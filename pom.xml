@@ -6,4 +6,66 @@
   <packaging>pom</packaging>
   <name>Scrumbledore</name>
   <description>Repository for Software Engineering Methods project group 12 at the TU Delft, consisting of David Alderliesten, Jesse Tilro, Floris Doolaard, Jeroen Meijer, and Niels Warnars.</description>
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-checkstyle-plugin</artifactId>
+  			<version>2.16</version>
+  			
+  			<configuration>
+			  <failOnViolation>false</failOnViolation>
+			  <configLocation>checkstyle.xml</configLocation>
+			</configuration>
+			
+			<executions>
+			  <execution>
+			   <id>verify-style</id>
+			   <phase>process-classes</phase>
+			   <goals>
+			    <goal>check</goal>
+			   </goals>
+			  </execution>
+			 </executions>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-pmd-plugin</artifactId>
+  			<version>3.5</version>
+  			
+  			<configuration>
+			  <format>xml</format>
+			</configuration>
+			
+			<executions>
+			  <execution>
+			   <id>verify-pmd</id>
+			   <phase>process-classes</phase>
+			   <goals>
+			    <goal>pmd</goal>
+			   </goals>
+			  </execution>
+			 </executions>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.codehaus.mojo</groupId>
+  			<artifactId>findbugs-maven-plugin</artifactId>
+  			<version>3.0.2</version>
+  			
+  			<configuration>
+			  <failOnError>false</failOnError>
+			</configuration>
+			
+			<executions>
+			  <execution>
+			   <id>verify-findbugs</id>
+			   <phase>process-classes</phase>
+			   <goals>
+			    <goal>check</goal>
+			   </goals>
+			  </execution>
+			 </executions>
+  		</plugin>
+  	</plugins>
+  </build>
 </project>
