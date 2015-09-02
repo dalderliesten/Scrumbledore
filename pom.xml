@@ -5,4 +5,23 @@
   <version>0.0.1-SNAPSHOT</version>
   <name>Scrumbledore</name>
   <description>A recreation of bubble bobble for the Software Engineering Methods course at the TU Delft, 2015-2016, for group 12.</description>
+  <build>
+  	<plugins>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-checkstyle-plugin</artifactId>
+  			<version>2.16</version>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.apache.maven.plugins</groupId>
+  			<artifactId>maven-pmd-plugin</artifactId>
+  			<version>3.5</version>
+  		</plugin>
+  		<plugin>
+  			<groupId>org.codehaus.mojo</groupId>
+  			<artifactId>findbugs-maven-plugin</artifactId>
+  			<version>3.0.2</version>
+  		</plugin>
+  	</plugins>
+  </build>
 </project>
