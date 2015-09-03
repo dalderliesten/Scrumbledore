@@ -37,4 +37,73 @@ public abstract class LevelElementTest {
     assertEquals(false, testElement.hasGravity());
     assertEquals(new Vector(0, 0), testElement.getSpeed());
   }
+
+  /**
+   * The Y-coordinate of the top of the element should be calculated correctly given the center
+   * position and height.
+   */
+  @Test
+  public void testGetTop() {
+    int y = 64;
+    int height = 32;
+    int top = y - height / 2;
+
+    Vector position = new Vector(128, y);
+    Vector size = new Vector(32, height);
+    LevelElement testElement = make(position, size);
+
+    assertEquals(top, testElement.getTop());
+  }
+
+  /**
+   * The Y-coordinate of the bottom of the element should be calculated correctly given the center
+   * position and height.
+   */
+  @Test
+  public void testGetBottom() {
+    int y = 128;
+    int height = 32;
+    int bottom = y + height / 2;
+
+    Vector position = new Vector(256, y);
+    Vector size = new Vector(64, height);
+    LevelElement testElement = make(position, size);
+
+    assertEquals(bottom, testElement.getBottom());
+  }
+
+  /**
+   * The X-coordinate of the left side of the element should be calculated correctly given the
+   * center position and width.
+   */
+  @Test
+  public void testGetLeft() {
+    int x = 64;
+    int width = 32;
+    int left = x - width / 2;
+
+    Vector position = new Vector(x, 128);
+    Vector size = new Vector(width, 96);
+    LevelElement testElement = make(position, size);
+
+    assertEquals(left, testElement.getLeft());
+  }
+
+  /**
+   * The X-coordinate of the right side of the element should be calculated correctly given the
+   * center position and width.
+   */
+  @Test
+  public void testGetRight() {
+    int x = 128;
+    int width = 32;
+    int right = x + width / 2;
+
+    Vector position = new Vector(x, 64);
+    Vector size = new Vector(width, 32);
+    LevelElement testElement = make(position, size);
+
+    assertEquals(right, testElement.getRight());
+  }
+
 }
