@@ -21,7 +21,9 @@ public class Level {
 
   /**
    * Add a LevelElement to this Level.
-   * @param element A LevelElement.
+   * 
+   * @param element
+   *          A LevelElement.
    */
   public void addElement(LevelElement element) {
     elements.add(element);

@@ -11,6 +11,7 @@ public abstract class LevelElement {
   private Vector position;
   private Vector size;
   private Vector speed;
+  private boolean gravity;
 
   /**
    * Create a new LevelElement instance.
@@ -26,6 +27,8 @@ public abstract class LevelElement {
     this.position = position;
     this.size = size;
     this.speed = speed;
+    // By default not affected by Gravity.
+    this.gravity = false;
   }
 
   /**
@@ -53,6 +56,25 @@ public abstract class LevelElement {
    */
   public Vector getSpeed() {
     return speed;
+  }
+
+  /**
+   * Check whether this LevelElement is affected by Gravity.
+   * 
+   * @return Boolean
+   */
+  public boolean hasGravity() {
+    return gravity;
+  }
+
+  /**
+   * Set the property determining whether this LevelElement is affected by gravity.
+   * 
+   * @param gravity
+   *          A boolean
+   */
+  public void setGravity(boolean gravity) {
+    this.gravity = gravity;
   }
 
 }
