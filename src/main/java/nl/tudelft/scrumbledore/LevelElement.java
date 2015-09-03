@@ -3,7 +3,7 @@ package nl.tudelft.scrumbledore;
 /**
  * Abstract class representing an element that can be placed in a Level.
  * 
- * @author Tilro
+ * @author Jesse Tilro
  *
  */
 public abstract class LevelElement {
@@ -20,13 +20,12 @@ public abstract class LevelElement {
    *          Position of the element in the level.
    * @param size
    *          Size of the element.
-   * @param speed
-   *          Speed vector of the element, describing the direction and size of its movement.
    */
-  public LevelElement(Vector position, Vector size, Vector speed) {
+  public LevelElement(Vector position, Vector size) {
     this.position = position;
     this.size = size;
-    this.speed = speed;
+    // Initial speed is 0.
+    this.speed = new Vector(0, 0);
     // By default not affected by Gravity.
     this.gravity = false;
   }
@@ -75,6 +74,42 @@ public abstract class LevelElement {
    */
   public void setGravity(boolean gravity) {
     this.gravity = gravity;
+  }
+
+  /**
+   * Get the absolute Y-coordinate of the top of this element, given the position and size.
+   * 
+   * @return Y-coordinate of top.
+   */
+  public int getTop() {
+    return position.getY() - size.getY() / 2;
+  }
+
+  /**
+   * Get the absolute Y-coordinate of the bottom of this element, given the position and size.
+   * 
+   * @return Y-coordinate of bottom.
+   */
+  public int getBottom() {
+    return position.getY() + size.getY() / 2;
+  }
+
+  /**
+   * Get the absolute X-coordinate of the left side of this element, given the position and size.
+   * 
+   * @return X-coordinate of left side.
+   */
+  public int getLeft() {
+    return position.getX() - size.getX() / 2;
+  }
+
+  /**
+   * Get the absolute X-coordinate of the right side of this element, given the position and size.
+   * 
+   * @return X-coordinate of right side.
+   */
+  public int getRight() {
+    return position.getX() + size.getX() / 2;
   }
 
 }
