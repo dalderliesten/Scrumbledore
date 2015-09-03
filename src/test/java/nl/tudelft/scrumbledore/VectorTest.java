@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -41,6 +42,26 @@ public class VectorTest {
     Vector testVector = new Vector(0, 0);
     testVector.setY(2);
     assertEquals(2, testVector.getY());
+  }
+
+  /**
+   * Two Vectors with the same X and Y should be considered equal.
+   */
+  @Test
+  public void testEqualsTrue() {
+    Vector testVector1 = new Vector(1, 2);
+    Vector testVector2 = new Vector(1, 2);
+    assertEquals(testVector1, testVector2);
+  }
+
+  /**
+   * Two Vectors with different X and Y should not be considered equal.
+   */
+  @Test
+  public void testEqualsFalse() {
+    Vector testVector1 = new Vector(1, 2);
+    Vector testVector2 = new Vector(1, 3);
+    assertFalse(testVector1.equals(testVector2));
   }
 
 }
