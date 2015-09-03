@@ -63,4 +63,20 @@ public class Vector {
     this.entryY = entryY;
   }
 
+  /**
+   * Check whether a given object is equal to this instance.
+   * 
+   * @param other
+   *          Another instance.
+   * @return A Boolean.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof Vector) {
+      Vector that = (Vector) other;
+      return (this.getX() == that.getX() && this.getY() == that.getY());
+    }
+    return false;
+  }
+
 }
