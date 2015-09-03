@@ -7,7 +7,7 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 /**
- * Test Case for Vector Class.
+ * Test Suite for Vector Class.
  * 
  * @author Jesse Tilro
  *
