@@ -1,4 +1,4 @@
-package scrumbledore;
+package nl.tudelft.scrumbledore;
 
 import javafx.application.Application;
 import javafx.stage.Stage;
