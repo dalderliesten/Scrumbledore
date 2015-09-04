@@ -18,7 +18,7 @@ public class Kinetics {
    * @param el
    *      The element where the speed has to be set.
    */
-  public static void setSpeed(LevelElement el) {
+  public static void addSpeed(LevelElement el) {
     el.getPosition().sum(el.getSpeed());
   }
   
