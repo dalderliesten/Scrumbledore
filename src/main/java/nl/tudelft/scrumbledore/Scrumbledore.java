@@ -1,36 +1,22 @@
 package nl.tudelft.scrumbledore;
 
-import javafx.application.Application;
-import javafx.stage.Stage;
+/**
+ * Launches the game and containes the main method, which will run the GUI.
+ * 
+ * @author David Alderliesten
+ */
+public class Scrumbledore {
 
-public class Scrumbledore extends Application {
-
-	/**
-	 * main
-	 * The main method launches the program execution
-	 * and launches the GUI and game classes.
-	 * 
-	 * @pre Program executed
-	 * @post Program terminated
-	 * @param args
-	 */
-	public static void main(String[] args) {
-		launch(args);
-	}
-
-	/**
-	 * start
-	 * The start method launches the JavaFX GUI window
-	 * and handles associated start-up items.
-	 * 
-	 * @pre Method called and gameStage passed
-	 * @post GUI created and handlers prepared
-	 * @param gameStage
-	 */
-	@Override
-	public void start(Stage gameStage) throws Exception {
-		gameStage.setTitle("Scrumbledore");
-		gameStage.show();
-	}
+  /**
+   * The main method launches the program.
+   * 
+   * @pre Program executed
+   * @post Program terminated
+   * @param args
+   *          Arguments given at program initialization
+   */
+  public static void main(String[] args) {
+    ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
+  }
 
 }
