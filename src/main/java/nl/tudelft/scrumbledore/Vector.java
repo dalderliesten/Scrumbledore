@@ -24,6 +24,16 @@ public class Vector {
     this.entryX = entryX;
     this.entryY = entryY;
   }
+  
+  /**
+   * Summing two vectors into one.
+   * @param vector
+   *          The vector to add to the current one.
+   */
+  public void sum(Vector vector) {
+    this.entryX += vector.entryX;
+    this.entryY += vector.entryY;
+  }
 
   /**
    * Get the X entry of the vector.
