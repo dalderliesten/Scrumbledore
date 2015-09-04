@@ -29,6 +29,9 @@ public class ScrumbledoreGUI extends Application {
     
     // Ensuring that the window cannot be resized.
     gameStage.setResizable(false);
+    
+    // Centering the window.
+    gameStage.centerOnScreen();
 
     // Rendering the stage in the current form.
     gameStage.show();
