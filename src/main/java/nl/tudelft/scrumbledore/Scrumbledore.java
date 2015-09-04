@@ -12,11 +12,11 @@ public class Scrumbledore {
    * 
    * @pre Program executed
    * @post Program terminated
-   * @param Arguments
-   *          given at program initialization
+   * @param args
+   *          Arguments given at program initialization
    */
   public static void main(String[] args) {
-      ScrumbledoreGUI.launch(args);
+    ScrumbledoreGUI.launch(args);
   }
 
 }
