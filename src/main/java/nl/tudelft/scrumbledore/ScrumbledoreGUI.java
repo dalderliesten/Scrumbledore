@@ -40,12 +40,6 @@ public class ScrumbledoreGUI extends Application {
     // Centering the window.
     gameStage.centerOnScreen();
 
-    // Create the anchor pane for layout.
-    AnchorPane mainPane = new AnchorPane();
-
-    // Create the main scene for actual display.
-    Scene mainScene = new Scene(mainPane, 700, 800, Color.GREY);
-
     // Creating the top handler box as well as the content for it.
     HBox topLabels = new HBox();
     Label scoreLabel = new Label("SCORE");
@@ -55,9 +49,6 @@ public class ScrumbledoreGUI extends Application {
 
     // Adding the content for the top bar to the container box.
     topLabels.getChildren().addAll(scoreLabel, powerupLabel, levelLabel, highLabel);
-    
-    // Adding the top labels to the pane anchor.
-    mainPane.setTopAnchor(topLabels, 1.0);
 
     // Creating the bottom handler box as well as the buttons for it.
     HBox bottomButtons = new HBox();
@@ -68,10 +59,8 @@ public class ScrumbledoreGUI extends Application {
     // Adding the buttons for the bottom bar to the container box.
     bottomButtons.getChildren().addAll(startstopButton, settingsButton, exitButton);
     
-    // Adding the bottom buttons to the pane anchor.
-    mainPane.setBottomAnchor(bottomButtons, 1.0);
-
-    // Adding the created scene to the stage for display.
+    // Creation of a scene for display of content.
+    Scene mainScene = new Scene();
     gameStage.setScene(mainScene);
 
     // Rendering the stage in the current form.
