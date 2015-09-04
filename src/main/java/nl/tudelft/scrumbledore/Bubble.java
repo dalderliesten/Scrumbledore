@@ -1,7 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 /**
- * This class represents a Bubble object that the player is able to shoot.
+ * This class creates a Bubble object 
+ * that the player can shoot.
  * @author Floris Doolaard
  *
  */

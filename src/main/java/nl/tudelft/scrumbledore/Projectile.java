@@ -1,7 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 /**
- * This abstract class represent subclasses like Bubble.
+ * This abstract class may be a superclass
+ * of projectile classes.
  * @author Floris Doolaard
  *
  */
