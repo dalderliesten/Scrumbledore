@@ -1,6 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
@@ -55,9 +57,31 @@ public class ScrumbledoreGUI extends Application {
 
     // Creating the bottom handler box as well as the buttons for it.
     HBox bottomButtons = new HBox();
-    Button startstopButton = new Button(Constants.startButtonText);
+    final Button startstopButton = new Button(Constants.startButtonText);
     Button settingsButton = new Button(Constants.settingsbuttonText);
     Button exitButton = new Button(Constants.exitbuttonText);
+
+    // Defining the desired action of the startstop button, which is to stop the game when active,
+    // and restart the game when paused.
+    startstopButton.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent arg0) {
+        startstopButton.setText(Constants.stopButtonText);
+      }
+    });
+
+    // Defining the desired action of the settings button, which is to show a settings menu.
+    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent arg0) {
+        System.out.println("SETTINGS MENU WOULD OPEN NOW");
+      }
+    });
+
+    // Defining the desired action of the exit button, which is to quit when pressed.
+    exitButton.setOnAction(new EventHandler<ActionEvent>() {
+      public void handle(ActionEvent event) {
+        System.exit(0);
+      }
+    });
 
     // Adding the buttons for the bottom bar to the container box.
     bottomButtons.getChildren().addAll(startstopButton, settingsButton, exitButton);
