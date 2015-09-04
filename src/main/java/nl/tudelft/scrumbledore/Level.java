@@ -29,4 +29,13 @@ public class Level {
     elements.add(element);
   }
 
+  /**
+   * Get all elements in the level.
+   * 
+   * @return All elements in the level.
+   */
+  public ArrayList<LevelElement> getElements() {
+    return elements;
+  }
+
 }

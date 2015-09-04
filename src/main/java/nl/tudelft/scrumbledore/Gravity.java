@@ -49,4 +49,16 @@ public class Gravity {
     }
   }
 
+  /**
+   * Pull down all elements in a given Level.
+   * 
+   * @param level
+   *          A Level containing elements to be pulled down.
+   */
+  public void pull(Level level) {
+    for (LevelElement element : level.getElements()) {
+      pull(element);
+    }
+  }
+
 }
