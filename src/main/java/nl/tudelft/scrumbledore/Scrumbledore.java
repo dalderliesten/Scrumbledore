@@ -16,7 +16,7 @@ public class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
-    ScrumbledoreGUI.launch(args);
+    ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
   }
 
 }
