@@ -16,7 +16,7 @@ public class Scrumbledore {
    *          given at program initialization
    */
   public static void main(String[] args) {
-
+      ScrumbledoreGUI.launch(args);
   }
 
 }
