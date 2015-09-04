@@ -3,8 +3,13 @@ package nl.tudelft.scrumbledore;
 import javafx.application.Application;
 import javafx.stage.Stage;
 
+/**
+ * Launches the Scrumbledore GUI and performs all required handling actions.
+ * 
+ * @author David Alderliesten
+ */
 public class ScrumbledoreGUI extends Application {
-  
+
   /**
    * start The start method launches the JavaFX GUI window and handles associated start-up items.
    * 
@@ -17,5 +22,5 @@ public class ScrumbledoreGUI extends Application {
     gameStage.setTitle("Scrumbledore");
     gameStage.show();
   }
-  
+
 }

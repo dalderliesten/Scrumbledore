@@ -1,5 +1,10 @@
 package nl.tudelft.scrumbledore;
 
+/**
+ * Launches the game and containes the main method, which will run the GUI.
+ * 
+ * @author David Alderliesten
+ */
 public class Scrumbledore {
 
   /**
@@ -11,7 +16,7 @@ public class Scrumbledore {
    *          given at program initialization
    */
   public static void main(String[] args) {
-      
+
   }
 
 }
