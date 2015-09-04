@@ -18,5 +18,5 @@ public class Constants {
   public static final String startButtonText = "Start";
   public static final String stopButtonText = "Stop";
   public static final String settingsbuttonText = "Settings";
-  public static final String exitbuttonTest = "Exit";
+  public static final String exitbuttonText = "Exit";
 }

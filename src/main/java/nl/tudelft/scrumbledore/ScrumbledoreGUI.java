@@ -57,7 +57,7 @@ public class ScrumbledoreGUI extends Application {
     HBox bottomButtons = new HBox();
     Button startstopButton = new Button(Constants.startButtonText);
     Button settingsButton = new Button(Constants.settingsbuttonText);
-    Button exitButton = new Button(Constants.exitbuttonTest);
+    Button exitButton = new Button(Constants.exitbuttonText);
 
     // Adding the buttons for the bottom bar to the container box.
     bottomButtons.getChildren().addAll(startstopButton, settingsButton, exitButton);
