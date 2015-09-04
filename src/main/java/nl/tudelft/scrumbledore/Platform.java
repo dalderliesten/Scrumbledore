@@ -1,11 +1,9 @@
-/**
- * 
- */
 package nl.tudelft.scrumbledore;
 
 /**
- * @author ...
- *
+ * Class representing a Platform in a game.
+ * 
+ * @author Niels Warnars
  */
 public class Platform extends LevelElement {
 

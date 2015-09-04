@@ -1,11 +1,9 @@
-/**
- * 
- */
 package nl.tudelft.scrumbledore;
 
 /**
- * @author ...
- *
+ * Class representing a Fruit in a game.
+ * 
+ * @author Niels Warnars
  */
 public class Fruit extends LevelElement {
 

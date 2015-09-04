@@ -1,11 +1,9 @@
-/**
- * 
- */
 package nl.tudelft.scrumbledore;
 
 /**
- * @author ...
- *
+ * Class representing an NPC in a game.
+ * 
+ * @author Niels Warnars
  */
 public class NPC extends LevelElement {
 

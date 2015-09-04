@@ -1,11 +1,9 @@
-/**
- * 
- */
 package nl.tudelft.scrumbledore;
 
 /**
- * @author ...
- *
+ * Class representing a Player in a game.
+ * 
+ * @author Niels Warnars
  */
 public class Player extends LevelElement {
 
