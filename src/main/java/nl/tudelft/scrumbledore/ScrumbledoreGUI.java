@@ -19,7 +19,7 @@ public class ScrumbledoreGUI extends Application {
    *          The stage required to display the GUI.
    */
   @Override
-  public void start(Stage gameStage) throws Exception {
+  public void start(Stage gameStage) {
     // Setting the title of the GUI to be Scrumbledore.
     gameStage.setTitle("Scrumbledore");
 
