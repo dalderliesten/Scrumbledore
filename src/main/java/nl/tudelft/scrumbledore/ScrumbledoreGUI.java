@@ -20,7 +20,17 @@ public class ScrumbledoreGUI extends Application {
    */
   @Override
   public void start(Stage gameStage) throws Exception {
+    // Setting the title of the GUI to be Scrumbledore.
     gameStage.setTitle("Scrumbledore");
+
+    // Setting the width and height of the GUI stage.
+    gameStage.setHeight(700);
+    gameStage.setWidth(800);
+    
+    // Ensuring that the window cannot be resized.
+    gameStage.setResizable(false);
+
+    // Rendering the stage in the current form.
     gameStage.show();
   }
 
