@@ -85,4 +85,23 @@ public class GravityTest {
     assertEquals(max, test2.getSpeed().getY());
   }
 
+  /**
+   * When an entire level is pulled, elements unaffected by gravity shouldn't be affected.
+   */
+  @Test
+  public void testPullLevelUnaffected() {
+    int strength = 2;
+    int max = 8;
+
+    Gravity gravity = new Gravity(strength, max);
+    LevelElement test = new TestElement();
+    test.setGravity(false);
+    Level level = new Level();
+    level.addElement(test);
+
+    gravity.pull(level);
+
+    assertEquals(0, test.getSpeed().getY());
+  }
+
 }
