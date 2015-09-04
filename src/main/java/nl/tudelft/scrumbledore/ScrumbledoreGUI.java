@@ -2,7 +2,10 @@ package nl.tudelft.scrumbledore;
 
 import javafx.application.Application;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.AnchorPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -14,7 +17,8 @@ import javafx.stage.Stage;
 public class ScrumbledoreGUI extends Application {
 
   /**
-   * The start method launches the JavaFX GUI window and handles associated start-up items.
+   * The start method launches the JavaFX GUI window and handles associated start-up items and the
+   * creation of essential features, such as buttons and display information.
    * 
    * @pre Method called and gameStage passed
    * @post GUI created and handlers prepared
@@ -41,6 +45,20 @@ public class ScrumbledoreGUI extends Application {
 
     // Create the main scene for actual display.
     Scene mainScene = new Scene(mainPane, 700, 800, Color.GREY);
+    
+    // Creating the top handler box as well as the content for it.
+    HBox topLabels = new HBox();
+    Label scoreLabel = new Label("SCORE");
+    Label highLabel = new Label("HIGH SCORE");
+    Label powerupLabel = new Label("POWER UP");
+    Label levelLabel = new Label("LEVEL");
+    
+    // Creating the bottom handler box as well as the buttons for it.
+    HBox bottomButtons = new HBox();
+    Button startstopButton = new Button("START STOP");
+    Button settingsButton = new Button("SETTINGS");
+    Button exitButton = new Button("EXIT");
+    
 
     // Adding the created scene to the stage for display.
     gameStage.setScene(mainScene);
