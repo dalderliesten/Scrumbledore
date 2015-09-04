@@ -44,10 +44,10 @@ public class ScrumbledoreGUI extends Application {
 
     // Creating the top handler box as well as the content for it.
     HBox topLabels = new HBox();
-    Label scoreLabel = new Label("SCORE");
-    Label highLabel = new Label("HIGH SCORE");
-    Label powerupLabel = new Label("POWER UP");
-    Label levelLabel = new Label("LEVEL");
+    Label scoreLabel = new Label(Constants.scorelabelText);
+    Label highLabel = new Label(Constants.highscorelabelText);
+    Label powerupLabel = new Label(Constants.poweruplabelText);
+    Label levelLabel = new Label(Constants.levellabelText);
 
     // Adding the content for the top bar to the container box.
     topLabels.getChildren().addAll(scoreLabel, powerupLabel, levelLabel, highLabel);
@@ -55,9 +55,9 @@ public class ScrumbledoreGUI extends Application {
 
     // Creating the bottom handler box as well as the buttons for it.
     HBox bottomButtons = new HBox();
-    Button startstopButton = new Button("START STOP");
-    Button settingsButton = new Button("SETTINGS");
-    Button exitButton = new Button("EXIT");
+    Button startstopButton = new Button(Constants.startButtonText);
+    Button settingsButton = new Button(Constants.settingsbuttonText);
+    Button exitButton = new Button(Constants.exitbuttonTest);
 
     // Adding the buttons for the bottom bar to the container box.
     bottomButtons.getChildren().addAll(startstopButton, settingsButton, exitButton);
