@@ -4,6 +4,7 @@ import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
@@ -38,6 +39,9 @@ public class ScrumbledoreGUI extends Application {
     // Centering the window.
     gameStage.centerOnScreen();
 
+    // Creation of the border pane for alignment of elements within the UI.
+    BorderPane mainPane = new BorderPane();
+
     // Creating the top handler box as well as the content for it.
     HBox topLabels = new HBox();
     Label scoreLabel = new Label("SCORE");
@@ -47,6 +51,7 @@ public class ScrumbledoreGUI extends Application {
 
     // Adding the content for the top bar to the container box.
     topLabels.getChildren().addAll(scoreLabel, powerupLabel, levelLabel, highLabel);
+    mainPane.setTop(topLabels);
 
     // Creating the bottom handler box as well as the buttons for it.
     HBox bottomButtons = new HBox();
@@ -56,9 +61,10 @@ public class ScrumbledoreGUI extends Application {
 
     // Adding the buttons for the bottom bar to the container box.
     bottomButtons.getChildren().addAll(startstopButton, settingsButton, exitButton);
-    
+    mainPane.setBottom(bottomButtons);
+
     // Creation of a scene for display of content.
-    Scene mainScene = new Scene();
+    Scene mainScene = new Scene(mainPane, 800, 600);
     gameStage.setScene(mainScene);
 
     // Rendering the stage in the current form.
