@@ -4,7 +4,7 @@ package nl.tudelft.scrumbledore;
  * Class representing a 2D vector, to be used in the game to represent for example a vector,
  * position or size.
  * 
- * @author Tilro
+ * @author Jesse Tilro
  *
  */
 public class Vector {
@@ -31,8 +31,8 @@ public class Vector {
    *          The vector to add to the current one.
    */
   public void sum(Vector vector) {
-    this.entryX += vector.entryX;
-    this.entryY += vector.entryY;
+    this.entryX += vector.getX();
+    this.entryY += vector.getY();
   }
 
   /**

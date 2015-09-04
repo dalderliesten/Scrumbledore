@@ -2,7 +2,7 @@ package nl.tudelft.scrumbledore;
 
 /**
  * The Kinetics class handles the position/speed of levelelements.
- * @author Floris
+ * @author Floris Doolaard
  *
  */
 public class Kinetics {
