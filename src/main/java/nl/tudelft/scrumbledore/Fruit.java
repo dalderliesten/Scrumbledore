@@ -19,4 +19,21 @@ public class Fruit extends LevelElement {
     super(position, size);
   }
 
+  
+  /**
+   * Check whether a given object is equal to this instance.
+   * 
+   * @param other
+   *          Another instance.
+   * @return A Boolean.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof Fruit) {
+      Fruit that = (Fruit) other;
+      return (this.getPosition().equals(that.getPosition()) && this.getSize() == that.getSize());
+    }
+    
+    return false;
+  }
 }

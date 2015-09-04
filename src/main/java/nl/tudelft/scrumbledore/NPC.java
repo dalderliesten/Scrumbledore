@@ -19,4 +19,22 @@ public class NPC extends LevelElement {
     super(position, size);
   }
 
+  
+  /**
+   * Check whether a given object is equal to this instance.
+   * 
+   * @param other
+   *          Another instance.
+   * @return A Boolean.
+   */
+  @Override
+  public boolean equals(Object other) {
+    if (other instanceof NPC) {
+      NPC that = (NPC) other;
+      return (this.getPosition().equals(that.getPosition()) && this.getSize() == that.getSize());
+    }
+    
+    return false;
+  }
+  
 }
