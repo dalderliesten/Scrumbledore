@@ -45,20 +45,31 @@ public class ScrumbledoreGUI extends Application {
 
     // Create the main scene for actual display.
     Scene mainScene = new Scene(mainPane, 700, 800, Color.GREY);
-    
+
     // Creating the top handler box as well as the content for it.
     HBox topLabels = new HBox();
     Label scoreLabel = new Label("SCORE");
     Label highLabel = new Label("HIGH SCORE");
     Label powerupLabel = new Label("POWER UP");
     Label levelLabel = new Label("LEVEL");
+
+    // Adding the content for the top bar to the container box.
+    topLabels.getChildren().addAll(scoreLabel, powerupLabel, levelLabel, highLabel);
     
+    // Adding the top labels to the pane anchor.
+    mainPane.setTopAnchor(topLabels, 1.0);
+
     // Creating the bottom handler box as well as the buttons for it.
     HBox bottomButtons = new HBox();
     Button startstopButton = new Button("START STOP");
     Button settingsButton = new Button("SETTINGS");
     Button exitButton = new Button("EXIT");
+
+    // Adding the buttons for the bottom bar to the container box.
+    bottomButtons.getChildren().addAll(startstopButton, settingsButton, exitButton);
     
+    // Adding the bottom buttons to the pane anchor.
+    mainPane.setBottomAnchor(bottomButtons, 1.0);
 
     // Adding the created scene to the stage for display.
     gameStage.setScene(mainScene);
