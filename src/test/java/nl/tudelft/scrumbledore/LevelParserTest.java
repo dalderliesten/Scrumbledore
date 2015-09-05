@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
+import static org.junit.Assert.assertTrue;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
@@ -15,6 +16,22 @@ import org.junit.Test;
  * @author Niels Warnars
  */
 public class LevelParserTest {
+  
+  
+  /**
+   * Test case for the listFilesInDir in which
+   * a the existence of two dummy files is 
+   * checked.
+   */
+  @Test
+  public void testListFilesInDir() {
+    LevelParser lp = new LevelParser();
+    ArrayList<String> testFiles = lp.listFilesInDir("src/main/resources/test");
+    
+    assertEquals(testFiles.size(), 2);
+    assertTrue(testFiles.contains("level01.txt"));
+    assertTrue(testFiles.contains("level02.txt"));
+  }
   
   /**
    * Test case in which the scenario is tested
@@ -33,7 +50,9 @@ public class LevelParserTest {
 
   
   /**
-   * Test case for readFromScanner method.
+   * Test case for readFromScanner method in
+   * which a test map is being parsed for
+   * validation.
    */
   @Test
   public void testReadFromScanner() {
@@ -59,7 +78,9 @@ public class LevelParserTest {
   }
   
   /**
-   * Test case for getElementFromChar method.
+   * Test case for getElementFromChar method 
+   * in which it is checked whether the correct
+   * objects are being returned.
    */
   @Test
   public void testGetElementFromChar() {
@@ -87,7 +108,9 @@ public class LevelParserTest {
  
 
   /**
-   * Test case for getBlockPosition method.
+   * Test case for getBlockPosition method that
+   * validates whether the correct position 
+   * calculated position is being returned.
    */
   @Test
   public void testGetBlockPosition() {
@@ -98,7 +121,9 @@ public class LevelParserTest {
   
   
   /**
-   * Test case for GetMiddleOfBlock method.
+   * Test case for GetMiddleOfBlock method in 
+   * which it is determined whether the correct
+   * expected center of the block is returned.
    */
   @Test 
   public void testGetMiddleOfBlock() {

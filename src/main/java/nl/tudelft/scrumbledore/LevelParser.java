@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.util.ArrayList;
 import java.util.Scanner;
 
 /**
@@ -21,6 +22,29 @@ public class LevelParser {
     level = new Level();
   }
   
+  
+  /**
+   * Lists all files in a given directory.
+   * 
+   * @param dir
+   *          A given directory
+   * @return
+   *          A list of file names
+   */
+  public ArrayList<String> listFilesInDir(String dir) {
+    ArrayList<String> levelFiles = new ArrayList<String>();
+    File resourceFolder = new File(dir);
+    File[] files = resourceFolder.listFiles();
+    
+    for (File file : files) {
+      if (file.isFile()) {
+        levelFiles.add(file.getName());
+      }  
+    }
+    
+    return levelFiles;
+  }
+    
   /**
    * 
    * @param inFile
