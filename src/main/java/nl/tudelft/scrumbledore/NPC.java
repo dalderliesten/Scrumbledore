@@ -6,7 +6,10 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  */
 public class NPC extends LevelElement {
-
+  private int life;
+  private int status;
+  private boolean hasFruit;
+  
   /**
    * Create a new NPC instance.
    * 
@@ -37,6 +40,36 @@ public class NPC extends LevelElement {
     }
     
     return false;
+  }
+
+
+  public int getLife() {
+    return life;
+  }
+
+
+  public void setLife(int life) {
+    this.life = life;
+  }
+
+
+  public int getStatus() {
+    return status;
+  }
+
+
+  public void setStatus(int status) {
+    this.status = status;
+  }
+
+
+  public boolean isHasFruit() {
+    return hasFruit;
+  }
+
+
+  public void setHasFruit(boolean hasFruit) {
+    this.hasFruit = hasFruit;
   }
   
 }
