@@ -12,17 +12,33 @@ import java.util.Scanner;
  * @author Niels Warnars
  */
 public class LevelParser {
-  private Level level;
+  private Level[] levels;
   private final int BLOCKSIZE = 19;
+  private final String levelsDir = "src/main/resources/";
   
   /**
    * Creates a new LevelParser.
    */
   public LevelParser() {
-    level = new Level();
+    levels = getLevels(levelsDir);
   }
   
-  
+  /**
+   * 
+   * @param dir
+   * @return
+   */
+  public Level[] loadLevelsFromDisk(String dir) {
+    ArrayList<String> levelFiles = listFilesInDir(dir);
+    Level[] levels = new Level[levelFiles.size()];
+    
+    for (int idx = 0; idx < levels.length; idx++) {
+      try {
+        levels[idx] = readLevelFromFile(dir + "/" + levelFiles.get(idx));
+      } catch (FileNotFoundException e) { }
+    }
+    return levels;
+  }
   /**
    * Lists all files in a given directory.
    * 
@@ -52,8 +68,8 @@ public class LevelParser {
    * @throws FileNotFoundException
    *           Exception thrown in case the file does not exist
    */
-  public void read(String inFile) throws FileNotFoundException {
-    readFromScanner(new Scanner(new File(inFile)));
+  public Level readLevelFromFile(String inFile) throws FileNotFoundException {
+    return readLevelFromScanner(new Scanner(new File(inFile)));
   }
   
     /**
@@ -63,7 +79,8 @@ public class LevelParser {
    * @throws FileNotFoundException
    *           Exception thrown in case the file does not exist
    */
-  public void readFromScanner(Scanner lineScanner) throws FileNotFoundException {
+  public Level readLevelFromScanner(Scanner lineScanner) throws FileNotFoundException {
+    Level tmpLevel = new Level();
     int lineNumber = 0;
     
     do {
@@ -78,7 +95,7 @@ public class LevelParser {
         // Add an element to a level if it's not 
         // a blank space.
         if (ch != ' ') { 
-          level.addElement(getElementFromChar(ch, idx, lineNumber));
+          tmpLevel.addElement(getElementFromChar(ch, idx, lineNumber));
         }
       } 
 
@@ -86,6 +103,8 @@ public class LevelParser {
       lineNumber++;
     } while (lineScanner.hasNextLine());
     lineScanner.close();
+    
+    return tmpLevel;
   }
   
   
@@ -162,13 +181,13 @@ public class LevelParser {
   }
   
   /**
-   * Returns a Level objects.
+   * Returns an array of Level objects.
    * 
    * @return
-   *        A level object
+   *        An array of level objects
    */
-  public Level getLevel() {
-    return level;
+  public Level[] getLevels() {
+    return levels;
   }
   
   /**

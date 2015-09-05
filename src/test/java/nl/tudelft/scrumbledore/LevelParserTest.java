@@ -17,6 +17,28 @@ import org.junit.Test;
  */
 public class LevelParserTest {
   
+  /**
+   * Test case for the loadLevelsFromDisk method.
+   * Two dummy levels are loaded from disk and
+   * consequently checked for the presence of 
+   * expected level elements.
+   */
+  @Test
+  public void testLoadLevelsFromDisk() {
+    LevelParser lp = new LevelParser();
+    Level[] levels = lp.loadLevelsFromDisk("src/main/resources/test");
+
+    ArrayList<LevelElement> elementsLevel1 = levels[0].getElements();
+    ArrayList<LevelElement> elementsLevel2 = levels[1].getElements();
+    
+    // Check whether level 1 only contains 1 Platform element
+    assertEquals(elementsLevel1.size(), 1);
+    assertEquals(new Platform(new Vector(9, 9), null), elementsLevel1.get(0));
+    
+    // Check whether level 2 only contains 1 Player element
+    assertEquals(elementsLevel2.size(), 1);
+    assertEquals(new Player(new Vector(9, 9), null), elementsLevel2.get(0));
+  }
   
   /**
    * Test case for the listFilesInDir in which
@@ -42,22 +64,21 @@ public class LevelParserTest {
   public void testFileNotFound() {
     LevelParser lp = new LevelParser();
     try {
-      lp.read("C:\\dummy.txt");
+      lp.readLevelFromFile("C:\\dummy.txt");
     } catch (FileNotFoundException e) {
       assertEquals(e.getClass(), FileNotFoundException.class);
     }
   }
 
-  
   /**
    * Test case for readFromScanner method in
    * which a test map is being parsed for
    * validation.
    */
   @Test
-  public void testReadFromScanner() {
+  public void testReadLevelFromScanner() {
     LevelParser lp = new LevelParser();
-    
+    Level level = new Level();
     String testMap = 
           " #\n"
         + "PNF\n";
@@ -65,10 +86,10 @@ public class LevelParserTest {
     Scanner sc = new Scanner(testMap);
     
     try {
-      lp.readFromScanner(sc);
+      level = lp.readLevelFromScanner(sc);
     } catch (FileNotFoundException e) { }
     
-    ArrayList<LevelElement> elements = lp.getLevel().getElements();
+    ArrayList<LevelElement> elements = level.getElements();
     assertEquals(elements.size(), 4);
     assertEquals(new Platform(new Vector(28, 9), null), elements.get(0));
     assertEquals(new Player(new Vector(9, 28), null), elements.get(1));
@@ -105,7 +126,6 @@ public class LevelParserTest {
     // Check for null if space is given
     assertNull(lp.getElementFromChar(' ', 0, 0));
   }
- 
 
   /**
    * Test case for getBlockPosition method that
@@ -117,8 +137,7 @@ public class LevelParserTest {
     LevelParser lp = new LevelParser();
     assertEquals(new Vector(9, 9), lp.getBlockPosition(0, 0));
     assertEquals(new Vector(28, 28), lp.getBlockPosition(1, 1));
-  }
-  
+  } 
   
   /**
    * Test case for GetMiddleOfBlock method in 
