@@ -15,7 +15,7 @@ import org.junit.Test;
  * @author Niels Warnars
  */
 public class LevelParserTest {
-
+  
   /**
    * Test case in which the scenario is tested
    * where the file that is being read does not
@@ -51,7 +51,6 @@ public class LevelParserTest {
     
     ArrayList<LevelElement> elements = lp.getLevel().getElements();
     assertEquals(elements.size(), 4);
-    System.out.println(elements.get(1).getPosition().getX());
     assertEquals(new Platform(new Vector(28, 9), null), elements.get(0));
     assertEquals(new Player(new Vector(9, 28), null), elements.get(1));
     assertEquals(new NPC(new Vector(28, 28), null), elements.get(2));
@@ -90,10 +89,11 @@ public class LevelParserTest {
   /**
    * Test case for getBlockPosition method.
    */
+  @Test
   public void testGetBlockPosition() {
     LevelParser lp = new LevelParser();
-    assertEquals(new Vector(10, 10), lp.getBlockPosition(0, 0));
-    assertEquals(new Vector(20, 20), lp.getBlockPosition(1, 1));
+    assertEquals(new Vector(9, 9), lp.getBlockPosition(0, 0));
+    assertEquals(new Vector(28, 28), lp.getBlockPosition(1, 1));
   }
   
   
