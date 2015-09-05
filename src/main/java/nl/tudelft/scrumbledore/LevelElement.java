@@ -111,5 +111,5 @@ public abstract class LevelElement {
   public int getRight() {
     return position.getX() + size.getX() / 2;
   }
-
+    
 }
