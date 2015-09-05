@@ -13,7 +13,6 @@ import java.util.Scanner;
  */
 public class LevelParser {
   private Level[] levels;
-  private final int blockSize = 19;
   private final String levelsDir = "src/main/resources/";
   
   /**
@@ -182,10 +181,10 @@ public class LevelParser {
    *        Screen position of a block
    */
   public Vector getBlockPosition(int i, int j) {
-    int middleOfBlock = getMiddleOfBlock(blockSize);
+    int middleOfBlock = getMiddleOfBlock(Constants.BLOCKSIZE);
     
-    int x = i * blockSize + middleOfBlock;
-    int y = j * blockSize + middleOfBlock;
+    int x = i * Constants.BLOCKSIZE + middleOfBlock;
+    int y = j * Constants.BLOCKSIZE + middleOfBlock;
     
     return new Vector(x, y);
   }
@@ -198,16 +197,6 @@ public class LevelParser {
    */
   public Level[] getLevels() {
     return levels;
-  }
-  
-  /**
-   * Returns the size of a level element.
-   * 
-   * @return
-   *        The size of a level element
-   */
-  public int getblockSize() {
-    return blockSize;
   }
   
 }

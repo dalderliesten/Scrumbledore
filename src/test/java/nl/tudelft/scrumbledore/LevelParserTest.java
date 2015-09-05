@@ -16,6 +16,9 @@ import org.junit.Test;
  * @author Niels Warnars
  */
 public class LevelParserTest {
+  private static int bOneMid = (Constants.BLOCKSIZE - 1) / 2;
+  private static int bTwoMid = bOneMid + Constants.BLOCKSIZE;
+  private static int bThreeMid = bTwoMid + Constants.BLOCKSIZE;
   
   /**
    * Test case for the loadLevelsFromDisk method.
@@ -33,11 +36,11 @@ public class LevelParserTest {
     
     // Check whether level 1 only contains 1 Platform element
     assertEquals(elementsLevel1.size(), 1);
-    assertEquals(new Platform(new Vector(9, 9), null), elementsLevel1.get(0));
+    assertEquals(new Platform(new Vector(bOneMid, bOneMid), null), elementsLevel1.get(0));
     
     // Check whether level 2 only contains 1 Player element
     assertEquals(elementsLevel2.size(), 1);
-    assertEquals(new Player(new Vector(9, 9), null), elementsLevel2.get(0));
+    assertEquals(new Player(new Vector(bOneMid, bOneMid), null), elementsLevel2.get(0));
   }
   
   /**
@@ -91,10 +94,10 @@ public class LevelParserTest {
     
     ArrayList<LevelElement> elements = level.getElements();
     assertEquals(elements.size(), 4);
-    assertEquals(new Platform(new Vector(28, 9), null), elements.get(0));
-    assertEquals(new Player(new Vector(9, 28), null), elements.get(1));
-    assertEquals(new NPC(new Vector(28, 28), null), elements.get(2));
-    assertEquals(new Fruit(new Vector(47, 28), null), elements.get(3));
+    assertEquals(new Platform(new Vector(bTwoMid, bOneMid), null), elements.get(0));
+    assertEquals(new Player(new Vector(bOneMid, bTwoMid), null), elements.get(1));
+    assertEquals(new NPC(new Vector(bTwoMid, bTwoMid), null), elements.get(2));
+    assertEquals(new Fruit(new Vector(bThreeMid, bTwoMid), null), elements.get(3));
 
   }
   
@@ -109,19 +112,19 @@ public class LevelParserTest {
     
     // Check for Platform match
     Platform platform = (Platform) lp.getElementFromChar('#', 0, 0);
-    assertEquals(new Platform(new Vector(9, 9), null), platform);
+    assertEquals(new Platform(new Vector(bOneMid, bOneMid), null), platform);
 
     // Check for Player match
     Player player = (Player) lp.getElementFromChar('P', 0, 0);
-    assertEquals(new Player(new Vector(9, 9), null), player);
+    assertEquals(new Player(new Vector(bOneMid, bOneMid), null), player);
 
     // Check for NPC match
     NPC npc = (NPC) lp.getElementFromChar('N', 0, 0);
-    assertEquals(new NPC(new Vector(9, 9), null), npc);
+    assertEquals(new NPC(new Vector(bOneMid, bOneMid), null), npc);
     
     // Check for Fruit match
     Fruit fruit = (Fruit) lp.getElementFromChar('F', 0, 0);
-    assertEquals(new Fruit(new Vector(9, 9), null), fruit);
+    assertEquals(new Fruit(new Vector(bOneMid, bOneMid), null), fruit);
     
     // Check for null if space is given
     assertNull(lp.getElementFromChar(' ', 0, 0));
@@ -135,8 +138,8 @@ public class LevelParserTest {
   @Test
   public void testGetBlockPosition() {
     LevelParser lp = new LevelParser();
-    assertEquals(new Vector(9, 9), lp.getBlockPosition(0, 0));
-    assertEquals(new Vector(28, 28), lp.getBlockPosition(1, 1));
+    assertEquals(new Vector(bOneMid, bOneMid), lp.getBlockPosition(0, 0));
+    assertEquals(new Vector(bTwoMid, bTwoMid), lp.getBlockPosition(1, 1));
   } 
   
   /**
@@ -150,6 +153,6 @@ public class LevelParserTest {
     assertEquals(-1, lp.getMiddleOfBlock(1));
     assertEquals(-1, lp.getMiddleOfBlock(2));
     assertEquals(1, lp.getMiddleOfBlock(3));
-    assertEquals(9, lp.getMiddleOfBlock(19));
+    assertEquals(bOneMid, lp.getMiddleOfBlock(Constants.BLOCKSIZE));
   }
 }
