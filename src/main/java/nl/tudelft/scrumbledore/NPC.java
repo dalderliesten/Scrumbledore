@@ -17,8 +17,6 @@ public class NPC extends LevelElement {
    */
   public NPC(Vector position, Vector size) {
     super(position, size);
-    
-    setGravity(true);
   }
 
 }
