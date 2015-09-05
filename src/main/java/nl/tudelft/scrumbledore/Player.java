@@ -17,6 +17,8 @@ public class Player extends LevelElement {
    */
   public Player(Vector position, Vector size) {
     super(position, size);
+    
+    setGravity(true);
   }
 
   
