@@ -13,22 +13,26 @@ import java.util.Scanner;
  */
 public class LevelParser {
   private Level[] levels;
-  private final int BLOCKSIZE = 19;
+  private final int blockSize = 19;
   private final String levelsDir = "src/main/resources/";
   
   /**
    * Creates a new LevelParser.
    */
   public LevelParser() {
-    levels = getLevels(levelsDir);
+    levels = loadLevelsFromDisk(levelsDir);
   }
   
   /**
+   * Loads an array of Level objects from 
+   * disk.
    * 
    * @param dir
+   *            A given directory
    * @return
+   *            An array of Level objects
    */
-  public Level[] loadLevelsFromDisk(String dir) {
+  protected Level[] loadLevelsFromDisk(String dir) {
     ArrayList<String> levelFiles = listFilesInDir(dir);
     Level[] levels = new Level[levelFiles.size()];
     
@@ -47,7 +51,7 @@ public class LevelParser {
    * @return
    *          A list of file names
    */
-  public ArrayList<String> listFilesInDir(String dir) {
+  protected ArrayList<String> listFilesInDir(String dir) {
     ArrayList<String> levelFiles = new ArrayList<String>();
     File resourceFolder = new File(dir);
     File[] files = resourceFolder.listFiles();
@@ -62,24 +66,30 @@ public class LevelParser {
   }
     
   /**
+   * Reads a level object from a given file.
    * 
    * @param inFile
    *           File name of level layout on disk.
    * @throws FileNotFoundException
    *           Exception thrown in case the file does not exist
+   * @return    
+   *           A level object
    */
-  public Level readLevelFromFile(String inFile) throws FileNotFoundException {
+  protected Level readLevelFromFile(String inFile) throws FileNotFoundException {
     return readLevelFromScanner(new Scanner(new File(inFile)));
   }
   
-    /**
+   /**
+   * Reads a level object from a given scanner.
    * 
    * @param lineScanner
    *           A given Scanner object
    * @throws FileNotFoundException
    *           Exception thrown in case the file does not exist
+   * @return    
+   *           A level object
    */
-  public Level readLevelFromScanner(Scanner lineScanner) throws FileNotFoundException {
+  protected Level readLevelFromScanner(Scanner lineScanner) throws FileNotFoundException {
     Level tmpLevel = new Level();
     int lineNumber = 0;
     
@@ -122,7 +132,7 @@ public class LevelParser {
    * @return
    *        An instance of a LevelElement child.
    */
-  public LevelElement getElementFromChar(char ch, int i, int j) {
+  protected LevelElement getElementFromChar(char ch, int i, int j) {
     Vector blockPos = getBlockPosition(i, j);
    
     switch (ch) {
@@ -150,7 +160,7 @@ public class LevelParser {
    *        The middle of a block size or
    *        -1 if the block size is even
    */
-  public int getMiddleOfBlock(int blockSize) {
+  protected int getMiddleOfBlock(int blockSize) {
     if (blockSize % 2 == 1 && blockSize > 2) {
       return Math.round(blockSize / 2);
     } 
@@ -172,10 +182,10 @@ public class LevelParser {
    *        Screen position of a block
    */
   public Vector getBlockPosition(int i, int j) {
-    int middleOfBlock = getMiddleOfBlock(BLOCKSIZE);
+    int middleOfBlock = getMiddleOfBlock(blockSize);
     
-    int x = i * BLOCKSIZE + middleOfBlock;
-    int y = j * BLOCKSIZE + middleOfBlock;
+    int x = i * blockSize + middleOfBlock;
+    int y = j * blockSize + middleOfBlock;
     
     return new Vector(x, y);
   }
@@ -196,8 +206,8 @@ public class LevelParser {
    * @return
    *        The size of a level element
    */
-  public int getBlockSize() {
-    return BLOCKSIZE;
+  public int getblockSize() {
+    return blockSize;
   }
   
 }
