@@ -31,7 +31,7 @@ public class Platform extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Platform) {
       Platform that = (Platform) other;
-      return (this.getPosition().equals(that.getPosition()) && this.getSize() == that.getSize());
+      return (this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize()));
     }
     
     return false;

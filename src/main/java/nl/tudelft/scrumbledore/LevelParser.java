@@ -133,16 +133,16 @@ public class LevelParser {
    */
   protected LevelElement getElementFromChar(char ch, int i, int j) {
     Vector blockPos = getBlockPosition(i, j);
-   
+    Vector size = new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE);
     switch (ch) {
       case '#':
-        return new Platform(blockPos, null);
+        return new Platform(blockPos, size);
       case 'P':
-        return new Player(blockPos, null);
+        return new Player(blockPos, size);
       case 'N':
-        return new NPC(blockPos, null);
+        return new NPC(blockPos, size);
       case 'F':
-        return new Fruit(blockPos, null);
+        return new Fruit(blockPos, size);
       default:
         return null;
     }
