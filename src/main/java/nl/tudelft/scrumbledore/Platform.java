@@ -6,7 +6,8 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  */
 public class Platform extends LevelElement {
-
+  private boolean isPassable;
+  
   /**
    * Create a new Platform instance.
    * 
@@ -35,6 +36,16 @@ public class Platform extends LevelElement {
     }
     
     return false;
+  }
+
+
+  public boolean isPassable() {
+    return isPassable;
+  }
+
+
+  public void setPassable(boolean isPassable) {
+    this.isPassable = isPassable;
   }
 
 }

@@ -6,7 +6,8 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  */
 public class Fruit extends LevelElement {
-
+  private int value;
+  private int time;
   /**
    * Create a new Fruit instance.
    * 
@@ -36,4 +37,26 @@ public class Fruit extends LevelElement {
     
     return false;
   }
+
+
+  public int getValue() {
+    return value;
+  }
+
+
+  public void setValue(int value) {
+    this.value = value;
+  }
+
+
+  public int getTime() {
+    return time;
+  }
+
+
+  public void setTime(int time) {
+    this.time = time;
+  }
+  
+  
 }
