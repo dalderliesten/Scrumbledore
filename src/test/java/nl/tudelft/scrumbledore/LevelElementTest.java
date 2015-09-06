@@ -47,7 +47,6 @@ public abstract class LevelElementTest {
 
     assertEquals(position, testElement.getPosition());
     assertEquals(size, testElement.getSize());
-    assertEquals(false, testElement.hasGravity());
     assertEquals(new Vector(0, 0), testElement.getSpeed());
   }
 
