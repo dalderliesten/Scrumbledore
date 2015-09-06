@@ -4,7 +4,7 @@ package nl.tudelft.scrumbledore;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-import org.junit.Test;
+//import org.junit.TestClass;
 
 /**
  * Testing the Fruit class.
@@ -12,7 +12,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class FruitTest extends LevelElementTest{
+public class FruitTest extends LevelElementTest {
 
   /**
    * Setting up test properties.
@@ -21,14 +21,6 @@ public class FruitTest extends LevelElementTest{
    */
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
-  }
-
-  /**
-   * Testing the equals method.
-   */
-  @Test
-  public void testEquals() {
-
   }
 
   /**

@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class PlatformTest {
+public class PlatformTest extends LevelElementTest{
 
   /**
    * Setting up test properties.
@@ -40,6 +40,11 @@ public class PlatformTest {
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
+  }
+
+  @Override
+  public LevelElement make(Vector position, Vector size) {
+    return new Platform(position, size);
   }
 
 }

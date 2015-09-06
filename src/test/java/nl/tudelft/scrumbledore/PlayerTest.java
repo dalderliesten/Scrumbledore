@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class PlayerTest {
+public class PlayerTest extends LevelElementTest{
 
   /**
    * Setting up test properties.
@@ -40,6 +40,11 @@ public class PlayerTest {
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
+  }
+
+  @Override
+  public LevelElement make(Vector position, Vector size) {
+    return new Player(position, size);
   }
 
 }

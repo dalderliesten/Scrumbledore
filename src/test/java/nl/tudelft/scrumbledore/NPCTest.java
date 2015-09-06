@@ -13,7 +13,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class NPCTest {
+public class NPCTest extends LevelElementTest {
 
   /**
    * Setting up test properties.
@@ -25,20 +25,17 @@ public class NPCTest {
   }
 
   /**
-   * Testing the equals method.
-   */
-  @Test
-  public void testEquals() {
-
-  }
-
-  /**
    * Deleting test properties after testing.
    * 
    * @throws Exception
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
+  }
+
+  @Override
+  public LevelElement make(Vector position, Vector size) {
+    return new NPC(position, size);
   }
 
 }

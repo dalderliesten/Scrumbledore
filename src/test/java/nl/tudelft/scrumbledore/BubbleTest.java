@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
  * @author Floris Doolaard
  *
  */
-public class BubbleTest {
+public class BubbleTest extends ProjectileTest{
 
   /**
    * Setting up test properties.
@@ -31,6 +31,11 @@ public class BubbleTest {
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
+  }
+
+  @Override
+  public LevelElement make(Vector position, Vector size) {
+    return new Bubble(position, size);
   }
 
 }

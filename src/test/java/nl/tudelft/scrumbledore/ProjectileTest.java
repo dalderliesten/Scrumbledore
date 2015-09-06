@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
  * @author Floris Doolaard
  *
  */
-public class ProjectileTest {
+public abstract class ProjectileTest extends LevelElementTest{
 
   /**
    * Setting up test properties.
@@ -31,6 +31,11 @@ public class ProjectileTest {
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
+  }
+  
+  @Override
+  public LevelElement make(Vector position, Vector size) {
+    return null;
   }
 
 }
