@@ -23,7 +23,16 @@ public class Kinetics {
   public void addSpeed(LevelElement el) {
     el.getPosition().sum(el.getSpeed());
   }
-  
-  pu
 
+  /**
+   * Update all elements in a given Level.
+   * 
+   * @param level
+   *          The level whose elements should be updated.
+   */
+  public void update(Level level) {
+    for (LevelElement el : level.getElements()) {
+      addSpeed(el);
+    }
+  }
 }
