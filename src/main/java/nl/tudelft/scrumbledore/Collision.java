@@ -10,6 +10,7 @@ public class Collision {
 
   private LevelElement collider;
   private LevelElement collidee;
+  private double delta;
   private CollisionType type;
 
   /**
@@ -20,9 +21,10 @@ public class Collision {
    * @param collidee
    *          The (static) LevelElement the collider is colliding with.
    */
-  public Collision(LevelElement collider, LevelElement collidee) {
+  public Collision(LevelElement collider, LevelElement collidee, double delta) {
     this.collider = collider;
     this.collidee = collidee;
+    this.delta = delta;
     findType();
   }
 
@@ -30,11 +32,8 @@ public class Collision {
    * Determines the CollisionType of this Collision and sets the type attribute correspondingly.
    */
   private void findType() {
-    if (!colliding()) {
-      type = CollisionType.None;
-    } else {
-      // Check for colliding direction.
-    }
+
+    type = CollisionType.None;
   }
 
   /**
@@ -43,22 +42,9 @@ public class Collision {
    * @return A boolean.
    */
   public boolean colliding() {
-    // Top edge of collider in between top and bottom edge of collidee.
-    boolean top = (collider.getTop() >= collidee.getTop() && collider.getTop() <= collidee
-        .getBottom());
-    // Bottom edge of collider in between top and bottom edge of collidee.
-    boolean bottom = (collider.getBottom() >= collidee.getTop() && collider.getBottom() <= collidee
-        .getBottom());
-    // Left edge of collider in between left and right edge of collidee.
-    boolean left = (collider.getLeft() >= collidee.getLeft() && collider.getLeft() <= collidee
-        .getRight());
-    // Right edge of collider in between left and right edge of collidee.
-    boolean right = (collider.getRight() >= collidee.getLeft() && collider.getRight() <= collidee
-        .getRight());
-
     // When at least one vertical and one horizontal edge of the collider are inside the collidee,
     // then collider and collidee are colliding.
-    return ((top || bottom) && (left || right));
+    return ((collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight()));
   }
 
   /**
@@ -86,6 +72,50 @@ public class Collision {
    */
   public CollisionType getType() {
     return type;
+  }
+
+  /**
+   * Check whether the left edge of the collider collides with the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean collidingLeft() {
+    boolean b = (collider.getLeft() >= collidee.getLeft() && collider.getLeft() <= collidee
+        .getRight());
+    return b;
+  }
+
+  /**
+   * Check whether the right edge of the collider collides with the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean collidingRight() {
+    boolean b = (collider.getRight() >= collidee.getLeft() && collider.getRight() <= collidee
+        .getRight());
+    return b;
+  }
+
+  /**
+   * Check whether the top edge of the collider collides with the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean collidingTop() {
+    boolean b = (collider.getTop() >= collidee.getTop() && collider.getTop() <= collidee
+        .getBottom());
+    return b;
+  }
+
+  /**
+   * Check whether the bottom edge of the collider collides with the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean collidingBottom() {
+    boolean b = (collider.getBottom() >= collidee.getTop() && collider.getBottom() <= collidee
+        .getBottom());
+    return b;
   }
 
 }

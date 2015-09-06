@@ -47,7 +47,7 @@ public class CollisionTest {
     this.collider = new Player(new Vector(colliderX, colliderY), new Vector(32, 32));
     this.collidee = new Platform(new Vector(collideeX, collideeY), new Vector(32, 32));
 
-    this.collision = new Collision(this.collider, this.collidee);
+    this.collision = new Collision(this.collider, this.collidee, 1);
   }
 
   /**

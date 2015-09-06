@@ -8,5 +8,5 @@ package nl.tudelft.scrumbledore;
  *
  */
 public enum CollisionType {
-  FromTop, FromBottom, FromLeft, FromRight, None
+  FromTop, FromBottom, FromLeft, FromRight, Overlapping, None
 }

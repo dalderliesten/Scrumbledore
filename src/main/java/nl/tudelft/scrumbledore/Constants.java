@@ -13,17 +13,20 @@ public class Constants {
   public static final String poweruplabelText = "Power ups:";
   public static final String scorelabelText = "Score: ";
   public static final String highscorelabelText = "High Score: ";
-  
+
   // String content meant for the button displayed within the GUI.
   public static final String startButtonText = "Start";
   public static final String stopButtonText = "Stop";
   public static final String settingsbuttonText = "Settings";
   public static final String exitbuttonText = "Exit";
-  
+
   // The standard size of a block.
   public static final int BLOCKSIZE = 31;
-  
+
   // Double precision
   public static final double DOUBLE_PRECISION = 0.001;
+
+  // Collision precision delta
+  public static final double COLLISION_PRECISION = 1;
 
 }
