@@ -1,17 +1,20 @@
 package nl.tudelft.scrumbledore;
 
 import javafx.application.Application;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
- * Launches the Scrumbledore GUI and performs all required handling actions.
+ * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
+ * GUI.
  * 
  * @author David Alderliesten
  */
@@ -63,6 +66,18 @@ public class ScrumbledoreGUI extends Application {
     Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
     contentHandler.getChildren().add(gameDisplay);
+
+    // Creation of a horiztonal box for storing bottom buttons and items to display.
+    HBox bottomItems = new HBox();
+
+    // Linking the buttons needed to their associated constants namesake.
+    Button startStopButton = new Button(Constants.STARTBTNLABEL);
+    Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
+    Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Adding the buttons to the bottom Hbox and to the game display interface.
+    bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
+    contentHandler.getChildren().add(bottomItems);
 
     // Displaying the user interface to the user.
     gameStage.show();

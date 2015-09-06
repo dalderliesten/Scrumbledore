@@ -23,6 +23,12 @@ public class Constants {
   public static final String POWERUPLABEL = "Power-Ups: ";
   public static final String LEVELLABEL = "Level: ";
 
+  // Defining text needed to display the buttons in the bottom of the user interface.
+  public static final String STARTBTNLABEL = "Start";
+  public static final String STOPBTNLABEL = "Stop";
+  public static final String SETTINGSBTNLABEL = "Settings";
+  public static final String EXITBTNLABEL = "Exit";
+
   // The standard size of a block.
   public static final int BLOCKSIZE = 31;
 
