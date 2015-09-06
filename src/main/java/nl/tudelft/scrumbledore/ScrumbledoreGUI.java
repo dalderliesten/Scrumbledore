@@ -39,10 +39,12 @@ public class ScrumbledoreGUI extends Application {
     gameStage.setScene(mainScene);
 
     // Creation of the game display canvas, and adding a graphics context object to allow for
-    // simple, call based refreshing.
+    // simple, call based refreshing.  Canvas is then added to the scene of the window.
     Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.RESOLUTIONY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
     contentHandler.getChildren().add(gameDisplay);
+    
+    
 
     // Displaying the user interface to the user.
     gameStage.show();
