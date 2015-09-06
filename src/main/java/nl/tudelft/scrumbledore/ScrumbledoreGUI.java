@@ -28,6 +28,9 @@ public class ScrumbledoreGUI extends Application {
     // Setting the title of the user interface window.
     gameStage.setTitle("Scrumbledore");
 
+    // Removing the ability to resize the game window. Must be disabled due to fixed dimensions.
+    gameStage.setResizable(false);
+
     // Setting the content handler group object, to which objects within the game must be added.
     Group contentHandler = new Group();
 
