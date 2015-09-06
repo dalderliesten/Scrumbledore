@@ -10,13 +10,17 @@ import java.util.ArrayList;
  */
 public class Level {
 
-  private ArrayList<LevelElement> elements;
+  private ArrayList<LevelElement> movingElements;
+  private ArrayList<Platform> platforms;
+  private Player player;
+
 
   /**
    * Constructs a new Level instance.
    */
   public Level() {
-    elements = new ArrayList<LevelElement>();
+    movingElements = new ArrayList<LevelElement>();
+    platforms = new ArrayList<Platform>();
   }
 
   /**
@@ -26,16 +30,46 @@ public class Level {
    *          A LevelElement.
    */
   public void addElement(LevelElement element) {
-    elements.add(element);
+    if (element.getClass().equals(Platform.class)) {
+      platforms.add((Platform) element);
+    } else if (element.getClass().equals(Player.class)) {
+      player = (Player) element;
+    } else {
+      movingElements.add(element);
+    }
   }
 
+  
   /**
-   * Returns an ArrayList of level elements.
+   * Returns an ArrayList of non-moving level elements.
    * 
-   * @return An ArrayList of level elements
+   * @return
+   *          An array of non-moving level elements
    */
-  public ArrayList<LevelElement> getElements() {
-    return elements;
+  public ArrayList<LevelElement> getMovingElements() {
+    return movingElements;
+  }
+
+
+  /**
+   * Returns an ArrayList of Platform elements.
+   * 
+   * @return
+   *          An ArrayList of Platform elements
+   */
+  public ArrayList<Platform> getPlatforms() {
+    return platforms;
+  }
+
+
+  /**
+   * Returns a Player object.
+   * 
+   * @return
+   *          A player object
+   */
+  public Player getPlayer() {
+    return player;
   }
 
 }
