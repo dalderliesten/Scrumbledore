@@ -59,6 +59,19 @@ public class Vector {
     this.entryX *= scalar;
     this.entryY *= scalar;
   }
+  
+  /**
+   * Returns a new Vector which is the product of a given vector and a scalar.
+   * 
+   * @param vector
+   *          The vector to be scaled.
+   * @param scalar
+   *          The scalar.
+   * @return The scaled vector.
+   */
+  public static Vector scale(Vector vector, int scalar) {
+    return new Vector(vector.getX() * scalar, vector.getY() * scalar);
+  }
 
   /**
    * Returns the result of the dotproduct between this vector and another one.
