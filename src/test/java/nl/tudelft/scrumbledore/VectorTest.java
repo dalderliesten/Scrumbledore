@@ -25,13 +25,66 @@ public class VectorTest {
   }
 
   /**
+   * The sum between to vectors should be calculated correctly.
+   */
+  @Test
+  public void testSum() {
+    Vector v1 = new Vector(1, 2);
+    Vector v2 = new Vector(3, 4);
+    v1.sum(v2);
+    assertEquals(new Vector(4, 6), v1);
+  }
+
+  /**
+   * The vector should be able to be scaled correctly.
+   */
+  @Test
+  public void testScale() {
+    Vector v1 = new Vector(8, 16);
+    v1.scale(2);
+    assertEquals(new Vector(16, 32), v1);
+  }
+  
+  /**
+   * The sum between to vectors should be calculated correctly.
+   */
+  @Test
+  public void testSumStatic() {
+    Vector v1 = new Vector(1, 2);
+    Vector v2 = new Vector(3, 4);
+    Vector res = Vector.sum(v1, v2);
+    assertEquals(new Vector(4, 6), res);
+  }
+
+  /**
+   * The vector should be able to be scaled correctly.
+   */
+  @Test
+  public void testScaleStatic() {
+    Vector v1 = new Vector(8, 16);
+    Vector res = Vector.scale(v1, 2);
+    assertEquals(new Vector(16, 32), res);
+  }
+
+  /**
+   * The dot product between to vectors should be calculated correctly.
+   */
+  @Test
+  public void testDotproduct() {
+    Vector v1 = new Vector(1, 2);
+    Vector v2 = new Vector(3, 4);
+    double dot = v1.dotProduct(v2);
+    assertEquals(11, dot, Constants.DOUBLE_PRECISION);
+  }
+
+  /**
    * The setX method should set the entryX property properly.
    */
   @Test
   public void testSetX() {
     Vector testVector = new Vector(0, 0);
     testVector.setX(1);
-    assertEquals(1, testVector.getX());
+    assertEquals(1, testVector.getX(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -41,7 +94,7 @@ public class VectorTest {
   public void testSetY() {
     Vector testVector = new Vector(0, 0);
     testVector.setY(2);
-    assertEquals(2, testVector.getY());
+    assertEquals(2, testVector.getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**

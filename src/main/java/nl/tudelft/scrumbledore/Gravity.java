@@ -33,12 +33,17 @@ public class Gravity {
    *          A LevelElement
    */
   public void pull(LevelElement element) {
+    // If the object has not yet been initialized, return.
+    if (element == null) {
+      return;
+    }
+    
     // If the element is not affected by Gravity, ignore it.
     if (!element.hasGravity()) {
       return;
     }
 
-    int vspeed = element.getSpeed().getY();
+    double vspeed = element.getSpeed().getY();
     // If the element has not yet reached the maximal falling speed and the difference is still
     // larger than or equal than the strength, increment it. Otherwise, set the vertical speed to
     // maximal.
@@ -56,9 +61,14 @@ public class Gravity {
    *          A Level containing elements to be pulled down.
    */
   public void pull(Level level) {
-    for (LevelElement element : level.getElements()) {
+    // Pull down generic moving elements
+
+    for (LevelElement element : level.getMovingElements()) {
       pull(element);
     }
+    
+    // Pull down the player
+    pull(level.getPlayer());
   }
 
 }
