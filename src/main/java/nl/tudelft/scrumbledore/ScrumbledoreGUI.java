@@ -67,12 +67,13 @@ public class ScrumbledoreGUI extends Application {
     Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
     contentHandler.setCenter(gameDisplay);
-    
-    // TODO remove debug cells.
-    gamePainter.fillText("CELL", 0, 0);
-    gamePainter.fillText("CELL", 31, 31);
-    gamePainter.fillText("CELL", 62, 62);
-    gamePainter.fillText("CELL", 93, 93);
+
+    // TODO remove debug cells, used to test.
+    for (int i = 0; i < 620; i = i + 31) {
+      for (int j = 0; j < 620; j = j + 31) {
+        gamePainter.fillText("CELL", j, i);
+      }
+    }
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
