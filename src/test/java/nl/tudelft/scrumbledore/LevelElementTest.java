@@ -52,7 +52,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(32, height);
     LevelElement testElement = make(position, size);
 
-    assertEquals(top, testElement.getTop());
+    assertEquals(top, testElement.getTop(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -69,7 +69,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(64, height);
     LevelElement testElement = make(position, size);
 
-    assertEquals(bottom, testElement.getBottom());
+    assertEquals(bottom, testElement.getBottom(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -86,7 +86,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(width, 96);
     LevelElement testElement = make(position, size);
 
-    assertEquals(left, testElement.getLeft());
+    assertEquals(left, testElement.getLeft(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -103,7 +103,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(width, 32);
     LevelElement testElement = make(position, size);
 
-    assertEquals(right, testElement.getRight());
+    assertEquals(right, testElement.getRight(), Constants.DOUBLE_PRECISION);
   }
 
 }

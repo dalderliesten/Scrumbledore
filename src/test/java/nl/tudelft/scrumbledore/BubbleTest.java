@@ -4,17 +4,20 @@ package nl.tudelft.scrumbledore;
 
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
+
 //import org.junit.Test;
 
 /**
- * Testing Bubble.
- * @author Floris
+ * Testing the Bubble class.
+ * 
+ * @author Floris Doolaard
  *
  */
 public class BubbleTest {
 
   /**
    * Setting up test properties.
+   * 
    * @throws Exception
    */
   @BeforeClass
@@ -23,11 +26,11 @@ public class BubbleTest {
 
   /**
    * Deleting test properties after testing.
+   * 
    * @throws Exception
    */
   @AfterClass
   public static void tearDownAfterClass() throws Exception {
   }
-
 
 }
