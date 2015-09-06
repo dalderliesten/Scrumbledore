@@ -14,5 +14,8 @@ public class Constants {
 
   // The standard size of a block.
   public static final int BLOCKSIZE = 31;
+  
+  // Double precision
+  public static final double DOUBLE_PRECISION = 0.001;
 
 }

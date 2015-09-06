@@ -81,7 +81,7 @@ public abstract class LevelElement {
    * 
    * @return Y-coordinate of top.
    */
-  public int getTop() {
+  public double getTop() {
     return position.getY() - size.getY() / 2;
   }
 
@@ -90,7 +90,7 @@ public abstract class LevelElement {
    * 
    * @return Y-coordinate of bottom.
    */
-  public int getBottom() {
+  public double getBottom() {
     return position.getY() + size.getY() / 2;
   }
 
@@ -99,7 +99,7 @@ public abstract class LevelElement {
    * 
    * @return X-coordinate of left side.
    */
-  public int getLeft() {
+  public double getLeft() {
     return position.getX() - size.getX() / 2;
   }
 
@@ -108,7 +108,7 @@ public abstract class LevelElement {
    * 
    * @return X-coordinate of right side.
    */
-  public int getRight() {
+  public double getRight() {
     return position.getX() + size.getX() / 2;
   }
     
