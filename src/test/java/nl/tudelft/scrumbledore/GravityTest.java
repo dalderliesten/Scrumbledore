@@ -25,7 +25,7 @@ public class GravityTest {
 
     gravity.pull(test);
 
-    assertEquals(0 + strength, test.getSpeed().getY());
+    assertEquals(0 + strength, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -42,7 +42,7 @@ public class GravityTest {
 
     gravity.pull(test);
 
-    assertEquals(max, test.getSpeed().getY());
+    assertEquals(max, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -59,7 +59,7 @@ public class GravityTest {
 
     gravity.pull(test);
 
-    assertEquals(max, test.getSpeed().getY());
+    assertEquals(max, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -81,8 +81,8 @@ public class GravityTest {
 
     gravity.pull(level);
 
-    assertEquals(0 + strength, test.getSpeed().getY());
-    assertEquals(max, test2.getSpeed().getY());
+    assertEquals(0 + strength, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
+    assertEquals(max, test2.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -101,7 +101,7 @@ public class GravityTest {
 
     gravity.pull(level);
 
-    assertEquals(0, test.getSpeed().getY());
+    assertEquals(0, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
 }

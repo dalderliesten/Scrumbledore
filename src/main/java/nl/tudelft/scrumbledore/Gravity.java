@@ -38,7 +38,7 @@ public class Gravity {
       return;
     }
 
-    int vspeed = element.getSpeed().getY();
+    double vspeed = element.getSpeed().getY();
     // If the element has not yet reached the maximal falling speed and the difference is still
     // larger than or equal than the strength, increment it. Otherwise, set the vertical speed to
     // maximal.

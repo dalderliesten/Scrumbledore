@@ -9,20 +9,20 @@ package nl.tudelft.scrumbledore;
  */
 public class Vector {
 
-  private int entryX;
-  private int entryY;
+  private double entryX;
+  private double entryY;
 
   /**
    * Create a new 2D Vector with given X and Y entries.
    * 
-   * @param entryX
+   * @param d
    *          The X entry of the vector.
-   * @param entryY
+   * @param e
    *          The Y entry of the vector.
    */
-  public Vector(int entryX, int entryY) {
-    this.entryX = entryX;
-    this.entryY = entryY;
+  public Vector(double d, double e) {
+    this.entryX = d;
+    this.entryY = e;
   }
 
   /**
@@ -80,7 +80,7 @@ public class Vector {
    *          The other vector.
    * @return The result of the dotproduct.
    */
-  public int dotProduct(Vector vector) {
+  public double dotProduct(Vector vector) {
     return this.entryX * vector.getX() + this.entryY * vector.getY();
   }
 
@@ -89,7 +89,7 @@ public class Vector {
    * 
    * @return X entry
    */
-  public int getX() {
+  public double getX() {
     return entryX;
   }
 
@@ -98,7 +98,7 @@ public class Vector {
    * 
    * @return Y entry
    */
-  public int getY() {
+  public double getY() {
     return entryY;
   }
 
@@ -108,18 +108,18 @@ public class Vector {
    * @param entryX
    *          X entry
    */
-  public void setX(int entryX) {
+  public void setX(double entryX) {
     this.entryX = entryX;
   }
 
   /**
    * Set the Y entry of the vector.
    * 
-   * @param entryY
+   * @param d
    *          Y entry
    */
-  public void setY(int entryY) {
-    this.entryY = entryY;
+  public void setY(double d) {
+    this.entryY = d;
   }
 
   /**
