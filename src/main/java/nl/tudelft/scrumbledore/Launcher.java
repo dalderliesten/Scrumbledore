@@ -9,4 +9,11 @@ package nl.tudelft.scrumbledore;
  */
 public class Launcher {
 
+  /**
+   * Constructs a new Launcher instance.
+   */
+  public Launcher() {
+
+  }
+
 }
