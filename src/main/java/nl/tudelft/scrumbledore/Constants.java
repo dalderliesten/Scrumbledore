@@ -17,6 +17,12 @@ public class Constants {
   // Setting the resolution constants for GUI game display.
   public static final int CANVASRESOLUTIONY = 620;
 
+  // Defenining labels needed in the top section of the user interface.
+  public static final String SCORELABEL = "Score: ";
+  public static final String HISCORELABEL = "High-Score: ";
+  public static final String POWERUPLABEL = "Power-Ups: ";
+  public static final String LEVELLABEL = "Level: ";
+
   // The standard size of a block.
   public static final int BLOCKSIZE = 31;
 

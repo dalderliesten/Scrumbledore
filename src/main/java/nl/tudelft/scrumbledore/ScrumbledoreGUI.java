@@ -5,6 +5,8 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
@@ -42,6 +44,19 @@ public class ScrumbledoreGUI extends Application {
     // Creating of the scene and assigning this scene to the game stage.
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
+
+    // Creation of a horizontal box for storing top labels and items to display.
+    HBox topItems = new HBox();
+
+    // Linking the labels needed in the top HBox to their constant referneces.
+    Label scoreLabel = new Label(Constants.SCORELABEL);
+    Label highScoreLabel = new Label(Constants.HISCORELABEL);
+    Label powerUpLabel = new Label(Constants.POWERUPLABEL);
+    Label levelLabel = new Label(Constants.LEVELLABEL);
+
+    // Adding the top labels to the top HBox and to the game display interface.
+    topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
+    contentHandler.getChildren().add(topItems);
 
     // Creation of the game display canvas, and adding a graphics context object to allow for
     // simple, call based refreshing. Canvas is then added to the scene of the window.
