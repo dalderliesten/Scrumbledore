@@ -19,4 +19,11 @@ public class Constants {
   public static final String stopButtonText = "Stop";
   public static final String settingsbuttonText = "Settings";
   public static final String exitbuttonText = "Exit";
+  
+  // The standard size of a block.
+  public static final int BLOCKSIZE = 31;
+  
+  // Double precision
+  public static final double DOUBLE_PRECISION = 0.001;
+
 }
