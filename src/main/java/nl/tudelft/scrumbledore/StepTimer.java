@@ -3,13 +3,17 @@ package nl.tudelft.scrumbledore;
 /**
  * Class responsible for invoking the step method at a given rate on the Game.
  * 
- * @author Jesse Tilro
+ * @author Jesse Tilro and Jeroen Meijer
  *
  */
 public class StepTimer {
 
   private int rate;
   private Game game;
+  private boolean running;
+  private boolean paused;
+  private long prevLoopTime;
+  private long optimalTime;
 
   /**
    * Construct a new StepTimer.
@@ -20,8 +24,12 @@ public class StepTimer {
    *          The game whose step should be executed.
    */
   public StepTimer(int rate, Game game) {
-    this.rate = rate;
     this.game = game;
+    this.prevLoopTime = System.nanoTime();
+    this.optimalTime = 1000000000 / rate;
+    this.rate = rate;
+    this.running = false;
+    this.paused = false;
   }
 
   /**
@@ -41,6 +49,7 @@ public class StepTimer {
    */
   public void setRate(int rate) {
     this.rate = rate;
+    this.optimalTime = 1000000000 / rate;
   }
 
   /**
@@ -62,4 +71,66 @@ public class StepTimer {
     this.game = game;
   }
 
+  /**
+   * Starts the game thread.
+   */
+  public void start() {
+    running = true;
+    Thread loop = new Thread() {
+      public void run() {
+        loopRunner();
+      }
+    };
+    loop.start();
+  }
+
+  /**
+   * Stops the game thread.
+   */
+  public void stop() {
+    running = false;
+  }
+
+  /**
+   * Resumes the game.
+   */
+  public void resume() {
+    paused = false;
+  }
+
+  /**
+   * Pauses the game.
+   */
+  public void pause() {
+    paused = true;
+  }
+
+  /**
+   * Keeps looping over the game loop as long as the game is running.
+   */
+  public void loopRunner() {
+    while (running) {
+      gameLoop();
+    }
+  }
+
+  /**
+   * 
+   */
+  public void gameLoop() {
+    // Timing related operations.
+    long now = System.nanoTime();
+    long elapsedTime = now - prevLoopTime;
+    prevLoopTime = now;
+    double d = elapsedTime / ((double) optimalTime);
+
+    if (!paused) {
+       game.step(d);
+    }
+    try {
+      Thread.sleep((prevLoopTime - System.nanoTime() + optimalTime) / 1000000);
+    } catch (InterruptedException ex) {
+      // Do nothing.
+    }
+  }
 }
