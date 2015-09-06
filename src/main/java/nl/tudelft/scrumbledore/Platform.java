@@ -18,6 +18,8 @@ public class Platform extends LevelElement {
    */
   public Platform(Vector position, Vector size) {
     super(position, size);
+    
+    isPassable = false;
   }
   
   
@@ -33,7 +35,8 @@ public class Platform extends LevelElement {
     if (other instanceof Platform) {
       Platform that = (Platform) other;
       return (this.getPosition().equals(that.getPosition()) 
-          && this.getSize().equals(that.getSize()));
+          && this.getSize().equals(that.getSize())
+          && this.isPassable() == that.isPassable());
     }
     
     return false;
