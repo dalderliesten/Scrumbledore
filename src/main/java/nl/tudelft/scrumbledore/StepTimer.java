@@ -92,9 +92,9 @@ public class StepTimer {
   }
 
   /**
-   * Unpauses the game.
+   * Resumes the game.
    */
-  public void unpause() {
+  public void resume() {
     paused = false;
   }
 
