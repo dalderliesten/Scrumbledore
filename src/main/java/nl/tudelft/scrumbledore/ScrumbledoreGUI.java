@@ -8,6 +8,7 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.paint.Color;
 import javafx.stage.Stage;
@@ -42,7 +43,7 @@ public class ScrumbledoreGUI extends Application {
     gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
-    Group contentHandler = new Group();
+    BorderPane contentHandler = new BorderPane();
 
     // Creating of the scene and assigning this scene to the game stage.
     Scene mainScene = new Scene(contentHandler);
@@ -59,13 +60,19 @@ public class ScrumbledoreGUI extends Application {
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
-    contentHandler.getChildren().add(topItems);
+    contentHandler.setTop(topItems);
 
     // Creation of the game display canvas, and adding a graphics context object to allow for
     // simple, call based refreshing. Canvas is then added to the scene of the window.
     Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
-    contentHandler.getChildren().add(gameDisplay);
+    contentHandler.setCenter(gameDisplay);
+    
+    // TODO remove debug cells.
+    gamePainter.fillText("CELL", 0, 0);
+    gamePainter.fillText("CELL", 31, 31);
+    gamePainter.fillText("CELL", 62, 62);
+    gamePainter.fillText("CELL", 93, 93);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
@@ -77,7 +84,7 @@ public class ScrumbledoreGUI extends Application {
 
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-    contentHandler.getChildren().add(bottomItems);
+    contentHandler.setBottom(bottomItems);
 
     // Displaying the user interface to the user.
     gameStage.show();
