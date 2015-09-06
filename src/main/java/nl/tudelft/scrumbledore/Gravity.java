@@ -59,6 +59,11 @@ public final class Gravity {
    *          The number of steps since last executing this function.
    */
   public static void pull(LevelElement element, double d) {
+    // If the object has not yet been initialized, return.
+    if (element == null) {
+      return;
+    }
+    
     // If the element is not affected by Gravity, ignore it.
     if (!element.hasGravity()) {
       return;
@@ -84,9 +89,13 @@ public final class Gravity {
    *          The number of steps since last executing this function.
    */
   public static void pull(Level level, double d) {
-    for (LevelElement element : level.getElements()) {
+    // Pull down generic moving elements
+    for (LevelElement element : level.getMovingElements()) {
       pull(element, d);
     }
+    
+    // Pull down the player
+    pull(level.getPlayer(), d);
   }
 
 }

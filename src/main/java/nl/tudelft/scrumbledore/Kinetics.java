@@ -20,7 +20,10 @@ public final class Kinetics {
    *          The number of steps since last executing this function.
    */
   public static void addSpeed(LevelElement el, double d) {
-    el.getPosition().sum(Vector.scale(el.getSpeed(), d));
+    // Only add speed if an object has been initialized.
+    if (el != null) {
+      el.getPosition().sum(Vector.scale(el.getSpeed(), d));
+    }
   }
 
   /**
@@ -32,8 +35,12 @@ public final class Kinetics {
    *          The number of steps since last executing this function.
    */
   public static void update(Level level, double d) {
-    for (LevelElement el : level.getElements()) {
+    // Add speed to generic moving elements
+    for (LevelElement el : level.getMovingElements()) {
       addSpeed(el, d);
     }
+    
+    // Add speed to player
+    addSpeed(level.getPlayer(), d);
   }
 }

@@ -18,6 +18,8 @@ public class Platform extends LevelElement {
    */
   public Platform(Vector position, Vector size) {
     super(position, size);
+    
+    isPassable = false;
   }
   
   
@@ -32,18 +34,33 @@ public class Platform extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Platform) {
       Platform that = (Platform) other;
-      return (this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize()));
+      return (this.getPosition().equals(that.getPosition()) 
+          && this.getSize().equals(that.getSize())
+          && this.isPassable() == that.isPassable());
     }
     
     return false;
   }
 
 
+  /**
+   * Return whether a plaform is passable.
+   * 
+   * @return
+   *        Whether a platform is passable.
+   */
   public boolean isPassable() {
     return isPassable;
   }
 
 
+  /**
+   * Set a Platform to passable.
+   * 
+   * @param isPassable
+   *        A platform is passable
+   *            
+   */
   public void setPassable(boolean isPassable) {
     this.isPassable = isPassable;
   }

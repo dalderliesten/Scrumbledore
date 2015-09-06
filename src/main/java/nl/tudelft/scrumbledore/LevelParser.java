@@ -97,7 +97,7 @@ public class LevelParser {
 
       // A Scanner cannot be used to iterate over
       // the chars in a line, so a for loop has 
-      // to be used
+      // to be used.
       for (int idx = 0; idx < line.length(); idx++) {
         char ch = line.charAt(idx);
         
@@ -135,8 +135,12 @@ public class LevelParser {
     Vector blockPos = getBlockPosition(i, j);
     Vector size = new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE);
     switch (ch) {
-      case '#':
+      case '#': // Normal platform
         return new Platform(blockPos, size);
+      case '_': // Passable platform
+        Platform platform = new Platform(blockPos, size);
+        platform.setPassable(true);
+        return platform;
       case 'P':
         return new Player(blockPos, size);
       case 'N':
