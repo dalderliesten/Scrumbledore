@@ -81,7 +81,7 @@ public class Vector {
    * @return The result of the dotproduct.
    */
   public int dotProduct(Vector vector) {
-    return entryX * vector.getX() + entryY * vector.getY();
+    return this.entryX * vector.getX() + this.entryY * vector.getY();
   }
 
   /**
