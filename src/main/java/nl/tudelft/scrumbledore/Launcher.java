@@ -9,11 +9,15 @@ package nl.tudelft.scrumbledore;
  */
 public class Launcher {
 
+  private Game game;
+  private StepTimer timer;
+
   /**
    * Constructs a new Launcher instance.
    */
   public Launcher() {
-
+    // Use levelparser to create levels and put them in a game.
+    // Put game in the timer.
   }
 
 }
