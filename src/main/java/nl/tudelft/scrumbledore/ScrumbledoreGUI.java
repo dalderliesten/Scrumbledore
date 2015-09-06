@@ -69,8 +69,8 @@ public class ScrumbledoreGUI extends Application {
     contentHandler.setCenter(gameDisplay);
 
     // TODO remove debug cells, used to test.
-    for (int i = 0; i < 620; i = i + 31) {
-      for (int j = 0; j < 620; j = j + 31) {
+    for (int i = 0; i < 620; i = i + Constants.BLOCKSIZE) {
+      for (int j = 0; j < 620; j = j + Constants.BLOCKSIZE) {
         gamePainter.fillText("CELL", j, i);
       }
     }
