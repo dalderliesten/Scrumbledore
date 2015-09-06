@@ -21,11 +21,12 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
     LevelElement test = new TestElement();
-    Gravity gravity = new Gravity(strength, max);
+    Gravity.setStrength(strength);
+    Gravity.setMax(max);
 
-    gravity.pull(test);
+    Gravity.pull(test, 1);
 
-    assertEquals(0 + strength, test.getSpeed().getY());
+    assertEquals(0 + strength, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -37,12 +38,14 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
     LevelElement test = new TestElement();
-    Gravity gravity = new Gravity(strength, max);
+    Gravity.setStrength(strength);
+    Gravity.setMax(max);
+
     test.getSpeed().setY(max - (strength - 1));
 
-    gravity.pull(test);
+    Gravity.pull(test, 1);
 
-    assertEquals(max, test.getSpeed().getY());
+    assertEquals(max, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -54,12 +57,13 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
     LevelElement test = new TestElement();
-    Gravity gravity = new Gravity(strength, max);
+    Gravity.setStrength(strength);
+    Gravity.setMax(max);
     test.getSpeed().setY(max + 1);
 
-    gravity.pull(test);
+    Gravity.pull(test, 1);
 
-    assertEquals(max, test.getSpeed().getY());
+    assertEquals(max, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -70,7 +74,8 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
 
-    Gravity gravity = new Gravity(strength, max);
+    Gravity.setStrength(strength);
+    Gravity.setMax(max);
     LevelElement test = new TestElement();
     LevelElement test2 = new TestElement();
     test.getSpeed().setY(0);
@@ -79,10 +84,10 @@ public class GravityTest {
     level.addElement(test);
     level.addElement(test2);
 
-    gravity.pull(level);
+    Gravity.pull(level, 1);
 
-    assertEquals(0 + strength, test.getSpeed().getY());
-    assertEquals(max, test2.getSpeed().getY());
+    assertEquals(0 + strength, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
+    assertEquals(max, test2.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -93,15 +98,16 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
 
-    Gravity gravity = new Gravity(strength, max);
+    Gravity.setStrength(strength);
+    Gravity.setMax(max);
     LevelElement test = new TestElement();
     test.setGravity(false);
     Level level = new Level();
     level.addElement(test);
 
-    gravity.pull(level);
+    Gravity.pull(level, 1);
 
-    assertEquals(0, test.getSpeed().getY());
+    assertEquals(0, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
 }

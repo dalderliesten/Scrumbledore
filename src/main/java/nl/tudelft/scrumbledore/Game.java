@@ -12,7 +12,7 @@ public class Game {
 
   private List<Level> levels;
   private Level currentLevel;
-  private Gravity gravity;
+  private Collisions collisions;
 
   /**
    * Constructs a new Game.
@@ -27,7 +27,10 @@ public class Game {
     this.levels = levels;
     this.currentLevel = levels.get(0);
 
-    this.gravity = new Gravity(1, 8);
+    Gravity.setStrength(1);
+    Gravity.setMax(8);
+    
+    this.collisions = new Collisions();
   }
 
   /**
@@ -100,14 +103,18 @@ public class Game {
 
   /**
    * Performs a step, the next cycle in the game.
+   * 
+   * @param delta
+   *          The relative period of time passed with respect to the expected period of time since
+   *          the last step.
    */
-  public void step() {
+  public void step(double delta) {
     // Pull down all gravity affected elements in the current level.
-    gravity.pull(currentLevel);
+    Gravity.pull(currentLevel, delta);
     // Detect collisions.
-    // collisions.detect(currentLevel);
-    // Apply kinectics.
-    // kinetics.apply(currentLevel);
+    collisions.detect(currentLevel);
+    // Apply kinetics.
+    Kinetics.update(currentLevel, delta);
   }
 
 }

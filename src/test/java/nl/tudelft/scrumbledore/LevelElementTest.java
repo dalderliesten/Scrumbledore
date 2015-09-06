@@ -2,6 +2,10 @@ package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
 
+
+
+import org.junit.After;
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -11,6 +15,17 @@ import org.junit.Test;
  *
  */
 public abstract class LevelElementTest {
+  private Vector position;
+  private Vector size;
+  
+  /**
+   * Setting up properties used in the test class.
+   */
+  @Before
+  public void before() {
+    position = new Vector(16, 32);
+    size = new Vector(42, 42);
+  }
 
   /**
    * Returns an instance of a LevelElement subclass to be tested.
@@ -28,13 +43,10 @@ public abstract class LevelElementTest {
    */
   @Test
   public void testConstructor() {
-    Vector position = new Vector(16, 32);
-    Vector size = new Vector(42, 42);
     LevelElement testElement = make(position, size);
 
     assertEquals(position, testElement.getPosition());
     assertEquals(size, testElement.getSize());
-    assertEquals(false, testElement.hasGravity());
     assertEquals(new Vector(0, 0), testElement.getSpeed());
   }
 
@@ -52,7 +64,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(32, height);
     LevelElement testElement = make(position, size);
 
-    assertEquals(top, testElement.getTop());
+    assertEquals(top, testElement.getTop(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -69,7 +81,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(64, height);
     LevelElement testElement = make(position, size);
 
-    assertEquals(bottom, testElement.getBottom());
+    assertEquals(bottom, testElement.getBottom(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -86,7 +98,7 @@ public abstract class LevelElementTest {
     Vector size = new Vector(width, 96);
     LevelElement testElement = make(position, size);
 
-    assertEquals(left, testElement.getLeft());
+    assertEquals(left, testElement.getLeft(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -103,7 +115,16 @@ public abstract class LevelElementTest {
     Vector size = new Vector(width, 32);
     LevelElement testElement = make(position, size);
 
-    assertEquals(right, testElement.getRight());
+    assertEquals(right, testElement.getRight(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * Cleaning up test properties after testing.
+   */
+  @After
+  public void after() {
+    position = null;
+    size = null;
   }
 
 }

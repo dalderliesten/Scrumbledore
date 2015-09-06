@@ -6,23 +6,47 @@ package nl.tudelft.scrumbledore;
  * @author Jesse Tilro
  *
  */
-public class Gravity {
+public final class Gravity {
 
-  private int strength;
-  private int max;
+  private static int strength;
+  private static int max;
+
+  private Gravity() {
+
+  }
 
   /**
-   * Construct a new Gravity simulator.
+   * @return Strength of the gravity.
+   */
+  public static int getStrength() {
+    return strength;
+  }
+
+  /**
+   * Sets the strength of the gravity.
    * 
    * @param strength
-   *          The strength with which the instance will pull down LevelElements, describing how much
-   *          the vertical speed should be incremented each step.
-   * @param max
-   *          The maximal vertical speed a LevelElement can be pulled to.
+   *          Strength of the gravity.
    */
-  public Gravity(int strength, int max) {
-    this.strength = strength;
-    this.max = max;
+  public static void setStrength(int strength) {
+    Gravity.strength = strength;
+  }
+
+  /**
+   * @return The maximum gravity.
+   */
+  public static int getMax() {
+    return max;
+  }
+
+  /**
+   * Sets the maximum gravity.
+   * 
+   * @param max
+   *          Maximum gravity.
+   */
+  public static void setMax(int max) {
+    Gravity.max = max;
   }
 
   /**
@@ -31,14 +55,21 @@ public class Gravity {
    * 
    * @param element
    *          A LevelElement
+   * @param d
+   *          The number of steps since last executing this function.
    */
-  public void pull(LevelElement element) {
+  public static void pull(LevelElement element, double d) {
+    // If the object has not yet been initialized, return.
+    if (element == null) {
+      return;
+    }
+    
     // If the element is not affected by Gravity, ignore it.
     if (!element.hasGravity()) {
       return;
     }
 
-    int vspeed = element.getSpeed().getY();
+    double vspeed = element.getSpeed().getY() * d;
     // If the element has not yet reached the maximal falling speed and the difference is still
     // larger than or equal than the strength, increment it. Otherwise, set the vertical speed to
     // maximal.
@@ -54,11 +85,17 @@ public class Gravity {
    * 
    * @param level
    *          A Level containing elements to be pulled down.
+   * @param d
+   *          The number of steps since last executing this function.
    */
-  public void pull(Level level) {
-    for (LevelElement element : level.getElements()) {
-      pull(element);
+  public static void pull(Level level, double d) {
+    // Pull down generic moving elements
+    for (LevelElement element : level.getMovingElements()) {
+      pull(element, d);
     }
+    
+    // Pull down the player
+    pull(level.getPlayer(), d);
   }
 
 }
