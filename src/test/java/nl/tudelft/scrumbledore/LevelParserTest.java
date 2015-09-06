@@ -33,16 +33,14 @@ public class LevelParserTest {
     LevelParser lp = new LevelParser();
     Level[] levels = lp.loadLevelsFromDisk("src/main/resources/test");
 
-    ArrayList<LevelElement> elementsLevel1 = levels[0].getElements();
-    ArrayList<LevelElement> elementsLevel2 = levels[1].getElements();
+    ArrayList<Platform> platformsLevel1 = levels[0].getPlatforms();
     
     // Check whether level 1 only contains 1 Platform element
-    assertEquals(elementsLevel1.size(), 1);
-    assertEquals(new Platform(new Vector(B_ONE_MID, B_ONE_MID), SIZE), elementsLevel1.get(0));
+    assertEquals(platformsLevel1.size(), 1);
+    assertEquals(new Platform(new Vector(B_ONE_MID, B_ONE_MID), SIZE), platformsLevel1.get(0));
     
     // Check whether level 2 only contains 1 Player element
-    assertEquals(elementsLevel2.size(), 1);
-    assertEquals(new Player(new Vector(B_ONE_MID, B_ONE_MID), SIZE), elementsLevel2.get(0));
+    assertEquals(new Player(new Vector(B_ONE_MID, B_ONE_MID), SIZE), levels[1].getPlayer());
   }
   
   /**
@@ -94,13 +92,17 @@ public class LevelParserTest {
       level = lp.readLevelFromScanner(sc);
     } catch (FileNotFoundException e) { }
     
-    ArrayList<LevelElement> elements = level.getElements();
-    assertEquals(elements.size(), 4);
-    assertEquals(new Platform(new Vector(B_TWO_MID, B_ONE_MID), SIZE), elements.get(0));
-    assertEquals(new Player(new Vector(B_ONE_MID, B_TWO_MID), SIZE), elements.get(1));
-    assertEquals(new NPC(new Vector(B_TWO_MID, B_TWO_MID), SIZE), elements.get(2));
-    assertEquals(new Fruit(new Vector(B_THREE_MID, B_TWO_MID), SIZE), elements.get(3));
+    ArrayList<LevelElement> movingElements = level.getMovingElements();
+    ArrayList<Platform> platforms = level.getPlatforms();
 
+    // Check lengths of array lists
+    assertEquals(platforms.size(), 1);
+    assertEquals(movingElements.size(), 2);
+
+    assertEquals(new Platform(new Vector(B_TWO_MID, B_ONE_MID), SIZE), platforms.get(0));
+    assertEquals(new Player(new Vector(B_ONE_MID, B_TWO_MID), SIZE), level.getPlayer());
+    assertEquals(new NPC(new Vector(B_TWO_MID, B_TWO_MID), SIZE), movingElements.get(0));
+    assertEquals(new Fruit(new Vector(B_THREE_MID, B_TWO_MID), SIZE), movingElements.get(1));
   }
   
   /**

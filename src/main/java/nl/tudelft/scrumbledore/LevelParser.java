@@ -97,7 +97,7 @@ public class LevelParser {
 
       // A Scanner cannot be used to iterate over
       // the chars in a line, so a for loop has 
-      // to be used
+      // to be used.
       for (int idx = 0; idx < line.length(); idx++) {
         char ch = line.charAt(idx);
         

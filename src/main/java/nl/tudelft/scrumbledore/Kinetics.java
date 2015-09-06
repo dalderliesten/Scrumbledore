@@ -21,7 +21,10 @@ public class Kinetics {
    *          The element whose position has to be updated with its speed.
    */
   public void addSpeed(LevelElement el) {
-    el.getPosition().sum(el.getSpeed());
+    // Only add speed if an object has been initialized.
+    if (el != null) {
+      el.getPosition().sum(el.getSpeed());   
+    }
   }
 
   /**
@@ -31,8 +34,12 @@ public class Kinetics {
    *          The level whose elements should be updated.
    */
   public void update(Level level) {
-    for (LevelElement el : level.getElements()) {
+    // Add speed to generic moving elements
+    for (LevelElement el : level.getMovingElements()) {
       addSpeed(el);
     }
+    
+    // Add speed to player
+    addSpeed(level.getPlayer());
   }
 }
