@@ -37,6 +37,19 @@ public class Vector {
   }
 
   /**
+   * Returns a new Vector which is the sum of two given vectors.
+   * 
+   * @param v1
+   *          The first vector.
+   * @param v2
+   *          The second vector.
+   * @return The sum of the first and second vector.
+   */
+  public static Vector sum(Vector v1, Vector v2) {
+    return new Vector(v1.getX() + v2.getX(), v1.getY() + v2.getY());
+  }
+
+  /**
    * Scale this vector using a scalar.
    * 
    * @param scalar
@@ -54,7 +67,7 @@ public class Vector {
    *          The other vector.
    * @return The result of the dotproduct.
    */
-  public int dotproduct(Vector vector) {
+  public int dotProduct(Vector vector) {
     return entryX * vector.getX() + entryY * vector.getY();
   }
 
