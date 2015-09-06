@@ -73,8 +73,8 @@ public class VectorTest {
   public void testDotproduct() {
     Vector v1 = new Vector(1, 2);
     Vector v2 = new Vector(3, 4);
-    int dot = v1.dotProduct(v2);
-    assertEquals(11, dot);
+    double dot = v1.dotProduct(v2);
+    assertEquals(11, dot, Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -84,7 +84,7 @@ public class VectorTest {
   public void testSetX() {
     Vector testVector = new Vector(0, 0);
     testVector.setX(1);
-    assertEquals(1, testVector.getX());
+    assertEquals(1, testVector.getX(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -94,7 +94,7 @@ public class VectorTest {
   public void testSetY() {
     Vector testVector = new Vector(0, 0);
     testVector.setY(2);
-    assertEquals(2, testVector.getY());
+    assertEquals(2, testVector.getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
