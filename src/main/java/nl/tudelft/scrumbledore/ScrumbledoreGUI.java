@@ -82,7 +82,8 @@ public class ScrumbledoreGUI extends Application {
     final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
     final Button exitButton = new Button(Constants.EXITBTNLABEL);
 
-    // Mapping the functions that the GUI buttons should perform to the button itself.
+    // Mapping the function of the start/stop button to start/stop the game when the button is
+    // pressed.
     startStopButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
@@ -91,6 +92,7 @@ public class ScrumbledoreGUI extends Application {
 
     });
 
+    // Mapping the settings button menu actionevent to trigger when the button is pressed.
     settingsButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
@@ -99,6 +101,7 @@ public class ScrumbledoreGUI extends Application {
 
     });
 
+    // Mapping the exit function to the exit button to quit when button is pressed.
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
