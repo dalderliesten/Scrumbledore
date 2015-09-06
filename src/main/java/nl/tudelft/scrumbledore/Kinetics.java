@@ -27,6 +27,21 @@ public final class Kinetics {
   }
 
   /**
+   * Reverse update the position of the LevelElement by removing the speed.
+   * 
+   * @param el
+   *          The element whose position has to be reverse updated with its speed.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  public static void removeSpeed(LevelElement el, double d) {
+    // Only add speed if an object has been initialized.
+    if (el != null) {
+      el.getPosition().difference(Vector.scale(el.getSpeed(), d));
+    }
+  }
+
+  /**
    * Update all elements in a given Level.
    * 
    * @param level
@@ -39,7 +54,7 @@ public final class Kinetics {
     for (LevelElement el : level.getMovingElements()) {
       addSpeed(el, d);
     }
-    
+
     // Add speed to player
     addSpeed(level.getPlayer(), d);
   }
