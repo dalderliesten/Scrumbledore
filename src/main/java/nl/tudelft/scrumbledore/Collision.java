@@ -11,7 +11,6 @@ public class Collision {
   private LevelElement collider;
   private LevelElement collidee;
   private double delta;
-  private CollisionType type;
 
   /**
    * Constructs a new Collision between a collider and a collidee.
@@ -25,15 +24,6 @@ public class Collision {
     this.collider = collider;
     this.collidee = collidee;
     this.delta = delta;
-    findType();
-  }
-
-  /**
-   * Determines the CollisionType of this Collision and sets the type attribute correspondingly.
-   */
-  private void findType() {
-
-    type = CollisionType.None;
   }
 
   /**
@@ -45,6 +35,110 @@ public class Collision {
     // When at least one vertical and one horizontal edge of the collider are inside the collidee,
     // then collider and collidee are colliding.
     return ((collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight()));
+  }
+
+  /**
+   * A collider is colliding with a collidee from the top if it will collide either in the next step
+   * while it is moving down, or its bottom is making contact with the collidee's top with a given
+   * precision.
+   * 
+   * @return A boolean.
+   */
+  public boolean collidingFromTop() {
+    if (!touchingLeft() && !touchingRight()) {
+      // If the collider is about to collide, anticipate.
+      if (collider.getBottom() < collidee.getTop() && collider.getSpeed().getY() > 0) {
+        // Anticipate movement
+        Kinetics.addSpeed(collider, delta);
+        boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
+        Kinetics.removeSpeed(collider, delta);
+
+        if (collisionExpected) {
+          return true;
+        }
+      }
+      // Otherwise, check whether the collider is touching the collidee.
+      return touchingTop();
+    }
+    return false;
+  }
+
+  /**
+   * A collider is colliding with a collidee from the bottom if it will collide either in the next
+   * step while it is moving up, or its top is making contact with the collidee's bottom with a
+   * given precision.
+   * 
+   * @return A boolean.
+   */
+  public boolean collidingFromBottom() {
+    if (!touchingLeft() && !touchingRight()) {
+      // If the collider is about to collide, anticipate.
+      if (collider.getTop() > collidee.getBottom() && collider.getSpeed().getY() < 0) {
+        // Anticipate movement
+        Kinetics.addSpeed(collider, delta);
+        boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
+        Kinetics.removeSpeed(collider, delta);
+
+        if (collisionExpected) {
+          return true;
+        }
+      }
+      // Otherwise, check whether the collider is touching the collidee.
+      return touchingBottom();
+    }
+    return false;
+  }
+
+  /**
+   * A collider is colliding with a collidee from the left if it will collide either in the next
+   * step while it is moving right, or its right side is making contact with the collidee's left
+   * side with a given precision.
+   * 
+   * @return A boolean.
+   */
+  public boolean collidingFromLeft() {
+    if (!touchingTop() && !touchingBottom()) {
+      // If the collider is about to collide, anticipate.
+      if (collider.getRight() < collidee.getLeft() && collider.getSpeed().getX() > 0) {
+        // Anticipate movement
+        Kinetics.addSpeed(collider, delta);
+        boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
+        Kinetics.removeSpeed(collider, delta);
+
+        if (collisionExpected) {
+          return true;
+        }
+      }
+      // Otherwise, check whether the collider is touching the collidee.
+      return touchingLeft();
+    }
+    return false;
+  }
+
+  /**
+   * A collider is colliding with a collidee from the right if it will collide either in the next
+   * step while it is moving left, or its left side is making contact with the collidee's right side
+   * with a given precision.
+   * 
+   * @return A boolean.
+   */
+  public boolean collidingFromRight() {
+    if (!touchingTop() && !touchingBottom()) {
+      // If the collider is about to collide, anticipate.
+      if (collider.getLeft() > collidee.getRight() && collider.getSpeed().getX() < 0) {
+        // Anticipate movement
+        Kinetics.addSpeed(collider, delta);
+        boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
+        Kinetics.removeSpeed(collider, delta);
+
+        if (collisionExpected) {
+          return true;
+        }
+      }
+      // Otherwise, check whether the collider is touching the collidee.
+      return touchingRight();
+    }
+    return false;
   }
 
   /**
@@ -66,12 +160,47 @@ public class Collision {
   }
 
   /**
-   * Get the type of this collision.
+   * Check whether the bottom edge of the collider just touches the top edge of the collidee.
    * 
-   * @return A CollisionType.
+   * @return Boolean.
    */
-  public CollisionType getType() {
-    return type;
+  private boolean touchingTop() {
+    boolean c1 = collider.getBottom() >= collidee.getTop();
+    boolean c2 = collider.getBottom() <= (collidee.getTop() + Constants.COLLISION_PRECISION);
+    return (colliding() && c1 && c2);
+  }
+
+  /**
+   * Check whether the top edge of the collider just touches the bottom edge of the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean touchingBottom() {
+    boolean c1 = collider.getTop() >= collidee.getBottom();
+    boolean c2 = collider.getTop() <= (collidee.getBottom() - Constants.COLLISION_PRECISION);
+    return (colliding() && c1 && c2);
+  }
+
+  /**
+   * Check whether the right edge of the collider just touches the left edge of the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean touchingLeft() {
+    boolean c1 = collider.getRight() >= collidee.getLeft();
+    boolean c2 = collider.getRight() <= (collidee.getLeft() + Constants.COLLISION_PRECISION);
+    return (colliding() && c1 && c2);
+  }
+
+  /**
+   * Check whether the left edge of the collider just touches the right edge of the collidee.
+   * 
+   * @return Boolean.
+   */
+  private boolean touchingRight() {
+    boolean c1 = collider.getLeft() >= collidee.getRight();
+    boolean c2 = collider.getLeft() <= (collidee.getRight() - Constants.COLLISION_PRECISION);
+    return (colliding() && c1 && c2);
   }
 
   /**
