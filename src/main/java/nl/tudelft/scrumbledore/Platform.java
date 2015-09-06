@@ -39,11 +39,24 @@ public class Platform extends LevelElement {
   }
 
 
+  /**
+   * Return whether a plaform is passable.
+   * 
+   * @return
+   *        Whether a platform is passable.
+   */
   public boolean isPassable() {
     return isPassable;
   }
 
 
+  /**
+   * Set a Platform to passable.
+   * 
+   * @param isPassable
+   *        A platform is passable
+   *            
+   */
   public void setPassable(boolean isPassable) {
     this.isPassable = isPassable;
   }

@@ -39,21 +39,45 @@ public class Fruit extends LevelElement {
   }
 
 
+  /**
+   * Get the value of a fruit.
+   * 
+   * @return
+   *        The value of a fruit
+   */
   public int getValue() {
     return value;
   }
 
 
+  /**
+   * Set the value of a fruit.
+   * 
+   * @param value
+   *          The value of a fruit
+   */
   public void setValue(int value) {
     this.value = value;
   }
 
 
+  /**
+   * Get the appearance time of a fruit.
+   * 
+   * @return
+   *        The appearance time of a fruit
+   */
   public int getTime() {
     return time;
   }
 
 
+  /**
+   * Set the appearance time of a fruit.
+   * 
+   * @param time
+   *        the appearance time of a fruit
+   */
   public void setTime(int time) {
     this.time = time;
   }

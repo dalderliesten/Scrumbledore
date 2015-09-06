@@ -43,31 +43,67 @@ public class NPC extends LevelElement {
   }
 
 
+  /**
+   * Get the life of an NPC.
+   * 
+   * @return
+   *        The life of an NPC
+   */
   public int getLife() {
     return life;
   }
 
 
+  /**
+   * Set the life of an NPC.
+   * 
+   * @param life
+   *        The life of an NPC
+   */
   public void setLife(int life) {
     this.life = life;
   }
 
 
+  /**
+   * Get the status of an NPC.
+   * 
+   * @return
+   *        The status of an NPC
+   */
   public int getStatus() {
     return status;
   }
 
 
+  /**
+   * Set the status of an NPC.
+   * 
+   * @param status
+   *        The status of an NPC
+   */
   public void setStatus(int status) {
     this.status = status;
   }
 
 
-  public boolean isHasFruit() {
+  /**
+   * Check whether an NPC has a fruit.
+   * 
+   * @return
+   *        Whether an NPC has a fruit
+   */
+  public boolean hasFruit() {
     return hasFruit;
   }
 
 
+  /**
+   * Set whether an NPC has a fruit.
+   * 
+   * @param hasFruit
+   *         Whether an NPC has a fruit.
+   */
   public void setHasFruit(boolean hasFruit) {
     this.hasFruit = hasFruit;
   }
