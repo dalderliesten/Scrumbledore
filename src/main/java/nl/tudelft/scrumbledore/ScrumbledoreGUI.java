@@ -5,6 +5,7 @@ import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 
 /**
@@ -28,6 +29,10 @@ public class ScrumbledoreGUI extends Application {
     // Setting the title of the user interface window.
     gameStage.setTitle("Scrumbledore");
 
+    // Setting the resolution needed for the entire GUI.
+    gameStage.setHeight(Constants.RESOLUTIONY);
+    gameStage.setWidth(Constants.RESOLUTIONX);
+
     // Removing the ability to resize the game window. Must be disabled due to fixed dimensions.
     gameStage.setResizable(false);
 
@@ -39,12 +44,10 @@ public class ScrumbledoreGUI extends Application {
     gameStage.setScene(mainScene);
 
     // Creation of the game display canvas, and adding a graphics context object to allow for
-    // simple, call based refreshing.  Canvas is then added to the scene of the window.
-    Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.RESOLUTIONY);
+    // simple, call based refreshing. Canvas is then added to the scene of the window.
+    Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
     contentHandler.getChildren().add(gameDisplay);
-    
-    
 
     // Displaying the user interface to the user.
     gameStage.show();
