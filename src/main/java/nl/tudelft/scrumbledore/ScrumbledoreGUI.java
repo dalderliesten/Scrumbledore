@@ -1,6 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -76,9 +78,34 @@ public class ScrumbledoreGUI extends Application {
     HBox bottomItems = new HBox();
 
     // Linking the buttons needed to their associated constants namesake.
-    Button startStopButton = new Button(Constants.STARTBTNLABEL);
-    Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
-    Button exitButton = new Button(Constants.EXITBTNLABEL);
+    final Button startStopButton = new Button(Constants.STARTBTNLABEL);
+    final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
+    final Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Mapping the functions that the GUI buttons should perform to the button itself.
+    startStopButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        startStopButton.setText(Constants.STOPBTNLABEL);
+      }
+
+    });
+
+    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        System.out.println("SETTINGS WOULD OPEN NOW");
+      }
+
+    });
+
+    exitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        System.exit(0);
+      }
+
+    });
 
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
