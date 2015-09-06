@@ -78,7 +78,7 @@ public class Vector {
    * @param scalar
    *          A scalar.
    */
-  public void scale(int scalar) {
+  public void scale(double scalar) {
     this.entryX *= scalar;
     this.entryY *= scalar;
   }
@@ -92,7 +92,7 @@ public class Vector {
    *          The scalar.
    * @return The scaled vector.
    */
-  public static Vector scale(Vector vector, int scalar) {
+  public static Vector scale(Vector vector, double scalar) {
     return new Vector(vector.getX() * scalar, vector.getY() * scalar);
   }
 

@@ -83,7 +83,7 @@ public class LevelParserTest {
     LevelParser lp = new LevelParser();
     Level level = new Level();
     String testMap = 
-          " #\n"
+          " #_\n"
         + "PNF\n";
     
     Scanner sc = new Scanner(testMap);
@@ -96,10 +96,16 @@ public class LevelParserTest {
     ArrayList<Platform> platforms = level.getPlatforms();
 
     // Check lengths of array lists
-    assertEquals(platforms.size(), 1);
+    assertEquals(platforms.size(), 2);
     assertEquals(movingElements.size(), 2);
 
     assertEquals(new Platform(new Vector(B_TWO_MID, B_ONE_MID), SIZE), platforms.get(0));
+    
+    // Assess the passable platform
+    Platform passablePlatform = new Platform(new Vector(B_THREE_MID, B_ONE_MID), SIZE);
+    passablePlatform.setPassable(true);
+    assertEquals(passablePlatform, platforms.get(1));
+    
     assertEquals(new Player(new Vector(B_ONE_MID, B_TWO_MID), SIZE), level.getPlayer());
     assertEquals(new NPC(new Vector(B_TWO_MID, B_TWO_MID), SIZE), movingElements.get(0));
     assertEquals(new Fruit(new Vector(B_THREE_MID, B_TWO_MID), SIZE), movingElements.get(1));
@@ -118,6 +124,13 @@ public class LevelParserTest {
     Platform platform = (Platform) lp.getElementFromChar('#', 0, 0);
     assertEquals(new Platform(new Vector(B_ONE_MID, B_ONE_MID), SIZE), platform);
 
+    // Check for passable Platform match
+    Platform passablePlatform = (Platform) lp.getElementFromChar('_', 0, 0);
+    Platform passablePlatformExpected = new Platform(new Vector(B_ONE_MID, B_ONE_MID), SIZE);
+    passablePlatformExpected.setPassable(true);
+    
+    assertEquals(passablePlatformExpected, passablePlatform);
+    
     // Check for Player match
     Player player = (Player) lp.getElementFromChar('P', 0, 0);
     assertEquals(new Player(new Vector(B_ONE_MID, B_ONE_MID), SIZE), player);

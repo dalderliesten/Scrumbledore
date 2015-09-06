@@ -6,12 +6,9 @@ package nl.tudelft.scrumbledore;
  * @author Floris Doolaard
  *
  */
-public class Kinetics {
+public final class Kinetics {
+  private Kinetics() {
 
-  /**
-   * Empty Kinetics contructor.
-   */
-  public Kinetics() {
   }
 
   /**
@@ -19,11 +16,13 @@ public class Kinetics {
    * 
    * @param el
    *          The element whose position has to be updated with its speed.
+   * @param d
+   *          The number of steps since last executing this function.
    */
-  public void addSpeed(LevelElement el) {
+  public static void addSpeed(LevelElement el, double d) {
     // Only add speed if an object has been initialized.
     if (el != null) {
-      el.getPosition().sum(el.getSpeed());   
+      el.getPosition().sum(Vector.scale(el.getSpeed(), d));
     }
   }
 
@@ -32,14 +31,16 @@ public class Kinetics {
    * 
    * @param level
    *          The level whose elements should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
    */
-  public void update(Level level) {
+  public static void update(Level level, double d) {
     // Add speed to generic moving elements
     for (LevelElement el : level.getMovingElements()) {
-      addSpeed(el);
+      addSpeed(el, d);
     }
     
     // Add speed to player
-    addSpeed(level.getPlayer());
+    addSpeed(level.getPlayer(), d);
   }
 }

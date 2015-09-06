@@ -5,25 +5,34 @@ package nl.tudelft.scrumbledore;
  * for later.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
+ * @author Niels Warnars
  *
  */
 public class Constants {
-  // String content meant for the labels at the top of the GUI.
-  public static final String levellabelText = "Level: ";
-  public static final String poweruplabelText = "Power ups:";
-  public static final String scorelabelText = "Score: ";
-  public static final String highscorelabelText = "High Score: ";
 
-  // String content meant for the button displayed within the GUI.
-  public static final String startButtonText = "Start";
-  public static final String stopButtonText = "Stop";
-  public static final String settingsbuttonText = "Settings";
-  public static final String exitbuttonText = "Exit";
+  // Setting the resolution of the entire GUI window.
+  public static final int RESOLUTIONX = 620;
+  public static final int RESOLUTIONY = 700;
+
+  // Setting the resolution constants for GUI game display.
+  public static final int CANVASRESOLUTIONY = 620;
+
+  // Defenining labels needed in the top section of the user interface.
+  public static final String SCORELABEL = "Score: ";
+  public static final String HISCORELABEL = "High-Score: ";
+  public static final String POWERUPLABEL = "Power-Ups: ";
+  public static final String LEVELLABEL = "Level: ";
+
+  // Defining text needed to display the buttons in the bottom of the user interface.
+  public static final String STARTBTNLABEL = "Start";
+  public static final String STOPBTNLABEL = "Stop";
+  public static final String SETTINGSBTNLABEL = "Settings";
+  public static final String EXITBTNLABEL = "Exit";
 
   // The standard size of a block.
   public static final int BLOCKSIZE = 31;
-
-  // Double precision
+  // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
   // Collision precision delta
