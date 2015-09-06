@@ -10,6 +10,7 @@ package nl.tudelft.scrumbledore;
  *
  */
 public class Constants {
+
   // Setting the resolution of the entire GUI window.
   public static final int RESOLUTIONX = 620;
   public static final int RESOLUTIONY = 700;
@@ -31,8 +32,10 @@ public class Constants {
 
   // The standard size of a block.
   public static final int BLOCKSIZE = 31;
-
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
+
+  // Collision precision delta
+  public static final double COLLISION_PRECISION = 1;
 
 }

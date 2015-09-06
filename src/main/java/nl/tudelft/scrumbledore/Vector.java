@@ -50,6 +50,29 @@ public class Vector {
   }
 
   /**
+   * Subtracting a given vector from this vector.
+   * 
+   * @param vector
+   *          The vector to subtract from to this vector.
+   */
+  public void difference(Vector vector) {
+    sum(Vector.scale(vector, -1));
+  }
+
+  /**
+   * Returns a new Vector which is the difference between two given vectors.
+   * 
+   * @param v1
+   *          The first vector.
+   * @param v2
+   *          The second vector.
+   * @return The difference between the first and second vector.
+   */
+  public static Vector difference(Vector v1, Vector v2) {
+    return Vector.sum(v1, Vector.scale(v2, -1));
+  }
+
+  /**
    * Scale this vector using a scalar.
    * 
    * @param scalar
@@ -59,7 +82,7 @@ public class Vector {
     this.entryX *= scalar;
     this.entryY *= scalar;
   }
-  
+
   /**
    * Returns a new Vector which is the product of a given vector and a scalar.
    * 
