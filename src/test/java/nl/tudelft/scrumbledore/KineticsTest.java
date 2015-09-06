@@ -2,8 +2,8 @@ package nl.tudelft.scrumbledore;
 
 //import static org.junit.Assert.*;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
+import org.junit.After;
+import org.junit.Before;
 //import org.junit.Test;
 import org.junit.Test;
 
@@ -15,13 +15,19 @@ import org.junit.Test;
  */
 public class KineticsTest {
 
+  private Vector pos;
+  private Vector size;
+  private Fruit f1;
   /**
    * Setting up test properties.
    * 
    * @throws Exception
    */
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  @Before
+  public void setUpBeforeClass() {
+    pos = new Vector(1.0, 1.0);
+    size = new Vector(1.0, 1.0);
+    f1 = new Fruit(pos, size);
   }
 
   /**
@@ -29,7 +35,7 @@ public class KineticsTest {
    */
   @Test
   public void testAddSpeed() {
-
+    // TO BE IMPLEMENTED
   }
 
   /**
@@ -37,7 +43,7 @@ public class KineticsTest {
    */
   @Test
   public void testUpdate() {
-
+    // TO BE IMPLEMENTED
   }
 
   /**
@@ -45,8 +51,11 @@ public class KineticsTest {
    * 
    * @throws Exception
    */
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  @After
+  public void tearDownAfterClass() {
+    pos = null;
+    size = null;
+    f1 = null;
   }
 
 }

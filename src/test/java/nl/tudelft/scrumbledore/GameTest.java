@@ -22,6 +22,7 @@ import org.junit.Test;
 public class GameTest {
   private Game g1;
   private Level l1;
+  private Level l2;
   private ArrayList<Level> list1;
 
   /**
@@ -32,8 +33,10 @@ public class GameTest {
   @Before
   public void before() {
     l1 = new Level();
+    l2 = new Level();
     list1 = new ArrayList<Level>();
     list1.add(l1);
+    list1.add(l2);
     g1 = new Game(list1);
   }
 
@@ -42,10 +45,10 @@ public class GameTest {
    */
   @Test
   public void testRemainingLevels() {
-    
+
     assertEquals(l1, g1.getCurrentLevel());
     assertEquals(l1, g1.getLevels().get(0));
-    assertEquals(0, g1.remainingLevels());
+    assertEquals(1, g1.remainingLevels());
   }
 
   /**
@@ -54,6 +57,11 @@ public class GameTest {
   @Test
   public void testGoToNextLevel() {
 
+    assertEquals(l1, g1.getCurrentLevel());
+    assertEquals(1, g1.remainingLevels());
+    g1.goToNextLevel();
+    assertEquals(l2, g1.getCurrentLevel());
+    assertEquals(0, g1.remainingLevels());
   }
 
   /**
@@ -63,6 +71,10 @@ public class GameTest {
    */
   @After
   public void tearDownAfterClass() {
+    l1 = null;
+    l2 = null;
+    list1 = null;
+    g1 = null;
   }
 
 }
