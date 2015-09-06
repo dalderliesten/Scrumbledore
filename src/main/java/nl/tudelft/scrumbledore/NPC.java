@@ -36,7 +36,8 @@ public class NPC extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof NPC) {
       NPC that = (NPC) other;
-      return (this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize()));
+      return (this.getPosition().equals(that.getPosition()) 
+          && this.getSize().equals(that.getSize()));
     }
     
     return false;
