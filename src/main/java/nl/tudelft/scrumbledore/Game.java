@@ -104,6 +104,10 @@ public class Game {
 
   /**
    * Performs a step, the next cycle in the game.
+   * 
+   * @param delta
+   *          The relative period of time passed with respect to the expected period of time since
+   *          the last step.
    */
   public void step(double delta) {
     // Pull down all gravity affected elements in the current level.
