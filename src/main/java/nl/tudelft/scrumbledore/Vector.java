@@ -24,15 +24,38 @@ public class Vector {
     this.entryX = entryX;
     this.entryY = entryY;
   }
-  
+
   /**
    * Summing two vectors into one.
+   * 
    * @param vector
    *          The vector to add to the current one.
    */
   public void sum(Vector vector) {
     this.entryX += vector.getX();
     this.entryY += vector.getY();
+  }
+
+  /**
+   * Scale this vector using a scalar.
+   * 
+   * @param scalar
+   *          A scalar.
+   */
+  public void scale(int scalar) {
+    this.entryX *= scalar;
+    this.entryY *= scalar;
+  }
+
+  /**
+   * Returns the result of the dotproduct between this vector and another one.
+   * 
+   * @param vector
+   *          The other vector.
+   * @return The result of the dotproduct.
+   */
+  public int dotproduct(Vector vector) {
+    return entryX * vector.getX() + entryY * vector.getY();
   }
 
   /**
