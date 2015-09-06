@@ -36,6 +36,17 @@ public class VectorTest {
   }
 
   /**
+   * The difference between to vectors should be calculated correctly.
+   */
+  @Test
+  public void testDifference() {
+    Vector v1 = new Vector(1, 2);
+    Vector v2 = new Vector(3, 4);
+    v1.difference(v2);
+    assertEquals(new Vector(-2, -2), v1);
+  }
+
+  /**
    * The vector should be able to be scaled correctly.
    */
   @Test
@@ -44,7 +55,7 @@ public class VectorTest {
     v1.scale(2);
     assertEquals(new Vector(16, 32), v1);
   }
-  
+
   /**
    * The sum between to vectors should be calculated correctly.
    */
@@ -54,6 +65,17 @@ public class VectorTest {
     Vector v2 = new Vector(3, 4);
     Vector res = Vector.sum(v1, v2);
     assertEquals(new Vector(4, 6), res);
+  }
+
+  /**
+   * The sum between to vectors should be calculated correctly.
+   */
+  @Test
+  public void testDifferenceStatic() {
+    Vector v1 = new Vector(1, 2);
+    Vector v2 = new Vector(3, 4);
+    Vector res = Vector.difference(v1, v2);
+    assertEquals(new Vector(-2, -2), res);
   }
 
   /**
