@@ -31,7 +31,8 @@ public class Constants {
   public static final String EXITBTNLABEL = "Exit";
 
   // The standard size of a block.
-  public static final int BLOCKSIZE = 31;
+  public static final double BLOCKSIZE = 32;
+
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
