@@ -16,7 +16,7 @@ public class Constants {
   public static final int RESOLUTIONY = 700;
 
   // Setting the resolution constants for GUI game display.
-  public static final int CANVASRESOLUTIONY = 620;
+  public static final int CANVASRESOLUTIONY = 640;
 
   // Defenining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";
