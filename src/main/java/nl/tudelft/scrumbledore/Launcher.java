@@ -25,7 +25,6 @@ public class Launcher {
   }
   
   /**
-   * launch
    * Launches the GUI associated to this launcher.
    * 
    * @pre method called
