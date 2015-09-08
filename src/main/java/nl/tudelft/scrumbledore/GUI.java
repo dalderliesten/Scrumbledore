@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * @author David Alderliesten
  * @author Niels Warnars
  */
-public class ScrumbledoreGUI extends Application {
+public class GUI extends Application {
   private Game game;
   private StepTimer timer;
   private Image playerSprite;
@@ -197,14 +197,15 @@ public class ScrumbledoreGUI extends Application {
       // Handling the key press.
       public void handle(KeyEvent keyPressed) {
         String keyPress = keyPressed.getCode().toString();
-
+        Player player = game.getCurrentLevel().getPlayer();
+        
         // Mapping the desired keys to the desired actions.
         if (keyPress.equals("LEFT")) {
-          game.getCurrentLevel().getPlayer().getSpeed().setX(-8);
+          player.addAction(PlayerAction.MoveLeft);
         } else if (keyPress.equals("RIGHT")) {
-          game.getCurrentLevel().getPlayer().getSpeed().setX(8);
+          player.addAction(PlayerAction.MoveRight);
         } else if (keyPress.equals("UP")) {
-          game.getCurrentLevel().getPlayer().getSpeed().setY(-16);
+          player.addAction(PlayerAction.Jump);
         }
       }
 
@@ -216,12 +217,13 @@ public class ScrumbledoreGUI extends Application {
       // Handling the key press.
       public void handle(KeyEvent keyReleased) {
         String keyRelease = keyReleased.getCode().toString();
-
+        Player player = game.getCurrentLevel().getPlayer();
+        
         // Mapping the desired keys to the desired actions.
         if (keyRelease.equals("LEFT")) {
-          game.getCurrentLevel().getPlayer().getSpeed().setX(0);
+          player.addAction(PlayerAction.MoveStop);
         } else if (keyRelease.equals("RIGHT")) {
-          game.getCurrentLevel().getPlayer().getSpeed().setX(0);
+          player.addAction(PlayerAction.MoveStop);
         }
       }
 

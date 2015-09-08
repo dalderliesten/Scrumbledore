@@ -138,7 +138,11 @@ public class StepTimer {
       game.step(d);
     }
     try {
-      Thread.sleep((prevLoopTime - System.nanoTime() + optimalTime) / 1000000);
+      long timeout = (prevLoopTime - System.nanoTime() + optimalTime) / 1000000;
+      if (timeout < 0) {
+        timeout = 0;
+      }
+      Thread.sleep(timeout);
     } catch (InterruptedException ex) {
       // Do nothing.
     }

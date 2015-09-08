@@ -48,6 +48,11 @@ public class Constants {
   public static final double GRAVITY_STRENGTH = 1;
   // Gravity maximal vertical speed.
   public static final double GRAVITY_MAX = 8;
+  
+  // Player horizontal movement speed
+  public static final double PLAYER_SPEED = 8;
+  // Player jump strength
+  public static final double PLAYER_JUMP = 16;
 
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
