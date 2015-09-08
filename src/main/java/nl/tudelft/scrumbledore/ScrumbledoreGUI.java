@@ -48,7 +48,7 @@ public class ScrumbledoreGUI extends Application {
     // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
-    // gameStage.setResizable(false);
+    gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
