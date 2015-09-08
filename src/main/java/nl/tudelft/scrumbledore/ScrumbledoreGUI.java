@@ -27,7 +27,7 @@ import javafx.scene.input.KeyEvent;
 public class ScrumbledoreGUI extends Application {
   private Game game;
   private StepTimer timer;
-  private Player player;
+  private Image playerSprite;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -91,7 +91,8 @@ public class ScrumbledoreGUI extends Application {
     }
 
     // Adding the initial player location to the GUI.
-    gamePainter.drawImage(new Image(Constants.PLAYER_SPRITE), game.getCurrentLevel().getPlayer()
+    playerSprite = new Image(Constants.PLAYER_SPRITE);
+    gamePainter.drawImage(playerSprite, game.getCurrentLevel().getPlayer()
         .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
 
     // Adding player movement support.
