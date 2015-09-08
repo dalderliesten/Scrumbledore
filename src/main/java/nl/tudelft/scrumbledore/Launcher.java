@@ -4,7 +4,8 @@ package nl.tudelft.scrumbledore;
  * Class responsible for setting up and launching a game, and connecting it to the StepTimer and the
  * GUI.
  * 
- * @author Jesse Tilro
+ * @author David Alderliesten
+ * @author Niels Warnars
  *
  */
 public class Launcher {
@@ -21,8 +22,10 @@ public class Launcher {
     
     // Creation of a steptimes to provide a restriction in the calculations per second.
     timer = new StepTimer(30, game);
-    
-    // Creation of the GUI to display everything.
+  }
+  
+  public void launch() {
+    // Launching the GUI to display all the content.
     ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
   }
 
