@@ -58,4 +58,60 @@ public final class Kinetics {
     // Add speed to player
     addSpeed(level.getPlayer(), d);
   }
+
+  /**
+   * Snap a LevelElement to the left side of another LevelElement.
+   * 
+   * @param snapper
+   *          The LevelElement to be snapped.
+   * @param snapTo
+   *          The LevelElement to be snapped to.
+   */
+  public static void snapLeft(LevelElement snapper, LevelElement snapTo) {
+    double offset = -1 * snapper.getSize().getX() / 2;
+    double newPos = snapTo.getLeft() + offset;
+    snapper.getPosition().setX(newPos);
+  }
+  
+  /**
+   * Snap a LevelElement to the right side of another LevelElement.
+   * 
+   * @param snapper
+   *          The LevelElement to be snapped.
+   * @param snapTo
+   *          The LevelElement to be snapped to.
+   */
+  public static void snapRight(LevelElement snapper, LevelElement snapTo) {
+    double offset = 1 * snapper.getSize().getX() / 2;
+    double newPos = snapTo.getRight() + offset;
+    snapper.getPosition().setX(newPos);
+  }
+  
+  /**
+   * Snap a LevelElement to the top side of another LevelElement.
+   * 
+   * @param snapper
+   *          The LevelElement to be snapped.
+   * @param snapTo
+   *          The LevelElement to be snapped to.
+   */
+  public static void snapTop(LevelElement snapper, LevelElement snapTo) {
+    double offset = -1 * snapper.getSize().getY() / 2;
+    double newPos = snapTo.getTop() + offset;
+    snapper.getPosition().setY(newPos);
+  }
+  
+  /**
+   * Snap a LevelElement to the bottom side of another LevelElement.
+   * 
+   * @param snapper
+   *          The LevelElement to be snapped.
+   * @param snapTo
+   *          The LevelElement to be snapped to.
+   */
+  public static void snapBottom(LevelElement snapper, LevelElement snapTo) {
+    double offset = 1 * snapper.getSize().getY() / 2;
+    double newPos = snapTo.getBottom() + offset;
+    snapper.getPosition().setY(newPos);
+  }
 }
