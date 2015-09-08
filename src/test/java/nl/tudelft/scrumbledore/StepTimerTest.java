@@ -1,11 +1,9 @@
 package nl.tudelft.scrumbledore;
 
-//import static org.junit.Assert.*;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
 
-//import org.junit.Test;
+import org.junit.Test;
 
 /**
  * Testing the StepTimer class.
@@ -22,6 +20,14 @@ public class StepTimerTest {
    */
   @BeforeClass
   public static void setUpBeforeClass() throws Exception {
+  }
+  
+  /**
+   * Testing the isPaused functionality.
+   */
+  @Test
+  public void testIsPaused() {
+    
   }
 
   /**

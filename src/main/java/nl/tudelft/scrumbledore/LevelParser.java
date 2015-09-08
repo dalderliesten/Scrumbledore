@@ -144,16 +144,6 @@ public class LevelParser {
     }
   }
 
-  /**
-   * Gets the middle of a block size.
-   * 
-   * @param blockSize
-   *          The size of a block.
-   * @return The middle of a block size.
-   */
-  protected double getMiddleOfBlock(double blockSize) {
-    return blockSize / 2;
-  }
 
   /**
    * Gets the screen position of a block based on given coordinates in the level map on disk.
@@ -165,10 +155,8 @@ public class LevelParser {
    * @return Screen position of a block
    */
   public Vector getBlockPosition(int i, int j) {
-    double middleOfBlock = getMiddleOfBlock(Constants.BLOCKSIZE);
-
-    double x = i * Constants.BLOCKSIZE + middleOfBlock;
-    double y = j * Constants.BLOCKSIZE + middleOfBlock;
+    double x = i * Constants.BLOCKSIZE;
+    double y = j * Constants.BLOCKSIZE;
 
     return new Vector(x, y);
   }
