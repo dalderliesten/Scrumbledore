@@ -12,11 +12,11 @@ package nl.tudelft.scrumbledore;
 public class Constants {
 
   // Setting the resolution of the entire GUI window.
-  public static final int RESOLUTIONX = 620;
+  public static final int RESOLUTIONX = 640;
   public static final int RESOLUTIONY = 700;
 
   // Setting the resolution constants for GUI game display.
-  public static final int CANVASRESOLUTIONY = 620;
+  public static final int CANVASRESOLUTIONY = 640;
 
   // Defenining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";
@@ -31,11 +31,15 @@ public class Constants {
   public static final String EXITBTNLABEL = "Exit";
 
   // The standard size of a block.
-  public static final int BLOCKSIZE = 31;
+  public static final double BLOCKSIZE = 32;
+
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
-  // Collision precision delta
+  // Collision precision delta.
   public static final double COLLISION_PRECISION = 1;
+
+  // Location of level text files on disk.
+  public static final String LEVELS_DIR = "src/main/resources/";
 
 }

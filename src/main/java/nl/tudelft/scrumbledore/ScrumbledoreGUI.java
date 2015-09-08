@@ -48,7 +48,7 @@ public class ScrumbledoreGUI extends Application {
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
 
-    // Adding the CSS stylesheet to the scene to style the GUI appearance.  TODO
+    // Adding the CSS stylesheet to the scene to style the GUI appearance. TODO
     // mainScene.getStylesheets().add("");
 
     // Creation of a horizontal box for storing top labels and items to display.
@@ -71,8 +71,10 @@ public class ScrumbledoreGUI extends Application {
     contentHandler.setCenter(gameDisplay);
 
     // TODO remove debug cells, used to test.
-    for (int i = 0; i < Constants.RESOLUTIONX; i = i + Constants.BLOCKSIZE) {
-      for (int j = 0; j < Constants.RESOLUTIONX; j = j + Constants.BLOCKSIZE) {
+    int incrementX = (int) Math.round(Constants.BLOCKSIZE);
+    int incrementY = (int) Math.round(Constants.BLOCKSIZE);
+    for (int i = 0; i < Constants.RESOLUTIONX; i += incrementX) {
+      for (int j = 0; j < Constants.RESOLUTIONX; j += incrementY) {
         gamePainter.fillText("CELL", j, i);
       }
     }
