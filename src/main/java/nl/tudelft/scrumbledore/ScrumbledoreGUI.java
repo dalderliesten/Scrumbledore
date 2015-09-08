@@ -153,9 +153,6 @@ public class ScrumbledoreGUI extends Application {
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
 
-    // Displaying the user interface.
-    gameStage.show();
-
     // Calling the dynamic handling for the GUI.
     spawnDynamic(gameStage);
   }
@@ -165,9 +162,14 @@ public class ScrumbledoreGUI extends Application {
    * 
    * @pre method called within the class
    * @post spawns and handles dynamic elemens of the game
-   * @param the stage used by the rest of the program
+   * @param passedStage
+   *          The stage used by the rest of the GUI
+   * @param passedScene
+   *          The scene used by the rest of the GUI
+   * @param passedPane
+   *          The layout pane used by the rest of the GUI
    */
-  private void spawnDynamic(Stage passedStage) {
-    
+  private void spawnDynamic(Stage passedStage, Scene passedScene, BorderPane passedPane) {
+    passedStage.show();
   }
 }
