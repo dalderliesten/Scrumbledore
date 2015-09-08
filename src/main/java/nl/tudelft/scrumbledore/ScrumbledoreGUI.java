@@ -1,13 +1,13 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
-
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.image.*;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -32,7 +32,7 @@ public class ScrumbledoreGUI extends Application {
   public void start(Stage gameStage) {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
-    timer = new StepTimer(30, game);
+    timer = new StepTimer(Constants.refreshRate, game);
 
     // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
@@ -58,7 +58,12 @@ public class ScrumbledoreGUI extends Application {
     Level currentLevel = game.getCurrentLevel();
     ArrayList<Platform> platforms = currentLevel.getPlatforms();
     
-    
+    for (Platform current : platforms) {
+      Vector position = current.getPosition();
+      Image img = new Image(Constants.PLATFORM_SPRITE);
+      
+      gamePainter.drawImage(img, position.getX(), position.getY());
+    }
 
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
