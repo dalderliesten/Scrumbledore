@@ -2,8 +2,6 @@ package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
 
-
-
 import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
@@ -17,7 +15,7 @@ import org.junit.Test;
 public abstract class LevelElementTest {
   private Vector position;
   private Vector size;
-  
+
   /**
    * Setting up properties used in the test class.
    */
@@ -117,7 +115,17 @@ public abstract class LevelElementTest {
 
     assertEquals(right, testElement.getRight(), Constants.DOUBLE_PRECISION);
   }
-  
+
+  /**
+   * Test whether the distance to another LevelElement is calculated correctly.
+   */
+  @Test
+  public void testDistance() {
+    LevelElement l1 = new Player(new Vector(0, 0), new Vector(32, 32));
+    LevelElement l2 = new Player(new Vector(3, 4), new Vector(32, 32));
+    assertEquals(5, l1.distance(l2), Constants.DOUBLE_PRECISION);
+  }
+
   /**
    * Cleaning up test properties after testing.
    */
