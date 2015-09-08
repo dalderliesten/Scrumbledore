@@ -42,9 +42,12 @@ public class Constants {
   // Collision precision delta.
   public static final double COLLISION_PRECISION = 1;
 
+  // Collision radius
+  public static final double COLLISION_RADIUS = 64;
+  
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
-  
+
   // References to images utilized for the game display within the GUI.
   public static final String PLATFORM_SPRITE = "images/Platform/Platform.png";
 }
