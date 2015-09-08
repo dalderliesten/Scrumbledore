@@ -32,7 +32,7 @@ public class ScrumbledoreGUI extends Application {
   @Override
   public void start(Stage gameStage) {
     gameStage.setTitle("Scrumbledore");
-    
+
     gameStage.show();
   }
 
