@@ -41,7 +41,7 @@ public class ScrumbledoreGUI extends Application {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
     timer = new StepTimer(Constants.refreshRate, game);
-    
+
     // Starting the step timer.
     timer.start();
 
@@ -51,7 +51,7 @@ public class ScrumbledoreGUI extends Application {
     // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
-    //gameStage.setResizable(false);
+    // gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
@@ -59,7 +59,7 @@ public class ScrumbledoreGUI extends Application {
     // Creating of the scene and assigning this scene to the game stage.
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
-    
+
     // Adding the desired stylesheet to the scene for visual modifications.
     mainScene.getStylesheets().add(Constants.CSS_LOCATION);
 
@@ -135,7 +135,7 @@ public class ScrumbledoreGUI extends Application {
     settingsButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-          System.out.println("SETTINGS HOOK ACTIVATED");
+        System.out.println("SETTINGS HOOK ACTIVATED");
       }
 
     });
@@ -155,5 +155,19 @@ public class ScrumbledoreGUI extends Application {
 
     // Displaying the user interface.
     gameStage.show();
+
+    // Calling the dynamic handling for the GUI.
+    spawnDynamic(gameStage);
+  }
+
+  /**
+   * spawnDynamic takes care of elements which must be updated, such as players and enemies.
+   * 
+   * @pre method called within the class
+   * @post spawns and handles dynamic elemens of the game
+   * @param the stage used by the rest of the program
+   */
+  private void spawnDynamic(Stage passedStage) {
+    
   }
 }
