@@ -27,15 +27,15 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     
     // Horizontal Movement.
     if (player.hasAction(PlayerAction.MoveLeft)) {
-      player.getSpeed().setX(-8);
+      player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
     }
     if (player.hasAction(PlayerAction.MoveRight)) {
-      player.getSpeed().setX(8);
+      player.getSpeed().setX(Constants.PLAYER_SPEED);
     }
 
     // Jumping
     if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
-      player.getSpeed().setY(-8);
+      player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
     }
     
     // Clear actions for next step.
