@@ -17,7 +17,7 @@ public class Scrumbledore {
    */
   public static void main(String[] args) {
     // Creating a launcher to launch the game and GUI.
-     (new Launcher()).launch();
+     ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
   }
 
 }
