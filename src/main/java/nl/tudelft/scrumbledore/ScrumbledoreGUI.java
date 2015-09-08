@@ -91,6 +91,9 @@ public class ScrumbledoreGUI extends Application {
       gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
           current.getPosition().getY());
     }
+    
+    // Adding the initial player location to the GUI.
+    gamePainter.drawImage(new Image(Constants.PLAYER_SPRITE), currentLevel.getPlayer().getPosition().getX(), currentLevel.getPlayer().getPosition().getY());
 
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
@@ -154,7 +157,7 @@ public class ScrumbledoreGUI extends Application {
     contentHandler.setBottom(bottomItems);
 
     // Calling the dynamic handling for the GUI.
-    spawnDynamic(gameStage);
+    spawnDynamic(gameStage, mainScene, contentHandler, currentLevel);
   }
 
   /**
@@ -168,8 +171,14 @@ public class ScrumbledoreGUI extends Application {
    *          The scene used by the rest of the GUI
    * @param passedPane
    *          The layout pane used by the rest of the GUI
+   * @param passedLevel
+   *          The current level, used for parsing player elements
+   * 
    */
-  private void spawnDynamic(Stage passedStage, Scene passedScene, BorderPane passedPane) {
+  private void spawnDynamic(Stage passedStage, Scene passedScene, BorderPane passedPane,
+      Level passedLevel) {
     passedStage.show();
+    
+    
   }
 }
