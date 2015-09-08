@@ -41,6 +41,9 @@ public class ScrumbledoreGUI extends Application {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
     timer = new StepTimer(Constants.refreshRate, game);
+    
+    // Starting the step timer.
+    timer.start();
 
     // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
@@ -48,7 +51,7 @@ public class ScrumbledoreGUI extends Application {
     // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
-    gameStage.setResizable(false);
+    //gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
