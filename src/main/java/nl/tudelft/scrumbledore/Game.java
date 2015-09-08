@@ -13,6 +13,7 @@ public class Game {
   private ArrayList<Level> levels;
   private ArrayList<LevelModifier> modifiers;
   private Level currentLevel;
+  private ScoreCounter score;
 
   /**
    * Constructs a new Game from disk.
@@ -50,6 +51,8 @@ public class Game {
     this.modifiers.add(new GravityLevelModifier());
     this.modifiers.add(new CollisionsLevelModifier(kinetics));
     this.modifiers.add(kinetics);
+    
+    this.score = new ScoreCounter();
   }
 
   /**

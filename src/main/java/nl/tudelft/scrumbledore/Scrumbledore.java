@@ -1,11 +1,8 @@
 package nl.tudelft.scrumbledore;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.FileReader;
-
 /**
- * Launches the game and containes the main method, which will run the GUI.
+ * Launches the game and containes the main method, which will run the GUI, which in turn will run
+ * the game.
  * 
  * @author David Alderliesten
  */
@@ -20,16 +17,7 @@ public class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
-    try {
-      File testCSS = new File(Constants.GUI_THEME);
-      
-      if(testCSS.exists()) {
-        System.out.println("All good.");
-      }
-    } catch(Exception e) {
-      System.out.println(e);
-    }
-    
+    // Creating a launcher to launch the game and GUI.
     ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
   }
 
