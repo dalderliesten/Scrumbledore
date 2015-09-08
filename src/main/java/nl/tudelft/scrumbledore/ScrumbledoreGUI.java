@@ -14,6 +14,7 @@ import javafx.scene.image.*;
  * GUI.
  * 
  * @author David Alderliesten
+ * @author Niels Warnars
  */
 public class ScrumbledoreGUI extends Application {
   private Game game;
@@ -53,15 +54,20 @@ public class ScrumbledoreGUI extends Application {
     // simple, call based refreshing. Canvas is then added to the scene of the window.
     Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
-    
+
     // Getting and fetching essential elements of the level.
     Level currentLevel = game.getCurrentLevel();
     ArrayList<Platform> platforms = currentLevel.getPlatforms();
-    
+
+    // Placing the platform elements within the level.
     for (Platform current : platforms) {
+      // Acquire the position for the current platform.
       Vector position = current.getPosition();
+
+      // Acquire the sprite image needed for the platform.
       Image img = new Image(Constants.PLATFORM_SPRITE);
-      
+
+      // Painting the current platform image at the desired x and y location given by the vector.
       gamePainter.drawImage(img, position.getX(), position.getY());
     }
 
