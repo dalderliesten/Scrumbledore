@@ -55,7 +55,13 @@ public final class Kinetics {
       addSpeed(el, d);
     }
 
+    Player player = level.getPlayer();
+    
     // Add speed to player
-    addSpeed(level.getPlayer(), d);
+    addSpeed(player, d);
+    
+    if (player.posY() + player.height() >= Constants.LEVELY) {
+      player.getPosition().setY(player.height() / 2);
+    }
   }
 }
