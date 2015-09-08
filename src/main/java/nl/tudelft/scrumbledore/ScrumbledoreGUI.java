@@ -80,14 +80,8 @@ public class ScrumbledoreGUI extends Application {
 
     // Placing the platform elements within the level.
     for (Platform current : platforms) {
-      // Acquire the position for the current platform.
-      Vector position = current.getPosition();
-
-      // Acquire the sprite image needed for the platform.
-      Image img = new Image(Constants.PLATFORM_SPRITE);
-
       // Painting the current platform image at the desired x and y location given by the vector.
-      gamePainter.drawImage(img, position.getX(), position.getY());
+      gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current.getPosition().getY());
     }
 
     // Displaying the parsed level content in the center of the user interface.
