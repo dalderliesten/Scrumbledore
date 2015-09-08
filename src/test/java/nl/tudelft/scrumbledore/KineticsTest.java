@@ -20,6 +20,7 @@ public class KineticsTest {
   private Vector pos;
   private Vector size;
   private Fruit f1;
+  private KineticsLevelModifier kinetics;
 
   /**
    * Setting up test properties.
@@ -31,6 +32,7 @@ public class KineticsTest {
     pos = new Vector(1.0, 1.0);
     size = new Vector(1.0, 1.0);
     f1 = new Fruit(pos, size);
+    kinetics = new KineticsLevelModifier();
   }
 
   /**
@@ -58,7 +60,7 @@ public class KineticsTest {
     LevelElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(64, 0), new Vector(32, 32));
 
-    Kinetics.snapLeft(snapper, snapTo);
+    kinetics.snapLeft(snapper, snapTo);
 
     assertEquals(32, snapper.getPosition().getX(), Constants.DOUBLE_PRECISION);
   }
@@ -72,7 +74,7 @@ public class KineticsTest {
     LevelElement snapper = new Player(new Vector(64, 0), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(0, 0), new Vector(32, 32));
 
-    Kinetics.snapRight(snapper, snapTo);
+    kinetics.snapRight(snapper, snapTo);
 
     assertEquals(32, snapper.getPosition().getX(), Constants.DOUBLE_PRECISION);
   }
@@ -86,7 +88,7 @@ public class KineticsTest {
     LevelElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(0, 64), new Vector(32, 32));
 
-    Kinetics.snapTop(snapper, snapTo);
+    kinetics.snapTop(snapper, snapTo);
 
     assertEquals(32, snapper.getPosition().getY(), Constants.DOUBLE_PRECISION);
   }
@@ -100,7 +102,7 @@ public class KineticsTest {
     LevelElement snapper = new Player(new Vector(0, 64), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(0, 0), new Vector(32, 32));
 
-    Kinetics.snapBottom(snapper, snapTo);
+    kinetics.snapBottom(snapper, snapTo);
 
     assertEquals(32, snapper.getPosition().getY(), Constants.DOUBLE_PRECISION);
   }
