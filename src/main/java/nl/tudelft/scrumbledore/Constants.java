@@ -39,4 +39,7 @@ public class Constants {
   // Collision precision delta
   public static final double COLLISION_PRECISION = 1;
 
+  // Collision radius
+  public static final double COLLISION_RADIUS = 64;
+
 }

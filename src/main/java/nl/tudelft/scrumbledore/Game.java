@@ -112,8 +112,8 @@ public class Game {
     // Pull down all gravity affected elements in the current level.
     Gravity.pull(currentLevel, delta);
     // Detect collisions.
-    collisions.detect(currentLevel);
-    // Apply kinetics.
+    collisions.detectPlayer(currentLevel, delta);
+    // Apply kinetics update.
     Kinetics.update(currentLevel, delta);
   }
 
