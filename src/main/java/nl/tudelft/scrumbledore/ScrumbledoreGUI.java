@@ -47,7 +47,7 @@ public class ScrumbledoreGUI extends Application {
     // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
-    gameStage.setResizable(false);
+    //gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
@@ -81,7 +81,8 @@ public class ScrumbledoreGUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : platforms) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current.getPosition().getY());
+      gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+          current.getPosition().getY());
     }
 
     // Displaying the parsed level content in the center of the user interface.
@@ -100,7 +101,15 @@ public class ScrumbledoreGUI extends Application {
     startStopButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        
+        // If the game is paused, it will resume it and change the button label to stop. Otherwise,
+        // it resumes the game and changes the butotn label to start.
+        if (timer.isPaused()) {
+          timer.resume();
+          startStopButton.setText(Constants.STOPBTNLABEL);
+        } else {
+          timer.pause();
+          startStopButton.setText(Constants.STARTBTNLABEL);
+        }
       }
 
     });
