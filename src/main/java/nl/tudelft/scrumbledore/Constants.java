@@ -19,7 +19,7 @@ public class Constants {
   public static final int LEVELX = 640;
   
   // Setting the refresh rates for the calculations.
-  public static final int refreshRate = 30;
+  public static final int REFRESH_RATE = 30;
 
   // Defenining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";

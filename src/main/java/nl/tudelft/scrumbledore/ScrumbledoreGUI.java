@@ -40,7 +40,7 @@ public class ScrumbledoreGUI extends Application {
   public void start(Stage gameStage) {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
-    timer = new StepTimer(Constants.refreshRate, game);
+    timer = new StepTimer(Constants.REFRESH_RATE, game);
 
     // Starting the step timer.
     timer.start();
