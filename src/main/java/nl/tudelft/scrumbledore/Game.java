@@ -11,10 +11,9 @@ import java.util.ArrayList;
 public class Game {
 
   private ArrayList<Level> levels;
+  private ArrayList<LevelModifier> modifiers;
   private Level currentLevel;
-  private Collisions collisions;
   private ScoreCounter score;
-
 
   /**
    * Constructs a new Game from disk.
@@ -22,30 +21,25 @@ public class Game {
   public Game() {
     // Load levels from disk
     LevelParser lp = new LevelParser();
-    levels = lp.getLevels();
-    
-    // The game needs at least one level.
-    assert levels.size() > 0;
-
-    this.levels = levels;
-    this.currentLevel = levels.get(0);
-
-    Gravity.setStrength(1);
-    Gravity.setMax(8);
-    
-    this.collisions = new Collisions();
-    
-    this.score = new ScoreCounter();
+    construct(lp.getLevels());
   }
-  
-  
+
   /**
    * Constructs a new Game based on a given ArrayList<Level>.
    * 
-   * @param levels An ArrayList of levels
+   * @param levels
+   *          An ArrayList of levels
    */
   public Game(ArrayList<Level> levels) {
-    this.levels = levels;
+    construct(levels);
+  }
+
+  /**
+   * Shared part of the constructors.
+   * @param levels The levels for the game.
+   */
+  public void construct(ArrayList<Level> levels) {
+    this.score = new ScoreCounter();
     
     // The game needs at least one level.
     assert levels.size() > 0;
@@ -53,10 +47,14 @@ public class Game {
     this.levels = levels;
     this.currentLevel = levels.get(0);
 
-    Gravity.setStrength(1);
-    Gravity.setMax(8);
+    KineticsLevelModifier kinetics = new KineticsLevelModifier();
+
+    this.modifiers = new ArrayList<LevelModifier>();
+    this.modifiers.add(new GravityLevelModifier());
+    this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
+    this.modifiers.add(kinetics);
     
-    this.collisions = new Collisions();
+    
   }
 
   /**
@@ -135,12 +133,9 @@ public class Game {
    *          the last step.
    */
   public void step(double delta) {
-    // Pull down all gravity affected elements in the current level.
-    Gravity.pull(currentLevel, delta);
-    // Detect collisions.
-    collisions.detectPlayer(currentLevel, delta);
-    // Apply kinetics update.
-    Kinetics.update(currentLevel, delta);
+    for (LevelModifier modifier : modifiers) {
+      modifier.modify(currentLevel, delta);
+    }
   }
 
 }
