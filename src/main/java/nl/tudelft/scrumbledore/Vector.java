@@ -108,6 +108,25 @@ public class Vector {
   }
 
   /**
+   * Returns the result the length of this vector.
+   * 
+   * @return The length.
+   */
+  public double length() {
+    return Math.sqrt(dotProduct(this));
+  }
+  
+  /**
+   * Returns the distance between this and a given other vector.
+   * @param vector The other vector.
+   * @return The distance.
+   */
+  public double distance(Vector vector) {
+    Vector dv = Vector.difference(this, vector);
+    return dv.length();
+  }
+
+  /**
    * Get the X entry of the vector.
    * 
    * @return X entry
