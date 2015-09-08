@@ -61,7 +61,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     // Detect collisions with candidates.
     for (Platform platform : candidates) {
       Collision collision = new Collision(player, platform, delta);
-      if (collision.collidingFromTop()) {
+      if (collision.collidingFromTop() && player.vSpeed() > 0) {
         kinetics.stopVertically(player);
         kinetics.snapTop(player, platform);
       }
