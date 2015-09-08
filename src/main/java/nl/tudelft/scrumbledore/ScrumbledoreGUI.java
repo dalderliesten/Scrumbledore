@@ -1,16 +1,11 @@
 package nl.tudelft.scrumbledore;
 
 import javafx.application.Application;
-import javafx.event.ActionEvent;
-import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.layout.BorderPane;
-import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.scene.layout.BorderPane;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -21,7 +16,7 @@ import javafx.stage.Stage;
 public class ScrumbledoreGUI extends Application {
   private Game scrumbledoreGame;
   private StepTimer gameTimer;
-  
+
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
    * creation of essential features, such as buttons and display information.
@@ -36,7 +31,7 @@ public class ScrumbledoreGUI extends Application {
     // Instantiate the essential game and step timer functions for the game handling.
     scrumbledoreGame = new Game();
     gameTimer = new StepTimer(30, scrumbledoreGame);
-    
+
     // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
 
@@ -45,8 +40,22 @@ public class ScrumbledoreGUI extends Application {
     gameStage.setWidth(Constants.GUIX);
     gameStage.setResizable(false);
 
+    // Setting the content handler group object, to which objects within the game must be added.
+    BorderPane contentHandler = new BorderPane();
+
+    // Creating of the scene and assigning this scene to the game stage.
+    Scene mainScene = new Scene(contentHandler);
+    gameStage.setScene(mainScene);
+
+    // Creation of the game display canvas, and adding a graphics context object to allow for
+    // simple, call based refreshing. Canvas is then added to the scene of the window.
+    Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
+
+    // Displaying the parsed level content in the center of the user interface.
+    contentHandler.setCenter(gameDisplay);
+
     // Displaying the user interface.
     gameStage.show();
   }
-
 }
