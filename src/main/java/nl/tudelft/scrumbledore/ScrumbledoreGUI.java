@@ -19,7 +19,9 @@ import javafx.stage.Stage;
  * @author David Alderliesten
  */
 public class ScrumbledoreGUI extends Application {
-
+  private Game scrumbledoreGame;
+  private StepTimer gameTimer;
+  
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
    * creation of essential features, such as buttons and display information.
@@ -31,15 +33,19 @@ public class ScrumbledoreGUI extends Application {
    */
   @Override
   public void start(Stage gameStage) {
+    // Instantiate the essential game and step timer functions for the game handling.
+    scrumbledoreGame = new Game();
+    gameTimer = new StepTimer(30, scrumbledoreGame);
+    
     // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
-    
+
     // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
     gameStage.setResizable(false);
-    
-    //Displaying the user interface.
+
+    // Displaying the user interface.
     gameStage.show();
   }
 
