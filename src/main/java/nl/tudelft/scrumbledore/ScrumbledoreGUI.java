@@ -31,12 +31,15 @@ public class ScrumbledoreGUI extends Application {
    */
   @Override
   public void start(Stage gameStage) {
+    // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
     
+    // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
     gameStage.setResizable(false);
-
+    
+    //Displaying the user interface.
     gameStage.show();
   }
 
