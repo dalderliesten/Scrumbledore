@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore;
 
-import java.util.ArrayList;
-
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,11 +9,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.image.*;
+import javafx.stage.Stage;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -26,6 +25,7 @@ import javafx.scene.image.*;
 public class ScrumbledoreGUI extends Application {
   private Game game;
   private StepTimer timer;
+  private Image playerSprite;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -40,7 +40,10 @@ public class ScrumbledoreGUI extends Application {
   public void start(Stage gameStage) {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
-    timer = new StepTimer(Constants.refreshRate, game);
+    timer = new StepTimer(Constants.REFRESH_RATE, game);
+
+    // Starting the step timer.
+    timer.start();
 
     // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
@@ -56,6 +59,9 @@ public class ScrumbledoreGUI extends Application {
     // Creating of the scene and assigning this scene to the game stage.
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
+
+    // Adding the desired stylesheet to the scene for visual modifications.
+    mainScene.getStylesheets().add(Constants.CSS_LOCATION);
 
     // Creation of a horizontal box for storing top labels and items to display.
     HBox topItems = new HBox();
@@ -75,15 +81,12 @@ public class ScrumbledoreGUI extends Application {
     Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
 
-    // Getting and fetching essential elements of the level.
-    Level currentLevel = game.getCurrentLevel();
-    ArrayList<Platform> platforms = currentLevel.getPlatforms();
+    addKeyEventListeners(mainScene);
 
-    // Placing the platform elements within the level.
-    for (Platform current : platforms) {
-      // Painting the current platform image at the desired x and y location given by the vector.
-      gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
-          current.getPosition().getY());
+    // Adding the initial enemy locations to the GUI.
+    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
+      gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), current
+          .getPosition().getY());
     }
 
     // Displaying the parsed level content in the center of the user interface.
@@ -100,10 +103,8 @@ public class ScrumbledoreGUI extends Application {
     // Checking the state of the game/timer to determine the start/stop button status needed for the
     // text.
     if (timer.isPaused()) {
-      timer.resume();
       startStopButton.setText(Constants.STOPBTNLABEL);
     } else {
-      timer.pause();
       startStopButton.setText(Constants.STARTBTNLABEL);
     }
 
@@ -129,7 +130,7 @@ public class ScrumbledoreGUI extends Application {
     settingsButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-          System.out.println("SETTINGS HOOK ACTIVATED");
+        System.out.println("SETTINGS HOOK ACTIVATED");
       }
 
     });
@@ -147,7 +148,83 @@ public class ScrumbledoreGUI extends Application {
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
 
-    // Displaying the user interface.
-    gameStage.show();
+    // Calling the dynamic handling for the GUI.
+    spawnDynamic(gameStage, gamePainter);
+  }
+
+  /**
+   * spawnDynamic takes care of elements which must be updated, such as players and enemies.
+   * 
+   * @pre method called within the class and valid parameters passed
+   * @post spawns and handles dynamic elemens of the game
+   * @param passedStage
+   *          The stage used by the rest of the GUI
+   * @param passedScene
+   *          The scene used by the rest of the GUI
+   * @param passedPane
+   *          The layout pane used by the rest of the GUI
+   * 
+   */
+  private void spawnDynamic(Stage passedStage, final GraphicsContext gamePainter) {
+    new AnimationTimer() {
+      public void handle(long currentNanoTime) {
+        // Clear canvas
+        gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+        // background image clears canvas
+        // Adding the initial player location to the GUI.
+        playerSprite = new Image(Constants.PLAYER_SPRITE);
+        gamePainter.drawImage(playerSprite,
+            game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
+                .getPlayer().getPosition().getY());
+
+        // Placing the platform elements within the level.
+        for (Platform current : game.getCurrentLevel().getPlatforms()) {
+          // Painting the current platform image at the desired x and y location given by the
+          // vector.
+          gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+              current.getPosition().getY());
+        }
+      }
+    }.start();
+
+    passedStage.show();
+  }
+
+  private void addKeyEventListeners(Scene scene) {
+    // KeyPress Event handlers.
+    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+      // Handling the key press.
+      public void handle(KeyEvent keyPressed) {
+        String keyPress = keyPressed.getCode().toString();
+
+        // Mapping the desired keys to the desired actions.
+        if (keyPress.equals("LEFT")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setX(-8);
+        } else if (keyPress.equals("RIGHT")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setX(8);
+        } else if (keyPress.equals("UP")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setY(-16);
+        }
+      }
+
+    });
+
+    // KeyRelease Event handlers.
+    scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+      // Handling the key press.
+      public void handle(KeyEvent keyReleased) {
+        String keyRelease = keyReleased.getCode().toString();
+
+        // Mapping the desired keys to the desired actions.
+        if (keyRelease.equals("LEFT")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setX(0);
+        } else if (keyRelease.equals("RIGHT")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setX(0);
+        }
+      }
+
+    });
   }
 }

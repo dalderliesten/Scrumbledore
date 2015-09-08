@@ -11,7 +11,7 @@ package nl.tudelft.scrumbledore;
  */
 public class Constants {
   // Setting the resolution of the entire GUI window.
-  public static final int GUIX = 640;
+  public static final int GUIX = 656;
   public static final int GUIY = 750;
 
   // Setting the resolution constants for level/game display.
@@ -19,7 +19,7 @@ public class Constants {
   public static final int LEVELX = 640;
   
   // Setting the refresh rates for the calculations.
-  public static final int refreshRate = 30;
+  public static final int REFRESH_RATE = 30;
 
   // Defenining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";
@@ -51,6 +51,9 @@ public class Constants {
 
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
+  
+  // Location of the CSS resource for the GUI styling.
+  public static final String CSS_LOCATION = "css/style.css";
 
   // References to images utilized for the game display within the GUI.
   public static final String BUBBLE_SPRITE = "images/Bubble/Bubble_32x32.png";
