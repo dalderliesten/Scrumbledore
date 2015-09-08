@@ -10,13 +10,16 @@ package nl.tudelft.scrumbledore;
  *
  */
 public class Constants {
-
   // Setting the resolution of the entire GUI window.
-  public static final int RESOLUTIONX = 620;
-  public static final int RESOLUTIONY = 700;
+  public static final int GUIX = 640;
+  public static final int GUIY = 750;
 
-  // Setting the resolution constants for GUI game display.
-  public static final int CANVASRESOLUTIONY = 620;
+  // Setting the resolution constants for level/game display.
+  public static final int LEVELY = 640;
+  public static final int LEVELX = 640;
+  
+  // Setting the refresh rates for the calculations.
+  public static final int refreshRate = 30;
 
   // Defenining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";
@@ -31,11 +34,28 @@ public class Constants {
   public static final String EXITBTNLABEL = "Exit";
 
   // The standard size of a block.
-  public static final int BLOCKSIZE = 31;
+  public static final double BLOCKSIZE = 32;
+
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
-  // Collision precision delta
+  // Collision precision delta.
   public static final double COLLISION_PRECISION = 1;
+  // Collision radius
+  public static final double COLLISION_RADIUS = 64;
 
+  // Gravity strength.
+  public static final double GRAVITY_STRENGTH = 1;
+  // Gravity maximal vertical speed.
+  public static final double GRAVITY_MAX = 8;
+
+  // Location of the resource string.
+  public static final String LEVELS_DIR = "src/main/resources/";
+
+  // References to images utilized for the game display within the GUI.
+  public static final String BUBBLE_SPRITE = "images/Bubble/Bubble_32x32.png";
+  public static final String FRUIT_SPRITE = "images/Fruit/Fruit_32x32.png";
+  public static final String NPC_SPRITE = "images/NPC/NPC_32x32.png";
+  public static final String PLATFORM_SPRITE = "images/Platform/Platform_32x32.png";
+  public static final String PLAYER_SPRITE = "images/Player/Player_32x32.png";
 }

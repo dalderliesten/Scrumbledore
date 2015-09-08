@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -8,17 +10,22 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.stage.Stage;
+import javafx.scene.image.*;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
  * GUI.
  * 
  * @author David Alderliesten
+ * @author Niels Warnars
  */
 public class ScrumbledoreGUI extends Application {
+  private Game game;
+  private StepTimer timer;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -31,15 +38,17 @@ public class ScrumbledoreGUI extends Application {
    */
   @Override
   public void start(Stage gameStage) {
-    // Setting the title of the user interface window.
+    // Instantiate the essential game and step timer functions for the game handling.
+    game = new Game();
+    timer = new StepTimer(Constants.refreshRate, game);
+
+    // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
 
-    // Setting the resolution needed for the entire GUI.
-    gameStage.setHeight(Constants.RESOLUTIONY);
-    gameStage.setWidth(Constants.RESOLUTIONX);
-
-    // Removing the ability to resize the game window. Must be disabled due to fixed dimensions.
-    gameStage.setResizable(false);
+    // Setting window dimension and movement properties.
+    gameStage.setHeight(Constants.GUIY);
+    gameStage.setWidth(Constants.GUIX);
+    // gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
@@ -47,9 +56,6 @@ public class ScrumbledoreGUI extends Application {
     // Creating of the scene and assigning this scene to the game stage.
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
-
-    // Adding the CSS stylesheet to the scene to style the GUI appearance.  TODO
-    // mainScene.getStylesheets().add("");
 
     // Creation of a horizontal box for storing top labels and items to display.
     HBox topItems = new HBox();
@@ -66,31 +72,55 @@ public class ScrumbledoreGUI extends Application {
 
     // Creation of the game display canvas, and adding a graphics context object to allow for
     // simple, call based refreshing. Canvas is then added to the scene of the window.
-    Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
+    Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
-    contentHandler.setCenter(gameDisplay);
 
-    // TODO remove debug cells, used to test.
-    for (int i = 0; i < Constants.RESOLUTIONX; i = i + Constants.BLOCKSIZE) {
-      for (int j = 0; j < Constants.RESOLUTIONX; j = j + Constants.BLOCKSIZE) {
-        gamePainter.fillText("CELL", j, i);
-      }
+    // Getting and fetching essential elements of the level.
+    Level currentLevel = game.getCurrentLevel();
+    ArrayList<Platform> platforms = currentLevel.getPlatforms();
+
+    // Placing the platform elements within the level.
+    for (Platform current : platforms) {
+      // Painting the current platform image at the desired x and y location given by the vector.
+      gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+          current.getPosition().getY());
     }
+
+    // Displaying the parsed level content in the center of the user interface.
+    contentHandler.setCenter(gameDisplay);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
 
     // Linking the buttons needed to their associated constants namesake.
-    final Button startStopButton = new Button(Constants.STARTBTNLABEL);
+    final Button startStopButton = new Button();
     final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
     final Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Checking the state of the game/timer to determine the start/stop button status needed for the
+    // text.
+    if (timer.isPaused()) {
+      timer.resume();
+      startStopButton.setText(Constants.STOPBTNLABEL);
+    } else {
+      timer.pause();
+      startStopButton.setText(Constants.STARTBTNLABEL);
+    }
 
     // Mapping the function of the start/stop button to start/stop the game when the button is
     // pressed.
     startStopButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        startStopButton.setText(Constants.STOPBTNLABEL);
+        // If the game is paused, it will resume it and change the button label to stop. Otherwise,
+        // it resumes the game and changes the butotn label to start.
+        if (timer.isPaused()) {
+          timer.resume();
+          startStopButton.setText(Constants.STOPBTNLABEL);
+        } else {
+          timer.pause();
+          startStopButton.setText(Constants.STARTBTNLABEL);
+        }
       }
 
     });
@@ -99,7 +129,7 @@ public class ScrumbledoreGUI extends Application {
     settingsButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        System.out.println("SETTINGS WOULD OPEN NOW");
+          System.out.println("SETTINGS HOOK ACTIVATED");
       }
 
     });
@@ -117,8 +147,7 @@ public class ScrumbledoreGUI extends Application {
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
 
-    // Displaying the user interface to the user.
+    // Displaying the user interface.
     gameStage.show();
   }
-
 }

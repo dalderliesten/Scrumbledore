@@ -21,10 +21,9 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
     LevelElement test = new TestElement();
-    Gravity.setStrength(strength);
-    Gravity.setMax(max);
-
-    Gravity.pull(test, 1);
+    
+    GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
+    gravity.pull(test, 1);
 
     assertEquals(0 + strength, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
@@ -38,12 +37,12 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
     LevelElement test = new TestElement();
-    Gravity.setStrength(strength);
-    Gravity.setMax(max);
+    
+    GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
 
     test.getSpeed().setY(max - (strength - 1));
 
-    Gravity.pull(test, 1);
+    gravity.pull(test, 1);
 
     assertEquals(max, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
@@ -57,11 +56,10 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
     LevelElement test = new TestElement();
-    Gravity.setStrength(strength);
-    Gravity.setMax(max);
+    GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
     test.getSpeed().setY(max + 1);
 
-    Gravity.pull(test, 1);
+    gravity.pull(test, 1);
 
     assertEquals(max, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
@@ -74,8 +72,7 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
 
-    Gravity.setStrength(strength);
-    Gravity.setMax(max);
+    GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
     LevelElement test = new TestElement();
     LevelElement test2 = new TestElement();
     test.getSpeed().setY(0);
@@ -84,7 +81,7 @@ public class GravityTest {
     level.addElement(test);
     level.addElement(test2);
 
-    Gravity.pull(level, 1);
+    gravity.modify(level, 1.0d);
 
     assertEquals(0 + strength, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
     assertEquals(max, test2.getSpeed().getY(), Constants.DOUBLE_PRECISION);
@@ -98,14 +95,13 @@ public class GravityTest {
     int strength = 2;
     int max = 8;
 
-    Gravity.setStrength(strength);
-    Gravity.setMax(max);
+    GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
     LevelElement test = new TestElement();
     test.setGravity(false);
     Level level = new Level();
     level.addElement(test);
 
-    Gravity.pull(level, 1);
+    gravity.modify(level, 1.0d);
 
     assertEquals(0, test.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }

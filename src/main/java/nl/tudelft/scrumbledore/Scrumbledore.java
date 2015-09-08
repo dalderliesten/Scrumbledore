@@ -1,7 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 /**
- * Launches the game and containes the main method, which will run the GUI.
+ * Launches the game and containes the main method, which will run the GUI, which in turn will run
+ * the game.
  * 
  * @author David Alderliesten
  */
@@ -16,6 +17,7 @@ public class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
+    // Creating a launcher to launch the game and GUI.
     ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
   }
 
