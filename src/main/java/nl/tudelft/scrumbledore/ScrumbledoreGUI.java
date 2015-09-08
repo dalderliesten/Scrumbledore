@@ -47,7 +47,7 @@ public class ScrumbledoreGUI extends Application {
     // Setting window dimension and movement properties.
     gameStage.setHeight(Constants.GUIY);
     gameStage.setWidth(Constants.GUIX);
-    //gameStage.setResizable(false);
+    // gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
@@ -92,9 +92,19 @@ public class ScrumbledoreGUI extends Application {
     HBox bottomItems = new HBox();
 
     // Linking the buttons needed to their associated constants namesake.
-    final Button startStopButton = new Button(Constants.STARTBTNLABEL);
+    final Button startStopButton = new Button();
     final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
     final Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Checking the state of the game/timer to determine the start/stop button status needed for the
+    // text.
+    if (timer.isPaused()) {
+      timer.resume();
+      startStopButton.setText(Constants.STOPBTNLABEL);
+    } else {
+      timer.pause();
+      startStopButton.setText(Constants.STARTBTNLABEL);
+    }
 
     // Mapping the function of the start/stop button to start/stop the game when the button is
     // pressed.
