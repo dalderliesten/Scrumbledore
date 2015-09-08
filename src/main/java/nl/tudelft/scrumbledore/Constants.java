@@ -10,7 +10,6 @@ package nl.tudelft.scrumbledore;
  *
  */
 public class Constants {
-
   // Setting the resolution of the entire GUI window.
   public static final int RESOLUTIONX = 640;
   public static final int RESOLUTIONY = 700;
@@ -40,5 +39,5 @@ public class Constants {
   public static final double COLLISION_PRECISION = 1;
 
   // Reference within the file structure to the CSS for the GUI.
-  public static final String GUI_THEME = "";
+  public static final String GUI_THEME = "src/main/resources/theme.css";
 }

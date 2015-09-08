@@ -48,9 +48,6 @@ public class ScrumbledoreGUI extends Application {
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
 
-    // Adding the CSS stylesheet to the scene to style the GUI appearance.
-    mainScene.getStylesheets().add("/scrumbledore/resource/theme.css");
-
     // Creation of a horizontal box for storing top labels and items to display.
     HBox topItems = new HBox();
 
@@ -118,6 +115,9 @@ public class ScrumbledoreGUI extends Application {
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
+    
+    // Adding the CSS stylesheet to the scene to style the GUI appearance.
+    mainScene.getStylesheets().add(Constants.GUI_THEME);
 
     // Displaying the user interface to the user.
     gameStage.show();
