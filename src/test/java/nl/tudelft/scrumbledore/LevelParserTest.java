@@ -29,16 +29,16 @@ public class LevelParserTest {
   @Test
   public void testLoadLevelsFromDisk() {
     LevelParser lp = new LevelParser();
-    Level[] levels = lp.loadLevelsFromDisk("src/main/resources/test");
+    ArrayList<Level> levels = lp.loadLevelsFromDisk("src/main/resources/test");
 
-    ArrayList<Platform> platformsLevel1 = levels[0].getPlatforms();
+    ArrayList<Platform> platformsLevel1 = levels.get(0).getPlatforms();
 
     // Check whether level 1 only contains 1 Platform element
     assertEquals(platformsLevel1.size(), 1);
     assertEquals(new Platform(new Vector(B_ONE_MID, B_ONE_MID), SIZE), platformsLevel1.get(0));
 
     // Check whether level 2 only contains 1 Player element
-    assertEquals(new Player(new Vector(B_ONE_MID, B_ONE_MID), SIZE), levels[1].getPlayer());
+    assertEquals(new Player(new Vector(B_ONE_MID, B_ONE_MID), SIZE), levels.get(1).getPlayer());
   }
 
   /**

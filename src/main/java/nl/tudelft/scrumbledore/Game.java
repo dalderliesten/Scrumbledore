@@ -1,6 +1,6 @@
 package nl.tudelft.scrumbledore;
 
-import java.util.List;
+import java.util.ArrayList;
 
 /**
  * The main controller of the game. Connects model classes and the GUI.
@@ -10,17 +10,40 @@ import java.util.List;
  */
 public class Game {
 
-  private List<Level> levels;
+  private ArrayList<Level> levels;
   private Level currentLevel;
   private Collisions collisions;
 
+
   /**
-   * Constructs a new Game.
-   * 
-   * @param levels
-   *          The levels the game needs to consist of.
+   * Constructs a new Game from disk.
    */
-  public Game(List<Level> levels) {
+  public Game() {
+    // Load levels from disk
+    LevelParser lp = new LevelParser();
+    levels = lp.getLevels();
+    
+    // The game needs at least one level.
+    assert levels.size() > 0;
+
+    this.levels = levels;
+    this.currentLevel = levels.get(0);
+
+    Gravity.setStrength(1);
+    Gravity.setMax(8);
+    
+    this.collisions = new Collisions();
+  }
+  
+  
+  /**
+   * Constructs a new Game based on a given ArrayList<Level>.
+   * 
+   * @param levels An ArrayList of levels
+   */
+  public Game(ArrayList<Level> levels) {
+    this.levels = levels;
+    
     // The game needs at least one level.
     assert levels.size() > 0;
 
@@ -54,7 +77,7 @@ public class Game {
    * 
    * @return All levels in the game.
    */
-  public List<Level> getLevels() {
+  public ArrayList<Level> getLevels() {
     return levels;
   }
 

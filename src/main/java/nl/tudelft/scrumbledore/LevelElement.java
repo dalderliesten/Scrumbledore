@@ -38,6 +38,24 @@ public abstract class LevelElement {
   public Vector getPosition() {
     return position;
   }
+  
+  /**
+   * Get the X coordinate of the element.
+   * 
+   * @return double
+   */
+  public double posX() {
+    return position.getX();
+  }
+  
+  /**
+   * Get the Y coordinate of the element.
+   * 
+   * @return double
+   */
+  public double posY() {
+    return position.getY();
+  }
 
   /**
    * Get the size vector of this element.
@@ -47,6 +65,24 @@ public abstract class LevelElement {
   public Vector getSize() {
     return size;
   }
+  
+  /**
+   * Get the width of the element.
+   * 
+   * @return double
+   */
+  public double width() {
+    return size.getX();
+  }
+  
+  /**
+   * Get the height of the element.
+   * 
+   * @return double
+   */
+  public double height() {
+    return size.getY();
+  }
 
   /**
    * Get the speed vector of this element.
@@ -55,6 +91,24 @@ public abstract class LevelElement {
    */
   public Vector getSpeed() {
     return speed;
+  }
+  
+  /**
+   * Get the horizontal speed of the element.
+   * 
+   * @return double
+   */
+  public double hSpeed() {
+    return speed.getX();
+  }
+  
+  /**
+   * Get the vertical speed of the element.
+   * 
+   * @return double
+   */
+  public double vSpeed() {
+    return speed.getY();
   }
 
   /**
