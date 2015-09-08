@@ -39,6 +39,13 @@ public class Player extends LevelElement {
       actions.add(action);
     }
   }
+  
+  /**
+   * Remove all actions from the queue.
+   */
+  public void clearActions() {
+    actions.clear();
+  }
 
   /**
    * Check whether the given action is queued for the next step.

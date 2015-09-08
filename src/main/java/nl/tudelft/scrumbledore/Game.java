@@ -51,6 +51,7 @@ public class Game {
 
     this.modifiers = new ArrayList<LevelModifier>();
     this.modifiers.add(new GravityLevelModifier());
+    this.modifiers.add(new PlayerActionsLevelModifier());
     this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
     this.modifiers.add(kinetics);
     

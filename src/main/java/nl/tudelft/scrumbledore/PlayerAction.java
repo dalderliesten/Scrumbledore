@@ -7,5 +7,5 @@ package nl.tudelft.scrumbledore;
  *
  */
 public enum PlayerAction {
-  MoveLeft, MoveRight, Jump, Shoot
+  MoveLeft, MoveRight, MoveStop, Jump, Shoot
 }
