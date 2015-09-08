@@ -32,6 +32,10 @@ public class ScrumbledoreGUI extends Application {
   @Override
   public void start(Stage gameStage) {
     gameStage.setTitle("Scrumbledore");
+    
+    gameStage.setHeight(Constants.GUIY);
+    gameStage.setWidth(Constants.GUIX);
+    gameStage.setResizable(false);
 
     gameStage.show();
   }
