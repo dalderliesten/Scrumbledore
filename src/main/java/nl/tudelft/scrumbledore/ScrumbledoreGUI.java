@@ -1,12 +1,17 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+
 import javafx.application.Application;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
+import javafx.scene.control.Button;
 import javafx.stage.Stage;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.scene.image.*;
 
 /**
@@ -73,6 +78,46 @@ public class ScrumbledoreGUI extends Application {
 
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
+
+    // Creation of a horiztonal box for storing bottom buttons and items to display.
+    HBox bottomItems = new HBox();
+
+    // Linking the buttons needed to their associated constants namesake.
+    final Button startStopButton = new Button(Constants.STARTBTNLABEL);
+    final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
+    final Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Mapping the function of the start/stop button to start/stop the game when the button is
+    // pressed.
+    startStopButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        startStopButton.setText(Constants.STOPBTNLABEL);
+      }
+
+    });
+
+    // Mapping the settings button menu actionevent to trigger when the button is pressed.
+    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        System.out.println("SETTINGS WOULD OPEN NOW");
+      }
+
+    });
+
+    // Mapping the exit function to the exit button to quit when button is pressed.
+    exitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        System.exit(0);
+      }
+
+    });
+
+    // Adding the buttons to the bottom Hbox and to the game display interface.
+    bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
+    contentHandler.setBottom(bottomItems);
 
     // Displaying the user interface.
     gameStage.show();
