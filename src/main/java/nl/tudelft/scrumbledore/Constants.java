@@ -49,5 +49,9 @@ public class Constants {
   public static final String LEVELS_DIR = "src/main/resources/";
 
   // References to images utilized for the game display within the GUI.
-  public static final String PLATFORM_SPRITE = "images/Platform/Platform.png";
+  public static final String BUBBLE_SPRITE = "images/Bubble/Bubble_32x32.png";
+  public static final String FRUIT_SPRITE = "images/Fruit/Fruit_32x32.png";
+  public static final String NPC_SPRITE = "images/NPC/NPC_32x32.png";
+  public static final String PLATFORM_SPRITE = "images/Platform/Platform_32x32.png";
+  public static final String PLAYER_SPRITE = "images/Player/Player_32x32.png";
 }
