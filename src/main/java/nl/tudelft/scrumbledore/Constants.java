@@ -38,10 +38,14 @@ public class Constants {
 
   // Collision precision delta.
   public static final double COLLISION_PRECISION = 1;
-
   // Collision radius
   public static final double COLLISION_RADIUS = 64;
-  
+
+  // Gravity strength.
+  public static final double GRAVITY_STRENGTH = 1;
+  // Gravity maximal vertical speed.
+  public static final double GRAVITY_MAX = 8;
+
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 

@@ -11,6 +11,7 @@ public class Collision {
   private LevelElement collider;
   private LevelElement collidee;
   private double delta;
+  private KineticsLevelModifier kinetics;
 
   /**
    * Constructs a new Collision between a collider and a collidee.
@@ -19,11 +20,15 @@ public class Collision {
    *          The (moving) LevelElement colliding.
    * @param collidee
    *          The (static) LevelElement the collider is colliding with.
+   * @param delta
+   *          The number of steps passed since this method was last called.
    */
   public Collision(LevelElement collider, LevelElement collidee, double delta) {
     this.collider = collider;
     this.collidee = collidee;
     this.delta = delta;
+    
+    this.kinetics = new KineticsLevelModifier();
   }
 
   /**
@@ -49,9 +54,9 @@ public class Collision {
       // If the collider is about to collide, anticipate.
       if (collider.getBottom() < collidee.getTop() && collider.getSpeed().getY() > 0) {
         // Anticipate movement
-        Kinetics.addSpeed(collider, delta);
+        kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
-        Kinetics.removeSpeed(collider, delta);
+        kinetics.removeSpeed(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -75,9 +80,9 @@ public class Collision {
       // If the collider is about to collide, anticipate.
       if (collider.getTop() > collidee.getBottom() && collider.getSpeed().getY() < 0) {
         // Anticipate movement
-        Kinetics.addSpeed(collider, delta);
+        kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
-        Kinetics.removeSpeed(collider, delta);
+        kinetics.removeSpeed(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -101,9 +106,9 @@ public class Collision {
       // If the collider is about to collide, anticipate.
       if (collider.getRight() < collidee.getLeft() && collider.getSpeed().getX() > 0) {
         // Anticipate movement
-        Kinetics.addSpeed(collider, delta);
+        kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
-        Kinetics.removeSpeed(collider, delta);
+        kinetics.removeSpeed(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -127,9 +132,9 @@ public class Collision {
       // If the collider is about to collide, anticipate.
       if (collider.getLeft() > collidee.getRight() && collider.getSpeed().getX() < 0) {
         // Anticipate movement
-        Kinetics.addSpeed(collider, delta);
+        kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
-        Kinetics.removeSpeed(collider, delta);
+        kinetics.removeSpeed(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -209,8 +214,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingLeft() {
-    boolean b = (collider.getLeft() >= collidee.getLeft() && collider.getLeft() <= collidee
-        .getRight());
+    boolean b = (collider.getLeft() >= collidee.getLeft()
+        && collider.getLeft() <= collidee.getRight());
     return b;
   }
 
@@ -220,8 +225,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingRight() {
-    boolean b = (collider.getRight() >= collidee.getLeft() && collider.getRight() <= collidee
-        .getRight());
+    boolean b = (collider.getRight() >= collidee.getLeft()
+        && collider.getRight() <= collidee.getRight());
     return b;
   }
 
@@ -231,8 +236,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingTop() {
-    boolean b = (collider.getTop() >= collidee.getTop() && collider.getTop() <= collidee
-        .getBottom());
+    boolean b = (collider.getTop() >= collidee.getTop()
+        && collider.getTop() <= collidee.getBottom());
     return b;
   }
 
@@ -242,8 +247,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingBottom() {
-    boolean b = (collider.getBottom() >= collidee.getTop() && collider.getBottom() <= collidee
-        .getBottom());
+    boolean b = (collider.getBottom() >= collidee.getTop()
+        && collider.getBottom() <= collidee.getBottom());
     return b;
   }
 
