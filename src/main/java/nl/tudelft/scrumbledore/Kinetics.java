@@ -49,19 +49,30 @@ public final class Kinetics {
    * @param d
    *          The number of steps since last executing this function.
    */
+  private static void updatePlayer(Level level, double d) {
+    Player player = level.getPlayer();
+
+    addSpeed(player, d);
+
+    if (player.posY() + player.height() >= Constants.LEVELY) {
+      player.getPosition().setY(player.height() / 2);
+    }
+  }
+
+  /**
+   * Update all elements in a given Level.
+   * 
+   * @param level
+   *          The level whose elements should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
   public static void update(Level level, double d) {
     // Add speed to generic moving elements
     for (LevelElement el : level.getMovingElements()) {
       addSpeed(el, d);
     }
 
-    Player player = level.getPlayer();
-    
-    // Add speed to player
-    addSpeed(player, d);
-    
-    if (player.posY() + player.height() >= Constants.LEVELY) {
-      player.getPosition().setY(player.height() / 2);
-    }
+    updatePlayer(level, d);
   }
 }
