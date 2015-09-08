@@ -81,19 +81,22 @@ public class ScrumbledoreGUI extends Application {
     Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
 
-    // Getting and fetching essential elements of the level.
-    Level currentLevel = game.getCurrentLevel();
-    ArrayList<Platform> platforms = currentLevel.getPlatforms();
-
     // Placing the platform elements within the level.
-    for (Platform current : platforms) {
+    for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
       gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
           current.getPosition().getY());
     }
-    
+
     // Adding the initial player location to the GUI.
-    gamePainter.drawImage(new Image(Constants.PLAYER_SPRITE), currentLevel.getPlayer().getPosition().getX(), currentLevel.getPlayer().getPosition().getY());
+    gamePainter.drawImage(new Image(Constants.PLAYER_SPRITE), game.getCurrentLevel().getPlayer()
+        .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
+
+    // Adding the initial enemy locations to the GUI.
+    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
+      gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), current
+          .getPosition().getY());
+    }
 
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
@@ -157,13 +160,13 @@ public class ScrumbledoreGUI extends Application {
     contentHandler.setBottom(bottomItems);
 
     // Calling the dynamic handling for the GUI.
-    spawnDynamic(gameStage, mainScene, contentHandler, currentLevel);
+    spawnDynamic(gameStage, mainScene, contentHandler);
   }
 
   /**
    * spawnDynamic takes care of elements which must be updated, such as players and enemies.
    * 
-   * @pre method called within the class
+   * @pre method called within the class and valid parameters passed
    * @post spawns and handles dynamic elemens of the game
    * @param passedStage
    *          The stage used by the rest of the GUI
@@ -171,14 +174,10 @@ public class ScrumbledoreGUI extends Application {
    *          The scene used by the rest of the GUI
    * @param passedPane
    *          The layout pane used by the rest of the GUI
-   * @param passedLevel
-   *          The current level, used for parsing player elements
    * 
    */
-  private void spawnDynamic(Stage passedStage, Scene passedScene, BorderPane passedPane,
-      Level passedLevel) {
+  private void spawnDynamic(Stage passedStage, Scene passedScene, BorderPane passedPane) {
     passedStage.show();
-    
-    
+
   }
 }
