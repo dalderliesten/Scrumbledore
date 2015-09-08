@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -14,8 +16,8 @@ import javafx.scene.layout.BorderPane;
  * @author David Alderliesten
  */
 public class ScrumbledoreGUI extends Application {
-  private Game scrumbledoreGame;
-  private StepTimer gameTimer;
+  private Game game;
+  private StepTimer timer;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -29,8 +31,8 @@ public class ScrumbledoreGUI extends Application {
   @Override
   public void start(Stage gameStage) {
     // Instantiate the essential game and step timer functions for the game handling.
-    scrumbledoreGame = new Game();
-    gameTimer = new StepTimer(30, scrumbledoreGame);
+    game = new Game();
+    timer = new StepTimer(30, game);
 
     // Setting the title of the GUI window.
     gameStage.setTitle("Scrumbledore");
@@ -51,6 +53,12 @@ public class ScrumbledoreGUI extends Application {
     // simple, call based refreshing. Canvas is then added to the scene of the window.
     Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
+    
+    // Getting and fetching essential elements of the level.
+    Level currentLevel = game.getCurrentLevel();
+    ArrayList<Platform> platforms = currentLevel.getPlatforms();
+    
+    
 
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
