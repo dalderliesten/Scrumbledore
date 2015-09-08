@@ -11,6 +11,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.*;
@@ -128,7 +129,7 @@ public class ScrumbledoreGUI extends Application {
     settingsButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        System.out.println("SETTINGS WOULD OPEN NOW");
+          System.out.println("SETTINGS HOOK ACTIVATED");
       }
 
     });
