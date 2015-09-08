@@ -16,7 +16,8 @@ public class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
-    ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
+    // Creating a launcher to launch the game and GUI.
+    Launcher scrumbledoreGame = new Launcher();
   }
 
 }

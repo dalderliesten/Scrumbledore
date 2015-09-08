@@ -16,8 +16,14 @@ public class Launcher {
    * Constructs a new Launcher instance.
    */
   public Launcher() {
-    // Use levelparser to create levels and put them in a game.
-    // Put game in the timer.
+    // Creation of a game object to display a game.
+    game = new Game();
+    
+    // Creation of a steptimes to provide a restriction in the calculations per second.
+    timer = new StepTimer(30, game);
+    
+    // Creation of the GUI to display everything.
+    ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
   }
 
 }
