@@ -100,7 +100,7 @@ public class ScrumbledoreGUI extends Application {
     startStopButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        startStopButton.setText(Constants.STOPBTNLABEL);
+        
       }
 
     });
