@@ -84,8 +84,8 @@ public final class Kinetics {
    *          The LevelElement to be snapped to.
    */
   public static void snapLeft(LevelElement snapper, LevelElement snapTo) {
-    double offset = -1 * snapper.getSize().getX() / 2;
-    double newPos = snapTo.getLeft() + offset;
+    double offset = snapper.getSize().getX() / 2;
+    double newPos = snapTo.getLeft() - offset;
     snapper.getPosition().setX(newPos);
   }
   
@@ -98,7 +98,7 @@ public final class Kinetics {
    *          The LevelElement to be snapped to.
    */
   public static void snapRight(LevelElement snapper, LevelElement snapTo) {
-    double offset = 1 * snapper.getSize().getX() / 2;
+    double offset = snapper.getSize().getX() / 2;
     double newPos = snapTo.getRight() + offset;
     snapper.getPosition().setX(newPos);
   }
@@ -112,8 +112,8 @@ public final class Kinetics {
    *          The LevelElement to be snapped to.
    */
   public static void snapTop(LevelElement snapper, LevelElement snapTo) {
-    double offset = -1 * snapper.getSize().getY() / 2;
-    double newPos = snapTo.getTop() + offset;
+    double offset = snapper.getSize().getY() / 2;
+    double newPos = snapTo.getTop() - offset;
     snapper.getPosition().setY(newPos);
   }
   
@@ -126,7 +126,7 @@ public final class Kinetics {
    *          The LevelElement to be snapped to.
    */
   public static void snapBottom(LevelElement snapper, LevelElement snapTo) {
-    double offset = 1 * snapper.getSize().getY() / 2;
+    double offset = snapper.getSize().getY() / 2;
     double newPos = snapTo.getBottom() + offset;
     snapper.getPosition().setY(newPos);
   }
