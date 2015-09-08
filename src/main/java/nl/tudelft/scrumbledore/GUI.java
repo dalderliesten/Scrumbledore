@@ -22,7 +22,7 @@ import javafx.stage.Stage;
  * @author David Alderliesten
  * @author Niels Warnars
  */
-public class ScrumbledoreGUI extends Application {
+public class GUI extends Application {
   private Game game;
   private StepTimer timer;
   private Image playerSprite;
