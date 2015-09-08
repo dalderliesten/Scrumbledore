@@ -11,14 +11,13 @@ import java.util.Scanner;
  * @author Niels Warnars
  */
 public class LevelParser {
-  private Level[] levels;
-  private final String levelsDir = "src/main/resources/";
+  private ArrayList<Level> levels;
 
   /**
    * Creates a new LevelParser.
    */
   public LevelParser() {
-    levels = loadLevelsFromDisk(levelsDir);
+    levels = loadLevelsFromDisk(Constants.LEVELS_DIR);
   }
 
   /**
@@ -28,13 +27,13 @@ public class LevelParser {
    *          A given directory
    * @return An array of Level objects
    */
-  protected Level[] loadLevelsFromDisk(String dir) {
+  protected ArrayList<Level> loadLevelsFromDisk(String dir) {
     ArrayList<String> levelFiles = listFilesInDir(dir);
-    Level[] levels = new Level[levelFiles.size()];
+    ArrayList<Level> levels = new ArrayList<Level>();
 
-    for (int idx = 0; idx < levels.length; idx++) {
+    for (int idx = 0; idx < levelFiles.size(); idx++) {
       try {
-        levels[idx] = readLevelFromFile(dir + "/" + levelFiles.get(idx));
+        levels.add(readLevelFromFile(dir + "/" + levelFiles.get(idx)));
       } catch (FileNotFoundException e) {
       }
     }
@@ -175,11 +174,11 @@ public class LevelParser {
   }
 
   /**
-   * Returns an array of Level objects.
+   * Returns an ArrayList of Level objects.
    * 
-   * @return An array of level objects
+   * @return An ArrayList of level objects
    */
-  public Level[] getLevels() {
+  public ArrayList<Level> getLevels() {
     return levels;
   }
 

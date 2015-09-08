@@ -36,7 +36,7 @@ public class Constants {
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
-  // Collision precision delta
+  // Collision precision delta.
   public static final double COLLISION_PRECISION = 1;
 
   // Reference within the file structure to the CSS for the GUI.
