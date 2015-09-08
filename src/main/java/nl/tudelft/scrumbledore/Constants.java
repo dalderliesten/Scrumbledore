@@ -12,7 +12,7 @@ package nl.tudelft.scrumbledore;
 public class Constants {
   // Setting the resolution of the entire GUI window.
   public static final int RESOLUTIONX = 640;
-  public static final int RESOLUTIONY = 700;
+  public static final int RESOLUTIONY = 750;
 
   // Setting the resolution constants for GUI game display.
   public static final int CANVASRESOLUTIONY = 640;
