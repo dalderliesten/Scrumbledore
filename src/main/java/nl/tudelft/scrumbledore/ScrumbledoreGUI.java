@@ -15,6 +15,7 @@ import javafx.stage.StageStyle;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.image.*;
+import javafx.scene.input.KeyEvent;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -26,6 +27,7 @@ import javafx.scene.image.*;
 public class ScrumbledoreGUI extends Application {
   private Game game;
   private StepTimer timer;
+  private Player player;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -91,6 +93,27 @@ public class ScrumbledoreGUI extends Application {
     // Adding the initial player location to the GUI.
     gamePainter.drawImage(new Image(Constants.PLAYER_SPRITE), game.getCurrentLevel().getPlayer()
         .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
+
+    // Adding player movement support.
+    mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+      // Handling the key press.
+      public void handle(KeyEvent keyPressed) {
+        String keyPress = keyPressed.getCode().toString();
+
+        // Mapping the desired keys to the desired actions.
+        if(keyPress.equals("LEFT")) {
+          System.out.println("GOING LEFT");
+        } else if(keyPress.equals("RIGHT")) {
+          System.out.println("GOING RIGHT");
+        } else if(keyPress.equals("UP")) {
+          System.out.println("GOING UP");
+        } else if(keyPress.equals("DOWN")) {
+          System.out.println("GOING DOWN");
+        }
+      }
+
+    });
 
     // Adding the initial enemy locations to the GUI.
     for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
