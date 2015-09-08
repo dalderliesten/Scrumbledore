@@ -58,6 +58,22 @@ public final class Kinetics {
     // Add speed to player
     addSpeed(level.getPlayer(), d);
   }
+  
+  /**
+   * Stop a LevelElement's vertical movement.
+   * @param element The element.
+   */
+  public static void stopVertically(LevelElement element) {
+    element.getSpeed().setY(0);
+  }
+  
+  /**
+   * Stop a LevelElement's horizontal movement.
+   * @param element The element.
+   */
+  public static void stopHorizontally(LevelElement element) {
+    element.getSpeed().setX(0);
+  }
 
   /**
    * Snap a LevelElement to the left side of another LevelElement.
