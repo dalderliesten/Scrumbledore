@@ -38,8 +38,8 @@ public class Constants {
 
   // Collision precision delta.
   public static final double COLLISION_PRECISION = 1;
-
-  // Location of level text files on disk.
+  
+  // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 
 }
