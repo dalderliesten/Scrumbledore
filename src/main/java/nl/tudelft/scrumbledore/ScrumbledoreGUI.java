@@ -48,8 +48,8 @@ public class ScrumbledoreGUI extends Application {
     Scene mainScene = new Scene(contentHandler);
     gameStage.setScene(mainScene);
 
-    // Adding the CSS stylesheet to the scene to style the GUI appearance. TODO
-    // mainScene.getStylesheets().add("");
+    // Adding the CSS stylesheet to the scene to style the GUI appearance.
+    mainScene.getStylesheets().add("/scrumbledore/resource/theme.css");
 
     // Creation of a horizontal box for storing top labels and items to display.
     HBox topItems = new HBox();
@@ -70,7 +70,7 @@ public class ScrumbledoreGUI extends Application {
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
     contentHandler.setCenter(gameDisplay);
 
-    // TODO remove debug cells, used to test.
+    // TODO temporary debug.
     int incrementX = (int) Math.round(Constants.BLOCKSIZE);
     int incrementY = (int) Math.round(Constants.BLOCKSIZE);
     for (int i = 0; i < Constants.RESOLUTIONX; i += incrementX) {

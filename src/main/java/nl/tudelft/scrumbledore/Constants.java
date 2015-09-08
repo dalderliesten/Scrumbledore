@@ -39,4 +39,6 @@ public class Constants {
   // Collision precision delta
   public static final double COLLISION_PRECISION = 1;
 
+  // Reference within the file structure to the CSS for the GUI.
+  public static final String GUI_THEME = "";
 }
