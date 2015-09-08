@@ -13,6 +13,7 @@ public class Game {
   private ArrayList<Level> levels;
   private Level currentLevel;
   private Collisions collisions;
+  private ScoreCounter score;
 
 
   /**
@@ -33,6 +34,8 @@ public class Game {
     Gravity.setMax(8);
     
     this.collisions = new Collisions();
+    
+    this.score = new ScoreCounter();
   }
   
   
