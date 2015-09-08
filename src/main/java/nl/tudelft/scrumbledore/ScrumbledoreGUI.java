@@ -31,89 +31,9 @@ public class ScrumbledoreGUI extends Application {
    */
   @Override
   public void start(Stage gameStage) {
-    // Setting the title of the user interface window.
     gameStage.setTitle("Scrumbledore");
-
-    // Setting the resolution needed for the entire GUI.
-    gameStage.setHeight(Constants.RESOLUTIONY);
-    gameStage.setWidth(Constants.RESOLUTIONX);
-
-    // Removing the ability to resize the game window. Must be disabled due to fixed dimensions.
-    gameStage.setResizable(false);
-
-    // Setting the content handler group object, to which objects within the game must be added.
-    BorderPane contentHandler = new BorderPane();
-
-    // Creating of the scene and assigning this scene to the game stage.
-    Scene mainScene = new Scene(contentHandler);
-    gameStage.setScene(mainScene);
-
-    // Adding the CSS stylesheet to the scene to style the GUI appearance. TODO
-    // mainScene.getStylesheets().add("");
-
-    // Creation of a horizontal box for storing top labels and items to display.
-    HBox topItems = new HBox();
-
-    // Linking the labels needed in the top HBox to their constant referneces.
-    Label scoreLabel = new Label(Constants.SCORELABEL);
-    Label highScoreLabel = new Label(Constants.HISCORELABEL);
-    Label powerUpLabel = new Label(Constants.POWERUPLABEL);
-    Label levelLabel = new Label(Constants.LEVELLABEL);
-
-    // Adding the top labels to the top HBox and to the game display interface.
-    topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
-    contentHandler.setTop(topItems);
-
-    // Creation of the game display canvas, and adding a graphics context object to allow for
-    // simple, call based refreshing. Canvas is then added to the scene of the window.
-    Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
-    GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
-    contentHandler.setCenter(gameDisplay);
-
-    // Creation of a horiztonal box for storing bottom buttons and items to display.
-    HBox bottomItems = new HBox();
-
-    // Linking the buttons needed to their associated constants namesake.
-    final Button startStopButton = new Button(Constants.STARTBTNLABEL);
-    final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
-    final Button exitButton = new Button(Constants.EXITBTNLABEL);
-
-    // Mapping the function of the start/stop button to start/stop the game when the button is
-    // pressed.
-    startStopButton.setOnAction(new EventHandler<ActionEvent>() {
-
-      public void handle(ActionEvent arg0) {
-        startStopButton.setText(Constants.STOPBTNLABEL);
-      }
-
-    });
-
-    // Mapping the settings button menu actionevent to trigger when the button is pressed.
-    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
-
-      public void handle(ActionEvent arg0) {
-        System.out.println("SETTINGS WOULD OPEN NOW");
-      }
-
-    });
-
-    // Mapping the exit function to the exit button to quit when button is pressed.
-    exitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-      public void handle(ActionEvent arg0) {
-        System.exit(0);
-      }
-
-    });
-
-    // Adding the buttons to the bottom Hbox and to the game display interface.
-    bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-    contentHandler.setBottom(bottomItems);
-
-    // Displaying the user interface to the user.
+    
     gameStage.show();
-    
-    
   }
 
 }
