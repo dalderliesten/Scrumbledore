@@ -103,10 +103,8 @@ public class ScrumbledoreGUI extends Application {
     // Checking the state of the game/timer to determine the start/stop button status needed for the
     // text.
     if (timer.isPaused()) {
-      timer.resume();
       startStopButton.setText(Constants.STOPBTNLABEL);
     } else {
-      timer.pause();
       startStopButton.setText(Constants.STARTBTNLABEL);
     }
 
@@ -193,7 +191,7 @@ public class ScrumbledoreGUI extends Application {
   }
 
   private void addKeyEventListeners(Scene scene) {
-    // Adding player movement support.
+    // KeyPress Event handlers.
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
       // Handling the key press.
@@ -202,13 +200,28 @@ public class ScrumbledoreGUI extends Application {
 
         // Mapping the desired keys to the desired actions.
         if (keyPress.equals("LEFT")) {
-          System.out.println("GOING LEFT");
+          game.getCurrentLevel().getPlayer().getSpeed().setX(-8);
         } else if (keyPress.equals("RIGHT")) {
-          System.out.println("GOING RIGHT");
+          game.getCurrentLevel().getPlayer().getSpeed().setX(8);
         } else if (keyPress.equals("UP")) {
-          System.out.println("GOING UP");
-        } else if (keyPress.equals("DOWN")) {
-          System.out.println("GOING DOWN");
+          game.getCurrentLevel().getPlayer().getSpeed().setY(-16);
+        }
+      }
+
+    });
+
+    // KeyRelease Event handlers.
+    scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
+
+      // Handling the key press.
+      public void handle(KeyEvent keyReleased) {
+        String keyRelease = keyReleased.getCode().toString();
+
+        // Mapping the desired keys to the desired actions.
+        if (keyRelease.equals("LEFT")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setX(0);
+        } else if (keyRelease.equals("RIGHT")) {
+          game.getCurrentLevel().getPlayer().getSpeed().setX(0);
         }
       }
 
