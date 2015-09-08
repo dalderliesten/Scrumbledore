@@ -24,6 +24,13 @@ public class Launcher {
     timer = new StepTimer(30, game);
   }
   
+  /**
+   * launch
+   * Launches the GUI associated to this launcher.
+   * 
+   * @pre method called
+   * @post runs the GUI
+   */
   public void launch() {
     // Launching the GUI to display all the content.
     ScrumbledoreGUI.launch(ScrumbledoreGUI.class);
