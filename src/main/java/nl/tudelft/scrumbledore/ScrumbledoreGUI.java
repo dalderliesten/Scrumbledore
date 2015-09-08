@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore;
 
-import java.util.ArrayList;
-
+import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -10,12 +9,11 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.stage.Stage;
-import javafx.stage.StageStyle;
+import javafx.scene.image.Image;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
-import javafx.scene.image.*;
-import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -83,38 +81,7 @@ public class ScrumbledoreGUI extends Application {
     Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
 
-    // Placing the platform elements within the level.
-    for (Platform current : game.getCurrentLevel().getPlatforms()) {
-      // Painting the current platform image at the desired x and y location given by the vector.
-      gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
-          current.getPosition().getY());
-    }
-
-    // Adding the initial player location to the GUI.
-    playerSprite = new Image(Constants.PLAYER_SPRITE);
-    gamePainter.drawImage(playerSprite, game.getCurrentLevel().getPlayer()
-        .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
-
-    // Adding player movement support.
-    mainScene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-      // Handling the key press.
-      public void handle(KeyEvent keyPressed) {
-        String keyPress = keyPressed.getCode().toString();
-
-        // Mapping the desired keys to the desired actions.
-        if(keyPress.equals("LEFT")) {
-          System.out.println("GOING LEFT");
-        } else if(keyPress.equals("RIGHT")) {
-          System.out.println("GOING RIGHT");
-        } else if(keyPress.equals("UP")) {
-          System.out.println("GOING UP");
-        } else if(keyPress.equals("DOWN")) {
-          System.out.println("GOING DOWN");
-        }
-      }
-
-    });
+    addKeyEventListeners(mainScene);
 
     // Adding the initial enemy locations to the GUI.
     for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
@@ -184,7 +151,7 @@ public class ScrumbledoreGUI extends Application {
     contentHandler.setBottom(bottomItems);
 
     // Calling the dynamic handling for the GUI.
-    spawnDynamic(gameStage, mainScene, contentHandler);
+    spawnDynamic(gameStage, gamePainter);
   }
 
   /**
@@ -200,8 +167,51 @@ public class ScrumbledoreGUI extends Application {
    *          The layout pane used by the rest of the GUI
    * 
    */
-  private void spawnDynamic(Stage passedStage, Scene passedScene, BorderPane passedPane) {
-    passedStage.show();
+  private void spawnDynamic(Stage passedStage, final GraphicsContext gamePainter) {
+    new AnimationTimer() {
+      public void handle(long currentNanoTime) {
+        // Clear canvas
+        gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+        // background image clears canvas
+        // Adding the initial player location to the GUI.
+        playerSprite = new Image(Constants.PLAYER_SPRITE);
+        gamePainter.drawImage(playerSprite,
+            game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
+                .getPlayer().getPosition().getY());
 
+        // Placing the platform elements within the level.
+        for (Platform current : game.getCurrentLevel().getPlatforms()) {
+          // Painting the current platform image at the desired x and y location given by the
+          // vector.
+          gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+              current.getPosition().getY());
+        }
+      }
+    }.start();
+
+    passedStage.show();
+  }
+
+  private void addKeyEventListeners(Scene scene) {
+    // Adding player movement support.
+    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+
+      // Handling the key press.
+      public void handle(KeyEvent keyPressed) {
+        String keyPress = keyPressed.getCode().toString();
+
+        // Mapping the desired keys to the desired actions.
+        if (keyPress.equals("LEFT")) {
+          System.out.println("GOING LEFT");
+        } else if (keyPress.equals("RIGHT")) {
+          System.out.println("GOING RIGHT");
+        } else if (keyPress.equals("UP")) {
+          System.out.println("GOING UP");
+        } else if (keyPress.equals("DOWN")) {
+          System.out.println("GOING DOWN");
+        }
+      }
+
+    });
   }
 }
