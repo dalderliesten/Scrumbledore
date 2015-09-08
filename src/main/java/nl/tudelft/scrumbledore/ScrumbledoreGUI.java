@@ -35,8 +35,8 @@ public class ScrumbledoreGUI extends Application {
     gameStage.setTitle("Scrumbledore");
 
     // Setting the resolution needed for the entire GUI.
-    gameStage.setHeight(Constants.RESOLUTIONY);
-    gameStage.setWidth(Constants.RESOLUTIONX);
+    gameStage.setHeight(Constants.GUIY);
+    gameStage.setWidth(Constants.GUIX);
 
     // Removing the ability to resize the game window. Must be disabled due to fixed dimensions.
     gameStage.setResizable(false);
@@ -59,22 +59,14 @@ public class ScrumbledoreGUI extends Application {
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
+    topItems.setStyle("-fx-background-color:#000000");
     contentHandler.setTop(topItems);
 
     // Creation of the game display canvas, and adding a graphics context object to allow for
     // simple, call based refreshing. Canvas is then added to the scene of the window.
-    Canvas gameDisplay = new Canvas(Constants.RESOLUTIONX, Constants.CANVASRESOLUTIONY);
+    Canvas gameDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
     contentHandler.setCenter(gameDisplay);
-
-    // TODO temporary debug.
-    int incrementX = (int) Math.round(Constants.BLOCKSIZE);
-    int incrementY = (int) Math.round(Constants.BLOCKSIZE);
-    for (int i = 0; i < Constants.RESOLUTIONX; i += incrementX) {
-      for (int j = 0; j < Constants.RESOLUTIONX; j += incrementY) {
-        gamePainter.fillText("CELL", j, i);
-      }
-    }
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
@@ -115,7 +107,7 @@ public class ScrumbledoreGUI extends Application {
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
-    
+
     // Adding the CSS stylesheet to the scene to style the GUI appearance.
     mainScene.getStylesheets().add(Constants.GUI_THEME);
 

@@ -11,11 +11,12 @@ package nl.tudelft.scrumbledore;
  */
 public class Constants {
   // Setting the resolution of the entire GUI window.
-  public static final int RESOLUTIONX = 640;
-  public static final int RESOLUTIONY = 750;
+  public static final int GUIX = 640;
+  public static final int GUIY = 750;
 
-  // Setting the resolution constants for GUI game display.
-  public static final int CANVASRESOLUTIONY = 640;
+  // Setting the resolution constants for level/game display.
+  public static final int LEVELY = 640;
+  public static final int LEVELX = 640;
 
   // Defenining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";
