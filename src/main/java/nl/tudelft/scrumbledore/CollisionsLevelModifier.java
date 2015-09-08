@@ -31,17 +31,6 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
-    detectPlayer(level, delta);
-  }
-  
-  /**
-   * Executing all detecting methods with the player.
-   * @param level
-   *          The level.
-   * @param delta
-   *          The delta provided by the StepTimer.
-   */
-  public void detectPlayer(Level level, double delta) {
     detectPlayerPlatform(level, delta);
     detectPlayerFruit(level, delta);
   }
