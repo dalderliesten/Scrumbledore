@@ -47,6 +47,9 @@ public class Constants {
   
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
+  
+  // Location of the CSS resource for the GUI styling.
+  public static final String CSS_LOCATION = "css/style.css";
 
   // References to images utilized for the game display within the GUI.
   public static final String BUBBLE_SPRITE = "images/Bubble/Bubble_32x32.png";
