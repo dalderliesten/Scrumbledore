@@ -165,5 +165,14 @@ public abstract class LevelElement {
   public double getRight() {
     return position.getX() + size.getX() / 2;
   }
+  
+  /**
+   * Get the distance to another LevelElement.
+   * @param other The other element to measure the distance to.
+   * @return The distance.
+   */
+  public double distance(LevelElement other) {
+    return getPosition().distance(other.getPosition());
+  }
     
 }

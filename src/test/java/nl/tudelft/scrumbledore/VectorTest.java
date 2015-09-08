@@ -98,6 +98,25 @@ public class VectorTest {
     double dot = v1.dotProduct(v2);
     assertEquals(11, dot, Constants.DOUBLE_PRECISION);
   }
+  
+  /**
+   * The length of a vector should be calculated correctly.
+   */
+  @Test
+  public void testLength() {
+    Vector vec = new Vector(3, 4);
+    assertEquals(5, vec.length(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * The distance between two vectors should be calculated correctly.
+   */
+  @Test
+  public void testDistance() {
+    Vector v1 = new Vector(3, 4);
+    Vector v2 = new Vector(6, 8);
+    assertEquals(5, v1.distance(v2), Constants.DOUBLE_PRECISION);
+  }
 
   /**
    * The setX method should set the entryX property properly.
