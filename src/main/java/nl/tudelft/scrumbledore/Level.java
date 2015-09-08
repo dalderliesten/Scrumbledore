@@ -12,6 +12,8 @@ public class Level {
 
   private ArrayList<LevelElement> movingElements;
   private ArrayList<Platform> platforms;
+  private ArrayList<Fruit> fruits;
+  private ArrayList<NPC> npcs;
   private Player player;
 
 
@@ -59,6 +61,26 @@ public class Level {
    */
   public ArrayList<Platform> getPlatforms() {
     return platforms;
+  }
+  
+  /**
+   * Returns an ArrayList of Fruit elements.
+   * 
+   * @return
+   *          An ArrayList of Fruit elements
+   */
+  public ArrayList<Fruit> getFruits() {
+    return fruits;
+  }
+  
+  /**
+   * Returns an ArrayList of NPC elements.
+   * 
+   * @return
+   *          An ArrayList of NPC elements
+   */
+  public ArrayList<NPC> getNPCs() {
+    return npcs;
   }
 
 

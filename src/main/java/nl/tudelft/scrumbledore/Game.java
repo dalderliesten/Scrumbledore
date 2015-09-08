@@ -39,6 +39,8 @@ public class Game {
    * @param levels The levels for the game.
    */
   public void construct(ArrayList<Level> levels) {
+    this.score = new ScoreCounter();
+    
     // The game needs at least one level.
     assert levels.size() > 0;
 
@@ -49,10 +51,10 @@ public class Game {
 
     this.modifiers = new ArrayList<LevelModifier>();
     this.modifiers.add(new GravityLevelModifier());
-    this.modifiers.add(new CollisionsLevelModifier(kinetics));
+    this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
     this.modifiers.add(kinetics);
     
-    this.score = new ScoreCounter();
+    
   }
 
   /**
