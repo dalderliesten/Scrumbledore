@@ -83,12 +83,6 @@ public class GUI extends Application {
 
     addKeyEventListeners(mainScene);
 
-    // Adding the initial enemy locations to the GUI.
-    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-      gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), current
-          .getPosition().getY());
-    }
-
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
 
@@ -177,6 +171,12 @@ public class GUI extends Application {
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
                 .getPlayer().getPosition().getY());
 
+        // Adding the initial enemy locations to the GUI.
+        for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
+          gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), 
+              current.getPosition().getY());
+        }
+        
         // Placing the platform elements within the level.
         for (Platform current : game.getCurrentLevel().getPlatforms()) {
           // Painting the current platform image at the desired x and y location given by the

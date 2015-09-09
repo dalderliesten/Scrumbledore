@@ -11,7 +11,8 @@ public class NPC extends LevelElement {
   private int life;
   private int status;
   private boolean hasFruit;
-  
+  private ArrayList<PlayerAction> actions;
+
   /**
    * Create a new NPC instance.
    * 
@@ -23,9 +24,52 @@ public class NPC extends LevelElement {
   public NPC(Vector position, Vector size) {
     super(position, size);
     
-    setGravity(true);
+    setGravity(false);
+    
+    actions = new ArrayList<PlayerAction>();
+
   }
 
+  
+  /**
+   * Add an action to be performed in the next step.
+   * 
+   * @param action
+   *          A PlayerAction
+   */
+  public void addAction(PlayerAction action) {
+    if (!hasAction(action)) {
+      actions.add(action);
+    }
+  }
+  
+  /**
+   * Remove all actions from the queue.
+   */
+  public void clearActions() {
+    actions.clear();
+  }
+
+  /**
+   * Check whether the given action is queued for the next step.
+   * 
+   * @param action
+   *          A PlayerAction.
+   * @return Boolean.
+   */
+  public boolean hasAction(PlayerAction action) {
+    return actions.contains(action);
+  }
+
+  /**
+   * Remove the given action from the actions queue.
+   * 
+   * @param action
+   *          A PlayerAction.
+   */
+  public void removeAction(PlayerAction action) {
+    actions.remove(action);
+  }
   
   /**
    * Helper method used to determine the position of 
