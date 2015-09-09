@@ -89,7 +89,7 @@ public class NPCTest extends LevelElementTest {
   @Test
   public void testObstacleBoundaries() {
     Level level = new Level();
-    String testMap = "# # N # #\n";
+    String testMap = "## N ##\n";
 
 
     try {
@@ -99,8 +99,8 @@ public class NPCTest extends LevelElementTest {
     NPC npc = (NPC) level.getMovingElements().get(0);
     Vector[] boundaries = npc.obstacleMovementBoundaries(level.getPlatforms());
     
-    assertEquals(new Vector(3 * Constants.BLOCKSIZE, 0), boundaries[0]);  
-    assertEquals(new Vector(6 * Constants.BLOCKSIZE, 0), boundaries[1]);   
+    assertEquals(new Vector(2 * Constants.BLOCKSIZE, 0), boundaries[0]);  
+    assertEquals(new Vector(4 * Constants.BLOCKSIZE, 0), boundaries[1]);   
   }
   
   
