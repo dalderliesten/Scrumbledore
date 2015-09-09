@@ -11,9 +11,10 @@ public class NPC extends LevelElement {
   private int life;
   private int status;
   private boolean hasFruit;
+  private String movementDirection;
   private Vector[] movementBoundaries;
   private ArrayList<Platform> platforms;
-  private ArrayList<PlayerAction> actions;
+  private ArrayList<NPCAction> actions;
 
   /**
    * Create a new NPC instance.
@@ -28,17 +29,22 @@ public class NPC extends LevelElement {
     
     setGravity(false);
     
-    actions = new ArrayList<PlayerAction>();
-
+    actions = new ArrayList<NPCAction>();
+    movementDirection = "left";
   }
 
-  /**
-   * .
-   * @param platforms
-   */
   public void setPlatforms(ArrayList<Platform> platforms) {
     this.platforms = platforms;
     movementBoundaries = movementBoundaries(this.platforms);
+  }
+  
+  public void setMovementDirection(String direction) {
+    this.movementDirection = direction;
+  }
+  
+ 
+  public String getMovementDirection() {
+    return this.movementDirection;
   }
   
   /**
@@ -47,7 +53,7 @@ public class NPC extends LevelElement {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(PlayerAction action) {
+  public void addAction(NPCAction action) {
     if (!hasAction(action)) {
       actions.add(action);
     }
@@ -64,10 +70,10 @@ public class NPC extends LevelElement {
    * Check whether the given action is queued for the next step.
    * 
    * @param action
-   *          A PlayerAction.
+   *          An NPCAction.
    * @return Boolean.
    */
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(NPCAction action) {
     return actions.contains(action);
   }
 
@@ -75,9 +81,9 @@ public class NPC extends LevelElement {
    * Remove the given action from the actions queue.
    * 
    * @param action
-   *          A PlayerAction.
+   *          An NPCAction.
    */
-  public void removeAction(PlayerAction action) {
+  public void removeAction(NPCAction action) {
     actions.remove(action);
   }
   

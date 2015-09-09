@@ -233,21 +233,46 @@ public class GUI extends Application {
   }
   
   private void enemyMover() {
-    System.out.println("NPC TEST");
     ArrayList<LevelElement> elements = game.getCurrentLevel().getMovingElements();
     NPC npc = new NPC(null, null);
     
+    // Temporarily only use 1 NPC
     for (LevelElement le: elements) {
       if (le.getClass().equals(NPC.class)) {
         npc = (NPC) le;
       }
     } 
     
+    // Assign platforms to NPC if this has not happened yet
     if (npc.getMovementBoundaries() == null) {
       npc.setPlatforms(game.getCurrentLevel().getPlatforms());
     }
     
-    npc.addAction(PlayerAction.MoveLeft);
+    if (npc.getMovementDirection().equals("right")) {
+      npc.addAction(NPCAction.MoveRight);
+    } else if (npc.getMovementDirection().equals("left")) {
+      npc.addAction(NPCAction.MoveLeft);
+    }
 
+    Vector currentPosition = npc.getPosition();
+    System.out.println(npc.getMovementBoundaries()[1]);
+    // Enemy is at left boundary, make it move to the right
+    if (currentPosition.equals(npc.getMovementBoundaries()[0])) {
+      System.out.println("[DEBUG] Moving to the right");
+       // Move right
+      npc.addAction(NPCAction.MoveStop);
+      npc.setMovementDirection("right");
+      return;
+    }
+    
+    // Enemy is at right boundary, make it move to the left
+    if (currentPosition.equals(npc.getMovementBoundaries()[1])) {
+      System.out.println("[DEBUG] Moving to the left");
+
+      // Move left
+      npc.addAction(NPCAction.MoveStop);
+      npc.setMovementDirection("left");
+      return;
+    }
   }
 }

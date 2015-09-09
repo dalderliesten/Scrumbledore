@@ -57,6 +57,9 @@ public class Constants {
   // Player jump strength
   public static final double PLAYER_JUMP = 16;
 
+  // NPC horizontal movement speed
+  public static final double NPC_SPEED = 4;
+  
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
   
