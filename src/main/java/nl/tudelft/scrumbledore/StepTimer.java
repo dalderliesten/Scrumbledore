@@ -3,7 +3,9 @@ package nl.tudelft.scrumbledore;
 /**
  * Class responsible for invoking the step method at a given rate on the Game.
  * 
- * @author Jesse Tilro and Jeroen Meijer
+ * @author Jesse Tilro
+ * @author Jeroen Meijer
+ * @author David Alderliesten
  *
  */
 public class StepTimer {
@@ -104,6 +106,14 @@ public class StepTimer {
   public void pause() {
     paused = true;
   }
+  
+  /**
+   * Checks if the game is paused.
+   * @return boolean true if paused
+   */
+  public boolean isPaused() {
+    return paused;
+  }
 
   /**
    * Keeps looping over the game loop as long as the game is running.
@@ -125,10 +135,14 @@ public class StepTimer {
     double d = elapsedTime / ((double) optimalTime);
 
     if (!paused) {
-       game.step(d);
+      game.step(d);
     }
     try {
-      Thread.sleep((prevLoopTime - System.nanoTime() + optimalTime) / 1000000);
+      long timeout = (prevLoopTime - System.nanoTime() + optimalTime) / 1000000;
+      if (timeout < 0) {
+        timeout = 0;
+      }
+      Thread.sleep(timeout);
     } catch (InterruptedException ex) {
       // Do nothing.
     }

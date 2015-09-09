@@ -6,47 +6,48 @@ package nl.tudelft.scrumbledore;
  * @author Jesse Tilro
  *
  */
-public final class Gravity {
+public class GravityLevelModifier implements LevelModifier {
 
-  private static int strength;
-  private static int max;
-
-  private Gravity() {
-
-  }
+  private double strength;
+  private double max;
 
   /**
-   * @return Strength of the gravity.
-   */
-  public static int getStrength() {
-    return strength;
-  }
-
-  /**
-   * Sets the strength of the gravity.
+   * Constructs a new Gravity Level Modifier using a given strength and max.
    * 
    * @param strength
-   *          Strength of the gravity.
-   */
-  public static void setStrength(int strength) {
-    Gravity.strength = strength;
-  }
-
-  /**
-   * @return The maximum gravity.
-   */
-  public static int getMax() {
-    return max;
-  }
-
-  /**
-   * Sets the maximum gravity.
-   * 
+   *          The strength.
    * @param max
-   *          Maximum gravity.
+   *          The maximal vertical speed it may accelerate elements to.
    */
-  public static void setMax(int max) {
-    Gravity.max = max;
+  public GravityLevelModifier(double strength, double max) {
+    this.strength = strength;
+    this.max = max;
+  }
+  
+  /**
+   * Construct a new Gravity Level Modifier using the constants for strenght and max.
+   */
+  public GravityLevelModifier() {
+    this.strength = Constants.GRAVITY_STRENGTH;
+    this.max = Constants.GRAVITY_MAX;
+  }
+
+  /**
+   * Pull down all elements in a given Level.
+   * 
+   * @param level
+   *          A Level containing elements to be pulled down.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  public void modify(Level level, double d) {
+    // Pull down generic moving elements
+    for (LevelElement element : level.getMovingElements()) {
+      pull(element, d);
+    }
+
+    // Pull down the player
+    pull(level.getPlayer(), d);
   }
 
   /**
@@ -58,12 +59,12 @@ public final class Gravity {
    * @param d
    *          The number of steps since last executing this function.
    */
-  public static void pull(LevelElement element, double d) {
+  public void pull(LevelElement element, double d) {
     // If the object has not yet been initialized, return.
     if (element == null) {
       return;
     }
-    
+
     // If the element is not affected by Gravity, ignore it.
     if (!element.hasGravity()) {
       return;
@@ -78,24 +79,6 @@ public final class Gravity {
     } else {
       element.getSpeed().setY(max);
     }
-  }
-
-  /**
-   * Pull down all elements in a given Level.
-   * 
-   * @param level
-   *          A Level containing elements to be pulled down.
-   * @param d
-   *          The number of steps since last executing this function.
-   */
-  public static void pull(Level level, double d) {
-    // Pull down generic moving elements
-    for (LevelElement element : level.getMovingElements()) {
-      pull(element, d);
-    }
-    
-    // Pull down the player
-    pull(level.getPlayer(), d);
   }
 
 }

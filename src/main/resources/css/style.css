@@ -1,0 +1,10 @@
+/*
+ * Style for Scrumbledore.
+ * A faithful recreation of Bubble Bobble.
+ * 
+ * Style and Themeing by David Alderliesten.
+ */
+ 
+ .root {
+ 	-fx-background-color: #313131;
+ }
