@@ -173,7 +173,7 @@ public class GUI extends Application {
         // background image clears canvas
         // Adding the initial player location to the GUI.
         playerSprite = new Image(Constants.PLAYER_SPRITE);
-        gamePainter.drawImage(playerSprite, 200, 200);
+        gamePainter.drawImage(playerSprite,
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
                 .getPlayer().getPosition().getY());
 
