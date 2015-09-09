@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -82,7 +84,7 @@ public class GUI extends Application {
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
 
     addKeyEventListeners(mainScene);
-
+    
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
 
@@ -162,6 +164,7 @@ public class GUI extends Application {
   private void spawnDynamic(Stage passedStage, final GraphicsContext gamePainter) {
     new AnimationTimer() {
       public void handle(long currentNanoTime) {
+        enemyMover();
         // Clear canvas
         gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
         // background image clears canvas
@@ -179,8 +182,7 @@ public class GUI extends Application {
         
         // Placing the platform elements within the level.
         for (Platform current : game.getCurrentLevel().getPlatforms()) {
-          // Painting the current platform image at the desired x and y location given by the
-          // vector.
+          // Painting the current platform image at the desired x and y location given by the vector.
           gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
               current.getPosition().getY());
         }
@@ -228,5 +230,24 @@ public class GUI extends Application {
       }
 
     });
+  }
+  
+  private void enemyMover() {
+    System.out.println("NPC TEST");
+    ArrayList<LevelElement> elements = game.getCurrentLevel().getMovingElements();
+    NPC npc = new NPC(null, null);
+    
+    for (LevelElement le: elements) {
+      if (le.getClass().equals(NPC.class)) {
+        npc = (NPC) le;
+      }
+    } 
+    
+    if (npc.getMovementBoundaries() == null) {
+      npc.setPlatforms(game.getCurrentLevel().getPlatforms());
+    }
+    
+    npc.addAction(PlayerAction.MoveLeft);
+
   }
 }

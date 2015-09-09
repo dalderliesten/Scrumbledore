@@ -3,32 +3,16 @@ package nl.tudelft.scrumbledore;
 import java.util.ArrayList;
 
 /**
- * Level Modifier that processes the actions to be performed on the Player.
+ * Level Modifier that processes the actions to be performed on an NPC.
  * 
  * @author Jesse Tilro
+ * @author Niels Warnars
  *
  */
-public class NPCLevelModifier implements LevelModifier {
+public class NPCLevelModifier {
 
-  /**
-   * Process the actions to be performed on the Player.
-   * 
-   * @param level
-   *          The level in which the player actions need to be processed.
-   * @param delta
-   *          The number of steps passed since the last execution of this method.
-   */
-  public void modify(Level level, double delta) {
 
-    ArrayList<LevelElement> elements = level.getMovingElements();
-    NPC npc = new NPC(null, null);
-    
-    for (LevelElement le : elements) {
-      if (le.getClass().equals(NPC.class)) {
-        npc = (NPC) le;
-        break;
-      }
-    }
+  public void modify(Level level, double delta, NPC npc) {
     
     // Stop Horizontal Movement.
     if (npc.hasAction(PlayerAction.MoveStop)) {

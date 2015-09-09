@@ -11,6 +11,8 @@ public class NPC extends LevelElement {
   private int life;
   private int status;
   private boolean hasFruit;
+  private Vector[] movementBoundaries;
+  private ArrayList<Platform> platforms;
   private ArrayList<PlayerAction> actions;
 
   /**
@@ -30,6 +32,14 @@ public class NPC extends LevelElement {
 
   }
 
+  /**
+   * .
+   * @param platforms
+   */
+  public void setPlatforms(ArrayList<Platform> platforms) {
+    this.platforms = platforms;
+    movementBoundaries = movementBoundaries(this.platforms);
+  }
   
   /**
    * Add an action to be performed in the next step.
@@ -324,6 +334,15 @@ public class NPC extends LevelElement {
    */
   public void setHasFruit(boolean hasFruit) {
     this.hasFruit = hasFruit;
+  }
+
+  
+  public ArrayList<Platform> getPlatforms() {
+    return platforms;
+  }
+
+  public Vector[] getMovementBoundaries() {
+    return movementBoundaries;
   }
   
 }
