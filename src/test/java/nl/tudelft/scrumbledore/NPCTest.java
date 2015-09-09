@@ -5,18 +5,15 @@ import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-//import static org.junit.Assert.*;
-
 import org.junit.AfterClass;
 import org.junit.BeforeClass;
-//import org.junit.Test;
 import org.junit.Test;
 
 /**
  * Testing the NPC class.
  * 
  * @author Floris Doolaard
- *
+ * @author Niels Warnars
  */
 public class NPCTest extends LevelElementTest {
 
@@ -63,12 +60,12 @@ public class NPCTest extends LevelElementTest {
   }
   
   /**
-   * Test case for the getUnderlayingPlatformsBoundaries method
-   * which checks whether the platform boundaries returned are
-   * the correct ones.
+   * Test case for the floorBoundaries method 
+   * which checks whether the platform boundaries 
+   * returned are the correct ones.
    */
   @Test
-  public void testGetUnderlayingFloorBoundaries() {
+  public void testFloorBoundaries() {
     Level level = new Level();
     String testMap = "   N    \n" + "# #### #\n";
 
@@ -77,10 +74,31 @@ public class NPCTest extends LevelElementTest {
     } catch (FileNotFoundException e) { }
 
     NPC npc = (NPC) level.getMovingElements().get(0);
-    Vector[] boundaries = npc.getUnderlayingFloorBoundaries(level.getPlatforms());
+    Vector[] boundaries = npc.floorBoundaries(level.getPlatforms());
     
     // Check left and right boundaries
     assertEquals(new Vector(2 * Constants.BLOCKSIZE, Constants.BLOCKSIZE), boundaries[0]);  
     assertEquals(new Vector(5 * Constants.BLOCKSIZE, Constants.BLOCKSIZE), boundaries[1]);    
+  }
+  
+  /**
+   * Test case for the obstacleBoundaries method 
+   * which checks whether the platforms found left
+   * and right from the NPC are the correct ones.
+   */
+  @Test
+  public void testObstacleBoundaries() {
+    Level level = new Level();
+    String testMap = "##########\n" + "# #  N # #\n" + "##########\n";
+
+    try {
+      level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
+    } catch (FileNotFoundException e) { }
+
+    NPC npc = (NPC) level.getMovingElements().get(0);
+    Vector[] boundaries = npc.obstacleBoundaries(level.getPlatforms());
+    
+    assertEquals(new Vector(2 * Constants.BLOCKSIZE, Constants.BLOCKSIZE), boundaries[0]);  
+    assertEquals(new Vector(7 * Constants.BLOCKSIZE, Constants.BLOCKSIZE), boundaries[1]);   
   }
 }

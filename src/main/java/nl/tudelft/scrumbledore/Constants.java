@@ -36,6 +36,9 @@ public class Constants {
   // The standard size of a block.
   public static final double BLOCKSIZE = 32;
 
+  // The height and width of the board in number of blocks.
+  public static final double NUM_BLOCKS = 20;
+  
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 

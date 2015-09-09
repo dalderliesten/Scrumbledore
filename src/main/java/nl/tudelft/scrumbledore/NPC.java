@@ -52,14 +52,16 @@ public class NPC extends LevelElement {
   
   
   /**
+   * Returns a vector array with the left and right
+   * boundaries of the underlying floor.
    * 
    * @param platforms
    *          An ArrayList of Platforms
    * @return
    *          A Vector array with the left and right
-   *          boundaries of the underlaying floor
+   *          boundaries of the underlying floor
    */
-  protected Vector[] getUnderlayingFloorBoundaries(ArrayList<Platform> platforms) {
+  protected Vector[] floorBoundaries(ArrayList<Platform> platforms) {
     Vector[] floorBoundaries = new Vector[2]; 
     Vector enemyPos = getPosition();
     Vector pUnderEnemyPos = Vector.sum(enemyPos, new Vector(0, Constants.BLOCKSIZE));
@@ -67,7 +69,7 @@ public class NPC extends LevelElement {
     // Get left most platform boundary
     for (int i = getIndexFromPos(platforms, pUnderEnemyPos); i > 0; i--) {
       Vector currentPlatformPos = platforms.get(i).getPosition();
-      Vector previousPlatformPos = platforms.get(i-1).getPosition();
+      Vector previousPlatformPos = platforms.get(i - 1).getPosition();
       Vector expectedPreviousPlatformPos = Vector.difference(currentPlatformPos, new Vector(Constants.BLOCKSIZE, 0));
 
       if (!previousPlatformPos.equals(expectedPreviousPlatformPos)) {
@@ -79,7 +81,7 @@ public class NPC extends LevelElement {
     // Get right most platform boundary
     for (int i = getIndexFromPos(platforms, pUnderEnemyPos); i < platforms.size(); i++) {
       Vector currentPlatformPos = platforms.get(i).getPosition();
-      Vector nextPlatformPos = platforms.get(i+1).getPosition();
+      Vector nextPlatformPos = platforms.get(i + 1).getPosition();
       Vector expectedNextPlatformPos = Vector.sum(currentPlatformPos, new Vector(Constants.BLOCKSIZE, 0));
 
       if (!nextPlatformPos.equals(expectedNextPlatformPos)) {
@@ -91,6 +93,84 @@ public class NPC extends LevelElement {
     return floorBoundaries;
   }
   
+  
+  /**
+   * Returns an ArrayList of platform objects with 
+   * the same height.
+   * 
+   * @param platforms
+   *            An ArrayList of platform objects
+   * @return
+   *            An ArrayList of platform objects
+   *            with the same height
+   */
+  protected ArrayList<Platform> getSameHeightPlatforms(ArrayList<Platform> platforms) {
+    ArrayList<Platform> sameHeightPlatforms = new ArrayList<Platform>();
+    
+    for (Platform platform : platforms) {
+      if (this.getPosition().getY() == platform.getPosition().getY()) {
+        sameHeightPlatforms.add(platform);
+      }
+    }
+    
+    return sameHeightPlatforms;
+  }
+  
+  /**
+   * Returns a vector array with the left and right
+   * obstacle boundaries.
+   * 
+   * @param platforms
+   *          An ArrayList of Platforms
+   * @return
+   *          A Vector array with the left and right
+   *          obstacle boundaries
+   */
+  protected Vector[] obstacleBoundaries(ArrayList<Platform> platforms) {
+    Vector[] boundaries = new Vector[2]; 
+    ArrayList<Platform> sameHeightPlatforms = getSameHeightPlatforms(platforms);
+
+    boundaries[0] = new Vector(0, getPosition().getY());
+    boundaries[1] = new Vector(Constants.NUM_BLOCKS * Constants.BLOCKSIZE, getPosition().getY());
+    
+    // Get left obstacle boundary
+    for (Platform platform : sameHeightPlatforms) {
+      double platformX = platform.getPosition().getX();
+      if (platformX < getPosition().getX() && platformX > boundaries[0].getX()) {
+        boundaries[0] = platform.getPosition();
+      }
+    }
+    
+    // Get right obstacle boundary
+    for (Platform platform : sameHeightPlatforms) {
+      double platformX = platform.getPosition().getX();
+      if (platformX > getPosition().getX() && platformX < boundaries[1].getX()) {
+        boundaries[1] = platform.getPosition();
+      }
+    }
+    
+    return boundaries;
+  }
+  
+  
+  /**
+   * 
+   * @param platforms
+   * @return
+   */
+  protected Vector[] getBoundaries(ArrayList<Platform> platforms) {
+    Vector[] boundaries = new Vector[2]; 
+    Vector leftBoundary;
+    Vector rightBoundary;
+    
+    Vector[] floorBoundaries = floorBoundaries(platforms);
+    Vector[] obstacleBoundaries = obstacleBoundaries(platforms);
+
+    // Construct left boundary
+    // Construct right boundary
+    
+    return boundaries;    
+  }
   
   /**
    * Check whether a given object is equal to this instance.
