@@ -65,7 +65,7 @@ public class NPCTest extends LevelElementTest {
    * returned are the correct ones.
    */
   @Test
-  public void testFloorBoundaries() {
+  public void testFloorMovementBoundaries() {
     Level level = new Level();
     String testMap = "   N    \n" + "# #### #\n";
 
@@ -87,7 +87,7 @@ public class NPCTest extends LevelElementTest {
    * and right from the NPC are the correct ones.
    */
   @Test
-  public void testObstacleBoundaries() {
+  public void testObstacleMovementBoundaries() {
     Level level = new Level();
     String testMap = "## N ##\n";
 

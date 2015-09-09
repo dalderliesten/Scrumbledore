@@ -57,15 +57,17 @@ public class NPC extends LevelElement {
    * 
    * @param platforms
    *            An ArrayList of platform objects
+   * @param height
+   *            The y coordinate of platform objects
    * @return
    *            An ArrayList of platform objects
    *            with the same height
    */
-  protected ArrayList<Platform> getSameHeightPlatforms(ArrayList<Platform> platforms) {
+  protected ArrayList<Platform> getPlatformsFromHeight(ArrayList<Platform> platforms, double height) {
     ArrayList<Platform> res = new ArrayList<Platform>();
     
     for (Platform platform : platforms) {
-      if (this.getPosition().getY() == platform.getPosition().getY()) {
+      if (height == platform.getPosition().getY()) {
         res.add(platform);
       }
     }
@@ -84,7 +86,10 @@ public class NPC extends LevelElement {
    *          A Vector array with the left and right
    *          boundaries of the underlying floor
    */
-  protected Vector[] floorMovementBoundaries(ArrayList<Platform> platforms) {
+  protected Vector[] floorMovementBoundaries(ArrayList<Platform> platformsIn) {
+    double height = getPosition().getY() + Constants.BLOCKSIZE;
+    ArrayList<Platform> platforms = getPlatformsFromHeight(platformsIn, height);
+
     Vector[] floorBoundaries = new Vector[2]; 
     Vector pUnderEnemyPos = Vector.sum(getPosition(), new Vector(0, Constants.BLOCKSIZE));
     
@@ -95,16 +100,21 @@ public class NPC extends LevelElement {
       Vector previousPos = platforms.get(i - 1).getPosition();
       Vector expectedPos = Vector.difference(currentPos, new Vector(Constants.BLOCKSIZE, 0));
 
-      if (!previousPos.equals(expectedPos)) {
+      if (!previousPos.equals(expectedPos) || i == 1) {
         floorBoundaries[0] = new Vector(currentPos.getX(), currentPos.getY());
         break;
       }
     }
     
-    
     // Get right most platform boundary
     for (int i = getIndexFromPos(platforms, pUnderEnemyPos); i < platforms.size(); i++) {
       Vector currentPos = platforms.get(i).getPosition();
+      
+      if (i == platforms.size() - 1) {
+        floorBoundaries[1] = new Vector(currentPos.getX(), currentPos.getY());
+        break;
+      }
+      
       Vector nextPos = platforms.get(i + 1).getPosition();
       Vector expectedPos = Vector.sum(currentPos, new Vector(Constants.BLOCKSIZE, 0));
 
@@ -113,12 +123,10 @@ public class NPC extends LevelElement {
         break;
       }
     }
-   
     
     // Move Y coords up by one position to represent the row of the enemy
     floorBoundaries[0].difference(new Vector(0, Constants.BLOCKSIZE));
     floorBoundaries[1].difference(new Vector(0, Constants.BLOCKSIZE));
-    
     return floorBoundaries;
   }
   
@@ -134,21 +142,15 @@ public class NPC extends LevelElement {
    *          obstacle boundaries
    */
   protected Vector[] obstacleMovementBoundaries(ArrayList<Platform> platformsIn) {
-    ArrayList<Platform> platforms = new ArrayList<Platform>();
-    
-    for (Platform platform : platformsIn) {
-      platforms.add(platform);
-    }
-    
     Vector[] boundaries = new Vector[2]; 
-    ArrayList<Platform> sameHeightPlatforms = getSameHeightPlatforms(platforms);
+    ArrayList<Platform> platforms = getPlatformsFromHeight(platformsIn, getPosition().getY());
 
     // Instantiate the boundaries as the most left and right positions.
     boundaries[0] = new Vector(0, getPosition().getY());
     boundaries[1] = new Vector(Constants.NUM_BLOCKS * Constants.BLOCKSIZE, getPosition().getY());
     
     // Get the left obstacle boundary
-    for (Platform platform : sameHeightPlatforms) {
+    for (Platform platform : platforms) {
       double platformX = platform.getPosition().getX();
       if (platformX < getPosition().getX() && platformX > boundaries[0].getX()) {
         boundaries[0] = new Vector(platform.getPosition().getX(), platform.getPosition().getY());
@@ -156,7 +158,7 @@ public class NPC extends LevelElement {
     }
     
     // Get the right obstacle boundary
-    for (Platform platform : sameHeightPlatforms) {
+    for (Platform platform : platforms) {
       double platformX = platform.getPosition().getX();
       if (platformX > getPosition().getX() && platformX < boundaries[1].getX()) {
         boundaries[1] = new Vector(platform.getPosition().getX(), platform.getPosition().getY());
@@ -183,7 +185,6 @@ public class NPC extends LevelElement {
   protected Vector[] movementBoundaries(ArrayList<Platform> platforms) {
     Vector[] boundaries = floorMovementBoundaries(platforms); 
     Vector[] obstacleBoundaries = obstacleMovementBoundaries(platforms);
-
 
     // Alter left boundary if an obstacle is present
     if (obstacleBoundaries[0].getX() > boundaries[0].getX()) {
