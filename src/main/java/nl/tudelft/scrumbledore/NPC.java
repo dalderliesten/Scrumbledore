@@ -154,11 +154,9 @@ public class NPC extends LevelElement {
       }
     }
     
-    // Move coordinates one block to the left/right to remove 
-    // the obstacles locations and get the real movement boundaries.
+   
     boundaries[0].sum(new Vector(Constants.BLOCKSIZE, 0));
-    boundaries[1].difference(new Vector(Constants.BLOCKSIZE, 0));
-    
+
     return boundaries;
   }
   

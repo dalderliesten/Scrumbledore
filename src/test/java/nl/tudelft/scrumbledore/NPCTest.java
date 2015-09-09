@@ -89,7 +89,8 @@ public class NPCTest extends LevelElementTest {
   @Test
   public void testObstacleBoundaries() {
     Level level = new Level();
-    String testMap = "# #  N # #\n";
+    String testMap = "# # N # #\n";
+
 
     try {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
@@ -111,7 +112,7 @@ public class NPCTest extends LevelElementTest {
   public void testMovementBoundaries() {
     Level level = new Level();
     String testMap = 
-          "# # N  # #\n" 
+          "# # N   ##\n" 
         + "#######   \n"
         + "##########\n";
 
