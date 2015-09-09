@@ -180,6 +180,18 @@ public class Vector {
     return false;
   }
 
+  
+  public boolean neighbouring(int precision, Object other) {
+    if (other instanceof Vector) {
+      Vector that = (Vector) other;
+      if (Math.abs(this.getX() - that.getX()) <= precision 
+          && Math.abs(this.getY() - that.getY()) <= precision) {
+        return true;
+      }
+    }
+    return false;
+
+  }
   @Override
   public String toString() {
     return "Vector [entryX=" + entryX + ", entryY=" + entryY + "]";

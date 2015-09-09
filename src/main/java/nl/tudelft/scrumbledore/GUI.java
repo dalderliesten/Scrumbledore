@@ -255,21 +255,17 @@ public class GUI extends Application {
     }
 
     Vector currentPosition = npc.getPosition();
-    System.out.println(npc.getMovementBoundaries()[1]);
+    //System.out.println("[DEBUG]: " + currentPosition);
+    
     // Enemy is at left boundary, make it move to the right
-    if (currentPosition.equals(npc.getMovementBoundaries()[0])) {
-      System.out.println("[DEBUG] Moving to the right");
-       // Move right
+    if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[0])) {
       npc.addAction(NPCAction.MoveStop);
       npc.setMovementDirection("right");
       return;
     }
     
     // Enemy is at right boundary, make it move to the left
-    if (currentPosition.equals(npc.getMovementBoundaries()[1])) {
-      System.out.println("[DEBUG] Moving to the left");
-
-      // Move left
+    if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[1])) {
       npc.addAction(NPCAction.MoveStop);
       npc.setMovementDirection("left");
       return;
