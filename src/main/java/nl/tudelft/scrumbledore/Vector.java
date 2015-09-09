@@ -180,4 +180,9 @@ public class Vector {
     return false;
   }
 
+  @Override
+  public String toString() {
+    return "Vector [entryX=" + entryX + ", entryY=" + entryY + "]";
+  }
+
 }
