@@ -251,8 +251,15 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderNPCs(GraphicsContext painter) {
+    ArrayList<NPC> npcs = new ArrayList<NPC>(); 
+    
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    for (NPC npc : game.getCurrentLevel().getNPCs()) {
+      npcs.add(npc);
+    }
+    
     // Adding the initial enemy locations to the GUI.
-    for (NPC current : game.getCurrentLevel().getNPCs()) {
+    for (NPC current : npcs) {
       String imagePath = "";
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         imagePath = Constants.NPC_SPRITE_LEFT;
