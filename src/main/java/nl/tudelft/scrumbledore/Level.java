@@ -38,6 +38,8 @@ public class Level {
       platforms.add((Platform) element);
     } else if (element.getClass().equals(NPC.class)) {
       npcs.add((NPC) element);
+    } else if (element.getClass().equals(Fruit.class)) {
+      fruits.add((Fruit) element);
     } else if (element.getClass().equals(Player.class)) {
       player = (Player) element;
     } 

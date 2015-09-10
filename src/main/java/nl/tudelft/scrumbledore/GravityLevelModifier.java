@@ -46,6 +46,11 @@ public class GravityLevelModifier implements LevelModifier {
       pull(element, d);
     }
 
+    // Pull down Fruits
+    for (Fruit element : level.getFruits()) {
+      pull(element, d);
+    }
+    
     // Pull down the player
     pull(level.getPlayer(), d);
   }
