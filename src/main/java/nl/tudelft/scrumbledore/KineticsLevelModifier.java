@@ -40,7 +40,7 @@ public class KineticsLevelModifier implements LevelModifier {
     addSpeed(player, d);
 
     if (player.posY() + player.height() >= Constants.LEVELY) {
-      player.getPosition().setY(player.height() / 2);
+      player.getPosition().setY(player.height() / -2);
     }
   }
   
