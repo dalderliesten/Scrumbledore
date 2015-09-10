@@ -248,9 +248,9 @@ public class GUI extends Application {
     // Adding the initial enemy locations to the GUI.
     for (NPC current : game.getCurrentLevel().getNPCs()) {
       String imagePath = "";
-      if (current.getMovementDirection().equals("left")) {
+      if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         imagePath = Constants.NPC_SPRITE_LEFT;
-      } else if (current.getMovementDirection().equals("right")) {
+      } else if (current.getMovementDirection().equals(NPCAction.MoveRight)) {
         imagePath = Constants.NPC_SPRITE_RIGHT;
       }
       painter.drawImage(new Image(imagePath), current.getPosition().getX(), current
