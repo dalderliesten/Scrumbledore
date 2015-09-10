@@ -20,6 +20,7 @@ public class Bubble extends Projectile {
    */
   public Bubble(Vector position, Vector size) {
     super(position, size);
+    getFriction().setX(Constants.BUBBLE_FRICTION);
     
     actions = new ArrayList<BubbleAction>();
   }
