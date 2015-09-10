@@ -47,7 +47,9 @@ public class KineticsLevelModifier implements LevelModifier {
   /**
    * Update the speed/position of the bubble in a given level.
    * @param level
+   *          The level whose Bubble objects should be updated.
    * @param d
+   *          The number of steps since last executing this function.
    */
   private void updateBubble(Level level, double d) {
     
