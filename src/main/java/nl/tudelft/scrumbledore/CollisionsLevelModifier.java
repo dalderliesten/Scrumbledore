@@ -48,9 +48,6 @@ public class CollisionsLevelModifier implements LevelModifier {
   public void detectPlayerPlatform(Level level, double delta) {
     Player player = level.getPlayer();
 
-    // Find platform collidee candidates and check for a collision.
-    ArrayList<Platform> candidates = new ArrayList<Platform>();
-
     for (Platform platform : level.getPlatforms()) {
       // Check if platform is in collision range.
       if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
