@@ -164,6 +164,7 @@ public class GUI extends Application {
   private void spawnDynamic(Stage passedStage, final GraphicsContext gamePainter) {
     new AnimationTimer() {
       public void handle(long currentNanoTime) {
+        // Make the enemies move simultaneously
         enemyMover();
         // Clear canvas
         gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
@@ -232,6 +233,9 @@ public class GUI extends Application {
     });
   }
   
+  /**
+   * Makes NPCs move to the right position.
+   */
   private void enemyMover() {
     
     // Loop over all NPCs
