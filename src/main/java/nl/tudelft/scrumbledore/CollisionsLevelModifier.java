@@ -66,8 +66,19 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (int i = 0; i < bubbles.size(); i++) {
         if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubbles.get(i), platform, delta);
-          if (collision.collidingFromLeft() || collision.collidingFromRight()) {
-            bubbles.remove(i);
+          if (collision.collidingFromBottom()) {
+            bubbles.get(i).getSpeed().setY(Constants.BUBBLE_SPEED);
+            kinetics.snapBottom(bubbles.get(i), platform);
+            break;
+          }
+          if (collision.collidingFromLeft()) {
+            bubbles.get(i).getSpeed().setX(-Constants.BUBBLE_SPEED);
+            kinetics.snapLeft(bubbles.get(i), platform);
+            break;
+          }
+          if (collision.collidingFromRight()) {
+            bubbles.get(i).getSpeed().setX(Constants.BUBBLE_SPEED);
+            kinetics.snapRight(bubbles.get(i), platform);
             break;
           }
         }
