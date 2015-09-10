@@ -6,6 +6,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
@@ -30,6 +31,12 @@ public class GUI extends Application {
   private Image playerSprite;
   private int playerDirection;
 
+  private Stage stage;
+  private Canvas staticDisplay;
+  private Canvas dynamicDisplay;
+  private GraphicsContext staticPainter;
+  private GraphicsContext dynamicPainter;
+
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
    * creation of essential features, such as buttons and display information.
@@ -40,28 +47,59 @@ public class GUI extends Application {
    *          The stage required to display the GUI.
    */
   @Override
-  public void start(Stage gameStage) {
+  public void start(Stage stage) {
+    this.stage = stage;
+
+    // Setup the Game logic.
+    setupGame();
+
+    // Setup the GUI display.
+    setupGUI();
+    renderPlatforms(staticPainter);
+
+    // Calling the dynamic handling for the GUI.
+    startAnimationTimer(stage, dynamicPainter);
+
+    stage.show();
+  }
+
+  private void setupGame() {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
     timer = new StepTimer(Constants.REFRESH_RATE, game);
 
     // Starting the step timer.
     timer.start();
+  }
+
+  private void setupGUI() {
+    // Setup the static canvas and its painter
+    staticDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    staticPainter = staticDisplay.getGraphicsContext2D();
+
+    // Setup the dynamic canvas and its painter
+    dynamicDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    dynamicPainter = dynamicDisplay.getGraphicsContext2D();
 
     // Setting the title of the GUI window.
-    gameStage.setTitle("Scrumbledore");
+    stage.setTitle("Scrumbledore");
 
     // Setting window dimension and movement properties.
-    gameStage.setHeight(Constants.GUIY);
-    gameStage.setWidth(Constants.GUIX);
+    stage.setHeight(Constants.GUIY);
+    stage.setWidth(Constants.GUIX);
     // gameStage.setResizable(false);
 
     // Setting the content handler group object, to which objects within the game must be added.
     BorderPane contentHandler = new BorderPane();
 
+    Group gameView = new Group();
+
+    gameView.getChildren().add(staticDisplay);
+    gameView.getChildren().add(dynamicDisplay);
+
     // Creating of the scene and assigning this scene to the game stage.
     Scene mainScene = new Scene(contentHandler);
-    gameStage.setScene(mainScene);
+    stage.setScene(mainScene);
 
     // Adding the desired stylesheet to the scene for visual modifications.
     mainScene.getStylesheets().add(Constants.CSS_LOCATION);
@@ -79,15 +117,10 @@ public class GUI extends Application {
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
     contentHandler.setTop(topItems);
 
-    // Creation of the game display canvas, and adding a graphics context object to allow for
-    // simple, call based refreshing. Canvas is then added to the scene of the window.
-    Canvas gameDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
-    GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
-
     addKeyEventListeners(mainScene);
 
     // Displaying the parsed level content in the center of the user interface.
-    contentHandler.setCenter(gameDisplay);
+    contentHandler.setCenter(gameView);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
@@ -144,13 +177,6 @@ public class GUI extends Application {
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
-
-    renderPlatforms(gamePainter);
-
-    // Calling the dynamic handling for the GUI.
-    startAnimationTimer(gameStage, gamePainter);
-
-    gameStage.show();
   }
 
   /**
