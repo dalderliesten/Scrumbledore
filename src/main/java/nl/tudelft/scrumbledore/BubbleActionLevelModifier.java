@@ -21,14 +21,14 @@ public class BubbleActionLevelModifier implements LevelModifier {
    */
   public void modify(Level level, double delta) {
 
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    for (Bubble bubble : level.getBubbles()) {
+      bubbles.add(bubble);
+    }
     
-    Iterator<Bubble> iter = level.getBubbles().iterator();
-    while (iter.hasNext()) {
-      Bubble bub = iter.next();
-      
+    for (Bubble bub : bubbles) {     
       if (bub.getLifetime() <= 0) {
         level.getBubbles().remove(bub);
-        iter = level.getBubbles().iterator();
       } else {
         bub.decreaseLifetime(delta);
 
