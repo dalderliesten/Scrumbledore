@@ -22,7 +22,7 @@ public class BubbleActionLevelModifier implements LevelModifier{
     
     for (Bubble bub : level.getBubbles()) {
       if (bub.vSpeed() > -Constants.BUBBLE_FLOAT) {
-        bub.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION));
+        bub.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION * delta));
       }
       if (bub.hasAction(BubbleAction.MoveLeft)) {
         bub.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);

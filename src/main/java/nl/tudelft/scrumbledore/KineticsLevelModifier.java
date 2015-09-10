@@ -98,7 +98,7 @@ public class KineticsLevelModifier implements LevelModifier {
       stopVertically(el);
     }
 
-    Vector fricDiff = new Vector(signX * el.hFric(), signY * el.vFric());
+    Vector fricDiff = new Vector(d * signX * el.hFric(), d * signY * el.vFric());
     el.getSpeed().difference(fricDiff);
   }
 
