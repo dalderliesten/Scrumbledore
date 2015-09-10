@@ -25,6 +25,7 @@ public class Level {
     movingElements = new ArrayList<LevelElement>();
     platforms = new ArrayList<Platform>();
     bubbles = new ArrayList<Bubble>();
+    fruits = new ArrayList<Fruit>();
   }
 
   /**
