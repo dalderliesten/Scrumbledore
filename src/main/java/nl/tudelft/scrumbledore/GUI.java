@@ -231,13 +231,16 @@ public class GUI extends Application {
    * @param painter
    *          The GraphicsContext to be used.
    */
-  private void renderBubbles(GraphicsContext painter) {    
-    ArrayList<Bubble> tmpBubbles = game.getCurrentLevel().getBubbles();
-    for (Bubble currentBubble : tmpBubbles) {
-      if (game.getCurrentLevel().getBubbles().contains(currentBubble)) {
+  private void renderBubbles(GraphicsContext painter) {
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    for (Bubble bubble : game.getCurrentLevel().getBubbles()) {
+      bubbles.add(bubble);
+    }
+    
+    for (Bubble currentBubble : bubbles) {
         painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
             currentBubble.getPosition().getY());
-      }
     }
   }
 
