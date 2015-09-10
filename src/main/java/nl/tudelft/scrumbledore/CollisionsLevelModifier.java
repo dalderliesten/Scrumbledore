@@ -68,17 +68,17 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubbles.get(i), platform, delta);
           if (collision.collidingFromBottom()) {
-            bubbles.get(i).getSpeed().setY(Constants.BUBBLE_SPEED);
+            bubbles.get(i).getSpeed().setY(Constants.BUBBLE_BOUNCE);
             kinetics.snapBottom(bubbles.get(i), platform);
             break;
           }
           if (collision.collidingFromLeft()) {
-            bubbles.get(i).getSpeed().setX(-Constants.BUBBLE_SPEED);
+            bubbles.get(i).getSpeed().setX(-Constants.BUBBLE_BOUNCE);
             kinetics.snapLeft(bubbles.get(i), platform);
             break;
           }
           if (collision.collidingFromRight()) {
-            bubbles.get(i).getSpeed().setX(Constants.BUBBLE_SPEED);
+            bubbles.get(i).getSpeed().setX(Constants.BUBBLE_BOUNCE);
             kinetics.snapRight(bubbles.get(i), platform);
             break;
           }
@@ -114,12 +114,15 @@ public class CollisionsLevelModifier implements LevelModifier {
 
       for (Bubble other : bubbles) {
         if (!other.equals(bubble) && other.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
-          if (other.posX() < bubble.posX()) {
-            other.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
-            bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-          } else {
-            other.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-            bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+          Collision collision = new Collision(bubble, other, delta);
+          if (collision.colliding()) {
+            if (other.posX() < bubble.posX()) {
+              other.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+              bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+            } else {
+              other.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+              bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+            }
           }
         }
       }
