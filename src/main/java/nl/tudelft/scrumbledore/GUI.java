@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -82,13 +84,7 @@ public class GUI extends Application {
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
 
     addKeyEventListeners(mainScene);
-
-    // Adding the initial enemy locations to the GUI.
-    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-      gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), current
-          .getPosition().getY());
-    }
-
+    
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
 
@@ -168,6 +164,8 @@ public class GUI extends Application {
   private void spawnDynamic(Stage passedStage, final GraphicsContext gamePainter) {
     new AnimationTimer() {
       public void handle(long currentNanoTime) {
+        // Make the enemies move simultaneously
+        enemyMover();
         // Clear canvas
         gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
         // background image clears canvas
@@ -181,10 +179,15 @@ public class GUI extends Application {
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
                 .getPlayer().getPosition().getY());
 
+        // Adding the initial enemy locations to the GUI.
+        for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
+          gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), 
+              current.getPosition().getY());
+        }
+        
         // Placing the platform elements within the level.
         for (Platform current : game.getCurrentLevel().getPlatforms()) {
-          // Painting the current platform image at the desired x and y location given by the
-          // vector.
+          // Painting the current platform image at the desired x and y location given by the vector.
           gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
               current.getPosition().getY());
         }
@@ -232,5 +235,48 @@ public class GUI extends Application {
       }
 
     });
+  }
+  
+  /**
+   * Makes NPCs move to the right position.
+   */
+  private void enemyMover() {
+    
+    // Loop over all NPCs
+    for (LevelElement element: game.getCurrentLevel().getMovingElements()) {
+      if (element.getClass().equals(NPC.class)) {
+        NPC npc = (NPC) element;
+        
+        // Assign platforms to NPC if this has not happened yet
+        if (npc.getMovementBoundaries() == null) {
+          npc.setPlatforms(game.getCurrentLevel().getPlatforms());
+        }
+        
+        // Move into a certain direction if this is indicated by the NPC
+        if (npc.getMovementDirection().equals("right")) {
+          npc.addAction(NPCAction.MoveRight);
+        } else if (npc.getMovementDirection().equals("left")) {
+          npc.addAction(NPCAction.MoveLeft);
+        }
+
+        Vector currentPosition = npc.getPosition();
+        
+        // Enemy is at left boundary, make it move to the right
+        if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[0])) {
+          npc.addAction(NPCAction.MoveStop);
+          npc.setMovementDirection("right");
+          return;
+        }
+        
+        // Enemy is at right boundary, make it move to the left
+        if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[1])) {
+          npc.addAction(NPCAction.MoveStop);
+          npc.setMovementDirection("left");
+          return;
+        }
+      }
+    } 
+    
+
   }
 }

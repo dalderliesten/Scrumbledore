@@ -179,5 +179,36 @@ public class Vector {
     }
     return false;
   }
+  
+  /**
+   * Checks whether a given object is a Vector object that
+   * lies close to this instance.
+   * 
+   * @param precision
+   *          Margin for two Vectors to be considered 
+   *          neighbouring
+   * @param other
+   *          Another instance.
+   * @return A Boolean
+   */
+  public boolean neighbouring(int precision, Object other) {
+    if (other instanceof Vector) {
+      Vector that = (Vector) other;
+      if (Math.abs(this.getX() - that.getX()) <= precision 
+          && Math.abs(this.getY() - that.getY()) <= precision) {
+        return true;
+      }
+    }
+    return false;
+
+  }
+  
+  /**
+   * Debug toString method.
+   */
+  @Override
+  public String toString() {
+    return "Vector [entryX=" + entryX + ", entryY=" + entryY + "]";
+  }
 
 }
