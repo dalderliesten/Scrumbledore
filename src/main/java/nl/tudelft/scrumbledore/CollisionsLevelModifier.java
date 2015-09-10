@@ -33,7 +33,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
-    detectPlayerPlatform(level, delta);
+    detectPlatform(level, delta);
     detectPlayerFruit(level, delta);
   }
 
@@ -45,8 +45,9 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
-  public void detectPlayerPlatform(Level level, double delta) {
+  public void detectPlatform(Level level, double delta) {
     Player player = level.getPlayer();
+    ArrayList<Bubble> bubbles = level.getBubbles();
 
     for (Platform platform : level.getPlatforms()) {
       // Check if platform is in collision range.
@@ -58,6 +59,15 @@ public class CollisionsLevelModifier implements LevelModifier {
           kinetics.snapTop(player, platform);
           // Collision is detected, no further evaluation of candidates necessary.
           break;
+        }
+      }
+      // Checking if a bubble collides with a wall.
+      for (int i = 0; i < bubbles.size(); i++) {
+        if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(bubbles.get(i), platform, delta);
+          if (collision.colliding()) {
+            bubbles.remove(i);
+          }
         }
       }
     }
