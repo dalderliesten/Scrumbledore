@@ -26,7 +26,9 @@ public class BubbleActionLevelModifier implements LevelModifier{
       if (bub.hasAction(BubbleAction.MoveRight)) {
         bub.getSpeed().setX(Constants.BUBBLE_SPEED);
       }
-    }  
+      bub.clearActions();
+    }
+    
   }
 
 }
