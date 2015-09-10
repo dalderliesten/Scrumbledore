@@ -33,9 +33,9 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
+    detectBubble(level, delta);
     detectPlatform(level, delta);
     detectPlayerFruit(level, delta);
-    detectPlayerBubble(level, delta);
     detectBubbleEnemy(level, delta);
   }
 
@@ -95,7 +95,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta.
    */
-  public void detectPlayerBubble(Level level, double delta) {
+  public void detectBubble(Level level, double delta) {
     Player player = level.getPlayer();
     ArrayList<Bubble> bubbles = level.getBubbles();
 
@@ -109,6 +109,18 @@ public class CollisionsLevelModifier implements LevelModifier {
           kinetics.snapTop(player, bubble);
           // Collision is detected, no further evaluation of candidates necessary.
           break;
+        }
+      }
+
+      for (Bubble other : bubbles) {
+        if (!other.equals(bubble) && other.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
+          if (other.posX() < bubble.posX()) {
+            other.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+            bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+          } else {
+            other.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+            bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+          }
         }
       }
     }
