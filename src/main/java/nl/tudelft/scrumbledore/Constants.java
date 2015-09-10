@@ -36,6 +36,9 @@ public class Constants {
   // The standard size of a block.
   public static final double BLOCKSIZE = 32;
 
+  // The height and width of the board in number of blocks.
+  public static final double NUM_BLOCKS = 20;
+  
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
@@ -54,6 +57,9 @@ public class Constants {
   // Player jump strength
   public static final double PLAYER_JUMP = 16;
 
+  // NPC horizontal movement speed
+  public static final double NPC_SPEED = 4;
+  
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 
