@@ -85,7 +85,7 @@ public class GUI extends Application {
     GraphicsContext gamePainter = gameDisplay.getGraphicsContext2D();
 
     addKeyEventListeners(mainScene);
-    
+
     // Displaying the parsed level content in the center of the user interface.
     contentHandler.setCenter(gameDisplay);
 
@@ -145,68 +145,114 @@ public class GUI extends Application {
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
     contentHandler.setBottom(bottomItems);
 
+    renderPlatforms(gamePainter);
+
     // Calling the dynamic handling for the GUI.
-    spawnDynamic(gameStage, gamePainter);
+    startAnimationTimer(gameStage, gamePainter);
+
+    gameStage.show();
   }
 
   /**
-   * spawnDynamic takes care of elements which must be updated, such as players and enemies.
+   * Start the animation timer to refresh the GUI.
    * 
-   * @pre method called within the class and valid parameters passed
-   * @post spawns and handles dynamic elemens of the game
-   * @param passedStage
-   *          The stage used by the rest of the GUI
-   * @param passedScene
-   *          The scene used by the rest of the GUI
-   * @param passedPane
-   *          The layout pane used by the rest of the GUI
+   * @param stage
+   *          The Stage used by the rest of the GUI
+   * @param painter
+   *          The GraphicsContext used by the rest of the GUI
    * 
    */
-  private void spawnDynamic(Stage passedStage, final GraphicsContext gamePainter) {
+  private void startAnimationTimer(final Stage stage, final GraphicsContext painter) {
     new AnimationTimer() {
       public void handle(long currentNanoTime) {
-        // Make the enemies move simultaneously
-        enemyMover();
-        // Clear canvas
-        gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
-        // background image clears canvas
-        // Adding the initial player location to the GUI.
-        if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
-          playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
-          playerDirection = 1;
-        } else {
-          playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
-          playerDirection = -1;
-        }
-        gamePainter.drawImage(playerSprite,
-            game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
-                .getPlayer().getPosition().getY());
-
-        // Adding the Bubbles being shot.
-        for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
-          gamePainter.drawImage(new Image(Constants.BUBBLE_SPRITE), 
-              currentBubble.getPosition().getX(), 
-              currentBubble.getPosition().getY());
-        }
-        
-        // Adding the initial enemy locations to the GUI.
-        for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-          gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), 
-              current.getPosition().getY());
-        }
-        
-        // Placing the platform elements within the level.
-        for (Platform current : game.getCurrentLevel().getPlatforms()) {
-          // Painting the current platform image at the desired x and y location given by the vector.
-          gamePainter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
-              current.getPosition().getY());
-        }
+        refresh(stage, painter);
       }
     }.start();
-
-    passedStage.show();
   }
 
+  /**
+   * Refresh the GUI by rendering all elements in the current level of the game.
+   */
+  private void refresh(Stage stage, final GraphicsContext painter) {
+    // Make the enemies move simultaneously
+    enemyMover();
+    // Clear canvas
+    painter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+    // Render Player.
+    renderPlayer(painter);
+    // Render Bubbles.
+    renderBubbles(painter);
+    // Render other moving elements.
+    renderMovingElements(painter);
+  }
+
+  /**
+   * Render the player of the game using the given GraphicsContext.
+   * 
+   * @param painter
+   *          The GraphicsContext to be used.
+   */
+  private void renderPlayer(GraphicsContext painter) {
+    if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
+      playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
+      playerDirection = 1;
+    } else {
+      playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
+      playerDirection = -1;
+    }
+    painter.drawImage(playerSprite, game.getCurrentLevel().getPlayer().getPosition().getX(), game
+        .getCurrentLevel().getPlayer().getPosition().getY());
+  }
+
+  /**
+   * Render the bubbles of the game using the given GraphicsContext.
+   * 
+   * @param painter
+   *          The GraphicsContext to be used.
+   */
+  private void renderBubbles(GraphicsContext painter) {
+    // Adding the Bubbles being shot.
+    for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
+      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
+    }
+  }
+
+  /**
+   * Render the moving elements of the game using the given GraphicsContext.
+   * 
+   * @param painter
+   *          The GraphicsContext to be used.
+   */
+  private void renderMovingElements(GraphicsContext painter) {
+    // Adding the initial enemy locations to the GUI.
+    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
+      painter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), current
+          .getPosition().getY());
+    }
+  }
+
+  /**
+   * Render the platforms of the game using the given GraphicsContext.
+   * 
+   * @param painter
+   *          The GraphicsContext to be used.
+   */
+  private void renderPlatforms(GraphicsContext painter) {
+    // Placing the platform elements within the level.
+    for (Platform current : game.getCurrentLevel().getPlatforms()) {
+      // Painting the current platform image at the desired x and y location given by the vector.
+      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current
+          .getPosition().getY());
+    }
+  }
+
+  /**
+   * Add key event listeners to a given scene to allow player controls.
+   * 
+   * @param scene
+   *          The scene the listeners should be added to.
+   */
   private void addKeyEventListeners(Scene scene) {
     // KeyPress Event handlers.
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
@@ -226,10 +272,10 @@ public class GUI extends Application {
         } else if (keyPress.equals("UP")) {
           player.addAction(PlayerAction.Jump);
         }
-        
+
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
-          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE, 
+          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
               Constants.BLOCKSIZE));
           bubbles.add(newBubble);
           if (playerDirection == -1) {
@@ -238,7 +284,7 @@ public class GUI extends Application {
           } else {
             newBubble.addAction(BubbleAction.MoveRight);
           }
-        } 
+        }
       }
 
     });
@@ -261,22 +307,22 @@ public class GUI extends Application {
 
     });
   }
-  
+
   /**
    * Makes NPCs move to the right position.
    */
   private void enemyMover() {
-    
+
     // Loop over all NPCs
-    for (LevelElement element: game.getCurrentLevel().getMovingElements()) {
+    for (LevelElement element : game.getCurrentLevel().getMovingElements()) {
       if (element.getClass().equals(NPC.class)) {
         NPC npc = (NPC) element;
-        
+
         // Assign platforms to NPC if this has not happened yet
         if (npc.getMovementBoundaries() == null) {
           npc.setPlatforms(game.getCurrentLevel().getPlatforms());
         }
-        
+
         // Move into a certain direction if this is indicated by the NPC
         if (npc.getMovementDirection().equals("right")) {
           npc.addAction(NPCAction.MoveRight);
@@ -285,14 +331,14 @@ public class GUI extends Application {
         }
 
         Vector currentPosition = npc.getPosition();
-        
+
         // Enemy is at left boundary, make it move to the right
         if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[0])) {
           npc.addAction(NPCAction.MoveStop);
           npc.setMovementDirection("right");
           return;
         }
-        
+
         // Enemy is at right boundary, make it move to the left
         if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[1])) {
           npc.addAction(NPCAction.MoveStop);
@@ -300,8 +346,7 @@ public class GUI extends Application {
           return;
         }
       }
-    } 
-    
+    }
 
   }
 }
