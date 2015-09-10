@@ -17,7 +17,7 @@ public class Constants {
   // Setting the resolution constants for level/game display.
   public static final int LEVELY = 640;
   public static final int LEVELX = 640;
-  
+
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
 
@@ -51,7 +51,7 @@ public class Constants {
   public static final double GRAVITY_STRENGTH = 1;
   // Gravity maximal vertical speed.
   public static final double GRAVITY_MAX = 8;
-  
+
   // Player horizontal movement speed
   public static final double PLAYER_SPEED = 8;
   // Player jump strength
@@ -62,14 +62,15 @@ public class Constants {
   
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
-  
+
   // Location of the CSS resource for the GUI styling.
   public static final String CSS_LOCATION = "css/style.css";
 
   // References to images utilized for the game display within the GUI.
-  public static final String BUBBLE_SPRITE = "images/Bubble/Bubble_32x32.png";
-  public static final String FRUIT_SPRITE = "images/Fruit/Fruit_32x32.png";
-  public static final String NPC_SPRITE = "images/NPC/NPC_32x32.png";
-  public static final String PLATFORM_SPRITE = "images/Platform/Platform_32x32.png";
-  public static final String PLAYER_SPRITE = "images/Player/Player_32x32.png";
+  public static final String BUBBLE_SPRITE = "images/sprites/bubble.png";
+  public static final String FRUIT_SPRITE = "images/sprites/fruit-banana.png";
+  public static final String NPC_SPRITE = "images/sprites/enemy-mighta.png";
+  public static final String PLATFORM_SPRITE = "images/sprites/wall-1.png";
+  public static final String PLAYER_SPRITE_LEFT = "images/sprites/player-left.png";
+  public static final String PLAYER_SPRITE_RIGHT = "images/sprites/player-right.png";
 }

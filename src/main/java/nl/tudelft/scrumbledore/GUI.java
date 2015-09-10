@@ -170,7 +170,11 @@ public class GUI extends Application {
         gamePainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
         // background image clears canvas
         // Adding the initial player location to the GUI.
-        playerSprite = new Image(Constants.PLAYER_SPRITE);
+        if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
+          playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
+        } else {
+          playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
+        }
         gamePainter.drawImage(playerSprite,
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
                 .getPlayer().getPosition().getY());
@@ -201,7 +205,7 @@ public class GUI extends Application {
       public void handle(KeyEvent keyPressed) {
         String keyPress = keyPressed.getCode().toString();
         Player player = game.getCurrentLevel().getPlayer();
-        
+
         // Mapping the desired keys to the desired actions.
         if (keyPress.equals("LEFT")) {
           player.addAction(PlayerAction.MoveLeft);
@@ -221,7 +225,7 @@ public class GUI extends Application {
       public void handle(KeyEvent keyReleased) {
         String keyRelease = keyReleased.getCode().toString();
         Player player = game.getCurrentLevel().getPlayer();
-        
+
         // Mapping the desired keys to the desired actions.
         if (keyRelease.equals("LEFT")) {
           player.addAction(PlayerAction.MoveStop);
