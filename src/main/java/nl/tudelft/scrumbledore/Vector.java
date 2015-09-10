@@ -126,6 +126,9 @@ public class Vector {
     return dv.length();
   }
   
+  /**
+   * Returns a newly cloned Vector object.
+   */
   @Override
   public Vector clone() {
     double newX = entryX;

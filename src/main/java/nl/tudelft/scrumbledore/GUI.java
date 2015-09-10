@@ -212,7 +212,6 @@ public class GUI extends Application {
         String keyPress = keyPressed.getCode().toString();
         Player player = game.getCurrentLevel().getPlayer();
         Vector bubblePos = player.getPosition().clone();
-        System.out.println(bubblePos.getX());
         ArrayList<Bubble> bubbles = game.getCurrentLevel().getBubbles();
 
         // Mapping the desired keys to the desired actions.
