@@ -48,14 +48,14 @@ public class Constants {
   public static final double COLLISION_RADIUS = 64;
 
   // Gravity strength.
-  public static final double GRAVITY_STRENGTH = 1;
+  public static final double GRAVITY_STRENGTH = 2;
   // Gravity maximal vertical speed.
   public static final double GRAVITY_MAX = 8;
 
   // Player horizontal movement speed
   public static final double PLAYER_SPEED = 8;
   // Player jump strength
-  public static final double PLAYER_JUMP = 16;
+  public static final double PLAYER_JUMP = 22;
 
   // Bubble horizontal movement speed
   public static final double BUBBLE_SPEED = 15;
