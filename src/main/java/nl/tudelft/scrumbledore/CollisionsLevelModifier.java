@@ -33,8 +33,9 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
-    detectPlayerPlatform(level, delta);
+    detectPlatform(level, delta);
     detectPlayerFruit(level, delta);
+    detectBubbleEnemy(level, delta);
   }
 
   /**
@@ -45,8 +46,9 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
-  public void detectPlayerPlatform(Level level, double delta) {
+  public void detectPlatform(Level level, double delta) {
     Player player = level.getPlayer();
+    ArrayList<Bubble> bubbles = level.getBubbles();
 
     for (Platform platform : level.getPlatforms()) {
       // Check if platform is in collision range.
@@ -60,7 +62,50 @@ public class CollisionsLevelModifier implements LevelModifier {
           break;
         }
       }
+      // Checking if a bubble collides with a wall.
+      for (int i = 0; i < bubbles.size(); i++) {
+        if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(bubbles.get(i), platform, delta);
+          if (collision.collidingFromLeft() || collision.collidingFromRight()) {
+            bubbles.remove(i);
+            break;
+          }
+        }
+      }
     }
+  }
+  
+  /**
+   * Detect collisions between Bubbles and enemies.
+   * @param level
+   *          The Level.
+   * @param delta
+   *          The steps passed since this method wat last executed.
+   */ 
+  public void detectBubbleEnemy(Level level, double delta) {
+    ArrayList<Bubble> bubbles = level.getBubbles();
+    ArrayList<LevelElement> enemies = level.getMovingElements();
+    ArrayList<Fruit> fruits = level.getFruits();
+    
+    if (bubbles.size() > 0 && enemies.size() > 0) {
+      for (int i = 0; i < enemies.size(); i++) {
+        for (int j = 0; j < bubbles.size(); j++) {
+          if (enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)) {
+            Collision collision = new Collision(bubbles.get(j), enemies.get(i), delta);
+            if (collision.colliding()) {
+              bubbles.remove(j);
+              Fruit newFruit = new Fruit(enemies.get(i).getPosition().clone(),
+                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              // Adding a new Fruit element in place of where the enemy died.
+              enemies.remove(i);
+              fruits.add(newFruit);
+              
+            }
+          }
+        }
+      }
+    }
+    
   }
 
   /**
@@ -72,18 +117,22 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   public void detectPlayerFruit(Level level, double delta) {
-    /*
-     * Player player = level.getPlayer();
-     * 
-     * // Find platform collidee candidates. ArrayList<Fruit> candidates = new ArrayList<Fruit>();
-     * 
-     * for (Fruit fruit : level.getFruits()) { double dist = player.distance(fruit); if (dist <=
-     * Constants.COLLISION_RADIUS) { candidates.add(fruit); } }
-     * 
-     * // Detect collisions with candidates. for (Fruit fruit : candidates) { Collision collision =
-     * new Collision(player, fruit, delta); if (collision.collidingFromTop()) {
-     * score.updateScore(fruit.getValue()); // TODO DELETE FRUIT } }
-     */
+     Player player = level.getPlayer();
+     ArrayList<Fruit> fruits = level.getFruits();
+     
+     if (fruits.size() > 0) {
+       for (int i = 0; i < fruits.size(); i++) {
+         if (fruits.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+           Collision collision = new Collision(player, fruits.get(i), delta);
+           if (collision.colliding()) {
+             fruits.remove(i);
+             score.updateScore(100);
+           }
+         }
+       }
+     }
+     
+     
   }
 
 }

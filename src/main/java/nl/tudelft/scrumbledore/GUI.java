@@ -199,8 +199,11 @@ public class GUI extends Application {
     renderPlayer(painter);
     // Render Bubbles.
     renderBubbles(painter);
+    // Render Fruits.
+    renderFruits(painter);
     // Render other moving elements.
     renderMovingElements(painter);
+    
   }
 
   /**
@@ -259,8 +262,15 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), 
+          current.getPosition().getY());
+    }
+  }
+  
+  private void renderFruits(GraphicsContext painter) {
+    for (Fruit current : game.getCurrentLevel().getFruits()) {
+      painter.drawImage(new Image(Constants.FRUIT_SPRITE),  current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
