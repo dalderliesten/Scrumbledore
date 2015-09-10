@@ -11,7 +11,7 @@ public class NPC extends LevelElement {
   private int life;
   private int status;
   private boolean hasFruit;
-  private String movementDirection;
+  private NPCAction movementDirection;
   private Vector[] movementBoundaries;
   private ArrayList<Platform> platforms;
   private ArrayList<NPCAction> actions;
@@ -30,7 +30,7 @@ public class NPC extends LevelElement {
     setGravity(false);
     
     actions = new ArrayList<NPCAction>();
-    movementDirection = "left";
+    movementDirection = NPCAction.MoveLeft;
   }
 
   /**
@@ -345,7 +345,7 @@ public class NPC extends LevelElement {
    * @param direction
    *          The moving direction of an NPC
    */
-  public void setMovementDirection(String direction) {
+  public void setMovementDirection(NPCAction direction) {
     this.movementDirection = direction;
   }
   
@@ -354,7 +354,7 @@ public class NPC extends LevelElement {
    * Returns the moving direction of an NPC.
    * @return The moving direction of an NPC
    */
-  public String getMovementDirection() {
+  public NPCAction getMovementDirection() {
     return this.movementDirection;
   }
   

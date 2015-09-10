@@ -202,7 +202,7 @@ public class GUI extends Application {
     // Render Fruits.
     renderFruits(painter);
     // Render other moving elements.
-    renderMovingElements(painter);
+    renderNPCs(painter);
     
   }
 
@@ -239,15 +239,21 @@ public class GUI extends Application {
   }
 
   /**
-   * Render the moving elements of the game using the given GraphicsContext.
+   * Render the NPCs of the game using the given GraphicsContext.
    * 
    * @param painter
    *          The GraphicsContext to be used.
    */
-  private void renderMovingElements(GraphicsContext painter) {
+  private void renderNPCs(GraphicsContext painter) {
     // Adding the initial enemy locations to the GUI.
-    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-      painter.drawImage(new Image(Constants.NPC_SPRITE_LEFT), current.getPosition().getX(), current
+    for (NPC current : game.getCurrentLevel().getNPCs()) {
+      String imagePath = "";
+      if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
+        imagePath = Constants.NPC_SPRITE_LEFT;
+      } else if (current.getMovementDirection().equals(NPCAction.MoveRight)) {
+        imagePath = Constants.NPC_SPRITE_RIGHT;
+      }
+      painter.drawImage(new Image(imagePath), current.getPosition().getX(), current
           .getPosition().getY());
     }
   }

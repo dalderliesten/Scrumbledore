@@ -139,7 +139,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   public void detectBubbleEnemy(Level level, double delta) {
     ArrayList<Bubble> bubbles = level.getBubbles();
-    ArrayList<LevelElement> enemies = level.getMovingElements();
+    ArrayList<NPC> enemies = level.getNPCs();
     ArrayList<Fruit> fruits = level.getFruits();
 
     if (bubbles.size() > 0 && enemies.size() > 0) {

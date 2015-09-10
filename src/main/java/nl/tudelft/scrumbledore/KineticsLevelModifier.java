@@ -17,8 +17,8 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    // Add speed to generic moving elements
-    for (LevelElement el : level.getMovingElements()) {
+    // Add speed to NPCs
+    for (NPC el : level.getNPCs()) {
       addSpeed(el, d);
     }
 
