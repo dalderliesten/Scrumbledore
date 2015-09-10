@@ -89,9 +89,13 @@ public class KineticsLevelModifier implements LevelModifier {
     int signY = 0;
     if (Math.abs(el.hSpeed()) > el.hFric()) {
       signX = (int) Math.signum(el.hSpeed());
+    } else {
+      stopHorizontally(el);
     }
     if (Math.abs(el.vSpeed()) > el.vFric()) {
       signY = (int) Math.signum(el.vSpeed());
+    } else {
+      stopVertically(el);
     }
 
     Vector fricDiff = new Vector(signX * el.hFric(), signY * el.vFric());
