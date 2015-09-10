@@ -71,6 +71,9 @@ public class Constants {
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;
 
+  // Maximum number of Bubbles per second that can be fired
+  public static final double RAPID_FIRE_LIMIT = 5;
+  
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 
