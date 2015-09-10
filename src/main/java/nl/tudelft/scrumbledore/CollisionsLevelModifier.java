@@ -48,22 +48,20 @@ public class CollisionsLevelModifier implements LevelModifier {
   public void detectPlayerPlatform(Level level, double delta) {
     Player player = level.getPlayer();
 
-    // Find platform collidee candidates.
+    // Find platform collidee candidates and check for a collision.
     ArrayList<Platform> candidates = new ArrayList<Platform>();
 
     for (Platform platform : level.getPlatforms()) {
-      double dist = player.distance(platform);
-      if (dist <= Constants.COLLISION_RADIUS) {
-        candidates.add(platform);
-      }
-    }
-
-    // Detect collisions with candidates.
-    for (Platform platform : candidates) {
-      Collision collision = new Collision(player, platform, delta);
-      if (collision.collidingFromTop() && player.vSpeed() > 0) {
-        kinetics.stopVertically(player);
-        kinetics.snapTop(player, platform);
+      // Check if platform is in collision range.
+      if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+        // Detect collision.
+        Collision collision = new Collision(player, platform, delta);
+        if (collision.collidingFromTop() && player.vSpeed() > 0) {
+          kinetics.stopVertically(player);
+          kinetics.snapTop(player, platform);
+          // Collision is detected, no further evaluation of candidates necessary.
+          break;
+        }
       }
     }
   }
