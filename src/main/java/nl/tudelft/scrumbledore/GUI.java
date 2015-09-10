@@ -179,6 +179,12 @@ public class GUI extends Application {
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
                 .getPlayer().getPosition().getY());
 
+        // Adding the Bubbles being shot.
+        for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
+          gamePainter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(), 
+              currentBubble.getPosition().getY());
+        }
+        
         // Adding the initial enemy locations to the GUI.
         for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
           gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), 
@@ -205,6 +211,9 @@ public class GUI extends Application {
       public void handle(KeyEvent keyPressed) {
         String keyPress = keyPressed.getCode().toString();
         Player player = game.getCurrentLevel().getPlayer();
+        Vector bubblePos = player.getPosition().clone();
+        System.out.println(bubblePos.getX());
+        ArrayList<Bubble> bubbles = game.getCurrentLevel().getBubbles();
 
         // Mapping the desired keys to the desired actions.
         if (keyPress.equals("LEFT")) {
@@ -213,6 +222,17 @@ public class GUI extends Application {
           player.addAction(PlayerAction.MoveRight);
         } else if (keyPress.equals("UP")) {
           player.addAction(PlayerAction.Jump);
+        }
+        
+        // Mapping the shooting action keys.
+        if (keyPress.equals("A")) {
+          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,Constants.BLOCKSIZE));
+          bubbles.add(newBubble);
+          newBubble.addAction(BubbleAction.MoveLeft);
+        } else if (keyPress.equals("D")) {
+          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,Constants.BLOCKSIZE));
+          bubbles.add(newBubble);
+          newBubble.addAction(BubbleAction.MoveRight);
         }
       }
 

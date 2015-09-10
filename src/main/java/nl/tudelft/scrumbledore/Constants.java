@@ -56,6 +56,9 @@ public class Constants {
   public static final double PLAYER_SPEED = 8;
   // Player jump strength
   public static final double PLAYER_JUMP = 16;
+  
+  // Bubble horizontal movement speed
+  public static final double BUBBLE_SPEED = 15;
 
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;
