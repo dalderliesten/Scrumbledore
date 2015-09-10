@@ -38,7 +38,7 @@ public class Constants {
 
   // The height and width of the board in number of blocks.
   public static final double NUM_BLOCKS = 20;
-  
+
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
@@ -56,13 +56,13 @@ public class Constants {
   public static final double PLAYER_SPEED = 8;
   // Player jump strength
   public static final double PLAYER_JUMP = 16;
-  
+
   // Bubble horizontal movement speed
   public static final double BUBBLE_SPEED = 15;
 
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;
-  
+
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 
@@ -72,7 +72,8 @@ public class Constants {
   // References to images utilized for the game display within the GUI.
   public static final String BUBBLE_SPRITE = "images/sprites/bubble.png";
   public static final String FRUIT_SPRITE = "images/sprites/fruit-banana.png";
-  public static final String NPC_SPRITE = "images/sprites/enemy-mighta.png";
+  public static final String NPC_SPRITE_LEFT = "images/sprites/enemy-mighta-left.png";
+  public static final String NPC_SPRITE_RIGHT = "images/sprites/enemy-mighta-right.png";
   public static final String PLATFORM_SPRITE = "images/sprites/wall-1.png";
   public static final String PLAYER_SPRITE_LEFT = "images/sprites/player-left.png";
   public static final String PLAYER_SPRITE_RIGHT = "images/sprites/player-right.png";

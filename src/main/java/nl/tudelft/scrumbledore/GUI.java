@@ -244,7 +244,7 @@ public class GUI extends Application {
   private void renderMovingElements(GraphicsContext painter) {
     // Adding the initial enemy locations to the GUI.
     for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-      painter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), current
+      painter.drawImage(new Image(Constants.NPC_SPRITE_LEFT), current.getPosition().getX(), current
           .getPosition().getY());
     }
   }
