@@ -32,10 +32,17 @@ public class GUI extends Application {
   private int playerDirection;
 
   private Stage stage;
+  private Scene scene;
+  private BorderPane layout;
+  private Group gameView;
   private Canvas staticDisplay;
   private Canvas dynamicDisplay;
   private GraphicsContext staticPainter;
   private GraphicsContext dynamicPainter;
+
+  private Button startStopButton;
+  private Button settingsButton;
+  private Button exitButton;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -55,14 +62,23 @@ public class GUI extends Application {
 
     // Setup the GUI display.
     setupGUI();
+
+    // Add event listeners.
+    addKeyEventListeners(scene);
+    addButtonEventListeners();
+
+    // Render the static canvas
     renderPlatforms(staticPainter);
 
-    // Calling the dynamic handling for the GUI.
+    // Start the animation timer to keep refreshing the dynamic canvas.
     startAnimationTimer(stage, dynamicPainter);
 
     stage.show();
   }
 
+  /**
+   * Setup the Game logic.
+   */
   private void setupGame() {
     // Instantiate the essential game and step timer functions for the game handling.
     game = new Game();
@@ -72,15 +88,10 @@ public class GUI extends Application {
     timer.start();
   }
 
+  /**
+   * Setup the GUI display.
+   */
   private void setupGUI() {
-    // Setup the static canvas and its painter
-    staticDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
-    staticPainter = staticDisplay.getGraphicsContext2D();
-
-    // Setup the dynamic canvas and its painter
-    dynamicDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
-    dynamicPainter = dynamicDisplay.getGraphicsContext2D();
-
     // Setting the title of the GUI window.
     stage.setTitle("Scrumbledore");
 
@@ -89,20 +100,35 @@ public class GUI extends Application {
     stage.setWidth(Constants.GUIX);
     // gameStage.setResizable(false);
 
-    // Setting the content handler group object, to which objects within the game must be added.
-    BorderPane contentHandler = new BorderPane();
+    setupGUIGameView();
+    setupGUILayout();
+    setupGUIScene();
+  }
 
-    Group gameView = new Group();
+  /**
+   * Setup the Game View GUI group.
+   */
+  private void setupGUIGameView() {
+    // Setup the static canvas and its painter
+    staticDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    staticPainter = staticDisplay.getGraphicsContext2D();
+
+    // Setup the dynamic canvas and its painter
+    dynamicDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    dynamicPainter = dynamicDisplay.getGraphicsContext2D();
+
+    gameView = new Group();
 
     gameView.getChildren().add(staticDisplay);
     gameView.getChildren().add(dynamicDisplay);
+  }
 
-    // Creating of the scene and assigning this scene to the game stage.
-    Scene mainScene = new Scene(contentHandler);
-    stage.setScene(mainScene);
-
-    // Adding the desired stylesheet to the scene for visual modifications.
-    mainScene.getStylesheets().add(Constants.CSS_LOCATION);
+  /**
+   * Setup the GUI layout. Uses the Game View GUI Group.
+   */
+  private void setupGUILayout() {
+    // Setting the content handler group object, to which objects within the game must be added.
+    layout = new BorderPane();
 
     // Creation of a horizontal box for storing top labels and items to display.
     HBox topItems = new HBox();
@@ -115,68 +141,34 @@ public class GUI extends Application {
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
-    contentHandler.setTop(topItems);
-
-    addKeyEventListeners(mainScene);
+    layout.setTop(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
-    contentHandler.setCenter(gameView);
+    layout.setCenter(gameView);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
 
     // Linking the buttons needed to their associated constants namesake.
-    final Button startStopButton = new Button();
-    final Button settingsButton = new Button(Constants.SETTINGSBTNLABEL);
-    final Button exitButton = new Button(Constants.EXITBTNLABEL);
-
-    // Checking the state of the game/timer to determine the start/stop button status needed for the
-    // text.
-    if (timer.isPaused()) {
-      startStopButton.setText(Constants.STOPBTNLABEL);
-    } else {
-      startStopButton.setText(Constants.STARTBTNLABEL);
-    }
-
-    // Mapping the function of the start/stop button to start/stop the game when the button is
-    // pressed.
-    startStopButton.setOnAction(new EventHandler<ActionEvent>() {
-
-      public void handle(ActionEvent arg0) {
-        // If the game is paused, it will resume it and change the button label to stop. Otherwise,
-        // it resumes the game and changes the butotn label to start.
-        if (timer.isPaused()) {
-          timer.resume();
-          startStopButton.setText(Constants.STOPBTNLABEL);
-        } else {
-          timer.pause();
-          startStopButton.setText(Constants.STARTBTNLABEL);
-        }
-      }
-
-    });
-
-    // Mapping the settings button menu actionevent to trigger when the button is pressed.
-    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
-
-      public void handle(ActionEvent arg0) {
-        System.out.println("SETTINGS HOOK ACTIVATED");
-      }
-
-    });
-
-    // Mapping the exit function to the exit button to quit when button is pressed.
-    exitButton.setOnAction(new EventHandler<ActionEvent>() {
-
-      public void handle(ActionEvent arg0) {
-        System.exit(0);
-      }
-
-    });
+    startStopButton = new Button(Constants.STOPBTNLABEL);
+    settingsButton = new Button(Constants.SETTINGSBTNLABEL);
+    exitButton = new Button(Constants.EXITBTNLABEL);
 
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-    contentHandler.setBottom(bottomItems);
+    layout.setBottom(bottomItems);
+  }
+
+  /**
+   * Setup the main GUI scene. Uses the GUI layout.
+   */
+  private void setupGUIScene() {
+    // Creating of the scene and assigning this scene to the game stage.
+    scene = new Scene(layout);
+    stage.setScene(scene);
+
+    // Adding the desired stylesheet to the scene for visual modifications.
+    scene.getStylesheets().add(Constants.CSS_LOCATION);
   }
 
   /**
@@ -271,6 +263,38 @@ public class GUI extends Application {
       painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current
           .getPosition().getY());
     }
+  }
+
+  /**
+   * Add event listeners to buttons.
+   */
+  private void addButtonEventListeners() {
+    // Mapping the function of the start/stop button to start/stop the game when the button is
+    // pressed.
+    startStopButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        // If the game is paused, it will resume it and change the button label to stop. Otherwise,
+        // it resumes the game and changes the butotn label to start.
+        if (timer.isPaused()) {
+          timer.resume();
+          startStopButton.setText(Constants.STOPBTNLABEL);
+        } else {
+          timer.pause();
+          startStopButton.setText(Constants.STARTBTNLABEL);
+        }
+      }
+
+    });
+
+    // Mapping the exit function to the exit button to quit when button is pressed.
+    exitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        System.exit(0);
+      }
+
+    });
   }
 
   /**
