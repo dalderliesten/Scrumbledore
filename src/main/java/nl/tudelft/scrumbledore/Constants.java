@@ -61,6 +61,8 @@ public class Constants {
   public static final double BUBBLE_SPEED = 15;
   // Bubble horizontal fiction
   public static final double BUBBLE_FRICTION = 2;
+  // Bubble horizontal fiction
+  public static final double BUBBLE_FLOAT = 1;
 
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;
