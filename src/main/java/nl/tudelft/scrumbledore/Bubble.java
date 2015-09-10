@@ -11,6 +11,8 @@ import java.util.ArrayList;
 public class Bubble extends Projectile {
   private ArrayList<BubbleAction> actions;
 
+  private double lifetime;
+
   /**
    * The Bubble constructor creates a new Bubble instance.
    * 
@@ -22,7 +24,7 @@ public class Bubble extends Projectile {
   public Bubble(Vector position, Vector size) {
     super(position, size);
     getFriction().setX(Constants.BUBBLE_FRICTION);
-
+    lifetime = Constants.BUBBLE_LIFETIME;
     actions = new ArrayList<BubbleAction>();
   }
 
@@ -59,5 +61,24 @@ public class Bubble extends Projectile {
    */
   public void clearActions() {
     actions.clear();
+  }
+
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+    lifetime -= delta;
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return lifetime;
   }
 }
