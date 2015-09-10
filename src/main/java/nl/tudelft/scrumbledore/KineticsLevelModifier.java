@@ -7,7 +7,7 @@ package nl.tudelft.scrumbledore;
  *
  */
 public class KineticsLevelModifier implements LevelModifier {
-  
+
   /**
    * Update all elements in a given Level.
    * 
@@ -23,10 +23,11 @@ public class KineticsLevelModifier implements LevelModifier {
     }
 
     updatePlayer(level, d);
+    updateBubble(level, d);
   }
-  
+
   /**
-   * Update all elements in a given Level.
+   * Update the player in a given Level.
    * 
    * @param level
    *          The level whose elements should be updated.
@@ -39,10 +40,25 @@ public class KineticsLevelModifier implements LevelModifier {
     addSpeed(player, d);
 
     if (player.posY() + player.height() >= Constants.LEVELY) {
-      player.getPosition().setY(player.height() / 2);
+      player.getPosition().setY(player.height() / -2);
     }
   }
-  
+
+  /**
+   * Update the speed/position of the bubble in a given level.
+   * 
+   * @param level
+   *          The level whose Bubble objects should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  private void updateBubble(Level level, double d) {
+    for (Bubble bubble : level.getBubbles()) {
+      addSpeed(bubble, d);
+      applyFriction(bubble, d);
+    }
+  }
+
   /**
    * Update the position of the LevelElement by adding the speed.
    * 
@@ -59,6 +75,34 @@ public class KineticsLevelModifier implements LevelModifier {
   }
 
   /**
+   * Apply friction on a given LevelElement based on its Friction Vector. If an entry in the speed
+   * vector is smaller than the corresponding entry in the friction vector, it is set to zero.
+   * Otherwise, the friction entry is subtracted from the speed.
+   * 
+   * @param el
+   *          A LevelElement
+   * @param d
+   *          The number of steps passed since this method was last called.
+   */
+  public void applyFriction(LevelElement el, double d) {
+    int signX = 0;
+    int signY = 0;
+    if (Math.abs(el.hSpeed()) > el.hFric()) {
+      signX = (int) Math.signum(el.hSpeed());
+    } else {
+      stopHorizontally(el);
+    }
+    if (Math.abs(el.vSpeed()) > el.vFric()) {
+      signY = (int) Math.signum(el.vSpeed());
+    } else {
+      stopVertically(el);
+    }
+
+    Vector fricDiff = new Vector(d * signX * el.hFric(), d * signY * el.vFric());
+    el.getSpeed().difference(fricDiff);
+  }
+
+  /**
    * Reverse update the position of the LevelElement by removing the speed.
    * 
    * @param el
@@ -72,18 +116,22 @@ public class KineticsLevelModifier implements LevelModifier {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
     }
   }
-  
+
   /**
    * Stop a LevelElement's vertical movement.
-   * @param element The element.
+   * 
+   * @param element
+   *          The element.
    */
   public void stopVertically(LevelElement element) {
     element.getSpeed().setY(0);
   }
-  
+
   /**
    * Stop a LevelElement's horizontal movement.
-   * @param element The element.
+   * 
+   * @param element
+   *          The element.
    */
   public void stopHorizontally(LevelElement element) {
     element.getSpeed().setX(0);
@@ -102,7 +150,7 @@ public class KineticsLevelModifier implements LevelModifier {
     double newPos = snapTo.getLeft() - offset;
     snapper.getPosition().setX(newPos);
   }
-  
+
   /**
    * Snap a LevelElement to the right side of another LevelElement.
    * 
@@ -116,7 +164,7 @@ public class KineticsLevelModifier implements LevelModifier {
     double newPos = snapTo.getRight() + offset;
     snapper.getPosition().setX(newPos);
   }
-  
+
   /**
    * Snap a LevelElement to the top side of another LevelElement.
    * 
@@ -130,7 +178,7 @@ public class KineticsLevelModifier implements LevelModifier {
     double newPos = snapTo.getTop() - offset;
     snapper.getPosition().setY(newPos);
   }
-  
+
   /**
    * Snap a LevelElement to the bottom side of another LevelElement.
    * 

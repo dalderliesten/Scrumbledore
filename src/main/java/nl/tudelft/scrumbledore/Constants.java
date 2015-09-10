@@ -17,7 +17,7 @@ public class Constants {
   // Setting the resolution constants for level/game display.
   public static final int LEVELY = 640;
   public static final int LEVELX = 640;
-  
+
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
 
@@ -36,6 +36,9 @@ public class Constants {
   // The standard size of a block.
   public static final double BLOCKSIZE = 32;
 
+  // The height and width of the board in number of blocks.
+  public static final double NUM_BLOCKS = 20;
+
   // Double precision for use within computational parts of the program.
   public static final double DOUBLE_PRECISION = 0.001;
 
@@ -45,25 +48,41 @@ public class Constants {
   public static final double COLLISION_RADIUS = 64;
 
   // Gravity strength.
-  public static final double GRAVITY_STRENGTH = 1;
+  public static final double GRAVITY_STRENGTH = 2;
   // Gravity maximal vertical speed.
   public static final double GRAVITY_MAX = 8;
-  
+
   // Player horizontal movement speed
   public static final double PLAYER_SPEED = 8;
   // Player jump strength
-  public static final double PLAYER_JUMP = 16;
+  public static final double PLAYER_JUMP = 22;
+
+  // Bubble horizontal movement speed
+  public static final double BUBBLE_SPEED = 16;
+  // Bubble horizontal fiction
+  public static final double BUBBLE_FRICTION = 1.5;
+  // Bubble horizontal fiction
+  public static final double BUBBLE_FLOAT = 2;
+  // Bubble bounce speed
+  public static final double BUBBLE_BOUNCE = 8;
+  // Number of steps a Bubble needs to stay alive.
+  public static final double BUBBLE_LIFETIME = REFRESH_RATE * 10;
+
+  // NPC horizontal movement speed
+  public static final double NPC_SPEED = 4;
 
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
-  
+
   // Location of the CSS resource for the GUI styling.
   public static final String CSS_LOCATION = "css/style.css";
 
   // References to images utilized for the game display within the GUI.
-  public static final String BUBBLE_SPRITE = "images/Bubble/Bubble_32x32.png";
-  public static final String FRUIT_SPRITE = "images/Fruit/Fruit_32x32.png";
-  public static final String NPC_SPRITE = "images/NPC/NPC_32x32.png";
-  public static final String PLATFORM_SPRITE = "images/Platform/Platform_32x32.png";
-  public static final String PLAYER_SPRITE = "images/Player/Player_32x32.png";
+  public static final String BUBBLE_SPRITE = "images/sprites/bubble.png";
+  public static final String FRUIT_SPRITE = "images/sprites/fruit-banana.png";
+  public static final String NPC_SPRITE_LEFT = "images/sprites/enemy-mighta-left.png";
+  public static final String NPC_SPRITE_RIGHT = "images/sprites/enemy-mighta-right.png";
+  public static final String PLATFORM_SPRITE = "images/sprites/wall-1.png";
+  public static final String PLAYER_SPRITE_LEFT = "images/sprites/player-left.png";
+  public static final String PLAYER_SPRITE_RIGHT = "images/sprites/player-right.png";
 }

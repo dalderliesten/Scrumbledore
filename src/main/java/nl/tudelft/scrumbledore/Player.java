@@ -11,6 +11,7 @@ import java.util.ArrayList;
 public class Player extends LevelElement {
 
   private ArrayList<PlayerAction> actions;
+  private PlayerAction lastMove;
 
   /**
    * Create a new Player instance.
@@ -26,6 +27,7 @@ public class Player extends LevelElement {
     setGravity(true);
 
     actions = new ArrayList<PlayerAction>();
+    lastMove = PlayerAction.MoveRight;
   }
 
   /**
@@ -37,9 +39,10 @@ public class Player extends LevelElement {
   public void addAction(PlayerAction action) {
     if (!hasAction(action)) {
       actions.add(action);
+      setLastMove(action);
     }
   }
-  
+
   /**
    * Remove all actions from the queue.
    */
@@ -69,6 +72,27 @@ public class Player extends LevelElement {
   }
 
   /**
+   * Get the last horizontal move performed.
+   * 
+   * @return The last move performed.
+   */
+  public PlayerAction getLastMove() {
+    return lastMove;
+  }
+
+  /**
+   * Set the last performed horizontal move.
+   * 
+   * @param action
+   *          The last move action performed.
+   */
+  public void setLastMove(PlayerAction action) {
+    if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
+      lastMove = action;
+    }
+  }
+
+  /**
    * Check whether a given object is equal to this instance.
    * 
    * @param other
@@ -79,8 +103,8 @@ public class Player extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Player) {
       Player that = (Player) other;
-      return (this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize()));
+      return (this.getPosition().equals(that.getPosition()) && this.getSize()
+          .equals(that.getSize()));
     }
 
     return false;
