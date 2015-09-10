@@ -33,6 +33,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
+    detectBubble(level, delta);
     detectPlatform(level, delta);
     detectPlayerFruit(level, delta);
     detectBubbleEnemy(level, delta);
@@ -66,27 +67,81 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (int i = 0; i < bubbles.size(); i++) {
         if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubbles.get(i), platform, delta);
-          if (collision.collidingFromLeft() || collision.collidingFromRight()) {
-            bubbles.remove(i);
+          if (collision.collidingFromBottom()) {
+            bubbles.get(i).getSpeed().setY(Constants.BUBBLE_BOUNCE);
+            kinetics.snapBottom(bubbles.get(i), platform);
+            break;
+          }
+          if (collision.collidingFromLeft()) {
+            bubbles.get(i).getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+            kinetics.snapLeft(bubbles.get(i), platform);
+            break;
+          }
+          if (collision.collidingFromRight()) {
+            bubbles.get(i).getSpeed().setX(Constants.BUBBLE_BOUNCE);
+            kinetics.snapRight(bubbles.get(i), platform);
             break;
           }
         }
       }
     }
   }
-  
+
+  /**
+   * Detect collision between the player an bubbles.
+   * 
+   * @param level
+   *          The level.
+   * @param delta
+   *          The delta.
+   */
+  public void detectBubble(Level level, double delta) {
+    Player player = level.getPlayer();
+    ArrayList<Bubble> bubbles = level.getBubbles();
+
+    for (Bubble bubble : bubbles) {
+      // Check if platform is in collision range.
+      if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+        // Detect collision.
+        Collision collision = new Collision(player, bubble, delta);
+        if (collision.collidingFromTop() && player.vSpeed() > 0) {
+          player.getSpeed().setY(-Constants.PLAYER_JUMP);
+          kinetics.snapTop(player, bubble);
+          // Collision is detected, no further evaluation of candidates necessary.
+          break;
+        }
+      }
+
+      for (Bubble other : bubbles) {
+        if (!other.equals(bubble) && other.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(bubble, other, delta);
+          if (collision.colliding()) {
+            if (other.posX() < bubble.posX()) {
+              other.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+              bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+            } else {
+              other.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+              bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+            }
+          }
+        }
+      }
+    }
+  }
+
   /**
    * Detect collisions between Bubbles and enemies.
+   * 
    * @param level
    *          The Level.
    * @param delta
    *          The steps passed since this method wat last executed.
-   */ 
+   */
   public void detectBubbleEnemy(Level level, double delta) {
     ArrayList<Bubble> bubbles = level.getBubbles();
     ArrayList<LevelElement> enemies = level.getMovingElements();
     ArrayList<Fruit> fruits = level.getFruits();
-    
+
     if (bubbles.size() > 0 && enemies.size() > 0) {
       for (int i = 0; i < enemies.size(); i++) {
         for (int j = 0; j < bubbles.size(); j++) {
@@ -99,13 +154,13 @@ public class CollisionsLevelModifier implements LevelModifier {
               // Adding a new Fruit element in place of where the enemy died.
               enemies.remove(i);
               fruits.add(newFruit);
-              
+
             }
           }
         }
       }
     }
-    
+
   }
 
   /**
@@ -117,22 +172,21 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   public void detectPlayerFruit(Level level, double delta) {
-     Player player = level.getPlayer();
-     ArrayList<Fruit> fruits = level.getFruits();
-     
-     if (fruits.size() > 0) {
-       for (int i = 0; i < fruits.size(); i++) {
-         if (fruits.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-           Collision collision = new Collision(player, fruits.get(i), delta);
-           if (collision.colliding()) {
-             fruits.remove(i);
-             score.updateScore(100);
-           }
-         }
-       }
-     }
-     
-     
+    Player player = level.getPlayer();
+    ArrayList<Fruit> fruits = level.getFruits();
+
+    if (fruits.size() > 0) {
+      for (int i = 0; i < fruits.size(); i++) {
+        if (fruits.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(player, fruits.get(i), delta);
+          if (collision.colliding()) {
+            fruits.remove(i);
+            score.updateScore(100);
+          }
+        }
+      }
+    }
+
   }
 
 }

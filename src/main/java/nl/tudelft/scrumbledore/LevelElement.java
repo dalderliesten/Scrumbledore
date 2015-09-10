@@ -11,6 +11,7 @@ public abstract class LevelElement {
   private Vector position;
   private Vector size;
   private Vector speed;
+  private Vector friction;
   private boolean gravity;
 
   /**
@@ -26,6 +27,8 @@ public abstract class LevelElement {
     this.size = size;
     // Initial speed is 0.
     this.speed = new Vector(0, 0);
+    // Initial friction is 0.
+    this.friction = new Vector(0, 0);
     // By default not affected by Gravity.
     this.gravity = false;
   }
@@ -109,6 +112,33 @@ public abstract class LevelElement {
    */
   public double vSpeed() {
     return speed.getY();
+  }
+
+  /**
+   * Get the friction vector of this element.
+   * 
+   * @return Friction Vector.
+   */
+  public Vector getFriction() {
+    return friction;
+  }
+
+  /**
+   * Get the horizontal friction.
+   * 
+   * @return Horizontal friction.
+   */
+  public double hFric() {
+    return friction.getX();
+  }
+
+  /**
+   * Get the vertical friction.
+   * 
+   * @return Vertical friction.
+   */
+  public double vFric() {
+    return friction.getY();
   }
 
   /**
