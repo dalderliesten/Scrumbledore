@@ -14,6 +14,7 @@ public class Level {
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
+  private ArrayList<Bubble> bubbles;
   private Player player;
 
 
@@ -23,6 +24,7 @@ public class Level {
   public Level() {
     movingElements = new ArrayList<LevelElement>();
     platforms = new ArrayList<Platform>();
+    bubbles = new ArrayList<Bubble>();
   }
 
   /**
@@ -92,6 +94,10 @@ public class Level {
    */
   public Player getPlayer() {
     return player;
+  }
+  
+  public ArrayList<Bubble> getBubbles() {
+    return bubbles;
   }
 
 }

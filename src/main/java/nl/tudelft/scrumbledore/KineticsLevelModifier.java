@@ -23,10 +23,11 @@ public class KineticsLevelModifier implements LevelModifier {
     }
 
     updatePlayer(level, d);
+    updateBubble(level, d);
   }
   
   /**
-   * Update all elements in a given Level.
+   * Update the player in a given Level.
    * 
    * @param level
    *          The level whose elements should be updated.
@@ -40,6 +41,20 @@ public class KineticsLevelModifier implements LevelModifier {
 
     if (player.posY() + player.height() >= Constants.LEVELY) {
       player.getPosition().setY(player.height() / -2);
+    }
+  }
+  
+  /**
+   * Update the speed/position of the bubble in a given level.
+   * @param level
+   *          The level whose Bubble objects should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  private void updateBubble(Level level, double d) {
+    
+    for (Bubble bubble : level.getBubbles()) {
+      addSpeed(bubble, d);
     }
   }
   

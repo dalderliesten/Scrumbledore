@@ -125,6 +125,16 @@ public class Vector {
     Vector dv = Vector.difference(this, vector);
     return dv.length();
   }
+  
+  /**
+   * Returns a newly cloned Vector object.
+   */
+  @Override
+  public Vector clone() {
+    double newX = entryX;
+    double newY = entryY;
+    return new Vector(newX, newY);
+  }
 
   /**
    * Get the X entry of the vector.

@@ -28,6 +28,7 @@ public class GUI extends Application {
   private Game game;
   private StepTimer timer;
   private Image playerSprite;
+  private int playerDirection;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -172,13 +173,22 @@ public class GUI extends Application {
         // Adding the initial player location to the GUI.
         if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
           playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
+          playerDirection = 1;
         } else {
           playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
+          playerDirection = -1;
         }
         gamePainter.drawImage(playerSprite,
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
                 .getPlayer().getPosition().getY());
 
+        // Adding the Bubbles being shot.
+        for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
+          gamePainter.drawImage(new Image(Constants.BUBBLE_SPRITE), 
+              currentBubble.getPosition().getX(), 
+              currentBubble.getPosition().getY());
+        }
+        
         // Adding the initial enemy locations to the GUI.
         for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
           gamePainter.drawImage(new Image(Constants.NPC_SPRITE), current.getPosition().getX(), 
@@ -205,6 +215,8 @@ public class GUI extends Application {
       public void handle(KeyEvent keyPressed) {
         String keyPress = keyPressed.getCode().toString();
         Player player = game.getCurrentLevel().getPlayer();
+        Vector bubblePos = player.getPosition().clone();
+        ArrayList<Bubble> bubbles = game.getCurrentLevel().getBubbles();
 
         // Mapping the desired keys to the desired actions.
         if (keyPress.equals("LEFT")) {
@@ -214,6 +226,19 @@ public class GUI extends Application {
         } else if (keyPress.equals("UP")) {
           player.addAction(PlayerAction.Jump);
         }
+        
+        // Mapping the shooting action keys.
+        if (keyPress.equals("Z")) {
+          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE, 
+              Constants.BLOCKSIZE));
+          bubbles.add(newBubble);
+          if (playerDirection == -1) {
+            newBubble.addAction(BubbleAction.MoveLeft);
+            System.out.println("Been here");
+          } else {
+            newBubble.addAction(BubbleAction.MoveRight);
+          }
+        } 
       }
 
     });
