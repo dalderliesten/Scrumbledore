@@ -38,7 +38,7 @@ public abstract class LevelElement {
   public Vector getPosition() {
     return position;
   }
-  
+
   /**
    * Get the X coordinate of the element.
    * 
@@ -47,7 +47,7 @@ public abstract class LevelElement {
   public double posX() {
     return position.getX();
   }
-  
+
   /**
    * Get the Y coordinate of the element.
    * 
@@ -65,7 +65,7 @@ public abstract class LevelElement {
   public Vector getSize() {
     return size;
   }
-  
+
   /**
    * Get the width of the element.
    * 
@@ -74,7 +74,7 @@ public abstract class LevelElement {
   public double width() {
     return size.getX();
   }
-  
+
   /**
    * Get the height of the element.
    * 
@@ -92,7 +92,7 @@ public abstract class LevelElement {
   public Vector getSpeed() {
     return speed;
   }
-  
+
   /**
    * Get the horizontal speed of the element.
    * 
@@ -101,7 +101,7 @@ public abstract class LevelElement {
   public double hSpeed() {
     return speed.getX();
   }
-  
+
   /**
    * Get the vertical speed of the element.
    * 
@@ -165,14 +165,48 @@ public abstract class LevelElement {
   public double getRight() {
     return position.getX() + size.getX() / 2;
   }
-  
+
   /**
    * Get the distance to another LevelElement.
-   * @param other The other element to measure the distance to.
+   * 
+   * @param other
+   *          The other element to measure the distance to.
    * @return The distance.
    */
   public double distance(LevelElement other) {
     return getPosition().distance(other.getPosition());
   }
-    
+
+  /**
+   * Check whether another element is within range of this element using a circular radius by
+   * computing the distance.
+   * 
+   * @param other
+   *          The other element.
+   * @param range
+   *          The range (of the circal).
+   * @return A boolean.
+   */
+  public boolean inRadiusRangeOf(LevelElement other, double range) {
+    double dist = distance(other);
+    return (dist <= range);
+  }
+
+  /**
+   * Check whether another element is within range of this element using a box. The box is a square
+   * axis-aligned bounding box, with dimensions of twice the given range. It has the position of
+   * this element as its center.
+   * 
+   * @param other
+   *          The other element.
+   * @param range
+   *          The range (a half of the dimensions of the square box).
+   * @return A boolean.
+   */
+  public boolean inBoxRangeOf(LevelElement other, double range) {
+    boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
+    boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
+    return (inX && inY);
+  }
+
 }
