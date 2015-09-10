@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -230,11 +231,13 @@ public class GUI extends Application {
    * @param painter
    *          The GraphicsContext to be used.
    */
-  private void renderBubbles(GraphicsContext painter) {
-    // Adding the Bubbles being shot.
-    for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
-      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+  private void renderBubbles(GraphicsContext painter) {    
+    ArrayList<Bubble> tmpBubbles = game.getCurrentLevel().getBubbles();
+    for (Bubble currentBubble : tmpBubbles) {
+      if (game.getCurrentLevel().getBubbles().contains(currentBubble)) {
+        painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+            currentBubble.getPosition().getY());
+      }
     }
   }
 
