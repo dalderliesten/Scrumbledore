@@ -28,6 +28,7 @@ public class GUI extends Application {
   private Game game;
   private StepTimer timer;
   private Image playerSprite;
+  private int playerDirection;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -172,8 +173,10 @@ public class GUI extends Application {
         // Adding the initial player location to the GUI.
         if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
           playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
+          playerDirection = 1;
         } else {
           playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
+          playerDirection = -1;
         }
         gamePainter.drawImage(playerSprite,
             game.getCurrentLevel().getPlayer().getPosition().getX(), game.getCurrentLevel()
@@ -225,17 +228,17 @@ public class GUI extends Application {
         }
         
         // Mapping the shooting action keys.
-        if (keyPress.equals("A")) {
+        if (keyPress.equals("Z")) {
           Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE, 
               Constants.BLOCKSIZE));
           bubbles.add(newBubble);
-          newBubble.addAction(BubbleAction.MoveLeft);
-        } else if (keyPress.equals("D")) {
-          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE, 
-              Constants.BLOCKSIZE));
-          bubbles.add(newBubble);
-          newBubble.addAction(BubbleAction.MoveRight);
-        }
+          if (playerDirection == -1) {
+            newBubble.addAction(BubbleAction.MoveLeft);
+            System.out.println("Been here");
+          } else {
+            newBubble.addAction(BubbleAction.MoveRight);
+          }
+        } 
       }
 
     });
