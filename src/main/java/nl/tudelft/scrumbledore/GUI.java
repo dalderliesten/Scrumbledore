@@ -329,7 +329,6 @@ public class GUI extends Application {
           bubbles.add(newBubble);
           if (playerDirection == -1) {
             newBubble.addAction(BubbleAction.MoveLeft);
-            System.out.println("Been here");
           } else {
             newBubble.addAction(BubbleAction.MoveRight);
           }
