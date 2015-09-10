@@ -25,11 +25,11 @@ public class Bubble extends Projectile {
   }
   
   /**
-   * Add an action the Bubble has to perform
+   * Add an action the Bubble has to perform.
    * @param action
    *          The action (MoveLeft or MoveRight) the Bubble has to perform.
    */
-  public void addAction(BubbleAction action){
+  public void addAction(BubbleAction action) {
     if (action == BubbleAction.MoveLeft) {
       //Clearing all actions before adding the only action it can perform during its life.
       actions.clear();

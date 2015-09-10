@@ -181,7 +181,8 @@ public class GUI extends Application {
 
         // Adding the Bubbles being shot.
         for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
-          gamePainter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(), 
+          gamePainter.drawImage(new Image(Constants.BUBBLE_SPRITE), 
+              currentBubble.getPosition().getX(), 
               currentBubble.getPosition().getY());
         }
         
@@ -225,11 +226,13 @@ public class GUI extends Application {
         
         // Mapping the shooting action keys.
         if (keyPress.equals("A")) {
-          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,Constants.BLOCKSIZE));
+          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE, 
+              Constants.BLOCKSIZE));
           bubbles.add(newBubble);
           newBubble.addAction(BubbleAction.MoveLeft);
         } else if (keyPress.equals("D")) {
-          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,Constants.BLOCKSIZE));
+          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE, 
+              Constants.BLOCKSIZE));
           bubbles.add(newBubble);
           newBubble.addAction(BubbleAction.MoveRight);
         }
