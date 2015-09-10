@@ -33,18 +33,15 @@ public class NPC extends LevelElement {
     movementDirection = "left";
   }
 
+  /**
+   * Sets the MovingBoundaries of an NPC and the platforms.
+   * 
+   * @param platforms
+   *          ArrayList of Platforms
+   */
   public void setPlatforms(ArrayList<Platform> platforms) {
     this.platforms = platforms;
     movementBoundaries = movementBoundaries(this.platforms);
-  }
-  
-  public void setMovementDirection(String direction) {
-    this.movementDirection = direction;
-  }
-  
- 
-  public String getMovementDirection() {
-    return this.movementDirection;
   }
   
   /**
@@ -258,6 +255,7 @@ public class NPC extends LevelElement {
     return boundaries;    
   }
   
+  
   /**
    * Check whether a given object is equal to this instance.
    * 
@@ -342,11 +340,38 @@ public class NPC extends LevelElement {
     this.hasFruit = hasFruit;
   }
 
+  /**
+   * Sets the moving direction of an NPC.
+   * @param direction
+   *          The moving direction of an NPC
+   */
+  public void setMovementDirection(String direction) {
+    this.movementDirection = direction;
+  }
   
+ 
+  /**
+   * Returns the moving direction of an NPC.
+   * @return The moving direction of an NPC
+   */
+  public String getMovementDirection() {
+    return this.movementDirection;
+  }
+  
+  
+  /**
+   * Returns an ArrayList of platforms.
+   * @return An ArrayList of platforms
+   */
   public ArrayList<Platform> getPlatforms() {
     return platforms;
   }
 
+  
+  /**
+   * Returns the moving boundaries of an NPC.
+   * @return The moving boundaries of an NPC
+   */
   public Vector[] getMovementBoundaries() {
     return movementBoundaries;
   }
