@@ -17,6 +17,9 @@ import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.scene.text.Text;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -41,6 +44,12 @@ public class GUI extends Application {
   private Canvas dynamicDisplay;
   private GraphicsContext staticPainter;
   private GraphicsContext dynamicPainter;
+  private AnimationTimer animationTimer = new AnimationTimer() {
+    public void handle(long currentNanoTime) {
+      advanceLevel();
+      renderDynamic();
+    }
+  };
 
   private Button startStopButton;
   private Button settingsButton;
@@ -72,7 +81,7 @@ public class GUI extends Application {
     renderStatic();
 
     // Start the animation timer to keep refreshing the dynamic canvas.
-    startAnimationTimer(stage, dynamicPainter);
+    animationTimer.start();
 
     stage.show();
   }
@@ -173,24 +182,6 @@ public class GUI extends Application {
   }
 
   /**
-   * Start the animation timer to refresh the GUI.
-   * 
-   * @param stage
-   *          The Stage used by the rest of the GUI
-   * @param painter
-   *          The GraphicsContext used by the rest of the GUI
-   * 
-   */
-  private void startAnimationTimer(final Stage stage, final GraphicsContext painter) {
-    new AnimationTimer() {
-      public void handle(long currentNanoTime) {
-        advanceLevel();
-        renderDynamic();
-      }
-    }.start();
-  }
-
-  /**
    * Render the static elements of the current level.
    */
   private void renderStatic() {
@@ -199,7 +190,7 @@ public class GUI extends Application {
     // Render the static canvas
     renderPlatforms(staticPainter);
   }
-  
+
   /**
    * Refresh the GUI by rendering all dynamic elements in the current level of the game.
    */
@@ -242,14 +233,14 @@ public class GUI extends Application {
    */
   private void renderBubbles(GraphicsContext painter) {
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
     for (Bubble bubble : game.getCurrentLevel().getBubbles()) {
       bubbles.add(bubble);
     }
-    
+
     for (Bubble currentBubble : bubbles) {
-        painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
-            currentBubble.getPosition().getY());
+      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -260,13 +251,13 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderNPCs(GraphicsContext painter) {
-    ArrayList<NPC> npcs = new ArrayList<NPC>(); 
-    
+    ArrayList<NPC> npcs = new ArrayList<NPC>();
+
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
     for (NPC npc : game.getCurrentLevel().getNPCs()) {
       npcs.add(npc);
     }
-    
+
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
       String imagePath = "";
@@ -275,8 +266,8 @@ public class GUI extends Application {
       } else if (current.getMovementDirection().equals(NPCAction.MoveRight)) {
         imagePath = Constants.NPC_SPRITE_RIGHT;
       }
-      painter.drawImage(new Image(imagePath), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(imagePath), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
@@ -290,35 +281,44 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), 
-          current.getPosition().getY());
+      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current
+          .getPosition().getY());
     }
   }
-  
+
   private void renderFruits(GraphicsContext painter) {
     ArrayList<Fruit> fruits = new ArrayList<Fruit>();
-    
+
     for (Fruit fruit : game.getCurrentLevel().getFruits()) {
       fruits.add(fruit);
     }
-    
+
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(Constants.FRUIT_SPRITE),  current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(new Image(Constants.FRUIT_SPRITE), current.getPosition().getX(), current
+          .getPosition().getY());
     }
   }
-  
+
   private void advanceLevel() {
     // When the enemies in the current level have been killed.
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
       // If there are no levels left in the game, show a message.
-      if(game.remainingLevels() == 0) {
-        System.exit(1);
+      if (game.remainingLevels() == 0) {
+        final Stage dialog = new Stage();
+        dialog.initModality(Modality.APPLICATION_MODAL);
+        dialog.initOwner(stage);
+        VBox dialogVbox = new VBox(20);
+        dialogVbox.getChildren().add(new Text("You beat the game!"));
+        Scene dialogScene = new Scene(dialogVbox, 300, 200);
+        dialog.setScene(dialogScene);
+        dialog.show();
+
+        animationTimer.stop();
+      } else {
+        // Go to the next level and then re-render it.
+        game.goToNextLevel();
+        renderStatic();
       }
-      
-      // Go to the next level and then re-render it.
-      game.goToNextLevel();
-      renderStatic();
     }
   }
 
@@ -392,7 +392,7 @@ public class GUI extends Application {
               newBubble.addAction(BubbleAction.MoveRight);
             }
           }
-          
+
           player.setIsFiring(true);
         }
       }
@@ -413,7 +413,7 @@ public class GUI extends Application {
         } else if (keyRelease.equals("RIGHT")) {
           player.addAction(PlayerAction.MoveStop);
         }
-        
+
         if (keyRelease.equals("Z")) {
           player.setIsFiring(false);
         }
