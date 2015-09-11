@@ -13,7 +13,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -35,7 +34,7 @@ public class GUI extends Application {
 
   private Stage stage;
   private Scene scene;
-  private BorderPane layout;
+  private VBox layout;
   private Group gameView;
   private Canvas staticDisplay;
   private Canvas dynamicDisplay;
@@ -135,7 +134,7 @@ public class GUI extends Application {
    */
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
-    layout = new BorderPane();
+    layout = new VBox();
 
     // Creation of a horizontal box for storing top labels and items to display.
     HBox topItems = new HBox();
@@ -148,10 +147,10 @@ public class GUI extends Application {
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
-    layout.setTop(topItems);
+    layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
-    layout.setCenter(gameView);
+    layout.getChildren().add(gameView);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
@@ -163,7 +162,7 @@ public class GUI extends Application {
 
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-    layout.setBottom(bottomItems);
+    layout.getChildren().add(bottomItems);
   }
 
   /**
