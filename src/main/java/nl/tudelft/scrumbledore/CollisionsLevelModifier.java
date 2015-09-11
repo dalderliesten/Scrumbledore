@@ -37,6 +37,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     detectPlatform(level, delta);
     detectPlayerFruit(level, delta);
     detectBubbleEnemy(level, delta);
+    detectPlayerEnemy(level, delta);
   }
 
   /**
@@ -59,10 +60,22 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (collision.collidingFromTop() && player.vSpeed() > 0) {
           kinetics.stopVertically(player);
           kinetics.snapTop(player, platform);
-          // Collision is detected, no further evaluation of candidates necessary.
-          break;
+        }
+        
+        // Only check platform collisions with the walls of a level
+        if (!platform.isPassable()) {
+          // Collision while moving to the right
+          if (collision.collidingFromLeft() && player.hSpeed() > 0) {
+            kinetics.stopHorizontally(player);
+          }
+          
+          // Collision while moving to the right
+          if (collision.collidingFromRight() && player.hSpeed() < 0) {
+            kinetics.stopHorizontally(player);
+          }       
         }
       }
+      
       // Checking if a bubble collides with a wall.
       for (int i = 0; i < bubbles.size(); i++) {
         if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
@@ -194,6 +207,29 @@ public class CollisionsLevelModifier implements LevelModifier {
       }
     }
 
+  }
+  
+  /**
+   * Restarting level on hit with enemy.
+   * @param level
+   *          The Level.
+   * @param delta
+   *          The delta provided by the StepTimer.
+   */
+  public void detectPlayerEnemy(Level level, double delta) {
+    Player player = level.getPlayer();
+    ArrayList<NPC> npcs = level.getNPCs();
+    
+    if (npcs.size() > 0) {
+      for (int i = 0; i < npcs.size(); i++) {
+        if (npcs.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(player, npcs.get(i), delta);
+          if (collision.colliding()) {
+            player.setAlive(false);
+          }
+        }
+      }
+    }
   }
 
 }
