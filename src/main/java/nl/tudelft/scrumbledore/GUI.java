@@ -247,7 +247,7 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
           currentBubble.getPosition().getY());
     }
   }
@@ -268,13 +268,11 @@ public class GUI extends Application {
 
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
-      String imagePath = "";
+      String spr = "enemy-mighta-right";
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
-        imagePath = Constants.NPC_SPRITE_LEFT;
-      } else if (current.getMovementDirection().equals(NPCAction.MoveRight)) {
-        imagePath = Constants.NPC_SPRITE_RIGHT;
+        spr = "enemy-mighta-left";
       }
-      painter.drawImage(new Image(imagePath), current.getPosition().getX(),
+      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -289,7 +287,7 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -302,7 +300,7 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(Constants.FRUIT_SPRITE), current.getPosition().getX(),
+      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
