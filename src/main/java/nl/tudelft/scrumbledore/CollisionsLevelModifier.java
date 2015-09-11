@@ -195,5 +195,21 @@ public class CollisionsLevelModifier implements LevelModifier {
     }
 
   }
+  
+  public void detectPlayerEnemy(Level level, double delta) {
+    Player player = level.getPlayer();
+    ArrayList<NPC> npcs = level.getNPCs();
+    
+    if ( npcs.size() > 0 ) {
+      for (int i = 0; i < npcs.size(); i++) {
+        if (npcs.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(player, npcs.get(i), delta);
+          if (collision.colliding()) {
+            player.setAlive(false);
+          }
+        }
+      }
+    }
+  }
 
 }

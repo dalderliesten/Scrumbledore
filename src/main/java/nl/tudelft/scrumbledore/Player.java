@@ -12,7 +12,8 @@ public class Player extends LevelElement {
 
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
-  private Boolean isFiring;
+  private Boolean firing;
+  private Boolean alive;
 
   /**
    * Create a new Player instance.
@@ -29,7 +30,8 @@ public class Player extends LevelElement {
 
     actions = new ArrayList<PlayerAction>();
     lastMove = PlayerAction.MoveRight;
-    isFiring = false;
+    firing = false;
+    alive = true;
   }
 
   /**
@@ -50,6 +52,24 @@ public class Player extends LevelElement {
    */
   public void clearActions() {
     actions.clear();
+  }
+  
+  /**
+   * Checking wether the player is alive.
+   * @return
+   *       The boolean if the player is alive.
+   */
+  public Boolean isAlive() {
+    return alive;
+  }
+  
+  /**
+   * Setting the life of the player.
+   * @param bool
+   *          Can be True or False, stated on situation of player.
+   */
+  public void setAlive(Boolean bool) {
+    alive = bool;
   }
 
   /**
@@ -117,8 +137,8 @@ public class Player extends LevelElement {
    * 
    * @return whether the Player is firing
    */
-  public Boolean getIsFiring() {
-    return isFiring;
+  public Boolean isFiring() {
+    return firing;
   }
 
   /**
@@ -126,8 +146,8 @@ public class Player extends LevelElement {
    * @param isFiring
    *          whether the Player is firing
    */
-  public void setIsFiring(Boolean isFiring) {
-    this.isFiring = isFiring;
+  public void setFiring(Boolean isFiring) {
+    this.firing = isFiring;
   }
   
   

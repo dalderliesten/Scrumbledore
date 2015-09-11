@@ -127,6 +127,14 @@ public class Game {
 
     invariant();
   }
+  
+  /**
+   * Restarting the game.
+   */
+  public void restart() {
+    LevelParser lp = new LevelParser();
+    construct(lp.getLevels());
+  }
 
   /**
    * Performs a step, the next cycle in the game.
