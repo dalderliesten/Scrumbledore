@@ -43,6 +43,7 @@ public class GUI extends Application {
   private GraphicsContext dynamicPainter;
   private AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
+      checkPlayerAlive();
       advanceLevel();
       renderDynamic();
     }
@@ -338,6 +339,16 @@ public class GUI extends Application {
   }
 
   /**
+   * If player died, restart the game.
+   */
+  private void checkPlayerAlive() {
+    if (!game.getCurrentLevel().getPlayer().isAlive()) {
+      game.restart();
+      renderStatic();
+    }
+  }
+
+  /**
    * Add event listeners to buttons.
    */
   private void addButtonEventListeners() {
@@ -398,8 +409,8 @@ public class GUI extends Application {
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
           if (!player.isFiring()) {
-            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-                Constants.BLOCKSIZE));
+            Bubble newBubble = new Bubble(bubblePos,
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
 
             bubbles.add(newBubble);
             if (player.getLastMove() == PlayerAction.MoveLeft) {
@@ -411,7 +422,7 @@ public class GUI extends Application {
 
           player.setFiring(true);
         }
-        
+
         // Restarting the game if "R" is pressed or when the player is dead.
         if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
           game.restart();
