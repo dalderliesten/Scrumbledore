@@ -400,7 +400,7 @@ public class GUI extends Application {
 
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
-          if (!player.getIsFiring()) {
+          if (!player.isFiring()) {
             Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
                 Constants.BLOCKSIZE));
             bubbles.add(newBubble);
@@ -411,7 +411,13 @@ public class GUI extends Application {
             }
           }
 
-          player.setIsFiring(true);
+          player.setFiring(true);
+        }
+        
+        // Restarting the game if "R" is pressed or when the player is dead.
+        if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
+          game.restart();
+          renderStatic();
         }
       }
 
@@ -433,7 +439,7 @@ public class GUI extends Application {
         }
 
         if (keyRelease.equals("Z")) {
-          player.setIsFiring(false);
+          player.setFiring(false);
         }
       }
 

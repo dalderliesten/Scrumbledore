@@ -37,6 +37,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     detectPlatform(level, delta);
     detectPlayerFruit(level, delta);
     detectBubbleEnemy(level, delta);
+    detectPlayerEnemy(level, delta);
   }
 
   /**
@@ -206,6 +207,29 @@ public class CollisionsLevelModifier implements LevelModifier {
       }
     }
 
+  }
+  
+  /**
+   * Restarting level on hit with enemy.
+   * @param level
+   *          The Level.
+   * @param delta
+   *          The delta provided by the StepTimer.
+   */
+  public void detectPlayerEnemy(Level level, double delta) {
+    Player player = level.getPlayer();
+    ArrayList<NPC> npcs = level.getNPCs();
+    
+    if (npcs.size() > 0) {
+      for (int i = 0; i < npcs.size(); i++) {
+        if (npcs.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(player, npcs.get(i), delta);
+          if (collision.colliding()) {
+            player.setAlive(false);
+          }
+        }
+      }
+    }
   }
 
 }
