@@ -69,8 +69,7 @@ public class GUI extends Application {
     addKeyEventListeners(scene);
     addButtonEventListeners();
 
-    // Render the static canvas
-    renderPlatforms(staticPainter);
+    renderStatic();
 
     // Start the animation timer to keep refreshing the dynamic canvas.
     startAnimationTimer(stage, dynamicPainter);
@@ -185,26 +184,36 @@ public class GUI extends Application {
   private void startAnimationTimer(final Stage stage, final GraphicsContext painter) {
     new AnimationTimer() {
       public void handle(long currentNanoTime) {
-        refresh(stage, painter);
+        advanceLevel();
+        renderDynamic();
       }
     }.start();
   }
 
   /**
-   * Refresh the GUI by rendering all elements in the current level of the game.
+   * Render the static elements of the current level.
    */
-  private void refresh(Stage stage, final GraphicsContext painter) {
+  private void renderStatic() {
     // Clear canvas
-    painter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+    staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+    // Render the static canvas
+    renderPlatforms(staticPainter);
+  }
+  
+  /**
+   * Refresh the GUI by rendering all dynamic elements in the current level of the game.
+   */
+  private void renderDynamic() {
+    // Clear canvas
+    dynamicPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
     // Render Player.
-    renderPlayer(painter);
+    renderPlayer(dynamicPainter);
     // Render Bubbles.
-    renderBubbles(painter);
+    renderBubbles(dynamicPainter);
     // Render Fruits.
-    renderFruits(painter);
+    renderFruits(dynamicPainter);
     // Render other moving elements.
-    renderNPCs(painter);
-    
+    renderNPCs(dynamicPainter);
   }
 
   /**
@@ -290,6 +299,13 @@ public class GUI extends Application {
     for (Fruit current : game.getCurrentLevel().getFruits()) {
       painter.drawImage(new Image(Constants.FRUIT_SPRITE),  current.getPosition().getX(),
           current.getPosition().getY());
+    }
+  }
+  
+  private void advanceLevel() {
+    if (game.getCurrentLevel().getNPCs().isEmpty()) {
+      game.goToNextLevel();
+      renderStatic();
     }
   }
 
