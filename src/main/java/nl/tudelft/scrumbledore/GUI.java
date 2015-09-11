@@ -1,10 +1,12 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -136,14 +138,20 @@ public class GUI extends Application {
     // Setting the content handler group object, to which objects within the game must be added.
     layout = new VBox();
 
-    // Creation of a horizontal box for storing top labels and items to display.
+    // Creation of a horizontal box for storing top labels and items to display, and making it the
+    // full width of the GUI.
     HBox topItems = new HBox();
+    topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
     Label scoreLabel = new Label(Constants.SCORELABEL);
+    scoreLabel.setAlignment(Pos.CENTER);
     Label highScoreLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel.setAlignment(Pos.CENTER);
     Label powerUpLabel = new Label(Constants.POWERUPLABEL);
+    powerUpLabel.setAlignment(Pos.CENTER);
     Label levelLabel = new Label(Constants.LEVELLABEL);
+    levelLabel.setAlignment(Pos.CENTER);
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
@@ -412,7 +420,7 @@ public class GUI extends Application {
 
           player.setFiring(true);
         }
-        
+
         // Restarting the game if "R" is pressed or when the player is dead.
         if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
           game.restart();
