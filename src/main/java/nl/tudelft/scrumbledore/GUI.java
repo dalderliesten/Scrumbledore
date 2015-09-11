@@ -296,7 +296,13 @@ public class GUI extends Application {
   }
   
   private void renderFruits(GraphicsContext painter) {
-    for (Fruit current : game.getCurrentLevel().getFruits()) {
+    ArrayList<Fruit> fruits = new ArrayList<Fruit>();
+    
+    for (Fruit fruit : game.getCurrentLevel().getFruits()) {
+      fruits.add(fruit);
+    }
+    
+    for (Fruit current : fruits) {
       painter.drawImage(new Image(Constants.FRUIT_SPRITE),  current.getPosition().getX(),
           current.getPosition().getY());
     }
