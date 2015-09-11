@@ -12,6 +12,7 @@ public class Player extends LevelElement {
 
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
+  private Boolean isFiring;
 
   /**
    * Create a new Player instance.
@@ -28,6 +29,7 @@ public class Player extends LevelElement {
 
     actions = new ArrayList<PlayerAction>();
     lastMove = PlayerAction.MoveRight;
+    isFiring = false;
   }
 
   /**
@@ -109,4 +111,24 @@ public class Player extends LevelElement {
 
     return false;
   }
+
+  /**
+   * Return whether the Player is firing.
+   * 
+   * @return whether the Player is firing
+   */
+  public Boolean getIsFiring() {
+    return isFiring;
+  }
+
+  /**
+   * Set whether the Player is firing.
+   * @param isFiring
+   *          whether the Player is firing
+   */
+  public void setIsFiring(Boolean isFiring) {
+    this.isFiring = isFiring;
+  }
+  
+  
 }
