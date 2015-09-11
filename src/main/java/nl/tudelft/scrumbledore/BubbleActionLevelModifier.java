@@ -1,5 +1,8 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+import java.util.Iterator;
+
 /**
  * Level Modifier that processes the actions to be performed on the Bubble.
  * 
@@ -18,7 +21,12 @@ public class BubbleActionLevelModifier implements LevelModifier {
    */
   public void modify(Level level, double delta) {
 
-    for (Bubble bub : level.getBubbles()) {
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    for (Bubble bubble : level.getBubbles()) {
+      bubbles.add(bubble);
+    }
+    
+    for (Bubble bub : bubbles) {     
       if (bub.getLifetime() <= 0) {
         level.getBubbles().remove(bub);
       } else {

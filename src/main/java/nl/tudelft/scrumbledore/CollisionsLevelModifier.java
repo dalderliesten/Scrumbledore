@@ -97,8 +97,13 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   public void detectBubble(Level level, double delta) {
     Player player = level.getPlayer();
-    ArrayList<Bubble> bubbles = level.getBubbles();
-
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+  
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    for (Bubble bubble : level.getBubbles()) {
+      bubbles.add(bubble);
+    }
+    
     for (Bubble bubble : bubbles) {
       // Check if platform is in collision range.
       if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
@@ -138,17 +143,16 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void detectBubbleEnemy(Level level, double delta) {
-    ArrayList<Bubble> bubbles = level.getBubbles();
     ArrayList<NPC> enemies = level.getNPCs();
     ArrayList<Fruit> fruits = level.getFruits();
 
-    if (bubbles.size() > 0 && enemies.size() > 0) {
+    if (level.getBubbles().size() > 0 && enemies.size() > 0) {
       for (int i = 0; i < enemies.size(); i++) {
-        for (int j = 0; j < bubbles.size(); j++) {
-          if (enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)) {
-            Collision collision = new Collision(bubbles.get(j), enemies.get(i), delta);
+        for (int j = 0; j < level.getBubbles().size(); j++) {
+          if (enemies.get(i).inBoxRangeOf(level.getBubbles().get(j), Constants.COLLISION_RADIUS)) {
+            Collision collision = new Collision(level.getBubbles().get(j), enemies.get(i), delta);
             if (collision.colliding()) {
-              bubbles.remove(j);
+              level.getBubbles().remove(j);
               Fruit newFruit = new Fruit(enemies.get(i).getPosition().clone(),
                   new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
               // Adding a new Fruit element in place of where the enemy died.

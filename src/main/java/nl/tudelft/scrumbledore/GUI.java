@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
@@ -231,10 +232,15 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderBubbles(GraphicsContext painter) {
-    // Adding the Bubbles being shot.
-    for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
-      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    for (Bubble bubble : game.getCurrentLevel().getBubbles()) {
+      bubbles.add(bubble);
+    }
+    
+    for (Bubble currentBubble : bubbles) {
+        painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+            currentBubble.getPosition().getY());
     }
   }
 
@@ -245,8 +251,15 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderNPCs(GraphicsContext painter) {
+    ArrayList<NPC> npcs = new ArrayList<NPC>(); 
+    
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    for (NPC npc : game.getCurrentLevel().getNPCs()) {
+      npcs.add(npc);
+    }
+    
     // Adding the initial enemy locations to the GUI.
-    for (NPC current : game.getCurrentLevel().getNPCs()) {
+    for (NPC current : npcs) {
       String imagePath = "";
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         imagePath = Constants.NPC_SPRITE_LEFT;
