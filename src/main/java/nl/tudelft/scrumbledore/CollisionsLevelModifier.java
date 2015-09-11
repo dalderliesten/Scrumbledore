@@ -60,9 +60,21 @@ public class CollisionsLevelModifier implements LevelModifier {
           kinetics.stopVertically(player);
           kinetics.snapTop(player, platform);
           // Collision is detected, no further evaluation of candidates necessary.
-          break;
+        }
+        
+        if (!platform.isPassable()) {
+          // Collision while moving to the right
+          if (collision.collidingFromLeft() && player.hSpeed() > 0) {
+            kinetics.stopHorizontally(player);
+          }
+          
+          // Collision while moving to the right
+          if (collision.collidingFromRight() && player.hSpeed() < 0) {
+            kinetics.stopHorizontally(player);
+          }       
         }
       }
+      
       // Checking if a bubble collides with a wall.
       for (int i = 0; i < bubbles.size(); i++) {
         if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
