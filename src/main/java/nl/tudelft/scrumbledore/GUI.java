@@ -116,11 +116,11 @@ public class GUI extends Application {
    */
   private void setupGUIGameView() {
     // Setup the static canvas and its painter
-    staticDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    staticDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     staticPainter = staticDisplay.getGraphicsContext2D();
 
     // Setup the dynamic canvas and its painter
-    dynamicDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    dynamicDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     dynamicPainter = dynamicDisplay.getGraphicsContext2D();
 
     gameView = new Group();
