@@ -286,6 +286,12 @@ public class GUI extends Application {
     }
   }
 
+  /**
+   * Render the fruit items of the game using the given GraphicsContext.
+   * 
+   * @param painter
+   *          The painter used to display the graphics content.
+   */
   private void renderFruits(GraphicsContext painter) {
     ArrayList<Fruit> fruits = new ArrayList<Fruit>();
 
@@ -299,20 +305,35 @@ public class GUI extends Application {
     }
   }
 
+  /**
+   * Advances the level to the next one, and displays a special dialog box upon completion of all
+   * the levels without dying.
+   */
   private void advanceLevel() {
     // When the enemies in the current level have been killed.
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
-        final Stage dialog = new Stage();
-        dialog.initModality(Modality.APPLICATION_MODAL);
-        dialog.initOwner(stage);
-        VBox dialogVbox = new VBox(20);
-        dialogVbox.getChildren().add(new Text("You beat the game!"));
-        Scene dialogScene = new Scene(dialogVbox, 300, 200);
-        dialog.setScene(dialogScene);
-        dialog.show();
+        // Creating of the dialog pop-up stage.
+        Stage gameWinStage = new Stage();
 
+        // Setting the parent of the dialog window.
+        gameWinStage.initModality(Modality.APPLICATION_MODAL);
+        gameWinStage.initOwner(stage);
+
+        // Creation of a vertical box to display the label, and creation of the label.
+        VBox dialogVbox = new VBox(20);
+        Label gameWinLabel = new Label(Constants.GAMEWIN_DIALOG);
+        dialogVbox.getChildren().add(gameWinLabel);
+
+        // Creation of a scene to display the virtual box and associated label.
+        Scene gameWinScene = new Scene(dialogVbox, 300, 200);
+
+        // Showing the dialog box.
+        gameWinStage.setScene(gameWinScene);
+        gameWinStage.show();
+
+        // Halting the animation timer. TODO make nice
         animationTimer.stop();
       } else {
         // Go to the next level and then re-render it.
