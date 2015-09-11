@@ -14,3 +14,7 @@
  	-fx-font-size: 15.0px;
     -fx-font-weight: bold;
  }
+ 
+ .button:hover {
+ 	-fx-background-color: #ff0000;
+ }

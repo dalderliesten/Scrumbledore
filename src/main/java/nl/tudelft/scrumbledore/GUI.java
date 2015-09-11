@@ -104,7 +104,7 @@ public class GUI extends Application {
     // Setting window dimension and movement properties.
     stage.setHeight(Constants.GUIY);
     stage.setWidth(Constants.GUIX);
-    // gameStage.setResizable(false);
+    stage.setResizable(false);
 
     setupGUIGameView();
     setupGUILayout();
