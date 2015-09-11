@@ -62,7 +62,7 @@ public class CollisionsLevelModifier implements LevelModifier {
           // Collision is detected, no further evaluation of candidates necessary.
         }
         
-        if (platform.getPosition().getY() == player.getPosition().getY()) {
+        if (!platform.isPassable()) {
           // Collision while moving to the right
           if (collision.collidingFromLeft() && player.hSpeed() > 0) {
             kinetics.stopHorizontally(player);
@@ -74,6 +74,7 @@ public class CollisionsLevelModifier implements LevelModifier {
           }       
         }
       }
+      
       // Checking if a bubble collides with a wall.
       for (int i = 0; i < bubbles.size(); i++) {
         if (platform.inBoxRangeOf(bubbles.get(i), Constants.COLLISION_RADIUS)) {
