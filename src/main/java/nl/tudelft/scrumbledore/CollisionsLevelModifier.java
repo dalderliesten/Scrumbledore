@@ -60,9 +60,9 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (collision.collidingFromTop() && player.vSpeed() > 0) {
           kinetics.stopVertically(player);
           kinetics.snapTop(player, platform);
-          // Collision is detected, no further evaluation of candidates necessary.
         }
         
+        // Only check platform collisions with the walls of a level
         if (!platform.isPassable()) {
           // Collision while moving to the right
           if (collision.collidingFromLeft() && player.hSpeed() > 0) {
