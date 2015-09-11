@@ -414,7 +414,8 @@ public class GUI extends Application {
           player.setFiring(true);
         }
         
-        if (keyPress.equals("R")) {
+        // Restarting the game if "R" is pressed or when the player is dead.
+        if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
           game.restart();
           renderStatic();
         }
