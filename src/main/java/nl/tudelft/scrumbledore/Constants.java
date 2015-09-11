@@ -33,6 +33,9 @@ public class Constants {
   public static final String SETTINGSBTNLABEL = "Settings";
   public static final String EXITBTNLABEL = "Exit";
 
+  // Defining text needed for the display of dialog and handling boxes within the user interface.
+  public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
+
   // The standard size of a block.
   public static final double BLOCKSIZE = 32;
 
@@ -73,7 +76,7 @@ public class Constants {
 
   // Maximum number of Bubbles per second that can be fired
   public static final double RAPID_FIRE_LIMIT = 5;
-  
+
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 
