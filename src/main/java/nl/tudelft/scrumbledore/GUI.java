@@ -340,14 +340,18 @@ public class GUI extends Application {
 
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
-          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-              Constants.BLOCKSIZE));
-          bubbles.add(newBubble);
-          if (playerDirection == -1) {
-            newBubble.addAction(BubbleAction.MoveLeft);
-          } else {
-            newBubble.addAction(BubbleAction.MoveRight);
+          if (!player.getIsFiring()) {
+            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
+                Constants.BLOCKSIZE));
+            bubbles.add(newBubble);
+            if (playerDirection == -1) {
+              newBubble.addAction(BubbleAction.MoveLeft);
+            } else {
+              newBubble.addAction(BubbleAction.MoveRight);
+            }
           }
+          
+          player.setIsFiring(true);
         }
       }
 
@@ -366,6 +370,10 @@ public class GUI extends Application {
           player.addAction(PlayerAction.MoveStop);
         } else if (keyRelease.equals("RIGHT")) {
           player.addAction(PlayerAction.MoveStop);
+        }
+        
+        if (keyRelease.equals("Z")) {
+          player.setIsFiring(false);
         }
       }
 
