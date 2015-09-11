@@ -1,10 +1,12 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -13,7 +15,6 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
@@ -35,7 +36,7 @@ public class GUI extends Application {
 
   private Stage stage;
   private Scene scene;
-  private BorderPane layout;
+  private VBox layout;
   private Group gameView;
   private Canvas staticDisplay;
   private Canvas dynamicDisplay;
@@ -107,7 +108,7 @@ public class GUI extends Application {
     // Setting window dimension and movement properties.
     stage.setHeight(Constants.GUIY);
     stage.setWidth(Constants.GUIX);
-    // gameStage.setResizable(false);
+    stage.setResizable(false);
 
     setupGUIGameView();
     setupGUILayout();
@@ -119,11 +120,11 @@ public class GUI extends Application {
    */
   private void setupGUIGameView() {
     // Setup the static canvas and its painter
-    staticDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    staticDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     staticPainter = staticDisplay.getGraphicsContext2D();
 
     // Setup the dynamic canvas and its painter
-    dynamicDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    dynamicDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     dynamicPainter = dynamicDisplay.getGraphicsContext2D();
 
     gameView = new Group();
@@ -137,23 +138,29 @@ public class GUI extends Application {
    */
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
-    layout = new BorderPane();
+    layout = new VBox();
 
-    // Creation of a horizontal box for storing top labels and items to display.
+    // Creation of a horizontal box for storing top labels and items to display, and making it the
+    // full width of the GUI.
     HBox topItems = new HBox();
+    topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
     Label scoreLabel = new Label(Constants.SCORELABEL);
+    scoreLabel.setAlignment(Pos.CENTER);
     Label highScoreLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel.setAlignment(Pos.CENTER);
     Label powerUpLabel = new Label(Constants.POWERUPLABEL);
+    powerUpLabel.setAlignment(Pos.CENTER);
     Label levelLabel = new Label(Constants.LEVELLABEL);
+    levelLabel.setAlignment(Pos.CENTER);
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
-    layout.setTop(topItems);
+    layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
-    layout.setCenter(gameView);
+    layout.getChildren().add(gameView);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
@@ -165,7 +172,7 @@ public class GUI extends Application {
 
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-    layout.setBottom(bottomItems);
+    layout.getChildren().add(bottomItems);
   }
 
   /**
