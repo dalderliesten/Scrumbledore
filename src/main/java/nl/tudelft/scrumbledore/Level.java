@@ -10,10 +10,10 @@ import java.util.ArrayList;
  */
 public class Level {
 
-  private ArrayList<LevelElement> movingElements;
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
+  private ArrayList<Bubble> bubbles;
   private Player player;
 
 
@@ -21,8 +21,10 @@ public class Level {
    * Constructs a new Level instance.
    */
   public Level() {
-    movingElements = new ArrayList<LevelElement>();
     platforms = new ArrayList<Platform>();
+    bubbles = new ArrayList<Bubble>();
+    fruits = new ArrayList<Fruit>();
+    npcs = new ArrayList<NPC>();
   }
 
   /**
@@ -34,24 +36,14 @@ public class Level {
   public void addElement(LevelElement element) {
     if (element.getClass().equals(Platform.class)) {
       platforms.add((Platform) element);
+    } else if (element.getClass().equals(NPC.class)) {
+      npcs.add((NPC) element);
+    } else if (element.getClass().equals(Fruit.class)) {
+      fruits.add((Fruit) element);
     } else if (element.getClass().equals(Player.class)) {
       player = (Player) element;
-    } else {
-      movingElements.add(element);
-    }
+    } 
   }
-
-  
-  /**
-   * Returns an ArrayList of non-moving level elements.
-   * 
-   * @return
-   *          An array of non-moving level elements
-   */
-  public ArrayList<LevelElement> getMovingElements() {
-    return movingElements;
-  }
-
 
   /**
    * Returns an ArrayList of Platform elements.
@@ -92,6 +84,10 @@ public class Level {
    */
   public Player getPlayer() {
     return player;
+  }
+  
+  public ArrayList<Bubble> getBubbles() {
+    return bubbles;
   }
 
 }

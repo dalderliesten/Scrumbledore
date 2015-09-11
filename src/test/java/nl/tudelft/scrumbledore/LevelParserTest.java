@@ -84,12 +84,12 @@ public class LevelParserTest {
     } catch (FileNotFoundException e) {
     }
 
-    ArrayList<LevelElement> movingElements = level.getMovingElements();
+    ArrayList<NPC> npcs = level.getNPCs();
     ArrayList<Platform> platforms = level.getPlatforms();
 
     // Check lengths of array lists
     assertEquals(platforms.size(), 2);
-    assertEquals(movingElements.size(), 2);
+    assertEquals(npcs.size(), 1);
 
     assertEquals(new Platform(new Vector(B_TWO, B_ONE), SIZE), platforms.get(0));
 
@@ -99,8 +99,7 @@ public class LevelParserTest {
     assertEquals(passablePlatform, platforms.get(1));
 
     assertEquals(new Player(new Vector(B_ONE, B_TWO), SIZE), level.getPlayer());
-    assertEquals(new NPC(new Vector(B_TWO, B_TWO), SIZE), movingElements.get(0));
-    assertEquals(new Fruit(new Vector(B_THREE, B_TWO), SIZE), movingElements.get(1));
+    assertEquals(new NPC(new Vector(B_TWO, B_TWO), SIZE), npcs.get(0));
   }
 
   /**
