@@ -322,12 +322,12 @@ public class GUI extends Application {
         gameWinStage.initOwner(stage);
 
         // Creation of a vertical box to display the label, and creation of the label.
-        VBox dialogVbox = new VBox(20);
+        VBox gameWinVBox = new VBox(20);
         Label gameWinLabel = new Label(Constants.GAMEWIN_DIALOG);
-        dialogVbox.getChildren().add(gameWinLabel);
+        gameWinVBox.getChildren().add(gameWinLabel);
 
         // Creation of a scene to display the virtual box and associated label.
-        Scene gameWinScene = new Scene(dialogVbox, 300, 200);
+        Scene gameWinScene = new Scene(gameWinVBox, 300, 200);
 
         // Showing the dialog box.
         gameWinStage.setScene(gameWinScene);
