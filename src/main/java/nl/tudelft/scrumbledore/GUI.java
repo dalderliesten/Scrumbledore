@@ -309,7 +309,14 @@ public class GUI extends Application {
   }
   
   private void advanceLevel() {
+    // When the enemies in the current level have been killed.
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
+      // If there are no levels left in the game, show a message.
+      if(game.remainingLevels() == 0) {
+        System.exit(1);
+      }
+      
+      // Go to the next level and then re-render it.
       game.goToNextLevel();
       renderStatic();
     }
