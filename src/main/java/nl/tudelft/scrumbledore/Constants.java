@@ -15,8 +15,8 @@ public class Constants {
   public static final int GUIY = 750;
 
   // Setting the resolution constants for level/game display.
-  public static final int LEVELY = 640;
   public static final int LEVELX = 640;
+  public static final int LEVELY = 640;
 
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
