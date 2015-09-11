@@ -30,8 +30,8 @@ import javafx.stage.Stage;
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
-  private Image playerSprite;
-  private int playerDirection;
+
+  private SpriteStore sprites;
 
   private Stage stage;
   private Scene scene;
@@ -58,6 +58,7 @@ public class GUI extends Application {
   @Override
   public void start(Stage stage) {
     this.stage = stage;
+    this.sprites = new SpriteStore();
 
     // Setup the Game logic.
     setupGame();
@@ -199,7 +200,7 @@ public class GUI extends Application {
     // Render the static canvas
     renderPlatforms(staticPainter);
   }
-  
+
   /**
    * Refresh the GUI by rendering all dynamic elements in the current level of the game.
    */
@@ -223,15 +224,13 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
+    String spr = "player-left";
     if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
-      playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
-      playerDirection = 1;
-    } else {
-      playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
-      playerDirection = -1;
+      spr = "player-right";
     }
-    painter.drawImage(playerSprite, game.getCurrentLevel().getPlayer().getPosition().getX(), game
-        .getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(sprites.getImage(spr),
+        game.getCurrentLevel().getPlayer().getPosition().getX(),
+        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -242,14 +241,14 @@ public class GUI extends Application {
    */
   private void renderBubbles(GraphicsContext painter) {
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
     for (Bubble bubble : game.getCurrentLevel().getBubbles()) {
       bubbles.add(bubble);
     }
-    
+
     for (Bubble currentBubble : bubbles) {
-        painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
-            currentBubble.getPosition().getY());
+      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -260,13 +259,13 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderNPCs(GraphicsContext painter) {
-    ArrayList<NPC> npcs = new ArrayList<NPC>(); 
-    
+    ArrayList<NPC> npcs = new ArrayList<NPC>();
+
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
     for (NPC npc : game.getCurrentLevel().getNPCs()) {
       npcs.add(npc);
     }
-    
+
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
       String imagePath = "";
@@ -275,8 +274,8 @@ public class GUI extends Application {
       } else if (current.getMovementDirection().equals(NPCAction.MoveRight)) {
         imagePath = Constants.NPC_SPRITE_RIGHT;
       }
-      painter.drawImage(new Image(imagePath), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(imagePath), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -290,24 +289,24 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), 
+      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
-  
+
   private void renderFruits(GraphicsContext painter) {
     ArrayList<Fruit> fruits = new ArrayList<Fruit>();
-    
+
     for (Fruit fruit : game.getCurrentLevel().getFruits()) {
       fruits.add(fruit);
     }
-    
+
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(Constants.FRUIT_SPRITE),  current.getPosition().getX(),
+      painter.drawImage(new Image(Constants.FRUIT_SPRITE), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
-  
+
   private void advanceLevel() {
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
       game.goToNextLevel();
@@ -376,16 +375,16 @@ public class GUI extends Application {
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
           if (!player.getIsFiring()) {
-            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-                Constants.BLOCKSIZE));
+            Bubble newBubble = new Bubble(bubblePos,
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
             bubbles.add(newBubble);
-            if (playerDirection == -1) {
+            if (player.getLastMove() == PlayerAction.MoveLeft) {
               newBubble.addAction(BubbleAction.MoveLeft);
             } else {
               newBubble.addAction(BubbleAction.MoveRight);
             }
           }
-          
+
           player.setIsFiring(true);
         }
       }
@@ -406,7 +405,7 @@ public class GUI extends Application {
         } else if (keyRelease.equals("RIGHT")) {
           player.addAction(PlayerAction.MoveStop);
         }
-        
+
         if (keyRelease.equals("Z")) {
           player.setIsFiring(false);
         }

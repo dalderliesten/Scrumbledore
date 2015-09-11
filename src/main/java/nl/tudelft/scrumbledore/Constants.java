@@ -81,6 +81,7 @@ public class Constants {
   public static final String CSS_LOCATION = "css/style.css";
 
   // References to images utilized for the game display within the GUI.
+  public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
   public static final String BUBBLE_SPRITE = "images/sprites/bubble.png";
   public static final String FRUIT_SPRITE = "images/sprites/fruit-banana.png";

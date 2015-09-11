@@ -38,6 +38,15 @@ public class Sprite {
   }
 
   /**
+   * Get the ID of this Sprite.
+   * 
+   * @return The ID.
+   */
+  public String getID() {
+    return id;
+  }
+
+  /**
    * The the path to the file to be used for this sprite.
    * 
    * @return File path.
