@@ -12,7 +12,7 @@ package nl.tudelft.scrumbledore;
 public class Constants {
   // Setting the resolution of the entire GUI window.
   public static final int GUIX = 656;
-  public static final int GUIY = 750;
+  public static final int GUIY = 723;
 
   // Setting the resolution constants for level/game display.
   public static final int LEVELX = 640;
