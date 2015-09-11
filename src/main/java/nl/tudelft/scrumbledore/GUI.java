@@ -30,8 +30,8 @@ import javafx.stage.Stage;
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
-  private Image playerSprite;
-  private int playerDirection;
+
+  private SpriteStore sprites;
 
   private Stage stage;
   private Scene scene;
@@ -64,6 +64,7 @@ public class GUI extends Application {
   @Override
   public void start(Stage stage) {
     this.stage = stage;
+    this.sprites = new SpriteStore();
 
     // Setup the Game logic.
     setupGame();
@@ -211,15 +212,13 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
+    String spr = "player-left";
     if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
-      playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
-      playerDirection = 1;
-    } else {
-      playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
-      playerDirection = -1;
+      spr = "player-right";
     }
-    painter.drawImage(playerSprite, game.getCurrentLevel().getPlayer().getPosition().getX(), game
-        .getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(sprites.getImage(spr),
+        game.getCurrentLevel().getPlayer().getPosition().getX(),
+        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -236,7 +235,7 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
           currentBubble.getPosition().getY());
     }
   }
@@ -257,14 +256,12 @@ public class GUI extends Application {
 
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
-      String imagePath = "";
+      String spr = "enemy-mighta-right";
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
-        imagePath = Constants.NPC_SPRITE_LEFT;
-      } else if (current.getMovementDirection().equals(NPCAction.MoveRight)) {
-        imagePath = Constants.NPC_SPRITE_RIGHT;
+        spr = "enemy-mighta-left";
       }
-      painter.drawImage(new Image(imagePath), current.getPosition().getX(), current.getPosition()
-          .getY());
+      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -278,8 +275,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -297,8 +294,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(Constants.FRUIT_SPRITE), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -403,8 +400,9 @@ public class GUI extends Application {
           if (!player.isFiring()) {
             Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
                 Constants.BLOCKSIZE));
+
             bubbles.add(newBubble);
-            if (playerDirection == -1) {
+            if (player.getLastMove() == PlayerAction.MoveLeft) {
               newBubble.addAction(BubbleAction.MoveLeft);
             } else {
               newBubble.addAction(BubbleAction.MoveRight);
