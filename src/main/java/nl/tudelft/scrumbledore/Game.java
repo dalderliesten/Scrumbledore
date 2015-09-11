@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The main controller of the game. Connects model classes and the GUI.
  * 
  * @author Jesse Tilro
- *
+ * @author David Alderliesten
  */
 public class Game {
 
@@ -36,11 +36,13 @@ public class Game {
 
   /**
    * Shared part of the constructors.
-   * @param levels The levels for the game.
+   * 
+   * @param levels
+   *          The levels for the game.
    */
   public void construct(ArrayList<Level> levels) {
     this.score = new ScoreCounter();
-    
+
     // The game needs at least one level.
     assert levels.size() > 0;
 
@@ -52,10 +54,11 @@ public class Game {
     this.modifiers = new ArrayList<LevelModifier>();
     this.modifiers.add(new PlayerActionsLevelModifier());
     this.modifiers.add(new GravityLevelModifier());
+    this.modifiers.add(new NPCLevelModifier());
     this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
+    this.modifiers.add(new BubbleActionLevelModifier());
     this.modifiers.add(kinetics);
-    
-    
+
   }
 
   /**

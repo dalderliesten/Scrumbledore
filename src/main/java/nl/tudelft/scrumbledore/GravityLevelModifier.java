@@ -41,11 +41,16 @@ public class GravityLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    // Pull down generic moving elements
-    for (LevelElement element : level.getMovingElements()) {
+    // Pull down NPCs
+    for (NPC element : level.getNPCs()) {
       pull(element, d);
     }
 
+    // Pull down Fruits
+    for (Fruit element : level.getFruits()) {
+      pull(element, d);
+    }
+    
     // Pull down the player
     pull(level.getPlayer(), d);
   }
