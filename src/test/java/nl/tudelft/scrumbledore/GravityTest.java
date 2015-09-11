@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
 
+import org.junit.Before;
 import org.junit.Test;
 
 /**
@@ -12,16 +13,30 @@ import org.junit.Test;
  */
 public class GravityTest {
 
+  private LevelElement test;
+  private LevelElement test2;
+  private double strength;
+  private double max;
+
+  /**
+   * Setup a new instance of this Test Suite, providing it which a test object.
+   */
+  @Before
+  public void setUp() {
+    test = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    test2 = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    test.setGravity(true);
+    test2.setGravity(true);
+    strength = 2;
+    max = 8;
+  }
+
   /**
    * When a level element is pulled that has not yet reached the maximal vertical speed and is not
    * about too in the next pull either, its vertical speed should be incremented with the strength.
    */
   @Test
   public void testPullNotReachedMaxSpeed() {
-    int strength = 2;
-    int max = 8;
-    LevelElement test = new TestElement();
-    
     GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
     gravity.pull(test, 1);
 
@@ -34,10 +49,6 @@ public class GravityTest {
    */
   @Test
   public void testPullAboutToReachMaxSpeed() {
-    int strength = 2;
-    int max = 8;
-    LevelElement test = new TestElement();
-    
     GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
 
     test.getSpeed().setY(max - (strength - 1));
@@ -53,9 +64,6 @@ public class GravityTest {
    */
   @Test
   public void testPullExceededMaxSpeed() {
-    int strength = 2;
-    int max = 8;
-    LevelElement test = new TestElement();
     GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
     test.getSpeed().setY(max + 1);
 
@@ -69,12 +77,7 @@ public class GravityTest {
    */
   @Test
   public void testPullLevel() {
-    int strength = 2;
-    int max = 8;
-
     GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
-    LevelElement test = new TestElement();
-    LevelElement test2 = new TestElement();
     test.getSpeed().setY(0);
     test2.getSpeed().setY(7);
     Level level = new Level();
@@ -92,11 +95,7 @@ public class GravityTest {
    */
   @Test
   public void testPullLevelUnaffected() {
-    int strength = 2;
-    int max = 8;
-
     GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
-    LevelElement test = new TestElement();
     test.setGravity(false);
     Level level = new Level();
     level.addElement(test);
