@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+
 /**
  * The Kinetics class handles the position/speed of levelelements.
  * 
@@ -53,7 +55,12 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   private void updateBubble(Level level, double d) {
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
     for (Bubble bubble : level.getBubbles()) {
+      bubbles.add(bubble);
+    }
+    for (Bubble bubble : bubbles) {
       addSpeed(bubble, d);
       applyFriction(bubble, d);
     }

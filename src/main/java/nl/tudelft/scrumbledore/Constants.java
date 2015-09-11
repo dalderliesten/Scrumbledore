@@ -66,11 +66,14 @@ public class Constants {
   // Bubble bounce speed
   public static final double BUBBLE_BOUNCE = 8;
   // Number of steps a Bubble needs to stay alive.
-  public static final double BUBBLE_LIFETIME = REFRESH_RATE * 10;
+  public static final double BUBBLE_LIFETIME = REFRESH_RATE * 4;
 
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;
 
+  // Maximum number of Bubbles per second that can be fired
+  public static final double RAPID_FIRE_LIMIT = 5;
+  
   // Location of the resource string.
   public static final String LEVELS_DIR = "src/main/resources/";
 
