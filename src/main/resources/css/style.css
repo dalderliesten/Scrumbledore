@@ -6,5 +6,15 @@
  */
  
  .root {
- 	-fx-background-color: #000;
+ 	-fx-background-color: #1d1d1d;
+ }
+ 
+ .hbox {
+ 	-fx-background-color: #1d1d1d;
+ }
+ 
+ .label {
+ 	-fx-font-size: 15.0px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #f5f5f5;
  }
