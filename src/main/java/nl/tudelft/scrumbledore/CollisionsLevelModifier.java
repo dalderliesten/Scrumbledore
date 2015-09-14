@@ -57,6 +57,8 @@ public class CollisionsLevelModifier implements LevelModifier {
       if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
         // Detect collision.
         Collision collision = new Collision(player, platform, delta);
+        
+        // Collision while falling 
         if (collision.collidingFromTop() && player.vSpeed() > 0) {
           kinetics.stopVertically(player);
           kinetics.snapTop(player, platform);
@@ -64,6 +66,12 @@ public class CollisionsLevelModifier implements LevelModifier {
         
         // Only check platform collisions with the walls of a level
         if (!platform.isPassable()) {
+          // Collision when jumping
+          if (collision.collidingFromBottom() && player.vSpeed() < 0) {
+            kinetics.stopVertically(player);
+            kinetics.snapBottom(player, platform);
+          }
+          
           // Collision while moving to the right
           if (collision.collidingFromLeft() && player.hSpeed() > 0) {
             kinetics.stopHorizontally(player);
