@@ -20,6 +20,7 @@ public class KineticsLevelModifier implements LevelModifier {
    */
   public void modify(Level level, double d) {
     updateNPC(level, d);
+    updateFruit(level, d);
     updatePlayer(level, d);
     updateBubble(level, d);
   }
@@ -33,7 +34,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * @param d
    *          The number of steps since last executing this function.
    */
-  private void updatFruit(Level level, double d) {
+  private void updateFruit(Level level, double d) {
     for (Fruit fruit : level.getFruits()) {
       addSpeed(fruit, d);
     }
