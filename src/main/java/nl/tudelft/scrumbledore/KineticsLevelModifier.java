@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @author Floris Doolaard
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class KineticsLevelModifier implements LevelModifier {
 
   /**

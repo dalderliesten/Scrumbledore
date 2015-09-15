@@ -144,7 +144,7 @@ public class StepTimer {
       }
       Thread.sleep(timeout);
     } catch (InterruptedException ex) {
-      // Do nothing.
+      ex.printStackTrace();
     }
   }
 }

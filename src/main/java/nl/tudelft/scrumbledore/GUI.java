@@ -6,7 +6,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -30,6 +28,7 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -139,6 +138,7 @@ public class GUI extends Application {
   /**
    * Setup the GUI layout. Uses the Game View GUI Group.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
     layout = new VBox();
@@ -206,14 +206,15 @@ public class GUI extends Application {
   private void renderDynamic() {
     // Clear canvas
     dynamicPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
-    // Render Player.
-    renderPlayer(dynamicPainter);
+
     // Render Bubbles.
     renderBubbles(dynamicPainter);
     // Render Fruits.
     renderFruits(dynamicPainter);
     // Render other moving elements.
     renderNPCs(dynamicPainter);
+    // Render Player.
+    renderPlayer(dynamicPainter);
   }
 
   /**
@@ -223,13 +224,22 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
+    Player player = game.getCurrentLevel().getPlayer();
+
+    boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+    boolean isFiring = player.isFiring();
+
     String spr = "player-left";
-    if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
+    if (isFiring && toRight) {
+      spr = "player-shoot-right";
+    } else if (isFiring) {
+      spr = "player-shoot-left";
+    } else if (toRight) {
       spr = "player-right";
     }
-    painter.drawImage(sprites.getImage(spr),
-        game.getCurrentLevel().getPlayer().getPosition().getX(),
-        game.getCurrentLevel().getPlayer().getPosition().getY());
+
+    painter.drawImage(sprites.getImage(spr), game.getCurrentLevel().getPlayer().getPosition()
+        .getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -271,8 +281,8 @@ public class GUI extends Application {
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
@@ -286,8 +296,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(), current
+          .getPosition().getY());
     }
   }
 
@@ -305,8 +315,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(), current
+          .getPosition().getY());
     }
   }
 
@@ -316,10 +326,10 @@ public class GUI extends Application {
    */
   @SuppressWarnings("checkstyle:methodlength")
   private void advanceLevel() {
-    
+
     // When the enemies in the current level have been killed.
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
-      
+
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
         // Log the completion of the game.
@@ -429,8 +439,8 @@ public class GUI extends Application {
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
           if (!player.isFiring()) {
-            Bubble newBubble = new Bubble(bubblePos,
-                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
+                Constants.BLOCKSIZE));
 
             bubbles.add(newBubble);
             if (player.getLastMove() == PlayerAction.MoveLeft) {

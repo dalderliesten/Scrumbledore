@@ -6,7 +6,7 @@ package nl.tudelft.scrumbledore;
  * 
  * @author David Alderliesten
  */
-public class Scrumbledore {
+abstract class Scrumbledore {
 
   /**
    * The main method launches the program.

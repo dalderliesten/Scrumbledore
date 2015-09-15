@@ -9,7 +9,7 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  *
  */
-public class Constants {
+abstract class Constants {
   // Setting the resolution of the entire GUI window.
   public static final int GUIX = 646;
   public static final int GUIY = 723;
@@ -21,7 +21,7 @@ public class Constants {
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
 
-  // Defenining labels needed in the top section of the user interface.
+  // Defining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score: ";
   public static final String HISCORELABEL = "High-Score: ";
   public static final String POWERUPLABEL = "Power-Ups: ";
