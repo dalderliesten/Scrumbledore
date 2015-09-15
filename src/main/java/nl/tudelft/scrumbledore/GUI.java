@@ -89,11 +89,6 @@ public class GUI extends Application {
     stage.show();
   }
 
-  @Override
-  public void stop() {
-    System.exit(0);
-  }
-
   /**
    * Setup the Game logic.
    */
