@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore;
 
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.IOException;
 
 /**
  * Class for the maintainence and creation of logging files, which track movement and actions in
@@ -22,7 +23,13 @@ public class Logger {
    * needed writers and file functions.
    */
   public Logger() {
+    loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
 
+    // Checking to see if the directory for the logs exists. If this is no the case, it will be
+    // created.
+    if (loggingDir.exists() == false) {
+      loggingDir.mkdir();
+    }
   }
 
 }
