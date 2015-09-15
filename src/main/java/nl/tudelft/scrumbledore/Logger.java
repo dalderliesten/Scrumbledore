@@ -66,7 +66,17 @@ public final class Logger {
    *          The content that the caller wishes to be logged in the logging file.
    */
   public static void log(String toLog) {
+    try {
+      // Makes the buffered writer to write the desired string.
+      BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile));
+      buffWriter.write(toLog);
 
+      // Closing the stream as both an optimization and as a bug removing technique, as closing it
+      // always writes content.
+      buffWriter.close();
+    } catch (IOException e) {
+      System.out.println(e);
+    }
   }
 
 }
