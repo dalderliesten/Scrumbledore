@@ -151,7 +151,7 @@ public class Game {
   public void step(double delta) {
     for (LevelModifier modifier : modifiers) {
       // Writing to the log that the next cycle has been entered.
-      Logger.log("----------NEXT CYCLE----------");
+      // Logger.log("----------NEXT CYCLE----------");
       modifier.modify(currentLevel, delta);
     }
   }
