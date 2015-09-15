@@ -4,6 +4,8 @@ import java.io.BufferedWriter;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 
 /**
  * Class for the maintainence and creation of logging files, which track movement and actions in
@@ -15,9 +17,6 @@ public class Logger {
   // The logging dir and file are utilized for storing of the logging file.
   File loggingDir;
   File loggingFile;
-
-  // The log writer is used to actually write content to the created file(s).
-  BufferedWriter buffWriter;
 
   /**
    * Logger constructor for the creation of the logging file for this session, along with all the
@@ -33,14 +32,22 @@ public class Logger {
       loggingDir.mkdir();
     }
 
-    // Creating the file and setting up the associated writers and buffers.
     try {
+      // Fetching the current date for the creation of the file and parsing it to allow for simple
+      // formatting.
+      Date currentDate = new Date();
+      SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
+
       // Taking care of the file name and file creation.
-      String desiredFileName = "Session.log";
+      String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
       loggingFile = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR + desiredFileName);
-      
-      buffWriter = new BufferedWriter(new FileWriter(loggingFile));
+
+      // Writing initial content to the file.
+      BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile));
       buffWriter.write("SCRUMBLEDORE LOGGING FILE");
+
+      // Closing the stream as both an optimization and as a bug removing technique, as closing it
+      // always writes content.
       buffWriter.close();
     } catch (IOException e) {
       System.out.println(e);
