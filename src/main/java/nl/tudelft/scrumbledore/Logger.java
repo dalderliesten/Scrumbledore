@@ -36,11 +36,12 @@ public class Logger {
     // Creating the file and setting up the associated writers and buffers.
     try {
       // Taking care of the file name and file creation.
-      String desiredFileName = "SessionLog.log";
+      String desiredFileName = "Session.log";
       loggingFile = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR + desiredFileName);
       
       buffWriter = new BufferedWriter(new FileWriter(loggingFile));
-      buffWriter.write("Testing testing 1 2 3");
+      buffWriter.write("SCRUMBLEDORE LOGGING FILE");
+      buffWriter.close();
     } catch (IOException e) {
       System.out.println(e);
     }
