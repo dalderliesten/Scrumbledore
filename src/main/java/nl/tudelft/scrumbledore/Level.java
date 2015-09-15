@@ -86,6 +86,13 @@ public class Level {
     return player;
   }
   
+  
+  /**
+   * Returns an ArrayList of Bubble objects.
+   * 
+   * @return
+   *          An ArrayList of Bubble objects.
+   */
   public ArrayList<Bubble> getBubbles() {
     return bubbles;
   }

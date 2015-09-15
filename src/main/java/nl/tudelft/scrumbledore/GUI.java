@@ -314,9 +314,12 @@ public class GUI extends Application {
    * Advances the level to the next one, and displays a special dialog box upon completion of all
    * the levels without dying.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   private void advanceLevel() {
+    
     // When the enemies in the current level have been killed.
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
+      
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
         // Creating of the dialog pop-up stage.
@@ -396,6 +399,7 @@ public class GUI extends Application {
    * @param scene
    *          The scene the listeners should be added to.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   private void addKeyEventListeners(Scene scene) {
     // KeyPress Event handlers.
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
