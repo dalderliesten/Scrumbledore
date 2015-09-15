@@ -20,37 +20,32 @@ public class NPCLevelModifier implements LevelModifier {
   public void modify(Level level, double delta) {
 
     // Loop over all NPCs
-    for (LevelElement element : level.getMovingElements()) {
-      if (element.getClass().equals(NPC.class)) {
-        NPC npc = (NPC) element;
+    for (NPC npc : level.getNPCs()) {
+      // Assign platforms to NPC if this has not happened yet
+      if (npc.getMovementBoundaries() == null) {
+        npc.setPlatforms(level.getPlatforms());
+      }
 
-        // Assign platforms to NPC if this has not happened yet
-        if (npc.getMovementBoundaries() == null) {
-          npc.setPlatforms(level.getPlatforms());
-        }
+      // Move into a certain direction if this is indicated by the NPC
+      if (npc.getMovementDirection().equals(NPCAction.MoveRight)) {
+        npc.getSpeed().setX(Constants.NPC_SPEED);
+      } else if (npc.getMovementDirection().equals(NPCAction.MoveLeft)) {
+        npc.getSpeed().setX(-1 * Constants.NPC_SPEED);
+      }
 
-        // Move into a certain direction if this is indicated by the NPC
-        if (npc.getMovementDirection().equals("right")) {
-          npc.getSpeed().setX(Constants.NPC_SPEED);
-        } else if (npc.getMovementDirection().equals("left")) {
-          npc.getSpeed().setX(-1 * Constants.NPC_SPEED);
-        }
+      Vector currentPosition = npc.getPosition();
 
-        Vector currentPosition = npc.getPosition();
-
-        // Enemy is at left boundary, make it move to the right
-        if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[0])
-            && npc.getMovementDirection().equals("left")) {
-          npc.getSpeed().setX(0);
-          npc.setMovementDirection("right");
-        } else if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[1])
-            && npc.getMovementDirection().equals("right")) {
-          npc.getSpeed().setX(0);
-          npc.setMovementDirection("left");
-        }
+      // Enemy is at left boundary, make it move to the right
+      if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[0])
+          && npc.getMovementDirection().equals(NPCAction.MoveLeft)) {
+        npc.getSpeed().setX(0);
+        npc.setMovementDirection(NPCAction.MoveRight);
+      } else if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[1])
+          && npc.getMovementDirection().equals(NPCAction.MoveRight)) {
+        npc.getSpeed().setX(0);
+        npc.setMovementDirection(NPCAction.MoveLeft);
       }
     }
-
   }
 
 }

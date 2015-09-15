@@ -7,6 +7,7 @@ import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.event.EventType;
+import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -15,8 +16,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
-import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 
@@ -31,17 +33,24 @@ import javafx.stage.WindowEvent;
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
-  private Image playerSprite;
-  private int playerDirection;
+
+  private SpriteStore sprites;
 
   private Stage stage;
   private Scene scene;
-  private BorderPane layout;
+  private VBox layout;
   private Group gameView;
   private Canvas staticDisplay;
   private Canvas dynamicDisplay;
   private GraphicsContext staticPainter;
   private GraphicsContext dynamicPainter;
+  private AnimationTimer animationTimer = new AnimationTimer() {
+    public void handle(long currentNanoTime) {
+      checkPlayerAlive();
+      advanceLevel();
+      renderDynamic();
+    }
+  };
 
   private Button startStopButton;
   private Button settingsButton;
@@ -59,6 +68,7 @@ public class GUI extends Application {
   @Override
   public void start(Stage stage) {
     this.stage = stage;
+    this.sprites = new SpriteStore();
 
     // Setup the Game logic.
     setupGame();
@@ -71,11 +81,10 @@ public class GUI extends Application {
     addButtonEventListeners();
     addWindowEventListeners(stage);
 
-    // Render the static canvas
-    renderPlatforms(staticPainter);
+    renderStatic();
 
     // Start the animation timer to keep refreshing the dynamic canvas.
-    startAnimationTimer(stage, dynamicPainter);
+    animationTimer.start();
 
     stage.show();
   }
@@ -107,7 +116,7 @@ public class GUI extends Application {
     // Setting window dimension and movement properties.
     stage.setHeight(Constants.GUIY);
     stage.setWidth(Constants.GUIX);
-    // gameStage.setResizable(false);
+    stage.setResizable(false);
 
     setupGUIGameView();
     setupGUILayout();
@@ -119,11 +128,11 @@ public class GUI extends Application {
    */
   private void setupGUIGameView() {
     // Setup the static canvas and its painter
-    staticDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    staticDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     staticPainter = staticDisplay.getGraphicsContext2D();
 
     // Setup the dynamic canvas and its painter
-    dynamicDisplay = new Canvas(Constants.GUIX, Constants.GUIY);
+    dynamicDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
     dynamicPainter = dynamicDisplay.getGraphicsContext2D();
 
     gameView = new Group();
@@ -137,23 +146,29 @@ public class GUI extends Application {
    */
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
-    layout = new BorderPane();
+    layout = new VBox();
 
-    // Creation of a horizontal box for storing top labels and items to display.
+    // Creation of a horizontal box for storing top labels and items to display, and making it the
+    // full width of the GUI.
     HBox topItems = new HBox();
+    topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
     Label scoreLabel = new Label(Constants.SCORELABEL);
+    scoreLabel.setAlignment(Pos.CENTER);
     Label highScoreLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel.setAlignment(Pos.CENTER);
     Label powerUpLabel = new Label(Constants.POWERUPLABEL);
+    powerUpLabel.setAlignment(Pos.CENTER);
     Label levelLabel = new Label(Constants.LEVELLABEL);
+    levelLabel.setAlignment(Pos.CENTER);
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
-    layout.setTop(topItems);
+    layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
-    layout.setCenter(gameView);
+    layout.getChildren().add(gameView);
 
     // Creation of a horiztonal box for storing bottom buttons and items to display.
     HBox bottomItems = new HBox();
@@ -165,7 +180,7 @@ public class GUI extends Application {
 
     // Adding the buttons to the bottom Hbox and to the game display interface.
     bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-    layout.setBottom(bottomItems);
+    layout.getChildren().add(bottomItems);
   }
 
   /**
@@ -181,34 +196,29 @@ public class GUI extends Application {
   }
 
   /**
-   * Start the animation timer to refresh the GUI.
-   * 
-   * @param stage
-   *          The Stage used by the rest of the GUI
-   * @param painter
-   *          The GraphicsContext used by the rest of the GUI
-   * 
+   * Render the static elements of the current level.
    */
-  private void startAnimationTimer(final Stage stage, final GraphicsContext painter) {
-    new AnimationTimer() {
-      public void handle(long currentNanoTime) {
-        refresh(stage, painter);
-      }
-    }.start();
+  private void renderStatic() {
+    // Clear canvas
+    staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+    // Render the static canvas
+    renderPlatforms(staticPainter);
   }
 
   /**
-   * Refresh the GUI by rendering all elements in the current level of the game.
+   * Refresh the GUI by rendering all dynamic elements in the current level of the game.
    */
-  private void refresh(Stage stage, final GraphicsContext painter) {
+  private void renderDynamic() {
     // Clear canvas
-    painter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+    dynamicPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
     // Render Player.
-    renderPlayer(painter);
+    renderPlayer(dynamicPainter);
     // Render Bubbles.
-    renderBubbles(painter);
+    renderBubbles(dynamicPainter);
+    // Render Fruits.
+    renderFruits(dynamicPainter);
     // Render other moving elements.
-    renderMovingElements(painter);
+    renderNPCs(dynamicPainter);
   }
 
   /**
@@ -218,14 +228,12 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
+    String spr = "player-left";
     if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
-      playerSprite = new Image(Constants.PLAYER_SPRITE_RIGHT);
-      playerDirection = 1;
-    } else {
-      playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
-      playerDirection = -1;
+      spr = "player-right";
     }
-    painter.drawImage(playerSprite, game.getCurrentLevel().getPlayer().getPosition().getX(),
+    painter.drawImage(sprites.getImage(spr),
+        game.getCurrentLevel().getPlayer().getPosition().getX(),
         game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
@@ -236,23 +244,39 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderBubbles(GraphicsContext painter) {
-    // Adding the Bubbles being shot.
-    for (Bubble currentBubble : game.getCurrentLevel().getBubbles()) {
-      painter.drawImage(new Image(Constants.BUBBLE_SPRITE), currentBubble.getPosition().getX(),
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+    for (Bubble bubble : game.getCurrentLevel().getBubbles()) {
+      bubbles.add(bubble);
+    }
+
+    for (Bubble currentBubble : bubbles) {
+      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
           currentBubble.getPosition().getY());
     }
   }
 
   /**
-   * Render the moving elements of the game using the given GraphicsContext.
+   * Render the NPCs of the game using the given GraphicsContext.
    * 
    * @param painter
    *          The GraphicsContext to be used.
    */
-  private void renderMovingElements(GraphicsContext painter) {
+  private void renderNPCs(GraphicsContext painter) {
+    ArrayList<NPC> npcs = new ArrayList<NPC>();
+
+    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+    for (NPC npc : game.getCurrentLevel().getNPCs()) {
+      npcs.add(npc);
+    }
+
     // Adding the initial enemy locations to the GUI.
-    for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-      painter.drawImage(new Image(Constants.NPC_SPRITE_LEFT), current.getPosition().getX(),
+    for (NPC current : npcs) {
+      String spr = "enemy-mighta-right";
+      if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
+        spr = "enemy-mighta-left";
+      }
+      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -267,8 +291,75 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(),
           current.getPosition().getY());
+    }
+  }
+
+  /**
+   * Render the fruit items of the game using the given GraphicsContext.
+   * 
+   * @param painter
+   *          The painter used to display the graphics content.
+   */
+  private void renderFruits(GraphicsContext painter) {
+    ArrayList<Fruit> fruits = new ArrayList<Fruit>();
+
+    for (Fruit fruit : game.getCurrentLevel().getFruits()) {
+      fruits.add(fruit);
+    }
+
+    for (Fruit current : fruits) {
+      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(),
+          current.getPosition().getY());
+    }
+  }
+
+  /**
+   * Advances the level to the next one, and displays a special dialog box upon completion of all
+   * the levels without dying.
+   */
+  private void advanceLevel() {
+    // When the enemies in the current level have been killed.
+    if (game.getCurrentLevel().getNPCs().isEmpty()) {
+      // If there are no levels left in the game, show a message.
+      if (game.remainingLevels() == 0) {
+        // Creating of the dialog pop-up stage.
+        Stage gameWinStage = new Stage();
+
+        // Setting the parent of the dialog window.
+        gameWinStage.initModality(Modality.APPLICATION_MODAL);
+        gameWinStage.initOwner(stage);
+
+        // Creation of a vertical box to display the label, and creation of the label.
+        VBox gameWinVBox = new VBox(20);
+        Label gameWinLabel = new Label(Constants.GAMEWIN_DIALOG);
+        gameWinVBox.getChildren().add(gameWinLabel);
+
+        // Creation of a scene to display the virtual box and associated label.
+        Scene gameWinScene = new Scene(gameWinVBox, 300, 200);
+
+        // Showing the dialog box.
+        gameWinStage.setScene(gameWinScene);
+        gameWinStage.show();
+
+        // Halting the animation timer. TODO make nice
+        animationTimer.stop();
+      } else {
+        // Go to the next level and then re-render it.
+        game.goToNextLevel();
+        renderStatic();
+      }
+    }
+  }
+
+  /**
+   * If player died, restart the game.
+   */
+  private void checkPlayerAlive() {
+    if (!game.getCurrentLevel().getPlayer().isAlive()) {
+      game.restart();
+      renderStatic();
     }
   }
 
@@ -332,14 +423,25 @@ public class GUI extends Application {
 
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
-          Bubble newBubble = new Bubble(bubblePos,
-              new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
-          bubbles.add(newBubble);
-          if (playerDirection == -1) {
-            newBubble.addAction(BubbleAction.MoveLeft);
-          } else {
-            newBubble.addAction(BubbleAction.MoveRight);
+          if (!player.isFiring()) {
+            Bubble newBubble = new Bubble(bubblePos,
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+
+            bubbles.add(newBubble);
+            if (player.getLastMove() == PlayerAction.MoveLeft) {
+              newBubble.addAction(BubbleAction.MoveLeft);
+            } else {
+              newBubble.addAction(BubbleAction.MoveRight);
+            }
           }
+
+          player.setFiring(true);
+        }
+
+        // Restarting the game if "R" is pressed or when the player is dead.
+        if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
+          game.restart();
+          renderStatic();
         }
       }
 
@@ -358,6 +460,10 @@ public class GUI extends Application {
           player.addAction(PlayerAction.MoveStop);
         } else if (keyRelease.equals("RIGHT")) {
           player.addAction(PlayerAction.MoveStop);
+        }
+
+        if (keyRelease.equals("Z")) {
+          player.setFiring(false);
         }
       }
 

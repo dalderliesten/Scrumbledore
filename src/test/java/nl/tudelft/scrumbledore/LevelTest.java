@@ -20,7 +20,7 @@ public class LevelTest {
    * using only one moving element.
    */
   @Test
-  public void testAddElementMovingElements() {
+  public void testAddElementNPCs() {
     Level level = new Level();
     Fruit fr = new Fruit(basicVt, basicVt);
     NPC npc = new NPC(basicVt, basicVt);
@@ -28,15 +28,14 @@ public class LevelTest {
     level.addElement(fr);
     level.addElement(npc);
     
-    ArrayList<LevelElement> movingElements = level.getMovingElements();
+    ArrayList<NPC> npcs = level.getNPCs();
 
     // Check whether other elements did not get created
     assertNull(level.getPlayer());
     assertEquals(level.getPlatforms().size(), 0);
     
-    assertEquals(movingElements.size(), 2);
-    assertEquals(movingElements.get(0).getClass(), Fruit.class);
-    assertEquals(movingElements.get(1).getClass(), NPC.class);
+    assertEquals(npcs.size(), 1);
+    assertEquals(npcs.get(0).getClass(), NPC.class);
   }
 
   
@@ -57,7 +56,6 @@ public class LevelTest {
 
     // Check whether other elements did not get created
     assertNull(level.getPlayer());
-    assertEquals(level.getMovingElements().size(), 0);
 
     assertEquals(platforms.size(), 2);
     assertEquals(platforms.get(0).getClass(), Platform.class);
@@ -78,9 +76,8 @@ public class LevelTest {
     level.addElement(player);
 
     // Check whether other elements did not get created
-    assertEquals(level.getMovingElements().size(), 0);
     assertEquals(level.getPlatforms().size(), 0);
-
+    
     assertEquals(level.getPlayer(), testPlayer);
   }
 
@@ -101,7 +98,7 @@ public class LevelTest {
     level.addElement(player);
     level.addElement(npc);
     
-    ArrayList<LevelElement> movingElements = level.getMovingElements();
+    ArrayList<NPC> npcs = level.getNPCs();
     ArrayList<Platform> platforms = level.getPlatforms();
     Player testPlayer = new Player(basicVt, basicVt);
     
@@ -113,8 +110,8 @@ public class LevelTest {
     assertEquals(level.getPlayer(), testPlayer);
 
     // Assert Moving Elements
-    assertEquals(movingElements.size(), 1);
-    assertEquals(movingElements.get(0).getClass(), NPC.class);
+    assertEquals(npcs.size(), 1);
+    assertEquals(npcs.get(0).getClass(), NPC.class);
   }
 
 }

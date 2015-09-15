@@ -73,7 +73,7 @@ public class NPCTest extends LevelElementTest {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
     } catch (FileNotFoundException e) { }
 
-    NPC npc = (NPC) level.getMovingElements().get(0);
+    NPC npc = level.getNPCs().get(0);
     Vector[] boundaries = npc.floorMovementBoundaries(level.getPlatforms());
     
     // Check left and right boundaries
@@ -96,7 +96,7 @@ public class NPCTest extends LevelElementTest {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
     } catch (FileNotFoundException e) { }
 
-    NPC npc = (NPC) level.getMovingElements().get(0);
+    NPC npc = level.getNPCs().get(0);
     Vector[] boundaries = npc.obstacleMovementBoundaries(level.getPlatforms());
     
     assertEquals(new Vector(2 * Constants.BLOCKSIZE, 0), boundaries[0]);  
@@ -121,7 +121,7 @@ public class NPCTest extends LevelElementTest {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
     } catch (FileNotFoundException e) { }
 
-    NPC npc = (NPC) level.getMovingElements().get(0);
+    NPC npc = level.getNPCs().get(0);
     Vector[] boundaries = npc.movementBoundaries(level.getPlatforms());
     
     assertEquals(new Vector(3 * Constants.BLOCKSIZE, 0), boundaries[0]);  

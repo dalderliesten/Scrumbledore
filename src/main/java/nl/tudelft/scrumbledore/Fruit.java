@@ -18,6 +18,8 @@ public class Fruit extends LevelElement {
    */
   public Fruit(Vector position, Vector size) {
     super(position, size);
+    
+    setGravity(true);
   }
 
   
