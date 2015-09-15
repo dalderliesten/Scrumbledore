@@ -86,4 +86,7 @@ public class Constants {
   // References to images utilized for the game display within the GUI.
   public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
+  
+  // Reference to the location directory for the log file handling.
+  public static final String LOGGER_DIR = "logging/";
 }
