@@ -395,9 +395,15 @@ public class GUI extends Application {
         // If the game is paused, it will resume it and change the button label to stop. Otherwise,
         // it resumes the game and changes the butotn label to start.
         if (timer.isPaused()) {
+          // Logging that the game has been restarted.
+          Logger.log("Game has been re-started.");
+
           timer.resume();
           startStopButton.setText(Constants.STOPBTNLABEL);
         } else {
+          // Writing to the game log that the game has been paused.
+          Logger.log("Game has been paused.");
+
           timer.pause();
           startStopButton.setText(Constants.STARTBTNLABEL);
         }
