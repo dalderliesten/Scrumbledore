@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
  * @author Floris Doolaard
  *
  */
-public class BubbleTest extends ProjectileTest{
+public class BubbleTest extends ProjectileTest {
 
   /**
    * Setting up test properties.

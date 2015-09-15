@@ -13,7 +13,7 @@ import org.junit.BeforeClass;
  * @author Floris Doolaard
  *
  */
-public abstract class ProjectileTest extends LevelElementTest{
+public abstract class ProjectileTest extends LevelElementTest {
 
   /**
    * Setting up test properties.

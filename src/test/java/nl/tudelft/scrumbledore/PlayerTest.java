@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class PlayerTest extends LevelElementTest{
+public class PlayerTest extends LevelElementTest {
 
   /**
    * Setting up test properties.

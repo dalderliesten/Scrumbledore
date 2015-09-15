@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class PlatformTest extends LevelElementTest{
+public class PlatformTest extends LevelElementTest {
 
   /**
    * Setting up test properties.
