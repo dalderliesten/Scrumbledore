@@ -123,6 +123,7 @@ public class Game {
     while (!currentLevel.equals(levels.get(index)) && index < levels.size()) {
       ++index;
     }
+    
     // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
 

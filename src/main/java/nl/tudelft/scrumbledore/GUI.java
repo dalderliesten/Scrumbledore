@@ -322,6 +322,9 @@ public class GUI extends Application {
       
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
+        // Log the completion of the game.
+        Logger.log("Player completed the game.");
+        
         // Creating of the dialog pop-up stage.
         Stage gameWinStage = new Stage();
 
@@ -344,6 +347,9 @@ public class GUI extends Application {
         // Halting the animation timer. TODO make nice
         animationTimer.stop();
       } else {
+        // Logging the advancement in level.
+        Logger.log("Player advanced to the next level.");
+        
         // Go to the next level and then re-render it.
         game.goToNextLevel();
         renderStatic();
