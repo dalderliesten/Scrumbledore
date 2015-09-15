@@ -17,24 +17,6 @@ import org.junit.Test;
  */
 public class NPCTest extends LevelElementTest {
 
-  /**
-   * Setting up test properties.
-   * 
-   * @throws Exception
-   */
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
-  }
-
-  /**
-   * Deleting test properties after testing.
-   * 
-   * @throws Exception
-   */
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
-  }
-
   @Override
   public LevelElement make(Vector position, Vector size) {
     return new NPC(position, size);
@@ -53,7 +35,9 @@ public class NPCTest extends LevelElementTest {
 
     try {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
-    } catch (FileNotFoundException e) { }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
     
     Vector vt = new Vector(2 * Constants.BLOCKSIZE, Constants.BLOCKSIZE);
     assertEquals(1, NPC.getIndexFromPos(level.getPlatforms(), vt));    
@@ -71,7 +55,9 @@ public class NPCTest extends LevelElementTest {
 
     try {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
-    } catch (FileNotFoundException e) { }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
     NPC npc = level.getNPCs().get(0);
     Vector[] boundaries = npc.floorMovementBoundaries(level.getPlatforms());
@@ -91,10 +77,11 @@ public class NPCTest extends LevelElementTest {
     Level level = new Level();
     String testMap = "## N ##\n";
 
-
     try {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
-    } catch (FileNotFoundException e) { }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
     NPC npc = level.getNPCs().get(0);
     Vector[] boundaries = npc.obstacleMovementBoundaries(level.getPlatforms());
@@ -116,10 +103,11 @@ public class NPCTest extends LevelElementTest {
         + "#######   \n"
         + "##########\n";
 
-
     try {
       level = (new LevelParser()).readLevelFromScanner(new Scanner(testMap));
-    } catch (FileNotFoundException e) { }
+    } catch (FileNotFoundException e) {
+      e.printStackTrace();
+    }
 
     NPC npc = level.getNPCs().get(0);
     Vector[] boundaries = npc.movementBoundaries(level.getPlatforms());

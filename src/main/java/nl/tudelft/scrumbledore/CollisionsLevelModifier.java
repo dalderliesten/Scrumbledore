@@ -223,21 +223,19 @@ public class CollisionsLevelModifier implements LevelModifier {
         for (int j = 0; j < level.getBubbles().size(); j++) {
           
           // Temp fix to prevent race condition
-          if (enemies.size() != i) {
-            if (enemies.get(i).inBoxRangeOf(level.getBubbles().get(j), Constants.COLLISION_RADIUS) 
+          if (enemies.size() != i 
+              && enemies.get(i).inBoxRangeOf(level.getBubbles().get(j), Constants.COLLISION_RADIUS) 
                 && new Collision(level.getBubbles().get(j), enemies.get(i), delta).colliding()) {
-              level.getBubbles().remove(j);
-              Fruit newFruit = new Fruit(enemies.get(i).getPosition().clone(),
-                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
-              // Adding a new Fruit element in place of where the enemy died.
-              enemies.remove(i);
-              fruits.add(newFruit);
-            }
+            level.getBubbles().remove(j);
+            Fruit newFruit = new Fruit(enemies.get(i).getPosition().clone(),
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            // Adding a new Fruit element in place of where the enemy died.
+            enemies.remove(i);
+            fruits.add(newFruit);
           }
         }
       }
     }
-
   }
 
   /**

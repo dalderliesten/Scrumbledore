@@ -8,7 +8,7 @@ package nl.tudelft.scrumbledore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class Vector {
+public class Vector  implements Cloneable {
 
   private double entryX;
   private double entryY;
@@ -129,12 +129,15 @@ public class Vector {
   
   /**
    * Returns a newly cloned Vector object.
+   * 
+   * @throws CloneNotSupportedException 
+   *            Throw exception in case of error
    */
   @Override
-  public Vector clone() {
-    return new Vector(entryX, entryY);
+  public Vector clone() throws CloneNotSupportedException { 
+    return (Vector) super.clone();
   }
-
+  
   /**
    * Get the X entry of the vector.
    * 

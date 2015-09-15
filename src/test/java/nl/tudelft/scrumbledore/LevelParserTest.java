@@ -82,6 +82,7 @@ public class LevelParserTest {
     try {
       level = lp.readLevelFromScanner(sc);
     } catch (FileNotFoundException e) {
+      assertEquals(e.getClass(), FileNotFoundException.class);
     }
 
     ArrayList<NPC> npcs = level.getNPCs();
