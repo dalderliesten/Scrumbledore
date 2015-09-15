@@ -171,11 +171,11 @@ public class Vector  implements Cloneable {
   /**
    * Set the Y entry of the vector.
    * 
-   * @param d
+   * @param entryY
    *          Y entry
    */
-  public void setY(double d) {
-    this.entryY = d;
+  public void setY(double entryY) {
+    this.entryY = entryY;
   }
 
   
