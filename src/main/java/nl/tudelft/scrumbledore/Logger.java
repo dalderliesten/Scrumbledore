@@ -22,6 +22,7 @@ public final class Logger {
    * Logger constructor. Is not used as the class is a utility class, and should not be insantiated.
    */
   private Logger() {
+
   }
 
   /**
@@ -69,6 +70,11 @@ public final class Logger {
     try {
       // Makes the buffered writer to write the desired string.
       BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
+
+      // Adds a new line to ensure that each log item takes up a new line.
+      buffWriter.newLine();
+
+      // Writing the passed log string to the log file.
       buffWriter.write(toLog);
 
       // Closing the stream as both an optimization and as a bug removing technique, as closing it
