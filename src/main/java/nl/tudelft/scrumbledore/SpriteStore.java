@@ -31,7 +31,7 @@ public class SpriteStore {
     for (final File fileEntry : dir.listFiles()) {
       if (!fileEntry.isDirectory()) {
         String name = fileEntry.getName();
-        int pos = name.lastIndexOf(".");
+        int pos = name.lastIndexOf('.');
         String id = name.substring(0, pos);
         String ext = name.substring(pos + 1);
         Sprite spr = new Sprite(id, ext);

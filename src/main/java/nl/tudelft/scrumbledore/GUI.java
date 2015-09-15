@@ -28,6 +28,7 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -137,6 +138,7 @@ public class GUI extends Application {
   /**
    * Setup the GUI layout. Uses the Game View GUI Group.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
     layout = new VBox();

@@ -12,6 +12,7 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class VectorTest {
 
   /**
