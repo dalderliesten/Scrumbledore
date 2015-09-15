@@ -19,15 +19,42 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    // Add speed to NPCs
-    for (NPC el : level.getNPCs()) {
-      addSpeed(el, d);
-    }
-
+    updateNPC(level, d);
+    updateFruit(level, d);
     updatePlayer(level, d);
     updateBubble(level, d);
   }
 
+  
+  /**
+   * Update the Fruits in a given Level.
+   * 
+   * @param level
+   *          The level whose elements should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  private void updateFruit(Level level, double d) {
+    for (Fruit fruit : level.getFruits()) {
+      addSpeed(fruit, d);
+    }
+  }
+  
+  /**
+   * Update the NPCs in a given Level.
+   * 
+   * @param level
+   *          The level whose elements should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  private void updateNPC(Level level, double d) {
+    for (NPC npc : level.getNPCs()) {
+      addSpeed(npc, d);
+    }
+  }
+  
+  
   /**
    * Update the player in a given Level.
    * 
@@ -60,6 +87,7 @@ public class KineticsLevelModifier implements LevelModifier {
     for (Bubble bubble : level.getBubbles()) {
       bubbles.add(bubble);
     }
+    
     for (Bubble bubble : bubbles) {
       addSpeed(bubble, d);
       applyFriction(bubble, d);
