@@ -6,6 +6,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -17,6 +18,7 @@ import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -67,6 +69,7 @@ public class GUI extends Application {
     // Add event listeners.
     addKeyEventListeners(scene);
     addButtonEventListeners();
+    addWindowEventListeners(stage);
 
     // Render the static canvas
     renderPlatforms(staticPainter);
@@ -75,6 +78,11 @@ public class GUI extends Application {
     startAnimationTimer(stage, dynamicPainter);
 
     stage.show();
+  }
+
+  @Override
+  public void stop() {
+    System.exit(0);
   }
 
   /**
@@ -217,8 +225,8 @@ public class GUI extends Application {
       playerSprite = new Image(Constants.PLAYER_SPRITE_LEFT);
       playerDirection = -1;
     }
-    painter.drawImage(playerSprite, game.getCurrentLevel().getPlayer().getPosition().getX(), game
-        .getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(playerSprite, game.getCurrentLevel().getPlayer().getPosition().getX(),
+        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -244,8 +252,8 @@ public class GUI extends Application {
   private void renderMovingElements(GraphicsContext painter) {
     // Adding the initial enemy locations to the GUI.
     for (LevelElement current : game.getCurrentLevel().getMovingElements()) {
-      painter.drawImage(new Image(Constants.NPC_SPRITE_LEFT), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(Constants.NPC_SPRITE_LEFT), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -259,8 +267,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(Constants.PLATFORM_SPRITE), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -324,8 +332,8 @@ public class GUI extends Application {
 
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
-          Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-              Constants.BLOCKSIZE));
+          Bubble newBubble = new Bubble(bubblePos,
+              new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
           bubbles.add(newBubble);
           if (playerDirection == -1) {
             newBubble.addAction(BubbleAction.MoveLeft);
@@ -354,6 +362,21 @@ public class GUI extends Application {
       }
 
     });
+  }
+
+  /**
+   * Add WindowEvent listener to exit the application when the window is closed.
+   * 
+   * @param stage
+   *          The Stage used by the rest of the GUI
+   */
+  private void addWindowEventListeners(Stage stage) {
+    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+      public void handle(WindowEvent event) {
+        System.exit(0);
+      }
+    });
+
   }
 
 }
