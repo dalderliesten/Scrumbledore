@@ -18,6 +18,8 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param kinetics
    *          The Kinetics Level Modifier to be used.
+   * @param score
+   *          The Score Counter to be used.
    */
   public CollisionsLevelModifier(KineticsLevelModifier kinetics, ScoreCounter score) {
     this.kinetics = kinetics;
@@ -74,6 +76,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public void detectPlayerPlatform(Level level, double delta) {
     Player player = level.getPlayer();
 
@@ -122,6 +125,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public void detectBubblePlatform(Level level, double delta) {
     for (Bubble bubble : level.getBubbles()) {
       for (Platform platform : level.getPlatforms()) {
@@ -162,6 +166,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public void detectPlayerBubble(Level level, double delta) {
     Player player = level.getPlayer();
     ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
