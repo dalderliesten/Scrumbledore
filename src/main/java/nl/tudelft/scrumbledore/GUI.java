@@ -360,7 +360,7 @@ public class GUI extends Application {
         gameWinStage.setScene(gameWinScene);
         gameWinStage.show();
 
-        // Halting the animation timer. TODO make nice
+        // Halting the animation timer.
         animationTimer.stop();
       } else {
         // Logging the advancement in level.
