@@ -6,6 +6,7 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
+import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -19,6 +20,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -77,6 +79,7 @@ public class GUI extends Application {
     // Add event listeners.
     addKeyEventListeners(scene);
     addButtonEventListeners();
+    addWindowEventListeners(stage);
 
     renderStatic();
 
@@ -460,6 +463,21 @@ public class GUI extends Application {
       }
 
     });
+  }
+
+  /**
+   * Add WindowEvent listener to exit the application when the window is closed.
+   * 
+   * @param stage
+   *          The Stage used by the rest of the GUI
+   */
+  private void addWindowEventListeners(Stage stage) {
+    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+      public void handle(WindowEvent event) {
+        System.exit(0);
+      }
+    });
+
   }
 
 }
