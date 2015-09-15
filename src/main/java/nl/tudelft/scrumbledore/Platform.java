@@ -31,6 +31,7 @@ public class Platform extends LevelElement {
    * @return A Boolean.
    */
   @Override
+  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   public boolean equals(Object other) {
     if (other instanceof Platform) {
       Platform that = (Platform) other;

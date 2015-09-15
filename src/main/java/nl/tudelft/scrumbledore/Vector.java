@@ -7,6 +7,7 @@ package nl.tudelft.scrumbledore;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class Vector {
 
   private double entryX;
@@ -131,9 +132,7 @@ public class Vector {
    */
   @Override
   public Vector clone() {
-    double newX = entryX;
-    double newY = entryY;
-    return new Vector(newX, newY);
+    return new Vector(entryX, entryY);
   }
 
   /**
@@ -181,6 +180,7 @@ public class Vector {
    *          Another instance.
    * @return A Boolean.
    */
+  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   @Override
   public boolean equals(Object other) {
     if (other instanceof Vector) {
@@ -213,12 +213,4 @@ public class Vector {
 
   }
   
-  /**
-   * Debug toString method.
-   */
-  @Override
-  public String toString() {
-    return "Vector [entryX=" + entryX + ", entryY=" + entryY + "]";
-  }
-
 }

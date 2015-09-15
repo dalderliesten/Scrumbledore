@@ -19,7 +19,6 @@ public class KineticsTest {
 
   private Vector pos;
   private Vector size;
-  private Fruit f1;
   private KineticsLevelModifier kinetics;
 
   /**
@@ -31,7 +30,6 @@ public class KineticsTest {
   public void setUpBeforeClass() {
     pos = new Vector(1.0, 1.0);
     size = new Vector(1.0, 1.0);
-    f1 = new Fruit(pos, size);
     kinetics = new KineticsLevelModifier();
   }
 
@@ -116,7 +114,6 @@ public class KineticsTest {
   public void tearDownAfterClass() {
     pos = null;
     size = null;
-    f1 = null;
   }
 
 }

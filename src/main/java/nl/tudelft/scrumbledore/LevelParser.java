@@ -35,6 +35,7 @@ public class LevelParser {
       try {
         levels.add(readLevelFromFile(dir + "/" + levelFiles.get(idx)));
       } catch (FileNotFoundException e) {
+        e.printStackTrace();
       }
     }
     return levels;

@@ -6,7 +6,6 @@ import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.event.EventType;
 import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
@@ -14,7 +13,6 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -139,6 +137,7 @@ public class GUI extends Application {
   /**
    * Setup the GUI layout. Uses the Game View GUI Group.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
     layout = new VBox();

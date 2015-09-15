@@ -6,6 +6,7 @@ package nl.tudelft.scrumbledore;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class LevelElement {
 
   private Vector position;

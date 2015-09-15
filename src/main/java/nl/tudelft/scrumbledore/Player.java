@@ -122,6 +122,7 @@ public class Player extends LevelElement {
    * @return A Boolean.
    */
   @Override
+  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   public boolean equals(Object other) {
     if (other instanceof Player) {
       Player that = (Player) other;

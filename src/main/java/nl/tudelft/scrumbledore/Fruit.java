@@ -31,7 +31,7 @@ public class Fruit extends LevelElement {
    * @return A Boolean.
    */
   @Override
-  @SuppressWarnings("FindBugs.HE_EQUALS_USE_HASHCODE")
+  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
       Fruit that = (Fruit) other;

@@ -120,6 +120,7 @@ public class NPC extends LevelElement {
    *            An ArrayList of platform objects
    *            with the same height
    */
+  @SuppressWarnings("checkstyle:linelength")
   protected ArrayList<Platform> getPlatformsFromHeight(ArrayList<Platform> platforms, double height) {
     ArrayList<Platform> res = new ArrayList<Platform>();
     
@@ -143,6 +144,7 @@ public class NPC extends LevelElement {
    *          A Vector array with the left and right
    *          boundaries of the underlying floor
    */
+  @SuppressWarnings("checkstyle:methodlength")
   protected Vector[] floorMovementBoundaries(ArrayList<Platform> platformsIn) {
     double height = getPosition().getY() + Constants.BLOCKSIZE;
     ArrayList<Platform> platforms = getPlatformsFromHeight(platformsIn, height);
@@ -263,6 +265,7 @@ public class NPC extends LevelElement {
    *          Another instance.
    * @return A Boolean.
    */
+  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   @Override
   public boolean equals(Object other) {
     if (other instanceof NPC) {
