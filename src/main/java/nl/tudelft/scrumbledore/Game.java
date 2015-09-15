@@ -138,7 +138,7 @@ public class Game {
     construct(lp.getLevels());
 
     // Writing to the log that the game was restarted.
-    Logger.log("--------------------GAME RESTARTED--------------------");
+    Logger.log("--------------------PLAYED DIED--------------------");
   }
 
   /**

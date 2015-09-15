@@ -232,14 +232,8 @@ public class GUI extends Application {
     String spr = "player-left";
     if (isFiring && toRight) {
       spr = "player-shoot-right";
-
-      // Sending the shooting information to the logger.
-      Logger.log("Player shot in the eastern direction.");
     } else if (isFiring) {
       spr = "player-shoot-left";
-
-      // Sending the shooting information to the logger.
-      Logger.log("Player shot in the western direction.");
     } else if (toRight) {
       spr = "player-right";
     }
@@ -378,6 +372,9 @@ public class GUI extends Application {
    */
   private void checkPlayerAlive() {
     if (!game.getCurrentLevel().getPlayer().isAlive()) {
+      // Logging that the game has been restarted.
+      Logger.log("--------------------PLAYER RESTARTED THE GAME--------------------");
+      
       game.restart();
       renderStatic();
     }
@@ -396,7 +393,7 @@ public class GUI extends Application {
         // it resumes the game and changes the butotn label to start.
         if (timer.isPaused()) {
           // Logging that the game has been restarted.
-          Logger.log("Game has been re-started.");
+          Logger.log("Game has been restarted.");
 
           timer.resume();
           startStopButton.setText(Constants.STOPBTNLABEL);
@@ -471,8 +468,14 @@ public class GUI extends Application {
 
             bubbles.add(newBubble);
             if (player.getLastMove() == PlayerAction.MoveLeft) {
+              // Sending the shooting information to the logger.
+              Logger.log("Player shot in the western direction.");
+
               newBubble.addAction(BubbleAction.MoveLeft);
             } else {
+              // Sending the shooting information to the logger.
+              Logger.log("Player shot in the eastern direction.");
+
               newBubble.addAction(BubbleAction.MoveRight);
             }
           }
