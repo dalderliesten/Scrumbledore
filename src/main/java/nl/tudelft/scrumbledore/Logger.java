@@ -13,16 +13,21 @@ import java.util.Date;
  * 
  * @author David Alderliesten
  */
-public class Logger {
+public final class Logger {
   // The logging dir and file are utilized for storing of the logging file.
   File loggingDir;
   File loggingFile;
 
   /**
-   * Logger constructor for the creation of the logging file for this session, along with all the
-   * needed writers and file functions.
+   * Logger constructor. Is not used as the class is a utility class, and should not be insantiated.
    */
-  public Logger() {
+  private Logger() {
+  }
+
+  /**
+   * Starts the logging by creating the logging file upon request.
+   */
+  public void start() {
     // Creating the directory location.
     loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
 
