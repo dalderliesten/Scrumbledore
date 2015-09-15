@@ -17,6 +17,8 @@ public class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
+    Logger.start();
+    
     // Creating a launcher to launch the game and GUI.
     GUI.launch(GUI.class);
   }
