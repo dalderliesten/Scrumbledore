@@ -5,8 +5,6 @@ import static org.junit.Assert.assertEquals;
 import java.io.FileNotFoundException;
 import java.util.Scanner;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
 import org.junit.Test;
 
 /**

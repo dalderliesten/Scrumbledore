@@ -24,6 +24,15 @@ public class Fruit extends LevelElement {
 
   
   /**
+   * Dummy HashCode method to satisfy code quality tools.
+   */
+  @Override
+  public int hashCode() {
+    return 0;
+  }
+  
+  
+  /**
    * Check whether a given object is equal to this instance.
    * 
    * @param other
@@ -31,7 +40,6 @@ public class Fruit extends LevelElement {
    * @return A Boolean.
    */
   @Override
-  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
       Fruit that = (Fruit) other;

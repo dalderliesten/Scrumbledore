@@ -21,6 +21,15 @@ public class Platform extends LevelElement {
     
     isPassable = false;
   }
+
+
+  /**
+   * Dummy HashCode method to satisfy code quality tools.
+   */
+  @Override
+  public int hashCode() {
+    return 0;
+  }
   
   
   /**
@@ -31,7 +40,6 @@ public class Platform extends LevelElement {
    * @return A Boolean.
    */
   @Override
-  @SuppressWarnings("PMD.OverrideBothEqualsAndHashcode")
   public boolean equals(Object other) {
     if (other instanceof Platform) {
       Platform that = (Platform) other;

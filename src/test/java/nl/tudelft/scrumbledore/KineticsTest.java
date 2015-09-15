@@ -4,9 +4,8 @@ import static org.junit.Assert.assertEquals;
 
 //import static org.junit.Assert.*;
 
-import org.junit.After;
 import org.junit.Before;
-//import org.junit.Test;
+
 import org.junit.Test;
 
 /**
@@ -27,22 +26,6 @@ public class KineticsTest {
   @Before
   public void setUpBeforeClass() {
     kinetics = new KineticsLevelModifier();
-  }
-
-  /**
-   * Testing the addSpeed method.
-   */
-  @Test
-  public void testAddSpeed() {
-    // TO BE IMPLEMENTED
-  }
-
-  /**
-   * Testing the update method.
-   */
-  @Test
-  public void testUpdate() {
-    // TO BE IMPLEMENTED
   }
 
   /**
