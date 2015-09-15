@@ -10,7 +10,11 @@ import java.io.File;
  * @author David Alderliesten
  */
 public class Logger {
+  // The logging dir and file are utilized for storing of the logging file.
+  File loggingDir;
   File loggingFile;
+
+  // The log writer is used to actually write content to the created file(s).
   BufferedWriter logWriter;
 
   /**
@@ -18,7 +22,7 @@ public class Logger {
    * needed writers and file functions.
    */
   public Logger() {
-    loggingFile = new File(Constants.LOGGER_DIR);
-    logWriter = null;
+
   }
+
 }
