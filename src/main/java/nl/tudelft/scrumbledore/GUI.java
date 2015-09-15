@@ -232,8 +232,14 @@ public class GUI extends Application {
     String spr = "player-left";
     if (isFiring && toRight) {
       spr = "player-shoot-right";
+
+      // Sending the shooting information to the logger.
+      Logger.log("Player shot in the eastern direction.");
     } else if (isFiring) {
       spr = "player-shoot-left";
+
+      // Sending the shooting information to the logger.
+      Logger.log("Player shot in the western direction.");
     } else if (toRight) {
       spr = "player-right";
     }
@@ -334,7 +340,7 @@ public class GUI extends Application {
       if (game.remainingLevels() == 0) {
         // Log the completion of the game.
         Logger.log("Player completed the game.");
-        
+
         // Creating of the dialog pop-up stage.
         Stage gameWinStage = new Stage();
 
@@ -359,7 +365,7 @@ public class GUI extends Application {
       } else {
         // Logging the advancement in level.
         Logger.log("Player advanced to the next level.");
-        
+
         // Go to the next level and then re-render it.
         game.goToNextLevel();
         renderStatic();
