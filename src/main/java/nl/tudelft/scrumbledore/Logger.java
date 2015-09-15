@@ -59,4 +59,14 @@ public final class Logger {
     }
   }
 
+  /**
+   * Allows the caller to log the passed string in the current sessions' loging file.
+   * 
+   * @param toLog
+   *          The content that the caller wishes to be logged in the logging file.
+   */
+  public static void log(String toLog) {
+
+  }
+
 }
