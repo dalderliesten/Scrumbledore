@@ -233,7 +233,7 @@ public class NPC extends LevelElement {
    * Returns a vector array with the left and right
    * coordinates of free horizontal movement space.
    * 
-   * @param platformsIn
+   * @param platforms
    *          An ArrayList of Platforms
    * @return
    *          A Vector array with left and right coordinates 
