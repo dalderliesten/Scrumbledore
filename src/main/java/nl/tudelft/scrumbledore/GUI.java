@@ -409,6 +409,9 @@ public class GUI extends Application {
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
+        // Logging the termination of the game.
+        Logger.log("GAME TERMINATED");
+
         System.exit(0);
       }
 
@@ -500,6 +503,10 @@ public class GUI extends Application {
   private void addWindowEventListeners(Stage stage) {
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
       public void handle(WindowEvent event) {
+        // Logging the termination of the game.
+        Logger.log("GAME TERMINATED");
+
+        // Quitting the game.
         System.exit(0);
       }
     });
