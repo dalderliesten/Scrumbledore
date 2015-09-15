@@ -68,7 +68,7 @@ public final class Logger {
   public static void log(String toLog) {
     try {
       // Makes the buffered writer to write the desired string.
-      BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile));
+      BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
       buffWriter.write(toLog);
 
       // Closing the stream as both an optimization and as a bug removing technique, as closing it
