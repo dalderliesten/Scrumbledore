@@ -18,6 +18,9 @@ public final class Logger {
   static File loggingDir;
   static File loggingFile;
 
+  // A boolean to ensure that logging is only done if the file has been created.
+  static boolean isStarted = false;
+
   /**
    * Logger constructor. Is not used as the class is a utility class, and should not be insantiated.
    */
@@ -58,6 +61,8 @@ public final class Logger {
     } catch (IOException e) {
       System.out.println(e);
     }
+
+    isStarted = true;
   }
 
   /**
@@ -67,21 +72,23 @@ public final class Logger {
    *          The content that the caller wishes to be logged in the logging file.
    */
   public static void log(String toLog) {
-    try {
-      // Makes the buffered writer to write the desired string.
-      BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
+    if (isStarted == true) {
+      try {
+        // Makes the buffered writer to write the desired string.
+        BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
 
-      // Adds a new line to ensure that each log item takes up a new line.
-      buffWriter.newLine();
+        // Adds a new line to ensure that each log item takes up a new line.
+        buffWriter.newLine();
 
-      // Writing the passed log string to the log file.
-      buffWriter.write(toLog);
+        // Writing the passed log string to the log file.
+        buffWriter.write(toLog);
 
-      // Closing the stream as both an optimization and as a bug removing technique, as closing it
-      // always writes content.
-      buffWriter.close();
-    } catch (IOException e) {
-      System.out.println(e);
+        // Closing the stream as both an optimization and as a bug removing technique, as closing it
+        // always writes content.
+        buffWriter.close();
+      } catch (IOException e) {
+        System.out.println(e);
+      }
     }
   }
 
