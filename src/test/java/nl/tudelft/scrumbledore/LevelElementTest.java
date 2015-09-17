@@ -217,6 +217,19 @@ public abstract class LevelElementTest {
   }
   
   /**
+   * Test the hFric and vFric methods.
+   */
+  @Test
+  public void testFric() {
+    LevelElement l1 = make(position, size);
+    l1.getFriction().setX(5);
+    l1.getFriction().setY(7);
+
+    assertEquals(5, l1.hFric(), Constants.DOUBLE_PRECISION);
+    assertEquals(7, l1.vFric(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
    * Cleaning up test properties after testing.
    */
   @After
