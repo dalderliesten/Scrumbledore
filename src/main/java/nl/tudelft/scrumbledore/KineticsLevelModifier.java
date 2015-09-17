@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * The Kinetics class handles the position/speed of levelelements.
  * 
  * @author Floris Doolaard
- *
+ * @author David Alderliesten
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class KineticsLevelModifier implements LevelModifier {
@@ -70,6 +70,10 @@ public class KineticsLevelModifier implements LevelModifier {
     if (player.posY() + player.height() >= Constants.LEVELY) {
       player.getPosition().setY(player.height() / -2);
     }
+
+    // Logging the movement of the player within the level to the session log.
+    Logger.log("Player moved to " + player.getPosition().getX() + ", "
+        + player.getPosition().getY());
   }
 
   /**
@@ -226,4 +230,5 @@ public class KineticsLevelModifier implements LevelModifier {
     double newPos = snapTo.getBottom() + offset;
     snapper.getPosition().setY(newPos);
   }
+
 }

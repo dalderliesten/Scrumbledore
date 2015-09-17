@@ -123,18 +123,22 @@ public class Game {
     while (!currentLevel.equals(levels.get(index)) && index < levels.size()) {
       ++index;
     }
+
     // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
 
     invariant();
   }
-  
+
   /**
    * Restarting the game.
    */
   public void restart() {
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
+
+    // Writing to the log that the game was restarted.
+    Logger.log("--------------------PLAYED DIED--------------------");
   }
 
   /**
@@ -146,6 +150,8 @@ public class Game {
    */
   public void step(double delta) {
     for (LevelModifier modifier : modifiers) {
+      // Writing to the log that the next cycle has been entered.
+      // Logger.log("----------NEXT CYCLE----------");
       modifier.modify(currentLevel, delta);
     }
   }
