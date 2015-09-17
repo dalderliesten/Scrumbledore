@@ -27,6 +27,30 @@ public class KineticsLevelModifierTest {
   }
 
   /**
+   * The position of an element should be updated correctly when adding it's speed vector and taking
+   * the delta into account.
+   */
+  @Test
+  public void testAddSpeed() {
+    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    el.getSpeed().sum(new Vector(2, 2));
+    kinetics.addSpeed(el, 0.5);
+    assertEquals(new Vector(2, 3), el.getPosition());
+  }
+
+  /**
+   * The position of an element should be updated correctly when removing it's speed vector and
+   * taking the delta into account.
+   */
+  @Test
+  public void testRemoveSpeed() {
+    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    el.getSpeed().sum(new Vector(2, 2));
+    kinetics.removeSpeed(el, 0.5);
+    assertEquals(new Vector(0, 1), el.getPosition());
+  }
+
+  /**
    * When stopping a Level Element horizontally, its horizontal speed should be zero.
    */
   @Test
