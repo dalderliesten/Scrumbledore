@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
@@ -19,13 +20,15 @@ public class SpriteStoreTest {
    */
   @Test
   public void testRead() {
-    // Additionally test constructor with zero parameters, just for the line coverage.
-    SpriteStore additionalTest = new SpriteStore();
     // Actual fixtures, execution and assertion.
     String dir = "src/test/resources/sprites/";
     SpriteStore test = new SpriteStore(dir);
     assertEquals(1, test.getAll().size());
     assertTrue(test.getAll().get(0).getID().equals("test"));
+
+    // Additionally test constructor with zero parameters, just for the line coverage.
+    SpriteStore additionalTest = new SpriteStore();
+    assertFalse(additionalTest.getAll().isEmpty());
   }
 
   /**
