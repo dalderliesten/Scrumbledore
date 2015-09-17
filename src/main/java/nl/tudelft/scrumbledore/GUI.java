@@ -443,11 +443,6 @@ public class GUI extends Application {
         } else if (keyPress.equals("RIGHT")) {
           player.addAction(PlayerAction.MoveRight);
         } else if (keyPress.equals("UP")) {
-          // Logging the movement of the player to the game log.
-          Logger.log("Player jumped from position " + player.getPosition().getX() + ", "
-              + player.getPosition().getY());
-
-          // Performing the actual jumping action.
           player.addAction(PlayerAction.Jump);
         }
 
