@@ -27,6 +27,66 @@ public class KineticsLevelModifierTest {
   }
 
   /**
+   * When the an element has a speed larger than its friction vector, the friction vector simply
+   * needs to be absolutely subtracted from the speed vector. (MCDC)
+   */
+  @Test
+  public void testApplyFrictionSpeedLargerThanFriction() {
+    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    // Set speed
+    el.getSpeed().sum(new Vector(4, -4));
+    // Set friction
+    el.getFriction().setX(8);
+    el.getFriction().setY(8);
+    // The expected resulting speed vector given the delta
+    Vector expectedOut = new Vector(2, -2);
+
+    kinetics.applyFriction(el, .25);
+
+    assertEquals(expectedOut, el.getSpeed());
+  }
+
+  /**
+   * When an element has a speed x entry being smaller than the friction x entry to be subtracted,
+   * its speed x entry should be set to 0. (MCDC)
+   */
+  @Test
+  public void testApplyFrictionSpeedXSmaller() {
+    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    // Set speed
+    el.getSpeed().sum(new Vector(4, -4));
+    // Set friction
+    el.getFriction().setX(8);
+    el.getFriction().setY(4);
+    // The expected resulting speed vector given the delta
+    Vector expectedOut = new Vector(0, -1);
+
+    kinetics.applyFriction(el, .75);
+
+    assertEquals(expectedOut, el.getSpeed());
+  }
+
+  /**
+   * When an element has a speed y entry being smaller than the friction y entry to be subtracted,
+   * its speed y entry should be set to 0. (MCDC)
+   */
+  @Test
+  public void testApplyFrictionSpeedYSmaller() {
+    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    // Set speed
+    el.getSpeed().sum(new Vector(4, -4));
+    // Set friction
+    el.getFriction().setX(4);
+    el.getFriction().setY(8);
+    // The expected resulting speed vector given the delta
+    Vector expectedOut = new Vector(1, 0);
+
+    kinetics.applyFriction(el, .75);
+
+    assertEquals(expectedOut, el.getSpeed());
+  }
+
+  /**
    * The position of an element should be updated correctly when adding it's speed vector and taking
    * the delta into account.
    */
@@ -35,6 +95,8 @@ public class KineticsLevelModifierTest {
     LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
     kinetics.addSpeed(el, 0.5);
+    // For branch coverage:
+    kinetics.addSpeed(null, 1);
     assertEquals(new Vector(2, 3), el.getPosition());
   }
 
@@ -47,6 +109,8 @@ public class KineticsLevelModifierTest {
     LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
     kinetics.removeSpeed(el, 0.5);
+    // For branch coverage:
+    kinetics.removeSpeed(null, 1);
     assertEquals(new Vector(0, 1), el.getPosition());
   }
 
