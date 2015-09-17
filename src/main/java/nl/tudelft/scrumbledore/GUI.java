@@ -371,7 +371,7 @@ public class GUI extends Application {
   private void checkPlayerAlive() {
     if (!game.getCurrentLevel().getPlayer().isAlive()) {
       // Logging that the game has been restarted.
-      Logger.log("--------------------PLAYER RESTARTED THE GAME--------------------");
+      Logger.log("--------------------PLAYER RESTARTED THE GAME");
 
       game.restart();
       renderStatic();
@@ -411,7 +411,7 @@ public class GUI extends Application {
 
       public void handle(ActionEvent arg0) {
         // Logging the termination of the game.
-        Logger.log("GAME TERMINATED");
+        Logger.log("--------------------GAME TERMINATED");
 
         System.exit(0);
       }
@@ -452,7 +452,7 @@ public class GUI extends Application {
           player.addAction(PlayerAction.MoveRight);
         } else if (keyPress.equals("UP")) {
           // Logging the movement of the player to the game log.
-          Logger.log("Player jumped to " + player.getPosition().getX() + ", "
+          Logger.log("Player jumped from position " + player.getPosition().getX() + ", "
               + player.getPosition().getY());
 
           player.addAction(PlayerAction.Jump);
@@ -523,7 +523,7 @@ public class GUI extends Application {
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
       public void handle(WindowEvent event) {
         // Logging the termination of the game.
-        Logger.log("GAME TERMINATED");
+        Logger.log("--------------------GAME TERMINATED");
 
         // Quitting the game.
         System.exit(0);
