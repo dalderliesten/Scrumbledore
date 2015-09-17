@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore;
 
 import java.io.File;
 import java.util.ArrayList;
+
 import javafx.scene.image.Image;
 
 /**
@@ -14,11 +15,25 @@ import javafx.scene.image.Image;
 public class SpriteStore {
 
   private ArrayList<Sprite> sprites;
+  private String dir;
 
   /**
    * Construct a new Sprite Store by reading the Sprites from the file system.
    */
   public SpriteStore() {
+    this.dir = Constants.RESOURCES_DIR + Constants.SPRITES_DIR;
+    read();
+  }
+
+  /**
+   * Construct a new Sprite Store by reading the Sprites from the file system, from a given
+   * directory.
+   * 
+   * @param dir
+   *          The directory where sprites should be loaded from.
+   */
+  public SpriteStore(String dir) {
+    this.dir = dir;
     read();
   }
 
@@ -27,8 +42,8 @@ public class SpriteStore {
    */
   public void read() {
     sprites = new ArrayList<Sprite>();
-    final File dir = new File(Constants.RESOURCES_DIR + Constants.SPRITES_DIR);
-    for (final File fileEntry : dir.listFiles()) {
+    final File directory = new File(dir);
+    for (final File fileEntry : directory.listFiles()) {
       if (!fileEntry.isDirectory()) {
         String name = fileEntry.getName();
         int pos = name.lastIndexOf('.');
@@ -38,6 +53,15 @@ public class SpriteStore {
         sprites.add(spr);
       }
     }
+  }
+
+  /**
+   * Return the ArrayList of sprites in the Sprite Store.
+   * 
+   * @return An ArrayList of Sprites.
+   */
+  public ArrayList<Sprite> getAll() {
+    return sprites;
   }
 
   /**

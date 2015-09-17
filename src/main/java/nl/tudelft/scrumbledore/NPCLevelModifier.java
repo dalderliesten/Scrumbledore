@@ -36,11 +36,11 @@ public class NPCLevelModifier implements LevelModifier {
       Vector currentPosition = npc.getPosition();
 
       // Enemy is at left boundary, make it move to the right
-      if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[0])
+      if (currentPosition.distance(npc.getMovementBoundaries()[0]) < 8
           && npc.getMovementDirection().equals(NPCAction.MoveLeft)) {
         npc.getSpeed().setX(0);
         npc.setMovementDirection(NPCAction.MoveRight);
-      } else if (currentPosition.neighbouring(8, npc.getMovementBoundaries()[1])
+      } else if (currentPosition.distance(npc.getMovementBoundaries()[1]) < 8
           && npc.getMovementDirection().equals(NPCAction.MoveRight)) {
         npc.getSpeed().setX(0);
         npc.setMovementDirection(NPCAction.MoveLeft);

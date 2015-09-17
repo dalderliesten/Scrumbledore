@@ -56,7 +56,7 @@ public class Game {
     this.modifiers.add(new GravityLevelModifier());
     this.modifiers.add(new NPCLevelModifier());
     this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
-    this.modifiers.add(new BubbleActionLevelModifier());
+    this.modifiers.add(new BubbleActionsLevelModifier());
     this.modifiers.add(kinetics);
 
   }
