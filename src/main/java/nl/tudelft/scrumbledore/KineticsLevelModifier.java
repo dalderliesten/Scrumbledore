@@ -106,12 +106,12 @@ public class KineticsLevelModifier implements LevelModifier {
   public void applyFriction(LevelElement el, double d) {
     int signX = 0;
     int signY = 0;
-    if (Math.abs(el.hSpeed()) > el.hFric()) {
+    if (Math.abs(el.hSpeed()) > el.hFric() * d) {
       signX = (int) Math.signum(el.hSpeed());
     } else {
       stopHorizontally(el);
     }
-    if (Math.abs(el.vSpeed()) > el.vFric()) {
+    if (Math.abs(el.vSpeed()) > el.vFric() * d) {
       signY = (int) Math.signum(el.vSpeed());
     } else {
       stopVertically(el);
