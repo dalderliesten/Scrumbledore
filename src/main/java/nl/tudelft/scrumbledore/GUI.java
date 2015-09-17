@@ -439,16 +439,8 @@ public class GUI extends Application {
 
         // Mapping the desired keys to the desired actions.
         if (keyPress.equals("LEFT")) {
-          // Logging the movement of the player to the game log.
-          Logger.log("Player moved to " + player.getPosition().getX() + ", "
-              + player.getPosition().getY());
-
           player.addAction(PlayerAction.MoveLeft);
         } else if (keyPress.equals("RIGHT")) {
-          // Logging the movement of the player to the game log.
-          Logger.log("Player moved to " + player.getPosition().getX() + ", "
-              + player.getPosition().getY());
-
           player.addAction(PlayerAction.MoveRight);
         } else if (keyPress.equals("UP")) {
           // Logging the movement of the player to the game log.
