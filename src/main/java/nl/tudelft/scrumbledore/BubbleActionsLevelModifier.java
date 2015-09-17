@@ -8,7 +8,7 @@ import java.util.ArrayList;
  * @author Floris Doolaard
  *
  */
-public class BubbleActionLevelModifier implements LevelModifier {
+public class BubbleActionsLevelModifier implements LevelModifier {
 
   /**
    * Processing the actions to be performed on the Bubble.
