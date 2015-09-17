@@ -114,9 +114,6 @@ public class Player extends LevelElement {
     if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
       lastMove = action;
     }
-
-    // Logging the movement of the player to the game log.
-    Logger.log("Player moved to " + getPosition().getX() + ", " + getPosition().getY());
   }
 
   /**
@@ -132,7 +129,7 @@ public class Player extends LevelElement {
    * 
    * @param other
    *          Another instance.
-   * @return A Boolean.
+   * @return A boolean.
    */
   @Override
   public boolean equals(Object other) {
