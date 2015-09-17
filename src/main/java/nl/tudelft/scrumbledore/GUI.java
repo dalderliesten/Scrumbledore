@@ -32,9 +32,7 @@ import javafx.stage.WindowEvent;
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
-
   private SpriteStore sprites;
-
   private Stage stage;
   private Scene scene;
   private VBox layout;
@@ -374,7 +372,7 @@ public class GUI extends Application {
     if (!game.getCurrentLevel().getPlayer().isAlive()) {
       // Logging that the game has been restarted.
       Logger.log("--------------------PLAYER RESTARTED THE GAME--------------------");
-      
+
       game.restart();
       renderStatic();
     }
