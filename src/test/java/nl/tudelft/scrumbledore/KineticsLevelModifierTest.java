@@ -3,9 +3,7 @@ package nl.tudelft.scrumbledore;
 import static org.junit.Assert.assertEquals;
 
 //import static org.junit.Assert.*;
-
 import org.junit.Before;
-
 import org.junit.Test;
 
 /**
@@ -29,6 +27,28 @@ public class KineticsLevelModifierTest {
   }
 
   /**
+   * When stopping a Level Element horizontally, its horizontal speed should be zero.
+   */
+  @Test
+  public void testStopHorizontally() {
+    LevelElement el = new Bubble(new Vector(0, 0), new Vector(0, 0));
+    el.getSpeed().setX(42);
+    kinetics.stopHorizontally(el);
+    assertEquals(0, el.getSpeed().getX(), Constants.DOUBLE_PRECISION);
+  }
+
+  /**
+   * When stopping a Level Element vertically, its vertical speed should be zero.
+   */
+  @Test
+  public void testStopVertically() {
+    LevelElement el = new Bubble(new Vector(0, 0), new Vector(0, 0));
+    el.getSpeed().setY(42);
+    kinetics.stopVertically(el);
+    assertEquals(0, el.getSpeed().getY(), Constants.DOUBLE_PRECISION);
+  }
+
+  /**
    * The LevelElement should be correctly snapped the left side of another one using the snapLeft
    * method.
    */
@@ -41,7 +61,7 @@ public class KineticsLevelModifierTest {
 
     assertEquals(32, snapper.getPosition().getX(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * The LevelElement should be correctly snapped the right side of another one using the snapRight
    * method.
@@ -55,7 +75,7 @@ public class KineticsLevelModifierTest {
 
     assertEquals(32, snapper.getPosition().getX(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * The LevelElement should be correctly snapped the top side of another one using the snapTop
    * method.
@@ -69,7 +89,7 @@ public class KineticsLevelModifierTest {
 
     assertEquals(32, snapper.getPosition().getY(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * The LevelElement should be correctly snapped the top side of another one using the snapTop
    * method.
