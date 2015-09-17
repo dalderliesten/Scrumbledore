@@ -8,7 +8,7 @@ package nl.tudelft.scrumbledore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class Vector  implements Cloneable {
+public class Vector implements Cloneable {
 
   private double entryX;
   private double entryY;
@@ -116,30 +116,33 @@ public class Vector  implements Cloneable {
   public double length() {
     return Math.sqrt(dotProduct(this));
   }
-  
+
   /**
    * Returns the distance between this and a given other vector.
-   * @param vector The other vector.
+   * 
+   * @param vector
+   *          The other vector.
    * @return The distance.
    */
   public double distance(Vector vector) {
     Vector dv = Vector.difference(this, vector);
     return dv.length();
   }
-  
+
   /**
    * Returns a newly cloned Vector object.
    */
   @Override
-  public Vector clone() { 
+  public Vector clone() {
     try {
       return (Vector) super.clone();
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
-    
+
     return null;
-}
+  }
+
   /**
    * Get the X entry of the vector.
    * 
@@ -178,7 +181,6 @@ public class Vector  implements Cloneable {
     this.entryY = entryY;
   }
 
-  
   /**
    * Dummy HashCode method to satisfy code quality tools.
    */
@@ -186,7 +188,7 @@ public class Vector  implements Cloneable {
   public int hashCode() {
     return 0;
   }
-  
+
   /**
    * Check whether a given object is equal to this instance.
    * 
@@ -202,28 +204,5 @@ public class Vector  implements Cloneable {
     }
     return false;
   }
-  
-  /**
-   * Checks whether a given object is a Vector object that
-   * lies close to this instance.
-   * 
-   * @param precision
-   *          Margin for two Vectors to be considered 
-   *          neighbouring
-   * @param other
-   *          Another instance.
-   * @return A Boolean
-   */
-  public boolean neighbouring(int precision, Object other) {
-    if (other instanceof Vector) {
-      Vector that = (Vector) other;
-      if (Math.abs(this.getX() - that.getX()) <= precision 
-          && Math.abs(this.getY() - that.getY()) <= precision) {
-        return true;
-      }
-    }
-    return false;
 
-  }
-  
 }
