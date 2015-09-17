@@ -192,4 +192,99 @@ public class KineticsLevelModifierTest {
     assertEquals(32, snapper.getPosition().getY(), Constants.DOUBLE_PRECISION);
   }
 
+  /**
+   * When a Level is modified, the position of the Player should be updated correctly.
+   */
+  @Test
+  public void testModifyPlayer() {
+    Player player = new Player(new Vector(0, 0), new Vector(0, 0));
+    player.getSpeed().sum(new Vector(4, 4));
+    Level level = new Level();
+    level.addElement(player);
+    Vector expectedPosition = new Vector(2, 2);
+
+    kinetics.modify(level, .5);
+
+    assertEquals(expectedPosition, player.getPosition());
+  }
+
+  /**
+   * When a Level is modified and the Player is moving outside the bottom of the Level, the Player
+   * should be warped to the top of the Level.
+   */
+  @Test
+  public void testModifyPlayerWarp() {
+    Player player = new Player(new Vector(0, Constants.LEVELY), new Vector(0, 0));
+    player.getSpeed().sum(new Vector(4, 4));
+    Level level = new Level();
+    level.addElement(player);
+    Vector expectedPosition = new Vector(2, 0);
+
+    kinetics.modify(level, .5);
+
+    assertEquals(expectedPosition, player.getPosition());
+  }
+
+  /**
+   * When a Level is modified, the position and speed of the Bubbles should be updated correctly.
+   */
+  @Test
+  public void testModifyBubbles() {
+    // Dummy player
+    Player player = new Player(new Vector(0, 0), new Vector(0, 0));
+    // Fixtures of interest
+    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(0, 0));
+    bubble.getSpeed().sum(new Vector(4, 4));
+    bubble.getFriction().setX(4);
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(player);
+    Vector expectedPosition = new Vector(2, 2);
+    Vector expectedSpeed = new Vector(2, 4);
+
+    kinetics.modify(level, .5);
+
+    assertEquals(expectedPosition, bubble.getPosition());
+    assertEquals(expectedSpeed, bubble.getSpeed());
+  }
+
+  /**
+   * When a Level is modified, the position of the NPC's should be updated correctly.
+   */
+  @Test
+  public void testModifyNPC() {
+    // Dummy player
+    Player player = new Player(new Vector(0, 0), new Vector(0, 0));
+    // Fixtures of interest
+    NPC npc = new NPC(new Vector(0, 0), new Vector(0, 0));
+    npc.getSpeed().sum(new Vector(4, 4));
+    Level level = new Level();
+    level.addElement(npc);
+    level.addElement(player);
+    Vector expectedPosition = new Vector(2, 2);
+
+    kinetics.modify(level, .5);
+
+    assertEquals(expectedPosition, npc.getPosition());
+  }
+
+  /**
+   * When a Level is modified, the position of the Fruits should be updated correctly.
+   */
+  @Test
+  public void testModifyFruit() {
+    // Dummy player
+    Player player = new Player(new Vector(0, 0), new Vector(0, 0));
+    // Fixtures of interest
+    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(0, 0));
+    fruit.getSpeed().sum(new Vector(4, 4));
+    Level level = new Level();
+    level.addElement(fruit);
+    level.addElement(player);
+    Vector expectedPosition = new Vector(2, 2);
+
+    kinetics.modify(level, .5);
+
+    assertEquals(expectedPosition, fruit.getPosition());
+  }
 }
