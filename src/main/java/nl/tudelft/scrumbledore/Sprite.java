@@ -12,6 +12,7 @@ public class Sprite {
 
   private String id;
   private String ext;
+  private String dir;
 
   /**
    * Constructs a new sprite instance with the given id to reference an image file.
@@ -22,10 +23,12 @@ public class Sprite {
   public Sprite(String id) {
     this.id = id;
     this.ext = "png";
+    this.dir = Constants.SPRITES_DIR;
   }
 
   /**
-   * Constructs a new sprite instance with the given id to reference an image file.
+   * Constructs a new sprite instance with the given id to reference an image file and the extension
+   * of the file.
    * 
    * @param id
    *          Reference to an image file.
@@ -35,6 +38,24 @@ public class Sprite {
   public Sprite(String id, String ext) {
     this.id = id;
     this.ext = ext;
+    this.dir = Constants.SPRITES_DIR;
+  }
+
+  /**
+   * Constructs a new sprite instance with the given id to reference an image file, the extension of
+   * the file and the directory to look for it.
+   * 
+   * @param id
+   *          Reference to an image file.
+   * @param ext
+   *          The extension of the image file.
+   * @param dir
+   *          The directory to look for the file.
+   */
+  public Sprite(String id, String ext, String dir) {
+    this.id = id;
+    this.ext = ext;
+    this.dir = dir;
   }
 
   /**
@@ -52,7 +73,7 @@ public class Sprite {
    * @return File path.
    */
   public String getPath() {
-    return Constants.SPRITES_DIR + id + "." + ext;
+    return dir + id + "." + ext;
   }
 
   /**
