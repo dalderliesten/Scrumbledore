@@ -19,7 +19,7 @@ public final class Logger {
   static File loggingFile;
 
   // A boolean to ensure that logging is only done if the file has been created.
-  static boolean isStarted = false;
+  static boolean started = false;
 
   /**
    * Logger constructor. Is not used as the class is a utility class, and should not be insantiated.
@@ -62,7 +62,7 @@ public final class Logger {
       System.out.println(e);
     }
 
-    isStarted = true;
+    started = true;
   }
 
   /**
@@ -72,7 +72,7 @@ public final class Logger {
    *          The content that the caller wishes to be logged in the logging file.
    */
   public static void log(String toLog) {
-    if (isStarted == true) {
+    if (started == true) {
       try {
         // Makes the buffered writer to write the desired string.
         BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
