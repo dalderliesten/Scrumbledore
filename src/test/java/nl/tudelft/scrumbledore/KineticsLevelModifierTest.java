@@ -14,7 +14,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
-public class KineticsTest {
+public class KineticsLevelModifierTest {
 
   private KineticsLevelModifier kinetics;
 
