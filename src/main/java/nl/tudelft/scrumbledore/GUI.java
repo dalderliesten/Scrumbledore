@@ -447,6 +447,7 @@ public class GUI extends Application {
           Logger.log("Player jumped from position " + player.getPosition().getX() + ", "
               + player.getPosition().getY());
 
+          // Performing the actual jumping action.
           player.addAction(PlayerAction.Jump);
         }
 

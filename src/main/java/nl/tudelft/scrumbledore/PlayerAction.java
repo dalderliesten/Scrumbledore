@@ -3,7 +3,7 @@ package nl.tudelft.scrumbledore;
 /**
  * Enumeration containing types of actions that the player can perform.
  * 
- * @author jesse
+ * @author Jesse Tilro
  *
  */
 public enum PlayerAction {
