@@ -32,9 +32,7 @@ import javafx.stage.WindowEvent;
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
-
   private SpriteStore sprites;
-
   private Stage stage;
   private Scene scene;
   private VBox layout;
@@ -332,6 +330,9 @@ public class GUI extends Application {
 
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
+        // Log the completion of the game.
+        Logger.log("Player completed the game.");
+
         // Creating of the dialog pop-up stage.
         Stage gameWinStage = new Stage();
 
@@ -351,9 +352,12 @@ public class GUI extends Application {
         gameWinStage.setScene(gameWinScene);
         gameWinStage.show();
 
-        // Halting the animation timer. TODO make nice
+        // Halting the animation timer.
         animationTimer.stop();
       } else {
+        // Logging the advancement in level.
+        Logger.log("Player advanced to the next level.");
+
         // Go to the next level and then re-render it.
         game.goToNextLevel();
         renderStatic();
@@ -366,6 +370,9 @@ public class GUI extends Application {
    */
   private void checkPlayerAlive() {
     if (!game.getCurrentLevel().getPlayer().isAlive()) {
+      // Logging that the game has been restarted.
+      Logger.log("--------------------PLAYER RESTARTED THE GAME");
+
       game.restart();
       renderStatic();
     }
@@ -383,9 +390,15 @@ public class GUI extends Application {
         // If the game is paused, it will resume it and change the button label to stop. Otherwise,
         // it resumes the game and changes the butotn label to start.
         if (timer.isPaused()) {
+          // Logging that the game has been restarted.
+          Logger.log("Game has been restarted.");
+
           timer.resume();
           startStopButton.setText(Constants.STOPBTNLABEL);
         } else {
+          // Writing to the game log that the game has been paused.
+          Logger.log("Game has been paused.");
+
           timer.pause();
           startStopButton.setText(Constants.STARTBTNLABEL);
         }
@@ -397,6 +410,9 @@ public class GUI extends Application {
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
+        // Logging the termination of the game.
+        Logger.log("--------------------GAME TERMINATED");
+
         System.exit(0);
       }
 
@@ -438,8 +454,14 @@ public class GUI extends Application {
 
             bubbles.add(newBubble);
             if (player.getLastMove() == PlayerAction.MoveLeft) {
+              // Sending the shooting information to the logger.
+              Logger.log("Player shot in the western direction.");
+
               newBubble.addAction(BubbleAction.MoveLeft);
             } else {
+              // Sending the shooting information to the logger.
+              Logger.log("Player shot in the eastern direction.");
+
               newBubble.addAction(BubbleAction.MoveRight);
             }
           }
@@ -488,6 +510,10 @@ public class GUI extends Application {
   private void addWindowEventListeners(Stage stage) {
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
       public void handle(WindowEvent event) {
+        // Logging the termination of the game.
+        Logger.log("--------------------GAME TERMINATED");
+
+        // Quitting the game.
         System.exit(0);
       }
     });

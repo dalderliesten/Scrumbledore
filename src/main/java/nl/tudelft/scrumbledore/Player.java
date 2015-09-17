@@ -7,9 +7,9 @@ import java.util.ArrayList;
  * 
  * @author Niels Warnars
  * @author Jesse Tilro
+ * @author David Alderliesten
  */
 public class Player extends LevelElement {
-
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
   private Boolean firing;
@@ -53,18 +53,19 @@ public class Player extends LevelElement {
   public void clearActions() {
     actions.clear();
   }
-  
+
   /**
    * Checking wether the player is alive.
-   * @return
-   *       The boolean if the player is alive.
+   * 
+   * @return The boolean if the player is alive.
    */
   public Boolean isAlive() {
     return alive;
   }
-  
+
   /**
    * Setting the life of the player.
+   * 
    * @param bool
    *          Can be True or False, stated on situation of player.
    */
@@ -109,6 +110,7 @@ public class Player extends LevelElement {
    *          The last move action performed.
    */
   public void setLastMove(PlayerAction action) {
+    // Mapping the last action to the arraylist with actions.
     if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
       lastMove = action;
     }
@@ -121,13 +123,13 @@ public class Player extends LevelElement {
   public int hashCode() {
     return 0;
   }
-  
+
   /**
    * Check whether a given object is equal to this instance.
    * 
    * @param other
    *          Another instance.
-   * @return A Boolean.
+   * @return A boolean.
    */
   @Override
   public boolean equals(Object other) {
@@ -151,12 +153,12 @@ public class Player extends LevelElement {
 
   /**
    * Set whether the Player is firing.
+   * 
    * @param isFiring
    *          whether the Player is firing
    */
   public void setFiring(Boolean isFiring) {
     this.firing = isFiring;
   }
-  
-  
+
 }
