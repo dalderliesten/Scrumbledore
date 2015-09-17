@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNull;
 
 import java.util.ArrayList;
 
@@ -28,12 +27,7 @@ public class LevelTest {
     level.addElement(fr);
     level.addElement(npc);
     
-    ArrayList<NPC> npcs = level.getNPCs();
-
-    // Check whether other elements did not get created
-    assertNull(level.getPlayer());
-    assertEquals(level.getPlatforms().size(), 0);
-    
+    ArrayList<NPC> npcs = level.getNPCs(); 
     assertEquals(npcs.size(), 1);
     assertEquals(npcs.get(0).getClass(), NPC.class);
   }
@@ -53,10 +47,6 @@ public class LevelTest {
     level.addElement(p2);
     
     ArrayList<Platform> platforms = level.getPlatforms();
-
-    // Check whether other elements did not get created
-    assertNull(level.getPlayer());
-
     assertEquals(platforms.size(), 2);
     assertEquals(platforms.get(0).getClass(), Platform.class);
     assertEquals(platforms.get(1).getClass(), Platform.class);
@@ -74,45 +64,46 @@ public class LevelTest {
     Player testPlayer = new Player(basicVt, basicVt);
 
     level.addElement(player);
-
-    // Check whether other elements did not get created
-    assertEquals(level.getPlatforms().size(), 0);
-    
     assertEquals(level.getPlayer(), testPlayer);
   }
 
 
   /**
    * Test case in which the addElement is tested
-   * using with different objects.
+   * using Fruit objects.
    */
   @Test
-  public void testAddElementMixed() {
+  public void testAddElementFruits() {
     Level level = new Level();
+    Fruit f1 = new Fruit(basicVt, basicVt);
+    Fruit f2 = new Fruit(basicVt, basicVt);
     
-    Platform platform = new Platform(basicVt, basicVt);
-    Player player = new Player(basicVt, basicVt);
-    NPC npc = new NPC(basicVt, basicVt);
-
-    level.addElement(platform);
-    level.addElement(player);
-    level.addElement(npc);
+    level.addElement(f1);
+    level.addElement(f2);
     
-    ArrayList<NPC> npcs = level.getNPCs();
-    ArrayList<Platform> platforms = level.getPlatforms();
-    Player testPlayer = new Player(basicVt, basicVt);
-    
-    // Assert Platform
-    assertEquals(platforms.size(), 1);
-    assertEquals(platforms.get(0).getClass(), Platform.class);
-    
-    // Assert Player
-    assertEquals(level.getPlayer(), testPlayer);
-
-    // Assert Moving Elements
-    assertEquals(npcs.size(), 1);
-    assertEquals(npcs.get(0).getClass(), NPC.class);
+    ArrayList<Fruit> fruits = level.getFruits();
+    assertEquals(fruits.size(), 2);
+    assertEquals(fruits.get(0).getClass(), Fruit.class);
+    assertEquals(fruits.get(1).getClass(), Fruit.class);
   }
 
+  /**
+   * Test case in which the addElement is tested
+   * using Bubble objects.
+   */
+  @Test
+  public void testAddElementBubbles() {
+    Level level = new Level();
+    Bubble b1 = new Bubble(basicVt, basicVt);
+    Bubble b2 = new Bubble(basicVt, basicVt);
+    
+    level.addElement(b1);
+    level.addElement(b2);
+    
+    ArrayList<Bubble> bubbles = level.getBubbles();
+    assertEquals(bubbles.size(), 2);
+    assertEquals(bubbles.get(0).getClass(), Bubble.class);
+    assertEquals(bubbles.get(1).getClass(), Bubble.class);
+  }
 }
 
