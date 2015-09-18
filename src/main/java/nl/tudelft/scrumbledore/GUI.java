@@ -535,9 +535,13 @@ public class GUI extends Application {
 
     // Adding content of the settings menu to the VBox.
     Label settingsHeader = new Label(Constants.SETTINGSBTNLABEL);
+    Label playerMoveLog = new Label(Constants.LOGGING_PLAYER_MOVEMENT);
+    Label playerJumpLog = new Label(Constants.LOGGING_PLAYER_INPUT);
+    Label playerShootingLog = new Label(Constants.LOGGING_SHOOTING);
+    Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
 
     // Adding all the content for the settings menu to the settings scene.
-    settingsBox.getChildren().addAll(settingsHeader);
+    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, playerJumpLog, playerShootingLog, gameStateLog);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
