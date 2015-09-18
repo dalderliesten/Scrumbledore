@@ -6,7 +6,7 @@
 Repository for project group 12 at the TU Delft, consisting of David Alderliesten, Jesse Tilro, Floris Doolaard, Jeroen Meijer, and Niels Warnars.
 
 # Controls
-Due to the lack of an in-game settings menu (which is being worked on), the controls for the game can be found below:
+The in-game settings menu does not yet have key display/binding (which is being worked on), so the controls for the game can be found below:
 
 * Up Arrow = Jump.
 * Left Arrow = Move Left.
