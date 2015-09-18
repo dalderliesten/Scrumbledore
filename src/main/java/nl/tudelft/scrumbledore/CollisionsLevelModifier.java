@@ -8,6 +8,7 @@ import java.util.ArrayList;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class CollisionsLevelModifier implements LevelModifier {
 
   private KineticsLevelModifier kinetics;
