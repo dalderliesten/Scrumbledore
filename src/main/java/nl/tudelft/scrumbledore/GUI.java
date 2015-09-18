@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
 
 /**
@@ -523,7 +524,16 @@ public class GUI extends Application {
    * Handles the creation and feature functioning of the settings menu.
    */
   private void settingsMenu() {
-    
+    // Creation and formatting of the settings stage.
+    Stage settingsStage = new Stage();
+    settingsStage.initStyle(StageStyle.UTILITY);
+
+    // Creation of the scene and adding it to the settings stage.
+    Scene settingsScene = new Scene(settingsStage);
+    settingsStage.setScene(settingsScene);
+
+    // Actual display of the settings stage.
+    settingsStage.show();
   }
 
   /**
