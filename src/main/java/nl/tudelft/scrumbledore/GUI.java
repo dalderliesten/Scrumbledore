@@ -30,8 +30,8 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({"PMD.TooManyMethods", "PMD.NPathComplexity", "PMD.CyclomaticComplexity", 
-  "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity"})
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.NPathComplexity", "PMD.CyclomaticComplexity",
+    "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -390,14 +390,18 @@ public class GUI extends Application {
         // If the game is paused, it will resume it and change the button label to stop. Otherwise,
         // it resumes the game and changes the butotn label to start.
         if (timer.isPaused()) {
-          // Logging that the game has been restarted.
-          Logger.log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
+          if (Constants.LOGGING_WANTSTARTSTOP) {
+            // Logging that the game has been restarted.
+            Logger.log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
+          }
 
           timer.resume();
           startStopButton.setText(Constants.STOPBTNLABEL);
         } else {
-          // Writing to the game log that the game has been paused.
-          Logger.log("--------------------GAME HAS BEEN PAUSED");
+          if (Constants.LOGGING_WANTSTARTSTOP) {
+            // Writing to the game log that the game has been paused.
+            Logger.log("--------------------GAME HAS BEEN PAUSED");
+          }
 
           timer.pause();
           startStopButton.setText(Constants.STARTBTNLABEL);
@@ -422,11 +426,14 @@ public class GUI extends Application {
         // Handling the creation and running of the settings menu.
         settingsMenu();
 
-        // Logging the entering of the settings menu and subsequent pausing of the game.
-        Logger.log("--------------------SETTINGS MENU OPENED");
+        if (Constants.LOGGING_WANTSTARTSTOP) {
+          // Logging the entering of the settings menu and subsequent pausing of the game.
+          Logger.log("--------------------SETTINGS MENU OPENED");
 
-        // Writing to the game log that the game has been paused.
-        Logger.log("--------------------GAME HAS BEEN PAUSED");
+          // Writing to the game log that the game has been paused.
+          Logger.log("--------------------GAME HAS BEEN PAUSED");
+        }
+
       }
 
     });
@@ -479,13 +486,17 @@ public class GUI extends Application {
 
             bubbles.add(newBubble);
             if (player.getLastMove() == PlayerAction.MoveLeft) {
-              // Sending the shooting information to the logger.
-              Logger.log("Player shot in the western direction.");
+              if (Constants.LOGGING_WANTSHOOTING) {
+                // Sending the shooting information to the logger.
+                Logger.log("Player shot in the western direction.");
+              }
 
               newBubble.addAction(BubbleAction.MoveLeft);
             } else {
-              // Sending the shooting information to the logger.
-              Logger.log("Player shot in the eastern direction.");
+              if (Constants.LOGGING_WANTSHOOTING) {
+                // Sending the shooting information to the logger.
+                Logger.log("Player shot in the eastern direction.");
+              }
 
               newBubble.addAction(BubbleAction.MoveRight);
             }
@@ -556,8 +567,10 @@ public class GUI extends Application {
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        // Logging the closing of the settings menu..
-        Logger.log("--------------------SETTINGS MENU CLOSED");
+        if (Constants.LOGGING_WANTSTARTSTOP) {
+          // Logging the closing of the settings menu.
+          Logger.log("--------------------SETTINGS MENU CLOSED");
+        }
 
         // Closing the settings GUI.
         settingsStage.close();
@@ -636,8 +649,7 @@ public class GUI extends Application {
   private void addWindowEventListeners(Stage stage) {
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
       public void handle(WindowEvent event) {
-        
-        
+
         // Logging the termination of the game.
         Logger.log("--------------------GAME TERMINATED");
 
