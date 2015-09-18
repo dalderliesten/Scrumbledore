@@ -24,31 +24,42 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     if (player.hasAction(PlayerAction.MoveStop)) {
       player.getSpeed().setX(0);
 
-      // Logging the stopping of player-caused movement.
-      Logger.log("Player stopped moving.");
+      if (Constants.LOGGING_WANTINPUT) {
+        // Logging the stopping of player-caused movement.
+        Logger.log("Player stopped moving.");
+      }
+
     }
 
     // Horizontal Movement.
     if (player.hasAction(PlayerAction.MoveLeft)) {
       player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+      if (Constants.LOGGING_WANTINPUT) {
+        // Logging the moving to the left action.
+        Logger.log("Player performed the move left action.");
+      }
 
-      // Logging the moving to the left action.
-      Logger.log("Player performed the move left action.");
     }
 
     if (player.hasAction(PlayerAction.MoveRight)) {
       player.getSpeed().setX(Constants.PLAYER_SPEED);
 
-      // Logging the moving to the right action.
-      Logger.log("Player performed the move right action.");
+      if (Constants.LOGGING_WANTINPUT) {
+        // Logging the moving to the right action.
+        Logger.log("Player performed the move right action.");
+      }
+
     }
 
     // Jumping
     if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
       player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
 
-      // Logging the jumping action.
-      Logger.log("Player performed the jump action.");
+      if (Constants.LOGGING_WANTINPUT) {
+        // Logging the jumping action.
+        Logger.log("Player performed the jump action.");
+      }
+
     }
 
     // Clear actions for next step.

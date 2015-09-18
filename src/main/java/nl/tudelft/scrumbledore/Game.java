@@ -138,7 +138,7 @@ public class Game {
     construct(lp.getLevels());
 
     // Writing to the log that the game was restarted.
-    Logger.log("--------------------PLAYED DIED--------------------");
+    Logger.log("--------------------PLAYED DIED");
   }
 
   /**
@@ -150,8 +150,6 @@ public class Game {
    */
   public void step(double delta) {
     for (LevelModifier modifier : modifiers) {
-      // Writing to the log that the next cycle has been entered.
-      // Logger.log("----------NEXT CYCLE----------");
       modifier.modify(currentLevel, delta);
     }
   }

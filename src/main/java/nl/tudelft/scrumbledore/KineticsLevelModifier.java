@@ -71,9 +71,11 @@ public class KineticsLevelModifier implements LevelModifier {
       player.getPosition().setY(player.height() / -2);
     }
 
-    // Logging the movement of the player within the level to the session log.
-    Logger.log("Player moved to " + player.getPosition().getX() + ", "
-        + player.getPosition().getY());
+    if (Constants.LOGGING_WANTMOVEMENT) {
+      // Logging the movement of the player within the level to the session log.
+      Logger.log("Player moved to " + player.getPosition().getX() + ", "
+          + player.getPosition().getY());
+    }
   }
 
   /**
