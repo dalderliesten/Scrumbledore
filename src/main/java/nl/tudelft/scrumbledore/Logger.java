@@ -53,7 +53,7 @@ public final class Logger {
 
       // Writing initial content to the file.
       BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile));
-      buffWriter.write("SCRUMBLEDORE LOGGING FILE");
+      buffWriter.write("--------------------SCRUMBLEDORE LOGGING FILE");
 
       // Closing the stream as both an optimization and as a bug removing technique, as closing it
       // always writes content.

@@ -1,8 +1,10 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -584,11 +586,18 @@ public class GUI extends Application {
     HBox movementToggleBox = new HBox(15);
     RadioButton movementLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     movementLogTrue.setToggleGroup(playerMovementGroup);
-    movementLogTrue.setSelected(true);
+    movementLogTrue.setSelected(false);
     RadioButton movementLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     movementLogFalse.setToggleGroup(playerMovementGroup);
-    movementLogFalse.setSelected(false);
+    movementLogFalse.setSelected(true);
     movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
+
+    // Handling the toggle options.
+    if (playerMovementGroup.getSelectedToggle() == movementLogTrue) {
+      Constants.LOGGING_WANTMOVEMENT = true;
+    } else {
+      Constants.LOGGING_WANTMOVEMENT = false;
+    }
 
     // Creation of the buttons and handler for the player input groups. Includes the creation of
     // all grouping and positioning elements.
@@ -596,10 +605,10 @@ public class GUI extends Application {
     HBox inputToggleBox = new HBox(15);
     RadioButton inputLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     inputLogTrue.setToggleGroup(playerInputGroup);
-    inputLogTrue.setSelected(true);
+    inputLogTrue.setSelected(false);
     RadioButton inputLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     inputLogFalse.setToggleGroup(playerInputGroup);
-    inputLogFalse.setSelected(false);
+    inputLogFalse.setSelected(true);
     inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
 
     // Creation of the buttons and handler for the player shooting groups. Includes the creation of
@@ -608,10 +617,10 @@ public class GUI extends Application {
     HBox shootToggleBox = new HBox(15);
     RadioButton shootLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     shootLogTrue.setToggleGroup(playerShootGroup);
-    shootLogTrue.setSelected(true);
+    shootLogTrue.setSelected(false);
     RadioButton shootLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     shootLogFalse.setToggleGroup(playerShootGroup);
-    shootLogFalse.setSelected(false);
+    shootLogFalse.setSelected(true);
     shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
 
     // Creation of the buttons and handler for the game tracking groups. Includes the creation of
@@ -620,10 +629,10 @@ public class GUI extends Application {
     HBox gameLogBox = new HBox(15);
     RadioButton gameLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     gameLogTrue.setToggleGroup(gameLogGroup);
-    gameLogTrue.setSelected(true);
+    gameLogTrue.setSelected(false);
     RadioButton gameLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     gameLogFalse.setToggleGroup(gameLogGroup);
-    gameLogFalse.setSelected(false);
+    gameLogFalse.setSelected(true);
     gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
 
     // Adding all the content for the settings menu to the settings scene.
