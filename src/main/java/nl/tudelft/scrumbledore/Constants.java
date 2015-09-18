@@ -38,6 +38,8 @@ abstract class Constants {
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
   public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game pausing and playing?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
+  public static final String LOGGING_ACTIVE = "Active";
+  public static final String LOGGING_DISABLED = "Disabled";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";

@@ -13,6 +13,8 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -77,7 +79,7 @@ public class GUI extends Application {
     // Add event listeners.
     addKeyEventListeners(scene);
     addButtonEventListeners();
-    // addWindowEventListeners(stage);
+    addWindowEventListeners(stage);
 
     renderStatic();
 
@@ -563,9 +565,15 @@ public class GUI extends Application {
 
     });
 
+    // Creation of the buttons and handler for the player movement groups.
+    final ToggleGroup playerMovementGroup = new ToggleGroup();
+    RadioButton movementLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    movementLogTrue.setToggleGroup(playerMovementGroup);
+    movementLogTrue.setSelected(true);
+
     // Adding all the content for the settings menu to the settings scene.
-    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, playerJumpLog,
-        playerShootingLog, gameStateLog, exitButton);
+    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementLogTrue,
+        playerJumpLog, playerShootingLog, gameStateLog, exitButton);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
