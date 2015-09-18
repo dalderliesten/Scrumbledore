@@ -332,7 +332,7 @@ public class GUI extends Application {
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
         // Log the completion of the game.
-        Logger.log("Player completed the game.");
+        Logger.log("Player completed the game successfully.");
 
         // Creating of the dialog pop-up stage.
         Stage gameWinStage = new Stage();
@@ -371,9 +371,6 @@ public class GUI extends Application {
    */
   private void checkPlayerAlive() {
     if (!game.getCurrentLevel().getPlayer().isAlive()) {
-      // Logging that the game has been restarted.
-      Logger.log("--------------------PLAYER RESTARTED THE GAME");
-
       game.restart();
       renderStatic();
     }
@@ -392,13 +389,13 @@ public class GUI extends Application {
         // it resumes the game and changes the butotn label to start.
         if (timer.isPaused()) {
           // Logging that the game has been restarted.
-          Logger.log("Game has been restarted.");
+          Logger.log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
 
           timer.resume();
           startStopButton.setText(Constants.STOPBTNLABEL);
         } else {
           // Writing to the game log that the game has been paused.
-          Logger.log("Game has been paused.");
+          Logger.log("--------------------GAME HAS BEEN PAUSED");
 
           timer.pause();
           startStopButton.setText(Constants.STARTBTNLABEL);
@@ -420,7 +417,7 @@ public class GUI extends Application {
         settingsMenu();
 
         // Logging the entering of the settings menu and subsequent pausing of the game.
-        Logger.log("Player entered the settings menu.");
+        Logger.log("--------------------SETTINGS MENU OPENED");
       }
 
     });
