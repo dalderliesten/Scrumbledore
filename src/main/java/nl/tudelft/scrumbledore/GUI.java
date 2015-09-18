@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.event.ActionEvent;
@@ -637,6 +636,8 @@ public class GUI extends Application {
   private void addWindowEventListeners(Stage stage) {
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
       public void handle(WindowEvent event) {
+        
+        
         // Logging the termination of the game.
         Logger.log("--------------------GAME TERMINATED");
 
