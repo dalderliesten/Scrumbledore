@@ -412,6 +412,8 @@ public class GUI extends Application {
         if (timer.isPaused() == false) {
           timer.pause();
         }
+        
+        startStopButton.setText(Constants.STARTBTNLABEL);
 
         // Handling the creation and running of the settings menu.
         settingsMenu();
