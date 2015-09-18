@@ -528,6 +528,11 @@ public class GUI extends Application {
     Stage settingsStage = new Stage();
     settingsStage.initStyle(StageStyle.UTILITY);
 
+    // Styling the settings window height and width.
+    settingsStage.setWidth(Constants.GUIX);
+    settingsStage.setHeight(Constants.GUIY);
+    settingsStage.setResizable(false);
+
     // Creation of the vertical box for settings display in a vertical manner.
     VBox settingsBox = new VBox();
 
