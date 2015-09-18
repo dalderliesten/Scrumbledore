@@ -35,6 +35,7 @@ public class LevelParser {
       try {
         levels.add(readLevelFromFile(dir + "/" + levelFiles.get(idx)));
       } catch (FileNotFoundException e) {
+        e.printStackTrace();
       }
     }
     return levels;
@@ -52,12 +53,13 @@ public class LevelParser {
     File resourceFolder = new File(dir);
     File[] files = resourceFolder.listFiles();
 
-    for (File file : files) {
-      if (file.isFile()) {
-        levelFiles.add(file.getName());
+    if (files != null) {
+      for (File file : files) {
+        if (file.isFile()) {
+          levelFiles.add(file.getName());
+        }
       }
     }
-
     return levelFiles;
   }
 
@@ -71,7 +73,7 @@ public class LevelParser {
    * @return A level object
    */
   protected Level readLevelFromFile(String inFile) throws FileNotFoundException {
-    return readLevelFromScanner(new Scanner(new File(inFile)));
+    return readLevelFromScanner(new Scanner(new File(inFile), "UTF-8"));
   }
 
   /**

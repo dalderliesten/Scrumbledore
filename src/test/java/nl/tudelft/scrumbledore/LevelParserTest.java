@@ -15,6 +15,7 @@ import org.junit.Test;
  * 
  * @author Niels Warnars
  */
+@SuppressWarnings("checkstyle:JUnitTestContainsTooManyAsserts")
 public class LevelParserTest {
   private static final double B_ONE = 0;
   private static final double B_TWO = B_ONE + Constants.BLOCKSIZE;
@@ -62,7 +63,7 @@ public class LevelParserTest {
   public void testFileNotFound() {
     LevelParser lp = new LevelParser();
     try {
-      lp.readLevelFromFile("C:\\dummy.txt");
+      lp.readLevelFromFile("dummy.txt");
     } catch (FileNotFoundException e) {
       assertEquals(e.getClass(), FileNotFoundException.class);
     }
@@ -82,6 +83,7 @@ public class LevelParserTest {
     try {
       level = lp.readLevelFromScanner(sc);
     } catch (FileNotFoundException e) {
+      assertEquals(e.getClass(), FileNotFoundException.class);
     }
 
     ArrayList<NPC> npcs = level.getNPCs();

@@ -56,7 +56,7 @@ public class Game {
     this.modifiers.add(new GravityLevelModifier());
     this.modifiers.add(new NPCLevelModifier());
     this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
-    this.modifiers.add(new BubbleActionLevelModifier());
+    this.modifiers.add(new BubbleActionsLevelModifier());
     this.modifiers.add(kinetics);
 
   }
@@ -123,18 +123,22 @@ public class Game {
     while (!currentLevel.equals(levels.get(index)) && index < levels.size()) {
       ++index;
     }
+
     // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
 
     invariant();
   }
-  
+
   /**
    * Restarting the game.
    */
   public void restart() {
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
+
+    // Writing to the log that the game was restarted.
+    Logger.log("--------------------PLAYED DIED");
   }
 
   /**

@@ -1,40 +1,82 @@
 package nl.tudelft.scrumbledore;
 
-//import static org.junit.Assert.*;
 
-import org.junit.AfterClass;
-import org.junit.BeforeClass;
-//import org.junit.TestClass;
+import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
+
+import org.junit.Test;
 
 /**
- * Testing the Fruit class.
+ * Test case for the Fruit class.
  * 
- * @author Floris Doolaard
- *
+ * @author Niels Warnars
  */
-public class FruitTest extends LevelElementTest {
+public class FruitTest {
 
   /**
-   * Setting up test properties.
-   * 
-   * @throws Exception
+   * Test the Fruit() constructor.
    */
-  @BeforeClass
-  public static void setUpBeforeClass() throws Exception {
+  @Test
+  public void testFruit() {
+    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
+   
+    assertEquals(new Vector(0, 0), fruit.getPosition());
+    assertEquals(new Vector(32, 32), fruit.getSize());
+    assertTrue(fruit.hasGravity());
   }
-
+  
   /**
-   * Deleting test properties after testing.
-   * 
-   * @throws Exception
+   * Test the get/setValue methods.
    */
-  @AfterClass
-  public static void tearDownAfterClass() throws Exception {
+  @Test
+  public void testGetSetValue() {
+    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    
+    fruit.setValue(42);
+    assertEquals(42, fruit.getValue());
   }
-
-  @Override
-  public LevelElement make(Vector position, Vector size) {
-    return new Fruit(position, size);
+  
+  /**
+   * Test dummy hashCode method.
+   */
+  @Test
+  public void testHashCode() {
+    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    assertEquals(0, fruit.hashCode());
+ 
+  }
+  /**
+   * Test the equals method with two the same objects.
+   */
+  @Test
+  public void testEqualsTrue() {
+    Fruit fruit1 = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    Fruit fruit2 = new Fruit(new Vector(0, 0), new Vector(32, 32));
+   
+    assertEquals(fruit1, fruit2);
+  }
+  
+  /**
+   * Test the equals method with two different objects.
+   */
+  @Test
+  public void testEqualsFalse() {
+    Fruit fruit1 = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    Fruit fruit2 = new Fruit(new Vector(1, 1), new Vector(32, 32));
+   
+    assertFalse(fruit1.equals(fruit2));
+  }
+  
+  /**
+   * Test the equals method with two different object classes.
+   */
+  @Test
+  public void testEqualsOtherObject() {
+    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
+   
+    assertFalse(fruit.equals(npc));
   }
 
 }

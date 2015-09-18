@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
-import java.util.Iterator;
 
 /**
  * Level Modifier that processes the actions to be performed on the Bubble.
@@ -9,7 +8,7 @@ import java.util.Iterator;
  * @author Floris Doolaard
  *
  */
-public class BubbleActionLevelModifier implements LevelModifier {
+public class BubbleActionsLevelModifier implements LevelModifier {
 
   /**
    * Processing the actions to be performed on the Bubble.

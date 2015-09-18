@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -13,12 +15,16 @@ import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
-import javafx.scene.image.Image;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
+import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.StageStyle;
+import javafx.stage.WindowEvent;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -28,12 +34,12 @@ import javafx.stage.Stage;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
+@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity", 
+  "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
-
   private SpriteStore sprites;
-
   private Stage stage;
   private Scene scene;
   private VBox layout;
@@ -77,6 +83,7 @@ public class GUI extends Application {
     // Add event listeners.
     addKeyEventListeners(scene);
     addButtonEventListeners();
+    addWindowEventListeners(stage);
 
     renderStatic();
 
@@ -203,14 +210,15 @@ public class GUI extends Application {
   private void renderDynamic() {
     // Clear canvas
     dynamicPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
-    // Render Player.
-    renderPlayer(dynamicPainter);
+
     // Render Bubbles.
     renderBubbles(dynamicPainter);
     // Render Fruits.
     renderFruits(dynamicPainter);
     // Render other moving elements.
     renderNPCs(dynamicPainter);
+    // Render Player.
+    renderPlayer(dynamicPainter);
   }
 
   /**
@@ -220,13 +228,22 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
+    Player player = game.getCurrentLevel().getPlayer();
+
+    boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+    boolean isFiring = player.isFiring();
+
     String spr = "player-left";
-    if (game.getCurrentLevel().getPlayer().getLastMove() == PlayerAction.MoveRight) {
+    if (isFiring && toRight) {
+      spr = "player-shoot-right";
+    } else if (isFiring) {
+      spr = "player-shoot-left";
+    } else if (toRight) {
       spr = "player-right";
     }
-    painter.drawImage(sprites.getImage(spr),
-        game.getCurrentLevel().getPlayer().getPosition().getX(),
-        game.getCurrentLevel().getPlayer().getPosition().getY());
+
+    painter.drawImage(sprites.getImage(spr), game.getCurrentLevel().getPlayer().getPosition()
+        .getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -268,8 +285,8 @@ public class GUI extends Application {
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
@@ -283,8 +300,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(), current
+          .getPosition().getY());
     }
   }
 
@@ -302,8 +319,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(), current
+          .getPosition().getY());
     }
   }
 
@@ -312,10 +329,15 @@ public class GUI extends Application {
    * the levels without dying.
    */
   private void advanceLevel() {
+
     // When the enemies in the current level have been killed.
     if (game.getCurrentLevel().getNPCs().isEmpty()) {
+
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
+        // Log the completion of the game.
+        Logger.log("Player completed the game successfully.");
+
         // Creating of the dialog pop-up stage.
         Stage gameWinStage = new Stage();
 
@@ -335,9 +357,12 @@ public class GUI extends Application {
         gameWinStage.setScene(gameWinScene);
         gameWinStage.show();
 
-        // Halting the animation timer. TODO make nice
+        // Halting the animation timer.
         animationTimer.stop();
       } else {
+        // Logging the advancement in level.
+        Logger.log("Player advanced to the next level.");
+
         // Go to the next level and then re-render it.
         game.goToNextLevel();
         renderStatic();
@@ -367,12 +392,50 @@ public class GUI extends Application {
         // If the game is paused, it will resume it and change the button label to stop. Otherwise,
         // it resumes the game and changes the butotn label to start.
         if (timer.isPaused()) {
+          if (Constants.LOGGING_WANTSTARTSTOP) {
+            // Logging that the game has been restarted.
+            Logger.log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
+          }
+
           timer.resume();
           startStopButton.setText(Constants.STOPBTNLABEL);
         } else {
+          if (Constants.LOGGING_WANTSTARTSTOP) {
+            // Writing to the game log that the game has been paused.
+            Logger.log("--------------------GAME HAS BEEN PAUSED");
+          }
+
           timer.pause();
           startStopButton.setText(Constants.STARTBTNLABEL);
         }
+      }
+
+    });
+
+    // Mapping the function of the settings button to the settings handling of the GUI.
+    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent event) {
+        // Checking if the game is paused, and if not, it gets paused.
+        if (!timer.isPaused()) {
+          timer.pause();
+        }
+
+        // Changing the start-stop button text to correctly display the start text after entering
+        // the settings menu.
+        startStopButton.setText(Constants.STARTBTNLABEL);
+
+        // Handling the creation and running of the settings menu.
+        settingsMenu();
+
+        if (Constants.LOGGING_WANTSTARTSTOP) {
+          // Logging the entering of the settings menu and subsequent pausing of the game.
+          Logger.log("--------------------SETTINGS MENU OPENED");
+
+          // Writing to the game log that the game has been paused.
+          Logger.log("--------------------GAME HAS BEEN PAUSED");
+        }
+
       }
 
     });
@@ -381,6 +444,9 @@ public class GUI extends Application {
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
+        // Logging the termination of the game.
+        Logger.log("--------------------GAME TERMINATED");
+
         System.exit(0);
       }
 
@@ -416,13 +482,23 @@ public class GUI extends Application {
         // Mapping the shooting action keys.
         if (keyPress.equals("Z")) {
           if (!player.isFiring()) {
-            Bubble newBubble = new Bubble(bubblePos,
-                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
+                Constants.BLOCKSIZE));
 
             bubbles.add(newBubble);
             if (player.getLastMove() == PlayerAction.MoveLeft) {
+              if (Constants.LOGGING_WANTSHOOTING) {
+                // Sending the shooting information to the logger.
+                Logger.log("Player shot in the western direction.");
+              }
+
               newBubble.addAction(BubbleAction.MoveLeft);
             } else {
+              if (Constants.LOGGING_WANTSHOOTING) {
+                // Sending the shooting information to the logger.
+                Logger.log("Player shot in the eastern direction.");
+              }
+
               newBubble.addAction(BubbleAction.MoveRight);
             }
           }
@@ -460,6 +536,177 @@ public class GUI extends Application {
       }
 
     });
+  }
+
+  /**
+   * Handles the creation and feature functioning of the settings menu.
+   */
+  private void settingsMenu() {
+    // Creation and formatting of the settings stage.
+    final Stage settingsStage = new Stage();
+    settingsStage.initStyle(StageStyle.UTILITY);
+
+    // Styling the settings window height and width.
+    settingsStage.setWidth(Constants.GUIX);
+    settingsStage.setHeight(Constants.GUIY);
+    settingsStage.setResizable(false);
+
+    // Creation of the vertical box for settings display in a vertical manner.
+    VBox settingsBox = new VBox(15);
+
+    // Adding content of the settings menu to the VBox.
+    Label settingsHeader = new Label(Constants.SETTINGSBTNLABEL);
+    Label playerMoveLog = new Label(Constants.LOGGING_PLAYER_MOVEMENT);
+    Label playerJumpLog = new Label(Constants.LOGGING_PLAYER_INPUT);
+    Label playerShootingLog = new Label(Constants.LOGGING_SHOOTING);
+    Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
+
+    // Adding the exit button to go back to the game menu.
+    Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Performing the handling of the settings exit button.
+    exitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        if (Constants.LOGGING_WANTSTARTSTOP) {
+          // Logging the closing of the settings menu.
+          Logger.log("--------------------SETTINGS MENU CLOSED");
+        }
+
+        // Closing the settings GUI.
+        settingsStage.close();
+      }
+
+    });
+
+    // Creation of the buttons and handler for the player movement groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup playerMovementGroup = new ToggleGroup();
+    HBox movementToggleBox = new HBox(15);
+    final RadioButton movementLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    movementLogTrue.setToggleGroup(playerMovementGroup);
+    final RadioButton movementLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    movementLogFalse.setToggleGroup(playerMovementGroup);
+    movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
+
+    // Implementing the listener for the radio buttons above.
+    playerMovementGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == movementLogTrue) {
+          Constants.LOGGING_WANTMOVEMENT = true;
+        } else {
+          Constants.LOGGING_WANTMOVEMENT = false;
+        }
+      }
+
+    });
+
+    // Creation of the buttons and handler for the player input groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup playerInputGroup = new ToggleGroup();
+    HBox inputToggleBox = new HBox(15);
+    final RadioButton inputLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    inputLogTrue.setToggleGroup(playerInputGroup);
+    final RadioButton inputLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    inputLogFalse.setToggleGroup(playerInputGroup);
+    inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
+
+    // Implementing the listener for the radio buttons above.
+    playerInputGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == inputLogTrue) {
+          Constants.LOGGING_WANTINPUT = true;
+        } else {
+          Constants.LOGGING_WANTINPUT = false;
+        }
+      }
+
+    });
+
+    // Creation of the buttons and handler for the player shooting groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup playerShootGroup = new ToggleGroup();
+    HBox shootToggleBox = new HBox(15);
+    final RadioButton shootLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    shootLogTrue.setToggleGroup(playerShootGroup);
+    final RadioButton shootLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    shootLogFalse.setToggleGroup(playerShootGroup);
+    shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
+
+    // Implementing the listener for the radio buttons above.
+    playerShootGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == shootLogTrue) {
+          Constants.LOGGING_WANTSHOOTING = true;
+        } else {
+          Constants.LOGGING_WANTSHOOTING = false;
+        }
+      }
+
+    });
+
+    // Creation of the buttons and handler for the game tracking groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup gameLogGroup = new ToggleGroup();
+    HBox gameLogBox = new HBox(15);
+    final RadioButton gameLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    gameLogTrue.setToggleGroup(gameLogGroup);
+    final RadioButton gameLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    gameLogFalse.setToggleGroup(gameLogGroup);
+    gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
+
+    // Implementing the listener for the radio buttons above.
+    gameLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == gameLogTrue) {
+          Constants.LOGGING_WANTSTARTSTOP = true;
+        } else {
+          Constants.LOGGING_WANTSTARTSTOP = false;
+        }
+      }
+
+    });
+
+    // Adding all the content for the settings menu to the settings scene.
+    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
+        playerJumpLog, inputToggleBox, playerShootingLog, shootToggleBox, gameStateLog, gameLogBox,
+        exitButton);
+
+    // Creation of the scene and adding it to the settings stage.
+    Scene settingsScene = new Scene(settingsBox);
+    settingsStage.setScene(settingsScene);
+
+    // Actual display of the settings stage and associated styling.
+    settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
+    settingsStage.show();
+  }
+
+  /**
+   * Add WindowEvent listener to exit the application when the window is closed.
+   * 
+   * @param stage
+   *          The Stage used by the rest of the GUI.
+   */
+  private void addWindowEventListeners(Stage stage) {
+    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+      public void handle(WindowEvent event) {
+
+        // Logging the termination of the game.
+        Logger.log("--------------------GAME TERMINATED");
+
+        // Quitting the game.
+        System.exit(0);
+      }
+    });
+
   }
 
 }

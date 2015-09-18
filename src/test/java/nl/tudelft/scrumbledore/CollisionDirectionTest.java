@@ -32,18 +32,12 @@ public class CollisionDirectionTest {
   /**
    * Constructs a new Test Suite instance for the next test case, using parameterized values.
    * 
-   * @param colliderX
-   *          X-coordinate of the position of the collider LevelElement.
-   * @param colliderY
-   *          Y-coordinate of the position of the collider LevelElement.
-   * @param collideeX
-   *          X-coordinate of the position of the collidee LevelElement.
-   * @param collideeY
-   *          Y-coordinate of the position of the collidee LevelElement.
-   * @param colliderSpeedX
-   *          The horizontal speed component of the collider LevelElement.
-   * @param colliderSpeedY
-   *          The vertical speed component of the collider LevelElement.
+   * @param collider
+   *          The position of the collider LevelElement.
+   * @param collidee
+   *          The position of the collidee LevelElement.
+   * @param colliderSpeed
+   *          The speed component of the collider LevelElement.
    * @param expectedTop
    *          Expected outcome of the collision from top check.
    * @param expectedBottom
@@ -53,19 +47,18 @@ public class CollisionDirectionTest {
    * @param expectedRight
    *          Expected outcome of the collision from top check.
    */
-  public CollisionDirectionTest(double colliderX, double colliderY, double collideeX,
-      double collideeY, double colliderSpeedX, double colliderSpeedY, boolean expectedTop,
-      boolean expectedBottom, boolean expectedLeft, boolean expectedRight) {
+  public CollisionDirectionTest(Vector collider, Vector collidee, Vector colliderSpeed, 
+      boolean expectedTop, boolean expectedBottom, boolean expectedLeft, boolean expectedRight) {
     this.expectedTop = expectedTop;
     this.expectedBottom = expectedBottom;
     this.expectedLeft = expectedLeft;
     this.expectedRight = expectedRight;
 
-    this.collider = new Player(new Vector(colliderX, colliderY), new Vector(32, 32));
-    this.collidee = new Platform(new Vector(collideeX, collideeY), new Vector(32, 32));
+    this.collider = new Player(collider, new Vector(32, 32));
+    this.collidee = new Platform(collidee, new Vector(32, 32));
 
-    this.collider.getSpeed().setX(colliderSpeedX);
-    this.collider.getSpeed().setY(colliderSpeedY);
+    this.collider.getSpeed().setX(colliderSpeed.getX());
+    this.collider.getSpeed().setY(colliderSpeed.getY());
 
     this.collision = new Collision(this.collider, this.collidee, 1);
   }
@@ -111,29 +104,39 @@ public class CollisionDirectionTest {
    * 
    * @return Collection of tuples of input values.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   @Parameters
   public static Collection<Object[]> data() {
     Collection<Object[]> input = new ArrayList<Object[]>();
     // Same position should not classify as a collision from any direction.
-    input.add(new Object[] { 0, 0, 0, 0, 0, 0, false, false, false, false });
+    input.add(new Object[] {
+        new Vector(0, 0), new Vector(0, 0), new Vector(0, 0), false, false, false, false });
 
     // Touching within collision precision.
     // Touching Top.
-    input.add(new Object[] { 33, 32, 32, 64, 0, 0, true, false, false, false });
-    input.add(new Object[] { 32, 32 - Constants.COLLISION_PRECISION, 32, 64, 0, 0, false, false,
-        false, false });
+    input.add(new Object[] {
+        new Vector(33, 32), new Vector(32, 64), new Vector(0, 0), true, false, false, false });
+    input.add(new Object[] {
+        new Vector(32, 32 - Constants.COLLISION_PRECISION), new Vector(32, 64), new Vector(0, 0), 
+        false, false, false, false });
     // Touching Left.
-    input.add(new Object[] { 0, 32, 32, 32, 0, 0, false, false, true, false });
-    input.add(new Object[] { 0 - Constants.COLLISION_PRECISION, 32, 32, 32, 0, 0, false, false,
-        false, false });
+    input.add(new Object[] {
+        new Vector(0, 32), new Vector(32, 32), new Vector(0, 0), false, false, true, false });
+    input.add(new Object[] {
+        new Vector(0 - Constants.COLLISION_PRECISION, 32), new Vector(32, 32), new Vector(0, 0), 
+        false, false, false, false });
 
     // Anticipation of predicted collision.
     // From Top.
-    input.add(new Object[] { 32, 25, 32, 64, 0, 8, true, false, false, false });
-    input.add(new Object[] { 32, 20, 32, 64, 0, 8, false, false, false, false });
-    input.add(new Object[] { 0, 31, 32, 64, 0, 8, false, false, false, false });
+    input.add(new Object[] {
+        new Vector(32, 25), new Vector(32, 64), new Vector(0, 8), true, false, false, false });
+    input.add(new Object[] {
+        new Vector(32, 20), new Vector(32, 64), new Vector(0, 8), false, false, false, false });
+    input.add(new Object[] {
+        new Vector(0, 31), new Vector(32, 64), new Vector(0, 8), false, false, false, false });
     // From Left.
-    input.add(new Object[] { 0, 32, 48, 32, 20, 0, false, false, true, false });
+    input.add(new Object[] {
+        new Vector(0, 32), new Vector(48, 32), new Vector(20, 0), false, false, true, false });
 
     return input;
   }

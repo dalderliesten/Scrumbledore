@@ -12,6 +12,7 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class VectorTest {
 
   /**
@@ -98,7 +99,7 @@ public class VectorTest {
     double dot = v1.dotProduct(v2);
     assertEquals(11, dot, Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * The length of a vector should be calculated correctly.
    */
@@ -107,7 +108,7 @@ public class VectorTest {
     Vector vec = new Vector(3, 4);
     assertEquals(5, vec.length(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * The distance between two vectors should be calculated correctly.
    */
@@ -156,6 +157,47 @@ public class VectorTest {
     Vector testVector1 = new Vector(1, 2);
     Vector testVector2 = new Vector(1, 3);
     assertFalse(testVector1.equals(testVector2));
+  }
+
+  /**
+   * A Vector should not be equal to an instance of another class.
+   */
+  @Test
+  public void testEqualsFalseOtherClass() {
+    Vector testVector1 = new Vector(1, 2);
+    LevelElement testElement = new Fruit(new Vector(0, 0), new Vector(0, 0));
+    assertFalse(testVector1.equals(testElement));
+  }
+
+  /**
+   * When a Vector is cloned, the original and its clone should be considered equal.
+   */
+  @Test
+  public void testCloneEqual() {
+    Vector original = new Vector(1, 2);
+    Vector clone = original.clone();
+    assertEquals(original, clone);
+  }
+
+  /**
+   * When a Vector is cloned and the clone is changed, the original and clone should not be
+   * considered equal anymore since they different instances.
+   */
+  @Test
+  public void testCloneNotEqual() {
+    Vector original = new Vector(1, 2);
+    Vector clone = original.clone();
+    clone.setX(42);
+    assertFalse(clone.equals(original));
+  }
+
+  /**
+   * The has code of a random instance should be zero, for the method is stubbed.
+   */
+  @Test
+  public void testHashCode() {
+    Vector test = new Vector(1, 2);
+    assertEquals(0, test.hashCode());
   }
 
 }

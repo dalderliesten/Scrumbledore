@@ -16,7 +16,6 @@ public class Level {
   private ArrayList<Bubble> bubbles;
   private Player player;
 
-
   /**
    * Constructs a new Level instance.
    */
@@ -42,50 +41,52 @@ public class Level {
       fruits.add((Fruit) element);
     } else if (element.getClass().equals(Player.class)) {
       player = (Player) element;
-    } 
+    } else if (element.getClass().equals(Bubble.class)) {
+      bubbles.add((Bubble) element);
+    }
   }
 
   /**
    * Returns an ArrayList of Platform elements.
    * 
-   * @return
-   *          An ArrayList of Platform elements
+   * @return An ArrayList of Platform elements
    */
   public ArrayList<Platform> getPlatforms() {
     return platforms;
   }
-  
+
   /**
    * Returns an ArrayList of Fruit elements.
    * 
-   * @return
-   *          An ArrayList of Fruit elements
+   * @return An ArrayList of Fruit elements
    */
   public ArrayList<Fruit> getFruits() {
     return fruits;
   }
-  
+
   /**
    * Returns an ArrayList of NPC elements.
    * 
-   * @return
-   *          An ArrayList of NPC elements
+   * @return An ArrayList of NPC elements
    */
   public ArrayList<NPC> getNPCs() {
     return npcs;
   }
 
-
   /**
    * Returns a Player object.
    * 
-   * @return
-   *          A player object
+   * @return A player object
    */
   public Player getPlayer() {
     return player;
   }
-  
+
+  /**
+   * Returns an ArrayList of Bubble objects.
+   * 
+   * @return An ArrayList of Bubble objects.
+   */
   public ArrayList<Bubble> getBubbles() {
     return bubbles;
   }

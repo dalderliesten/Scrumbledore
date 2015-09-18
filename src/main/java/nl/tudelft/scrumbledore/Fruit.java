@@ -7,7 +7,7 @@ package nl.tudelft.scrumbledore;
  */
 public class Fruit extends LevelElement {
   private int value;
-  private int time;
+
   /**
    * Create a new Fruit instance.
    * 
@@ -18,8 +18,19 @@ public class Fruit extends LevelElement {
    */
   public Fruit(Vector position, Vector size) {
     super(position, size);
+    
+    setGravity(true);
   }
 
+  
+  /**
+   * Dummy HashCode method to satisfy code quality tools.
+   */
+  @Override
+  public int hashCode() {
+    return 0;
+  }
+  
   
   /**
    * Check whether a given object is equal to this instance.
@@ -61,27 +72,4 @@ public class Fruit extends LevelElement {
     this.value = value;
   }
 
-
-  /**
-   * Get the appearance time of a fruit.
-   * 
-   * @return
-   *        The appearance time of a fruit
-   */
-  public int getTime() {
-    return time;
-  }
-
-
-  /**
-   * Set the appearance time of a fruit.
-   * 
-   * @param time
-   *        the appearance time of a fruit
-   */
-  public void setTime(int time) {
-    this.time = time;
-  }
-  
-  
 }

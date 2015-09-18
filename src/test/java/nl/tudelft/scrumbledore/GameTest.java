@@ -3,6 +3,7 @@ package nl.tudelft.scrumbledore;
 //import static org.junit.Assert.*;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
@@ -61,6 +62,20 @@ public class GameTest {
     assertEquals(0, g1.remainingLevels());
   }
 
+  /**
+   * Test the restart() method.
+   */
+  @Test
+  public void testRestart() {
+    assertEquals(1, g1.remainingLevels());
+    
+    g1.goToNextLevel();
+    assertEquals(0, g1.remainingLevels());  
+  
+    g1.restart();
+    assertTrue(g1.remainingLevels() > 0);
+  }
+    
   /**
    * Deleting test properties after testing.
    * 

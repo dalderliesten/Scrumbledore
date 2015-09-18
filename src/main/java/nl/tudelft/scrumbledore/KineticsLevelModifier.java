@@ -6,8 +6,9 @@ import java.util.ArrayList;
  * The Kinetics class handles the position/speed of levelelements.
  * 
  * @author Floris Doolaard
- *
+ * @author David Alderliesten
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class KineticsLevelModifier implements LevelModifier {
 
   /**
@@ -19,13 +20,38 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    // Add speed to NPCs
-    for (NPC el : level.getNPCs()) {
-      addSpeed(el, d);
-    }
-
+    updateNPC(level, d);
+    updateFruit(level, d);
     updatePlayer(level, d);
     updateBubble(level, d);
+  }
+
+  /**
+   * Update the Fruits in a given Level.
+   * 
+   * @param level
+   *          The level whose elements should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  private void updateFruit(Level level, double d) {
+    for (Fruit fruit : level.getFruits()) {
+      addSpeed(fruit, d);
+    }
+  }
+
+  /**
+   * Update the NPCs in a given Level.
+   * 
+   * @param level
+   *          The level whose elements should be updated.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  private void updateNPC(Level level, double d) {
+    for (NPC npc : level.getNPCs()) {
+      addSpeed(npc, d);
+    }
   }
 
   /**
@@ -44,6 +70,12 @@ public class KineticsLevelModifier implements LevelModifier {
     if (player.posY() + player.height() >= Constants.LEVELY) {
       player.getPosition().setY(player.height() / -2);
     }
+
+    if (Constants.LOGGING_WANTMOVEMENT) {
+      // Logging the movement of the player within the level to the session log.
+      Logger.log("Player moved to " + player.getPosition().getX() + ", "
+          + player.getPosition().getY());
+    }
   }
 
   /**
@@ -56,28 +88,14 @@ public class KineticsLevelModifier implements LevelModifier {
    */
   private void updateBubble(Level level, double d) {
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
     for (Bubble bubble : level.getBubbles()) {
       bubbles.add(bubble);
     }
+
     for (Bubble bubble : bubbles) {
       addSpeed(bubble, d);
       applyFriction(bubble, d);
-    }
-  }
-
-  /**
-   * Update the position of the LevelElement by adding the speed.
-   * 
-   * @param el
-   *          The element whose position has to be updated with its speed.
-   * @param d
-   *          The number of steps since last executing this function.
-   */
-  public void addSpeed(LevelElement el, double d) {
-    // Only add speed if an object has been initialized.
-    if (el != null) {
-      el.getPosition().sum(Vector.scale(el.getSpeed(), d));
     }
   }
 
@@ -94,12 +112,12 @@ public class KineticsLevelModifier implements LevelModifier {
   public void applyFriction(LevelElement el, double d) {
     int signX = 0;
     int signY = 0;
-    if (Math.abs(el.hSpeed()) > el.hFric()) {
+    if (Math.abs(el.hSpeed()) > el.hFric() * d) {
       signX = (int) Math.signum(el.hSpeed());
     } else {
       stopHorizontally(el);
     }
-    if (Math.abs(el.vSpeed()) > el.vFric()) {
+    if (Math.abs(el.vSpeed()) > el.vFric() * d) {
       signY = (int) Math.signum(el.vSpeed());
     } else {
       stopVertically(el);
@@ -107,6 +125,21 @@ public class KineticsLevelModifier implements LevelModifier {
 
     Vector fricDiff = new Vector(d * signX * el.hFric(), d * signY * el.vFric());
     el.getSpeed().difference(fricDiff);
+  }
+
+  /**
+   * Update the position of the LevelElement by adding the speed.
+   * 
+   * @param el
+   *          The element whose position has to be updated with its speed.
+   * @param d
+   *          The number of steps since last executing this function.
+   */
+  public void addSpeed(LevelElement el, double d) {
+    // Only add speed if an object has been initialized.
+    if (el != null) {
+      el.getPosition().sum(Vector.scale(el.getSpeed(), d));
+    }
   }
 
   /**
@@ -199,4 +232,5 @@ public class KineticsLevelModifier implements LevelModifier {
     double newPos = snapTo.getBottom() + offset;
     snapper.getPosition().setY(newPos);
   }
+
 }
