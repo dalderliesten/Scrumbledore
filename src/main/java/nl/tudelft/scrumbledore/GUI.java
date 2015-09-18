@@ -577,9 +577,46 @@ public class GUI extends Application {
     movementLogFalse.setSelected(false);
     movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
 
+    // Creation of the buttons and handler for the player input groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup playerInputGroup = new ToggleGroup();
+    HBox inputToggleBox = new HBox(15);
+    RadioButton inputLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    inputLogTrue.setToggleGroup(playerInputGroup);
+    inputLogTrue.setSelected(true);
+    RadioButton inputLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    inputLogFalse.setToggleGroup(playerInputGroup);
+    inputLogFalse.setSelected(false);
+    inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
+
+    // Creation of the buttons and handler for the player shooting groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup playerShootGroup = new ToggleGroup();
+    HBox shootToggleBox = new HBox(15);
+    RadioButton shootLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    shootLogTrue.setToggleGroup(playerShootGroup);
+    shootLogTrue.setSelected(true);
+    RadioButton shootLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    shootLogFalse.setToggleGroup(playerShootGroup);
+    shootLogFalse.setSelected(false);
+    shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
+
+    // Creation of the buttons and handler for the game tracking groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup gameLogGroup = new ToggleGroup();
+    HBox gameLogBox = new HBox(15);
+    RadioButton gameLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    gameLogTrue.setToggleGroup(gameLogGroup);
+    gameLogTrue.setSelected(true);
+    RadioButton gameLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    gameLogFalse.setToggleGroup(gameLogGroup);
+    gameLogFalse.setSelected(false);
+    gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
+
     // Adding all the content for the settings menu to the settings scene.
     settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
-        playerJumpLog, playerShootingLog, gameStateLog, exitButton);
+        playerJumpLog, inputToggleBox, playerShootingLog, shootToggleBox, gameStateLog, gameLogBox,
+        exitButton);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
