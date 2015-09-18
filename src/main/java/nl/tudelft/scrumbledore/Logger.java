@@ -15,29 +15,30 @@ import java.util.Date;
  */
 public final class Logger {
   // The logging dir and file are utilized for storing of the logging file.
-  static File loggingDir;
-  static File loggingFile;
+  private static File loggingDir;
+  private static File loggingFile;
 
   // A boolean to ensure that logging is only done if the file has been created.
-  static boolean started = false;
+  private static boolean started = false;
 
   /**
-   * Logger constructor. Is not used as the class is a utility class, and should not be insantiated.
+   * Logger constructor. Is not used as the class is a utility class, 
+   * and should not be instantiated.
    */
   private Logger() {
-
   }
 
   /**
    * Starts the logging by creating the logging file upon request.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
     // Creating the directory location.
     loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
 
     // Checking to see if the directory for the logs exists. If this is no the case, it will be
     // created.
-    if (loggingDir.exists() == false) {
+    if (!loggingDir.exists()) {
       loggingDir.mkdir();
     }
 
@@ -72,7 +73,7 @@ public final class Logger {
    *          The content that the caller wishes to be logged in the logging file.
    */
   public static void log(String toLog) {
-    if (started == true) {
+    if (started) {
       try {
         // Makes the buffered writer to write the desired string.
         BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
