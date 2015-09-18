@@ -540,7 +540,7 @@ public class GUI extends Application {
     settingsStage.setResizable(false);
 
     // Creation of the vertical box for settings display in a vertical manner.
-    VBox settingsBox = new VBox();
+    VBox settingsBox = new VBox(15);
 
     // Adding content of the settings menu to the VBox.
     Label settingsHeader = new Label(Constants.SETTINGSBTNLABEL);
@@ -565,14 +565,20 @@ public class GUI extends Application {
 
     });
 
-    // Creation of the buttons and handler for the player movement groups.
+    // Creation of the buttons and handler for the player movement groups. Includes the creation of
+    // all grouping and positioning elements.
     final ToggleGroup playerMovementGroup = new ToggleGroup();
+    HBox movementToggleBox = new HBox(15);
     RadioButton movementLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     movementLogTrue.setToggleGroup(playerMovementGroup);
     movementLogTrue.setSelected(true);
+    RadioButton movementLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    movementLogFalse.setToggleGroup(playerMovementGroup);
+    movementLogFalse.setSelected(false);
+    movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
 
     // Adding all the content for the settings menu to the settings scene.
-    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementLogTrue,
+    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
         playerJumpLog, playerShootingLog, gameStateLog, exitButton);
 
     // Creation of the scene and adding it to the settings stage.
