@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
+import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -15,6 +16,7 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
@@ -584,69 +586,97 @@ public class GUI extends Application {
     // all grouping and positioning elements.
     final ToggleGroup playerMovementGroup = new ToggleGroup();
     HBox movementToggleBox = new HBox(15);
-    RadioButton movementLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    final RadioButton movementLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     movementLogTrue.setToggleGroup(playerMovementGroup);
-    RadioButton movementLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    final RadioButton movementLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     movementLogFalse.setToggleGroup(playerMovementGroup);
     movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
 
-    // Handling the toggle options.
-    if (playerMovementGroup.getSelectedToggle() == movementLogTrue) {
-      Constants.LOGGING_WANTMOVEMENT = true;
-    } else {
-      Constants.LOGGING_WANTMOVEMENT = false;
-    }
+    // Implementing the listener for the radio buttons above.
+    playerMovementGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == movementLogTrue) {
+          Constants.LOGGING_WANTMOVEMENT = true;
+        } else {
+          Constants.LOGGING_WANTMOVEMENT = false;
+        }
+      }
+
+    });
 
     // Creation of the buttons and handler for the player input groups. Includes the creation of
     // all grouping and positioning elements.
     final ToggleGroup playerInputGroup = new ToggleGroup();
     HBox inputToggleBox = new HBox(15);
-    RadioButton inputLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    final RadioButton inputLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     inputLogTrue.setToggleGroup(playerInputGroup);
-    RadioButton inputLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    final RadioButton inputLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     inputLogFalse.setToggleGroup(playerInputGroup);
     inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
 
-    // Handling the toggle options.
-    if (playerInputGroup.getSelectedToggle() == inputLogTrue) {
-      Constants.LOGGING_WANTINPUT = true;
-    } else {
-      Constants.LOGGING_WANTINPUT = false;
-    }
+    // Implementing the listener for the radio buttons above.
+    playerInputGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == inputLogTrue) {
+          Constants.LOGGING_WANTINPUT = true;
+        } else {
+          Constants.LOGGING_WANTINPUT = false;
+        }
+      }
+
+    });
 
     // Creation of the buttons and handler for the player shooting groups. Includes the creation of
     // all grouping and positioning elements.
     final ToggleGroup playerShootGroup = new ToggleGroup();
     HBox shootToggleBox = new HBox(15);
-    RadioButton shootLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    final RadioButton shootLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     shootLogTrue.setToggleGroup(playerShootGroup);
-    RadioButton shootLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    final RadioButton shootLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     shootLogFalse.setToggleGroup(playerShootGroup);
     shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
 
-    // Handling the toggle options.
-    if (playerShootGroup.getSelectedToggle() == shootLogTrue) {
-      Constants.LOGGING_WANTSHOOTING = true;
-    } else {
-      Constants.LOGGING_WANTSHOOTING = false;
-    }
+    // Implementing the listener for the radio buttons above.
+    playerShootGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == shootLogTrue) {
+          Constants.LOGGING_WANTSHOOTING = true;
+        } else {
+          Constants.LOGGING_WANTSHOOTING = false;
+        }
+      }
+
+    });
 
     // Creation of the buttons and handler for the game tracking groups. Includes the creation of
     // all grouping and positioning elements.
     final ToggleGroup gameLogGroup = new ToggleGroup();
     HBox gameLogBox = new HBox(15);
-    RadioButton gameLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    final RadioButton gameLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
     gameLogTrue.setToggleGroup(gameLogGroup);
-    RadioButton gameLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    final RadioButton gameLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     gameLogFalse.setToggleGroup(gameLogGroup);
     gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
 
-    // Handling the toggle options.
-    if (gameLogGroup.getSelectedToggle() == gameLogTrue) {
-      Constants.LOGGING_WANTSTARTSTOP = true;
-    } else {
-      Constants.LOGGING_WANTSTARTSTOP = false;
-    }
+    // Implementing the listener for the radio buttons above.
+    gameLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == gameLogTrue) {
+          Constants.LOGGING_WANTSTARTSTOP = true;
+        } else {
+          Constants.LOGGING_WANTSTARTSTOP = false;
+        }
+      }
+
+    });
 
     // Adding all the content for the settings menu to the settings scene.
     settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
