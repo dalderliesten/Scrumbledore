@@ -43,14 +43,17 @@ public class SpriteStore {
   public void read() {
     sprites = new ArrayList<Sprite>();
     final File directory = new File(dir);
-    for (final File fileEntry : directory.listFiles()) {
-      if (!fileEntry.isDirectory()) {
-        String name = fileEntry.getName();
-        int pos = name.lastIndexOf('.');
-        String id = name.substring(0, pos);
-        String ext = name.substring(pos + 1);
-        Sprite spr = new Sprite(id, ext);
-        sprites.add(spr);
+    File[] fileEntries = directory.listFiles();
+    if (fileEntries != null) {
+      for (final File fileEntry : fileEntries) {
+        if (!fileEntry.isDirectory()) {
+          String name = fileEntry.getName();
+          int pos = name.lastIndexOf('.');
+          String id = name.substring(0, pos);
+          String ext = name.substring(pos + 1);
+          Sprite spr = new Sprite(id, ext);
+          sprites.add(spr);
+        }
       }
     }
   }
