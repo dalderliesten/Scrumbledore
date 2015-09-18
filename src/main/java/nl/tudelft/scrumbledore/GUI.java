@@ -143,7 +143,6 @@ public class GUI extends Application {
   /**
    * Setup the GUI layout. Uses the Game View GUI Group.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
     layout = new VBox();
@@ -329,7 +328,6 @@ public class GUI extends Application {
    * Advances the level to the next one, and displays a special dialog box upon completion of all
    * the levels without dying.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   private void advanceLevel() {
 
     // When the enemies in the current level have been killed.
@@ -461,7 +459,6 @@ public class GUI extends Application {
    * @param scene
    *          The scene the listeners should be added to.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   private void addKeyEventListeners(Scene scene) {
     // KeyPress Event handlers.
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
