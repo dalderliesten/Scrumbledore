@@ -9,7 +9,12 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  *
  */
-abstract class Constants {
+@SuppressWarnings("checkstyle:linelength")
+public final class Constants {
+  // Empty private constructor for utility class
+  private Constants() {
+    
+  }
   // Setting the resolution of the entire GUI window.
   public static final int GUIX = 646;
   public static final int GUIY = 723;

@@ -34,8 +34,8 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({ "PMD.TooManyMethods", "PMD.NPathComplexity", "PMD.CyclomaticComplexity",
-    "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity", 
+  "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -143,7 +143,6 @@ public class GUI extends Application {
   /**
    * Setup the GUI layout. Uses the Game View GUI Group.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   private void setupGUILayout() {
     // Setting the content handler group object, to which objects within the game must be added.
     layout = new VBox();
@@ -329,7 +328,6 @@ public class GUI extends Application {
    * Advances the level to the next one, and displays a special dialog box upon completion of all
    * the levels without dying.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   private void advanceLevel() {
 
     // When the enemies in the current level have been killed.
@@ -419,7 +417,7 @@ public class GUI extends Application {
 
       public void handle(ActionEvent event) {
         // Checking if the game is paused, and if not, it gets paused.
-        if (timer.isPaused() == false) {
+        if (!timer.isPaused()) {
           timer.pause();
         }
 
@@ -461,7 +459,6 @@ public class GUI extends Application {
    * @param scene
    *          The scene the listeners should be added to.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   private void addKeyEventListeners(Scene scene) {
     // KeyPress Event handlers.
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {

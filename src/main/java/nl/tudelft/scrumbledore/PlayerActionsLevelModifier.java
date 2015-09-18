@@ -16,6 +16,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
+  @SuppressWarnings({ "checkstyle:methodlength", "PMD.CyclomaticComplexity", 
+    "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
   public void modify(Level level, double delta) {
 
     Player player = level.getPlayer();
