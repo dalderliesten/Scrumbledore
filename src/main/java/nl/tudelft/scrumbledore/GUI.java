@@ -406,6 +406,16 @@ public class GUI extends Application {
 
     });
 
+    // Mapping the function of the settings button to the settings handling of the GUI.
+    settingsButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent event) {
+        // Logging the entering of the settings menu and subsequent pausing of the game.
+        Logger.log("Player entered the settings menu.");
+      }
+
+    });
+
     // Mapping the exit function to the exit button to quit when button is pressed.
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
 
