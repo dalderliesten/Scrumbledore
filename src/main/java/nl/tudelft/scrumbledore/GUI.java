@@ -528,8 +528,11 @@ public class GUI extends Application {
     Stage settingsStage = new Stage();
     settingsStage.initStyle(StageStyle.UTILITY);
 
+    // Creation of the vertical box for settings display in a vertical manner.
+    VBox settingsBox = new VBox();
+
     // Creation of the scene and adding it to the settings stage.
-    Scene settingsScene = new Scene(settingsStage);
+    Scene settingsScene = new Scene(settingsBox);
     settingsStage.setScene(settingsScene);
 
     // Actual display of the settings stage.
