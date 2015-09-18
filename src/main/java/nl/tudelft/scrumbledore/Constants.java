@@ -33,6 +33,12 @@ abstract class Constants {
   public static final String SETTINGSBTNLABEL = "Settings";
   public static final String EXITBTNLABEL = "Exit";
 
+  // Defining the text needed for the display of options in the settings menu.
+  public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
+  public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
+  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game pausing and playing?";
+  public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
+
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
 
@@ -86,7 +92,7 @@ abstract class Constants {
   // References to images utilized for the game display within the GUI.
   public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
-  
+
   // Reference to the location directory for the log file handling.
   public static final String LOGGER_DIR = "logging/";
 }
