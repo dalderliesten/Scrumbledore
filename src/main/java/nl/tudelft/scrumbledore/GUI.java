@@ -77,7 +77,7 @@ public class GUI extends Application {
     // Add event listeners.
     addKeyEventListeners(scene);
     addButtonEventListeners();
-    addWindowEventListeners(stage);
+    //addWindowEventListeners(stage);
 
     renderStatic();
 
