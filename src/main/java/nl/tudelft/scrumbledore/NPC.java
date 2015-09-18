@@ -380,11 +380,12 @@ public class NPC extends LevelElement {
 
   
   /**
-   * Returns the moving boundaries of an NPC.
-   * @return The moving boundaries of an NPC
+   * Returns the movement boundaries of an NPC.
+   * @return The movement boundaries of an NPC
    */
   public Vector[] getMovementBoundaries() {
-    return movementBoundaries;
+    Vector[] res = {movementBoundaries[0], movementBoundaries[1]};
+    return res;
   }
   
 }
