@@ -536,6 +536,12 @@ public class GUI extends Application {
     // Creation of the vertical box for settings display in a vertical manner.
     VBox settingsBox = new VBox();
 
+    // Adding content of the settings menu to the VBox.
+    Label settingsHeader = new Label(Constants.SETTINGSBTNLABEL);
+
+    // Adding all the content for the settings menu to the settings scene.
+    settingsBox.getChildren().addAll(settingsHeader);
+
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
     settingsStage.setScene(settingsScene);
