@@ -63,7 +63,7 @@ public class LevelParserTest {
   public void testFileNotFound() {
     LevelParser lp = new LevelParser();
     try {
-      lp.readLevelFromFile("C:\\dummy.txt");
+      lp.readLevelFromFile("dummy.txt");
     } catch (FileNotFoundException e) {
       assertEquals(e.getClass(), FileNotFoundException.class);
     }

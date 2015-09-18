@@ -13,6 +13,7 @@ import org.junit.Test;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class PlayerTest extends LevelElementTest {
 
   private Player player;

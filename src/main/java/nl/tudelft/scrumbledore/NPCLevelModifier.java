@@ -7,6 +7,7 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  *
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class NPCLevelModifier implements LevelModifier {
 
   /**
@@ -22,7 +23,7 @@ public class NPCLevelModifier implements LevelModifier {
     // Loop over all NPCs
     for (NPC npc : level.getNPCs()) {
       // Assign platforms to NPC if this has not happened yet
-      if (npc.getMovementBoundaries() == null) {
+      if (npc.getPlatforms() == null) {
         npc.setPlatforms(level.getPlatforms());
       }
 
