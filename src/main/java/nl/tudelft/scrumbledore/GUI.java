@@ -540,7 +540,8 @@ public class GUI extends Application {
     Scene settingsScene = new Scene(settingsBox);
     settingsStage.setScene(settingsScene);
 
-    // Actual display of the settings stage.
+    // Actual display of the settings stage and associated styling.
+    settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
     settingsStage.show();
   }
 
@@ -548,7 +549,7 @@ public class GUI extends Application {
    * Add WindowEvent listener to exit the application when the window is closed.
    * 
    * @param stage
-   *          The Stage used by the rest of the GUI
+   *          The Stage used by the rest of the GUI.
    */
   private void addWindowEventListeners(Stage stage) {
     stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
