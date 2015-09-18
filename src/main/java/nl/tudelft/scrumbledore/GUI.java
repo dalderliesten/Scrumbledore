@@ -34,8 +34,8 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({ "PMD.TooManyMethods", "PMD.NPathComplexity", "PMD.CyclomaticComplexity",
-    "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity", 
+  "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -419,7 +419,7 @@ public class GUI extends Application {
 
       public void handle(ActionEvent event) {
         // Checking if the game is paused, and if not, it gets paused.
-        if (timer.isPaused() == false) {
+        if (!timer.isPaused()) {
           timer.pause();
         }
 
