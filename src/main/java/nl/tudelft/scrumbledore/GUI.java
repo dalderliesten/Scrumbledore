@@ -77,7 +77,7 @@ public class GUI extends Application {
     // Add event listeners.
     addKeyEventListeners(scene);
     addButtonEventListeners();
-    //addWindowEventListeners(stage);
+    // addWindowEventListeners(stage);
 
     renderStatic();
 
@@ -412,7 +412,9 @@ public class GUI extends Application {
         if (timer.isPaused() == false) {
           timer.pause();
         }
-        
+
+        // Changing the start-stop button text to correctly display the start text after entering
+        // the settings menu.
         startStopButton.setText(Constants.STARTBTNLABEL);
 
         // Handling the creation and running of the settings menu.
@@ -420,7 +422,7 @@ public class GUI extends Application {
 
         // Logging the entering of the settings menu and subsequent pausing of the game.
         Logger.log("--------------------SETTINGS MENU OPENED");
-        
+
         // Writing to the game log that the game has been paused.
         Logger.log("--------------------GAME HAS BEEN PAUSED");
       }
@@ -527,7 +529,7 @@ public class GUI extends Application {
    */
   private void settingsMenu() {
     // Creation and formatting of the settings stage.
-    Stage settingsStage = new Stage();
+    final Stage settingsStage = new Stage();
     settingsStage.initStyle(StageStyle.UTILITY);
 
     // Styling the settings window height and width.
@@ -545,8 +547,25 @@ public class GUI extends Application {
     Label playerShootingLog = new Label(Constants.LOGGING_SHOOTING);
     Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
 
+    // Adding the exit button to go back to the game menu.
+    Button exitButton = new Button(Constants.EXITBTNLABEL);
+
+    // Performing the handling of the settings exit button.
+    exitButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        // Logging the closing of the settings menu..
+        Logger.log("--------------------SETTINGS MENU CLOSED");
+
+        // Closing the settings GUI.
+        settingsStage.close();
+      }
+
+    });
+
     // Adding all the content for the settings menu to the settings scene.
-    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, playerJumpLog, playerShootingLog, gameStateLog);
+    settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, playerJumpLog,
+        playerShootingLog, gameStateLog, exitButton);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
