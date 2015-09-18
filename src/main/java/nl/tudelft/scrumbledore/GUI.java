@@ -410,6 +410,14 @@ public class GUI extends Application {
     settingsButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent event) {
+        // Checking if the game is paused, and if not, it gets paused.
+        if (timer.isPaused() == false) {
+          timer.pause();
+        }
+
+        // Handling the creation and running of the settings menu.
+        settingsMenu();
+
         // Logging the entering of the settings menu and subsequent pausing of the game.
         Logger.log("Player entered the settings menu.");
       }
@@ -509,6 +517,13 @@ public class GUI extends Application {
       }
 
     });
+  }
+
+  /**
+   * Handles the creation and feature functioning of the settings menu.
+   */
+  private void settingsMenu() {
+    
   }
 
   /**
