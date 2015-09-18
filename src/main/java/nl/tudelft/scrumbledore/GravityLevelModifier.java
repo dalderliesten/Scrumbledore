@@ -75,12 +75,13 @@ public class GravityLevelModifier implements LevelModifier {
       return;
     }
 
-    double vspeed = element.getSpeed().getY() * d;
+    double vspeed = element.vSpeed();
+    double update = strength * d;
     // If the element has not yet reached the maximal falling speed and the difference is still
     // larger than or equal than the strength, increment it. Otherwise, set the vertical speed to
     // maximal.
-    if ((max - vspeed) >= strength) {
-      element.getSpeed().setY(vspeed + strength);
+    if ((max - vspeed) >= update) {
+      element.getSpeed().setY(vspeed + update);
     } else {
       element.getSpeed().setY(max);
     }
