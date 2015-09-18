@@ -42,10 +42,10 @@ abstract class Constants {
   public static final String LOGGING_DISABLED = "No";
   
   // Defining the settings value tracking.
-  public static boolean LOGGING_WANTMOVEMENT = false;
-  public static boolean LOGGING_WANTINPUT = false;
-  public static boolean LOGGING_WANTSTARTSTOP = false;
-  public static boolean LOGGING_WANTSHOOTING = false;
+  public static boolean LOGGING_WANTMOVEMENT = true;
+  public static boolean LOGGING_WANTINPUT = true;
+  public static boolean LOGGING_WANTSTARTSTOP = true;
+  public static boolean LOGGING_WANTSHOOTING = true;
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
