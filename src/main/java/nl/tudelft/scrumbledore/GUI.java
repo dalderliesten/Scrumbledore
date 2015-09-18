@@ -418,6 +418,9 @@ public class GUI extends Application {
 
         // Logging the entering of the settings menu and subsequent pausing of the game.
         Logger.log("--------------------SETTINGS MENU OPENED");
+        
+        // Writing to the game log that the game has been paused.
+        Logger.log("--------------------GAME HAS BEEN PAUSED");
       }
 
     });
