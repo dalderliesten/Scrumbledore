@@ -12,6 +12,7 @@ import org.junit.Test;
  * @author Floris Doolaard
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class KineticsLevelModifierTest {
 
   private KineticsLevelModifier kinetics;
