@@ -54,7 +54,7 @@ public class FruitTest {
     Fruit fruit1 = new Fruit(new Vector(0, 0), new Vector(32, 32));
     Fruit fruit2 = new Fruit(new Vector(0, 0), new Vector(32, 32));
    
-    assertTrue(fruit1.equals(fruit2));
+    assertEquals(fruit1, fruit2);
   }
   
   /**

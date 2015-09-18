@@ -7,6 +7,7 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  *
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class NPCLevelModifier implements LevelModifier {
 
   /**

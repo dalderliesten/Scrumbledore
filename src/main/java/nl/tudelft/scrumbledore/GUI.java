@@ -28,7 +28,8 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.NPathComplexity", "PMD.CyclomaticComplexity", 
+  "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity"})
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;

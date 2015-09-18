@@ -15,6 +15,7 @@ import org.junit.Test;
  * @author Niels Warnars
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class LevelElementTest {
   private Vector position;
   private Vector size;
