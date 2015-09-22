@@ -14,7 +14,6 @@ import java.util.Date;
  * @author David Alderliesten
  */
 public final class Logger {
-  // The logging dir and file are utilized for storing of the logging file.
   private static File loggingDir;
   private static File loggingFile;
 
@@ -22,10 +21,11 @@ public final class Logger {
   private static boolean started = false;
 
   /**
-   * Logger constructor. Is not used as the class is a utility class, 
-   * and should not be instantiated.
+   * Logger constructor. Is not used as the class is a utility class, and should not be
+   * instantiated.
    */
   private Logger() {
+
   }
 
   /**
@@ -33,11 +33,8 @@ public final class Logger {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
-    // Creating the directory location.
     loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
 
-    // Checking to see if the directory for the logs exists. If this is no the case, it will be
-    // created.
     if (!loggingDir.exists()) {
       loggingDir.mkdir();
     }
@@ -48,16 +45,14 @@ public final class Logger {
       Date currentDate = new Date();
       SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
 
-      // Taking care of the file name and file creation.
       String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
       loggingFile = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR + desiredFileName);
 
-      // Writing initial content to the file.
       BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile));
       buffWriter.write("--------------------SCRUMBLEDORE LOGGING FILE");
 
       // Closing the stream as both an optimization and as a bug removing technique, as closing it
-      // always writes content.
+      // always writes content and prevents buffer overflow-type errors.
       buffWriter.close();
     } catch (IOException e) {
       System.out.println(e);
@@ -75,17 +70,14 @@ public final class Logger {
   public static void log(String toLog) {
     if (started) {
       try {
-        // Makes the buffered writer to write the desired string.
         BufferedWriter buffWriter = new BufferedWriter(new FileWriter(loggingFile, true));
 
         // Adds a new line to ensure that each log item takes up a new line.
         buffWriter.newLine();
-
-        // Writing the passed log string to the log file.
         buffWriter.write(toLog);
 
         // Closing the stream as both an optimization and as a bug removing technique, as closing it
-        // always writes content.
+        // always writes content and prevents buffer overflow-type errors.
         buffWriter.close();
       } catch (IOException e) {
         System.out.println(e);
