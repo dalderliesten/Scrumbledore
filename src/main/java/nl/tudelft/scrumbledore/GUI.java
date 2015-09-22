@@ -34,8 +34,8 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity", 
-  "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity",
+    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -596,7 +596,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == movementLogTrue) {
           Constants.LOGGING_WANTMOVEMENT = true;
-        } else {
+        } else if (newToggle == movementLogFalse) {
           Constants.LOGGING_WANTMOVEMENT = false;
         }
       }
@@ -620,7 +620,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == inputLogTrue) {
           Constants.LOGGING_WANTINPUT = true;
-        } else {
+        } else if (newToggle == inputLogFalse) {
           Constants.LOGGING_WANTINPUT = false;
         }
       }
@@ -644,7 +644,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == shootLogTrue) {
           Constants.LOGGING_WANTSHOOTING = true;
-        } else {
+        } else if (newToggle == shootLogFalse) {
           Constants.LOGGING_WANTSHOOTING = false;
         }
       }
@@ -668,7 +668,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == gameLogTrue) {
           Constants.LOGGING_WANTSTARTSTOP = true;
-        } else {
+        } else if (newToggle == gameLogFalse) {
           Constants.LOGGING_WANTSTARTSTOP = false;
         }
       }
