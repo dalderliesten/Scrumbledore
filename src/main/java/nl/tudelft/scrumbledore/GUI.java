@@ -589,6 +589,13 @@ public class GUI extends Application {
     movementLogFalse.setToggleGroup(playerMovementGroup);
     movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
 
+    // Arming initial buttons.
+    if (Constants.LOGGING_WANTMOVEMENT) {
+      movementLogTrue.setSelected(true);
+    } else {
+      movementLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerMovementGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -612,6 +619,13 @@ public class GUI extends Application {
     final RadioButton inputLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     inputLogFalse.setToggleGroup(playerInputGroup);
     inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
+
+    // Arming initial buttons.
+    if (Constants.LOGGING_WANTINPUT) {
+      inputLogTrue.setSelected(true);
+    } else {
+      inputLogFalse.setSelected(true);
+    }
 
     // Implementing the listener for the radio buttons above.
     playerInputGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
@@ -637,6 +651,12 @@ public class GUI extends Application {
     shootLogFalse.setToggleGroup(playerShootGroup);
     shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
 
+    if (Constants.LOGGING_WANTSHOOTING) {
+      shootLogTrue.setSelected(true);
+    } else {
+      shootLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerShootGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -660,6 +680,12 @@ public class GUI extends Application {
     final RadioButton gameLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
     gameLogFalse.setToggleGroup(gameLogGroup);
     gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
+
+    if (Constants.LOGGING_WANTSTARTSTOP) {
+      gameLogTrue.setSelected(true);
+    } else {
+      gameLogFalse.setSelected(true);
+    }
 
     // Implementing the listener for the radio buttons above.
     gameLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
