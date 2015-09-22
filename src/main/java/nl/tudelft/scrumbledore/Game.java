@@ -14,6 +14,7 @@ public class Game {
   private ArrayList<LevelModifier> modifiers;
   private Level currentLevel;
   private ScoreCounter score;
+  private double steps;
 
   /**
    * Constructs a new Game from disk.
@@ -42,6 +43,7 @@ public class Game {
    */
   public void construct(ArrayList<Level> levels) {
     this.score = new ScoreCounter();
+    this.steps = 0;
 
     // The game needs at least one level.
     assert levels.size() > 0;
@@ -149,9 +151,38 @@ public class Game {
    *          the last step.
    */
   public void step(double delta) {
+    addSteps(delta);
     for (LevelModifier modifier : modifiers) {
       modifier.modify(currentLevel, delta);
     }
+  }
+
+  /**
+   * Increment this Game's step counter with a given number of (partial) steps.
+   * 
+   * @param steps
+   *          The number of (partial) steps to be added.
+   */
+  public void addSteps(double steps) {
+    this.steps += steps;
+  }
+
+  /**
+   * Get the exact number of steps that have been performed in this game.
+   * 
+   * @return The number of steps performed.
+   */
+  public double getSteps() {
+    return steps;
+  }
+  
+  /**
+   * Get the number of entire steps that have been performed in this game.
+   * 
+   * @return The number of entire steps performed.
+   */
+  public int getFullSteps() {
+    return (int) Math.floor(steps);
   }
 
 }
