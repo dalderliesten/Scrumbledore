@@ -153,17 +153,14 @@ public class GUI extends Application {
     topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
-    Label scoreLabel = new Label(Constants.SCORELABEL);
-    scoreLabel.setAlignment(Pos.CENTER);
+    Label scoreTitleLabel = new Label(Constants.SCORELABEL);
+    Label scoreLabel = new Label();
     Label highScoreLabel = new Label(Constants.HISCORELABEL);
-    highScoreLabel.setAlignment(Pos.CENTER);
     Label powerUpLabel = new Label(Constants.POWERUPLABEL);
-    powerUpLabel.setAlignment(Pos.CENTER);
     Label levelLabel = new Label(Constants.LEVELLABEL);
-    levelLabel.setAlignment(Pos.CENTER);
 
     // Adding the top labels to the top HBox and to the game display interface.
-    topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
+    topItems.getChildren().addAll(scoreTitleLabel, powerUpLabel, levelLabel, highScoreLabel);
     layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
@@ -200,6 +197,7 @@ public class GUI extends Application {
   private void renderStatic() {
     // Clear canvas
     staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+
     // Render the static canvas
     renderPlatforms(staticPainter);
   }
@@ -213,10 +211,13 @@ public class GUI extends Application {
 
     // Render Bubbles.
     renderBubbles(dynamicPainter);
+
     // Render Fruits.
     renderFruits(dynamicPainter);
+
     // Render other moving elements.
     renderNPCs(dynamicPainter);
+
     // Render Player.
     renderPlayer(dynamicPainter);
   }
