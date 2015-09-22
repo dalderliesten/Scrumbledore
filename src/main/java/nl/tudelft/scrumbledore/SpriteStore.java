@@ -3,14 +3,12 @@ package nl.tudelft.scrumbledore;
 import java.io.File;
 import java.util.ArrayList;
 
-import javafx.scene.image.Image;
-
 /**
  * The Sprite Store reads and creates Sprites from the file system and allows to easily select and
  * use them.
  * 
  * @author Jesse Tilro
- *
+ * @author Niels Warnars
  */
 public class SpriteStore {
 

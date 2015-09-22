@@ -1,12 +1,10 @@
 package nl.tudelft.scrumbledore;
 
-import javafx.scene.image.Image;
-
 /**
  * Represents a sprite that can be drawn in the GUI as a visual representation of a LevelElement.
  * 
  * @author Jesse Tilro
- *
+ * @author Niels Warnars
  */
 public class Sprite {
 

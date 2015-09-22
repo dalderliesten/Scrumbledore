@@ -1,11 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertNotNull;
 
 import org.junit.Test;
-
-import javafx.scene.image.Image;
 
 /**
  * Test Suite for the Sprite class.
