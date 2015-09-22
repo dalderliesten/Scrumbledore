@@ -41,4 +41,5 @@ public class SpriteTest {
     String expectedPath = Constants.SPRITES_DIR + "file.ext";
     assertEquals(expectedPath, test.getPath());
   }
+
 }

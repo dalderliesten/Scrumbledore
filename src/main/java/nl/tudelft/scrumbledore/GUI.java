@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -242,8 +243,9 @@ public class GUI extends Application {
       spr = "player-right";
     }
 
-    painter.drawImage(sprites.getImage(spr), game.getCurrentLevel().getPlayer().getPosition()
-        .getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(new Image(sprites.getPathFromID(spr)), 
+        game.getCurrentLevel().getPlayer().getPosition().getX(), 
+        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -260,8 +262,8 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("bubble")), 
+          currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
     }
   }
 
@@ -285,8 +287,8 @@ public class GUI extends Application {
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(), current.getPosition()
-          .getY());
+      painter.drawImage(new Image(sprites.getPathFromID(spr)), 
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -300,8 +302,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), 
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -319,8 +321,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")), 
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
