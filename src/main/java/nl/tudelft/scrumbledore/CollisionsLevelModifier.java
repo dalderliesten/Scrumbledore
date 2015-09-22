@@ -237,6 +237,8 @@ public class CollisionsLevelModifier implements LevelModifier {
               && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
               && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {
             bubbles.get(j).setHasNPC(true);
+            // The lifetime of the bubble gets extended if the bubble cathes an enemy.
+            bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
             // The enemy gets removed and a new encapsulated enemy will appear.
             enemies.remove(i);
           }

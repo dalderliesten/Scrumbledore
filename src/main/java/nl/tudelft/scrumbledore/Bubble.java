@@ -79,6 +79,14 @@ public class Bubble extends Projectile {
   }
   
   /**
+   * Setting the life time of a bubble.
+   * @param newTime The new life time.
+   */
+  public void setLifetime(double newTime) {
+    lifetime = newTime;
+  }
+  
+  /**
    * Return a boolean wether to see if a bubble has an NPC in it.
    * @return Boolean of hasNPC.
    */

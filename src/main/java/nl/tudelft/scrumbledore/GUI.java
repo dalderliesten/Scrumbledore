@@ -260,8 +260,13 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      if( !currentBubble.hasNPC() ) {
+        painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
+            currentBubble.getPosition().getY());
+      } else {
+        painter.drawImage(sprites.getImage("bubble-enemy-mighta"), currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
+      }
+      
     }
   }
 
