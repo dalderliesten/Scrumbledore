@@ -154,7 +154,7 @@ public class GUI extends Application {
 
     // Linking the labels needed in the top HBox to their constant referneces.
     Label scoreTitleLabel = new Label(Constants.SCORELABEL);
-    Label scoreLabel = new Label();
+    Label scoreLabel = new Label(game.getScore());
     Label highScoreLabel = new Label(Constants.HISCORELABEL);
     Label powerUpLabel = new Label(Constants.POWERUPLABEL);
     Label levelLabel = new Label(Constants.LEVELLABEL);

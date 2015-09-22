@@ -154,4 +154,15 @@ public class Game {
     }
   }
 
+  /**
+   * Returns the current value of the score.
+   * 
+   * @return Value of the current score.
+   */
+  public String getScore() {
+    String toReturn = score.getScoreString();
+    
+    return toReturn;
+  }
+
 }
