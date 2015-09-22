@@ -45,6 +45,7 @@ public final class Constants {
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_ACTIVE = "Yes";
   public static final String LOGGING_DISABLED = "No";
+  public static final String SETTINGSCLOSE = "Close";
   
   // Defining the settings value tracking.
   public static boolean LOGGING_WANTMOVEMENT = true;

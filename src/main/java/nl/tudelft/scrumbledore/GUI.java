@@ -562,7 +562,7 @@ public class GUI extends Application {
     Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
 
     // Adding the exit button to go back to the game menu.
-    Button exitButton = new Button(Constants.EXITBTNLABEL);
+    Button exitButton = new Button(Constants.SETTINGSCLOSE);
 
     // Performing the handling of the settings exit button.
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
