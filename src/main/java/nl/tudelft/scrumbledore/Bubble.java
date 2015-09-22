@@ -27,6 +27,7 @@ public class Bubble extends Projectile {
     getFriction().setX(Constants.BUBBLE_FRICTION);
     lifetime = Constants.BUBBLE_LIFETIME;
     actions = new ArrayList<BubbleAction>();
+    hasNPC = false;
   }
 
   /**
