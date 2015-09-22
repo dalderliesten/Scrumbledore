@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import nl.tudelft.scrumbledore.gui.GUI;
+
 /**
  * Launches the game and containes the main method, which will run the GUI, which in turn will run
  * the game.

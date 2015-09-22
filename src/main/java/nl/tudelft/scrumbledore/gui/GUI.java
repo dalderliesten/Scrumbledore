@@ -1,4 +1,4 @@
-package nl.tudelft.scrumbledore;
+package nl.tudelft.scrumbledore.gui;
 
 import java.util.ArrayList;
 
@@ -25,6 +25,20 @@ import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.stage.WindowEvent;
+import nl.tudelft.scrumbledore.Bubble;
+import nl.tudelft.scrumbledore.BubbleAction;
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Fruit;
+import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.NPC;
+import nl.tudelft.scrumbledore.NPCAction;
+import nl.tudelft.scrumbledore.Platform;
+import nl.tudelft.scrumbledore.Player;
+import nl.tudelft.scrumbledore.PlayerAction;
+import nl.tudelft.scrumbledore.SpriteStore;
+import nl.tudelft.scrumbledore.StepTimer;
+import nl.tudelft.scrumbledore.Vector;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
