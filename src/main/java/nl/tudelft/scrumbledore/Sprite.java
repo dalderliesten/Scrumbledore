@@ -75,14 +75,5 @@ public class Sprite {
   public String getPath() {
     return dir + id + "." + ext;
   }
-
-  /**
-   * Get a JavaFX Image instance for this sprite.
-   * 
-   * @return An Image instance.
-   */
-  public Image getImage() {
-    return new Image(getPath());
-  }
-
+  
 }

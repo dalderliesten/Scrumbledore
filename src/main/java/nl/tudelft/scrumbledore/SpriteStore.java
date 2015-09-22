@@ -84,14 +84,14 @@ public class SpriteStore {
   }
 
   /**
-   * Get an Image instance of the Sprite with the given ID.
+   * Get the path of a Sprite based on a given ID.
    * 
    * @param id
    *          The ID.
-   * @return An Image.
+   * @return The path of a Sprite
    */
-  public Image getImage(String id) {
-    return get(id).getImage();
+  public String getPathFromID(String id) {
+    return get(id).getPath();
   }
 
 }
