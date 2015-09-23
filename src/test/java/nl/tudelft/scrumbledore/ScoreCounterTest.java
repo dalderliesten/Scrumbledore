@@ -43,4 +43,17 @@ public class ScoreCounterTest {
     assertEquals(42, sc.getScore());
   }
 
+  /**
+   * Test whether the score is updated accordingly if it is incremented twice. 
+   */
+  @Test
+  public void testUpdateScoreTwice() {
+    ScoreCounter sc = new ScoreCounter();
+    
+    sc.updateScore(1);
+    assertEquals(1, sc.getScore());
+    
+    sc.updateScore(1);
+    assertEquals(2, sc.getScore());
+  }
 }
