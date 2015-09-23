@@ -18,6 +18,7 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
+import javafx.scene.image.Image;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,8 +35,8 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity", 
-  "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity",
+    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -242,8 +243,9 @@ public class GUI extends Application {
       spr = "player-right";
     }
 
-    painter.drawImage(sprites.getImage(spr), game.getCurrentLevel().getPlayer().getPosition()
-        .getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(new Image(sprites.getPathFromID(spr)), 
+        game.getCurrentLevel().getPlayer().getPosition().getX(), 
+        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -260,8 +262,8 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("bubble")), 
+          currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
     }
   }
 
@@ -285,8 +287,8 @@ public class GUI extends Application {
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(), current.getPosition()
-          .getY());
+      painter.drawImage(new Image(sprites.getPathFromID(spr)), 
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -300,8 +302,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), 
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -319,8 +321,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")), 
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -562,7 +564,7 @@ public class GUI extends Application {
     Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
 
     // Adding the exit button to go back to the game menu.
-    Button exitButton = new Button(Constants.EXITBTNLABEL);
+    Button exitButton = new Button(Constants.SETTINGSCLOSE);
 
     // Performing the handling of the settings exit button.
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -589,6 +591,13 @@ public class GUI extends Application {
     movementLogFalse.setToggleGroup(playerMovementGroup);
     movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
 
+    // Arming initial buttons.
+    if (Constants.LOGGING_WANTMOVEMENT) {
+      movementLogTrue.setSelected(true);
+    } else {
+      movementLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerMovementGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -596,7 +605,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == movementLogTrue) {
           Constants.LOGGING_WANTMOVEMENT = true;
-        } else {
+        } else if (newToggle == movementLogFalse) {
           Constants.LOGGING_WANTMOVEMENT = false;
         }
       }
@@ -613,6 +622,13 @@ public class GUI extends Application {
     inputLogFalse.setToggleGroup(playerInputGroup);
     inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
 
+    // Arming initial buttons.
+    if (Constants.LOGGING_WANTINPUT) {
+      inputLogTrue.setSelected(true);
+    } else {
+      inputLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerInputGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -620,7 +636,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == inputLogTrue) {
           Constants.LOGGING_WANTINPUT = true;
-        } else {
+        } else if (newToggle == inputLogFalse) {
           Constants.LOGGING_WANTINPUT = false;
         }
       }
@@ -637,6 +653,12 @@ public class GUI extends Application {
     shootLogFalse.setToggleGroup(playerShootGroup);
     shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
 
+    if (Constants.LOGGING_WANTSHOOTING) {
+      shootLogTrue.setSelected(true);
+    } else {
+      shootLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerShootGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -644,7 +666,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == shootLogTrue) {
           Constants.LOGGING_WANTSHOOTING = true;
-        } else {
+        } else if (newToggle == shootLogFalse) {
           Constants.LOGGING_WANTSHOOTING = false;
         }
       }
@@ -661,6 +683,12 @@ public class GUI extends Application {
     gameLogFalse.setToggleGroup(gameLogGroup);
     gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
 
+    if (Constants.LOGGING_WANTSTARTSTOP) {
+      gameLogTrue.setSelected(true);
+    } else {
+      gameLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     gameLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -668,7 +696,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == gameLogTrue) {
           Constants.LOGGING_WANTSTARTSTOP = true;
-        } else {
+        } else if (newToggle == gameLogFalse) {
           Constants.LOGGING_WANTSTARTSTOP = false;
         }
       }
