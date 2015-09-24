@@ -544,6 +544,7 @@ public class GUI extends Application {
   /**
    * Handles the creation and feature functioning of the settings menu.
    */
+  @SuppressWarnings("PMD.ExcessiveMethodLength")
   private void settingsMenu() {
     // Creation and formatting of the settings stage.
     final Stage settingsStage = new Stage();
