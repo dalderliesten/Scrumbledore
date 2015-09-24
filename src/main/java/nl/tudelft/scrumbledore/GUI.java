@@ -1,14 +1,12 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -36,7 +34,8 @@ import javafx.stage.WindowEvent;
  * @author Niels Warnars
  */
 @SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity",
-    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity",
+    "PMD.TooManyFields" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -60,6 +59,10 @@ public class GUI extends Application {
   private Button startStopButton;
   private Button settingsButton;
   private Button exitButton;
+  private Label scoreLabel;
+  private Label levelLabel;
+  private Label highScoreLabel;
+  private Label powerUpLabel;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -91,6 +94,7 @@ public class GUI extends Application {
     // Start the animation timer to keep refreshing the dynamic canvas.
     animationTimer.start();
 
+    // Showing the game stage.
     stage.show();
   }
 
@@ -150,21 +154,22 @@ public class GUI extends Application {
 
     // Creation of a horizontal box for storing top labels and items to display, and making it the
     // full width of the GUI.
-    HBox topItems = new HBox();
+    HBox topItems = new HBox(15);
     topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
-    Label scoreLabel = new Label(Constants.SCORELABEL);
-    scoreLabel.setAlignment(Pos.CENTER);
-    Label highScoreLabel = new Label(Constants.HISCORELABEL);
-    highScoreLabel.setAlignment(Pos.CENTER);
-    Label powerUpLabel = new Label(Constants.POWERUPLABEL);
-    powerUpLabel.setAlignment(Pos.CENTER);
-    Label levelLabel = new Label(Constants.LEVELLABEL);
-    levelLabel.setAlignment(Pos.CENTER);
+    Label scoreTitleLabel = new Label(Constants.SCORELABEL);
+    scoreLabel = new Label(game.getScore());
+    Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel = new Label(game.getHighScore());
+    Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
+    powerUpLabel = new Label("NONE ACTIVE");
+    Label levelTitleLabel = new Label(Constants.LEVELLABEL);
+    levelLabel = new Label(game.getCurrentLevelNumber());
 
     // Adding the top labels to the top HBox and to the game display interface.
-    topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
+    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, powerUpLabel,
+        levelTitleLabel, levelLabel, highScoreTitleLabel, highScoreLabel);
     layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
@@ -201,12 +206,14 @@ public class GUI extends Application {
   private void renderStatic() {
     // Clear canvas
     staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+
     // Render the static canvas
     renderPlatforms(staticPainter);
   }
 
   /**
-   * Refresh the GUI by rendering all dynamic elements in the current level of the game.
+   * Refresh the GUI by rendering all dynamic elements in the current level of the game Also updates
+   * all the GUI elements that must be refreshed per cycle.
    */
   private void renderDynamic() {
     // Clear canvas
@@ -214,12 +221,24 @@ public class GUI extends Application {
 
     // Render Bubbles.
     renderBubbles(dynamicPainter);
+
     // Render Fruits.
     renderFruits(dynamicPainter);
+
     // Render other moving elements.
     renderNPCs(dynamicPainter);
+
     // Render Player.
     renderPlayer(dynamicPainter);
+
+    // Updating the score display for the GUI.
+    scoreLabel.setText(game.getScore());
+
+    // Updating the current level number display for the GUI.
+    levelLabel.setText(game.getCurrentLevelNumber());
+
+    // Updating the current high score display for the GUI.
+    highScoreLabel.setText(game.getHighScore());
   }
 
   /**
@@ -243,9 +262,8 @@ public class GUI extends Application {
       spr = "player-right";
     }
 
-    painter.drawImage(new Image(sprites.getPathFromID(spr)), 
-        game.getCurrentLevel().getPlayer().getPosition().getX(), 
-        game.getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(new Image(sprites.getPathFromID(spr)), game.getCurrentLevel().getPlayer()
+        .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -262,8 +280,8 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(new Image(sprites.getPathFromID("bubble")), 
-          currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("bubble")), currentBubble.getPosition()
+          .getX(), currentBubble.getPosition().getY());
     }
   }
 
@@ -287,8 +305,8 @@ public class GUI extends Application {
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(new Image(sprites.getPathFromID(spr)), 
-          current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID(spr)), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -302,8 +320,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), 
-          current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -321,8 +339,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")), 
-          current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")), current.getPosition()
+          .getX(), current.getPosition().getY());
     }
   }
 
@@ -543,6 +561,7 @@ public class GUI extends Application {
   /**
    * Handles the creation and feature functioning of the settings menu.
    */
+  @SuppressWarnings("PMD.ExcessiveMethodLength")
   private void settingsMenu() {
     // Creation and formatting of the settings stage.
     final Stage settingsStage = new Stage();

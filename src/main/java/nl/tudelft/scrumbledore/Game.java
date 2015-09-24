@@ -15,6 +15,7 @@ public class Game {
   private Level currentLevel;
   private ScoreCounter score;
   private double steps;
+  private int currentLevelNumber;
 
   /**
    * Constructs a new Game from disk.
@@ -23,6 +24,9 @@ public class Game {
     // Load levels from disk
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
+
+    // Instantiating the current level number to one.
+    currentLevelNumber = 1;
   }
 
   /**
@@ -64,7 +68,7 @@ public class Game {
   }
 
   /**
-   * Runs invariant assertions.
+   * Runs invariant assertions required for the functioning of the game.
    */
   public void invariant() {
     assert levels.contains(currentLevel);
@@ -77,6 +81,19 @@ public class Game {
    */
   public Level getCurrentLevel() {
     return currentLevel;
+  }
+
+  /**
+   * Returns the current level number.
+   * 
+   * @return The current level number as a string.
+   */
+  public String getCurrentLevelNumber() {
+    String toReturn = "";
+
+    toReturn = toReturn + currentLevelNumber;
+
+    return toReturn;
   }
 
   /**
@@ -129,6 +146,9 @@ public class Game {
     // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
 
+    // Incrementing the current level number by one.
+    currentLevelNumber = currentLevelNumber + 1;
+
     invariant();
   }
 
@@ -158,6 +178,30 @@ public class Game {
   }
 
   /**
+   * Returns the current value of the score.
+   * 
+   * @return Value of the current score.
+   */
+  public String getScore() {
+    String toReturn = score.getScoreString();
+
+    return toReturn;
+  }
+
+  /**
+   * Returns the current value of the high score.
+   * 
+   * @return Value of the high score.
+   */
+  public String getHighScore() {
+    String toReturn = "";
+    
+    toReturn = toReturn + score.getHighScore();
+
+    return toReturn;
+  }
+
+  /**
    * Increment this Game's step counter with a given number of (partial) steps.
    * 
    * @param steps
@@ -175,7 +219,7 @@ public class Game {
   public double getSteps() {
     return steps;
   }
-  
+
   /**
    * Get the number of entire steps that have been performed in this game.
    * 
