@@ -205,7 +205,8 @@ public class GUI extends Application {
   }
 
   /**
-   * Refresh the GUI by rendering all dynamic elements in the current level of the game.
+   * Refresh the GUI by rendering all dynamic elements in the current level of the game Also updates
+   * all the GUI elements that must be refreshed per cycle.
    */
   private void renderDynamic() {
     // Clear canvas
@@ -222,6 +223,9 @@ public class GUI extends Application {
 
     // Render Player.
     renderPlayer(dynamicPainter);
+
+    // Updating the score display for the GUI.
+    scoreLabel.setText(game.getScore());
   }
 
   /**

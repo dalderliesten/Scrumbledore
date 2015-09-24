@@ -126,7 +126,7 @@ public class StepTimer {
   }
 
   /**
-   * The game loop runs the loop within the thread for the game.
+   * Runs the loop within the thread for the game.
    */
   public void gameLoop() {
     // Timing related operations.
@@ -147,6 +147,6 @@ public class StepTimer {
     } catch (InterruptedException ex) {
       ex.printStackTrace();
     }
-
   }
+
 }
