@@ -15,6 +15,7 @@ import org.junit.Test;
  * Testing the Game class.
  * 
  * @author Floris Doolaard
+ * @author Jesse Tilro
  *
  */
 public class GameTest {
@@ -43,7 +44,6 @@ public class GameTest {
    */
   @Test
   public void testRemainingLevels() {
-
     assertEquals(l1, g1.getCurrentLevel());
     assertEquals(l1, g1.getLevels().get(0));
     assertEquals(1, g1.remainingLevels());
@@ -68,14 +68,25 @@ public class GameTest {
   @Test
   public void testRestart() {
     assertEquals(1, g1.remainingLevels());
-    
+
     g1.goToNextLevel();
-    assertEquals(0, g1.remainingLevels());  
-  
+    assertEquals(0, g1.remainingLevels());
+
     g1.restart();
     assertTrue(g1.remainingLevels() > 0);
   }
-    
+
+  /**
+   * Test step counting methods.
+   */
+  @Test
+  public void testSteps() {
+    g1.addSteps(3.2);
+    g1.addSteps(6.4);
+    assertEquals(9.6, g1.getSteps(), Constants.DOUBLE_PRECISION);
+    assertEquals(9, g1.getFullSteps());
+  }
+
   /**
    * Deleting test properties after testing.
    * 
