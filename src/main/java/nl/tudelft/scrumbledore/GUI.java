@@ -60,6 +60,9 @@ public class GUI extends Application {
   private Button settingsButton;
   private Button exitButton;
   private Label scoreLabel;
+  private Label levelLabel;
+  private Label highScoreLabel;
+  private Label powerUpLabel;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -157,13 +160,15 @@ public class GUI extends Application {
     // Linking the labels needed in the top HBox to their constant referneces.
     Label scoreTitleLabel = new Label(Constants.SCORELABEL);
     scoreLabel = new Label(game.getScore());
-    Label highScoreLabel = new Label(Constants.HISCORELABEL);
-    Label powerUpLabel = new Label(Constants.POWERUPLABEL);
-    Label levelLabel = new Label(Constants.LEVELLABEL);
+    Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel = new Label("HIGH GOES HERE");
+    Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
+    Label levelTitleLabel = new Label(Constants.LEVELLABEL);
+    levelLabel = new Label(game.getCurrentLevelNumber());
 
     // Adding the top labels to the top HBox and to the game display interface.
-    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpLabel, levelLabel,
-        highScoreLabel);
+    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, levelTitleLabel,
+        levelLabel, highScoreTitleLabel);
     layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
@@ -227,6 +232,9 @@ public class GUI extends Application {
 
     // Updating the score display for the GUI.
     scoreLabel.setText(game.getScore());
+
+    // Updating the current level number display for the GUI.
+    levelLabel.setText(game.getCurrentLevelNumber());
   }
 
   /**

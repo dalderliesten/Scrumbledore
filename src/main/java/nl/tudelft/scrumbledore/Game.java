@@ -15,6 +15,7 @@ public class Game {
   private Level currentLevel;
   private ScoreCounter score;
   private double steps;
+  private int currentLevelNumber;
 
   /**
    * Constructs a new Game from disk.
@@ -23,6 +24,9 @@ public class Game {
     // Load levels from disk
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
+
+    // Instantiating the current level number to one.
+    currentLevelNumber = 1;
   }
 
   /**
@@ -64,7 +68,7 @@ public class Game {
   }
 
   /**
-   * Runs invariant assertions.
+   * Runs invariant assertions required for the functioning of the game.
    */
   public void invariant() {
     assert levels.contains(currentLevel);
@@ -77,6 +81,19 @@ public class Game {
    */
   public Level getCurrentLevel() {
     return currentLevel;
+  }
+
+  /**
+   * Returns the current level number.
+   * 
+   * @return The current level number as a string.
+   */
+  public String getCurrentLevelNumber() {
+    String toReturn = "";
+
+    toReturn = toReturn + currentLevelNumber;
+
+    return toReturn;
   }
 
   /**
@@ -128,6 +145,9 @@ public class Game {
 
     // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
+
+    // Incrementing the current level number by one.
+    currentLevelNumber = currentLevelNumber + 1;
 
     invariant();
   }
