@@ -8,23 +8,34 @@ package nl.tudelft.scrumbledore;
  */
 public class ScoreCounter {
   private int score;
+  private int highScore;
 
   /**
    * Contructing a a ScoreCounter object.
    *
    */
   public ScoreCounter() {
-    // Initial score is 0
+    // Initial score and highscore is 0.
     this.score = 0;
+    this.highScore = 0;
   }
 
   /**
-   * Return the current total score.
+   * Returns the current total score.
    * 
    * @return The current score.
    */
   public int getScore() {
     return score;
+  }
+  
+  /**
+   * Returns the current high score.
+   * 
+   * @return The current high-score.
+   */
+  public int getHighScore() {
+    return highScore;
   }
 
   /**
