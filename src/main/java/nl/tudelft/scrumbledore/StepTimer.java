@@ -6,7 +6,6 @@ package nl.tudelft.scrumbledore;
  * @author Jesse Tilro
  * @author Jeroen Meijer
  * @author David Alderliesten
- *
  */
 public class StepTimer {
 
@@ -107,9 +106,10 @@ public class StepTimer {
   public void pause() {
     paused = true;
   }
-  
+
   /**
    * Checks if the game is paused.
+   * 
    * @return boolean true if paused
    */
   public boolean isPaused() {
@@ -126,7 +126,7 @@ public class StepTimer {
   }
 
   /**
-   * 
+   * The game loop runs the loop within the thread for the game.
    */
   public void gameLoop() {
     // Timing related operations.
@@ -147,5 +147,6 @@ public class StepTimer {
     } catch (InterruptedException ex) {
       ex.printStackTrace();
     }
+
   }
 }
