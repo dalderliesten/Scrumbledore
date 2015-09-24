@@ -21,6 +21,12 @@ public class LevelParser {
   }
 
   /**
+   * Creates a new LevelParser and loads levels from a user defined path.
+   */
+  public LevelParser(String dir) {
+    levels = loadLevelsFromDisk(dir);
+  }
+  /**
    * Loads an array of Level objects from disk.
    * 
    * @param dir

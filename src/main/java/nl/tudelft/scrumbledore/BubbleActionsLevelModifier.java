@@ -20,12 +20,12 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    */
   public void modify(Level level, double delta) {
 
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
     for (Bubble bubble : level.getBubbles()) {
       bubbles.add(bubble);
     }
-    
-    for (Bubble bub : bubbles) {     
+
+    for (Bubble bub : bubbles) {
       if (bub.getLifetime() <= 0) {
         level.getBubbles().remove(bub);
       } else {
@@ -40,10 +40,25 @@ public class BubbleActionsLevelModifier implements LevelModifier {
         if (bub.hasAction(BubbleAction.MoveRight)) {
           bub.getSpeed().setX(Constants.BUBBLE_SPEED);
         }
+
+        warp(bub);
+        
         bub.clearActions();
       }
     }
 
+  }
+
+  /**
+   * When a Bubble leaves the level from the top, it should warp to the bottom of the level.
+   * 
+   * @param bubble
+   *          The Bubble to be warped.
+   */
+  private void warp(Bubble bubble) {
+    if (bubble.posY() <= -bubble.height() / 2) {
+      bubble.getPosition().setY(Constants.LEVELY + bubble.height() / 2);
+    }
   }
 
 }

@@ -77,6 +77,7 @@ public class StepTimer {
    * Starts the game thread.
    */
   public void start() {
+    assert !running;
     running = true;
     Thread loop = new Thread() {
       public void run() {

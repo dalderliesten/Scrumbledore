@@ -149,4 +149,35 @@ public class LevelParserTest {
     assertEquals(new Vector(B_ONE, B_ONE), lp.getBlockPosition(0, 0));
     assertEquals(new Vector(B_TWO, B_TWO), lp.getBlockPosition(1, 1));
   }
+  
+  /**
+   * Test whether the getLevels method returns the desired levels. 
+   */
+  @Test
+  public void testGetLevels() {
+    LevelParser lp = new LevelParser("src/main/resources/test");
+    ArrayList<Level> levels = lp.getLevels();
+
+    Level l1 = new Level();
+    Level l2 = new Level();
+
+    Platform platform = new Platform(new Vector(0, 0), 
+        new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+    Player player = new Player(new Vector(0, 0), 
+        new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+   
+    l1.addElement(platform);   
+    l2.addElement(player);
+    
+    // Check whether two test levels are available
+    assertEquals(2, levels.size());
+    
+    // Check whether level 1 contains a platform and level 2 doesn't
+    assertEquals(platform, levels.get(0).getPlatforms().get(0));
+    assertEquals(new ArrayList<Platform>(), levels.get(1).getPlatforms());
+    
+    // Check whether level 1 contains a player and level 2 doesn't
+    assertEquals(null, levels.get(0).getPlayer());    
+    assertEquals(player, levels.get(1).getPlayer());
+  }
 }
