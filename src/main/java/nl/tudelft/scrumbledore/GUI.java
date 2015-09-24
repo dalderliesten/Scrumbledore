@@ -161,7 +161,7 @@ public class GUI extends Application {
     Label scoreTitleLabel = new Label(Constants.SCORELABEL);
     scoreLabel = new Label(game.getScore());
     Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
-    highScoreLabel = new Label("HIGH GOES HERE");
+    highScoreLabel = new Label(game.getHighScore());
     Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
     powerUpLabel = new Label("NONE ACTIVE");
     Label levelTitleLabel = new Label(Constants.LEVELLABEL);
@@ -169,7 +169,7 @@ public class GUI extends Application {
 
     // Adding the top labels to the top HBox and to the game display interface.
     topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, powerUpLabel,
-        levelTitleLabel, levelLabel, highScoreTitleLabel);
+        levelTitleLabel, levelLabel, highScoreTitleLabel, highScoreLabel);
     layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
@@ -236,6 +236,9 @@ public class GUI extends Application {
 
     // Updating the current level number display for the GUI.
     levelLabel.setText(game.getCurrentLevelNumber());
+
+    // Updating the current high score display for the GUI.
+    highScoreLabel.setText(game.getHighScore());
   }
 
   /**

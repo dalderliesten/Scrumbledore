@@ -28,7 +28,7 @@ public class ScoreCounter {
   public int getScore() {
     return score;
   }
-  
+
   /**
    * Returns the current high score.
    * 
@@ -52,13 +52,18 @@ public class ScoreCounter {
   }
 
   /**
-   * Updating the current score with additional score.
+   * Updating the current score with additional score and update the high-score if needed.
    * 
    * @param addScore
    *          The score to be added to the total score.
    */
   public void updateScore(int addScore) {
     score += addScore;
+
+    // If the new score is bigger than the high-score, it updates the high-score.
+    if (score > highScore) {
+      highScore = score;
+    }
   }
 
 }

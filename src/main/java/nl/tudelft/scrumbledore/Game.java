@@ -189,6 +189,19 @@ public class Game {
   }
 
   /**
+   * Returns the current value of the high score.
+   * 
+   * @return Value of the high score.
+   */
+  public String getHighScore() {
+    String toReturn = "";
+    
+    toReturn = toReturn + score.getHighScore();
+
+    return toReturn;
+  }
+
+  /**
    * Increment this Game's step counter with a given number of (partial) steps.
    * 
    * @param steps
