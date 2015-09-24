@@ -91,6 +91,7 @@ public class GUI extends Application {
     // Start the animation timer to keep refreshing the dynamic canvas.
     animationTimer.start();
 
+    // Showing the game stage.
     stage.show();
   }
 
@@ -150,7 +151,7 @@ public class GUI extends Application {
 
     // Creation of a horizontal box for storing top labels and items to display, and making it the
     // full width of the GUI.
-    HBox topItems = new HBox();
+    HBox topItems = new HBox(15);
     topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
