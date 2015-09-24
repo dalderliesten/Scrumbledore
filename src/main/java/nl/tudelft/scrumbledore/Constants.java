@@ -27,10 +27,10 @@ public final class Constants {
   public static final int REFRESH_RATE = 30;
 
   // Defining labels needed in the top section of the user interface.
-  public static final String SCORELABEL = "Score: ";
-  public static final String HISCORELABEL = "High-Score: ";
-  public static final String POWERUPLABEL = "Power-Ups: ";
-  public static final String LEVELLABEL = "Level: ";
+  public static final String SCORELABEL = "Score:";
+  public static final String HISCORELABEL = "High-Score:";
+  public static final String POWERUPLABEL = "Power-Ups:";
+  public static final String LEVELLABEL = "Level:";
 
   // Defining text needed to display the buttons in the bottom of the user interface.
   public static final String STARTBTNLABEL = "Start";
@@ -109,4 +109,5 @@ public final class Constants {
 
   // Reference to the location directory for the log file handling.
   public static final String LOGGER_DIR = "logging/";
+  
 }
