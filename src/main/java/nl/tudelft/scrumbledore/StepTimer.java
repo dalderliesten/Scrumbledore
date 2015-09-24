@@ -129,7 +129,6 @@ public class StepTimer {
    * Runs the loop within the thread for the game.
    */
   public void gameLoop() {
-    // Timing related operations.
     long now = System.nanoTime();
     long elapsedTime = now - prevLoopTime;
     prevLoopTime = now;

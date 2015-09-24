@@ -164,8 +164,6 @@ public class Game {
    */
   public String getScore() {
     String toReturn = score.getScoreString();
-    
-    System.out.println(toReturn);
 
     return toReturn;
   }
