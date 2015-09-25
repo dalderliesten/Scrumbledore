@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.ArrayList;
+
 /**
  * Class simulating Gravity on the LevelElements in the game.
  * 
@@ -52,7 +54,10 @@ public class GravityLevelModifier implements LevelModifier {
     }
 
     // Pull down the player
-    pull(level.getPlayer(), d);
+    ArrayList<Player> players = level.getPlayers();
+    for (Player player : players) {
+      pull(player, d);
+    }
   }
 
   /**

@@ -44,9 +44,7 @@ import nl.tudelft.scrumbledore.StepTimer;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity",
-    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity",
-    "PMD.TooManyFields" })
+@SuppressWarnings("checkstyle:methodlength")
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -260,28 +258,30 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
-    Player player = game.getCurrentLevel().getPlayer();
-    double steps = game.getSteps();
+    ArrayList<Player> players = game.getCurrentLevel().getPlayers();
 
-    boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
-    boolean isFiring = player.isFiring();
+    for (Player player : players) {
+      double steps = game.getSteps();
 
-    String spr = "player-move-left";
-    if (isFiring && toRight) {
-      spr = "player-shoot-right";
-    } else if (isFiring) {
-      spr = "player-shoot-left";
-    } else if (toRight) {
-      spr = "player-move-right";
+      boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+      boolean isFiring = player.isFiring();
+
+      String spr = "player-move-left";
+      if (isFiring && toRight) {
+        spr = "player-shoot-right";
+      } else if (isFiring) {
+        spr = "player-shoot-left";
+      } else if (toRight) {
+        spr = "player-move-right";
+      }
+
+      if (player.getSpeed().getX() == 0 && !isFiring) {
+        steps = 0;
+      }
+
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
     }
-
-    if (player.getSpeed().getX() == 0 && !isFiring) {
-      steps = 0;
-    }
-
-    String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-    painter.drawImage(new Image(path), game.getCurrentLevel().getPlayer().getPosition().getX(),
-        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -303,9 +303,8 @@ public class GUI extends Application {
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
       }
-
-      painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
-          .getPosition().getY());
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -331,8 +330,8 @@ public class GUI extends Application {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      painter
-          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -366,8 +365,8 @@ public class GUI extends Application {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      painter
-          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -422,7 +421,14 @@ public class GUI extends Application {
    * If player died, restart the game.
    */
   private void checkPlayerAlive() {
-    if (!game.getCurrentLevel().getPlayer().isAlive()) {
+    ArrayList<Player> players = game.getCurrentLevel().getPlayers();
+    Boolean playersLeft = false;
+    for (Player player : players) {
+      if (player.isAlive()) {
+        playersLeft = true;
+      }
+    }
+    if (!playersLeft) {
       game.restart();
       renderStatic();
     }
@@ -504,7 +510,6 @@ public class GUI extends Application {
   /**
    * Handles the creation and feature functioning of the settings menu.
    */
-  @SuppressWarnings("PMD.ExcessiveMethodLength")
   private void settingsMenu() {
     // Creation and formatting of the settings stage.
     final Stage settingsStage = new Stage();
