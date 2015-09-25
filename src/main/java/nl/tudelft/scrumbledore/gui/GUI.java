@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore.gui;
 
 import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -319,7 +320,7 @@ public class GUI extends Application {
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
       String spr = "enemy-mighta-right";
-      if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
+      if (current.getLastMove().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
       painter.drawImage(new Image(sprites.getPathFromID(spr)), current.getPosition().getX(),

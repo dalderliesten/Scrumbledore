@@ -43,6 +43,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     detectPlayerFruit(level, delta);
     detectPlayerEnemy(level, delta);
     detectBubbleEnemy(level, delta);
+    detectNPCPlatform(level, delta);
   }
 
   /**
@@ -120,7 +121,56 @@ public class CollisionsLevelModifier implements LevelModifier {
   }
 
   /**
-   * Detect collisions between player and platform.
+   * Detect collisions between NPC's and platform.
+   * 
+   * @param level
+   *          The Level.
+   * @param delta
+   *          The delta provided by the StepTimer.
+   */
+  @SuppressWarnings("checkstyle:methodlength")
+  public void detectNPCPlatform(Level level, double delta) {
+
+    for (NPC npc : level.getNPCs()) {
+      for (Platform platform : level.getPlatforms()) {
+        // Check if platform is in collision range.
+        if (platform.inBoxRangeOf(npc, Constants.COLLISION_RADIUS)) {
+          // Detect collision.
+          Collision collision = new Collision(npc, platform, delta);
+
+          // Collision while falling
+          if (collision.collidingFromTop() && npc.vSpeed() > 0) {
+            kinetics.stopVertically(npc);
+            kinetics.snapTop(npc, platform);
+          }
+
+          // Only check platform collisions with the walls of a level
+          if (!platform.isPassable()) {
+
+            // Collision while moving to the right
+            if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
+              kinetics.stopHorizontally(npc);
+              kinetics.snapLeft(npc, platform);
+              npc.addAction(NPCAction.MoveLeft);
+            }
+
+            // Collision while moving to the right
+            if (collision.collidingFromRight() && npc.hSpeed() < 0) {
+              kinetics.stopHorizontally(npc);
+              kinetics.snapRight(npc, platform);
+              npc.addAction(NPCAction.MoveRight);
+            }
+
+          }
+        }
+      }
+
+    }
+
+  }
+
+  /**
+   * Detect collisions between bubble and platform.
    * 
    * @param level
    *          The Level.
@@ -172,7 +222,9 @@ public class CollisionsLevelModifier implements LevelModifier {
   public void detectPlayerBubble(Level level, double delta) {
     Player player = level.getPlayer();
     ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+
     ArrayList<Fruit> fruits = level.getFruits();
+
 
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
     for (Bubble bubble : level.getBubbles()) {
@@ -233,13 +285,13 @@ public class CollisionsLevelModifier implements LevelModifier {
 
     if (bubbles.size() > 0 && enemies.size() > 0) {
       for (int i = 0; i < enemies.size(); i++) {
-        for (int j = 0; j < bubbles.size(); j++) {
 
+        for (int j = 0; j < bubbles.size(); j++) {
           // Temp fix to prevent race condition
           if (enemies.size() != i
               && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
               && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {            
-
+            
             // The enemy gets removed and a new encapsulated enemy will appear.
             enemies.remove(i);
             bubbles.get(j).setHasNPC(true);
