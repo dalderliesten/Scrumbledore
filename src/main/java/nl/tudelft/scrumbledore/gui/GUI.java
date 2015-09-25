@@ -524,6 +524,7 @@ public class GUI extends Application {
     Label playerJumpLog = new Label(Constants.LOGGING_PLAYER_INPUT);
     Label playerShootingLog = new Label(Constants.LOGGING_SHOOTING);
     Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
+    Label pointStateLog = new Label(Constants.LOGGING_POINTS);
 
     // Adding the exit button to go back to the game menu.
     Button exitButton = new Button(Constants.SETTINGSCLOSE);
@@ -665,10 +666,40 @@ public class GUI extends Application {
 
     });
 
+    // Creation of the buttons and handler for the points tracking groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup pointsLogGroup = new ToggleGroup();
+    HBox pointsLogBox = new HBox(15);
+    final RadioButton pointsLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    pointsLogTrue.setToggleGroup(pointsLogGroup);
+    final RadioButton pointsLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    pointsLogFalse.setToggleGroup(pointsLogGroup);
+    pointsLogBox.getChildren().addAll(pointsLogTrue, pointsLogFalse);
+
+    if (Constants.LOGGING_WANTPOINTS) {
+      pointsLogTrue.setSelected(true);
+    } else {
+      pointsLogFalse.setSelected(true);
+    }
+
+    // Implementing the listener for the radio buttons above.
+    pointsLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == pointsLogTrue) {
+          Constants.LOGGING_WANTPOINTS = true;
+        } else if (newToggle == pointsLogFalse) {
+          Constants.LOGGING_WANTPOINTS = false;
+        }
+      }
+
+    });
+
     // Adding all the content for the settings menu to the settings scene.
     settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
         playerJumpLog, inputToggleBox, playerShootingLog, shootToggleBox, gameStateLog, gameLogBox,
-        exitButton);
+        pointStateLog, pointsLogBox, exitButton);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
@@ -678,4 +709,5 @@ public class GUI extends Application {
     settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
     settingsStage.show();
   }
+
 }
