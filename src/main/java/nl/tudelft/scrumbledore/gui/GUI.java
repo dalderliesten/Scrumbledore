@@ -297,9 +297,13 @@ public class GUI extends Application {
       bubbles.add(bubble);
     }
 
-    String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
-
     for (Bubble currentBubble : bubbles) {
+      String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
+
+      if (currentBubble.hasNPC()) {
+        path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
+      }
+
       painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
           .getPosition().getY());
     }
@@ -374,7 +378,8 @@ public class GUI extends Application {
   private void advanceLevel() {
 
     // When the enemies in the current level have been killed.
-    if (game.getCurrentLevel().getNPCs().isEmpty()) {
+    if (game.getCurrentLevel().getNPCs().isEmpty()
+        && game.getCurrentLevel().getEnemyBubbles().isEmpty()) {
 
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
