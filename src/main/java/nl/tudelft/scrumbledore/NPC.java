@@ -11,7 +11,7 @@ public class NPC extends LevelElement {
   private int life;
   private int status;
   private boolean hasFruit;
-  private NPCAction movementDirection;
+  private NPCAction lastMove;
   private ArrayList<NPCAction> actions;
 
   /**
@@ -28,7 +28,7 @@ public class NPC extends LevelElement {
     setGravity(true);
 
     actions = new ArrayList<NPCAction>();
-    movementDirection = NPCAction.MoveLeft;
+    addAction(NPCAction.MoveLeft);
   }
 
   /**
@@ -40,6 +40,7 @@ public class NPC extends LevelElement {
   public void addAction(NPCAction action) {
     if (!hasAction(action)) {
       actions.add(action);
+      setLastMove(action);
     }
   }
 
@@ -155,22 +156,25 @@ public class NPC extends LevelElement {
   }
 
   /**
-   * Sets the moving direction of an NPC.
+   * Get the last horizontal move performed.
    * 
-   * @param direction
-   *          The moving direction of an NPC
+   * @return The last move performed.
    */
-  public void setMovementDirection(NPCAction direction) {
-    this.movementDirection = direction;
+  public NPCAction getLastMove() {
+    return lastMove;
   }
 
   /**
-   * Returns the moving direction of an NPC.
+   * Set the last performed horizontal move.
    * 
-   * @return The moving direction of an NPC
+   * @param action
+   *          The last move action performed.
    */
-  public NPCAction getMovementDirection() {
-    return this.movementDirection;
+  public void setLastMove(NPCAction action) {
+    // Mapping the last action to the arraylist with actions.
+    if (action == NPCAction.MoveLeft || action == NPCAction.MoveRight) {
+      lastMove = action;
+    }
   }
 
 }

@@ -20,7 +20,23 @@ public class NPCLevelModifier implements LevelModifier {
    */
   public void modify(Level level, double delta) {
 
-    // For the moment, the NPC does not need to be controlled here.
+    for (NPC npc : level.getNPCs()) {
+
+      if (npc.hasAction(NPCAction.MoveLeft)) {
+        npc.getSpeed().setX(-Constants.NPC_SPEED);
+      }
+
+      if (npc.hasAction(NPCAction.MoveRight)) {
+        npc.getSpeed().setX(Constants.NPC_SPEED);
+      }
+
+      npc.clearActions();
+
+      if (npc.posY() >= Constants.LEVELY + npc.height() / 2) {
+        npc.getPosition().setY(-npc.height() / 2);
+      }
+
+    }
 
   }
 

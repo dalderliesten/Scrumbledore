@@ -150,12 +150,14 @@ public class CollisionsLevelModifier implements LevelModifier {
             if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
               kinetics.stopHorizontally(npc);
               kinetics.snapLeft(npc, platform);
+              npc.addAction(NPCAction.MoveLeft);
             }
 
             // Collision while moving to the right
             if (collision.collidingFromRight() && npc.hSpeed() < 0) {
               kinetics.stopHorizontally(npc);
               kinetics.snapRight(npc, platform);
+              npc.addAction(NPCAction.MoveRight);
             }
 
           }
