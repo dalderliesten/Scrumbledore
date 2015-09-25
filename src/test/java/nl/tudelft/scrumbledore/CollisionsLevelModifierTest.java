@@ -54,7 +54,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(fruit);
     level.addElement(platform);
    
-    clm.detectFruitPlatform(level, 1000);
+    clm.detectFruitPlatform(level, 1);
     verify(klm).stopVertically(fruit);
     verify(klm).snapTop(fruit, platform);
   }
@@ -72,7 +72,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(player);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1000);   
+    clm.detectPlayerPlatform(level, 1);   
     verify(klm).stopVertically(player);
     verify(klm).snapTop(player, platform);
   }
@@ -80,7 +80,7 @@ public class CollisionsLevelModifierTest {
   /**
    * Test the collision between a platform and a player colliding from the bottom.
    */
- /* @Test
+  @Test
   public void testDetectPlayerPlatformFromBottom() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Player player = new Player(new Vector(0, 33), new Vector(32, 32));
@@ -90,10 +90,10 @@ public class CollisionsLevelModifierTest {
     level.addElement(player);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1000);   
+    clm.detectPlayerPlatform(level, 1);   
     verify(klm).stopVertically(player);
     verify(klm).snapBottom(player, platform);
-  }*/
+  }
   
   /**
    * Test the collision between a platform and a player colliding from the left.
@@ -109,44 +109,9 @@ public class CollisionsLevelModifierTest {
     level.addElement(player);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1000);   
+    clm.detectPlayerPlatform(level, 1);   
     verify(klm).stopHorizontally(player);
   }
-  
-  /**
-   * Test the collision between a platform and a player colliding from the right.
-   */
-  /*@Test
-  public void testDetectPlayerPlatformFromRight() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Player player = new Player(new Vector(32, 0), new Vector(32, 32));
-    
-    player.getSpeed().setX(-4);
-    Level level = new Level();
-    level.addElement(player);
-    level.addElement(platform);
-
-    clm.detectPlayerPlatform(level, 1000);   
-    verify(klm).stopHorizontally(player);
-  }*/
-
-  /**
-   * Test the collision between a platform and a bubble colliding from the bottom.
-   */
-  /*@Test
-  public void testDetectBubblePlatformFromBottom() {
-    Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
-    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
-        
-    Level level = new Level();
-    level.addElement(bubble);
-    level.addElement(platform);
-    
-    clm.detectBubblePlatform(level, 1000);
-    verify(klm).snapBottom(bubble, platform);  
-    assertEquals(bubble.vSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
-
-  }*/
   
   /**
    * Test the collision between a platform and a bubble colliding from the left.
@@ -160,28 +125,10 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
     level.addElement(platform);
     
-    clm.detectBubblePlatform(level, 1000);
+    clm.detectBubblePlatform(level, 1);
     verify(klm).snapLeft(bubble, platform);
     assertEquals(bubble.hSpeed(), -Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
   }
-  
-  /**
-   * Test the collision between a platform and a bubble colliding from the right.
-   */
-  /*@Test
-  public void testDetectBubblePlatformFromRight() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Bubble bubble = new Bubble(new Vector(32, 0), new Vector(32, 32));
-        
-    Level level = new Level();
-    level.addElement(bubble);
-    level.addElement(platform);
-    
-    clm.detectBubblePlatform(level, 1000);
-    verify(klm).snapRight(bubble, platform);
-    assertEquals(bubble.hSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
-
-  }*/
   
   /**
    * Test the collision between a bubble and a player colliding from the top.
@@ -196,7 +143,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(player);
     level.addElement(bubble);
 
-    clm.detectPlayerBubble(level, 1000);   
+    clm.detectPlayerBubble(level, 1);   
     verify(klm).snapTop(player, bubble);
     assertEquals(-Constants.PLAYER_JUMP, player.vSpeed(), Constants.DOUBLE_PRECISION);
   }
@@ -218,7 +165,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
     level.addElement(bubble2);
 
-    clm.detectPlayerBubble(level, 1000);   
+    clm.detectPlayerBubble(level, 1);   
     assertEquals(Constants.BUBBLE_BOUNCE, bubble.hSpeed(), Constants.DOUBLE_PRECISION);
     assertEquals(-Constants.BUBBLE_BOUNCE, bubble2.hSpeed(), Constants.DOUBLE_PRECISION);
   }
@@ -240,7 +187,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
     level.addElement(bubble2);
 
-    clm.detectPlayerBubble(level, 1000);   
+    clm.detectPlayerBubble(level, 1);   
     assertEquals(-Constants.BUBBLE_BOUNCE, bubble.hSpeed(), Constants.DOUBLE_PRECISION);
     assertEquals(Constants.BUBBLE_BOUNCE, bubble2.hSpeed(), Constants.DOUBLE_PRECISION);
   }
@@ -258,10 +205,8 @@ public class CollisionsLevelModifierTest {
     level.addElement(npc);
     
     assertEquals(0, level.getFruits().size());
-    clm.detectBubbleEnemy(level, 1000);   
+    clm.detectBubbleEnemy(level, 1);   
     assertEquals(0, level.getNPCs().size());
-    assertEquals(1, level.getFruits().size());
-
   }
 
   /**
@@ -271,12 +216,13 @@ public class CollisionsLevelModifierTest {
   public void testDetectPlayerFruit() {
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
     Fruit fruit = new Fruit(new Vector(0, 32), new Vector(32, 32));
-  
+    fruit.setIsPickable(true);
+    
     Level level = new Level();
     level.addElement(player);
     level.addElement(fruit);  
     
-    clm.detectPlayerFruit(level, 1000);   
+    clm.detectPlayerFruit(level, 1);   
     assertEquals(0, level.getFruits().size());
     verify(sc).updateScore(100);
   }
@@ -294,7 +240,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(npc);
     
     assertTrue(player.isAlive());
-    clm.detectPlayerEnemy(level, 1000);   
+    clm.detectPlayerEnemy(level, 1);   
     assertFalse(player.isAlive());
   }
 
