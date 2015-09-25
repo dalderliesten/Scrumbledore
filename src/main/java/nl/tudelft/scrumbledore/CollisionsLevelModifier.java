@@ -289,7 +289,7 @@ public class CollisionsLevelModifier implements LevelModifier {
 
         for (int j = 0; j < bubbles.size(); j++) {
           // Temp fix to prevent race condition
-          if (enemies.size() != i
+          if (!(bubbles.get(j).hasNPC()) && enemies.size() != i
               && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
               && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {            
             
