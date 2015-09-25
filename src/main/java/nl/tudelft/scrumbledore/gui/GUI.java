@@ -297,9 +297,11 @@ public class GUI extends Application {
       bubbles.add(bubble);
     }
 
+    String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
+
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(new Image(sprites.get("bubble").getPath()), currentBubble.getPosition()
-          .getX(), currentBubble.getPosition().getY());
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
+          .getPosition().getY());
     }
   }
 
@@ -311,6 +313,7 @@ public class GUI extends Application {
    */
   private void renderNPCs(GraphicsContext painter) {
     ArrayList<NPC> npcs = new ArrayList<NPC>();
+    double steps = game.getSteps();
 
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
     for (NPC npc : game.getCurrentLevel().getNPCs()) {
@@ -319,12 +322,13 @@ public class GUI extends Application {
 
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
-      String spr = "enemy-mighta-right";
+      String spr = "zenchan-move-right";
       if (current.getLastMove().equals(NPCAction.MoveLeft)) {
-        spr = "enemy-mighta-left";
+        spr = "zenchan-move-left";
       }
-      painter.drawImage(new Image(sprites.get(spr).getPath()), current.getPosition().getX(),
-          current.getPosition().getY());
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      painter
+          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -357,8 +361,9 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(sprites.get("fruit-banana").getPath()), current.getPosition()
-          .getX(), current.getPosition().getY());
+      String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
+      painter
+          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
     }
   }
 

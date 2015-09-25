@@ -82,7 +82,7 @@ public final class Constants {
   public static final double PLAYER_JUMP = 22;
 
   // Bubble horizontal movement speed
-  public static final double BUBBLE_SPEED = 16;
+  public static final double BUBBLE_SPEED = 20;
   // Bubble horizontal fiction
   public static final double BUBBLE_FRICTION = 1.5;
   // Bubble horizontal fiction
