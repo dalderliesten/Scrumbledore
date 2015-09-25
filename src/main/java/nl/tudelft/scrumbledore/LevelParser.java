@@ -22,10 +22,14 @@ public class LevelParser {
 
   /**
    * Creates a new LevelParser and loads levels from a user defined path.
+   * 
+   * @param dir
+   *          A given directory
    */
   public LevelParser(String dir) {
     levels = loadLevelsFromDisk(dir);
   }
+
   /**
    * Loads an array of Level objects from disk.
    * 
@@ -151,7 +155,6 @@ public class LevelParser {
       return null;
     }
   }
-
 
   /**
    * Gets the screen position of a block based on given coordinates in the level map on disk.

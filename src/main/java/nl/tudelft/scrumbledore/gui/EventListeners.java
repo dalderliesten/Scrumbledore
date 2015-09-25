@@ -1,13 +1,10 @@
 package nl.tudelft.scrumbledore.gui;
 
-import nl.tudelft.scrumbledore.Bubble;
-import nl.tudelft.scrumbledore.BubbleAction;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.Player;
 import nl.tudelft.scrumbledore.PlayerAction;
-import nl.tudelft.scrumbledore.Vector;
 import javafx.stage.Stage;
 import javafx.scene.Scene;
 import javafx.event.EventHandler;
@@ -15,6 +12,7 @@ import javafx.event.EventHandler;
 import java.util.ArrayList;
 
 import javafx.stage.WindowEvent;
+import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 
 /**
@@ -23,8 +21,6 @@ import javafx.scene.input.KeyEvent;
  * @author Jeroen Meijer
  *
  */
-@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity",
-    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
 public class EventListeners {
   private Game game;
   private Stage stage;
@@ -45,7 +41,7 @@ public class EventListeners {
     this.stage = stage;
     this.scene = scene;
   }
-  
+
   /**
    * Initializes the EventListeners.
    */
@@ -61,81 +57,51 @@ public class EventListeners {
    *          The scene the listeners should be added to.
    */
   private void addKeyEventListeners() {
-    // KeyPress Event handlers.
+    keyPressListeners();
+    keyReleaseListeners();
+  }
+  
+  /**
+   * Adds key press listeners.
+   */
+  private void keyPressListeners() {
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
-      // Handling the key press.
       public void handle(KeyEvent keyPressed) {
-        String keyPress = keyPressed.getCode().toString();
-        Player player = game.getCurrentLevel().getPlayer();
-        Vector bubblePos = player.getPosition().clone();
-        ArrayList<Bubble> bubbles = game.getCurrentLevel().getBubbles();
+        KeyCode keyCode = keyPressed.getCode();
+        ArrayList<Player> players = game.getCurrentLevel().getPlayers();
+        Boolean playersLeft = false;
+        for (int i = 0; i < players.size(); i++) {
+          players.get(i).addAction(Constants.KEY_MAPPING.get(i).get(keyCode));
 
-        // Mapping the desired keys to the desired actions.
-        if (keyPress.equals("LEFT")) {
-          player.addAction(PlayerAction.MoveLeft);
-        } else if (keyPress.equals("RIGHT")) {
-          player.addAction(PlayerAction.MoveRight);
-        } else if (keyPress.equals("UP")) {
-          player.addAction(PlayerAction.Jump);
-        }
-
-        // Mapping the shooting action keys.
-        if (keyPress.equals("Z")) {
-          if (!player.isFiring()) {
-            Bubble newBubble = new Bubble(bubblePos,
-                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
-
-            bubbles.add(newBubble);
-            if (player.getLastMove() == PlayerAction.MoveLeft) {
-              if (Constants.LOGGING_WANTSHOOTING) {
-                // Sending the shooting information to the logger.
-                Logger.log("Player shot in the western direction.");
-              }
-
-              newBubble.addAction(BubbleAction.MoveLeft);
-            } else {
-              if (Constants.LOGGING_WANTSHOOTING) {
-                // Sending the shooting information to the logger.
-                Logger.log("Player shot in the eastern direction.");
-              }
-
-              newBubble.addAction(BubbleAction.MoveRight);
-            }
+          if (players.get(i).isAlive()) {
+            playersLeft = true;
           }
-
-          player.setFiring(true);
         }
 
         // Restarting the game if "R" is pressed or when the player is dead.
-        if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
+        if (keyCode == KeyCode.R || !playersLeft) {
           game.restart();
           // renderStatic();
         }
       }
-
     });
-
-    // KeyRelease Event handlers.
+  }
+  
+  /**
+   * Adds key release listeners.
+   */
+  private void keyReleaseListeners() {
     scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
 
-      // Handling the key press.
       public void handle(KeyEvent keyReleased) {
-        String keyRelease = keyReleased.getCode().toString();
-        Player player = game.getCurrentLevel().getPlayer();
-
-        // Mapping the desired keys to the desired actions.
-        if (keyRelease.equals("LEFT")) {
-          player.addAction(PlayerAction.MoveStop);
-        } else if (keyRelease.equals("RIGHT")) {
-          player.addAction(PlayerAction.MoveStop);
-        }
-
-        if (keyRelease.equals("Z")) {
-          player.setFiring(false);
+        KeyCode keyCode = keyReleased.getCode();
+        ArrayList<Player> players = game.getCurrentLevel().getPlayers();
+        for (int i = 0; i < players.size(); i++) {
+          players.get(i)
+              .addAction(PlayerAction.invertAction(Constants.KEY_MAPPING.get(i).get(keyCode)));
         }
       }
-
     });
   }
 

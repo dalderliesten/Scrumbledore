@@ -39,7 +39,7 @@ public class LevelParserTest {
     assertEquals(new Platform(new Vector(B_ONE, B_ONE), SIZE), platformsLevel1.get(0));
 
     // Check whether level 2 only contains 1 Player element
-    assertEquals(new Player(new Vector(B_ONE, B_ONE), SIZE), levels.get(1).getPlayer());
+    assertEquals(new Player(new Vector(B_ONE, B_ONE), SIZE), levels.get(1).getPlayers().get(0));
   }
 
   /**
@@ -100,7 +100,7 @@ public class LevelParserTest {
     passablePlatform.setPassable(true);
     assertEquals(passablePlatform, platforms.get(1));
 
-    assertEquals(new Player(new Vector(B_ONE, B_TWO), SIZE), level.getPlayer());
+    assertEquals(new Player(new Vector(B_ONE, B_TWO), SIZE), level.getPlayers().get(0));
     assertEquals(new NPC(new Vector(B_TWO, B_TWO), SIZE), npcs.get(0));
   }
 
@@ -177,7 +177,7 @@ public class LevelParserTest {
     assertEquals(new ArrayList<Platform>(), levels.get(1).getPlatforms());
     
     // Check whether level 1 contains a player and level 2 doesn't
-    assertEquals(null, levels.get(0).getPlayer());    
-    assertEquals(player, levels.get(1).getPlayer());
+    assertEquals(0, levels.get(0).getPlayers().size());    
+    assertEquals(player, levels.get(1).getPlayers().get(0));
   }
 }

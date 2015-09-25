@@ -63,18 +63,19 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   private void updatePlayer(Level level, double d) {
-    Player player = level.getPlayer();
+    ArrayList<Player> players = level.getPlayers();
+    for (Player player : players) {
+      addSpeed(player, d);
 
-    addSpeed(player, d);
+      if (player.posY() + player.height() >= Constants.LEVELY) {
+        player.getPosition().setY(player.height() / -2);
+      }
 
-    if (player.posY() + player.height() >= Constants.LEVELY) {
-      player.getPosition().setY(player.height() / -2);
-    }
-
-    if (Constants.LOGGING_WANTMOVEMENT) {
-      // Logging the movement of the player within the level to the session log.
-      Logger.log("Player moved to " + player.getPosition().getX() + ", "
-          + player.getPosition().getY());
+      if (Constants.LOGGING_WANTMOVEMENT) {
+        // Logging the movement of the player within the level to the session log.
+        Logger.log(
+            "Player moved to " + player.getPosition().getX() + ", " + player.getPosition().getY());
+      }
     }
   }
 
