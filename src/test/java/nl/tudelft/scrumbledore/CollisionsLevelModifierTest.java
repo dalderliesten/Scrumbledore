@@ -157,6 +157,16 @@ public class CollisionsLevelModifierTest {
    */
   @Test
   public void testDetectPlayerFruit() {
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    Fruit fruit = new Fruit(new Vector(0, 32), new Vector(32, 32));
+  
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(fruit);  
+    
+    clm.detectPlayerFruit(level, 1000);   
+    assertEquals(0, level.getFruits().size());
+    verify(sc).updateScore(100);
   }
 
   /**
