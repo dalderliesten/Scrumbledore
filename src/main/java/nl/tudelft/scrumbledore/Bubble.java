@@ -10,6 +10,7 @@ import java.util.ArrayList;
  */
 public class Bubble extends Projectile {
   private ArrayList<BubbleAction> actions;
+  private Boolean hasNPC;
 
   private double lifetime;
 
@@ -26,6 +27,7 @@ public class Bubble extends Projectile {
     getFriction().setX(Constants.BUBBLE_FRICTION);
     lifetime = Constants.BUBBLE_LIFETIME;
     actions = new ArrayList<BubbleAction>();
+    hasNPC = false;
   }
 
   /**
@@ -74,5 +76,29 @@ public class Bubble extends Projectile {
    */
   public double getLifetime() {
     return lifetime;
+  }
+  
+  /**
+   * Setting the life time of a bubble.
+   * @param newTime The new life time.
+   */
+  public void setLifetime(double newTime) {
+    lifetime = newTime;
+  }
+  
+  /**
+   * Return a boolean wether to see if a bubble has an NPC in it.
+   * @return Boolean of hasNPC.
+   */
+  public Boolean hasNPC() {
+    return hasNPC;
+  }
+  
+  /**
+   * Setting a boolean to hasNPC.
+   * @param bool The boolean that hasNPC has to be.
+   */
+  public void setHasNPC(Boolean bool) {
+    hasNPC = bool;
   }
 }

@@ -3,10 +3,11 @@ package nl.tudelft.scrumbledore;
 /**
  * Class representing a Fruit in a game.
  * 
- * @author Niels Warnars
+ * @author Niels Warnars, Floris Doolaard
  */
 public class Fruit extends LevelElement {
   private int value;
+  private Boolean pickable;
 
   /**
    * Create a new Fruit instance.
@@ -20,6 +21,7 @@ public class Fruit extends LevelElement {
     super(position, size);
     
     setGravity(true);
+    pickable = false;
   }
 
   
@@ -70,6 +72,22 @@ public class Fruit extends LevelElement {
    */
   public void setValue(int value) {
     this.value = value;
+  }
+  
+  /**
+   * Return whether the fruit instance is pickable or not.
+   * @return Boolean pickable.
+   */
+  public Boolean isPickable() {
+    return pickable;
+  }
+  
+  /**
+   * Setting whether the fruit instance is pickable.
+   * @param bool true or false.
+   */
+  public void setIsPickable(Boolean bool) {
+    pickable = bool;
   }
 
 }

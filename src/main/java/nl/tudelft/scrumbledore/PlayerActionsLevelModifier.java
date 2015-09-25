@@ -95,7 +95,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     Vector bubblePos = player.getPosition().clone();
     ArrayList<Bubble> bubbles = level.getBubbles();
 
-    if (player.hasAction(PlayerAction.Shoot)) {
+    if (player.hasAction(PlayerAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
         Bubble newBubble = new Bubble(bubblePos,
             new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
