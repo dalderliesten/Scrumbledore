@@ -60,6 +60,62 @@ public class CollisionsLevelModifierTest {
   }
 
   /**
+   * Test the collision between a platform and an NPC colliding from the top.
+   */
+  @Test
+  public void testDetectNPCPlatformFromTop() {
+    Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
+    npc.getSpeed().setY(4);
+    
+    Level level = new Level();
+    level.addElement(platform);
+    level.addElement(npc);
+    
+    clm.detectNPCPlatform(level, 1);   
+    verify(klm).stopVertically(npc);
+    verify(klm).snapTop(npc, platform);
+  }
+  
+  /**
+   * Test the collision between a platform and an NPC colliding from the left.
+   */
+  @Test
+  public void testDetectNPCPlatformFromLeft() {
+    Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
+    npc.getSpeed().setX(4);
+    
+    Level level = new Level();
+    level.addElement(platform);
+    level.addElement(npc);
+    
+    clm.detectNPCPlatform(level, 1);   
+    verify(klm).stopHorizontally(npc);
+    verify(klm).snapLeft(npc, platform);
+    assertTrue(npc.hasAction(NPCAction.MoveLeft));
+  }
+  
+  /**
+   * Test the collision between a platform and an NPC colliding from the right.
+   */
+  @Test
+  public void testDetectNPCPlatformFromRight() {
+    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(33, 0), new Vector(32, 32));
+    npc.getSpeed().setX(-4);
+    
+    Level level = new Level();
+    level.addElement(platform);
+    level.addElement(npc);
+    
+    clm.detectNPCPlatform(level, 1);   
+    verify(klm).stopHorizontally(npc);
+    verify(klm).snapRight(npc, platform);
+    assertTrue(npc.hasAction(NPCAction.MoveRight));
+  }
+  
+  /**
    * Test the collision between a platform and a player colliding from the top.
    */
   @Test
