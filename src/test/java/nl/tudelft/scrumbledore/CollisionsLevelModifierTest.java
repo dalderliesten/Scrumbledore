@@ -183,26 +183,70 @@ public class CollisionsLevelModifierTest {
     verify(klm).snapRight(bubble, platform);
     assertEquals(bubble.hSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
 
-  }
+  }*/
   
   /**
-   * 
+   * Test the collision between a bubble and a player colliding from the top.
    */
   @Test
   public void testDetectPlayerBubbleFromTop() {
+    Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    player.getSpeed().setY(4);
+    
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(bubble);
+
+    clm.detectPlayerBubble(level, 1000);   
+    verify(klm).snapTop(player, bubble);
+    assertEquals(-Constants.PLAYER_JUMP, player.vSpeed(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * Test the collision between a bubble and a bubble colliding.
+   */
+  @Test
+  public void testDetectPlayerBubbleTwoSameBubbles() {
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble2 = new Bubble(new Vector(0, 0), new Vector(32, 32));
+    
+    bubble.getSpeed().setX(2);
+    bubble2.getSpeed().setX(4);
+
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(bubble);
+    level.addElement(bubble2);
+
+    clm.detectPlayerBubble(level, 1000);   
+    assertEquals(Constants.BUBBLE_BOUNCE, bubble.hSpeed(), Constants.DOUBLE_PRECISION);
+    assertEquals(-Constants.BUBBLE_BOUNCE, bubble2.hSpeed(), Constants.DOUBLE_PRECISION);
   }
 
+  /**
+   * Test the collision between a bubble and a bubble colliding.
+   */
   @Test
-  public void testDetectPlayerBubbleFromBottom() {
+  public void testDetectPlayerBubbleTwoDifferentBubbles() {
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble2 = new Bubble(new Vector(32, 0), new Vector(32, 32));
+    
+    bubble.getSpeed().setX(2);
+    bubble2.getSpeed().setX(4);
+
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(bubble);
+    level.addElement(bubble2);
+
+    clm.detectPlayerBubble(level, 1000);   
+    assertEquals(-Constants.BUBBLE_BOUNCE, bubble.hSpeed(), Constants.DOUBLE_PRECISION);
+    assertEquals(Constants.BUBBLE_BOUNCE, bubble2.hSpeed(), Constants.DOUBLE_PRECISION);
   }
   
-  @Test
-  public void testDetectPlayerBubbleFromLeft() {
-  }
-  
-  @Test
-  public void testDetectPlayerBubbleFromRight() {
-  }
   /**
    * Test the collision between a bubble and an enemy.
    */
