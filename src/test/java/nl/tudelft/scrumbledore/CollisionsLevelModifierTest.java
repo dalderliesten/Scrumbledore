@@ -148,7 +148,7 @@ public class CollisionsLevelModifierTest {
     verify(klm).snapBottom(bubble, platform);  
     assertEquals(bubble.vSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
 
-  }
+  }*/
   
   /**
    * Test the collision between a platform and a bubble colliding from the left.
