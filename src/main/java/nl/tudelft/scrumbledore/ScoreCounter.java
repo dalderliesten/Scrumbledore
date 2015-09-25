@@ -15,7 +15,6 @@ public class ScoreCounter {
    *
    */
   public ScoreCounter() {
-    // Initial score and highscore is 0.
     this.score = 0;
     this.highScore = 0;
   }
@@ -64,7 +63,8 @@ public class ScoreCounter {
 
     if (score > highScore) {
       highScore = score;
+
+      Logger.log("The high-score has been changed and is now worth " + highScore + " points!");
     }
   }
-
 }
