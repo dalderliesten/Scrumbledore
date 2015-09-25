@@ -10,18 +10,32 @@ import java.util.ArrayList;
  */
 public class AnimatedSprite {
 
+  private String id;
   private ArrayList<Sprite> frames;
   private double interval;
 
   /**
    * Construct a new AnimatedSprite.
    * 
+   * @param id
+   *          The ID to be assigned to this animated sprite.
    * @param interval
    *          The number of (partial) steps between each frame.
    */
-  public AnimatedSprite(double interval) {
+  public AnimatedSprite(String id, double interval) {
+    this.id = id;
     this.frames = new ArrayList<Sprite>();
     this.interval = interval;
+  }
+
+  /**
+   * Add a Sprite instance as the next frame in the sequence to this Animated Sprite.
+   * 
+   * @param frame
+   *          The next frame in the sequence.
+   */
+  public void addFrame(Sprite frame) {
+    frames.add(frame);
   }
 
   /**
@@ -47,8 +61,36 @@ public class AnimatedSprite {
   private int getIndex(double steps) {
     double cycle = frames.size() * interval;
     double currentCycle = steps % cycle;
+    int index = (int) Math.floor(currentCycle / interval);
+    return index;
+  }
 
-    return (int) Math.ceil(currentCycle / interval);
+  /**
+   * Get the ID of this Animated Sprite.
+   * 
+   * @return The ID.
+   */
+  public String getID() {
+    return id;
+  }
+
+  /**
+   * Get the current interval of steps between two frames.
+   * 
+   * @return The interval.
+   */
+  public double getInterval() {
+    return interval;
+  }
+
+  /**
+   * Set the current interval of steps between two frames.
+   * 
+   * @param interval
+   *          The interval.
+   */
+  public void setInterval(double interval) {
+    this.interval = interval;
   }
 
 }
