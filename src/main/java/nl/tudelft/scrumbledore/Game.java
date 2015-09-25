@@ -14,6 +14,8 @@ public class Game {
   private ArrayList<LevelModifier> modifiers;
   private Level currentLevel;
   private ScoreCounter score;
+  private double steps;
+  private int currentLevelNumber;
 
   /**
    * Constructs a new Game from disk.
@@ -22,6 +24,9 @@ public class Game {
     // Load levels from disk
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
+
+    // Instantiating the current level number to one.
+    currentLevelNumber = 1;
   }
 
   /**
@@ -42,6 +47,7 @@ public class Game {
    */
   public void construct(ArrayList<Level> levels) {
     this.score = new ScoreCounter();
+    this.steps = 0;
 
     // The game needs at least one level.
     assert levels.size() > 0;
@@ -62,7 +68,7 @@ public class Game {
   }
 
   /**
-   * Runs invariant assertions.
+   * Runs invariant assertions required for the functioning of the game.
    */
   public void invariant() {
     assert levels.contains(currentLevel);
@@ -75,6 +81,19 @@ public class Game {
    */
   public Level getCurrentLevel() {
     return currentLevel;
+  }
+
+  /**
+   * Returns the current level number.
+   * 
+   * @return The current level number as a string.
+   */
+  public String getCurrentLevelNumber() {
+    String toReturn = "";
+
+    toReturn = toReturn + currentLevelNumber;
+
+    return toReturn;
   }
 
   /**
@@ -127,6 +146,9 @@ public class Game {
     // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
 
+    // Incrementing the current level number by one.
+    currentLevelNumber = currentLevelNumber + 1;
+
     invariant();
   }
 
@@ -149,9 +171,62 @@ public class Game {
    *          the last step.
    */
   public void step(double delta) {
+    addSteps(delta);
     for (LevelModifier modifier : modifiers) {
       modifier.modify(currentLevel, delta);
     }
+  }
+
+  /**
+   * Returns the current value of the score.
+   * 
+   * @return Value of the current score.
+   */
+  public String getScore() {
+    String toReturn = score.getScoreString();
+
+    return toReturn;
+  }
+
+  /**
+   * Returns the current value of the high score.
+   * 
+   * @return Value of the high score.
+   */
+  public String getHighScore() {
+    String toReturn = "";
+    
+    toReturn = toReturn + score.getHighScore();
+
+    return toReturn;
+  }
+
+  /**
+   * Increment this Game's step counter with a given number of (partial) steps.
+   * 
+   * @param steps
+   *          The number of (partial) steps to be added.
+   */
+  public void addSteps(double steps) {
+    this.steps += steps;
+  }
+
+  /**
+   * Get the exact number of steps that have been performed in this game.
+   * 
+   * @return The number of steps performed.
+   */
+  public double getSteps() {
+    return steps;
+  }
+
+  /**
+   * Get the number of entire steps that have been performed in this game.
+   * 
+   * @return The number of entire steps performed.
+   */
+  public int getFullSteps() {
+    return (int) Math.floor(steps);
   }
 
 }

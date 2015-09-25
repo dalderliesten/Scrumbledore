@@ -1,4 +1,4 @@
-package nl.tudelft.scrumbledore;
+package nl.tudelft.scrumbledore.gui;
 
 import java.util.ArrayList;
 
@@ -8,7 +8,6 @@ import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,13 +17,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
+import nl.tudelft.scrumbledore.Bubble;
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Fruit;
+import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.NPC;
+import nl.tudelft.scrumbledore.NPCAction;
+import nl.tudelft.scrumbledore.Platform;
+import nl.tudelft.scrumbledore.Player;
+import nl.tudelft.scrumbledore.PlayerAction;
+import nl.tudelft.scrumbledore.SpriteStore;
+import nl.tudelft.scrumbledore.StepTimer;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -34,8 +44,7 @@ import javafx.stage.WindowEvent;
  * @author Jesse Tilro
  * @author Niels Warnars
  */
-@SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity", 
-  "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+@SuppressWarnings("checkstyle:methodlength")
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -59,6 +68,10 @@ public class GUI extends Application {
   private Button startStopButton;
   private Button settingsButton;
   private Button exitButton;
+  private Label scoreLabel;
+  private Label levelLabel;
+  private Label highScoreLabel;
+  private Label powerUpLabel;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -81,15 +94,17 @@ public class GUI extends Application {
     setupGUI();
 
     // Add event listeners.
-    addKeyEventListeners(scene);
+    EventListeners el = new EventListeners(game, stage, scene);
+    el.init();
+
     addButtonEventListeners();
-    addWindowEventListeners(stage);
 
     renderStatic();
 
     // Start the animation timer to keep refreshing the dynamic canvas.
     animationTimer.start();
 
+    // Showing the game stage.
     stage.show();
   }
 
@@ -149,21 +164,22 @@ public class GUI extends Application {
 
     // Creation of a horizontal box for storing top labels and items to display, and making it the
     // full width of the GUI.
-    HBox topItems = new HBox();
+    HBox topItems = new HBox(15);
     topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
-    Label scoreLabel = new Label(Constants.SCORELABEL);
-    scoreLabel.setAlignment(Pos.CENTER);
-    Label highScoreLabel = new Label(Constants.HISCORELABEL);
-    highScoreLabel.setAlignment(Pos.CENTER);
-    Label powerUpLabel = new Label(Constants.POWERUPLABEL);
-    powerUpLabel.setAlignment(Pos.CENTER);
-    Label levelLabel = new Label(Constants.LEVELLABEL);
-    levelLabel.setAlignment(Pos.CENTER);
+    Label scoreTitleLabel = new Label(Constants.SCORELABEL);
+    scoreLabel = new Label(game.getScore());
+    Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel = new Label(game.getHighScore());
+    Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
+    powerUpLabel = new Label("NONE ACTIVE");
+    Label levelTitleLabel = new Label(Constants.LEVELLABEL);
+    levelLabel = new Label(game.getCurrentLevelNumber());
 
     // Adding the top labels to the top HBox and to the game display interface.
-    topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
+    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, powerUpLabel,
+        levelTitleLabel, levelLabel, highScoreTitleLabel, highScoreLabel);
     layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
@@ -200,12 +216,14 @@ public class GUI extends Application {
   private void renderStatic() {
     // Clear canvas
     staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+
     // Render the static canvas
     renderPlatforms(staticPainter);
   }
 
   /**
-   * Refresh the GUI by rendering all dynamic elements in the current level of the game.
+   * Refresh the GUI by rendering all dynamic elements in the current level of the game Also updates
+   * all the GUI elements that must be refreshed per cycle.
    */
   private void renderDynamic() {
     // Clear canvas
@@ -213,12 +231,24 @@ public class GUI extends Application {
 
     // Render Bubbles.
     renderBubbles(dynamicPainter);
+
     // Render Fruits.
     renderFruits(dynamicPainter);
+
     // Render other moving elements.
     renderNPCs(dynamicPainter);
+
     // Render Player.
     renderPlayer(dynamicPainter);
+
+    // Updating the score display for the GUI.
+    scoreLabel.setText(game.getScore());
+
+    // Updating the current level number display for the GUI.
+    levelLabel.setText(game.getCurrentLevelNumber());
+
+    // Updating the current high score display for the GUI.
+    highScoreLabel.setText(game.getHighScore());
   }
 
   /**
@@ -228,22 +258,30 @@ public class GUI extends Application {
    *          The GraphicsContext to be used.
    */
   private void renderPlayer(GraphicsContext painter) {
-    Player player = game.getCurrentLevel().getPlayer();
+    ArrayList<Player> players = game.getCurrentLevel().getPlayers();
 
-    boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
-    boolean isFiring = player.isFiring();
+    for (Player player : players) {
+      double steps = game.getSteps();
 
-    String spr = "player-left";
-    if (isFiring && toRight) {
-      spr = "player-shoot-right";
-    } else if (isFiring) {
-      spr = "player-shoot-left";
-    } else if (toRight) {
-      spr = "player-right";
+      boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+      boolean isFiring = player.isFiring();
+
+      String spr = "player-move-left";
+      if (isFiring && toRight) {
+        spr = "player-shoot-right";
+      } else if (isFiring) {
+        spr = "player-shoot-left";
+      } else if (toRight) {
+        spr = "player-move-right";
+      }
+
+      if (player.getSpeed().getX() == 0 && !isFiring) {
+        steps = 0;
+      }
+
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
     }
-
-    painter.drawImage(sprites.getImage(spr), game.getCurrentLevel().getPlayer().getPosition()
-        .getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -260,8 +298,13 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
+
+      if (currentBubble.hasNPC()) {
+        path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
+      }
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
+          .getPosition().getY());
     }
   }
 
@@ -273,6 +316,7 @@ public class GUI extends Application {
    */
   private void renderNPCs(GraphicsContext painter) {
     ArrayList<NPC> npcs = new ArrayList<NPC>();
+    double steps = game.getSteps();
 
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
     for (NPC npc : game.getCurrentLevel().getNPCs()) {
@@ -281,12 +325,13 @@ public class GUI extends Application {
 
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
-      String spr = "enemy-mighta-right";
-      if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
-        spr = "enemy-mighta-left";
+      String spr = "zenchan-move-right";
+      if (current.getLastMove().equals(NPCAction.MoveLeft)) {
+        spr = "zenchan-move-left";
       }
-      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(), current.getPosition()
-          .getY());
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      painter
+          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -300,8 +345,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -319,8 +364,9 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(), current
-          .getPosition().getY());
+      String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
+      painter
+          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -331,7 +377,8 @@ public class GUI extends Application {
   private void advanceLevel() {
 
     // When the enemies in the current level have been killed.
-    if (game.getCurrentLevel().getNPCs().isEmpty()) {
+    if (game.getCurrentLevel().getNPCs().isEmpty()
+        && game.getCurrentLevel().getEnemyBubbles().isEmpty()) {
 
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
@@ -374,7 +421,14 @@ public class GUI extends Application {
    * If player died, restart the game.
    */
   private void checkPlayerAlive() {
-    if (!game.getCurrentLevel().getPlayer().isAlive()) {
+    ArrayList<Player> players = game.getCurrentLevel().getPlayers();
+    Boolean playersLeft = false;
+    for (Player player : players) {
+      if (player.isAlive()) {
+        playersLeft = true;
+      }
+    }
+    if (!playersLeft) {
       game.restart();
       renderStatic();
     }
@@ -454,91 +508,6 @@ public class GUI extends Application {
   }
 
   /**
-   * Add key event listeners to a given scene to allow player controls.
-   * 
-   * @param scene
-   *          The scene the listeners should be added to.
-   */
-  private void addKeyEventListeners(Scene scene) {
-    // KeyPress Event handlers.
-    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-      // Handling the key press.
-      public void handle(KeyEvent keyPressed) {
-        String keyPress = keyPressed.getCode().toString();
-        Player player = game.getCurrentLevel().getPlayer();
-        Vector bubblePos = player.getPosition().clone();
-        ArrayList<Bubble> bubbles = game.getCurrentLevel().getBubbles();
-
-        // Mapping the desired keys to the desired actions.
-        if (keyPress.equals("LEFT")) {
-          player.addAction(PlayerAction.MoveLeft);
-        } else if (keyPress.equals("RIGHT")) {
-          player.addAction(PlayerAction.MoveRight);
-        } else if (keyPress.equals("UP")) {
-          player.addAction(PlayerAction.Jump);
-        }
-
-        // Mapping the shooting action keys.
-        if (keyPress.equals("Z")) {
-          if (!player.isFiring()) {
-            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-                Constants.BLOCKSIZE));
-
-            bubbles.add(newBubble);
-            if (player.getLastMove() == PlayerAction.MoveLeft) {
-              if (Constants.LOGGING_WANTSHOOTING) {
-                // Sending the shooting information to the logger.
-                Logger.log("Player shot in the western direction.");
-              }
-
-              newBubble.addAction(BubbleAction.MoveLeft);
-            } else {
-              if (Constants.LOGGING_WANTSHOOTING) {
-                // Sending the shooting information to the logger.
-                Logger.log("Player shot in the eastern direction.");
-              }
-
-              newBubble.addAction(BubbleAction.MoveRight);
-            }
-          }
-
-          player.setFiring(true);
-        }
-
-        // Restarting the game if "R" is pressed or when the player is dead.
-        if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
-          game.restart();
-          renderStatic();
-        }
-      }
-
-    });
-
-    // KeyRelease Event handlers.
-    scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
-      // Handling the key press.
-      public void handle(KeyEvent keyReleased) {
-        String keyRelease = keyReleased.getCode().toString();
-        Player player = game.getCurrentLevel().getPlayer();
-
-        // Mapping the desired keys to the desired actions.
-        if (keyRelease.equals("LEFT")) {
-          player.addAction(PlayerAction.MoveStop);
-        } else if (keyRelease.equals("RIGHT")) {
-          player.addAction(PlayerAction.MoveStop);
-        }
-
-        if (keyRelease.equals("Z")) {
-          player.setFiring(false);
-        }
-      }
-
-    });
-  }
-
-  /**
    * Handles the creation and feature functioning of the settings menu.
    */
   private void settingsMenu() {
@@ -560,9 +529,11 @@ public class GUI extends Application {
     Label playerJumpLog = new Label(Constants.LOGGING_PLAYER_INPUT);
     Label playerShootingLog = new Label(Constants.LOGGING_SHOOTING);
     Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
+    Label pointStateLog = new Label(Constants.LOGGING_POINTS);
+    Label enemyStateLog = new Label(Constants.LOGGING_ENEMY);
 
     // Adding the exit button to go back to the game menu.
-    Button exitButton = new Button(Constants.EXITBTNLABEL);
+    Button exitButton = new Button(Constants.SETTINGSCLOSE);
 
     // Performing the handling of the settings exit button.
     exitButton.setOnAction(new EventHandler<ActionEvent>() {
@@ -589,6 +560,13 @@ public class GUI extends Application {
     movementLogFalse.setToggleGroup(playerMovementGroup);
     movementToggleBox.getChildren().addAll(movementLogTrue, movementLogFalse);
 
+    // Arming initial buttons.
+    if (Constants.LOGGING_WANTMOVEMENT) {
+      movementLogTrue.setSelected(true);
+    } else {
+      movementLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerMovementGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -596,7 +574,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == movementLogTrue) {
           Constants.LOGGING_WANTMOVEMENT = true;
-        } else {
+        } else if (newToggle == movementLogFalse) {
           Constants.LOGGING_WANTMOVEMENT = false;
         }
       }
@@ -613,6 +591,13 @@ public class GUI extends Application {
     inputLogFalse.setToggleGroup(playerInputGroup);
     inputToggleBox.getChildren().addAll(inputLogTrue, inputLogFalse);
 
+    // Arming initial buttons.
+    if (Constants.LOGGING_WANTINPUT) {
+      inputLogTrue.setSelected(true);
+    } else {
+      inputLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerInputGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -620,7 +605,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == inputLogTrue) {
           Constants.LOGGING_WANTINPUT = true;
-        } else {
+        } else if (newToggle == inputLogFalse) {
           Constants.LOGGING_WANTINPUT = false;
         }
       }
@@ -637,6 +622,12 @@ public class GUI extends Application {
     shootLogFalse.setToggleGroup(playerShootGroup);
     shootToggleBox.getChildren().addAll(shootLogTrue, shootLogFalse);
 
+    if (Constants.LOGGING_WANTSHOOTING) {
+      shootLogTrue.setSelected(true);
+    } else {
+      shootLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     playerShootGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -644,7 +635,7 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == shootLogTrue) {
           Constants.LOGGING_WANTSHOOTING = true;
-        } else {
+        } else if (newToggle == shootLogFalse) {
           Constants.LOGGING_WANTSHOOTING = false;
         }
       }
@@ -661,6 +652,12 @@ public class GUI extends Application {
     gameLogFalse.setToggleGroup(gameLogGroup);
     gameLogBox.getChildren().addAll(gameLogTrue, gameLogFalse);
 
+    if (Constants.LOGGING_WANTSTARTSTOP) {
+      gameLogTrue.setSelected(true);
+    } else {
+      gameLogFalse.setSelected(true);
+    }
+
     // Implementing the listener for the radio buttons above.
     gameLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
 
@@ -668,8 +665,68 @@ public class GUI extends Application {
           Toggle newToggle) {
         if (newToggle == gameLogTrue) {
           Constants.LOGGING_WANTSTARTSTOP = true;
-        } else {
+        } else if (newToggle == gameLogFalse) {
           Constants.LOGGING_WANTSTARTSTOP = false;
+        }
+      }
+
+    });
+
+    // Creation of the buttons and handler for the points tracking groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup pointsLogGroup = new ToggleGroup();
+    HBox pointsLogBox = new HBox(15);
+    final RadioButton pointsLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    pointsLogTrue.setToggleGroup(pointsLogGroup);
+    final RadioButton pointsLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    pointsLogFalse.setToggleGroup(pointsLogGroup);
+    pointsLogBox.getChildren().addAll(pointsLogTrue, pointsLogFalse);
+
+    if (Constants.LOGGING_WANTPOINTS) {
+      pointsLogTrue.setSelected(true);
+    } else {
+      pointsLogFalse.setSelected(true);
+    }
+
+    // Implementing the listener for the radio buttons above.
+    pointsLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == pointsLogTrue) {
+          Constants.LOGGING_WANTPOINTS = true;
+        } else if (newToggle == pointsLogFalse) {
+          Constants.LOGGING_WANTPOINTS = false;
+        }
+      }
+
+    });
+
+    // Creation of the buttons and handler for the enemy tracking groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup enemyLogGroup = new ToggleGroup();
+    HBox enemyLogBox = new HBox(15);
+    final RadioButton enemyLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    enemyLogTrue.setToggleGroup(enemyLogGroup);
+    final RadioButton enemyLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    enemyLogFalse.setToggleGroup(enemyLogGroup);
+    enemyLogBox.getChildren().addAll(enemyLogTrue, enemyLogFalse);
+
+    if (Constants.LOGGING_WANTENEMY) {
+      enemyLogTrue.setSelected(true);
+    } else {
+      enemyLogFalse.setSelected(true);
+    }
+
+    // Implementing the listener for the radio buttons above.
+    enemyLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == enemyLogTrue) {
+          Constants.LOGGING_WANTENEMY = true;
+        } else if (newToggle == enemyLogFalse) {
+          Constants.LOGGING_WANTENEMY = false;
         }
       }
 
@@ -678,7 +735,7 @@ public class GUI extends Application {
     // Adding all the content for the settings menu to the settings scene.
     settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
         playerJumpLog, inputToggleBox, playerShootingLog, shootToggleBox, gameStateLog, gameLogBox,
-        exitButton);
+        pointStateLog, pointsLogBox, enemyStateLog, enemyLogBox, exitButton);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
@@ -687,26 +744,6 @@ public class GUI extends Application {
     // Actual display of the settings stage and associated styling.
     settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
     settingsStage.show();
-  }
-
-  /**
-   * Add WindowEvent listener to exit the application when the window is closed.
-   * 
-   * @param stage
-   *          The Stage used by the rest of the GUI.
-   */
-  private void addWindowEventListeners(Stage stage) {
-    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-      public void handle(WindowEvent event) {
-
-        // Logging the termination of the game.
-        Logger.log("--------------------GAME TERMINATED");
-
-        // Quitting the game.
-        System.exit(0);
-      }
-    });
-
   }
 
 }

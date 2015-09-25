@@ -19,14 +19,20 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    *          The number of steps passed since the last execution of this method.
    */
   public void modify(Level level, double delta) {
-
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>(); 
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+    ArrayList<NPC> enemies = level.getNPCs();
+    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
     for (Bubble bubble : level.getBubbles()) {
       bubbles.add(bubble);
     }
-    
-    for (Bubble bub : bubbles) {     
+
+    for (Bubble bub : bubbles) {
       if (bub.getLifetime() <= 0) {
+        if (bub.hasNPC()) {
+          enemies.add(new NPC(bub.getPosition().clone(), 
+              new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
+          enemyBubbles.remove(bub);
+        }
         level.getBubbles().remove(bub);
       } else {
         bub.decreaseLifetime(delta);
@@ -40,10 +46,25 @@ public class BubbleActionsLevelModifier implements LevelModifier {
         if (bub.hasAction(BubbleAction.MoveRight)) {
           bub.getSpeed().setX(Constants.BUBBLE_SPEED);
         }
+
+        warp(bub);
+        
         bub.clearActions();
       }
     }
 
+  }
+
+  /**
+   * When a Bubble leaves the level from the top, it should warp to the bottom of the level.
+   * 
+   * @param bubble
+   *          The Bubble to be warped.
+   */
+  private void warp(Bubble bubble) {
+    if (bubble.posY() <= -bubble.height() / 2) {
+      bubble.getPosition().setY(Constants.LEVELY + bubble.height() / 2);
+    }
   }
 
 }
