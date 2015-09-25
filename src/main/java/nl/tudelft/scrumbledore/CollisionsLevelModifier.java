@@ -251,6 +251,11 @@ public class CollisionsLevelModifier implements LevelModifier {
             fruits.add(newFruit);
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);
+
+            if (Constants.LOGGING_WANTENEMY) {
+              Logger.log("Player executed an encapsulated enemy.");
+            }
+
             break;
           }
         }
@@ -384,7 +389,7 @@ public class CollisionsLevelModifier implements LevelModifier {
   /**
    * Returns a KineticsLevelModifier.
    * 
-   * @return the kinetics
+   * @return The kinetics
    */
   public KineticsLevelModifier getKinetics() {
     return kinetics;
