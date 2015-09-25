@@ -248,6 +248,7 @@ public class CollisionsLevelModifier implements LevelModifier {
           Fruit newFruit = new Fruit(bubble.getPosition().clone(),
               new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
           fruits.add(newFruit);
+          level.getEnemyBubbles().remove(bubble);
           level.getBubbles().remove(bubble);
           break;
         }
@@ -280,8 +281,8 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   public void detectBubbleEnemy(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Fruit> fruits = level.getFruits();
     ArrayList<Bubble> bubbles = level.getBubbles();
+    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
 
     if (bubbles.size() > 0 && enemies.size() > 0) {
       for (int i = 0; i < enemies.size(); i++) {
@@ -294,6 +295,7 @@ public class CollisionsLevelModifier implements LevelModifier {
             
             // The enemy gets removed and a new encapsulated enemy will appear.
             enemies.remove(i);
+            enemyBubbles.add(bubbles.get(j));
             bubbles.get(j).setHasNPC(true);
             // The lifetime of the bubble gets extended if the bubble cathes an enemy.
             bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
