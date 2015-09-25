@@ -54,7 +54,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
-  public void detectFruitPlatform(Level level, double delta) {
+  protected void detectFruitPlatform(Level level, double delta) {
     for (Fruit fruit : level.getFruits()) {
       for (Platform platform : level.getPlatforms()) {
         // Check if platform is in collision range.
@@ -81,7 +81,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   @SuppressWarnings("checkstyle:methodlength")
-  public void detectPlayerPlatform(Level level, double delta) {
+  protected void detectPlayerPlatform(Level level, double delta) {
     Player player = level.getPlayer();
 
     for (Platform platform : level.getPlatforms()) {
@@ -178,7 +178,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   @SuppressWarnings("checkstyle:methodlength")
-  public void detectBubblePlatform(Level level, double delta) {
+  protected void detectBubblePlatform(Level level, double delta) {
     for (Bubble bubble : level.getBubbles()) {
       for (Platform platform : level.getPlatforms()) {
         // Check if platform is in collision range.
@@ -219,7 +219,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta.
    */
   @SuppressWarnings("checkstyle:methodlength")
-  public void detectPlayerBubble(Level level, double delta) {
+  protected void detectPlayerBubble(Level level, double delta) {
     Player player = level.getPlayer();
     ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
 
@@ -279,7 +279,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The steps passed since this method wat last executed.
    */
-  public void detectBubbleEnemy(Level level, double delta) {
+  protected void detectBubbleEnemy(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
     ArrayList<Bubble> bubbles = level.getBubbles();
     ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
@@ -313,7 +313,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
-  public void detectPlayerFruit(Level level, double delta) {
+  protected void detectPlayerFruit(Level level, double delta) {
     Player player = level.getPlayer();
     ArrayList<Fruit> fruits = level.getFruits();
 
@@ -341,7 +341,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
-  public void detectPlayerEnemy(Level level, double delta) {
+  protected void detectPlayerEnemy(Level level, double delta) {
     Player player = level.getPlayer();
     ArrayList<NPC> npcs = level.getNPCs();
 
@@ -355,6 +355,22 @@ public class CollisionsLevelModifier implements LevelModifier {
         }
       }
     }
+  }
+
+  /**
+   * Returns a KineticsLevelModifier.
+   * @return the kinetics
+   */
+  public KineticsLevelModifier getKinetics() {
+    return kinetics;
+  }
+
+  /**
+   * Returns a ScoreCounter.
+   * @return the score
+   */
+  public ScoreCounter getScore() {
+    return score;
   }
 
 }
