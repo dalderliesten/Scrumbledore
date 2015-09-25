@@ -261,22 +261,26 @@ public class GUI extends Application {
     ArrayList<Player> players = game.getCurrentLevel().getPlayers();
 
     for (Player player : players) {
-      if (player.isAlive()) {
-        boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
-        boolean isFiring = player.isFiring();
+      double steps = game.getSteps();
 
-        String spr = "player-left";
-        if (isFiring && toRight) {
-          spr = "player-shoot-right";
-        } else if (isFiring) {
-          spr = "player-shoot-left";
-        } else if (toRight) {
-          spr = "player-right";
-        }
+      boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+      boolean isFiring = player.isFiring();
 
-        painter.drawImage(new Image(sprites.getPathFromID(spr)), player.getPosition().getX(),
-            player.getPosition().getY());
+      String spr = "player-move-left";
+      if (isFiring && toRight) {
+        spr = "player-shoot-right";
+      } else if (isFiring) {
+        spr = "player-shoot-left";
+      } else if (toRight) {
+        spr = "player-move-right";
       }
+
+      if (player.getSpeed().getX() == 0 && !isFiring) {
+        steps = 0;
+      }
+
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
     }
   }
 
@@ -294,13 +298,13 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
+      String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
+
       if (currentBubble.hasNPC()) {
-        painter.drawImage(new Image(sprites.getPathFromID("bubble-enemy-mighta")),
-            currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
-      } else {
-        painter.drawImage(new Image(sprites.getPathFromID("bubble")),
-            currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
+        path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
       }
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -312,6 +316,7 @@ public class GUI extends Application {
    */
   private void renderNPCs(GraphicsContext painter) {
     ArrayList<NPC> npcs = new ArrayList<NPC>();
+    double steps = game.getSteps();
 
     // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
     for (NPC npc : game.getCurrentLevel().getNPCs()) {
@@ -320,11 +325,12 @@ public class GUI extends Application {
 
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
-      String spr = "enemy-mighta-right";
+      String spr = "zenchan-move-right";
       if (current.getLastMove().equals(NPCAction.MoveLeft)) {
-        spr = "enemy-mighta-left";
+        spr = "zenchan-move-left";
       }
-      painter.drawImage(new Image(sprites.getPathFromID(spr)), current.getPosition().getX(),
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      painter.drawImage(new Image(path), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -339,7 +345,7 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), current.getPosition().getX(),
+      painter.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -358,8 +364,9 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")),
-          current.getPosition().getX(), current.getPosition().getY());
+      String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
