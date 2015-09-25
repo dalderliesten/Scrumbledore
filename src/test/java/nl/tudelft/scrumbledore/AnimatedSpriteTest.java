@@ -62,6 +62,7 @@ public class AnimatedSpriteTest {
     input.add(new Object[] { 5, 0, "frame-1" });
     input.add(new Object[] { 5, 5, "frame-2" });
     input.add(new Object[] { 5, 6, "frame-2" });
+    input.add(new Object[] { 5, 14, "frame-3" });
     input.add(new Object[] { 5, 15, "frame-1" });
     input.add(new Object[] { 20, 30, "frame-2" });
     return input;

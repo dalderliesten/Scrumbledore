@@ -53,13 +53,4 @@ public class SpriteStoreTest {
     assertEquals(null, test.get("non_existant_sprite"));
   }
 
-  /**
-   * A valid path to a Sprite should be returned if the SpriteStore is queried
-   * for a given ID.
-   */
-  @Test
-  public void testGetPathFromID() {
-    SpriteStore test = new SpriteStore();
-    assertEquals("images/sprites/bubble.png", test.getPathFromID("bubble"));
-   }
 }

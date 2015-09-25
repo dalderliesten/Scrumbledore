@@ -13,8 +13,9 @@ package nl.tudelft.scrumbledore;
 public final class Constants {
   // Empty private constructor for utility class
   private Constants() {
-    
+
   }
+
   // Setting the resolution of the entire GUI window.
   public static final int GUIX = 646;
   public static final int GUIY = 723;
@@ -46,7 +47,7 @@ public final class Constants {
   public static final String LOGGING_ACTIVE = "Yes";
   public static final String LOGGING_DISABLED = "No";
   public static final String SETTINGSCLOSE = "Close";
-  
+
   // Defining the settings value tracking.
   public static boolean LOGGING_WANTMOVEMENT = false;
   public static boolean LOGGING_WANTINPUT = false;
@@ -107,7 +108,9 @@ public final class Constants {
   public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
 
+  public static final double ANIMATED_SPRITES_INTERVAL = 5;
+
   // Reference to the location directory for the log file handling.
   public static final String LOGGER_DIR = "logging/";
-  
+
 }

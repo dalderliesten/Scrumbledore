@@ -274,8 +274,9 @@ public class GUI extends Application {
       spr = "player-right";
     }
 
-    painter.drawImage(new Image(sprites.getPathFromID(spr)), game.getCurrentLevel().getPlayer()
-        .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
+    String path = sprites.get(spr).getPath();
+    painter.drawImage(new Image(path), game.getCurrentLevel().getPlayer().getPosition().getX(),
+        game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -292,7 +293,7 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(new Image(sprites.getPathFromID("bubble")), currentBubble.getPosition()
+      painter.drawImage(new Image(sprites.get("bubble").getPath()), currentBubble.getPosition()
           .getX(), currentBubble.getPosition().getY());
     }
   }
@@ -317,7 +318,7 @@ public class GUI extends Application {
       if (current.getLastMove().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(new Image(sprites.getPathFromID(spr)), current.getPosition().getX(),
+      painter.drawImage(new Image(sprites.get(spr).getPath()), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -332,7 +333,7 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), current.getPosition().getX(),
+      painter.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition().getX(),
           current.getPosition().getY());
     }
   }
@@ -351,7 +352,7 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")), current.getPosition()
+      painter.drawImage(new Image(sprites.get("fruit-banana").getPath()), current.getPosition()
           .getX(), current.getPosition().getY());
     }
   }

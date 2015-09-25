@@ -29,6 +29,22 @@ public class AnimatedSprite {
   }
 
   /**
+   * Construct a new AnimatedSprite given a predefined sequence of frames.
+   * 
+   * @param id
+   *          The ID to be assigned to this animated sprite.
+   * @param interval
+   *          The number of (partial) steps between each frame.
+   * @param frames
+   *          The frames the animated sprite should consist of.
+   */
+  public AnimatedSprite(String id, double interval, ArrayList<Sprite> frames) {
+    this.id = id;
+    this.frames = frames;
+    this.interval = interval;
+  }
+
+  /**
    * Add a Sprite instance as the next frame in the sequence to this Animated Sprite.
    * 
    * @param frame
