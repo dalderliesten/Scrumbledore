@@ -21,12 +21,16 @@ public class BubbleActionsLevelModifier implements LevelModifier {
   public void modify(Level level, double delta) {
 
     ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+    ArrayList<NPC> enemies = level.getNPCs();
     for (Bubble bubble : level.getBubbles()) {
       bubbles.add(bubble);
     }
 
     for (Bubble bub : bubbles) {
       if (bub.getLifetime() <= 0) {
+        if (bub.hasNPC()) {
+          enemies.add(new NPC(bub.getPosition().clone(), new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
+        }
         level.getBubbles().remove(bub);
       } else {
         bub.decreaseLifetime(delta);
