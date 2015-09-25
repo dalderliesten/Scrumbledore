@@ -288,4 +288,20 @@ public class CollisionsLevelModifier implements LevelModifier {
     }
   }
 
+  /**
+   * Returns a KineticsLevelModifier
+   * @return the kinetics
+   */
+  public KineticsLevelModifier getKinetics() {
+    return kinetics;
+  }
+
+  /**
+   * Returns a ScoreCounter
+   * @return the score
+   */
+  public ScoreCounter getScore() {
+    return score;
+  }
+
 }
