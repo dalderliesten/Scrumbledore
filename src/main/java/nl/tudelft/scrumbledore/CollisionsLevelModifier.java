@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class responsible for collision detection between given elements.
  * 
  * @author Jesse Tilro
- *
+ * @author David Alderliesten
  */
 @SuppressWarnings({ "checkstyle:methodlength", "PMD.ModifiedCyclomaticComplexity",
     "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })

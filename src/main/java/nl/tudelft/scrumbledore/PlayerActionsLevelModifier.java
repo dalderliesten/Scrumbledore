@@ -104,13 +104,13 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         if (player.getLastMove() == PlayerAction.MoveLeft) {
           if (Constants.LOGGING_WANTSHOOTING) {
             // Sending the shooting information to the logger.
-            Logger.log("Player shot in the western direction.");
+            Logger.log("Player shot in the left direction.");
           }
           newBubble.addAction(BubbleAction.MoveLeft);
         } else {
           if (Constants.LOGGING_WANTSHOOTING) {
             // Sending the shooting information to the logger.
-            Logger.log("Player shot in the eastern direction.");
+            Logger.log("Player shot in the right direction.");
           }
           newBubble.addAction(BubbleAction.MoveRight);
         }
