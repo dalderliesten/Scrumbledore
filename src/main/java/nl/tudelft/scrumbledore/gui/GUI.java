@@ -301,7 +301,7 @@ public class GUI extends Application {
       String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
 
       if (currentBubble.hasNPC()) {
-        path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
+        path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
       }
 
       painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
