@@ -30,6 +30,7 @@ public class CollisionsLevelModifierTest {
     
     clm = new CollisionsLevelModifier(klm, sc);
   }
+  
   /**
    * Test the CollisionsLevelModifier constructor and the getter methods.
    */
@@ -146,14 +147,26 @@ public class CollisionsLevelModifierTest {
   }
 
   /**
-   * 
+   * Test the collision between a bubble and an enemy.
    */
   @Test
   public void testDetectBubbleEnemy() {
+    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(0, 32), new Vector(32, 32));
+  
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(npc);
+    
+    assertEquals(0, level.getFruits().size());
+    clm.detectBubbleEnemy(level, 1000);   
+    assertEquals(0, level.getNPCs().size());
+    assertEquals(1, level.getFruits().size());
+
   }
 
   /**
-   * 
+   * Test the collision between a player and a fruit.
    */
   @Test
   public void testDetectPlayerFruit() {
@@ -170,7 +183,7 @@ public class CollisionsLevelModifierTest {
   }
 
   /**
-   * 
+   * Test the collision between a player and an enemy.
    */
   @Test
   public void testDetectPlayerEnemy() {
