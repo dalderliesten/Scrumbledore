@@ -2,6 +2,8 @@ package nl.tudelft.scrumbledore;
 
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
 
@@ -79,10 +81,10 @@ public class CollisionsLevelModifierTest {
   /**
    * Test the collision between a platform and a player colliding from the bottom.
    */
-  /*@Test
+ /* @Test
   public void testDetectPlayerPlatformFromBottom() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Player player = new Player(new Vector(0, 32), new Vector(32, 32));
+    Player player = new Player(new Vector(0, 33), new Vector(32, 32));
     player.getSpeed().setY(-4);
     
     Level level = new Level();
@@ -92,8 +94,8 @@ public class CollisionsLevelModifierTest {
     clm.detectPlayerPlatform(level, 1000);   
     verify(klm).stopVertically(player);
     verify(klm).snapBottom(player, platform);
-  }
-  */
+  }*/
+  
   /**
    * Test the collision between a platform and a player colliding from the left.
    */
@@ -127,8 +129,8 @@ public class CollisionsLevelModifierTest {
 
     clm.detectPlayerPlatform(level, 1000);   
     verify(klm).stopHorizontally(player);
-  }
-*/
+  }*/
+
   /**
    * 
    */
@@ -162,6 +164,16 @@ public class CollisionsLevelModifierTest {
    */
   @Test
   public void testDetectPlayerEnemy() {
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(0, 32), new Vector(32, 32));
+  
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(npc);
+    
+    assertTrue(player.isAlive());
+    clm.detectPlayerEnemy(level, 1000);   
+    assertFalse(player.isAlive());
   }
 
 }
