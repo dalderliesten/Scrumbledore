@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore.gui;
 
 import java.util.ArrayList;
+
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
@@ -291,8 +292,14 @@ public class GUI extends Application {
     }
 
     for (Bubble currentBubble : bubbles) {
-      painter.drawImage(new Image(sprites.getPathFromID("bubble")), currentBubble.getPosition()
-          .getX(), currentBubble.getPosition().getY());
+      if (currentBubble.hasNPC()) {
+        painter.drawImage(new Image(sprites.getPathFromID("bubble-enemy-mighta")), 
+            currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
+      } else {
+        painter.drawImage(new Image(sprites.getPathFromID("bubble")), 
+            currentBubble.getPosition().getX(),
+            currentBubble.getPosition().getY());
+      }  
     }
   }
 
@@ -313,7 +320,7 @@ public class GUI extends Application {
     // Adding the initial enemy locations to the GUI.
     for (NPC current : npcs) {
       String spr = "enemy-mighta-right";
-      if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
+      if (current.getLastMove().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
       painter.drawImage(new Image(sprites.getPathFromID(spr)), current.getPosition().getX(),
@@ -362,7 +369,7 @@ public class GUI extends Application {
   private void advanceLevel() {
 
     // When the enemies in the current level have been killed.
-    if (game.getCurrentLevel().getNPCs().isEmpty()) {
+    if (game.getCurrentLevel().getNPCs().isEmpty() && game.getCurrentLevel().getEnemyBubbles().isEmpty()) {
 
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
