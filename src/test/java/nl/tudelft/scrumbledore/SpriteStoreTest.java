@@ -10,7 +10,7 @@ import org.junit.Test;
  * Test Suite for the Sprite Store class.
  * 
  * @author Jesse Tilro
- *
+ * @author Niels Warnars
  */
 public class SpriteStoreTest {
 

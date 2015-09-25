@@ -1,5 +1,12 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javafx.scene.input.KeyCode;
+
 /**
  * Class for the maintainence of strings for display in visual and GUI. Meant to allow easy fixing
  * for later.
@@ -9,12 +16,12 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  *
  */
-@SuppressWarnings("checkstyle:linelength")
 public final class Constants {
   // Empty private constructor for utility class
   private Constants() {
-    
+
   }
+
   // Setting the resolution of the entire GUI window.
   public static final int GUIX = 646;
   public static final int GUIY = 723;
@@ -27,10 +34,10 @@ public final class Constants {
   public static final int REFRESH_RATE = 30;
 
   // Defining labels needed in the top section of the user interface.
-  public static final String SCORELABEL = "Score: ";
-  public static final String HISCORELABEL = "High-Score: ";
-  public static final String POWERUPLABEL = "Power-Ups: ";
-  public static final String LEVELLABEL = "Level: ";
+  public static final String SCORELABEL = "Score:";
+  public static final String HISCORELABEL = "High-Score:";
+  public static final String POWERUPLABEL = "Power-Ups:";
+  public static final String LEVELLABEL = "Level:";
 
   // Defining text needed to display the buttons in the bottom of the user interface.
   public static final String STARTBTNLABEL = "Start";
@@ -41,16 +48,18 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP = 
+      "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_ACTIVE = "Yes";
   public static final String LOGGING_DISABLED = "No";
-  
+  public static final String SETTINGSCLOSE = "Close";
+
   // Defining the settings value tracking.
-  public static boolean LOGGING_WANTMOVEMENT = true;
-  public static boolean LOGGING_WANTINPUT = true;
-  public static boolean LOGGING_WANTSTARTSTOP = true;
-  public static boolean LOGGING_WANTSHOOTING = true;
+  public static boolean LOGGING_WANTMOVEMENT = false;
+  public static boolean LOGGING_WANTINPUT = false;
+  public static boolean LOGGING_WANTSTARTSTOP = false;
+  public static boolean LOGGING_WANTSHOOTING = false;
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
@@ -80,7 +89,7 @@ public final class Constants {
   public static final double PLAYER_JUMP = 22;
 
   // Bubble horizontal movement speed
-  public static final double BUBBLE_SPEED = 16;
+  public static final double BUBBLE_SPEED = 20;
   // Bubble horizontal fiction
   public static final double BUBBLE_FRICTION = 1.5;
   // Bubble horizontal fiction
@@ -106,6 +115,40 @@ public final class Constants {
   public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
 
+  public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
+
   // Reference to the location directory for the log file handling.
   public static final String LOGGER_DIR = "logging/";
+
+  // Keymapping
+  public static final List<Map<KeyCode, PlayerAction>> KEY_MAPPING = createKeyMapping();
+
+  private static List<Map<KeyCode, PlayerAction>> createKeyMapping() {
+    List<Map<KeyCode, PlayerAction>> keyMapping = new ArrayList<Map<KeyCode, PlayerAction>>();
+
+    keyMapping.add(createKeyMappingP1());
+    keyMapping.add(createKeyMappingP2());
+
+    return keyMapping;
+  }
+
+  private static Map<KeyCode, PlayerAction> createKeyMappingP1() {
+    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
+    keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
+    keyMapping.put(KeyCode.RIGHT, PlayerAction.MoveRight);
+    keyMapping.put(KeyCode.UP, PlayerAction.Jump);
+    keyMapping.put(KeyCode.NUMPAD0, PlayerAction.Shoot);
+
+    return keyMapping;
+  }
+
+  private static Map<KeyCode, PlayerAction> createKeyMappingP2() {
+    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
+    keyMapping.put(KeyCode.A, PlayerAction.MoveLeft);
+    keyMapping.put(KeyCode.D, PlayerAction.MoveRight);
+    keyMapping.put(KeyCode.W, PlayerAction.Jump);
+    keyMapping.put(KeyCode.CONTROL, PlayerAction.Shoot);
+
+    return keyMapping;
+  }
 }

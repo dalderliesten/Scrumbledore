@@ -64,7 +64,7 @@ public class LevelTest {
     Player testPlayer = new Player(basicVt, basicVt);
 
     level.addElement(player);
-    assertEquals(level.getPlayer(), testPlayer);
+    assertEquals(level.getPlayers().get(0), testPlayer);
   }
 
 
