@@ -303,8 +303,8 @@ public class GUI extends Application {
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
       }
-      painter.drawImage(new Image(path), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
+          .getPosition().getY());
     }
   }
 
@@ -330,8 +330,8 @@ public class GUI extends Application {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      painter.drawImage(new Image(path), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter
+          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -365,8 +365,8 @@ public class GUI extends Application {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      painter.drawImage(new Image(path), current.getPosition().getX(),
-          current.getPosition().getY());
+      painter
+          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -530,6 +530,7 @@ public class GUI extends Application {
     Label playerShootingLog = new Label(Constants.LOGGING_SHOOTING);
     Label gameStateLog = new Label(Constants.LOGGING_GAME_STARTSTOP);
     Label pointStateLog = new Label(Constants.LOGGING_POINTS);
+    Label enemyStateLog = new Label(Constants.LOGGING_ENEMY);
 
     // Adding the exit button to go back to the game menu.
     Button exitButton = new Button(Constants.SETTINGSCLOSE);
@@ -701,10 +702,40 @@ public class GUI extends Application {
 
     });
 
+    // Creation of the buttons and handler for the enemy tracking groups. Includes the creation of
+    // all grouping and positioning elements.
+    final ToggleGroup enemyLogGroup = new ToggleGroup();
+    HBox enemyLogBox = new HBox(15);
+    final RadioButton enemyLogTrue = new RadioButton(Constants.LOGGING_ACTIVE);
+    enemyLogTrue.setToggleGroup(enemyLogGroup);
+    final RadioButton enemyLogFalse = new RadioButton(Constants.LOGGING_DISABLED);
+    enemyLogFalse.setToggleGroup(enemyLogGroup);
+    enemyLogBox.getChildren().addAll(enemyLogTrue, enemyLogFalse);
+
+    if (Constants.LOGGING_WANTENEMY) {
+      enemyLogTrue.setSelected(true);
+    } else {
+      enemyLogFalse.setSelected(true);
+    }
+
+    // Implementing the listener for the radio buttons above.
+    enemyLogGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
+
+      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
+          Toggle newToggle) {
+        if (newToggle == enemyLogTrue) {
+          Constants.LOGGING_WANTENEMY = true;
+        } else if (newToggle == enemyLogFalse) {
+          Constants.LOGGING_WANTENEMY = false;
+        }
+      }
+
+    });
+
     // Adding all the content for the settings menu to the settings scene.
     settingsBox.getChildren().addAll(settingsHeader, playerMoveLog, movementToggleBox,
         playerJumpLog, inputToggleBox, playerShootingLog, shootToggleBox, gameStateLog, gameLogBox,
-        pointStateLog, pointsLogBox, exitButton);
+        pointStateLog, pointsLogBox, enemyStateLog, enemyLogBox, exitButton);
 
     // Creation of the scene and adding it to the settings stage.
     Scene settingsScene = new Scene(settingsBox);
