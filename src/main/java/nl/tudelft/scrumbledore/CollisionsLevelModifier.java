@@ -236,7 +236,7 @@ public class CollisionsLevelModifier implements LevelModifier {
       if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
         // Detect collision.
         Collision collision = new Collision(player, bubble, delta);
-        if (collision.collidingFromTop() && player.vSpeed() > 0) {
+        if (collision.collidingFromTop() && player.vSpeed() > 0  && !(bubble.hasNPC())) {
           player.getSpeed().setY(-Constants.PLAYER_JUMP);
           kinetics.snapTop(player, bubble);
           // Collision is detected, no further evaluation of candidates necessary.
