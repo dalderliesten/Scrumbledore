@@ -171,7 +171,6 @@ public class NPC extends LevelElement {
    *          The last move action performed.
    */
   public void setLastMove(NPCAction action) {
-    // Mapping the last action to the arraylist with actions.
     if (action == NPCAction.MoveLeft || action == NPCAction.MoveRight) {
       lastMove = action;
     }

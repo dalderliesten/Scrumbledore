@@ -15,7 +15,6 @@ public class ScoreCounter {
    *
    */
   public ScoreCounter() {
-    // Initial score and highscore is 0.
     this.score = 0;
     this.highScore = 0;
   }
@@ -60,10 +59,16 @@ public class ScoreCounter {
   public void updateScore(int addScore) {
     score += addScore;
 
-    // If the new score is bigger than the high-score, it updates the high-score.
+    if (Constants.LOGGING_WANTPOINTS) {
+      Logger.log("Player gained " + addScore + " points, totalling at " + score + " points.");
+    }
+
     if (score > highScore) {
       highScore = score;
+
+      if (Constants.LOGGING_WANTPOINTS) {
+        Logger.log("The high-score has been changed and is now worth " + highScore + " points!");
+      }
     }
   }
-
 }

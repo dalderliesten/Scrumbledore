@@ -6,7 +6,7 @@ import java.util.ArrayList;
  * Class responsible for collision detection between given elements.
  * 
  * @author Jesse Tilro
- *
+ * @author David Alderliesten
  */
 @SuppressWarnings({ "checkstyle:methodlength", "PMD.ModifiedCyclomaticComplexity",
     "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
@@ -246,11 +246,16 @@ public class CollisionsLevelModifier implements LevelModifier {
 
           // If a bubble contains an enemy, drop a fruit.
           if (collision.colliding() && bubble.hasNPC()) {
-            Fruit newFruit = new Fruit(bubble.getPosition().clone(),
-                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            Fruit newFruit = new Fruit(bubble.getPosition().clone(), new Vector(
+                Constants.BLOCKSIZE, Constants.BLOCKSIZE));
             fruits.add(newFruit);
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);
+
+            if (Constants.LOGGING_WANTENEMY) {
+              Logger.log("Player executed an encapsulated enemy.");
+            }
+
             break;
           }
         }
@@ -304,7 +309,7 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (int i = 0; i < enemies.size(); i++) {
 
         for (int j = 0; j < bubbles.size(); j++) {
-          // Temp fix to prevent race condition
+          // Temp fix to prevent race condition.
           if (!(bubbles.get(j).hasNPC()) && enemies.size() != i
               && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
               && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {
@@ -315,6 +320,10 @@ public class CollisionsLevelModifier implements LevelModifier {
             bubbles.get(j).setHasNPC(true);
             // The lifetime of the bubble gets extended if the bubble cathes an enemy.
             bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
+
+            if (Constants.LOGGING_WANTENEMY) {
+              Logger.log("An enemy was encapsulated by a bubble.");
+            }
           }
         }
       }
@@ -380,7 +389,7 @@ public class CollisionsLevelModifier implements LevelModifier {
   /**
    * Returns a KineticsLevelModifier.
    * 
-   * @return the kinetics
+   * @return The kinetics
    */
   public KineticsLevelModifier getKinetics() {
     return kinetics;
