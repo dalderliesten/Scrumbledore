@@ -1,5 +1,12 @@
 package nl.tudelft.scrumbledore;
 
+import java.util.List;
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.Map;
+
+import javafx.scene.input.KeyCode;
+
 /**
  * Class for the maintainence of strings for display in visual and GUI. Meant to allow easy fixing
  * for later.
@@ -9,12 +16,12 @@ package nl.tudelft.scrumbledore;
  * @author Niels Warnars
  *
  */
-@SuppressWarnings("checkstyle:linelength")
 public final class Constants {
   // Empty private constructor for utility class
   private Constants() {
-    
+
   }
+
   // Setting the resolution of the entire GUI window.
   public static final int GUIX = 646;
   public static final int GUIY = 723;
@@ -41,12 +48,13 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP = 
+      "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_ACTIVE = "Yes";
   public static final String LOGGING_DISABLED = "No";
   public static final String SETTINGSCLOSE = "Close";
-  
+
   // Defining the settings value tracking.
   public static boolean LOGGING_WANTMOVEMENT = false;
   public static boolean LOGGING_WANTINPUT = false;
@@ -109,5 +117,37 @@ public final class Constants {
 
   // Reference to the location directory for the log file handling.
   public static final String LOGGER_DIR = "logging/";
-  
+
+  // Keymapping
+  public static final List<Map<KeyCode, PlayerAction>> KEY_MAPPING = createKeyMapping();
+
+  private static List<Map<KeyCode, PlayerAction>> createKeyMapping() {
+    List<Map<KeyCode, PlayerAction>> keyMapping = new ArrayList<Map<KeyCode, PlayerAction>>();
+
+    keyMapping.add(createKeyMappingP1());
+    keyMapping.add(createKeyMappingP2());
+
+    return keyMapping;
+  }
+
+  private static Map<KeyCode, PlayerAction> createKeyMappingP1() {
+    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
+    keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
+    keyMapping.put(KeyCode.RIGHT, PlayerAction.MoveRight);
+    keyMapping.put(KeyCode.UP, PlayerAction.Jump);
+    keyMapping.put(KeyCode.NUMPAD0, PlayerAction.Shoot);
+
+    return keyMapping;
+  }
+
+  private static Map<KeyCode, PlayerAction> createKeyMappingP2() {
+    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
+    keyMapping.put(KeyCode.A, PlayerAction.MoveLeft);
+    keyMapping.put(KeyCode.D, PlayerAction.MoveRight);
+    keyMapping.put(KeyCode.W, PlayerAction.Jump);
+    keyMapping.put(KeyCode.CONTROL, PlayerAction.Shoot);
+
+    return keyMapping;
+  }
+
 }
