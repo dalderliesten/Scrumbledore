@@ -23,7 +23,7 @@ public class GravityLevelModifier implements LevelModifier {
     this.strength = strength;
     this.max = max;
   }
-  
+
   /**
    * Construct a new Gravity Level Modifier using the constants for strenght and max.
    */
@@ -50,7 +50,7 @@ public class GravityLevelModifier implements LevelModifier {
     for (Fruit element : level.getFruits()) {
       pull(element, d);
     }
-    
+
     // Pull down the player
     pull(level.getPlayer(), d);
   }
