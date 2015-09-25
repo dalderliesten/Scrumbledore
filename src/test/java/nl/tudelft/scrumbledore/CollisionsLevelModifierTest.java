@@ -133,19 +133,76 @@ public class CollisionsLevelModifierTest {
   }*/
 
   /**
-   * 
+   * Test the collision between a platform and a bubble colliding from the bottom.
+   */
+  /*@Test
+  public void testDetectBubblePlatformFromBottom() {
+    Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
+        
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(platform);
+    
+    clm.detectBubblePlatform(level, 1000);
+    verify(klm).snapBottom(bubble, platform);  
+    assertEquals(bubble.vSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
+
+  }
+  
+  /**
+   * Test the collision between a platform and a bubble colliding from the left.
    */
   @Test
-  public void testDetectBubblePlatform() {
+  public void testDetectBubblePlatformFromLeft() {
+    Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
+        
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(platform);
+    
+    clm.detectBubblePlatform(level, 1000);
+    verify(klm).snapLeft(bubble, platform);
+    assertEquals(bubble.hSpeed(), -Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
   }
+  
+  /**
+   * Test the collision between a platform and a bubble colliding from the right.
+   */
+  /*@Test
+  public void testDetectBubblePlatformFromRight() {
+    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(32, 0), new Vector(32, 32));
+        
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(platform);
+    
+    clm.detectBubblePlatform(level, 1000);
+    verify(klm).snapRight(bubble, platform);
+    assertEquals(bubble.hSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
 
+  }
+  
   /**
    * 
    */
   @Test
-  public void testDetectPlayerBubble() {
+  public void testDetectPlayerBubbleFromTop() {
   }
 
+  @Test
+  public void testDetectPlayerBubbleFromBottom() {
+  }
+  
+  @Test
+  public void testDetectPlayerBubbleFromLeft() {
+  }
+  
+  @Test
+  public void testDetectPlayerBubbleFromRight() {
+  }
   /**
    * Test the collision between a bubble and an enemy.
    */
