@@ -1,12 +1,10 @@
 package nl.tudelft.scrumbledore;
 
-
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
-
 import org.junit.Before;
 import org.junit.Test;
 
@@ -21,7 +19,7 @@ public class CollisionsLevelModifierTest {
   private CollisionsLevelModifier clm;
   
   /**
-   * 
+   * Set up mock objects and an CollisionsLevelModifier instance.
    */
   @Before
   public void setUp() {
