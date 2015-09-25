@@ -1,14 +1,12 @@
-package nl.tudelft.scrumbledore;
+package nl.tudelft.scrumbledore.gui;
 
 import java.util.ArrayList;
-
 import javafx.animation.AnimationTimer;
 import javafx.application.Application;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
-import javafx.geometry.Pos;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
@@ -18,13 +16,24 @@ import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
-import javafx.scene.input.KeyEvent;
+import javafx.scene.image.Image;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
-import javafx.stage.WindowEvent;
+import nl.tudelft.scrumbledore.Bubble;
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Fruit;
+import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.NPC;
+import nl.tudelft.scrumbledore.NPCAction;
+import nl.tudelft.scrumbledore.Platform;
+import nl.tudelft.scrumbledore.Player;
+import nl.tudelft.scrumbledore.PlayerAction;
+import nl.tudelft.scrumbledore.SpriteStore;
+import nl.tudelft.scrumbledore.StepTimer;
 
 /**
  * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
@@ -35,7 +44,8 @@ import javafx.stage.WindowEvent;
  * @author Niels Warnars
  */
 @SuppressWarnings({ "checkstyle:methodlength", "PMD.TooManyMethods", "PMD.NPathComplexity",
-    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity" })
+    "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity", "PMD.StdCyclomaticComplexity",
+    "PMD.TooManyFields" })
 public class GUI extends Application {
   private Game game;
   private StepTimer timer;
@@ -59,6 +69,10 @@ public class GUI extends Application {
   private Button startStopButton;
   private Button settingsButton;
   private Button exitButton;
+  private Label scoreLabel;
+  private Label levelLabel;
+  private Label highScoreLabel;
+  private Label powerUpLabel;
 
   /**
    * The start method launches the JavaFX GUI window and handles associated start-up items and the
@@ -81,15 +95,17 @@ public class GUI extends Application {
     setupGUI();
 
     // Add event listeners.
-    addKeyEventListeners(scene);
+    EventListeners el = new EventListeners(game, stage, scene);
+    el.init();
+
     addButtonEventListeners();
-    addWindowEventListeners(stage);
 
     renderStatic();
 
     // Start the animation timer to keep refreshing the dynamic canvas.
     animationTimer.start();
 
+    // Showing the game stage.
     stage.show();
   }
 
@@ -149,21 +165,22 @@ public class GUI extends Application {
 
     // Creation of a horizontal box for storing top labels and items to display, and making it the
     // full width of the GUI.
-    HBox topItems = new HBox();
+    HBox topItems = new HBox(15);
     topItems.maxWidth(Constants.GUIX);
 
     // Linking the labels needed in the top HBox to their constant referneces.
-    Label scoreLabel = new Label(Constants.SCORELABEL);
-    scoreLabel.setAlignment(Pos.CENTER);
-    Label highScoreLabel = new Label(Constants.HISCORELABEL);
-    highScoreLabel.setAlignment(Pos.CENTER);
-    Label powerUpLabel = new Label(Constants.POWERUPLABEL);
-    powerUpLabel.setAlignment(Pos.CENTER);
-    Label levelLabel = new Label(Constants.LEVELLABEL);
-    levelLabel.setAlignment(Pos.CENTER);
+    Label scoreTitleLabel = new Label(Constants.SCORELABEL);
+    scoreLabel = new Label(game.getScore());
+    Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
+    highScoreLabel = new Label(game.getHighScore());
+    Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
+    powerUpLabel = new Label("NONE ACTIVE");
+    Label levelTitleLabel = new Label(Constants.LEVELLABEL);
+    levelLabel = new Label(game.getCurrentLevelNumber());
 
     // Adding the top labels to the top HBox and to the game display interface.
-    topItems.getChildren().addAll(scoreLabel, powerUpLabel, levelLabel, highScoreLabel);
+    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, powerUpLabel,
+        levelTitleLabel, levelLabel, highScoreTitleLabel, highScoreLabel);
     layout.getChildren().add(topItems);
 
     // Displaying the parsed level content in the center of the user interface.
@@ -200,12 +217,14 @@ public class GUI extends Application {
   private void renderStatic() {
     // Clear canvas
     staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+
     // Render the static canvas
     renderPlatforms(staticPainter);
   }
 
   /**
-   * Refresh the GUI by rendering all dynamic elements in the current level of the game.
+   * Refresh the GUI by rendering all dynamic elements in the current level of the game Also updates
+   * all the GUI elements that must be refreshed per cycle.
    */
   private void renderDynamic() {
     // Clear canvas
@@ -213,12 +232,24 @@ public class GUI extends Application {
 
     // Render Bubbles.
     renderBubbles(dynamicPainter);
+
     // Render Fruits.
     renderFruits(dynamicPainter);
+
     // Render other moving elements.
     renderNPCs(dynamicPainter);
+
     // Render Player.
     renderPlayer(dynamicPainter);
+
+    // Updating the score display for the GUI.
+    scoreLabel.setText(game.getScore());
+
+    // Updating the current level number display for the GUI.
+    levelLabel.setText(game.getCurrentLevelNumber());
+
+    // Updating the current high score display for the GUI.
+    highScoreLabel.setText(game.getHighScore());
   }
 
   /**
@@ -242,8 +273,8 @@ public class GUI extends Application {
       spr = "player-right";
     }
 
-    painter.drawImage(sprites.getImage(spr), game.getCurrentLevel().getPlayer().getPosition()
-        .getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
+    painter.drawImage(new Image(sprites.getPathFromID(spr)), game.getCurrentLevel().getPlayer()
+        .getPosition().getX(), game.getCurrentLevel().getPlayer().getPosition().getY());
   }
 
   /**
@@ -261,12 +292,14 @@ public class GUI extends Application {
 
     for (Bubble currentBubble : bubbles) {
       if( !currentBubble.hasNPC() ) {
-        painter.drawImage(sprites.getImage("bubble"), currentBubble.getPosition().getX(),
+        painter.drawImage(new Image(sprites.getPathFromID("bubble")), currentBubble.getPosition().getX(),
             currentBubble.getPosition().getY());
       } else {
-        painter.drawImage(sprites.getImage("bubble-enemy-mighta"), currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
-      }
-      
+        painter.drawImage(new Image(sprites.getPathFromID("bubble-enemy-mighta")), currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
+      } 
+
+      painter.drawImage(new Image(sprites.getPathFromID("bubble")), currentBubble.getPosition()
+          .getX(), currentBubble.getPosition().getY());
     }
   }
 
@@ -290,8 +323,8 @@ public class GUI extends Application {
       if (current.getMovementDirection().equals(NPCAction.MoveLeft)) {
         spr = "enemy-mighta-left";
       }
-      painter.drawImage(sprites.getImage(spr), current.getPosition().getX(), current.getPosition()
-          .getY());
+      painter.drawImage(new Image(sprites.getPathFromID(spr)), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -305,8 +338,8 @@ public class GUI extends Application {
     // Placing the platform elements within the level.
     for (Platform current : game.getCurrentLevel().getPlatforms()) {
       // Painting the current platform image at the desired x and y location given by the vector.
-      painter.drawImage(sprites.getImage("wall-1"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("wall-1")), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -324,8 +357,8 @@ public class GUI extends Application {
     }
 
     for (Fruit current : fruits) {
-      painter.drawImage(sprites.getImage("fruit-banana"), current.getPosition().getX(), current
-          .getPosition().getY());
+      painter.drawImage(new Image(sprites.getPathFromID("fruit-banana")), current.getPosition()
+          .getX(), current.getPosition().getY());
     }
   }
 
@@ -459,93 +492,9 @@ public class GUI extends Application {
   }
 
   /**
-   * Add key event listeners to a given scene to allow player controls.
-   * 
-   * @param scene
-   *          The scene the listeners should be added to.
-   */
-  private void addKeyEventListeners(Scene scene) {
-    // KeyPress Event handlers.
-    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
-
-      // Handling the key press.
-      public void handle(KeyEvent keyPressed) {
-        String keyPress = keyPressed.getCode().toString();
-        Player player = game.getCurrentLevel().getPlayer();
-        Vector bubblePos = player.getPosition().clone();
-        ArrayList<Bubble> bubbles = game.getCurrentLevel().getBubbles();
-
-        // Mapping the desired keys to the desired actions.
-        if (keyPress.equals("LEFT")) {
-          player.addAction(PlayerAction.MoveLeft);
-        } else if (keyPress.equals("RIGHT")) {
-          player.addAction(PlayerAction.MoveRight);
-        } else if (keyPress.equals("UP")) {
-          player.addAction(PlayerAction.Jump);
-        }
-
-        // Mapping the shooting action keys.
-        if (keyPress.equals("Z")) {
-          if (!player.isFiring()) {
-            Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-                Constants.BLOCKSIZE));
-
-            bubbles.add(newBubble);
-            if (player.getLastMove() == PlayerAction.MoveLeft) {
-              if (Constants.LOGGING_WANTSHOOTING) {
-                // Sending the shooting information to the logger.
-                Logger.log("Player shot in the western direction.");
-              }
-
-              newBubble.addAction(BubbleAction.MoveLeft);
-            } else {
-              if (Constants.LOGGING_WANTSHOOTING) {
-                // Sending the shooting information to the logger.
-                Logger.log("Player shot in the eastern direction.");
-              }
-
-              newBubble.addAction(BubbleAction.MoveRight);
-            }
-          }
-
-          player.setFiring(true);
-        }
-
-        // Restarting the game if "R" is pressed or when the player is dead.
-        if (keyPress.equals("R") || !game.getCurrentLevel().getPlayer().isAlive()) {
-          game.restart();
-          renderStatic();
-        }
-      }
-
-    });
-
-    // KeyRelease Event handlers.
-    scene.setOnKeyReleased(new EventHandler<KeyEvent>() {
-
-      // Handling the key press.
-      public void handle(KeyEvent keyReleased) {
-        String keyRelease = keyReleased.getCode().toString();
-        Player player = game.getCurrentLevel().getPlayer();
-
-        // Mapping the desired keys to the desired actions.
-        if (keyRelease.equals("LEFT")) {
-          player.addAction(PlayerAction.MoveStop);
-        } else if (keyRelease.equals("RIGHT")) {
-          player.addAction(PlayerAction.MoveStop);
-        }
-
-        if (keyRelease.equals("Z")) {
-          player.setFiring(false);
-        }
-      }
-
-    });
-  }
-
-  /**
    * Handles the creation and feature functioning of the settings menu.
    */
+  @SuppressWarnings("PMD.ExcessiveMethodLength")
   private void settingsMenu() {
     // Creation and formatting of the settings stage.
     final Stage settingsStage = new Stage();
@@ -719,25 +668,4 @@ public class GUI extends Application {
     settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
     settingsStage.show();
   }
-
-  /**
-   * Add WindowEvent listener to exit the application when the window is closed.
-   * 
-   * @param stage
-   *          The Stage used by the rest of the GUI.
-   */
-  private void addWindowEventListeners(Stage stage) {
-    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-      public void handle(WindowEvent event) {
-
-        // Logging the termination of the game.
-        Logger.log("--------------------GAME TERMINATED");
-
-        // Quitting the game.
-        System.exit(0);
-      }
-    });
-
-  }
-
 }
