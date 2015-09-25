@@ -108,7 +108,7 @@ public final class Constants {
   public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
 
-  public static final double ANIMATED_SPRITES_INTERVAL = 5;
+  public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
 
   // Reference to the location directory for the log file handling.
   public static final String LOGGER_DIR = "logging/";

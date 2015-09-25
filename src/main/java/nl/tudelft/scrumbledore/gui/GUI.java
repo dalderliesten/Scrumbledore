@@ -261,20 +261,25 @@ public class GUI extends Application {
    */
   private void renderPlayer(GraphicsContext painter) {
     Player player = game.getCurrentLevel().getPlayer();
+    double steps = game.getSteps();
 
     boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
     boolean isFiring = player.isFiring();
 
-    String spr = "player-left";
+    String spr = "player-move-left";
     if (isFiring && toRight) {
       spr = "player-shoot-right";
     } else if (isFiring) {
       spr = "player-shoot-left";
     } else if (toRight) {
-      spr = "player-right";
+      spr = "player-move-right";
     }
 
-    String path = sprites.get(spr).getPath();
+    if (player.getSpeed().getX() == 0 && !isFiring) {
+      steps = 0;
+    }
+
+    String path = sprites.getAnimated(spr).getFrame(steps).getPath();
     painter.drawImage(new Image(path), game.getCurrentLevel().getPlayer().getPosition().getX(),
         game.getCurrentLevel().getPlayer().getPosition().getY());
   }
