@@ -64,6 +64,7 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.collidingFromTop() && fruit.vSpeed() > 0) {
             kinetics.stopVertically(fruit);
             kinetics.snapTop(fruit, platform);
+            fruit.setIsPickable(true);
           }
         }
       }
@@ -195,6 +196,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Fruit newFruit = new Fruit(bubble.getPosition().clone(),
               new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
           fruits.add(newFruit);
+          level.getBubbles().remove(bubble);
+          break;
         }
       }
 
@@ -235,12 +238,13 @@ public class CollisionsLevelModifier implements LevelModifier {
           // Temp fix to prevent race condition
           if (enemies.size() != i
               && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
-              && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {
+              && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {            
+
+            // The enemy gets removed and a new encapsulated enemy will appear.
+            enemies.remove(i);
             bubbles.get(j).setHasNPC(true);
             // The lifetime of the bubble gets extended if the bubble cathes an enemy.
             bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
-            // The enemy gets removed and a new encapsulated enemy will appear.
-            enemies.remove(i);
           }
         }
       }
@@ -261,11 +265,13 @@ public class CollisionsLevelModifier implements LevelModifier {
 
     if (fruits.size() > 0) {
       for (int i = 0; i < fruits.size(); i++) {
-        if (fruits.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-          Collision collision = new Collision(player, fruits.get(i), delta);
-          if (collision.colliding()) {
-            fruits.remove(i);
-            score.updateScore(100);
+        if (fruits.get(i).isPickable()){
+          if (fruits.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+            Collision collision = new Collision(player, fruits.get(i), delta);
+            if (collision.colliding()) {
+              fruits.remove(i);
+              score.updateScore(100);
+            }
           }
         }
       }
