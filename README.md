@@ -8,13 +8,13 @@ Repository for project group 12 at the TU Delft, consisting of David Alderlieste
 # Controls
 The in-game settings menu does not yet have key display/binding (which is being worked on), so the controls for the game can be found below:
 
-Player 1:
+#Player 1:
 * Up Arrow = Jump.
 * Left Arrow = Move Left.
 * Right Arrow = Move Right.
 * NumPad 0 = Shoot projectile/bubble.
-*
-Player 2:
+
+#Player 2:
 * A = Jump.
 * W = Move Left.
 * D = Move Right.
