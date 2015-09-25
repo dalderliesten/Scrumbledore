@@ -60,7 +60,8 @@ public class ScoreCounter {
   public void updateScore(int addScore) {
     score += addScore;
 
-    // If the new score is bigger than the high-score, it updates the high-score.
+    Logger.log("Player gained " + addScore + " points.");
+
     if (score > highScore) {
       highScore = score;
     }
