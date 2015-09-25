@@ -59,7 +59,7 @@ public class ScoreCounter {
   public void updateScore(int addScore) {
     score += addScore;
 
-    Logger.log("Player gained " + addScore + " points.");
+    Logger.log("Player gained " + addScore + " points, totalling at " + score + " points.");
 
     if (score > highScore) {
       highScore = score;
