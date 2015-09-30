@@ -89,11 +89,7 @@ public class Game {
    * @return The current level number as a string.
    */
   public String getCurrentLevelNumber() {
-    String toReturn = "";
-
-    toReturn = toReturn + currentLevelNumber;
-
-    return toReturn;
+    return new Integer(currentLevelNumber).toString();
   }
 
   /**
@@ -183,9 +179,7 @@ public class Game {
    * @return Value of the current score.
    */
   public String getScore() {
-    String toReturn = score.getScoreString();
-
-    return toReturn;
+    return score.getScoreString();
   }
 
   /**
@@ -194,11 +188,7 @@ public class Game {
    * @return Value of the high score.
    */
   public String getHighScore() {
-    String toReturn = "";
-    
-    toReturn = toReturn + score.getHighScore();
-
-    return toReturn;
+    return new Integer(score.getHighScore()).toString();
   }
 
   /**

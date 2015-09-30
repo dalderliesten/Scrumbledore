@@ -22,6 +22,31 @@ public class ScoreCounterTest {
   }
 
   /**
+   * Test whether the high score of a game is set correctly
+   * if the current score is higher than the previous high score.
+   */
+  @Test
+  public void testGetHighScore() {
+    ScoreCounter sc = new ScoreCounter();
+    assertEquals(0, sc.getHighScore());
+
+    sc.updateScore(42);
+    assertEquals(42, sc.getHighScore());
+  }
+  
+  /**
+   * Check whether the string returned by the getScoreString
+   * method has the expected format.
+   */
+  @Test
+  public void testGetScoreString() {
+    ScoreCounter sc = new ScoreCounter();
+    assertEquals("0", sc.getScoreString());
+    
+    sc.updateScore(42);
+    assertEquals("42", sc.getScoreString());
+  }
+  /**
    * Test whether the score stays the same if 0 is added. 
    */
   @Test
