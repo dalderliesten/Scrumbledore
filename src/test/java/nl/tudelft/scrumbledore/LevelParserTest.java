@@ -158,16 +158,11 @@ public class LevelParserTest {
     LevelParser lp = new LevelParser("src/main/resources/test");
     ArrayList<Level> levels = lp.getLevels();
 
-    Level l1 = new Level();
-    Level l2 = new Level();
 
     Platform platform = new Platform(new Vector(0, 0), 
         new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
     Player player = new Player(new Vector(0, 0), 
         new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
-   
-    l1.addElement(platform);   
-    l2.addElement(player);
     
     // Check whether two test levels are available
     assertEquals(2, levels.size());
