@@ -43,7 +43,7 @@ public class ScoreCounter {
    * @return The current score as a string.
    */
   public String getScoreString() {
-    return new Integer(score).toString();
+    return Integer.toString(score);
   }
 
   /**
