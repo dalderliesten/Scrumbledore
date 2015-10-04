@@ -13,6 +13,8 @@ import org.junit.Test;
  * 
  * @author Niels Warnars
  */
+@SuppressWarnings({ "PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyMethods",
+    "PMD.TooManyStaticImports" })
 public class CollisionsLevelModifierTest {
   private KineticsLevelModifier klm;
   private ScoreCounter sc;

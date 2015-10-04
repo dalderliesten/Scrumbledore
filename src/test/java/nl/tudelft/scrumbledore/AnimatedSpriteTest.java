@@ -33,6 +33,7 @@ public class AnimatedSpriteTest {
    * @param expectedFrame
    *          The ID of the expected frame to be retrieved given the interval and steps.
    */
+  @SuppressWarnings("PMD.AvoidDuplicateLiterals")
   public AnimatedSpriteTest(double interval, double steps, String expectedFrame) {
     this.steps = steps;
     this.expectedFrame = expectedFrame;
