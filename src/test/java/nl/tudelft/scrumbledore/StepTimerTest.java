@@ -19,6 +19,7 @@ import static org.mockito.Mockito.anyDouble;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings({"PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyStaticImports"})
 public class StepTimerTest {
 
   /**
