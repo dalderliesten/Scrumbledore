@@ -29,7 +29,7 @@ public class BubbleActionsLevelModifier implements LevelModifier {
     for (Bubble bub : bubbles) {
       if (bub.getLifetime() <= 0) {
         if (bub.hasNPC()) {
-          enemies.add(new NPC(bub.getPosition().clone(), 
+          enemies.add(new NPC(bub.getPosition().clone(),
               new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
           enemyBubbles.remove(bub);
         }
@@ -47,24 +47,10 @@ public class BubbleActionsLevelModifier implements LevelModifier {
           bub.getSpeed().setX(Constants.BUBBLE_SPEED);
         }
 
-        warp(bub);
-        
         bub.clearActions();
       }
     }
 
-  }
-
-  /**
-   * When a Bubble leaves the level from the top, it should warp to the bottom of the level.
-   * 
-   * @param bubble
-   *          The Bubble to be warped.
-   */
-  private void warp(Bubble bubble) {
-    if (bubble.posY() <= -bubble.height() / 2) {
-      bubble.getPosition().setY(Constants.LEVELY + bubble.height() / 2);
-    }
   }
 
 }
