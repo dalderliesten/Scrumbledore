@@ -116,13 +116,13 @@ public final class Constants {
   // References to images utilized for the game display within the GUI.
   public static final String RESOURCES_DIR = "src/main/resources/";
   public static final String SPRITES_DIR = "images/sprites/";
-  public static final String USERWORKS_DIR = "";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
 
   // Reference to the location directory for the log file handling.
-  public static final String LOGGER_DIR = "logging/";
+  public static final String LOGGER_DIR = System.getProperty("user.dir")
+      + System.getProperty("file.separator") + "logger" + System.getProperty("file.separator");
 
   // Keymapping reference location.
   public static final List<Map<KeyCode, PlayerAction>> KEY_MAPPING = createKeyMapping();
