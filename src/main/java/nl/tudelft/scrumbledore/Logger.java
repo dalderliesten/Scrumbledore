@@ -26,7 +26,6 @@ public final class Logger {
    * instantiated.
    */
   private Logger() {
-
   }
 
   /**
@@ -35,20 +34,20 @@ public final class Logger {
   @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
     loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
-    
+
     try {
       if (!loggingDir.exists()) {
         boolean result = loggingDir.mkdir();
-        
+
         // Throw an IOException if the logging directory could not be made.
         if (!result) {
-            throw new IOException();
+          throw new IOException();
         }
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-    
+
     try {
       // Fetching the current date for the creation of the file and parsing it to allow for simple
       // formatting.
@@ -58,8 +57,8 @@ public final class Logger {
       String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
       loggingFile = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR + desiredFileName);
 
-      BufferedWriter buffWriter = new BufferedWriter(
-          new OutputStreamWriter(new FileOutputStream(loggingFile), "UTF-8"));
+      BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+          loggingFile), "UTF-8"));
       buffWriter.write("--------------------SCRUMBLEDORE LOGGING FILE");
 
       // Closing the stream as both an optimization and as a bug removing technique, as closing it
@@ -81,8 +80,8 @@ public final class Logger {
   public static void log(String toLog) {
     if (started) {
       try {
-        BufferedWriter buffWriter = new BufferedWriter(
-            new OutputStreamWriter(new FileOutputStream(loggingFile, true), "UTF-8"));
+        BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+            loggingFile, true), "UTF-8"));
 
         // Adds a new line to ensure that each log item takes up a new line.
         buffWriter.newLine();
