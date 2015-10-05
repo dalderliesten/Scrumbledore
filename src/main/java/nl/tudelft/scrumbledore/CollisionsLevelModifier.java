@@ -66,7 +66,7 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.collidingFromTop() && fruit.vSpeed() > 0) {
             kinetics.stopVertically(fruit);
             kinetics.snapTop(fruit, platform);
-            fruit.setIsPickable(true);
+            fruit.setPickable(true);
           }
         }
       }
@@ -246,8 +246,8 @@ public class CollisionsLevelModifier implements LevelModifier {
 
           // If a bubble contains an enemy, drop a fruit.
           if (collision.colliding() && bubble.hasNPC()) {
-            Fruit newFruit = new Fruit(bubble.getPosition().clone(), new Vector(
-                Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            Fruit newFruit = new Fruit(bubble.getPosition().clone(),
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
             fruits.add(newFruit);
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);
