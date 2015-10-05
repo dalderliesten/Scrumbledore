@@ -34,6 +34,7 @@ public final class Logger {
   @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
     loggingDir = new File(Constants.USERWORKS_DIR + Constants.LOGGER_DIR);
+    System.out.println(Constants.USERWORKS_DIR + Constants.LOGGER_DIR);
 
     try {
       if (!loggingDir.exists()) {
