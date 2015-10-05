@@ -37,6 +37,7 @@ public class KineticsLevelModifier implements LevelModifier {
   private void updateFruit(Level level, double d) {
     for (Fruit fruit : level.getFruits()) {
       addSpeed(fruit, d);
+      warpVertically(fruit);
     }
   }
 
