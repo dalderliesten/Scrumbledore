@@ -33,7 +33,7 @@ public final class Logger {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
-    loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
+    loggingDir = new File(Constants.USERWORKS_DIR + Constants.LOGGER_DIR);
 
     try {
       if (!loggingDir.exists()) {
@@ -55,7 +55,7 @@ public final class Logger {
       SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
 
       String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
-      loggingFile = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR + desiredFileName);
+      loggingFile = new File(Constants.USERWORKS_DIR + Constants.LOGGER_DIR + desiredFileName);
 
       BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
           loggingFile), "UTF-8"));
@@ -72,7 +72,7 @@ public final class Logger {
   }
 
   /**
-   * Allows the caller to log the passed string in the current sessions' loging file.
+   * Allows the caller to log the passed string in the current sessions' logging file.
    * 
    * @param toLog
    *          The content that the caller wishes to be logged in the logging file.
