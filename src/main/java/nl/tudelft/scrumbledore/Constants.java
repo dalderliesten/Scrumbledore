@@ -32,6 +32,37 @@ public final class Constants {
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
 
+  // Defining text needed for the buttons at the main menu of the GUI.
+  public static final String SINGLEPLAYERGAME_BUTTON = "Singleplayer Game";
+  public static final String MULTIPLAYERGAME_BUTTON = "Multiplayer Game";
+  public static final String SETTINGS_BUTTON = "Settings";
+  public static final String EXIT_BUTTION = "Exit";
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  // Temp org space TODO remove
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  
   // Defining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score:";
   public static final String HISCORELABEL = "High-Score:";

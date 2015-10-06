@@ -27,7 +27,7 @@ public class UserInterface extends Application {
     gameStage.setWidth(Constants.GUIX);
     gameStage.setResizable(false);
     
-    Mainmenu.mainMenuStart(gameStage);
+    Mainmenu.mainMenuHandle(gameStage);
   }
 
 }
