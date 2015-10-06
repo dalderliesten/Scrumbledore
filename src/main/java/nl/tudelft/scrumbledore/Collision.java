@@ -175,8 +175,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean touchingBottom() {
-    boolean c1 = collider.getTop() >= collidee.getBottom();
-    boolean c2 = collider.getTop() <= (collidee.getBottom() - Constants.COLLISION_PRECISION);
+    boolean c1 = collider.getTop() >= collidee.getBottom() - Constants.COLLISION_PRECISION;
+    boolean c2 = collider.getTop() <= collidee.getBottom();
     return (colliding() && c1 && c2);
   }
 
