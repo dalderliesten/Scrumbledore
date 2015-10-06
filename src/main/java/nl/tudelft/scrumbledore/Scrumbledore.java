@@ -22,14 +22,10 @@ abstract class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
-    // Create the appData folder, which is required to store and fetch essential elements for the
-    // game.
     makeAppData();
 
-    // Create a logger to log all actions in this session.
     Logger.start();
 
-    // Creating a launcher to launch the game and GUI.
     GUI.launch(GUI.class);
   }
 
@@ -44,7 +40,6 @@ abstract class Scrumbledore {
       if (!appDataDir.exists()) {
         boolean result = appDataDir.mkdir();
 
-        // Throw an IOException if the logging directory could not be made.
         if (!result) {
           throw new IOException();
         }

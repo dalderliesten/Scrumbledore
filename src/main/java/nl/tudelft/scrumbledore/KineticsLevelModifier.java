@@ -71,7 +71,6 @@ public class KineticsLevelModifier implements LevelModifier {
       warpVertically(player);
 
       if (Constants.LOGGING_WANTMOVEMENT) {
-        // Logging the movement of the player within the level to the session log.
         Logger.log(
             "Player moved to " + player.getPosition().getX() + ", " + player.getPosition().getY());
       }
@@ -137,7 +136,6 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void addSpeed(LevelElement el, double d) {
-    // Only add speed if an object has been initialized.
     if (el != null) {
       el.getPosition().sum(Vector.scale(el.getSpeed(), d));
     }
@@ -152,7 +150,6 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void removeSpeed(LevelElement el, double d) {
-    // Only add speed if an object has been initialized.
     if (el != null) {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
     }
