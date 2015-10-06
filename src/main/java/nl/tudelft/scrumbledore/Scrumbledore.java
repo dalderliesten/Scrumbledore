@@ -24,7 +24,8 @@ abstract class Scrumbledore {
   public static void main(String[] args) {
     makeAppData();
 
-    Logger.start();
+    // To create the logging directory and session file already.
+    Logger.getInstance();
 
     GUI.launch(GUI.class);
   }

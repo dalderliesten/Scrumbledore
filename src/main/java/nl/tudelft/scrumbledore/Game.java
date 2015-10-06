@@ -149,7 +149,7 @@ public class Game {
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
 
-    Logger.log("--------------------PLAYED DIED");
+    Logger.getInstance().log("--------------------PLAYED DIED");
   }
 
   /**
