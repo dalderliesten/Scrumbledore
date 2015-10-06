@@ -33,26 +33,58 @@ public final class Mainmenu {
   public static void mainMenuHandle(Stage passedStage) {
     gameStage = passedStage;
     contentBox = new VBox();
-    
+
     generateButtons();
-    
+
     currentScene = new Scene(contentBox);
     gameStage.setScene(currentScene);
 
     gameStage.show();
   }
-  
+
   /**
    * Generates the main menu buttons.
    */
   private static void generateButtons() {
     Button singleplayerGameButton = new Button(Constants.SINGLEPLAYERGAME_BUTTON);
-    
-    Button multiplayerGamebutton = new Button(Constants.MULTIPLAYERGAME_BUTTON);
-    
+
+    Button multiplayerGameButton = new Button(Constants.MULTIPLAYERGAME_BUTTON);
+
     Button settingsButton = new Button(Constants.SETTINGS_BUTTON);
-    
+
     Button exitButton = new Button(Constants.EXIT_BUTTION);
+
+    contentBox.getChildren().addAll(singleplayerGameButton, multiplayerGameButton, settingsButton,
+        exitButton);
+  }
+
+  /**
+   * Handling the actions needed for the singleplayer choice.
+   */
+  private static void singleplayerChoice() {
+
+  }
+
+  /**
+   * Handling the actions needed for the multiplayer choice.
+   */
+  private static void multiplayerChoice() {
+
+  }
+
+  /**
+   * Handling the actions needed for the settings choice.
+   */
+  private static void settingsButton() {
+
+  }
+
+  /**
+   * Handling the actions needed for the exit game choice.
+   */
+  private static void exitButton() {
+    // Quitting the game with a value of zero, indicating everything worked as intended.
+    System.exit(0);
   }
 
 }
