@@ -107,19 +107,19 @@ public final class Constants {
   // Maximum number of Bubbles per second that can be fired
   public static final double RAPID_FIRE_LIMIT = 5;
 
-  // Location of the resource strings, including directories and styling/sprite locations.
+  // Location of the directories for the program.
   public static final String LEVELS_DIR = "src/main/resources/";
   public static final String RESOURCES_DIR = "src/main/resources/";
-  public static final String APPDATA_DIR = "appdata";
+  public static final String APPDATA_DIR = System.getProperty("user.dir")
+      + System.getProperty("file.separator") + "appdata" + System.getProperty("file.separator");
+
+  // Location of the directories for resources, such as sprites and CSS styling.
   public static final String SPRITES_DIR = "images/sprites/";
   public static final String CSS_LOCATION = "css/style.css";
+  public static final String LOGGER_DIR = "";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
-
-  // Reference to the location directory for the log file handling.
-  public static final String LOGGER_DIR = System.getProperty("user.dir")
-      + System.getProperty("file.separator") + "logger" + System.getProperty("file.separator");
 
   // Keymapping reference location.
   public static final List<Map<KeyCode, PlayerAction>> KEY_MAPPING = createKeyMapping();

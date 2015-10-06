@@ -1,5 +1,8 @@
 package nl.tudelft.scrumbledore;
 
+import java.io.File;
+import java.io.IOException;
+
 import nl.tudelft.scrumbledore.gui.GUI;
 
 /**
@@ -33,7 +36,20 @@ abstract class Scrumbledore {
    * keybinding saving.
    */
   private static void makeAppData() {
+    File appDataDir = new File(Constants.APPDATA_DIR);
 
+    try {
+      if (!appDataDir.exists()) {
+        boolean result = appDataDir.mkdir();
+
+        // Throw an IOException if the logging directory could not be made.
+        if (!result) {
+          throw new IOException();
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }
