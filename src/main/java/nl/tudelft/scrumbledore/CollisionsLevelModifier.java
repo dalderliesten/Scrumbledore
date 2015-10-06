@@ -95,30 +95,36 @@ public class CollisionsLevelModifier implements LevelModifier {
     ArrayList<Player> players = level.getPlayers();
 
     for (Player player : players) {
+      // To accelerate the second iteration over the platforms
+      ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+          candidates.add(platform);
           Collision collision = new Collision(player, platform, delta);
 
           if (collision.collidingFromTop() && player.vSpeed() > 0) {
             kinetics.stopVertically(player);
             kinetics.snapTop(player, platform);
           }
+        }
+      }
+      // Since vertical collision detection has to be done before horizontal
+      for (Platform platform : candidates) {
+        Collision collision = new Collision(player, platform, delta);
 
-          // To prevent horizontal collisions with passable platforms
-          if (!platform.isPassable()) {
+        if (!platform.isPassable()) {
 
-            if (collision.collidingFromBottom() && player.vSpeed() < 0) {
-              kinetics.stopVertically(player);
-              kinetics.snapBottom(player, platform);
-            }
+          if (collision.collidingFromBottom() && player.vSpeed() < 0) {
+            kinetics.stopVertically(player);
+            kinetics.snapBottom(player, platform);
+          }
 
-            if (collision.collidingFromLeft() && player.hSpeed() > 0) {
-              kinetics.stopHorizontally(player);
-            }
+          if (collision.collidingFromLeft() && player.hSpeed() > 0) {
+            kinetics.stopHorizontally(player);
+          }
 
-            if (collision.collidingFromRight() && player.hSpeed() < 0) {
-              kinetics.stopHorizontally(player);
-            }
+          if (collision.collidingFromRight() && player.hSpeed() < 0) {
+            kinetics.stopHorizontally(player);
           }
         }
       }
@@ -136,29 +142,32 @@ public class CollisionsLevelModifier implements LevelModifier {
   public void detectNPCPlatform(Level level, double delta) {
 
     for (NPC npc : level.getNPCs()) {
+      // To accelerate the second iteration over the platforms
+      ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(npc, Constants.COLLISION_RADIUS)) {
+          candidates.add(platform);
           Collision collision = new Collision(npc, platform, delta);
 
           if (collision.collidingFromTop() && npc.vSpeed() > 0) {
             kinetics.stopVertically(npc);
             kinetics.snapTop(npc, platform);
           }
+        }
+      }
+      // Since vertical collision detection has to be done before horizontal
+      for (Platform platform : candidates) {
+        Collision collision = new Collision(npc, platform, delta);
 
-          if (!platform.isPassable()) {
+        if (!platform.isPassable()) {
+          if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
+            kinetics.stopHorizontally(npc);
+            npc.addAction(NPCAction.MoveLeft);
+          }
 
-            if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
-              kinetics.stopHorizontally(npc);
-              kinetics.snapLeft(npc, platform);
-              npc.addAction(NPCAction.MoveLeft);
-            }
-
-            if (collision.collidingFromRight() && npc.hSpeed() < 0) {
-              kinetics.stopHorizontally(npc);
-              kinetics.snapRight(npc, platform);
-              npc.addAction(NPCAction.MoveRight);
-            }
-
+          if (collision.collidingFromRight() && npc.hSpeed() < 0) {
+            kinetics.stopHorizontally(npc);
+            npc.addAction(NPCAction.MoveRight);
           }
         }
       }
