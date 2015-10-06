@@ -201,7 +201,7 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The Level Element to be warped.
    */
   public void warpHorizontally(LevelElement element) {
-    double offset = -16;
+    double offset = -element.width() / 2;
     if (element.posX() < -offset) {
       element.getPosition().setX(Constants.LEVELX + offset);
     } else if (element.posX() > Constants.LEVELX + offset) {

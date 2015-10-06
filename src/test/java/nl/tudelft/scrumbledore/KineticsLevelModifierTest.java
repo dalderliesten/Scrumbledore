@@ -172,7 +172,7 @@ public class KineticsLevelModifierTest {
     LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
     el.getPosition().setX(Constants.LEVELX);
     kinetics.warpHorizontally(el);
-    assertEquals(1, el.posX(), Constants.DOUBLE_PRECISION);
+    assertEquals(16, el.posX(), Constants.DOUBLE_PRECISION);
     assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
   }
 
@@ -185,7 +185,7 @@ public class KineticsLevelModifierTest {
     LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
     el.getPosition().setX(0);
     kinetics.warpHorizontally(el);
-    assertEquals(Constants.LEVELX - 1, el.posX(), Constants.DOUBLE_PRECISION);
+    assertEquals(Constants.LEVELX - 16, el.posX(), Constants.DOUBLE_PRECISION);
     assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
   }
 
