@@ -27,7 +27,7 @@ public final class Mainmenu {
   }
 
   /**
-   * The constructor handles the creation of the main menu scene, and ensures the scene handling is
+   * The handler handles the creation of the main menu scene, and ensures the scene handling is
    * done within the current stage.
    * 
    * @param passedStage
