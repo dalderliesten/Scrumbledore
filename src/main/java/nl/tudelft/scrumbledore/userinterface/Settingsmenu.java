@@ -36,6 +36,9 @@ public final class Settingsmenu {
     currentScene = new Scene(contentBox);
     gameStage.setScene(currentScene);
 
+    // Adding the style to the settings scene.
+    currentScene.getStylesheets().add(Constants.CSS_MAINMENU);
+
     gameStage.show();
   }
 
