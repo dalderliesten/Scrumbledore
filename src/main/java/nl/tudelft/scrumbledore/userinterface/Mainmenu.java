@@ -41,6 +41,8 @@ public final class Mainmenu {
 
     currentScene = new Scene(contentBox);
     gameStage.setScene(currentScene);
+    
+    currentScene.getStylesheets().add(Constants.CSS_LOCATION);
 
     gameStage.show();
   }
