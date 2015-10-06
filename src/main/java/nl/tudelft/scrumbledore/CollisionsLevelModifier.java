@@ -57,6 +57,19 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectFruitPlatform(Level level, double delta) {
     for (Fruit fruit : level.getFruits()) {
+      // To prevent the player from instantaneously picking up fruit.
+      boolean pickable = true;
+      for (Player player : level.getPlayers()) {
+        Collision playerCollision = new Collision(fruit, player, delta);
+        if (playerCollision.colliding()) {
+          pickable = false;
+        }
+      }
+      // Since becoming pickable can't be undone.
+      if (pickable) {
+        fruit.setPickable(pickable);
+      }
+
       for (Platform platform : level.getPlatforms()) {
         // Check if platform is in collision range.
         if (platform.inBoxRangeOf(fruit, Constants.COLLISION_RADIUS)) {
@@ -66,7 +79,6 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.collidingFromTop() && fruit.vSpeed() > 0) {
             kinetics.stopVertically(fruit);
             kinetics.snapTop(fruit, platform);
-            fruit.setIsPickable(true);
           }
         }
       }
@@ -246,8 +258,8 @@ public class CollisionsLevelModifier implements LevelModifier {
 
           // If a bubble contains an enemy, drop a fruit.
           if (collision.colliding() && bubble.hasNPC()) {
-            Fruit newFruit = new Fruit(bubble.getPosition().clone(), new Vector(
-                Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            Fruit newFruit = new Fruit(bubble.getPosition().clone(),
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
             fruits.add(newFruit);
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);
