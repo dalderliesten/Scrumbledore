@@ -26,11 +26,8 @@ public abstract class LevelElement {
   public LevelElement(Vector position, Vector size) {
     this.position = position;
     this.size = size;
-    // Initial speed is 0.
     this.speed = new Vector(0, 0);
-    // Initial friction is 0.
     this.friction = new Vector(0, 0);
-    // By default not affected by Gravity.
     this.gravity = false;
   }
 

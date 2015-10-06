@@ -25,7 +25,6 @@ abstract class Scrumbledore {
     // game.
     makeAppDataDir();
 
-    // Create a logger to log all actions in this session.
     Logger.start();
 
     // Creating a launcher to launch the game and GUI.
@@ -43,7 +42,6 @@ abstract class Scrumbledore {
       if (!appDataDir.exists()) {
         boolean result = appDataDir.mkdir();
 
-        // Throw an IOException if the logging directory could not be made.
         if (!result) {
           throw new IOException();
         }

@@ -108,14 +108,12 @@ public class LevelParser {
       for (int idx = 0; idx < line.length(); idx++) {
         char ch = line.charAt(idx);
 
-        // Add an element to a level if it's not
-        // a blank space.
+        // Since blank spaces correspond to no element at the given position.
         if (ch != ' ') {
           tmpLevel.addElement(getElementFromChar(ch, idx, lineNumber));
         }
       }
 
-      // Increment the current line
       lineNumber++;
     } while (lineScanner.hasNextLine());
     lineScanner.close();
@@ -139,9 +137,9 @@ public class LevelParser {
     Vector blockPos = getBlockPosition(i, j);
     Vector size = new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE);
     switch (ch) {
-    case '#': // Normal platform
+    case '#':
       return new Platform(blockPos, size);
-    case '_': // Passable platform
+    case '_':
       Platform platform = new Platform(blockPos, size);
       platform.setPassable(true);
       return platform;

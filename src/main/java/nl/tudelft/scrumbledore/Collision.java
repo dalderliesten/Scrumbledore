@@ -28,7 +28,7 @@ public class Collision {
     this.collider = collider;
     this.collidee = collidee;
     this.delta = delta;
-    
+
     this.kinetics = new KineticsLevelModifier();
   }
 
@@ -38,8 +38,8 @@ public class Collision {
    * @return A boolean.
    */
   public boolean colliding() {
-    // When at least one vertical and one horizontal edge of the collider are inside the collidee,
-    // then collider and collidee are colliding.
+    // Since colliding can be defined as having at least one vertical and one horizontal edge
+    // of the collider inside the boundary box of the collidee.
     return ((collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight()));
   }
 
@@ -52,9 +52,8 @@ public class Collision {
    */
   public boolean collidingFromTop() {
     if (!touchingLeft() && !touchingRight()) {
-      // If the collider is about to collide, anticipate.
       if (collider.getBottom() < collidee.getTop() && collider.getSpeed().getY() > 0) {
-        // Anticipate movement
+        // To anticipate movement in the next step
         kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
         kinetics.removeSpeed(collider, delta);
@@ -63,7 +62,6 @@ public class Collision {
           return true;
         }
       }
-      // Otherwise, check whether the collider is touching the collidee.
       return touchingTop();
     }
     return false;
@@ -78,9 +76,8 @@ public class Collision {
    */
   public boolean collidingFromBottom() {
     if (!touchingLeft() && !touchingRight()) {
-      // If the collider is about to collide, anticipate.
       if (collider.getTop() > collidee.getBottom() && collider.getSpeed().getY() < 0) {
-        // Anticipate movement
+        // To anticipate movement in the next step
         kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
         kinetics.removeSpeed(collider, delta);
@@ -89,7 +86,6 @@ public class Collision {
           return true;
         }
       }
-      // Otherwise, check whether the collider is touching the collidee.
       return touchingBottom();
     }
     return false;
@@ -104,9 +100,8 @@ public class Collision {
    */
   public boolean collidingFromLeft() {
     if (!touchingTop() && !touchingBottom()) {
-      // If the collider is about to collide, anticipate.
       if (collider.getRight() < collidee.getLeft() && collider.getSpeed().getX() > 0) {
-        // Anticipate movement
+        // To anticipate movement in the next step
         kinetics.addSpeed(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
         kinetics.removeSpeed(collider, delta);
@@ -115,7 +110,6 @@ public class Collision {
           return true;
         }
       }
-      // Otherwise, check whether the collider is touching the collidee.
       return touchingLeft();
     }
     return false;
@@ -141,7 +135,6 @@ public class Collision {
           return true;
         }
       }
-      // Otherwise, check whether the collider is touching the collidee.
       return touchingRight();
     }
     return false;
