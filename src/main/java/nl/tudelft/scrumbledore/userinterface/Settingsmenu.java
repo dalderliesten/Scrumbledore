@@ -1,7 +1,10 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import nl.tudelft.scrumbledore.Constants;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
@@ -36,10 +39,12 @@ public final class Settingsmenu {
     setupSettings();
 
     generateTitle();
-    
+    loggingOptions();
+    exitButtonHandling();
+
     currentScene = new Scene(currentBox);
     settingsStage.setScene(currentScene);
-    
+
     currentScene.getStylesheets().add(Constants.CSS_SETTINGS);
 
     settingsStage.show();
@@ -61,11 +66,45 @@ public final class Settingsmenu {
    */
   private static void generateTitle() {
     Label titleLabel = new Label(Constants.SETTINGS_LABEL);
-    
+
     // Setting a unique CSS ID for correct themeing.
     titleLabel.setId("settingstitle");
-    
+
     currentBox.getChildren().add(titleLabel);
+  }
+
+  /**
+   * Adds the logging selection options to the settings menu.
+   */
+  private static void loggingOptions() {
+
+  }
+
+  /**
+   * Handles the creation and the return from the settings menu.
+   */
+  private static void exitButtonHandling() {
+    Button exitButton = new Button(Constants.SETTINGSEXIT_BUTTION);
+    mapExitFunction(exitButton);
+
+    currentBox.getChildren().add(exitButton);
+  }
+
+  /**
+   * Handling the actions needed for the exit game choice.
+   * 
+   * @param passedButton
+   *          The button that has been passed that requires exit assigning.
+   */
+  private static void mapExitFunction(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        // Quitting the game with a value of zero, indicating everything worked as intended.
+        System.exit(0);
+      }
+
+    });
   }
 
 }
