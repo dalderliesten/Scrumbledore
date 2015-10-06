@@ -260,26 +260,34 @@ public class GUI extends Application {
   private void renderPlayer(GraphicsContext painter) {
     ArrayList<Player> players = game.getCurrentLevel().getPlayers();
 
+    String color = "";
+    String[] colors = { "green", "blue" };
+    int index = 0;
+
     for (Player player : players) {
+      if (index < colors.length) {
+        color = colors[index++];
+      }
+
       double steps = game.getSteps();
 
       boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
       boolean isFiring = player.isFiring();
 
-      String spr = "player-move-left";
+      String spr = "move-left";
       if (isFiring && toRight) {
-        spr = "player-shoot-right";
+        spr = "shoot-right";
       } else if (isFiring) {
-        spr = "player-shoot-left";
+        spr = "shoot-left";
       } else if (toRight) {
-        spr = "player-move-right";
+        spr = "move-right";
       }
 
       if (player.getSpeed().getX() == 0 && !isFiring) {
         steps = 0;
       }
 
-      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
       painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
     }
   }
@@ -303,8 +311,8 @@ public class GUI extends Application {
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
       }
-      painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
-          .getPosition().getY());
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -330,8 +338,8 @@ public class GUI extends Application {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      painter
-          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -365,8 +373,8 @@ public class GUI extends Application {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      painter
-          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
