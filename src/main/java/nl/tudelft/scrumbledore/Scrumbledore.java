@@ -22,6 +22,8 @@ abstract class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
+    // Create the appData folder, which is required to store and fetch essential elements for the
+    // game.
     makeAppData();
 
     // Create a logger to log all actions in this session.

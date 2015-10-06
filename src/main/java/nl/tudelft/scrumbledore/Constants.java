@@ -116,7 +116,7 @@ public final class Constants {
   // Location of the directories for resources, such as sprites and CSS styling.
   public static final String SPRITES_DIR = "images/sprites/";
   public static final String CSS_LOCATION = "css/style.css";
-  public static final String LOGGER_DIR = "";
+  public static final String LOGGER_DIR =  "logger" + System.getProperty("file.separator");
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;

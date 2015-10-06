@@ -34,7 +34,7 @@ public final class Logger {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
-    loggingDir = new File(Constants.LOGGER_DIR);
+    loggingDir = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR);
 
     try {
       if (!loggingDir.exists()) {
@@ -56,7 +56,7 @@ public final class Logger {
       SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
 
       String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
-      loggingFile = new File(Constants.LOGGER_DIR + desiredFileName);
+      loggingFile = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR + desiredFileName);
 
       BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
           loggingFile), "UTF-8"));
