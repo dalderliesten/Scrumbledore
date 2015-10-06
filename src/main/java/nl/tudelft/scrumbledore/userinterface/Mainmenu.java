@@ -1,11 +1,11 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Logger;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
+import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
@@ -35,16 +35,29 @@ public final class Mainmenu {
    */
   public static void mainMenuHandle(Stage passedStage) {
     gameStage = passedStage;
-    contentBox = new VBox();
+    contentBox = new VBox(Constants.MAINMENU_PADDING);
+
+    generateLogo();
 
     generateButtons();
 
     currentScene = new Scene(contentBox);
     gameStage.setScene(currentScene);
-    
-    currentScene.getStylesheets().add(Constants.CSS_LOCATION);
+
+    // Adding the style to the main menu scene.
+    currentScene.getStylesheets().add(Constants.CSS_MAINMENU);
 
     gameStage.show();
+  }
+
+  /**
+   * Generates the logo at the top of the main menu.
+   */
+  private static void generateLogo() {
+    Label logo = new Label(Constants.SCRUMBLEDORE_TEXT);
+    
+    // Adding the label to the display box.
+    contentBox.getChildren().add(logo);
   }
 
   /**
@@ -63,6 +76,7 @@ public final class Mainmenu {
     Button exitButton = new Button(Constants.EXIT_BUTTION);
     exitButtonChoice(exitButton);
 
+    // Adding all the buttons and their functions to the display box.
     contentBox.getChildren().addAll(singleplayerGameButton, multiplayerGameButton, settingsButton,
         exitButton);
   }

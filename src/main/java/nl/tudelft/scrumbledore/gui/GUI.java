@@ -207,7 +207,7 @@ public class GUI extends Application {
     stage.setScene(scene);
 
     // Adding the desired stylesheet to the scene for visual modifications.
-    scene.getStylesheets().add(Constants.CSS_LOCATION);
+    scene.getStylesheets().add(Constants.CSS_GENERAL);
   }
 
   /**
@@ -750,7 +750,7 @@ public class GUI extends Application {
     settingsStage.setScene(settingsScene);
 
     // Actual display of the settings stage and associated styling.
-    settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
+    settingsScene.getStylesheets().add(Constants.CSS_GENERAL);
     settingsStage.show();
   }
 

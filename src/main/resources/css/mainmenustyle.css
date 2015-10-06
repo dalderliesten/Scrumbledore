@@ -1,0 +1,28 @@
+/*
+ * Style for the main menu.
+ * Scrumbledore, a faithful recreation of Bubble Bobble.
+ * 
+ * @author David Alderliesten.
+ */
+ 
+ .root, .button {
+ 	-fx-background-color: #616161;
+ }
+ 
+ .label {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-font-weight: bold;
+ 	-fx-font-size: 55.0px;
+ }
+ 
+ .button {
+ 	-fx-font-size: 25.0px;
+ 	 -fx-border-color: #616161;
+ 	-fx-border-style: solid;
+ 	-fx-border-width: 5;
+ }
+ 
+ .button:hover {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-border-color: #32b8f1;
+ }

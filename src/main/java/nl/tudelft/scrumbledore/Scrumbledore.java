@@ -2,8 +2,6 @@ package nl.tudelft.scrumbledore;
 
 import java.io.File;
 import java.io.IOException;
-
-import nl.tudelft.scrumbledore.gui.GUI;
 import nl.tudelft.scrumbledore.userinterface.UserInterface;
 
 /**

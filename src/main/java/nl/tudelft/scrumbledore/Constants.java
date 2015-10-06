@@ -32,11 +32,15 @@ public final class Constants {
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
 
-  // Defining text needed for the buttons at the main menu of the GUI.
+  // Defining text needed for the labels and buttons at the main menu of the GUI.
+  public static final String SCRUMBLEDORE_TEXT = "SCRUMBLEDORE";
   public static final String SINGLEPLAYERGAME_BUTTON = "Singleplayer Game";
   public static final String MULTIPLAYERGAME_BUTTON = "Multiplayer Game";
   public static final String SETTINGS_BUTTON = "Settings";
   public static final String EXIT_BUTTION = "Exit";
+  
+  // Defining constants needed for the main menu interface items.
+  public static final int MAINMENU_PADDING = 30;
 
   
   
@@ -153,7 +157,8 @@ public final class Constants {
   public static final String LOGGER_DIR = "logger" + System.getProperty("file.separator");
 
   // Location of the css file. Kept as such due to bugs with FX.
-  public static final String CSS_LOCATION = "css/style.css";
+  public static final String CSS_GENERAL = "css/style.css";
+  public static final String CSS_MAINMENU = "css/mainmenustyle.css";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
