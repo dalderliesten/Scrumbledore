@@ -1,6 +1,9 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Logger;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.layout.VBox;
@@ -47,12 +50,16 @@ public final class Mainmenu {
    */
   private static void generateButtons() {
     Button singleplayerGameButton = new Button(Constants.SINGLEPLAYERGAME_BUTTON);
+    singleplayerChoice(singleplayerGameButton);
 
     Button multiplayerGameButton = new Button(Constants.MULTIPLAYERGAME_BUTTON);
+    multiplayerChoice(multiplayerGameButton);
 
     Button settingsButton = new Button(Constants.SETTINGS_BUTTON);
+    settingsChoice(settingsButton);
 
     Button exitButton = new Button(Constants.EXIT_BUTTION);
+    exitButtonChoice(exitButton);
 
     contentBox.getChildren().addAll(singleplayerGameButton, multiplayerGameButton, settingsButton,
         exitButton);
@@ -60,31 +67,49 @@ public final class Mainmenu {
 
   /**
    * Handling the actions needed for the singleplayer choice.
+   * 
+   * @param passedButton
+   *          The button that has been passed that requires singleplayer game launch assigning.
    */
-  private static void singleplayerChoice() {
+  private static void singleplayerChoice(Button passedButton) {
 
   }
 
   /**
    * Handling the actions needed for the multiplayer choice.
+   * 
+   * @param passedButton
+   *          The button that has been passed that requires multiplayer game launch assigning.
    */
-  private static void multiplayerChoice() {
+  private static void multiplayerChoice(Button passedButton) {
 
   }
 
   /**
    * Handling the actions needed for the settings choice.
+   * 
+   * @param passedButton
+   *          The button that has been passed that requires settings assigning.
    */
-  private static void settingsButton() {
+  private static void settingsChoice(Button passedButton) {
 
   }
 
   /**
    * Handling the actions needed for the exit game choice.
+   * 
+   * @param passedButton
+   *          The button that has been passed that requires exit assigning.
    */
-  private static void exitButton() {
-    // Quitting the game with a value of zero, indicating everything worked as intended.
-    System.exit(0);
+  private static void exitButtonChoice(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        // Quitting the game with a value of zero, indicating everything worked as intended.
+        System.exit(0);
+      }
+
+    });
   }
 
 }
