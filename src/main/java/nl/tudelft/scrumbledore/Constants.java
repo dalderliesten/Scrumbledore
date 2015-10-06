@@ -107,15 +107,12 @@ public final class Constants {
   // Maximum number of Bubbles per second that can be fired
   public static final double RAPID_FIRE_LIMIT = 5;
 
-  // Location of the resource string.
+  // Location of the resource strings, including directories and styling/sprite locations.
   public static final String LEVELS_DIR = "src/main/resources/";
-
-  // Location of the CSS resource for the GUI styling.
-  public static final String CSS_LOCATION = "css/style.css";
-
-  // References to images utilized for the game display within the GUI.
   public static final String RESOURCES_DIR = "src/main/resources/";
+  public static final String APPDATA_DIR = "appdata";
   public static final String SPRITES_DIR = "images/sprites/";
+  public static final String CSS_LOCATION = "css/style.css";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;

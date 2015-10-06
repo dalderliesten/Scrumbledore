@@ -19,11 +19,21 @@ abstract class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
+    makeAppData();
+
     // Create a logger to log all actions in this session.
     Logger.start();
 
     // Creating a launcher to launch the game and GUI.
     GUI.launch(GUI.class);
+  }
+
+  /**
+   * Creates the appData folder, which is used by multiple classes for issues such as logging and
+   * keybinding saving.
+   */
+  private static void makeAppData() {
+
   }
 
 }
