@@ -77,7 +77,7 @@ public final class Settingsmenu {
    * Adds the logging selection options to the settings menu.
    */
   private static void loggingOptions() {
-    //TODO
+    // TODO
   }
 
   /**
@@ -100,8 +100,7 @@ public final class Settingsmenu {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        // Quitting the game with a value of zero, indicating everything worked as intended.
-        System.exit(0);
+        settingsStage.close();
       }
 
     });
