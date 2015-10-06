@@ -38,6 +38,7 @@ public class KineticsLevelModifier implements LevelModifier {
     for (Fruit fruit : level.getFruits()) {
       addSpeed(fruit, d);
       warpVertically(fruit);
+      warpHorizontally(fruit);
     }
   }
 
@@ -53,6 +54,7 @@ public class KineticsLevelModifier implements LevelModifier {
     for (NPC npc : level.getNPCs()) {
       addSpeed(npc, d);
       warpVertically(npc);
+      warpHorizontally(npc);
     }
   }
 
@@ -69,6 +71,7 @@ public class KineticsLevelModifier implements LevelModifier {
     for (Player player : players) {
       addSpeed(player, d);
       warpVertically(player);
+      warpHorizontally(player);
 
       if (Constants.LOGGING_WANTMOVEMENT) {
         Logger.getInstance().log(
@@ -96,6 +99,7 @@ public class KineticsLevelModifier implements LevelModifier {
       addSpeed(bubble, d);
       applyFriction(bubble, d);
       warpVertically(bubble);
+      warpHorizontally(bubble);
     }
   }
 
@@ -197,11 +201,11 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The Level Element to be warped.
    */
   public void warpHorizontally(LevelElement element) {
-    double offset = element.width() / 2;
-    if (element.posX() < -offset) {
-      element.getPosition().setX(Constants.LEVELX + offset);
-    } else if (element.posX() > Constants.LEVELX + offset) {
-      element.getPosition().setX(-offset);
+    double offset = 0;
+    if (element.posX() <= -offset) {
+      element.getPosition().setX(Constants.LEVELX - 1);
+    } else if (element.posX() >= Constants.LEVELX + offset) {
+      element.getPosition().setX(1);
     }
   }
 
