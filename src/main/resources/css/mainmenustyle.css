@@ -13,13 +13,16 @@
  	-fx-text-fill: #32b8f1;
  	-fx-font-weight: bold;
  	-fx-font-size: 55.0px;
+ 	-fx-padding: 0 0 0 15;
  }
  
  .button {
+ 	-fx-text-fill: #cccccc;
  	-fx-font-size: 25.0px;
  	 -fx-border-color: #616161;
  	-fx-border-style: solid;
- 	-fx-border-width: 5;
+ 	-fx-border-width: 0 0 0 5;
+ 	-fx-padding: 0 0 0 10;
  }
  
  .button:hover {
