@@ -121,10 +121,12 @@ public class CollisionsLevelModifier implements LevelModifier {
 
           if (collision.collidingFromLeft() && player.hSpeed() > 0) {
             kinetics.stopHorizontally(player);
+            kinetics.snapLeft(player, platform);
           }
 
           if (collision.collidingFromRight() && player.hSpeed() < 0) {
             kinetics.stopHorizontally(player);
+            kinetics.snapRight(player, platform);
           }
         }
       }
@@ -162,11 +164,13 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (!platform.isPassable()) {
           if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
             kinetics.stopHorizontally(npc);
+            kinetics.snapLeft(npc, platform);
             npc.addAction(NPCAction.MoveLeft);
           }
 
           if (collision.collidingFromRight() && npc.hSpeed() < 0) {
             kinetics.stopHorizontally(npc);
+            kinetics.snapRight(npc, platform);
             npc.addAction(NPCAction.MoveRight);
           }
         }
