@@ -1,5 +1,8 @@
 package nl.tudelft.scrumbledore.userinterface;
 
+import nl.tudelft.scrumbledore.Constants;
+import javafx.scene.Scene;
+import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 
 /**
@@ -8,6 +11,9 @@ import javafx.stage.Stage;
  * @author David Alderliesten
  */
 public final class Settingsmenu {
+  private static Stage gameStage;
+  private static Scene currentScene;
+  private static VBox contentBox;
 
   /**
    * Constructor is set to private, as only one instance of the settings menu should exist at any
@@ -24,7 +30,13 @@ public final class Settingsmenu {
    *          The stage that is active that has been passed.
    */
   public static void settingsHandle(Stage passedStage) {
+    gameStage = passedStage;
+    contentBox = new VBox(Constants.SETTINGS_PADDING);
 
+    currentScene = new Scene(contentBox);
+    gameStage.setScene(currentScene);
+
+    gameStage.show();
   }
 
 }

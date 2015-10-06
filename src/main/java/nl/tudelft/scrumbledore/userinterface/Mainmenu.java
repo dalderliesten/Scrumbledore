@@ -108,7 +108,13 @@ public final class Mainmenu {
    *          The button that has been passed that requires settings assigning.
    */
   private static void settingsChoice(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
+      public void handle(ActionEvent arg0) {
+        Settingsmenu.settingsHandle(gameStage);
+      }
+
+    });
   }
 
   /**

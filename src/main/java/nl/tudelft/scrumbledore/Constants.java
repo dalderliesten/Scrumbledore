@@ -39,8 +39,10 @@ public final class Constants {
   public static final String SETTINGS_BUTTON = "Settings";
   public static final String EXIT_BUTTION = "Exit";
   
-  // Defining constants needed for the main menu interface items.
+  // Defining constants needed for the user interface items.
   public static final int MAINMENU_PADDING = 30;
+  public static final int SETTINGS_PADDING = 20;
+  
 
   
   
