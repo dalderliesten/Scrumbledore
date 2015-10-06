@@ -27,8 +27,8 @@ public final class Mainmenu {
   }
 
   /**
-   * The handler handles the creation of the main menu scene, and ensures the scene handling is
-   * done within the current stage.
+   * The handler handles the creation of the main menu scene, and ensures the scene handling is done
+   * within the current stage.
    * 
    * @param passedStage
    *          The stage that is active that has been passed.
@@ -55,7 +55,7 @@ public final class Mainmenu {
    */
   private static void generateLogo() {
     Label logo = new Label(Constants.SCRUMBLEDORE_TEXT);
-    
+
     // Adding the label to the display box.
     contentBox.getChildren().add(logo);
   }
@@ -111,7 +111,7 @@ public final class Mainmenu {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        Settingsmenu.settingsHandle(gameStage);
+        Settingsmenu.settingsHandle();
       }
 
     });
