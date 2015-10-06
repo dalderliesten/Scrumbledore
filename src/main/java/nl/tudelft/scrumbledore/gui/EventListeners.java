@@ -1,19 +1,18 @@
 package nl.tudelft.scrumbledore.gui;
 
+import java.util.ArrayList;
+
+import javafx.event.EventHandler;
+import javafx.scene.Scene;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.Player;
 import nl.tudelft.scrumbledore.PlayerAction;
-import javafx.stage.Stage;
-import javafx.scene.Scene;
-import javafx.event.EventHandler;
-
-import java.util.ArrayList;
-
-import javafx.stage.WindowEvent;
-import javafx.scene.input.KeyCode;
-import javafx.scene.input.KeyEvent;
 
 /**
  * Handles all the evenlisteners of the gui.
@@ -60,7 +59,7 @@ public class EventListeners {
     keyPressListeners();
     keyReleaseListeners();
   }
-  
+
   /**
    * Adds key press listeners.
    */
@@ -87,7 +86,7 @@ public class EventListeners {
       }
     });
   }
-  
+
   /**
    * Adds key release listeners.
    */
@@ -116,7 +115,7 @@ public class EventListeners {
       public void handle(WindowEvent event) {
 
         // Logging the termination of the game.
-        Logger.log("--------------------GAME TERMINATED");
+        Logger.getInstance().log("--------------------GAME TERMINATED");
 
         // Quitting the game.
         System.exit(0);
