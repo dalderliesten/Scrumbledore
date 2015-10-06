@@ -39,6 +39,8 @@ public final class Settingsmenu {
     
     currentScene = new Scene(currentBox);
     settingsStage.setScene(currentScene);
+    
+    currentScene.getStylesheets().add(Constants.CSS_SETTINGS);
 
     settingsStage.show();
   }
@@ -59,6 +61,9 @@ public final class Settingsmenu {
    */
   private static void generateTitle() {
     Label titleLabel = new Label(Constants.SETTINGS_LABEL);
+    
+    // Setting a unique CSS ID for correct themeing.
+    titleLabel.setId("settingstitle");
     
     currentBox.getChildren().add(titleLabel);
   }

@@ -39,6 +39,14 @@ public final class Constants {
   public static final String SETTINGS_BUTTON = "Settings";
   public static final String EXIT_BUTTION = "Exit";
   
+  // Defining the settings value tracking.
+  public static boolean LOGGING_WANTMOVEMENT = false;
+  public static boolean LOGGING_WANTINPUT = false;
+  public static boolean LOGGING_WANTSTARTSTOP = false;
+  public static boolean LOGGING_WANTSHOOTING = false;
+  public static boolean LOGGING_WANTPOINTS = false;
+  public static boolean LOGGING_WANTENEMY = false;
+  
   // Defining text needed for the labels and buttons at the settings menu of the GUI.
   public static final String SETTINGS_LABEL = "Settings";
   
@@ -95,14 +103,6 @@ public final class Constants {
   public static final String LOGGING_ACTIVE = "Yes";
   public static final String LOGGING_DISABLED = "No";
   public static final String SETTINGSCLOSE = "Close";
-
-  // Defining the settings value tracking.
-  public static boolean LOGGING_WANTMOVEMENT = false;
-  public static boolean LOGGING_WANTINPUT = false;
-  public static boolean LOGGING_WANTSTARTSTOP = false;
-  public static boolean LOGGING_WANTSHOOTING = false;
-  public static boolean LOGGING_WANTPOINTS = false;
-  public static boolean LOGGING_WANTENEMY = false;
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
@@ -162,8 +162,8 @@ public final class Constants {
   public static final String LOGGER_DIR = "logger" + System.getProperty("file.separator");
 
   // Location of the css file. Kept as such due to bugs with FX.
-  public static final String CSS_GENERAL = "css/style.css";
   public static final String CSS_MAINMENU = "css/mainmenustyle.css";
+  public static final String CSS_SETTINGS = "css/settingsstyle.css";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
