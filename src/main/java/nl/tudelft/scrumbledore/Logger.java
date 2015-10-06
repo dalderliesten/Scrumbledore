@@ -26,29 +26,29 @@ public final class Logger {
    * instantiated.
    */
   private Logger() {
-
   }
 
   /**
-   * Starts the logging by creating the logging file upon request.
+   * Starts the logging by creating the logging file upon request and ensuring that all associated
+   * logging directories exist.
    */
   @SuppressWarnings("checkstyle:methodlength")
   public static void start() {
-    loggingDir = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR);
-    
+    loggingDir = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR);
+
     try {
       if (!loggingDir.exists()) {
         boolean result = loggingDir.mkdir();
-        
+
         // Throw an IOException if the logging directory could not be made.
         if (!result) {
-            throw new IOException();
+          throw new IOException();
         }
       }
     } catch (IOException e) {
       e.printStackTrace();
     }
-    
+
     try {
       // Fetching the current date for the creation of the file and parsing it to allow for simple
       // formatting.
@@ -56,10 +56,10 @@ public final class Logger {
       SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
 
       String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
-      loggingFile = new File(Constants.RESOURCES_DIR + Constants.LOGGER_DIR + desiredFileName);
+      loggingFile = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR + desiredFileName);
 
-      BufferedWriter buffWriter = new BufferedWriter(
-          new OutputStreamWriter(new FileOutputStream(loggingFile), "UTF-8"));
+      BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+          loggingFile), "UTF-8"));
       buffWriter.write("--------------------SCRUMBLEDORE LOGGING FILE");
 
       // Closing the stream as both an optimization and as a bug removing technique, as closing it
@@ -73,7 +73,7 @@ public final class Logger {
   }
 
   /**
-   * Allows the caller to log the passed string in the current sessions' loging file.
+   * Allows the caller to log the passed string in the current sessions' logging file.
    * 
    * @param toLog
    *          The content that the caller wishes to be logged in the logging file.
@@ -81,8 +81,8 @@ public final class Logger {
   public static void log(String toLog) {
     if (started) {
       try {
-        BufferedWriter buffWriter = new BufferedWriter(
-            new OutputStreamWriter(new FileOutputStream(loggingFile, true), "UTF-8"));
+        BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+            loggingFile, true), "UTF-8"));
 
         // Adds a new line to ensure that each log item takes up a new line.
         buffWriter.newLine();

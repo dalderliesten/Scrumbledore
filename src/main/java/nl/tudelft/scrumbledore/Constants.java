@@ -17,9 +17,8 @@ import javafx.scene.input.KeyCode;
  *
  */
 public final class Constants {
-  // Empty private constructor for utility class
+  // Empty private constructor for the utility class.
   private Constants() {
-
   }
 
   // Setting the resolution of the entire GUI window.
@@ -48,7 +47,7 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP =
+  public static final String LOGGING_GAME_STARTSTOP = 
       "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
@@ -87,9 +86,9 @@ public final class Constants {
   // Gravity maximal vertical speed.
   public static final double GRAVITY_MAX = 8;
 
-  // Player horizontal movement speed
+  // Player horizontal movement speed.
   public static final double PLAYER_SPEED = 8;
-  // Player jump strength
+  // Player jump strength.
   public static final double PLAYER_JUMP = 22;
 
   // Bubble horizontal movement speed
@@ -109,24 +108,29 @@ public final class Constants {
   // Maximum number of Bubbles per second that can be fired
   public static final double RAPID_FIRE_LIMIT = 5;
 
-  // Location of the resource string.
-  public static final String LEVELS_DIR = "src/main/resources/";
+  // Location of the directories for the program.
+  public static final String LEVELS_DIR = "src" + System.getProperty("file.separator") + "main"
+      + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator");
+  public static final String RESOURCES_DIR = "src" + System.getProperty("file.separator") + "main"
+      + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator");
+  public static final String APPDATA_DIR = System.getProperty("user.dir")
+      + System.getProperty("file.separator") + "appdata" + System.getProperty("file.separator");
 
-  // Location of the CSS resource for the GUI styling.
+  // Location of the directories for resources, such as sprites and logging locations.
+  public static final String SPRITES_DIR = "images" + System.getProperty("file.separator")
+      + "sprites" + System.getProperty("file.separator");
+  public static final String LOGGER_DIR = "logger" + System.getProperty("file.separator");
+
+  // Location of the css file. Kept as such due to bugs with FX.
   public static final String CSS_LOCATION = "css/style.css";
 
-  // References to images utilized for the game display within the GUI.
-  public static final String RESOURCES_DIR = "src/main/resources/";
-  public static final String SPRITES_DIR = "images/sprites/";
-
+  // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
 
-  // Reference to the location directory for the log file handling.
-  public static final String LOGGER_DIR = "logging/";
-
-  // Keymapping
+  // Keymapping reference location.
   public static final List<Map<KeyCode, PlayerAction>> KEY_MAPPING = createKeyMapping();
 
+  // Generation of keymapping list to prevent action skipping.
   private static List<Map<KeyCode, PlayerAction>> createKeyMapping() {
     List<Map<KeyCode, PlayerAction>> keyMapping = new ArrayList<Map<KeyCode, PlayerAction>>();
 
@@ -136,6 +140,7 @@ public final class Constants {
     return keyMapping;
   }
 
+  // Performing key mapping for player one.
   private static Map<KeyCode, PlayerAction> createKeyMappingP1() {
     Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
     keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
@@ -146,6 +151,7 @@ public final class Constants {
     return keyMapping;
   }
 
+  // Performing key mapping for player two.
   private static Map<KeyCode, PlayerAction> createKeyMappingP2() {
     Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
     keyMapping.put(KeyCode.A, PlayerAction.MoveLeft);

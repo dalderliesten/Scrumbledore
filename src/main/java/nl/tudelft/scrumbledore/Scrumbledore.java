@@ -1,5 +1,8 @@
 package nl.tudelft.scrumbledore;
 
+import java.io.File;
+import java.io.IOException;
+
 import nl.tudelft.scrumbledore.gui.GUI;
 
 /**
@@ -19,11 +22,36 @@ abstract class Scrumbledore {
    *          Arguments given at program initialization
    */
   public static void main(String[] args) {
+    // Create the appData folder, which is required to store and fetch essential elements for the
+    // game.
+    makeAppData();
+
     // Create a logger to log all actions in this session.
     Logger.start();
 
     // Creating a launcher to launch the game and GUI.
     GUI.launch(GUI.class);
+  }
+
+  /**
+   * Creates the appData folder, which is used by multiple classes for issues such as logging and
+   * keybinding saving.
+   */
+  private static void makeAppData() {
+    File appDataDir = new File(Constants.APPDATA_DIR);
+
+    try {
+      if (!appDataDir.exists()) {
+        boolean result = appDataDir.mkdir();
+
+        // Throw an IOException if the logging directory could not be made.
+        if (!result) {
+          throw new IOException();
+        }
+      }
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
   }
 
 }
