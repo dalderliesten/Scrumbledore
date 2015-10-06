@@ -77,7 +77,7 @@ public final class Settingsmenu {
    * Adds the logging selection options to the settings menu.
    */
   private static void loggingOptions() {
-
+    //TODO
   }
 
   /**
