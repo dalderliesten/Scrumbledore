@@ -4,6 +4,7 @@ import java.io.File;
 import java.io.IOException;
 
 import nl.tudelft.scrumbledore.gui.GUI;
+import nl.tudelft.scrumbledore.userinterface.UserInterface;
 
 /**
  * Launches the game and containes the main method, which will run the GUI, which in turn will run
@@ -24,20 +25,20 @@ abstract class Scrumbledore {
   public static void main(String[] args) {
     // Create the appData folder, which is required to store and fetch essential elements for the
     // game.
-    makeAppData();
+    makeAppDataDir();
 
     // Create a logger to log all actions in this session.
     Logger.start();
 
     // Creating a launcher to launch the game and GUI.
-    GUI.launch(GUI.class);
+    UserInterface.launch(UserInterface.class);
   }
 
   /**
    * Creates the appData folder, which is used by multiple classes for issues such as logging and
    * keybinding saving.
    */
-  private static void makeAppData() {
+  private static void makeAppDataDir() {
     File appDataDir = new File(Constants.APPDATA_DIR);
 
     try {
