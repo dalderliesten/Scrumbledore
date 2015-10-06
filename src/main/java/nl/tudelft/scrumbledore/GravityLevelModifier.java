@@ -70,21 +70,17 @@ public class GravityLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void pull(LevelElement element, double d) {
-    // If the object has not yet been initialized, return.
     if (element == null) {
       return;
     }
 
-    // If the element is not affected by Gravity, ignore it.
     if (!element.hasGravity()) {
       return;
     }
 
     double vspeed = element.vSpeed();
     double update = strength * d;
-    // If the element has not yet reached the maximal falling speed and the difference is still
-    // larger than or equal than the strength, increment it. Otherwise, set the vertical speed to
-    // maximal.
+
     if ((max - vspeed) >= update) {
       element.getSpeed().setY(vspeed + update);
     } else {

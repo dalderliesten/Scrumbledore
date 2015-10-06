@@ -71,11 +71,9 @@ public class CollisionsLevelModifier implements LevelModifier {
       }
 
       for (Platform platform : level.getPlatforms()) {
-        // Check if platform is in collision range.
         if (platform.inBoxRangeOf(fruit, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(fruit, platform, delta);
 
-          // Collision while falling
           if (collision.collidingFromTop() && fruit.vSpeed() > 0) {
             kinetics.stopVertically(fruit);
             kinetics.snapTop(fruit, platform);
@@ -98,35 +96,28 @@ public class CollisionsLevelModifier implements LevelModifier {
 
     for (Player player : players) {
       for (Platform platform : level.getPlatforms()) {
-        // Check if platform is in collision range.
         if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-          // Detect collision.
           Collision collision = new Collision(player, platform, delta);
 
-          // Collision while falling
           if (collision.collidingFromTop() && player.vSpeed() > 0) {
             kinetics.stopVertically(player);
             kinetics.snapTop(player, platform);
           }
 
-          // Only check platform collisions with the walls of a level
+          // To prevent horizontal collisions with passable platforms
           if (!platform.isPassable()) {
-            // Collision when jumping
+
             if (collision.collidingFromBottom() && player.vSpeed() < 0) {
               kinetics.stopVertically(player);
               kinetics.snapBottom(player, platform);
             }
 
-            // Collision while moving to the right
             if (collision.collidingFromLeft() && player.hSpeed() > 0) {
               kinetics.stopHorizontally(player);
-              // kinetics.snapLeft(player, platform);
             }
 
-            // Collision while moving to the left
             if (collision.collidingFromRight() && player.hSpeed() < 0) {
               kinetics.stopHorizontally(player);
-              // kinetics.snapRight(player, platform);
             }
           }
         }
@@ -146,28 +137,22 @@ public class CollisionsLevelModifier implements LevelModifier {
 
     for (NPC npc : level.getNPCs()) {
       for (Platform platform : level.getPlatforms()) {
-        // Check if platform is in collision range.
         if (platform.inBoxRangeOf(npc, Constants.COLLISION_RADIUS)) {
-          // Detect collision.
           Collision collision = new Collision(npc, platform, delta);
 
-          // Collision while falling
           if (collision.collidingFromTop() && npc.vSpeed() > 0) {
             kinetics.stopVertically(npc);
             kinetics.snapTop(npc, platform);
           }
 
-          // Only check platform collisions with the walls of a level
           if (!platform.isPassable()) {
 
-            // Collision while moving to the right
             if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
               kinetics.stopHorizontally(npc);
               kinetics.snapLeft(npc, platform);
               npc.addAction(NPCAction.MoveLeft);
             }
 
-            // Collision while moving to the right
             if (collision.collidingFromRight() && npc.hSpeed() < 0) {
               kinetics.stopHorizontally(npc);
               kinetics.snapRight(npc, platform);
@@ -193,25 +178,21 @@ public class CollisionsLevelModifier implements LevelModifier {
   protected void detectBubblePlatform(Level level, double delta) {
     for (Bubble bubble : level.getBubbles()) {
       for (Platform platform : level.getPlatforms()) {
-        // Check if platform is in collision range.
         if (platform.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubble, platform, delta);
 
-          // Check for collision from the bottom
           if (collision.collidingFromBottom()) {
             bubble.getSpeed().setY(Constants.BUBBLE_BOUNCE);
             kinetics.snapBottom(bubble, platform);
             break;
           }
 
-          // Check for collision from the left
           if (collision.collidingFromLeft()) {
             bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
             kinetics.snapLeft(bubble, platform);
             break;
           }
 
-          // Check for collision from the right
           if (collision.collidingFromRight()) {
             bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
             kinetics.snapRight(bubble, platform);
@@ -239,24 +220,20 @@ public class CollisionsLevelModifier implements LevelModifier {
 
       ArrayList<Fruit> fruits = level.getFruits();
 
-      // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
+      // To prevent a race condition when many bubbles are shot rapidly
       for (Bubble bubble : level.getBubbles()) {
         bubbles.add(bubble);
       }
 
       for (Bubble bubble : bubbles) {
-        // Check if platform is in collision range.
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-          // Detect collision.
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && player.vSpeed() > 0 && !(bubble.hasNPC())) {
             player.getSpeed().setY(-Constants.PLAYER_JUMP);
             kinetics.snapTop(player, bubble);
-            // Collision is detected, no further evaluation of candidates necessary.
             break;
           }
 
-          // If a bubble contains an enemy, drop a fruit.
           if (collision.colliding() && bubble.hasNPC()) {
             Fruit newFruit = new Fruit(bubble.getPosition().clone(),
                 new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
@@ -274,14 +251,11 @@ public class CollisionsLevelModifier implements LevelModifier {
       }
 
       for (Bubble bubble : bubbles) {
-        // Check if platform is in collision range.
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-          // Detect collision.
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && player.vSpeed() > 0) {
             player.getSpeed().setY(-Constants.PLAYER_JUMP);
             kinetics.snapTop(player, bubble);
-            // Collision is detected, no further evaluation of candidates necessary.
             break;
           }
         }
@@ -321,16 +295,14 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (int i = 0; i < enemies.size(); i++) {
 
         for (int j = 0; j < bubbles.size(); j++) {
-          // Temp fix to prevent race condition.
+          // Temporary fix to prevent race condition.
           if (!(bubbles.get(j).hasNPC()) && enemies.size() != i
               && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
               && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {
 
-            // The enemy gets removed and a new encapsulated enemy will appear.
             enemies.remove(i);
             enemyBubbles.add(bubbles.get(j));
             bubbles.get(j).setHasNPC(true);
-            // The lifetime of the bubble gets extended if the bubble cathes an enemy.
             bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
 
             if (Constants.LOGGING_WANTENEMY) {
