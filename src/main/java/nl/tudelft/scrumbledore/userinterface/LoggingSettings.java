@@ -1,11 +1,10 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import nl.tudelft.scrumbledore.Constants;
-import javafx.beans.value.ObservableValue;
 import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.scene.control.Label;
 import javafx.scene.control.RadioButton;
-import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -34,42 +33,50 @@ public final class LoggingSettings {
   public static VBox fetchLoggingOptions() {
     currentBox = new VBox(Constants.SETTINGS_PADDING);
 
-    generatePlayerMovement();
+    generateOptions();
 
     return currentBox;
   }
 
   /**
-   * Generates the logging options and labels for the player movement query.
+   * Generates the options needed for the logger in the settings menu.
    */
-  private static void generatePlayerMovement() {
-    HBox useBox = new HBox(15);
-    Label query = new Label(Constants.LOGGING_PLAYER_MOVEMENT);
-    final ToggleGroup toggleGroup = new ToggleGroup();
-    final RadioButton logTrue = new RadioButton(Constants.SETTINGS_YES);
-    logTrue.setToggleGroup(toggleGroup);
-    final RadioButton logFalse = new RadioButton(Constants.SETTINGS_NO);
-    logFalse.setToggleGroup(toggleGroup);
+  private static void generateOptions() {
+    generateMovement();
+  }
+
+  /**
+   * Generates button functionality for the movement query.
+   */
+  private static void generateMovement() {
+    HBox movementBox = new HBox(Constants.SETTINGS_PADDING);
+    Label queryLocation = new Label(Constants.LOGGING_PLAYER_MOVEMENT);
+    final ToggleGroup movementGroup = new ToggleGroup();
+    final RadioButton movementTrue = new RadioButton(Constants.SETTINGS_YES);
+    movementTrue.setToggleGroup(movementGroup);
+    final RadioButton movementFalse = new RadioButton(Constants.SETTINGS_NO);
+    movementFalse.setToggleGroup(movementGroup);
 
     if (Constants.LOGGING_WANTMOVEMENT) {
-      logTrue.setSelected(true);
+      movementTrue.setSelected(true);
+      movementFalse.setSelected(false);
     } else {
-      logFalse.setSelected(true);
+      movementFalse.setSelected(true);
+      movementTrue.setSelected(false);
     }
-    
-    toggleGroup.selectedToggleProperty().addListener(new ChangeListener<Toggle>() {
-      public void changed(ObservableValue<? extends Toggle> original, Toggle oldToggle,
-          Toggle newToggle) {
-        if (newToggle == logTrue) {
+    movementGroup.selectedToggleProperty().addListener(new ChangeListener<Object>() {
+      public void changed(ObservableValue<? extends Object> param, Object oldButton,
+          Object newButton) {
+        if (newButton == movementTrue) {
           Constants.LOGGING_WANTMOVEMENT = true;
-        } else if (newToggle == logFalse) {
+        } else if (newButton == movementFalse) {
           Constants.LOGGING_WANTMOVEMENT = false;
         }
       }
     });
 
-    useBox.getChildren().addAll(query, logTrue, logFalse);
-    currentBox.getChildren().add(useBox);
+    movementBox.getChildren().addAll(queryLocation, movementTrue, movementFalse);
+    currentBox.getChildren().addAll(movementBox);
   }
 
 }
