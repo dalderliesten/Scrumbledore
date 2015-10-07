@@ -265,30 +265,33 @@ public class GUI extends Application {
     int index = 0;
 
     for (Player player : players) {
-      if (index < colors.length) {
-        color = colors[index++];
+      if (player.isAlive()) {
+        if (index < colors.length) {
+          color = colors[index++];
+        }
+
+        double steps = game.getSteps();
+
+        boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+        boolean isFiring = player.isFiring();
+
+        String spr = "move-left";
+        if (isFiring && toRight) {
+          spr = "shoot-right";
+        } else if (isFiring) {
+          spr = "shoot-left";
+        } else if (toRight) {
+          spr = "move-right";
+        }
+
+        if (player.getSpeed().getX() == 0 && !isFiring) {
+          steps = 0;
+        }
+
+        String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
+        painter.drawImage(new Image(path), player.getPosition().getX(),
+            player.getPosition().getY());
       }
-
-      double steps = game.getSteps();
-
-      boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
-      boolean isFiring = player.isFiring();
-
-      String spr = "move-left";
-      if (isFiring && toRight) {
-        spr = "shoot-right";
-      } else if (isFiring) {
-        spr = "shoot-left";
-      } else if (toRight) {
-        spr = "move-right";
-      }
-
-      if (player.getSpeed().getX() == 0 && !isFiring) {
-        steps = 0;
-      }
-
-      String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
-      painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
     }
   }
 
