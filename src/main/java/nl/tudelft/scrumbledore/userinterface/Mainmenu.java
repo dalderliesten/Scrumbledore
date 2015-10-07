@@ -85,7 +85,13 @@ public final class Mainmenu {
    *          The button that has been passed that requires singleplayer game launch assigning.
    */
   private static void singleplayerChoice(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
+      public void handle(ActionEvent arg0) {
+        GameDisplay.launchGame(gameStage);
+      }
+
+    });
   }
 
   /**
@@ -95,7 +101,13 @@ public final class Mainmenu {
    *          The button that has been passed that requires multiplayer game launch assigning.
    */
   private static void multiplayerChoice(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
+      public void handle(ActionEvent arg0) {
+        GameDisplay.launchGame(gameStage);
+      }
+
+    });
   }
 
   /**

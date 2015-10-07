@@ -16,20 +16,27 @@ import javafx.stage.Stage;
  * 
  * @author David Alderliesten
  */
-public class GameDisplay {
-  private Stage currentStage;
-  private Scene currentScene;
-  private BorderPane currentLayout;
-  private StepTimer currentTimer;
-  private Game currentGame;
-  private SpriteStore sprites;
+public final class GameDisplay {
+  private static Stage currentStage;
+  private static Scene currentScene;
+  private static BorderPane currentLayout;
+  private static StepTimer currentTimer;
+  private static Game currentGame;
+  private static SpriteStore sprites;
 
   /**
+   * Constructor is set to private, as only one instance of the main menu should exist.
+   */
+  private GameDisplay() {
+  }
+
+  /**
+   * Handles the creation of a game and the associated interface.
    * 
    * @param passedStage
    *          The stage used by the game client.
    */
-  public GameDisplay(Stage passedStage) {
+  public static void launchGame(Stage passedStage) {
     currentStage = passedStage;
     currentLayout = new BorderPane();
 
@@ -44,7 +51,7 @@ public class GameDisplay {
   /**
    * Prepares the game by launching the sprite storage, game instance, and timer instance.
    */
-  private void prepareGame() {
+  private static void prepareGame() {
     sprites = new SpriteStore();
     currentGame = new Game();
 
@@ -55,13 +62,13 @@ public class GameDisplay {
   /**
    * Prepares the non-refreshing content of the user interface.
    */
-  private void prepareInterfaceElements() {
+  private static void prepareInterfaceElements() {
     HBox topLabels = new HBox();
     Label scoreQuery = new Label(Constants.GAME_SCORELABEL);
     Label highQuery = new Label(Constants.GAME_HISCORELABEL);
     Label powerupQuery = new Label(Constants.GAME_POWERUPLABEL);
     Label levelQuery = new Label(Constants.GAME_LEVELLABEL);
-    
+
     topLabels.getChildren().addAll(scoreQuery, powerupQuery, highQuery, levelQuery);
     currentLayout.setTop(topLabels);
   }
