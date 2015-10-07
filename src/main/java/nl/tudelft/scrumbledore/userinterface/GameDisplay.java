@@ -5,6 +5,7 @@ import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
 import javafx.scene.Scene;
+import javafx.scene.layout.BorderPane;
 import javafx.stage.Stage;
 
 /**
@@ -16,6 +17,7 @@ import javafx.stage.Stage;
 public class GameDisplay {
   private Stage currentStage;
   private Scene currentScene;
+  private BorderPane currentLayout;
   private StepTimer currentTimer;
   private Game currentGame;
   private SpriteStore sprites;
@@ -27,7 +29,14 @@ public class GameDisplay {
    */
   public GameDisplay(Stage passedStage) {
     currentStage = passedStage;
+    currentLayout = new BorderPane();
+    
     prepareGame();
+    prepareInterfaceElements();
+    
+    currentScene = new Scene(currentLayout);
+    passedStage.setScene(currentScene);
+    passedStage.show();
   }
 
   /**
@@ -39,6 +48,13 @@ public class GameDisplay {
 
     currentTimer = new StepTimer(Constants.REFRESH_RATE, currentGame);
     currentTimer.start();
+  }
+
+  /**
+   * Prepares the non-refreshing content of the user interface.
+   */
+  private void prepareInterfaceElements() {
+    
   }
 
 }
