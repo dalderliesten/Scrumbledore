@@ -15,3 +15,10 @@
  	-fx-font-weight: bold;
  	-fx-font-size: 15.0px;
  }
+ 
+ #gameviewscores {
+ 	-fx-background-color: #333333;
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-font-weight: bold;
+ 	-fx-font-size: 15.0px;
+ }
