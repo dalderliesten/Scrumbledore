@@ -15,6 +15,7 @@ import javafx.scene.layout.VBox;
  * 
  * @author David Alderliesten
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class LoggingSettings {
   private static VBox currentBox;
 
@@ -45,6 +46,9 @@ public final class LoggingSettings {
     generateMovement();
     generateInput();
     generateStartStop();
+    generateShooting();
+    generatePoints();
+    generateEnemy();
   }
 
   /**
@@ -147,6 +151,108 @@ public final class LoggingSettings {
 
     startStopBox.getChildren().addAll(queryStartStop, startStopTrue, startStopFalse);
     currentBox.getChildren().addAll(startStopBox);
+  }
+
+  /**
+   * Generate the shooting options or logging for the settings menu.
+   */
+  private static void generateShooting() {
+    HBox shootBox = new HBox(Constants.SETTINGS_PADDING);
+    Label queryShoot = new Label(Constants.LOGGING_SHOOTING);
+    final ToggleGroup shootGroup = new ToggleGroup();
+    final RadioButton shootTrue = new RadioButton(Constants.SETTINGS_YES);
+    shootTrue.setToggleGroup(shootGroup);
+    final RadioButton shootFalse = new RadioButton(Constants.SETTINGS_NO);
+    shootFalse.setToggleGroup(shootGroup);
+
+    if (Constants.LOGGING_WANTSHOOTING) {
+      shootTrue.setSelected(true);
+      shootFalse.setSelected(false);
+    } else {
+      shootFalse.setSelected(true);
+      shootTrue.setSelected(false);
+    }
+    shootGroup.selectedToggleProperty().addListener(new ChangeListener<Object>() {
+      public void changed(ObservableValue<? extends Object> param, Object oldButton,
+          Object newButton) {
+        if (newButton == shootTrue) {
+          Constants.LOGGING_WANTSHOOTING = true;
+        } else if (newButton == shootFalse) {
+          Constants.LOGGING_WANTSHOOTING = false;
+        }
+      }
+    });
+
+    shootBox.getChildren().addAll(queryShoot, shootTrue, shootFalse);
+    currentBox.getChildren().addAll(shootBox);
+  }
+
+  /**
+   * Generate the points options or logging for the settings menu.
+   */
+  private static void generatePoints() {
+    HBox pointBox = new HBox(Constants.SETTINGS_PADDING);
+    Label queryPoint = new Label(Constants.LOGGING_POINTS);
+    final ToggleGroup pointGroup = new ToggleGroup();
+    final RadioButton pointTrue = new RadioButton(Constants.SETTINGS_YES);
+    pointTrue.setToggleGroup(pointGroup);
+    final RadioButton pointFalse = new RadioButton(Constants.SETTINGS_NO);
+    pointFalse.setToggleGroup(pointGroup);
+
+    if (Constants.LOGGING_WANTPOINTS) {
+      pointTrue.setSelected(true);
+      pointFalse.setSelected(false);
+    } else {
+      pointFalse.setSelected(true);
+      pointTrue.setSelected(false);
+    }
+    pointGroup.selectedToggleProperty().addListener(new ChangeListener<Object>() {
+      public void changed(ObservableValue<? extends Object> param, Object oldButton,
+          Object newButton) {
+        if (newButton == pointTrue) {
+          Constants.LOGGING_WANTPOINTS = true;
+        } else if (newButton == pointFalse) {
+          Constants.LOGGING_WANTPOINTS = false;
+        }
+      }
+    });
+
+    pointBox.getChildren().addAll(queryPoint, pointTrue, pointFalse);
+    currentBox.getChildren().addAll(pointBox);
+  }
+
+  /**
+   * Generate the enemy options or logging for the settings menu.
+   */
+  private static void generateEnemy() {
+    HBox enemyBox = new HBox(Constants.SETTINGS_PADDING);
+    Label queryEnemy = new Label(Constants.LOGGING_ENEMY);
+    final ToggleGroup enemyGroup = new ToggleGroup();
+    final RadioButton enemyTrue = new RadioButton(Constants.SETTINGS_YES);
+    enemyTrue.setToggleGroup(enemyGroup);
+    final RadioButton enemyFalse = new RadioButton(Constants.SETTINGS_NO);
+    enemyFalse.setToggleGroup(enemyGroup);
+
+    if (Constants.LOGGING_WANTENEMY) {
+      enemyTrue.setSelected(true);
+      enemyFalse.setSelected(false);
+    } else {
+      enemyFalse.setSelected(true);
+      enemyTrue.setSelected(false);
+    }
+    enemyGroup.selectedToggleProperty().addListener(new ChangeListener<Object>() {
+      public void changed(ObservableValue<? extends Object> param, Object oldButton,
+          Object newButton) {
+        if (newButton == enemyTrue) {
+          Constants.LOGGING_WANTENEMY = true;
+        } else if (newButton == enemyFalse) {
+          Constants.LOGGING_WANTENEMY = false;
+        }
+      }
+    });
+
+    enemyBox.getChildren().addAll(queryEnemy, enemyTrue, enemyFalse);
+    currentBox.getChildren().addAll(enemyBox);
   }
 
 }
