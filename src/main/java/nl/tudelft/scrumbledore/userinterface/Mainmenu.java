@@ -76,7 +76,6 @@ public final class Mainmenu {
     Button exitButton = new Button(Constants.EXIT_BUTTION);
     exitButtonChoice(exitButton);
 
-    // Adding all the buttons and their functions to the display box.
     contentBox.getChildren().addAll(singleplayerGameButton, multiplayerGameButton, settingsButton,
         exitButton);
   }

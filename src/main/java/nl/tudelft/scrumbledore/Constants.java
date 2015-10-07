@@ -49,7 +49,7 @@ public final class Constants {
   
   // Defining text needed for the labels and buttons at the settings menu of the GUI.
   public static final String SETTINGS_LABEL = "Settings";
-  public static final String SETTINGSEXIT_BUTTION = "Exit";
+  public static final String SETTINGSEXIT_BUTTION = "Back";
   
   // Defining constants needed for the user interface items.
   public static final int MAINMENU_PADDING = 30;
