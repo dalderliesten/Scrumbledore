@@ -13,13 +13,13 @@
  	-fx-text-fill: #32b8f1;
  	-fx-font-weight: bold;
  	-fx-font-size: 35.0px;
- 	-fx-padding: 0.0 0.0 0.0 11.0;
+ 	-fx-padding: 0.0 0.0 0.0 13.0;
  }
  
  .label {
  	-fx-text-fill: #ffffff;
  	-fx-font-size: 15.0px;
- 	-fx-padding: 0.0 0.0 0.0 10.0;
+ 	-fx-padding: 0.0 0.0 0.0 14.0;
  }
  
  .radio-button {
@@ -42,7 +42,7 @@
  	-fx-border-color: #1d1d1d;
  	-fx-border-style: solid;
  	-fx-border-width: 0.0 0.0 0.0 5.0;
- 	-fx-padding: 0.0 0.0 0.0 10.0;
+ 	-fx-padding: 0.0 0.0 0.0 8.0;
  }
  
  .button:hover {
