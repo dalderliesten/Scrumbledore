@@ -38,6 +38,7 @@ public class KineticsLevelModifier implements LevelModifier {
     for (Fruit fruit : level.getFruits()) {
       addSpeed(fruit, d);
       warpVertically(fruit);
+      warpHorizontally(fruit);
     }
   }
 
@@ -53,6 +54,7 @@ public class KineticsLevelModifier implements LevelModifier {
     for (NPC npc : level.getNPCs()) {
       addSpeed(npc, d);
       warpVertically(npc);
+      warpHorizontally(npc);
     }
   }
 
@@ -69,9 +71,10 @@ public class KineticsLevelModifier implements LevelModifier {
     for (Player player : players) {
       addSpeed(player, d);
       warpVertically(player);
+      warpHorizontally(player);
 
       if (Constants.LOGGING_WANTMOVEMENT) {
-        Logger.log(
+        Logger.getInstance().log(
             "Player moved to " + player.getPosition().getX() + ", " + player.getPosition().getY());
       }
     }
@@ -96,6 +99,7 @@ public class KineticsLevelModifier implements LevelModifier {
       addSpeed(bubble, d);
       applyFriction(bubble, d);
       warpVertically(bubble);
+      warpHorizontally(bubble);
     }
   }
 
@@ -182,11 +186,26 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The Level Element to be warped.
    */
   public void warpVertically(LevelElement element) {
-    double offset = element.width() / 2;
+    double offset = element.height() / 2;
     if (element.posY() < -offset) {
       element.getPosition().setY(Constants.LEVELY + offset);
     } else if (element.posY() > Constants.LEVELY + offset) {
       element.getPosition().setY(-offset);
+    }
+  }
+
+  /**
+   * Warp a Level Element through the horizontal boundaries of the level.
+   * 
+   * @param element
+   *          The Level Element to be warped.
+   */
+  public void warpHorizontally(LevelElement element) {
+    double offset = -element.width() / 2;
+    if (element.posX() < -offset) {
+      element.getPosition().setX(Constants.LEVELX + offset);
+    } else if (element.posX() > Constants.LEVELX + offset) {
+      element.getPosition().setX(-offset);
     }
   }
 

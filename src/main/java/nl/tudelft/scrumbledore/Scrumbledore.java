@@ -25,7 +25,8 @@ abstract class Scrumbledore {
     // game.
     makeAppDataDir();
 
-    Logger.start();
+    // To create the logging directory and session file already.
+    Logger.getInstance();
 
     // Creating a launcher to launch the game and GUI.
     UserInterface.launch(UserInterface.class);

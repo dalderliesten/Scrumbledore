@@ -1,3 +1,5 @@
+//
+//
 //package nl.tudelft.scrumbledore.gui;
 //
 //import java.util.ArrayList;
@@ -207,7 +209,7 @@
 //    stage.setScene(scene);
 //
 //    // Adding the desired stylesheet to the scene for visual modifications.
-//    scene.getStylesheets().add(Constants.CSS_GENERAL);
+//    scene.getStylesheets().add(Constants.CSS_LOCATION);
 //  }
 //
 //  /**
@@ -391,7 +393,7 @@
 //      // If there are no levels left in the game, show a message.
 //      if (game.remainingLevels() == 0) {
 //        // Log the completion of the game.
-//        Logger.log("Player completed the game successfully.");
+//        Logger.getInstance().log("Player completed the game successfully.");
 //
 //        // Creating of the dialog pop-up stage.
 //        Stage gameWinStage = new Stage();
@@ -416,7 +418,7 @@
 //        animationTimer.stop();
 //      } else {
 //        // Logging the advancement in level.
-//        Logger.log("Player advanced to the next level.");
+//        Logger.getInstance().log("Player advanced to the next level.");
 //
 //        // Go to the next level and then re-render it.
 //        game.goToNextLevel();
@@ -456,7 +458,7 @@
 //        if (timer.isPaused()) {
 //          if (Constants.LOGGING_WANTSTARTSTOP) {
 //            // Logging that the game has been restarted.
-//            Logger.log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
+//            Logger.getInstance().log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
 //          }
 //
 //          timer.resume();
@@ -464,7 +466,7 @@
 //        } else {
 //          if (Constants.LOGGING_WANTSTARTSTOP) {
 //            // Writing to the game log that the game has been paused.
-//            Logger.log("--------------------GAME HAS BEEN PAUSED");
+//            Logger.getInstance().log("--------------------GAME HAS BEEN PAUSED");
 //          }
 //
 //          timer.pause();
@@ -492,10 +494,10 @@
 //
 //        if (Constants.LOGGING_WANTSTARTSTOP) {
 //          // Logging the entering of the settings menu and subsequent pausing of the game.
-//          Logger.log("--------------------SETTINGS MENU OPENED");
+//          Logger.getInstance().log("--------------------SETTINGS MENU OPENED");
 //
 //          // Writing to the game log that the game has been paused.
-//          Logger.log("--------------------GAME HAS BEEN PAUSED");
+//          Logger.getInstance().log("--------------------GAME HAS BEEN PAUSED");
 //        }
 //
 //      }
@@ -507,7 +509,7 @@
 //
 //      public void handle(ActionEvent arg0) {
 //        // Logging the termination of the game.
-//        Logger.log("--------------------GAME TERMINATED");
+//        Logger.getInstance().log("--------------------GAME TERMINATED");
 //
 //        System.exit(0);
 //      }
@@ -549,7 +551,7 @@
 //      public void handle(ActionEvent arg0) {
 //        if (Constants.LOGGING_WANTSTARTSTOP) {
 //          // Logging the closing of the settings menu.
-//          Logger.log("--------------------SETTINGS MENU CLOSED");
+//          Logger.getInstance().log("--------------------SETTINGS MENU CLOSED");
 //        }
 //
 //        // Closing the settings GUI.
@@ -750,7 +752,7 @@
 //    settingsStage.setScene(settingsScene);
 //
 //    // Actual display of the settings stage and associated styling.
-//    settingsScene.getStylesheets().add(Constants.CSS_GENERAL);
+//    settingsScene.getStylesheets().add(Constants.CSS_LOCATION);
 //    settingsStage.show();
 //  }
 //

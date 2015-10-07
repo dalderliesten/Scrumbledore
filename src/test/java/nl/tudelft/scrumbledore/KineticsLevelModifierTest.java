@@ -164,6 +164,32 @@ public class KineticsLevelModifierTest {
   }
 
   /**
+   * When a Level Element has gotten outside the right side of the level and is subsequently being
+   * warped, it should reappear just outside the left side of the level with the same Y coordinate.
+   */
+  @Test
+  public void testWarpHorizontallyRightToLeft() {
+    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    el.getPosition().setX(Constants.LEVELX);
+    kinetics.warpHorizontally(el);
+    assertEquals(16, el.posX(), Constants.DOUBLE_PRECISION);
+    assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
+  }
+
+  /**
+   * When a Level Element has gotten outside the left side of the level and is subsequently being
+   * warped, it should reappear just outside the right side of the level with the same Y coordinate.
+   */
+  @Test
+  public void testWarpHorizontallyLeftToRight() {
+    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
+    el.getPosition().setX(0);
+    kinetics.warpHorizontally(el);
+    assertEquals(Constants.LEVELX - 16, el.posX(), Constants.DOUBLE_PRECISION);
+    assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
+  }
+
+  /**
    * The LevelElement should be correctly snapped the left side of another one using the snapLeft
    * method.
    */

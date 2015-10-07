@@ -56,14 +56,16 @@ public class ScoreCounter {
     score += addScore;
 
     if (Constants.LOGGING_WANTPOINTS) {
-      Logger.log("Player gained " + addScore + " points, totalling at " + score + " points.");
+      Logger.getInstance()
+          .log("Player gained " + addScore + " points, totalling at " + score + " points.");
     }
 
     if (score > highScore) {
       highScore = score;
 
       if (Constants.LOGGING_WANTPOINTS) {
-        Logger.log("The high-score has been changed and is now worth " + highScore + " points!");
+        Logger.getInstance()
+            .log("The high-score has been changed and is now worth " + highScore + " points!");
       }
     }
   }
