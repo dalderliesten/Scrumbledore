@@ -39,7 +39,10 @@ public final class Settingsmenu {
     setupSettings();
 
     generateTitle();
-    loggingOptions();
+    
+    VBox loggingOptions = LoggingSettings.fetchLoggingOptions();
+    currentBox.getChildren().addAll(loggingOptions);
+    
     exitButtonHandling();
 
     currentScene = new Scene(currentBox);
@@ -71,13 +74,6 @@ public final class Settingsmenu {
     titleLabel.setId("settingstitle");
 
     currentBox.getChildren().add(titleLabel);
-  }
-
-  /**
-   * Adds the logging selection options to the settings menu.
-   */
-  private static void loggingOptions() {
-    // TODO
   }
 
   /**

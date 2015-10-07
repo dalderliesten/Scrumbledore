@@ -38,7 +38,7 @@ public final class Constants {
   public static final String MULTIPLAYERGAME_BUTTON = "Multiplayer Game";
   public static final String SETTINGS_BUTTON = "Settings";
   public static final String EXIT_BUTTION = "Exit";
-  
+
   // Defining the settings value tracking.
   public static boolean LOGGING_WANTMOVEMENT = false;
   public static boolean LOGGING_WANTINPUT = false;
@@ -46,41 +46,28 @@ public final class Constants {
   public static boolean LOGGING_WANTSHOOTING = false;
   public static boolean LOGGING_WANTPOINTS = false;
   public static boolean LOGGING_WANTENEMY = false;
-  
+
   // Defining text needed for the labels and buttons at the settings menu of the GUI.
   public static final String SETTINGS_LABEL = "Settings";
+  public static final String SETTINGS_YES = "Yes";
+  public static final String SETTINGS_NO = "No";
   public static final String SETTINGSEXIT_BUTTION = "Back";
-  
+
+  // Defining the text needed for the display of logging options in the settings menu.
+  public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
+  public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
+  public static final String LOGGING_GAME_STARTSTOP = 
+      "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
+  public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
+  public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
+
   // Defining constants needed for the user interface items.
   public static final int MAINMENU_PADDING = 30;
   public static final int SETTINGS_PADDING = 20;
-  
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   // Temp org space TODO remove
 
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
-  
   // Defining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score:";
   public static final String HISCORELABEL = "High-Score:";
@@ -92,18 +79,6 @@ public final class Constants {
   public static final String STOPBTNLABEL = "Stop";
   public static final String SETTINGSBTNLABEL = "Settings";
   public static final String EXITBTNLABEL = "Exit";
-
-  // Defining the text needed for the display of options in the settings menu.
-  public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
-  public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = 
-      "Do you wish to track game states, such as pausing and restarting?";
-  public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
-  public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
-  public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
-  public static final String LOGGING_ACTIVE = "Yes";
-  public static final String LOGGING_DISABLED = "No";
-  public static final String SETTINGSCLOSE = "Close";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
