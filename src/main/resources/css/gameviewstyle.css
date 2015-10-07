@@ -1,0 +1,17 @@
+/*
+ * Style for the settings menu.
+ * Scrumbledore, a faithful recreation of Bubble Bobble.
+ * 
+ * @author David Alderliesten.
+ */
+ 
+ .root {
+ 	-fx-background-color: #1d1d1d;
+ }
+ 
+ #gameviewtop {
+ 	-fx-background-color: #32b8f1;
+ 	-fx-text-fill: #1d1d1d;
+ 	-fx-font-weight: bold;
+ 	-fx-font-size: 15.0px;
+ }

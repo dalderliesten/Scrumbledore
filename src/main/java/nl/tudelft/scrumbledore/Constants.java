@@ -133,6 +133,7 @@ public final class Constants {
   // Location of the css file. Kept as such due to bugs with FX.
   public static final String CSS_MAINMENU = "css/mainmenustyle.css";
   public static final String CSS_SETTINGS = "css/settingsstyle.css";
+  public static final String CSS_GAMEVIEW = "css/gameviewstyle.css";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;

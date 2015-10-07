@@ -44,7 +44,9 @@ public final class GameDisplay {
     prepareInterfaceElements();
 
     currentScene = new Scene(currentLayout);
+    currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     passedStage.setScene(currentScene);
+    
     passedStage.show();
   }
 
@@ -63,7 +65,9 @@ public final class GameDisplay {
    * Prepares the non-refreshing content of the user interface.
    */
   private static void prepareInterfaceElements() {
-    HBox topLabels = new HBox();
+    HBox topLabels = new HBox(Constants.GAME_PADDING);
+    topLabels.setId("gameviewtop");
+    
     Label scoreQuery = new Label(Constants.GAME_SCORELABEL);
     Label highQuery = new Label(Constants.GAME_HISCORELABEL);
     Label powerupQuery = new Label(Constants.GAME_POWERUPLABEL);
