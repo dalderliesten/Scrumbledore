@@ -44,7 +44,6 @@ public final class Mainmenu {
     currentScene = new Scene(contentBox);
     gameStage.setScene(currentScene);
 
-    // Adding the style to the main menu scene.
     currentScene.getStylesheets().add(Constants.CSS_MAINMENU);
 
     gameStage.show();
@@ -56,7 +55,6 @@ public final class Mainmenu {
   private static void generateLogo() {
     Label logo = new Label(Constants.SCRUMBLEDORE_TEXT);
 
-    // Adding the label to the display box.
     contentBox.getChildren().add(logo);
   }
 
