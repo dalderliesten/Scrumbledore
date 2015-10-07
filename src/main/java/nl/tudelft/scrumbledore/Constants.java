@@ -66,19 +66,11 @@ public final class Constants {
   public static final int MAINMENU_PADDING = 30;
   public static final int SETTINGS_PADDING = 20;
 
-  // Temp org space TODO remove
-
   // Defining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score:";
   public static final String HISCORELABEL = "High-Score:";
   public static final String POWERUPLABEL = "Power-Ups:";
   public static final String LEVELLABEL = "Level:";
-
-  // Defining text needed to display the buttons in the bottom of the user interface.
-  public static final String STARTBTNLABEL = "Start";
-  public static final String STOPBTNLABEL = "Stop";
-  public static final String SETTINGSBTNLABEL = "Settings";
-  public static final String EXITBTNLABEL = "Exit";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
