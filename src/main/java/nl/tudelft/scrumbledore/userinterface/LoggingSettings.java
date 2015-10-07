@@ -43,6 +43,8 @@ public final class LoggingSettings {
    */
   private static void generateOptions() {
     generateMovement();
+    generateInput();
+    generateStartStop();
   }
 
   /**
@@ -77,6 +79,74 @@ public final class LoggingSettings {
 
     movementBox.getChildren().addAll(queryLocation, movementTrue, movementFalse);
     currentBox.getChildren().addAll(movementBox);
+  }
+
+  /**
+   * Generates the queries for the input logging within the settings menu.
+   */
+  private static void generateInput() {
+    HBox inputBox = new HBox(Constants.SETTINGS_PADDING);
+    Label queryInput = new Label(Constants.LOGGING_PLAYER_INPUT);
+    final ToggleGroup inputGroup = new ToggleGroup();
+    final RadioButton inputTrue = new RadioButton(Constants.SETTINGS_YES);
+    inputTrue.setToggleGroup(inputGroup);
+    final RadioButton inputFalse = new RadioButton(Constants.SETTINGS_NO);
+    inputFalse.setToggleGroup(inputGroup);
+
+    if (Constants.LOGGING_WANTINPUT) {
+      inputTrue.setSelected(true);
+      inputFalse.setSelected(false);
+    } else {
+      inputFalse.setSelected(true);
+      inputTrue.setSelected(false);
+    }
+    inputGroup.selectedToggleProperty().addListener(new ChangeListener<Object>() {
+      public void changed(ObservableValue<? extends Object> param, Object oldButton,
+          Object newButton) {
+        if (newButton == inputTrue) {
+          Constants.LOGGING_WANTINPUT = true;
+        } else if (newButton == inputFalse) {
+          Constants.LOGGING_WANTINPUT = false;
+        }
+      }
+    });
+
+    inputBox.getChildren().addAll(queryInput, inputTrue, inputFalse);
+    currentBox.getChildren().addAll(inputBox);
+  }
+
+  /**
+   * Generate the start/stop options or logging for the settings menu.
+   */
+  private static void generateStartStop() {
+    HBox startStopBox = new HBox(Constants.SETTINGS_PADDING);
+    Label queryStartStop = new Label(Constants.LOGGING_GAME_STARTSTOP);
+    final ToggleGroup startStopGroup = new ToggleGroup();
+    final RadioButton startStopTrue = new RadioButton(Constants.SETTINGS_YES);
+    startStopTrue.setToggleGroup(startStopGroup);
+    final RadioButton startStopFalse = new RadioButton(Constants.SETTINGS_NO);
+    startStopFalse.setToggleGroup(startStopGroup);
+
+    if (Constants.LOGGING_WANTSTARTSTOP) {
+      startStopTrue.setSelected(true);
+      startStopFalse.setSelected(false);
+    } else {
+      startStopFalse.setSelected(true);
+      startStopTrue.setSelected(false);
+    }
+    startStopGroup.selectedToggleProperty().addListener(new ChangeListener<Object>() {
+      public void changed(ObservableValue<? extends Object> param, Object oldButton,
+          Object newButton) {
+        if (newButton == startStopTrue) {
+          Constants.LOGGING_WANTSTARTSTOP = true;
+        } else if (newButton == startStopFalse) {
+          Constants.LOGGING_WANTSTARTSTOP = false;
+        }
+      }
+    });
+
+    startStopBox.getChildren().addAll(queryStartStop, startStopTrue, startStopFalse);
+    currentBox.getChildren().addAll(startStopBox);
   }
 
 }
