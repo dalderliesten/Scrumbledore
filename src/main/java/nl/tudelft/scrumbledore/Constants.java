@@ -65,12 +65,13 @@ public final class Constants {
   // Defining constants needed for the user interface items.
   public static final int MAINMENU_PADDING = 30;
   public static final int SETTINGS_PADDING = 20;
+  public static final int GAME_PADDING = 10;
 
   // Defining labels needed in the top section of the user interface.
-  public static final String SCORELABEL = "Score:";
-  public static final String HISCORELABEL = "High-Score:";
-  public static final String POWERUPLABEL = "Power-Ups:";
-  public static final String LEVELLABEL = "Level:";
+  public static final String GAME_SCORELABEL = "Score";
+  public static final String GAME_HISCORELABEL = "High-Score";
+  public static final String GAME_POWERUPLABEL = "Power-Ups";
+  public static final String GAME_LEVELLABEL = "Level";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";

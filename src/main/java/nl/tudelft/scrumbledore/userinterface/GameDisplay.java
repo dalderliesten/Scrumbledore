@@ -5,7 +5,9 @@ import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
 import javafx.scene.Scene;
+import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
+import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
 
 /**
@@ -30,10 +32,10 @@ public class GameDisplay {
   public GameDisplay(Stage passedStage) {
     currentStage = passedStage;
     currentLayout = new BorderPane();
-    
+
     prepareGame();
     prepareInterfaceElements();
-    
+
     currentScene = new Scene(currentLayout);
     passedStage.setScene(currentScene);
     passedStage.show();
@@ -54,7 +56,14 @@ public class GameDisplay {
    * Prepares the non-refreshing content of the user interface.
    */
   private void prepareInterfaceElements() {
+    HBox topLabels = new HBox();
+    Label scoreQuery = new Label(Constants.GAME_SCORELABEL);
+    Label highQuery = new Label(Constants.GAME_HISCORELABEL);
+    Label powerupQuery = new Label(Constants.GAME_POWERUPLABEL);
+    Label levelQuery = new Label(Constants.GAME_LEVELLABEL);
     
+    topLabels.getChildren().addAll(scoreQuery, powerupQuery, highQuery, levelQuery);
+    currentLayout.setTop(topLabels);
   }
 
 }
