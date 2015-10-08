@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.Bubble;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.Platform;
@@ -239,6 +240,7 @@ public final class GameDisplay {
     dynamicContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
     renderPlayer();
+    renderBubbles();
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
@@ -276,6 +278,26 @@ public final class GameDisplay {
       String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
       dynamicContext.drawImage(new Image(path), player.getPosition().getX(), player.getPosition()
           .getY());
+    }
+  }
+
+  /**
+   * Renders the bubble projectile(s) on the map.
+   */
+  private static void renderBubbles() {
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+    for (Bubble bubble : currentGame.getCurrentLevel().getBubbles()) {
+      bubbles.add(bubble);
+    }
+
+    for (Bubble currentBubble : bubbles) {
+      String path = sprites.getAnimated("bubble").getFrame(currentGame.getSteps()).getPath();
+
+      if (currentBubble.hasNPC()) {
+        path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
+      }
+      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
+          .getPosition().getY());
     }
   }
 

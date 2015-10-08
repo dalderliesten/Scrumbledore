@@ -29,38 +29,11 @@
 ////
 ////  private void renderDynamic() {
 ////
-////    // Render Bubbles.
-////    renderBubbles(dynamicPainter);
-////
 ////    // Render Fruits.
 ////    renderFruits(dynamicPainter);
 ////
 ////    // Render other moving elements.
 ////    renderNPCs(dynamicPainter);
-////  }
-////
-////  /**
-////   * Render the bubbles of the game using the given GraphicsContext.
-////   * 
-////   * @param painter
-////   *          The GraphicsContext to be used.
-////   */
-////  private void renderBubbles(GraphicsContext painter) {
-////    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-////    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-////    for (Bubble bubble : game.getCurrentLevel().getBubbles()) {
-////      bubbles.add(bubble);
-////    }
-////
-////    for (Bubble currentBubble : bubbles) {
-////      String path = sprites.getAnimated("bubble").getFrame(game.getSteps()).getPath();
-////
-////      if (currentBubble.hasNPC()) {
-////        path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
-////      }
-////      painter.drawImage(new Image(path), currentBubble.getPosition().getX(),
-////          currentBubble.getPosition().getY());
-////    }
 ////  }
 ////
 ////  /**
