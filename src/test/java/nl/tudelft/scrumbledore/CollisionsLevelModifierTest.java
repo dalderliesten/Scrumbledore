@@ -105,7 +105,7 @@ public class CollisionsLevelModifierTest {
   @Test
   public void testDetectNPCPlatformFromRight() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    NPC npc = new NPC(new Vector(33, 0), new Vector(32, 32));
+    NPC npc = new NPC(new Vector(32, 0), new Vector(32, 32));
     npc.getSpeed().setX(-4);
 
     Level level = new Level();
@@ -171,7 +171,42 @@ public class CollisionsLevelModifierTest {
     clm.detectPlayerPlatform(level, 1);
     verify(klm).stopHorizontally(player);
   }
+  
+  /**
+   * Test the collision between a platform and a player colliding from the right.
+   */
+  @Test
+  public void testDetectPlayerPlatformFromRight() {
+    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
+    Player player = new Player(new Vector(32, 0), new Vector(32, 32));
 
+    player.getSpeed().setX(-4);
+
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(platform);
+
+    clm.detectPlayerPlatform(level, 1);
+    verify(klm).stopHorizontally(player);
+  }
+
+  /**
+   * Test the collision between a platform and a bubble colliding from the bottom.
+   */
+  @Test
+  public void testDetectBubblePlatformFromBottom() {
+    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
+
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(platform);
+
+    clm.detectBubblePlatform(level, 1);
+    verify(klm).snapBottom(bubble, platform);
+    assertEquals(bubble.vSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
+  }
+  
   /**
    * Test the collision between a platform and a bubble colliding from the left.
    */
@@ -190,12 +225,49 @@ public class CollisionsLevelModifierTest {
   }
 
   /**
+   * Test the collision between a platform and a bubble colliding from the left.
+   */
+  @Test
+  public void testDetectBubblePlatformFromRight() {
+    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
+    Bubble bubble = new Bubble(new Vector(32, 0), new Vector(32, 32));
+
+    Level level = new Level();
+    level.addElement(bubble);
+    level.addElement(platform);
+
+    clm.detectBubblePlatform(level, 1);
+    verify(klm).snapRight(bubble, platform);
+    assertEquals(bubble.hSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
    * Test the collision between a bubble and a player colliding from the top.
    */
   @Test
   public void testDetectPlayerBubbleFromTop() {
     Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    player.getSpeed().setY(4);
+
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(bubble);
+
+    clm.detectPlayerBubble(level, 1);
+    verify(klm).snapTop(player, bubble);
+    assertEquals(-Constants.PLAYER_JUMP, player.vSpeed(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * Test the collision between a bubble containing an NPC and a player colliding from the top.
+   */
+  @Test
+  public void testDetectPlayerBubbleWithNPCFromTop() {
+    Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    
+    bubble.setHasNPC(true);
     player.getSpeed().setY(4);
 
     Level level = new Level();
