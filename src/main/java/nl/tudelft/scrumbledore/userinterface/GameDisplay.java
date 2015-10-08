@@ -2,14 +2,19 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.Platform;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
+import javafx.scene.Group;
 import javafx.scene.Scene;
+import javafx.scene.canvas.Canvas;
+import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.stage.Stage;
@@ -20,12 +25,18 @@ import javafx.stage.Stage;
  * 
  * @author David Alderliesten
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class GameDisplay {
   private static Stage currentStage;
   private static Scene currentScene;
   private static BorderPane currentLayout;
+  private static Group renderGroup;
   private static StepTimer currentTimer;
   private static Game currentGame;
+  private static Canvas staticCanvas;
+  private static Canvas dynamicCanvas;
+  private static GraphicsContext staticContext;
+  private static GraphicsContext dynamicContext;
   private static SpriteStore sprites;
   private static Label scoreLabel;
   private static Label highScoreLabel;
@@ -51,10 +62,17 @@ public final class GameDisplay {
     prepareGame();
     prepareInterfaceTop();
     prepareInterfaceBottom();
+    prepareRenderer();
+    currentLayout.setCenter(renderGroup);
+    
+    renderStatic();
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     passedStage.setScene(currentScene);
+
+    EventListeners listeners = new EventListeners(currentGame, currentStage, currentScene);
+    listeners.init();
 
     passedStage.show();
   }
@@ -176,4 +194,29 @@ public final class GameDisplay {
     });
   }
 
+  /**
+   * Prepares the game view renderer.
+   */
+  private static void prepareRenderer() {
+    staticCanvas = new Canvas(Constants.LEVELX, Constants.LEVELY);
+    staticContext = staticCanvas.getGraphicsContext2D();
+
+    dynamicCanvas = new Canvas(Constants.LEVELX, Constants.LEVELY);
+    dynamicContext = dynamicCanvas.getGraphicsContext2D();
+
+    renderGroup = new Group();
+    renderGroup.getChildren().addAll(staticCanvas, dynamicCanvas);
+  }
+
+  /**
+   * Renders the static elements of the level, such as the platforms.
+   */
+  private static void renderStatic() {
+    staticContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+
+    for (Platform current : currentGame.getCurrentLevel().getPlatforms()) {
+      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition()
+          .getX(), current.getPosition().getY());
+    }
+  }
 }

@@ -1,52 +1,3 @@
-//<<<<<<< HEAD
-////
-////
-////package nl.tudelft.scrumbledore.gui;
-////
-////import java.util.ArrayList;
-////
-////import javafx.animation.AnimationTimer;
-////import javafx.application.Application;
-////import javafx.beans.value.ChangeListener;
-////import javafx.beans.value.ObservableValue;
-////import javafx.event.ActionEvent;
-////import javafx.event.EventHandler;
-////import javafx.scene.Group;
-////import javafx.scene.Scene;
-////import javafx.scene.canvas.Canvas;
-////import javafx.scene.canvas.GraphicsContext;
-////import javafx.scene.control.Button;
-////import javafx.scene.control.Label;
-////import javafx.scene.control.RadioButton;
-////import javafx.scene.control.Toggle;
-////import javafx.scene.control.ToggleGroup;
-////import javafx.scene.image.Image;
-////import javafx.scene.layout.HBox;
-////import javafx.scene.layout.VBox;
-////import javafx.stage.Modality;
-////import javafx.stage.Stage;
-////import javafx.stage.StageStyle;
-////import nl.tudelft.scrumbledore.Bubble;
-////import nl.tudelft.scrumbledore.Constants;
-////import nl.tudelft.scrumbledore.Fruit;
-////import nl.tudelft.scrumbledore.Game;
-////import nl.tudelft.scrumbledore.Logger;
-////import nl.tudelft.scrumbledore.NPC;
-////import nl.tudelft.scrumbledore.NPCAction;
-////import nl.tudelft.scrumbledore.Platform;
-////import nl.tudelft.scrumbledore.Player;
-////import nl.tudelft.scrumbledore.PlayerAction;
-////import nl.tudelft.scrumbledore.SpriteStore;
-////import nl.tudelft.scrumbledore.StepTimer;
-////
-/////**
-//// * Launches the Scrumbledore GUI and performs all required handling actions that are related to the
-//// * GUI.
-//// * 
-//// * @author David Alderliesten
-//// * @author Jesse Tilro
-//// * @author Niels Warnars
-//// */
 ////@SuppressWarnings("checkstyle:methodlength")
 ////public class GUI extends Application {
 ////  private Game game;
@@ -87,122 +38,20 @@
 ////   */
 ////  @Override
 ////  public void start(Stage stage) {
-////    // Add event listeners.
-////    EventListeners el = new EventListeners(game, stage, scene);
-////    el.init();
-////
-////    addButtonEventListeners();
 ////
 ////    renderStatic();
 ////
 ////    // Start the animation timer to keep refreshing the dynamic canvas.
 ////    animationTimer.start();
-////
-////    // Showing the game stage.
-////    stage.show();
-////  }
-////
-////  /**
-////   * Setup the Game logic.
-////   */
-////  private void setupGame() {
-////    // Instantiate the essential game and step timer functions for the game handling.
-////    game = new Game();
-////    timer = new StepTimer(Constants.REFRESH_RATE, game);
-////
-////    // Starting the step timer.
-////    timer.start();
 ////  }
 ////
 ////  /**
 ////   * Setup the GUI display.
 ////   */
 ////  private void setupGUI() {
-////    // Setting the title of the GUI window.
-////    stage.setTitle("Scrumbledore");
-////
-////    // Setting window dimension and movement properties.
-////    stage.setHeight(Constants.GUIY);
-////    stage.setWidth(Constants.GUIX);
-////    stage.setResizable(false);
-////
-////    setupGUIGameView();
-////    setupGUILayout();
 ////    setupGUIScene();
 ////  }
 ////
-////  /**
-////   * Setup the Game View GUI group.
-////   */
-////  private void setupGUIGameView() {
-////    // Setup the static canvas and its painter
-////    staticDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
-////    staticPainter = staticDisplay.getGraphicsContext2D();
-////
-////    // Setup the dynamic canvas and its painter
-////    dynamicDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
-////    dynamicPainter = dynamicDisplay.getGraphicsContext2D();
-////
-////    gameView = new Group();
-////
-////    gameView.getChildren().add(staticDisplay);
-////    gameView.getChildren().add(dynamicDisplay);
-////  }
-////
-////  /**
-////   * Setup the GUI layout. Uses the Game View GUI Group.
-////   */
-////  private void setupGUILayout() {
-////    // Setting the content handler group object, to which objects within the game must be added.
-////    layout = new VBox();
-////
-////    // Creation of a horizontal box for storing top labels and items to display, and making it the
-////    // full width of the GUI.
-////    HBox topItems = new HBox(15);
-////    topItems.maxWidth(Constants.GUIX);
-////
-////    // Linking the labels needed in the top HBox to their constant referneces.
-////    Label scoreTitleLabel = new Label(Constants.SCORELABEL);
-////    scoreLabel = new Label(game.getScore());
-////    Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
-////    highScoreLabel = new Label(game.getHighScore());
-////    Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
-////    powerUpLabel = new Label("NONE ACTIVE");
-////    Label levelTitleLabel = new Label(Constants.LEVELLABEL);
-////    levelLabel = new Label(game.getCurrentLevelNumber());
-////
-////    // Adding the top labels to the top HBox and to the game display interface.
-////    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, powerUpLabel,
-////        levelTitleLabel, levelLabel, highScoreTitleLabel, highScoreLabel);
-////    layout.getChildren().add(topItems);
-////
-////    // Displaying the parsed level content in the center of the user interface.
-////    layout.getChildren().add(gameView);
-////
-////    // Creation of a horiztonal box for storing bottom buttons and items to display.
-////    HBox bottomItems = new HBox();
-////
-////    // Linking the buttons needed to their associated constants namesake.
-////    startStopButton = new Button(Constants.STOPBTNLABEL);
-////    settingsButton = new Button(Constants.SETTINGSBTNLABEL);
-////    exitButton = new Button(Constants.EXITBTNLABEL);
-////
-////    // Adding the buttons to the bottom Hbox and to the game display interface.
-////    bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-////    layout.getChildren().add(bottomItems);
-////  }
-////
-////  /**
-////   * Setup the main GUI scene. Uses the GUI layout.
-////   */
-////  private void setupGUIScene() {
-////    // Creating of the scene and assigning this scene to the game stage.
-////    scene = new Scene(layout);
-////    stage.setScene(scene);
-////
-////    // Adding the desired stylesheet to the scene for visual modifications.
-////    scene.getStylesheets().add(Constants.CSS_LOCATION);
-////  }
 ////
 ////  /**
 ////   * Render the static elements of the current level.
@@ -333,21 +182,6 @@
 ////      }
 ////      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
 ////      painter.drawImage(new Image(path), current.getPosition().getX(),
-////          current.getPosition().getY());
-////    }
-////  }
-////
-////  /**
-////   * Render the platforms of the game using the given GraphicsContext.
-////   * 
-////   * @param painter
-////   *          The GraphicsContext to be used.
-////   */
-////  private void renderPlatforms(GraphicsContext painter) {
-////    // Placing the platform elements within the level.
-////    for (Platform current : game.getCurrentLevel().getPlatforms()) {
-////      // Painting the current platform image at the desired x and y location given by the vector.
-////      painter.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition().getX(),
 ////          current.getPosition().getY());
 ////    }
 ////  }
@@ -836,20 +670,6 @@
 //   */
 //  @Override
 //  public void start(Stage stage) {
-//    this.stage = stage;
-//    this.sprites = new SpriteStore();
-//
-//    // Setup the Game logic.
-//    setupGame();
-//
-//    // Setup the GUI display.
-//    setupGUI();
-//
-//    // Add event listeners.
-//    EventListeners el = new EventListeners(game, stage, scene);
-//    el.init();
-//
-//    addButtonEventListeners();
 //
 //    renderStatic();
 //
@@ -873,102 +693,9 @@
 //  }
 //
 //  /**
-//   * Setup the GUI display.
-//   */
-//  private void setupGUI() {
-//    // Setting the title of the GUI window.
-//    stage.setTitle("Scrumbledore");
-//
-//    // Setting window dimension and movement properties.
-//    stage.setHeight(Constants.GUIY);
-//    stage.setWidth(Constants.GUIX);
-//    stage.setResizable(false);
-//
-//    setupGUIGameView();
-//    setupGUILayout();
-//    setupGUIScene();
-//  }
-//
-//  /**
-//   * Setup the Game View GUI group.
-//   */
-//  private void setupGUIGameView() {
-//    // Setup the static canvas and its painter
-//    staticDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
-//    staticPainter = staticDisplay.getGraphicsContext2D();
-//
-//    // Setup the dynamic canvas and its painter
-//    dynamicDisplay = new Canvas(Constants.LEVELX, Constants.LEVELY);
-//    dynamicPainter = dynamicDisplay.getGraphicsContext2D();
-//
-//    gameView = new Group();
-//
-//    gameView.getChildren().add(staticDisplay);
-//    gameView.getChildren().add(dynamicDisplay);
-//  }
-//
-//  /**
-//   * Setup the GUI layout. Uses the Game View GUI Group.
-//   */
-//  private void setupGUILayout() {
-//    // Setting the content handler group object, to which objects within the game must be added.
-//    layout = new VBox();
-//
-//    // Creation of a horizontal box for storing top labels and items to display, and making it the
-//    // full width of the GUI.
-//    HBox topItems = new HBox(15);
-//    topItems.maxWidth(Constants.GUIX);
-//
-//    // Linking the labels needed in the top HBox to their constant referneces.
-//    Label scoreTitleLabel = new Label(Constants.SCORELABEL);
-//    scoreLabel = new Label(game.getScore());
-//    Label highScoreTitleLabel = new Label(Constants.HISCORELABEL);
-//    highScoreLabel = new Label(game.getHighScore());
-//    Label powerUpTitleLabel = new Label(Constants.POWERUPLABEL);
-//    powerUpLabel = new Label("NONE ACTIVE");
-//    Label levelTitleLabel = new Label(Constants.LEVELLABEL);
-//    levelLabel = new Label(game.getCurrentLevelNumber());
-//
-//    // Adding the top labels to the top HBox and to the game display interface.
-//    topItems.getChildren().addAll(scoreTitleLabel, scoreLabel, powerUpTitleLabel, powerUpLabel,
-//        levelTitleLabel, levelLabel, highScoreTitleLabel, highScoreLabel);
-//    layout.getChildren().add(topItems);
-//
-//    // Displaying the parsed level content in the center of the user interface.
-//    layout.getChildren().add(gameView);
-//
-//    // Creation of a horiztonal box for storing bottom buttons and items to display.
-//    HBox bottomItems = new HBox();
-//
-//    // Linking the buttons needed to their associated constants namesake.
-//    startStopButton = new Button(Constants.STOPBTNLABEL);
-//    settingsButton = new Button(Constants.SETTINGSBTNLABEL);
-//    exitButton = new Button(Constants.EXITBTNLABEL);
-//
-//    // Adding the buttons to the bottom Hbox and to the game display interface.
-//    bottomItems.getChildren().addAll(startStopButton, settingsButton, exitButton);
-//    layout.getChildren().add(bottomItems);
-//  }
-//
-//  /**
-//   * Setup the main GUI scene. Uses the GUI layout.
-//   */
-//  private void setupGUIScene() {
-//    // Creating of the scene and assigning this scene to the game stage.
-//    scene = new Scene(layout);
-//    stage.setScene(scene);
-//
-//    // Adding the desired stylesheet to the scene for visual modifications.
-//    scene.getStylesheets().add(Constants.CSS_LOCATION);
-//  }
-//
-//  /**
 //   * Render the static elements of the current level.
 //   */
 //  private void renderStatic() {
-//    // Clear canvas
-//    staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
-//
 //    // Render the static canvas
 //    renderPlatforms(staticPainter);
 //  }
