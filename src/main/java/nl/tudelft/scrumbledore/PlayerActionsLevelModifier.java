@@ -22,21 +22,22 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     ArrayList<Player> players = level.getPlayers();
 
     for (Player player : players) {
-      checkHorizontalMovement(player);
-      checkStopMovement(player);
-      checkShooting(player, level);
+      if (player.isAlive()) {
+        checkHorizontalMovement(player);
+        checkStopMovement(player);
+        checkShooting(player, level);
 
-      if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
-        player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
+        if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
+          player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
 
-        if (Constants.LOGGING_WANTINPUT) {
-          Logger.getInstance().log("Player performed the jump action.");
+          if (Constants.LOGGING_WANTINPUT) {
+            Logger.getInstance().log("Player performed the jump action.");
+          }
         }
+
+        player.clearActions();
       }
-
-      player.clearActions();
     }
-
   }
 
   /**
