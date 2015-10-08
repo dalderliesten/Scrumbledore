@@ -172,10 +172,10 @@ public final class GameDisplay {
 
       public void handle(ActionEvent arg0) {
         if (!currentTimer.isPaused()) {
-          passedButton.setText(Constants.GAME_STOPBUTTON);
+          passedButton.setText(Constants.GAME_STARTBUTTON);
           currentTimer.pause();
         } else {
-          passedButton.setText(Constants.GAME_STARTBUTTON);
+          passedButton.setText(Constants.GAME_STOPBUTTON);
           currentTimer.resume();
         }
       }
