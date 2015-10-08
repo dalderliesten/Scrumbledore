@@ -87,15 +87,6 @@
 ////   */
 ////  @Override
 ////  public void start(Stage stage) {
-////    this.stage = stage;
-////    this.sprites = new SpriteStore();
-////
-////    // Setup the Game logic.
-////    setupGame();
-////
-////    // Setup the GUI display.
-////    setupGUI();
-////
 ////    // Add event listeners.
 ////    EventListeners el = new EventListeners(game, stage, scene);
 ////    el.init();
