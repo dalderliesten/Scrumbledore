@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.Bubble;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.NPC;
+import nl.tudelft.scrumbledore.NPCAction;
 import nl.tudelft.scrumbledore.Platform;
 import nl.tudelft.scrumbledore.Player;
 import nl.tudelft.scrumbledore.PlayerAction;
@@ -241,6 +243,7 @@ public final class GameDisplay {
 
     renderPlayer();
     renderBubbles();
+    renderNPC();
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
@@ -298,6 +301,28 @@ public final class GameDisplay {
       }
       dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
           .getPosition().getY());
+    }
+  }
+
+  /**
+   * Renders the non-player characters on the map.
+   */
+  private static void renderNPC() {
+    ArrayList<NPC> npcs = new ArrayList<NPC>();
+    double steps = currentGame.getSteps();
+
+    for (NPC npc : currentGame.getCurrentLevel().getNPCs()) {
+      npcs.add(npc);
+    }
+
+    for (NPC current : npcs) {
+      String spr = "zenchan-move-right";
+      if (current.getLastMove().equals(NPCAction.MoveLeft)) {
+        spr = "zenchan-move-left";
+      }
+      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 

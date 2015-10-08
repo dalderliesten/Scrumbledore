@@ -27,42 +27,6 @@
 ////  private Label highScoreLabel;
 ////  private Label powerUpLabel;
 ////
-////  private void renderDynamic() {
-////
-////    // Render Fruits.
-////    renderFruits(dynamicPainter);
-////
-////    // Render other moving elements.
-////    renderNPCs(dynamicPainter);
-////  }
-////
-////  /**
-////   * Render the NPCs of the game using the given GraphicsContext.
-////   * 
-////   * @param painter
-////   *          The GraphicsContext to be used.
-////   */
-////  private void renderNPCs(GraphicsContext painter) {
-////    ArrayList<NPC> npcs = new ArrayList<NPC>();
-////    double steps = game.getSteps();
-////
-////    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-////    for (NPC npc : game.getCurrentLevel().getNPCs()) {
-////      npcs.add(npc);
-////    }
-////
-////    // Adding the initial enemy locations to the GUI.
-////    for (NPC current : npcs) {
-////      String spr = "zenchan-move-right";
-////      if (current.getLastMove().equals(NPCAction.MoveLeft)) {
-////        spr = "zenchan-move-left";
-////      }
-////      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-////      painter.drawImage(new Image(path), current.getPosition().getX(),
-////          current.getPosition().getY());
-////    }
-////  }
-////
 ////  /**
 ////   * Render the fruit items of the game using the given GraphicsContext.
 ////   * 
