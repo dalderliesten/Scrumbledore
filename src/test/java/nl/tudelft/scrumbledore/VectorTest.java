@@ -195,7 +195,6 @@ public class VectorTest {
     try {
       clone = original.clone();
     } catch (CloneNotSupportedException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
     clone.setX(42);
