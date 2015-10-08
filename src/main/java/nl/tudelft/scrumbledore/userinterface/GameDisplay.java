@@ -5,6 +5,7 @@ import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.Platform;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
+import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.geometry.Pos;
@@ -25,7 +26,7 @@ import javafx.stage.Stage;
  * 
  * @author David Alderliesten
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.TooManyFields" })
 public final class GameDisplay {
   private static Stage currentStage;
   private static Scene currentScene;
@@ -42,6 +43,12 @@ public final class GameDisplay {
   private static Label highScoreLabel;
   private static Label levelLabel;
   private static Label powerUpLabel;
+
+  private static AnimationTimer animationTimer = new AnimationTimer() {
+    public void handle(long currentNanoTime) {
+      renderDynamic();
+    }
+  };
 
   /**
    * Constructor is set to private, as only one instance of the main menu should exist.
@@ -64,8 +71,9 @@ public final class GameDisplay {
     prepareInterfaceBottom();
     prepareRenderer();
     currentLayout.setCenter(renderGroup);
-    
+
     renderStatic();
+    animationTimer.start();
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
@@ -218,5 +226,16 @@ public final class GameDisplay {
       staticContext.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition()
           .getX(), current.getPosition().getY());
     }
+  }
+
+  /**
+   * Renders the dynamic elements of the level, such as the player and enemies.
+   */
+  private static void renderDynamic() {
+    dynamicContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
+    
+    scoreLabel.setText(currentGame.getScore());
+    highScoreLabel.setText(currentGame.getHighScore());
+    levelLabel.setText(currentGame.getCurrentLevelNumber());
   }
 }

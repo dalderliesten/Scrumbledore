@@ -27,50 +27,7 @@
 ////  private Label highScoreLabel;
 ////  private Label powerUpLabel;
 ////
-////  /**
-////   * The start method launches the JavaFX GUI window and handles associated start-up items and the
-////   * creation of essential features, such as buttons and display information.
-////   * 
-////   * @pre Method called and gameStage passed
-////   * @post GUI created and handlers prepared
-////   * @param gameStage
-////   *          The stage required to display the GUI.
-////   */
-////  @Override
-////  public void start(Stage stage) {
-////
-////    renderStatic();
-////
-////    // Start the animation timer to keep refreshing the dynamic canvas.
-////    animationTimer.start();
-////  }
-////
-////  /**
-////   * Setup the GUI display.
-////   */
-////  private void setupGUI() {
-////    setupGUIScene();
-////  }
-////
-////
-////  /**
-////   * Render the static elements of the current level.
-////   */
-////  private void renderStatic() {
-////    // Clear canvas
-////    staticPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
-////
-////    // Render the static canvas
-////    renderPlatforms(staticPainter);
-////  }
-////
-////  /**
-////   * Refresh the GUI by rendering all dynamic elements in the current level of the game Also updates
-////   * all the GUI elements that must be refreshed per cycle.
-////   */
 ////  private void renderDynamic() {
-////    // Clear canvas
-////    dynamicPainter.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 ////
 ////    // Render Bubbles.
 ////    renderBubbles(dynamicPainter);
