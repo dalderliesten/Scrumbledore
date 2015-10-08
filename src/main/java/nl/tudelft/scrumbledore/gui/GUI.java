@@ -28,26 +28,6 @@
 ////  private Label powerUpLabel;
 ////
 ////  /**
-////   * Render the fruit items of the game using the given GraphicsContext.
-////   * 
-////   * @param painter
-////   *          The painter used to display the graphics content.
-////   */
-////  private void renderFruits(GraphicsContext painter) {
-////    ArrayList<Fruit> fruits = new ArrayList<Fruit>();
-////
-////    for (Fruit fruit : game.getCurrentLevel().getFruits()) {
-////      fruits.add(fruit);
-////    }
-////
-////    for (Fruit current : fruits) {
-////      String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-////      painter.drawImage(new Image(path), current.getPosition().getX(),
-////          current.getPosition().getY());
-////    }
-////  }
-////
-////  /**
 ////   * Advances the level to the next one, and displays a special dialog box upon completion of all
 ////   * the levels without dying.
 ////   */

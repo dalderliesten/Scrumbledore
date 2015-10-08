@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Bubble;
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Fruit;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.NPC;
 import nl.tudelft.scrumbledore.NPCAction;
@@ -244,6 +245,7 @@ public final class GameDisplay {
     renderPlayer();
     renderBubbles();
     renderNPC();
+    renderFruit();
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
@@ -321,6 +323,20 @@ public final class GameDisplay {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
+          .getY());
+    }
+  }
+
+  private static void renderFruit() {
+    ArrayList<Fruit> fruits = new ArrayList<Fruit>();
+
+    for (Fruit fruit : currentGame.getCurrentLevel().getFruits()) {
+      fruits.add(fruit);
+    }
+
+    for (Fruit current : fruits) {
+      String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
       dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
           .getY());
     }
