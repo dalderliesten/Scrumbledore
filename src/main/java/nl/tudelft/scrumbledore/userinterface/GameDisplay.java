@@ -6,6 +6,7 @@ import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
@@ -47,6 +48,7 @@ public final class GameDisplay {
 
     prepareGame();
     prepareInterfaceTop();
+    prepareInterfaceBottom();
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
@@ -67,11 +69,12 @@ public final class GameDisplay {
   }
 
   /**
-   * Prepares the non-refreshing content of the user interface.
+   * Prepares the ontent at the top of the user interface.
    */
+  @SuppressWarnings("PMD.AvoidDuplicateLiterals")
   private static void prepareInterfaceTop() {
     HBox topLabels = new HBox(Constants.GAME_PADDING);
-    topLabels.setId("gameviewtop");
+    topLabels.setId("gameviewbar");
 
     Label scoreQuery = new Label(Constants.GAME_SCORELABEL);
     Label highQuery = new Label(Constants.GAME_HISCORELABEL);
@@ -91,6 +94,22 @@ public final class GameDisplay {
         highScoreLabel, levelQuery, levelLabel);
     topLabels.setAlignment(Pos.CENTER);
     currentLayout.setTop(topLabels);
+  }
+  
+  /**
+   * Prepares the content at the bottom of the user interface.
+   */
+  private static void prepareInterfaceBottom() {
+    HBox bottomButtons = new HBox(Constants.GAME_PADDING);
+    bottomButtons.setId("gameviewbar");
+    
+    Button startStopButton = new Button(Constants.GAME_STARTBUTTON);
+    Button settingsButton = new Button(Constants.GAME_SETTINGSBUTTON);
+    Button exitButton = new Button(Constants.GAME_EXITBUTTON);
+    
+    bottomButtons.getChildren().addAll(startStopButton, settingsButton, exitButton);
+    bottomButtons.setAlignment(Pos.CENTER);
+    currentLayout.setBottom(bottomButtons);
   }
 
 }

@@ -72,6 +72,12 @@ public final class Constants {
   public static final String GAME_HISCORELABEL = "High-Score";
   public static final String GAME_POWERUPLABEL = "Power-Ups";
   public static final String GAME_LEVELLABEL = "Level";
+  
+  // Defining labels needed in the bottom section of the user interface.
+  public static final String GAME_STARTBUTTON = "Start";
+  public static final String GAME_STOPBUTTON = "Stop";
+  public static final String GAME_SETTINGSBUTTON = "Settings";
+  public static final String GAME_EXITBUTTON = "Exit";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
