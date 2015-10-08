@@ -6,6 +6,7 @@ import nl.tudelft.scrumbledore.Bubble;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Fruit;
 import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.NPC;
 import nl.tudelft.scrumbledore.NPCAction;
 import nl.tudelft.scrumbledore.Platform;
@@ -26,6 +27,8 @@ import javafx.scene.control.Label;
 import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
+import javafx.scene.layout.VBox;
+import javafx.stage.Modality;
 import javafx.stage.Stage;
 
 /**
@@ -226,6 +229,37 @@ public final class GameDisplay {
     if (!playersLeft) {
       currentGame.restart();
       renderStatic();
+    }
+  }
+
+  /**
+   * Checks the status of the level, and determines if the player should advance to the next level.
+   */
+  private static void levelStatus() {
+    if (currentGame.getCurrentLevel().getNPCs().isEmpty()
+        && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
+      if (currentGame.remainingLevels() == 0) {
+        Logger.getInstance().log("Player completed the game successfully.");
+
+        Stage gameWinStage = new Stage();
+        gameWinStage.initModality(Modality.APPLICATION_MODAL);
+        gameWinStage.initOwner(currentStage);
+
+        VBox gameWinVBox = new VBox(20);
+        Label gameWinLabel = new Label(Constants.GAMEWIN_DIALOG);
+        gameWinVBox.getChildren().add(gameWinLabel);
+
+        Scene gameWinScene = new Scene(gameWinVBox, 300, 200);
+        gameWinStage.setScene(gameWinScene);
+        gameWinStage.show();
+
+        animationTimer.stop();
+      } else {
+        Logger.getInstance().log("Player advanced to the next level.");
+
+        currentGame.goToNextLevel();
+        renderStatic();
+      }
     }
   }
 
