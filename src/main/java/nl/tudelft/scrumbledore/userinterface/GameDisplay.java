@@ -23,6 +23,10 @@ public final class GameDisplay {
   private static StepTimer currentTimer;
   private static Game currentGame;
   private static SpriteStore sprites;
+  private static Label scoreLabel;
+  private static Label highScoreLabel;
+  private static Label levelLabel;
+  private static Label powerUpLabel;
 
   /**
    * Constructor is set to private, as only one instance of the main menu should exist.
@@ -41,12 +45,12 @@ public final class GameDisplay {
     currentLayout = new BorderPane();
 
     prepareGame();
-    prepareInterfaceElements();
+    prepareInterfaceTop();
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     passedStage.setScene(currentScene);
-    
+
     passedStage.show();
   }
 
@@ -64,16 +68,26 @@ public final class GameDisplay {
   /**
    * Prepares the non-refreshing content of the user interface.
    */
-  private static void prepareInterfaceElements() {
+  private static void prepareInterfaceTop() {
     HBox topLabels = new HBox(Constants.GAME_PADDING);
     topLabels.setId("gameviewtop");
-    
+
     Label scoreQuery = new Label(Constants.GAME_SCORELABEL);
     Label highQuery = new Label(Constants.GAME_HISCORELABEL);
-    Label powerupQuery = new Label(Constants.GAME_POWERUPLABEL);
+    Label powerUpQuery = new Label(Constants.GAME_POWERUPLABEL);
     Label levelQuery = new Label(Constants.GAME_LEVELLABEL);
 
-    topLabels.getChildren().addAll(scoreQuery, powerupQuery, highQuery, levelQuery);
+    scoreLabel = new Label(currentGame.getScore());
+    scoreLabel.setId("gameviewscores");
+    highScoreLabel = new Label(currentGame.getHighScore());
+    highScoreLabel.setId("gameviewscores");
+    powerUpLabel = new Label("NONE");
+    powerUpLabel.setId("gameviewscores");
+    levelLabel = new Label(currentGame.getCurrentLevelNumber());
+    levelLabel.setId("gameviewscores");
+
+    topLabels.getChildren().addAll(scoreQuery, scoreLabel, powerUpQuery, powerUpLabel, highQuery,
+        highScoreLabel, levelQuery, levelLabel);
     currentLayout.setTop(topLabels);
   }
 
