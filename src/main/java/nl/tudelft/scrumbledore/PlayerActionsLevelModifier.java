@@ -87,6 +87,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param level
    *          Level to be get the bubbles from
    */
+  @SuppressWarnings("methodlength")
   public void checkShooting(Player player, Level level) {
     Vector bubblePos = null;
     
