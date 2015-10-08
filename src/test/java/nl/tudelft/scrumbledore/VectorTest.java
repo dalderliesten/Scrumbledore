@@ -175,7 +175,12 @@ public class VectorTest {
   @Test
   public void testCloneEqual() {
     Vector original = new Vector(1, 2);
-    Vector clone = original.clone();
+    Vector clone = null;
+    try {
+      clone = original.clone();
+    } catch (CloneNotSupportedException e) {
+      e.printStackTrace();
+    }
     assertEquals(original, clone);
   }
 
@@ -186,7 +191,12 @@ public class VectorTest {
   @Test
   public void testCloneNotEqual() {
     Vector original = new Vector(1, 2);
-    Vector clone = original.clone();
+    Vector clone = null;
+    try {
+      clone = original.clone();
+    } catch (CloneNotSupportedException e) {
+      e.printStackTrace();
+    }
     clone.setX(42);
     assertFalse(clone.equals(original));
   }

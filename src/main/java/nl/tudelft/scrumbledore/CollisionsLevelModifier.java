@@ -248,8 +248,13 @@ public class CollisionsLevelModifier implements LevelModifier {
           }
 
           if (collision.colliding() && bubble.hasNPC()) {
-            Fruit newFruit = new Fruit(bubble.getPosition().clone(),
-                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            Fruit newFruit = null;
+            try {
+              newFruit = new Fruit(bubble.getPosition().clone(),
+                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+            } catch (CloneNotSupportedException e) {
+              e.printStackTrace();
+            }
             fruits.add(newFruit);
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);

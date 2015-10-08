@@ -88,7 +88,13 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    *          Level to be get the bubbles from
    */
   public void checkShooting(Player player, Level level) {
-    Vector bubblePos = player.getPosition().clone();
+    Vector bubblePos = null;
+    
+    try {
+      bubblePos = player.getPosition().clone();
+    } catch (CloneNotSupportedException e) {
+      e.printStackTrace();
+    }
     ArrayList<Bubble> bubbles = level.getBubbles();
 
     if (player.hasAction(PlayerAction.Shoot) && player.isAlive()) {

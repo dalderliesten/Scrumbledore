@@ -8,6 +8,8 @@ import java.util.ArrayList;
  * @author Floris Doolaard
  *
  */
+@SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
+    "PMD.StdCyclomaticComplexity" })
 public class BubbleActionsLevelModifier implements LevelModifier {
 
   /**
@@ -18,6 +20,7 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
     ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
     ArrayList<NPC> enemies = level.getNPCs();
@@ -29,8 +32,12 @@ public class BubbleActionsLevelModifier implements LevelModifier {
     for (Bubble bub : bubbles) {
       if (bub.getLifetime() <= 0) {
         if (bub.hasNPC()) {
-          enemies.add(new NPC(bub.getPosition().clone(),
-              new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
+          try {
+            enemies.add(new NPC(bub.getPosition().clone(),
+                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
+          } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+          }
           enemyBubbles.remove(bub);
         }
         level.getBubbles().remove(bub);

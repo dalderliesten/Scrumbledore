@@ -15,7 +15,6 @@ import java.util.Date;
  * @author David Alderliesten
  */
 public final class Logger {
-  private File loggingDir;
   private File loggingFile;
 
   private static volatile Logger instance;

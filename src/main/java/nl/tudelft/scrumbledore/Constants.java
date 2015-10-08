@@ -16,6 +16,7 @@ import javafx.scene.input.KeyCode;
  * @author Niels Warnars
  *
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Constants {
   // Empty private constructor for the utility class.
   private Constants() {
