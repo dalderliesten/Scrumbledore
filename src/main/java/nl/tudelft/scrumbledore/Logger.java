@@ -18,7 +18,7 @@ public final class Logger {
   private File loggingDir;
   private File loggingFile;
 
-  private static Logger instance;
+  private static volatile Logger instance;
 
   /**
    * Logger constructor, which should be used only once since this is a Singleton class.
@@ -26,6 +26,22 @@ public final class Logger {
   private Logger() {
     createLoggingDir();
     createLoggingFile();
+  }
+
+  /**
+   * Creates a new Logger instance if it has not yet been instantiated.
+   * 
+   * @return The single Logger instance.
+   */
+  public static Logger getInstance() {
+    if (instance == null) {
+      synchronized (Logger.class) {
+        if (instance == null) {
+          instance = new Logger();
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -66,18 +82,6 @@ public final class Logger {
     } catch (IOException e) {
       System.out.println(e);
     }
-  }
-
-  /**
-   * Creates a new Logger instance if it has not yet been instantiated.
-   * 
-   * @return The single Logger instance.
-   */
-  public static Logger getInstance() {
-    if (instance == null) {
-      instance = new Logger();
-    }
-    return instance;
   }
 
   /**
