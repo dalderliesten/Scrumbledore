@@ -4,6 +4,7 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
+import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Label;
 import javafx.scene.layout.BorderPane;
@@ -88,6 +89,7 @@ public final class GameDisplay {
 
     topLabels.getChildren().addAll(scoreQuery, scoreLabel, powerUpQuery, powerUpLabel, highQuery,
         highScoreLabel, levelQuery, levelLabel);
+    topLabels.setAlignment(Pos.CENTER);
     currentLayout.setTop(topLabels);
   }
 
