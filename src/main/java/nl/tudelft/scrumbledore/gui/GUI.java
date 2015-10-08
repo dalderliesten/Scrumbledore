@@ -265,10 +265,10 @@ public class GUI extends Application {
     int index = 0;
 
     for (Player player : players) {
+      if (index < colors.length) {
+        color = colors[index++];
+      }
       if (player.isAlive()) {
-        if (index < colors.length) {
-          color = colors[index++];
-        }
 
         double steps = game.getSteps();
 
