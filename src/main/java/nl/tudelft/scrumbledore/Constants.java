@@ -1,8 +1,8 @@
 package nl.tudelft.scrumbledore;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.scene.input.KeyCode;
@@ -47,8 +47,7 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = 
-      "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
   public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
@@ -110,7 +109,8 @@ public final class Constants {
 
   // Location of the directories for the program.
   public static final String LEVELS_DIR = "src" + System.getProperty("file.separator") + "main"
-      + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator");
+      + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator")
+      + "levels" + System.getProperty("file.separator");
   public static final String RESOURCES_DIR = "src" + System.getProperty("file.separator") + "main"
       + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator");
   public static final String APPDATA_DIR = System.getProperty("user.dir")
