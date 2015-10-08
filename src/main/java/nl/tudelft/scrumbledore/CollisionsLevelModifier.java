@@ -259,7 +259,7 @@ public class CollisionsLevelModifier implements LevelModifier {
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);
 
-            if (Constants.LOGGING_WANTENEMY) {
+            if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("Player executed an encapsulated enemy.");
             }
 
@@ -323,7 +323,7 @@ public class CollisionsLevelModifier implements LevelModifier {
             bubbles.get(j).setHasNPC(true);
             bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
 
-            if (Constants.LOGGING_WANTENEMY) {
+            if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("An enemy was encapsulated by a bubble.");
             }
           }

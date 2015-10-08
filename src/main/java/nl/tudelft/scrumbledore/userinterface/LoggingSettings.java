@@ -63,7 +63,7 @@ public final class LoggingSettings {
     final RadioButton movementFalse = new RadioButton(Constants.SETTINGS_NO);
     movementFalse.setToggleGroup(movementGroup);
 
-    if (Constants.LOGGING_WANTMOVEMENT) {
+    if (Constants.isLoggingWantMovement()) {
       movementTrue.setSelected(true);
       movementFalse.setSelected(false);
     } else {
@@ -74,9 +74,9 @@ public final class LoggingSettings {
       public void changed(ObservableValue<? extends Object> param, Object oldButton,
           Object newButton) {
         if (newButton == movementTrue) {
-          Constants.LOGGING_WANTMOVEMENT = true;
+          Constants.setLoggingWantMovement(true);
         } else if (newButton == movementFalse) {
-          Constants.LOGGING_WANTMOVEMENT = false;
+          Constants.setLoggingWantMovement(false);
         }
       }
     });
@@ -97,7 +97,7 @@ public final class LoggingSettings {
     final RadioButton inputFalse = new RadioButton(Constants.SETTINGS_NO);
     inputFalse.setToggleGroup(inputGroup);
 
-    if (Constants.LOGGING_WANTINPUT) {
+    if (Constants.isLoggingWantInput()) {
       inputTrue.setSelected(true);
       inputFalse.setSelected(false);
     } else {
@@ -108,9 +108,9 @@ public final class LoggingSettings {
       public void changed(ObservableValue<? extends Object> param, Object oldButton,
           Object newButton) {
         if (newButton == inputTrue) {
-          Constants.LOGGING_WANTINPUT = true;
+          Constants.setLoggingWantInput(true);
         } else if (newButton == inputFalse) {
-          Constants.LOGGING_WANTINPUT = false;
+          Constants.setLoggingWantInput(false);
         }
       }
     });
@@ -131,7 +131,7 @@ public final class LoggingSettings {
     final RadioButton startStopFalse = new RadioButton(Constants.SETTINGS_NO);
     startStopFalse.setToggleGroup(startStopGroup);
 
-    if (Constants.LOGGING_WANTSTARTSTOP) {
+    if (Constants.isLoggingWantStartStop()) {
       startStopTrue.setSelected(true);
       startStopFalse.setSelected(false);
     } else {
@@ -142,9 +142,9 @@ public final class LoggingSettings {
       public void changed(ObservableValue<? extends Object> param, Object oldButton,
           Object newButton) {
         if (newButton == startStopTrue) {
-          Constants.LOGGING_WANTSTARTSTOP = true;
+          Constants.setLoggingWantStartStop(true);
         } else if (newButton == startStopFalse) {
-          Constants.LOGGING_WANTSTARTSTOP = false;
+          Constants.setLoggingWantStartStop(false);
         }
       }
     });
@@ -165,7 +165,7 @@ public final class LoggingSettings {
     final RadioButton shootFalse = new RadioButton(Constants.SETTINGS_NO);
     shootFalse.setToggleGroup(shootGroup);
 
-    if (Constants.LOGGING_WANTSHOOTING) {
+    if (Constants.isLoggingWantShooting()) {
       shootTrue.setSelected(true);
       shootFalse.setSelected(false);
     } else {
@@ -176,9 +176,9 @@ public final class LoggingSettings {
       public void changed(ObservableValue<? extends Object> param, Object oldButton,
           Object newButton) {
         if (newButton == shootTrue) {
-          Constants.LOGGING_WANTSHOOTING = true;
+          Constants.setLoggingWantShooting(true);
         } else if (newButton == shootFalse) {
-          Constants.LOGGING_WANTSHOOTING = false;
+          Constants.setLoggingWantShooting(false);
         }
       }
     });
@@ -199,7 +199,7 @@ public final class LoggingSettings {
     final RadioButton pointFalse = new RadioButton(Constants.SETTINGS_NO);
     pointFalse.setToggleGroup(pointGroup);
 
-    if (Constants.LOGGING_WANTPOINTS) {
+    if (Constants.isLoggingWantPoints()) {
       pointTrue.setSelected(true);
       pointFalse.setSelected(false);
     } else {
@@ -210,9 +210,9 @@ public final class LoggingSettings {
       public void changed(ObservableValue<? extends Object> param, Object oldButton,
           Object newButton) {
         if (newButton == pointTrue) {
-          Constants.LOGGING_WANTPOINTS = true;
+          Constants.setLoggingWantPoints(true);
         } else if (newButton == pointFalse) {
-          Constants.LOGGING_WANTPOINTS = false;
+          Constants.setLoggingWantPoints(false);
         }
       }
     });
@@ -233,7 +233,7 @@ public final class LoggingSettings {
     final RadioButton enemyFalse = new RadioButton(Constants.SETTINGS_NO);
     enemyFalse.setToggleGroup(enemyGroup);
 
-    if (Constants.LOGGING_WANTENEMY) {
+    if (Constants.isLoggingWantEnemy()) {
       enemyTrue.setSelected(true);
       enemyFalse.setSelected(false);
     } else {
@@ -244,9 +244,9 @@ public final class LoggingSettings {
       public void changed(ObservableValue<? extends Object> param, Object oldButton,
           Object newButton) {
         if (newButton == enemyTrue) {
-          Constants.LOGGING_WANTENEMY = true;
+          Constants.setLoggingWantEnemy(true);
         } else if (newButton == enemyFalse) {
-          Constants.LOGGING_WANTENEMY = false;
+          Constants.setLoggingWantEnemy(false);
         }
       }
     });

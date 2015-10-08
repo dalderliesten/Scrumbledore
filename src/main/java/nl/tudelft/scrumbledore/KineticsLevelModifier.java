@@ -73,7 +73,7 @@ public class KineticsLevelModifier implements LevelModifier {
       warpVertically(player);
       warpHorizontally(player);
 
-      if (Constants.LOGGING_WANTMOVEMENT) {
+      if (Constants.isLoggingWantMovement()) {
         Logger.getInstance().log(
             "Player moved to " + player.getPosition().getX() + ", " + player.getPosition().getY());
       }
