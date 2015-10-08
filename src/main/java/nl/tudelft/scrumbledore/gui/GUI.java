@@ -260,26 +260,34 @@ public class GUI extends Application {
   private void renderPlayer(GraphicsContext painter) {
     ArrayList<Player> players = game.getCurrentLevel().getPlayers();
 
+    String color = "";
+    String[] colors = { "green", "blue" };
+    int index = 0;
+
     for (Player player : players) {
+      if (index < colors.length) {
+        color = colors[index++];
+      }
+
       double steps = game.getSteps();
 
       boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
       boolean isFiring = player.isFiring();
 
-      String spr = "player-move-left";
+      String spr = "move-left";
       if (isFiring && toRight) {
-        spr = "player-shoot-right";
+        spr = "shoot-right";
       } else if (isFiring) {
-        spr = "player-shoot-left";
+        spr = "shoot-left";
       } else if (toRight) {
-        spr = "player-move-right";
+        spr = "move-right";
       }
 
       if (player.getSpeed().getX() == 0 && !isFiring) {
         steps = 0;
       }
 
-      String path = sprites.getAnimated(spr).getFrame(steps).getPath();
+      String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
       painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
     }
   }
@@ -303,8 +311,8 @@ public class GUI extends Application {
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(game.getSteps()).getPath();
       }
-      painter.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
-          .getPosition().getY());
+      painter.drawImage(new Image(path), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -330,8 +338,8 @@ public class GUI extends Application {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      painter
-          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -365,8 +373,8 @@ public class GUI extends Application {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      painter
-          .drawImage(new Image(path), current.getPosition().getX(), current.getPosition().getY());
+      painter.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -383,7 +391,7 @@ public class GUI extends Application {
       // If there are no levels left in the game, show a message.
       if (game.remainingLevels() == 0) {
         // Log the completion of the game.
-        Logger.log("Player completed the game successfully.");
+        Logger.getInstance().log("Player completed the game successfully.");
 
         // Creating of the dialog pop-up stage.
         Stage gameWinStage = new Stage();
@@ -408,7 +416,7 @@ public class GUI extends Application {
         animationTimer.stop();
       } else {
         // Logging the advancement in level.
-        Logger.log("Player advanced to the next level.");
+        Logger.getInstance().log("Player advanced to the next level.");
 
         // Go to the next level and then re-render it.
         game.goToNextLevel();
@@ -448,7 +456,7 @@ public class GUI extends Application {
         if (timer.isPaused()) {
           if (Constants.LOGGING_WANTSTARTSTOP) {
             // Logging that the game has been restarted.
-            Logger.log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
+            Logger.getInstance().log("--------------------GAME HAS BEEN RESTARTED AFTER A PAUSE");
           }
 
           timer.resume();
@@ -456,7 +464,7 @@ public class GUI extends Application {
         } else {
           if (Constants.LOGGING_WANTSTARTSTOP) {
             // Writing to the game log that the game has been paused.
-            Logger.log("--------------------GAME HAS BEEN PAUSED");
+            Logger.getInstance().log("--------------------GAME HAS BEEN PAUSED");
           }
 
           timer.pause();
@@ -484,10 +492,10 @@ public class GUI extends Application {
 
         if (Constants.LOGGING_WANTSTARTSTOP) {
           // Logging the entering of the settings menu and subsequent pausing of the game.
-          Logger.log("--------------------SETTINGS MENU OPENED");
+          Logger.getInstance().log("--------------------SETTINGS MENU OPENED");
 
           // Writing to the game log that the game has been paused.
-          Logger.log("--------------------GAME HAS BEEN PAUSED");
+          Logger.getInstance().log("--------------------GAME HAS BEEN PAUSED");
         }
 
       }
@@ -499,7 +507,7 @@ public class GUI extends Application {
 
       public void handle(ActionEvent arg0) {
         // Logging the termination of the game.
-        Logger.log("--------------------GAME TERMINATED");
+        Logger.getInstance().log("--------------------GAME TERMINATED");
 
         System.exit(0);
       }
@@ -541,7 +549,7 @@ public class GUI extends Application {
       public void handle(ActionEvent arg0) {
         if (Constants.LOGGING_WANTSTARTSTOP) {
           // Logging the closing of the settings menu.
-          Logger.log("--------------------SETTINGS MENU CLOSED");
+          Logger.getInstance().log("--------------------SETTINGS MENU CLOSED");
         }
 
         // Closing the settings GUI.

@@ -19,12 +19,11 @@ public class Fruit extends LevelElement {
    */
   public Fruit(Vector position, Vector size) {
     super(position, size);
-    
+
     setGravity(true);
     pickable = false;
   }
 
-  
   /**
    * Dummy HashCode method to satisfy code quality tools.
    */
@@ -32,8 +31,7 @@ public class Fruit extends LevelElement {
   public int hashCode() {
     return 0;
   }
-  
-  
+
   /**
    * Check whether a given object is equal to this instance.
    * 
@@ -45,24 +43,21 @@ public class Fruit extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
       Fruit that = (Fruit) other;
-      return (this.getPosition().equals(that.getPosition()) 
+      return (this.getPosition().equals(that.getPosition())
           && this.getSize().equals(that.getSize()));
     }
-    
+
     return false;
   }
-
 
   /**
    * Get the value of a fruit.
    * 
-   * @return
-   *        The value of a fruit
+   * @return The value of a fruit
    */
   public int getValue() {
     return value;
   }
-
 
   /**
    * Set the value of a fruit.
@@ -73,20 +68,23 @@ public class Fruit extends LevelElement {
   public void setValue(int value) {
     this.value = value;
   }
-  
+
   /**
    * Return whether the fruit instance is pickable or not.
+   * 
    * @return Boolean pickable.
    */
   public Boolean isPickable() {
     return pickable;
   }
-  
+
   /**
    * Setting whether the fruit instance is pickable.
-   * @param bool true or false.
+   * 
+   * @param bool
+   *          true or false.
    */
-  public void setIsPickable(Boolean bool) {
+  public void setPickable(Boolean bool) {
     pickable = bool;
   }
 

@@ -110,7 +110,6 @@ public class Player extends LevelElement {
    *          The last move action performed.
    */
   public void setLastMove(PlayerAction action) {
-    // Mapping the last action to the arraylist with actions.
     if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
       lastMove = action;
     }

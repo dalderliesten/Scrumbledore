@@ -32,10 +32,6 @@ public class NPCLevelModifier implements LevelModifier {
 
       npc.clearActions();
 
-      if (npc.posY() >= Constants.LEVELY + npc.height() / 2) {
-        npc.getPosition().setY(-npc.height() / 2);
-      }
-
     }
 
   }

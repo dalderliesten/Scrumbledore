@@ -85,36 +85,6 @@ public class NPCTest extends LevelElementTest {
   }
   
   /**
-   * Test the get/set methods of the life attribute.
-   */
-  @Test
-  public void testLife() {
-    assertEquals(0, npc.getLife());
-    npc.setLife(42);
-    assertEquals(42, npc.getLife());
-  }
-  
-  /**
-   * Test the get/set methods of the status attribute.
-   */
-  @Test
-  public void testStatus() {
-    assertEquals(0, npc.getStatus());
-    npc.setStatus(42);
-    assertEquals(42, npc.getStatus());    
-  }
-  
-  /**
-   * Test the get/set methods of the hasFruit attribute.
-   */
-  @Test
-  public void testHasFruit() {
-    assertFalse(npc.hasFruit());
-    npc.setHasFruit(true);
-    assertTrue(npc.hasFruit());
-  }
-  
-  /**
    * The stubbed method hashCode should just return zero (line coverage).
    */
   @Test

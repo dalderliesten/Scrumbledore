@@ -21,11 +21,9 @@ public class Game {
    * Constructs a new Game from disk.
    */
   public Game() {
-    // Load levels from disk
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
 
-    // Instantiating the current level number to one.
     currentLevelNumber = 1;
   }
 
@@ -49,7 +47,6 @@ public class Game {
     this.score = new ScoreCounter();
     this.steps = 0;
 
-    // The game needs at least one level.
     assert levels.size() > 0;
 
     this.levels = levels;
@@ -89,11 +86,7 @@ public class Game {
    * @return The current level number as a string.
    */
   public String getCurrentLevelNumber() {
-    String toReturn = "";
-
-    toReturn = toReturn + currentLevelNumber;
-
-    return toReturn;
+    return Integer.toString(currentLevelNumber);
   }
 
   /**
@@ -137,16 +130,13 @@ public class Game {
     invariant();
     assert remainingLevels() > 0;
 
-    // Find index of current level.
     int index = 0;
     while (!currentLevel.equals(levels.get(index)) && index < levels.size()) {
       ++index;
     }
 
-    // Set current level to the successor of this level.
     setCurrentLevel(levels.get(index + 1));
 
-    // Incrementing the current level number by one.
     currentLevelNumber = currentLevelNumber + 1;
 
     invariant();
@@ -159,8 +149,7 @@ public class Game {
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
 
-    // Writing to the log that the game was restarted.
-    Logger.log("--------------------PLAYED DIED");
+    Logger.getInstance().log("--------------------PLAYED DIED");
   }
 
   /**
@@ -183,9 +172,7 @@ public class Game {
    * @return Value of the current score.
    */
   public String getScore() {
-    String toReturn = score.getScoreString();
-
-    return toReturn;
+    return score.getScoreString();
   }
 
   /**
@@ -194,11 +181,7 @@ public class Game {
    * @return Value of the high score.
    */
   public String getHighScore() {
-    String toReturn = "";
-    
-    toReturn = toReturn + score.getHighScore();
-
-    return toReturn;
+    return Integer.toString(score.getHighScore());
   }
 
   /**
