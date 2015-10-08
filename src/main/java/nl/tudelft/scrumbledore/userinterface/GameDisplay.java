@@ -1,8 +1,12 @@
 package nl.tudelft.scrumbledore.userinterface;
 
+import java.util.ArrayList;
+
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.Platform;
+import nl.tudelft.scrumbledore.Player;
+import nl.tudelft.scrumbledore.PlayerAction;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
 import javafx.animation.AnimationTimer;
@@ -233,9 +237,46 @@ public final class GameDisplay {
    */
   private static void renderDynamic() {
     dynamicContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
-    
+
+    renderPlayer();
+
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
     levelLabel.setText(currentGame.getCurrentLevelNumber());
   }
+
+  /**
+   * Renders the player(s) on the map.
+   */
+  private static void renderPlayer() {
+    ArrayList<Player> players = currentGame.getCurrentLevel().getPlayers();
+    String color = "";
+    String[] colors = { "green", "blue" };
+    int index = 0;
+
+    for (Player player : players) {
+      if (index < colors.length) {
+        color = colors[index++];
+      }
+      double steps = currentGame.getSteps();
+      boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
+      boolean isFiring = player.isFiring();
+      String spr = "move-left";
+      if (isFiring && toRight) {
+        spr = "shoot-right";
+      } else if (isFiring) {
+        spr = "shoot-left";
+      } else if (toRight) {
+        spr = "move-right";
+      }
+      if (player.getSpeed().getX() == 0 && !isFiring) {
+        steps = 0;
+      }
+
+      String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
+      dynamicContext.drawImage(new Image(path), player.getPosition().getX(), player.getPosition()
+          .getY());
+    }
+  }
+
 }

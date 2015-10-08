@@ -37,59 +37,6 @@
 ////
 ////    // Render other moving elements.
 ////    renderNPCs(dynamicPainter);
-////
-////    // Render Player.
-////    renderPlayer(dynamicPainter);
-////
-////    // Updating the score display for the GUI.
-////    scoreLabel.setText(game.getScore());
-////
-////    // Updating the current level number display for the GUI.
-////    levelLabel.setText(game.getCurrentLevelNumber());
-////
-////    // Updating the current high score display for the GUI.
-////    highScoreLabel.setText(game.getHighScore());
-////  }
-////
-////  /**
-////   * Render the player of the game using the given GraphicsContext.
-////   * 
-////   * @param painter
-////   *          The GraphicsContext to be used.
-////   */
-////  private void renderPlayer(GraphicsContext painter) {
-////    ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-////
-////    String color = "";
-////    String[] colors = { "green", "blue" };
-////    int index = 0;
-////
-////    for (Player player : players) {
-////      if (index < colors.length) {
-////        color = colors[index++];
-////      }
-////
-////      double steps = game.getSteps();
-////
-////      boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
-////      boolean isFiring = player.isFiring();
-////
-////      String spr = "move-left";
-////      if (isFiring && toRight) {
-////        spr = "shoot-right";
-////      } else if (isFiring) {
-////        spr = "shoot-left";
-////      } else if (toRight) {
-////        spr = "move-right";
-////      }
-////
-////      if (player.getSpeed().getX() == 0 && !isFiring) {
-////        steps = 0;
-////      }
-////
-////      String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
-////      painter.drawImage(new Image(path), player.getPosition().getX(), player.getPosition().getY());
-////    }
 ////  }
 ////
 ////  /**
