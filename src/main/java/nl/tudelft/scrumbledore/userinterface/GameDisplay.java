@@ -105,7 +105,13 @@ public final class GameDisplay {
     HBox bottomButtons = new HBox(Constants.GAME_PADDING);
     bottomButtons.setId("gameviewbar");
 
-    Button startStopButton = new Button(Constants.GAME_STARTBUTTON);
+    Button startStopButton = new Button();
+    if (!currentTimer.isPaused()) {
+      startStopButton.setText(Constants.GAME_STOPBUTTON);
+    } else {
+      startStopButton.setText(Constants.GAME_STARTBUTTON);
+    }
+    mapStartStopButton(startStopButton);
     Button settingsButton = new Button(Constants.GAME_SETTINGSBUTTON);
     mapSettingsButton(settingsButton);
     Button exitButton = new Button(Constants.GAME_EXITBUTTON);
@@ -114,6 +120,28 @@ public final class GameDisplay {
     bottomButtons.getChildren().addAll(startStopButton, settingsButton, exitButton);
     bottomButtons.setAlignment(Pos.CENTER);
     currentLayout.setBottom(bottomButtons);
+  }
+
+  /**
+   * Maps the functionality of the start/stop game button to the button itself.
+   * 
+   * @param passedButton
+   *          The button which must recieve the functionality.
+   */
+  private static void mapStartStopButton(final Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        if (!currentTimer.isPaused()) {
+          passedButton.setText(Constants.GAME_STOPBUTTON);
+          currentTimer.pause();
+        } else {
+          passedButton.setText(Constants.GAME_STARTBUTTON);
+          currentTimer.resume();
+        }
+      }
+
+    });
   }
 
   /**
@@ -131,7 +159,7 @@ public final class GameDisplay {
 
     });
   }
-  
+
   /**
    * Maps the functionality of the exit/quit button to the button itself.
    * 
