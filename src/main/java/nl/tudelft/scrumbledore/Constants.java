@@ -1,8 +1,8 @@
 package nl.tudelft.scrumbledore;
 
-import java.util.List;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javafx.scene.input.KeyCode;
@@ -39,6 +39,30 @@ public final class Constants {
   public static final String SETTINGS_BUTTON = "Settings";
   public static final String EXIT_BUTTION = "Exit";
 
+  // Defining labels needed in the top section of the user interface.
+  public static final String SCORELABEL = "Score:";
+  public static final String HISCORELABEL = "High-Score:";
+  public static final String POWERUPLABEL = "Power-Ups:";
+  public static final String LEVELLABEL = "Level:";
+
+  // Defining text needed to display the buttons in the bottom of the user interface.
+  public static final String STARTBTNLABEL = "Start";
+  public static final String STOPBTNLABEL = "Stop";
+  public static final String SETTINGSBTNLABEL = "Settings";
+  public static final String EXITBTNLABEL = "Exit";
+
+  // Defining the text needed for the display of options in the settings menu.
+  public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
+  public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
+  public static final String LOGGING_GAME_STARTSTOP = 
+      "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
+  public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
+  public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
+  public static final String LOGGING_ACTIVE = "Yes";
+  public static final String LOGGING_DISABLED = "No";
+  public static final String SETTINGSCLOSE = "Close";
+
   // Defining the settings value tracking.
   public static boolean LOGGING_WANTMOVEMENT = false;
   public static boolean LOGGING_WANTINPUT = false;
@@ -52,15 +76,6 @@ public final class Constants {
   public static final String SETTINGS_YES = "Yes";
   public static final String SETTINGS_NO = "No";
   public static final String SETTINGSEXIT_BUTTION = "Back";
-
-  // Defining the text needed for the display of logging options in the settings menu.
-  public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
-  public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = 
-      "Do you wish to track game states, such as pausing and restarting?";
-  public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
-  public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
-  public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
 
   // Defining constants needed for the user interface items.
   public static final int MAINMENU_PADDING = 30;
@@ -125,7 +140,8 @@ public final class Constants {
 
   // Location of the directories for the program.
   public static final String LEVELS_DIR = "src" + System.getProperty("file.separator") + "main"
-      + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator");
+      + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator")
+      + "levels" + System.getProperty("file.separator");
   public static final String RESOURCES_DIR = "src" + System.getProperty("file.separator") + "main"
       + System.getProperty("file.separator") + "resources" + System.getProperty("file.separator");
   public static final String APPDATA_DIR = System.getProperty("user.dir")
