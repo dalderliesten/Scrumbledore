@@ -1,4 +1,4 @@
-package nl.tudelft.scrumbledore.gui;
+package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 
@@ -17,8 +17,8 @@ import nl.tudelft.scrumbledore.PlayerAction;
 /**
  * Handles all the evenlisteners of the gui.
  * 
+ * @author David Alderliesten
  * @author Jeroen Meijer
- *
  */
 public class EventListeners {
   private Game game;
@@ -121,6 +121,6 @@ public class EventListeners {
         System.exit(0);
       }
     });
-
   }
+  
 }

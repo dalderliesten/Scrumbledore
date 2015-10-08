@@ -32,6 +32,13 @@ public final class Constants {
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
 
+  // Defining text needed for the labels and buttons at the main menu of the GUI.
+  public static final String SCRUMBLEDORE_TEXT = "SCRUMBLEDORE";
+  public static final String SINGLEPLAYERGAME_BUTTON = "Singleplayer Game";
+  public static final String MULTIPLAYERGAME_BUTTON = "Multiplayer Game";
+  public static final String SETTINGS_BUTTON = "Settings";
+  public static final String EXIT_BUTTION = "Exit";
+
   // Defining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score:";
   public static final String HISCORELABEL = "High-Score:";
@@ -47,7 +54,8 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP = 
+      "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
   public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
@@ -62,6 +70,29 @@ public final class Constants {
   public static boolean LOGGING_WANTSHOOTING = false;
   public static boolean LOGGING_WANTPOINTS = false;
   public static boolean LOGGING_WANTENEMY = false;
+
+  // Defining text needed for the labels and buttons at the settings menu of the GUI.
+  public static final String SETTINGS_LABEL = "Settings";
+  public static final String SETTINGS_YES = "Yes";
+  public static final String SETTINGS_NO = "No";
+  public static final String SETTINGSEXIT_BUTTION = "Back";
+
+  // Defining constants needed for the user interface items.
+  public static final int MAINMENU_PADDING = 30;
+  public static final int SETTINGS_PADDING = 20;
+  public static final int GAME_PADDING = 10;
+
+  // Defining labels needed in the top section of the user interface.
+  public static final String GAME_SCORELABEL = "Score";
+  public static final String GAME_HISCORELABEL = "High-Score";
+  public static final String GAME_POWERUPLABEL = "Power-Ups";
+  public static final String GAME_LEVELLABEL = "Level";
+  
+  // Defining labels needed in the bottom section of the user interface.
+  public static final String GAME_STARTBUTTON = "Start";
+  public static final String GAME_STOPBUTTON = "Stop";
+  public static final String GAME_SETTINGSBUTTON = "Settings";
+  public static final String GAME_EXITBUTTON = "Exit";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
@@ -122,7 +153,9 @@ public final class Constants {
   public static final String LOGGER_DIR = "logger" + System.getProperty("file.separator");
 
   // Location of the css file. Kept as such due to bugs with FX.
-  public static final String CSS_LOCATION = "css/style.css";
+  public static final String CSS_MAINMENU = "css/mainmenustyle.css";
+  public static final String CSS_SETTINGS = "css/settingsstyle.css";
+  public static final String CSS_GAMEVIEW = "css/gameviewstyle.css";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
