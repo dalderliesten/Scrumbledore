@@ -6,6 +6,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.input.MouseEvent;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -39,17 +40,17 @@ public final class Settingsmenu {
     setupSettings();
 
     generateTitle();
-    
+
     VBox loggingOptions = LoggingSettings.fetchLoggingOptions();
     currentBox.getChildren().addAll(loggingOptions);
-    
+
     exitButtonHandling();
 
     currentScene = new Scene(currentBox);
     settingsStage.setScene(currentScene);
 
     currentScene.getStylesheets().add(Constants.CSS_SETTINGS);
-
+    preventMoving();
     settingsStage.show();
   }
 
@@ -99,6 +100,17 @@ public final class Settingsmenu {
         settingsStage.close();
       }
 
+    });
+  }
+
+  /**
+   * Ensures the settings window cannot be moved around.
+   */
+  private static void preventMoving() {
+    currentScene.setOnMouseDragged(new EventHandler<MouseEvent>() {
+      public void handle(MouseEvent event) {
+        settingsStage.centerOnScreen();
+      }
     });
   }
 
