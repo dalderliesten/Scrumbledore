@@ -37,7 +37,7 @@ import javafx.stage.Stage;
  * 
  * @author David Alderliesten
  */
-@SuppressWarnings({ "PMD.TooManyMethods", "PMD.TooManyFields" })
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.TooManyFields", "PMD.CyclomaticComplexity" })
 public final class GameDisplay {
   private static Stage currentStage;
   private static Scene currentScene;
@@ -110,7 +110,7 @@ public final class GameDisplay {
   }
 
   /**
-   * Prepares the ontent at the top of the user interface.
+   * Prepares the content at the top of the user interface.
    */
   @SuppressWarnings("PMD.AvoidDuplicateLiterals")
   private static void prepareInterfaceTop() {
