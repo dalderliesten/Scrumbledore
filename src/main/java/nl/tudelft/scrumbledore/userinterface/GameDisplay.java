@@ -54,6 +54,8 @@ public final class GameDisplay {
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
+      playerStatus();
+      levelStatus();
       renderDynamic();
     }
   };
@@ -208,6 +210,23 @@ public final class GameDisplay {
       }
 
     });
+  }
+
+  /**
+   * Checks the status of the player(s) in terms of life.
+   */
+  private static void playerStatus() {
+    ArrayList<Player> players = currentGame.getCurrentLevel().getPlayers();
+    Boolean playersLeft = false;
+    for (Player player : players) {
+      if (player.isAlive()) {
+        playersLeft = true;
+      }
+    }
+    if (!playersLeft) {
+      currentGame.restart();
+      renderStatic();
+    }
   }
 
   /**
