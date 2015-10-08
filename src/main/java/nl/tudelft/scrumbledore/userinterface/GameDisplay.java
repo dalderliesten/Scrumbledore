@@ -152,7 +152,7 @@ public final class GameDisplay {
     }
     mapStartStopButton(startStopButton);
     Button settingsButton = new Button(Constants.GAME_SETTINGSBUTTON);
-    mapSettingsButton(settingsButton);
+    mapSettingsButton(settingsButton, startStopButton);
     Button exitButton = new Button(Constants.GAME_EXITBUTTON);
     mapExitButton(exitButton);
 
@@ -188,11 +188,15 @@ public final class GameDisplay {
    * 
    * @param passedButton
    *          The button which must recieve the functionality.
+   * @param startStopbutton
+   *          The start/stop button whose label must be updated.
    */
-  private static void mapSettingsButton(Button passedButton) {
+  private static void mapSettingsButton(Button passedButton, final Button startStopButton) {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
+        currentTimer.pause();
+        startStopButton.setText(Constants.GAME_STARTBUTTON);
         Settingsmenu.settingsHandle();
       }
 
