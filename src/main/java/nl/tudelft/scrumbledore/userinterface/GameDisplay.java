@@ -4,6 +4,8 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
 import javafx.geometry.Pos;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -95,21 +97,55 @@ public final class GameDisplay {
     topLabels.setAlignment(Pos.CENTER);
     currentLayout.setTop(topLabels);
   }
-  
+
   /**
    * Prepares the content at the bottom of the user interface.
    */
   private static void prepareInterfaceBottom() {
     HBox bottomButtons = new HBox(Constants.GAME_PADDING);
     bottomButtons.setId("gameviewbar");
-    
+
     Button startStopButton = new Button(Constants.GAME_STARTBUTTON);
     Button settingsButton = new Button(Constants.GAME_SETTINGSBUTTON);
+    mapSettingsButton(settingsButton);
     Button exitButton = new Button(Constants.GAME_EXITBUTTON);
-    
+    mapExitButton(exitButton);
+
     bottomButtons.getChildren().addAll(startStopButton, settingsButton, exitButton);
     bottomButtons.setAlignment(Pos.CENTER);
     currentLayout.setBottom(bottomButtons);
+  }
+
+  /**
+   * Maps the functionality of the settings button to the button itself.
+   * 
+   * @param passedButton
+   *          The button which must recieve the functionality.
+   */
+  private static void mapSettingsButton(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        Settingsmenu.settingsHandle();
+      }
+
+    });
+  }
+  
+  /**
+   * Maps the functionality of the exit/quit button to the button itself.
+   * 
+   * @param passedButton
+   *          The button which must recieve the functionality.
+   */
+  private static void mapExitButton(Button passedButton) {
+    passedButton.setOnAction(new EventHandler<ActionEvent>() {
+
+      public void handle(ActionEvent arg0) {
+        Mainmenu.mainMenuHandle(currentStage);
+      }
+
+    });
   }
 
 }
