@@ -133,14 +133,8 @@ public class Vector implements Cloneable {
    * Returns a newly cloned Vector object.
    */
   @Override
-  public Vector clone() {
-    try {
-      return (Vector) super.clone();
-    } catch (CloneNotSupportedException e) {
-      e.printStackTrace();
-    }
-
-    return null;
+  public Vector clone() throws CloneNotSupportedException {
+    return (Vector) super.clone();
   }
 
   /**
