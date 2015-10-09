@@ -48,6 +48,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     detectPlayerFruit(level, delta);
     detectPlayerEnemy(level, delta);
     detectBubbleEnemy(level, delta);
+    detectBubbleBubble(level, delta);
     detectNPCPlatform(level, delta);
   }
 
@@ -271,32 +272,6 @@ public class CollisionsLevelModifier implements LevelModifier {
           }
         }
       }
-
-      for (Bubble bubble : bubbles) {
-        if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-          Collision collision = new Collision(player, bubble, delta);
-          if (collision.collidingFromTop() && player.vSpeed() > 0) {
-            player.getSpeed().setY(-Constants.PLAYER_JUMP);
-            kinetics.snapTop(player, bubble);
-            break;
-          }
-        }
-
-        for (Bubble other : bubbles) {
-          if (!other.equals(bubble) && other.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
-            Collision collision = new Collision(bubble, other, delta);
-            if (collision.colliding()) {
-              if (other.posX() < bubble.posX()) {
-                other.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
-                bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-              } else {
-                other.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-                bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
-              }
-            }
-          }
-        }
-      }
     }
   }
 
@@ -306,7 +281,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param level
    *          The Level.
    * @param delta
-   *          The steps passed since this method wat last executed.
+   *          The steps passed since this method was last executed.
    */
   protected void detectBubbleEnemy(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
@@ -329,6 +304,40 @@ public class CollisionsLevelModifier implements LevelModifier {
 
             if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("An enemy was encapsulated by a bubble.");
+            }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Detect and handle collisions between Bubbles.
+   * 
+   * @param level
+   *          The level to be modified.
+   * @param delta
+   *          The number of steps passed since this method was last executed.
+   */
+  protected void detectBubbleBubble(Level level, double delta) {
+    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
+
+    // To prevent a race condition when many bubbles are shot rapidly
+    for (Bubble bubble : level.getBubbles()) {
+      bubbles.add(bubble);
+    }
+
+    for (Bubble bubble : bubbles) {
+      for (Bubble other : bubbles) {
+        if (!other.equals(bubble) && other.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(bubble, other, delta);
+          if (collision.colliding()) {
+            if (other.posX() < bubble.posX()) {
+              other.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+              bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+            } else {
+              other.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+              bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
             }
           }
         }
