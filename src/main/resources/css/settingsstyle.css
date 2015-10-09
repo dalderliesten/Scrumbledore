@@ -28,12 +28,14 @@
  	-fx-font-weight: bold;
  }
  
- .radio-button .radio, .radio-button .dot {
+ .radio-button .radio {
  	-fx-background-color: transparent;
  }
  
- .radio-button:focused .dot {
+ .radio-button:focused .dot,  .radio-button:active .dot, .radio-button:selected .dot {
  	-fx-background-color: #32b8f1;
+ 	-fx-mark-highlight-color: #32b8fa;
+ 	-fx-mark-color: #32b8fa;
  }
  
  .button {
