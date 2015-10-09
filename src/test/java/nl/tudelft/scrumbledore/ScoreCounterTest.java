@@ -20,13 +20,13 @@ public class ScoreCounterTest {
   @Test
   public void testScoreCounter() {
     ScoreCounter sc = new ScoreCounter();
-    
+
     assertEquals(0, sc.getScore());
   }
 
   /**
-   * Test whether the high score of a game is set correctly
-   * if the current score is higher than the previous high score.
+   * Test whether the high score of a game is set correctly if the current score is higher than the
+   * previous high score.
    */
   @Test
   public void testGetHighScore() {
@@ -36,95 +36,77 @@ public class ScoreCounterTest {
     sc.updateScore(42);
     assertEquals(42, sc.getHighScore());
   }
-  
+
   /**
-   * Check whether the string returned by the getScoreString
-   * method has the expected format.
+   * Check whether the string returned by the getScoreString method has the expected format.
    */
   @Test
   public void testGetScoreString() {
     ScoreCounter sc = new ScoreCounter();
     assertEquals("0", sc.getScoreString());
-    
+
     sc.updateScore(42);
     assertEquals("42", sc.getScoreString());
   }
+
   /**
-   * Test whether the score stays the same if 0 is added. 
+   * Test whether the score stays the same if 0 is added.
    */
   @Test
   public void testUpdateScoreZero() {
     ScoreCounter sc = new ScoreCounter();
     sc.updateScore(0);
-    
+
     assertEquals(0, sc.getScore());
   }
-  
+
   /**
-   * Test whether the score is updated accordingly based on a given number of points. 
+   * Test whether the score is updated accordingly based on a given number of points.
    */
   @Test
   public void testUpdateScore() {
     ScoreCounter sc = new ScoreCounter();
     sc.updateScore(42);
-    
+
     assertEquals(42, sc.getScore());
   }
 
   /**
-   * Test whether the score is updated accordingly if it is incremented twice. 
+   * Test whether the score is updated accordingly if it is incremented twice.
    */
   @Test
   public void testUpdateScoreTwice() {
     ScoreCounter sc = new ScoreCounter();
-    
+
     sc.updateScore(1);
     assertEquals(1, sc.getScore());
-    
+
     sc.updateScore(1);
     assertEquals(2, sc.getScore());
   }
-  
+
   /**
    * Test whether the reset maintains a score of zero at zero.
    */
   @Test
   public void testResetOnZero() {
     ScoreCounter sc = new ScoreCounter();
-    
+
     sc.resetScore();
     assertEquals(0, sc.getScore());
   }
-  
+
   /**
    * Test whether the score reset works after one incrementation.
    */
   @Test
   public void testResetOnce() {
     ScoreCounter sc = new ScoreCounter();
-    
+
     sc.updateScore(1);
-    assertEquals(1, sc.getScore());
-    
+
     sc.resetScore();
     assertEquals(0, sc.getScore());
   }
-  
-  /**
-   * Test whether the score reset works after two incrementations.
-   */
-  @Test
-  public void testResetTwice() {
-    ScoreCounter sc = new ScoreCounter();
-    
-    sc.updateScore(1);
-    assertEquals(1, sc.getScore());
-    
-    sc.updateScore(1);
-    assertEquals(2, sc.getScore());
-    
-    sc.resetScore();
-    assertEquals(0, sc.getScore());
-  }
-  
+
 }
