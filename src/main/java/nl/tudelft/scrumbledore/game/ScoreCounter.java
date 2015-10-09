@@ -4,7 +4,7 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 
 /**
- * A counter given to the Game class as an attribute.
+ * A counter given to the Game class as an attribute that keeps track of the score.
  * 
  * @author Floris Doolaard
  * @author David Alderliesten
@@ -15,7 +15,6 @@ public class ScoreCounter {
 
   /**
    * Contructing a a ScoreCounter object.
-   *
    */
   public ScoreCounter() {
     this.score = 0;
@@ -59,17 +58,24 @@ public class ScoreCounter {
     score += addScore;
 
     if (Constants.isLoggingWantPoints()) {
-      Logger.getInstance()
-          .log("Player gained " + addScore + " points, totalling at " + score + " points.");
+      Logger.getInstance().log(
+          "Player gained " + addScore + " points, totalling at " + score + " points.");
     }
 
     if (score > highScore) {
       highScore = score;
 
       if (Constants.isLoggingWantPoints()) {
-        Logger.getInstance()
-            .log("The high-score has been changed and is now worth " + highScore + " points!");
+        Logger.getInstance().log(
+            "The high-score has been changed and is now worth " + highScore + " points!");
       }
     }
+  }
+
+  /**
+   * Resets the score to a value of 0 when called.
+   */
+  public void resetScore() {
+    score = 0;
   }
 }

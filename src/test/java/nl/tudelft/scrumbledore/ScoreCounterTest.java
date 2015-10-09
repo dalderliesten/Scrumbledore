@@ -9,6 +9,7 @@ import nl.tudelft.scrumbledore.game.ScoreCounter;
 /**
  * Test suite for the scoreCounter class.
  * 
+ * @author David Alderliesten
  * @author Niels Warnars
  */
 public class ScoreCounterTest {
@@ -83,4 +84,47 @@ public class ScoreCounterTest {
     sc.updateScore(1);
     assertEquals(2, sc.getScore());
   }
+  
+  /**
+   * Test whether the reset maintains a score of zero at zero.
+   */
+  @Test
+  public void testResetOnZero() {
+    ScoreCounter sc = new ScoreCounter();
+    
+    sc.resetScore();
+    assertEquals(0, sc.getScore());
+  }
+  
+  /**
+   * Test whether the score reset works after one incrementation.
+   */
+  @Test
+  public void testResetOnce() {
+    ScoreCounter sc = new ScoreCounter();
+    
+    sc.updateScore(1);
+    assertEquals(1, sc.getScore());
+    
+    sc.resetScore();
+    assertEquals(0, sc.getScore());
+  }
+  
+  /**
+   * Test whether the score reset works after two incrementations.
+   */
+  @Test
+  public void testResetTwice() {
+    ScoreCounter sc = new ScoreCounter();
+    
+    sc.updateScore(1);
+    assertEquals(1, sc.getScore());
+    
+    sc.updateScore(1);
+    assertEquals(2, sc.getScore());
+    
+    sc.resetScore();
+    assertEquals(0, sc.getScore());
+  }
+  
 }
