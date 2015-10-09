@@ -1,0 +1,53 @@
+/*
+ * Style for the settings menu.
+ * Scrumbledore, a faithful recreation of Bubble Bobble.
+ * 
+ * @author David Alderliesten.
+ */
+ 
+ .root, .button {
+ 	-fx-background-color: #1d1d1d;
+ }
+ 
+ #settingstitle {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-font-weight: bold;
+ 	-fx-font-size: 35.0px;
+ 	-fx-padding: 0.0 0.0 0.0 13.0;
+ }
+ 
+ .label {
+ 	-fx-text-fill: #ffffff;
+ 	-fx-font-size: 15.0px;
+ 	-fx-padding: 0.0 0.0 0.0 14.0;
+ }
+ 
+ .radio-button {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-text-size: 15.0px;
+ 	-fx-font-weight: bold;
+ }
+ 
+ .radio-button .radio {
+ 	-fx-background-color: transparent;
+ }
+ 
+ .radio-button:focused .dot,  .radio-button:active .dot, .radio-button:selected .dot {
+ 	-fx-background-color: #32b8f1;
+ 	-fx-mark-highlight-color: #32b8fa;
+ 	-fx-mark-color: #32b8fa;
+ }
+ 
+ .button {
+ 	-fx-text-fill: #cccccc;
+ 	-fx-font-size: 15.0px;
+ 	-fx-border-color: #1d1d1d;
+ 	-fx-border-style: solid;
+ 	-fx-border-width: 0.0 0.0 0.0 5.0;
+ 	-fx-padding: 0.0 0.0 0.0 8.0;
+ }
+ 
+ .button:hover {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-border-color: #32b8f1;
+ }
