@@ -9,10 +9,10 @@ import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Game;
 import nl.tudelft.scrumbledore.Logger;
-import nl.tudelft.scrumbledore.Player;
-import nl.tudelft.scrumbledore.PlayerAction;
+import nl.tudelft.scrumbledore.game.Game;
+import nl.tudelft.scrumbledore.level.Player;
+import nl.tudelft.scrumbledore.level.PlayerAction;
 
 /**
  * Handles all the evenlisteners of the gui.

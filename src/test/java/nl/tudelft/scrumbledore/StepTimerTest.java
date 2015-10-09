@@ -11,6 +11,10 @@ import static org.mockito.Mockito.verify;
 
 import org.junit.Test;
 
+import nl.tudelft.scrumbledore.game.Game;
+import nl.tudelft.scrumbledore.game.MultiPlayerGame;
+import nl.tudelft.scrumbledore.game.SinglePlayerGame;
+
 /**
  * Test Suite for the StepTimer class.
  * 
