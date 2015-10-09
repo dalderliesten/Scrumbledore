@@ -32,13 +32,6 @@ public class SinglePlayerGame extends Game {
   }
 
   /**
-   * Turn this Game's Levels into Single Player Game Levels by removing the second Player.
-   */
-  private void makeLevelsSinglePlayer() {
-
-  }
-
-  /**
    * Make new Levels for this Game.
    * 
    * @return A list of Levels.
