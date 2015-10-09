@@ -13,7 +13,6 @@ import nl.tudelft.scrumbledore.level.LevelModifier;
  * @author David Alderliesten
  */
 public abstract class Game {
-
   private ArrayList<Level> levels;
   private ArrayList<LevelModifier> modifiers;
   private Level currentLevel;
@@ -217,6 +216,7 @@ public abstract class Game {
    */
   public void restart() {
     levels = makeLevels();
+    score.resetScore();
     currentLevel = levels.get(0);
   }
 

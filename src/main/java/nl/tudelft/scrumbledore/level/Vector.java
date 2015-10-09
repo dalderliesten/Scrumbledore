@@ -9,7 +9,6 @@ package nl.tudelft.scrumbledore.level;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Vector implements Cloneable {
-
   private double entryX;
   private double entryY;
 

@@ -70,8 +70,6 @@ public final class SettingsMenu {
    */
   private static void generateTitle() {
     Label titleLabel = new Label(Constants.SETTINGS_LABEL);
-
-    // Setting a unique CSS ID for correct themeing.
     titleLabel.setId("settingstitle");
 
     currentBox.getChildren().add(titleLabel);
