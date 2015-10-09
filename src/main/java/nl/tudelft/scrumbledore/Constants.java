@@ -169,14 +169,26 @@ public final class Constants {
   private static List<Map<KeyCode, PlayerAction>> createKeyMapping() {
     List<Map<KeyCode, PlayerAction>> keyMapping = new ArrayList<Map<KeyCode, PlayerAction>>();
 
+    keyMapping.add(createKeyMappingMP1());
+    keyMapping.add(createKeyMappingMP2());
     keyMapping.add(createKeyMappingP1());
-    keyMapping.add(createKeyMappingP2());
 
     return keyMapping;
   }
 
-  // Performing key mapping for player one.
+  // Performing key mapping for player one in the single-player.
   private static Map<KeyCode, PlayerAction> createKeyMappingP1() {
+    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
+    keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
+    keyMapping.put(KeyCode.RIGHT, PlayerAction.MoveRight);
+    keyMapping.put(KeyCode.UP, PlayerAction.Jump);
+    keyMapping.put(KeyCode.E, PlayerAction.Shoot);
+
+    return keyMapping;
+  }
+
+  // Performing key mapping for player one in the multi-player.
+  private static Map<KeyCode, PlayerAction> createKeyMappingMP1() {
     Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
     keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
     keyMapping.put(KeyCode.RIGHT, PlayerAction.MoveRight);
@@ -186,13 +198,13 @@ public final class Constants {
     return keyMapping;
   }
 
-  // Performing key mapping for player two.
-  private static Map<KeyCode, PlayerAction> createKeyMappingP2() {
+  // Performing key mapping for player two in the multi-player.
+  private static Map<KeyCode, PlayerAction> createKeyMappingMP2() {
     Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
     keyMapping.put(KeyCode.A, PlayerAction.MoveLeft);
     keyMapping.put(KeyCode.D, PlayerAction.MoveRight);
     keyMapping.put(KeyCode.W, PlayerAction.Jump);
-    keyMapping.put(KeyCode.Q, PlayerAction.Shoot);
+    keyMapping.put(KeyCode.V, PlayerAction.Shoot);
 
     return keyMapping;
   }
