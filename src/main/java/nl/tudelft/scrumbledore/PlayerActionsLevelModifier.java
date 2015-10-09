@@ -30,7 +30,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
           player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
 
-          if (Constants.LOGGING_WANTINPUT) {
+          if (Constants.isLoggingWantInput()) {
             Logger.getInstance().log("Player performed the jump action.");
           }
         }
@@ -49,7 +49,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
   public void checkHorizontalMovement(Player player) {
     if (player.hasAction(PlayerAction.MoveLeft)) {
       player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
-      if (Constants.LOGGING_WANTINPUT) {
+      if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move left action.");
       }
     }
@@ -57,7 +57,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     if (player.hasAction(PlayerAction.MoveRight)) {
       player.getSpeed().setX(Constants.PLAYER_SPEED);
 
-      if (Constants.LOGGING_WANTINPUT) {
+      if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move right action.");
       }
     }
@@ -73,7 +73,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     if (player.hasAction(PlayerAction.MoveStop)) {
       player.getSpeed().setX(0);
 
-      if (Constants.LOGGING_WANTINPUT) {
+      if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player stopped moving.");
       }
     }
@@ -87,6 +87,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param level
    *          Level to be get the bubbles from
    */
+  @SuppressWarnings("methodlength")
   public void checkShooting(Player player, Level level) {
     Vector bubblePos = null;
     
@@ -104,12 +105,12 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
         bubbles.add(newBubble);
         if (player.getLastMove() == PlayerAction.MoveLeft) {
-          if (Constants.LOGGING_WANTSHOOTING) {
+          if (Constants.isLoggingWantShooting()) {
             Logger.getInstance().log("Player shot in the left direction.");
           }
           newBubble.addAction(BubbleAction.MoveLeft);
         } else {
-          if (Constants.LOGGING_WANTSHOOTING) {
+          if (Constants.isLoggingWantShooting()) {
             Logger.getInstance().log("Player shot in the right direction.");
           }
           newBubble.addAction(BubbleAction.MoveRight);

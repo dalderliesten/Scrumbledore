@@ -65,12 +65,12 @@ public final class Constants {
   public static final String SETTINGSCLOSE = "Close";
 
   // Defining the settings value tracking.
-  public static boolean LOGGING_WANTMOVEMENT = false;
-  public static boolean LOGGING_WANTINPUT = false;
-  public static boolean LOGGING_WANTSTARTSTOP = false;
-  public static boolean LOGGING_WANTSHOOTING = false;
-  public static boolean LOGGING_WANTPOINTS = false;
-  public static boolean LOGGING_WANTENEMY = false;
+  private static boolean loggingWantMovement = false;
+  private static boolean loggingWantInput = false;
+  private static boolean loggingWantStartStop = false;
+  private static boolean loggingWantShooting = false;
+  private static boolean loggingWantPoints = false;
+  private static boolean loggingWantEnemy = false;
 
   // Defining text needed for the labels and buttons at the settings menu of the GUI.
   public static final String SETTINGS_LABEL = "Settings";
@@ -194,5 +194,108 @@ public final class Constants {
     keyMapping.put(KeyCode.CONTROL, PlayerAction.Shoot);
 
     return keyMapping;
+  }
+  
+  
+  /**
+   * Returns whether movement should be logged.
+   * @return whether movement should be logged
+   */
+  public static boolean isLoggingWantMovement() {
+    return loggingWantMovement;
+  }
+
+  /**
+   * Returns whether input should be logged.
+   * @return whether input should be logged
+   */
+  public static boolean isLoggingWantInput() {
+    return loggingWantInput;
+  }
+
+  /**
+   * Returns whether the usage of the start/stop button should be logged.
+   * @return whether the usage of the start/stop button should be logged
+   */
+  public static boolean isLoggingWantStartStop() {
+    return loggingWantStartStop;
+  }
+
+  /**
+   * Returns whether shooting actions should be logged.
+   * @return whether shooting actions should be logged
+   */
+  public static boolean isLoggingWantShooting() {
+    return loggingWantShooting;
+  }
+
+  /**
+   * Returns whether obtained points should be logged.
+   * @return whether obtained points should be logged.
+   */
+  public static boolean isLoggingWantPoints() {
+    return loggingWantPoints;
+  }
+
+  /**
+   * Returns whether the location of enemies should be logged.
+   * @return whether the location of enemies should be logged.
+   */
+  public static boolean isLoggingWantEnemy() {
+    return loggingWantEnemy;
+  }
+
+  /**
+   * Set whether movement should be logged.
+   * @param loggingWantMovement
+   *          whether movement should be logged
+   */
+  public static void setLoggingWantMovement(boolean loggingWantMovement) {
+    Constants.loggingWantMovement = loggingWantMovement;
+  }
+
+  /**
+   * Set whether input should be logged.
+   * @param loggingWantInput
+   *          whether input should be logged
+   */
+  public static void setLoggingWantInput(boolean loggingWantInput) {
+    Constants.loggingWantInput = loggingWantInput;
+  }
+
+  /**
+   * Set whether the usage of the start/stop button should be logged.
+   * @param loggingWantStartStop 
+   *          whether the usage of the start/stop button should be logged
+   */
+  public static void setLoggingWantStartStop(boolean loggingWantStartStop) {
+    Constants.loggingWantStartStop = loggingWantStartStop;
+  }
+
+  /**
+   * Set whether shooting actions should be logged.
+   * @param loggingWantShooting 
+   *          whether shooting actions should be logged
+   */
+  public static void setLoggingWantShooting(boolean loggingWantShooting) {
+    Constants.loggingWantShooting = loggingWantShooting;
+  }
+
+  /**
+   * Set whether obtained points should be logged.
+   * @param loggingWantPoints   
+   *          whether obtained points should be logged
+   */
+  public static void setLoggingWantPoints(boolean loggingWantPoints) {
+    Constants.loggingWantPoints = loggingWantPoints;
+  }
+
+  /**
+   * Set whether the location of enemies should be logged.
+   * @param loggingWantEnemy
+   *          whether the location of enemies should be logged
+   */
+  public static void setLoggingWantEnemy(boolean loggingWantEnemy) {
+    Constants.loggingWantEnemy = loggingWantEnemy;
   }
 }
