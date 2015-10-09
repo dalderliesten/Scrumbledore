@@ -69,19 +69,8 @@ public class EventListeners {
       public void handle(KeyEvent keyPressed) {
         KeyCode keyCode = keyPressed.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        Boolean playersLeft = false;
         for (int i = 0; i < players.size(); i++) {
           players.get(i).addAction(Constants.KEY_MAPPING.get(i).get(keyCode));
-
-          if (players.get(i).isAlive()) {
-            playersLeft = true;
-          }
-        }
-
-        // Restarting the game if "R" is pressed or when the player is dead.
-        if (keyCode == KeyCode.R || !playersLeft) {
-          game.restart();
-          // renderStatic();
         }
       }
     });
@@ -122,5 +111,5 @@ public class EventListeners {
       }
     });
   }
-  
+
 }
