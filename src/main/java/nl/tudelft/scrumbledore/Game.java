@@ -3,12 +3,13 @@ package nl.tudelft.scrumbledore;
 import java.util.ArrayList;
 
 /**
- * The main controller of the game. Connects model classes and the GUI.
+ * The class responsible for aggregating all model classes of the Game, and therefore modeling a
+ * Game session.
  * 
  * @author Jesse Tilro
  * @author David Alderliesten
  */
-public class Game {
+public abstract class Game {
 
   private ArrayList<Level> levels;
   private ArrayList<LevelModifier> modifiers;
@@ -17,18 +18,17 @@ public class Game {
   private double steps;
 
   /**
-   * Constructs a new Game from disk.
+   * Constructs a new Game with levels parsed from file system.
    */
   public Game() {
-    LevelParser lp = new LevelParser();
-    construct(lp.getLevels());
+    construct(makeLevels());
   }
 
   /**
-   * Constructs a new Game based on a given ArrayList<Level>.
+   * Constructs a new Game with given levels, used for testing purposes.
    * 
    * @param levels
-   *          An ArrayList of levels
+   *          The levels this Game needs to consist of.
    */
   public Game(ArrayList<Level> levels) {
     construct(levels);
@@ -40,25 +40,16 @@ public class Game {
    * @param levels
    *          The levels for the game.
    */
-  public void construct(ArrayList<Level> levels) {
-    this.score = new ScoreCounter();
-    this.steps = 0;
-
+  private void construct(ArrayList<Level> levels) {
     assert levels.size() > 0;
 
     this.levels = levels;
-    this.currentLevel = levels.get(0);
+    this.currentLevel = this.levels.get(0);
 
-    KineticsLevelModifier kinetics = new KineticsLevelModifier();
+    this.score = new ScoreCounter();
+    this.steps = 0;
 
     this.modifiers = new ArrayList<LevelModifier>();
-    this.modifiers.add(new PlayerActionsLevelModifier());
-    this.modifiers.add(new GravityLevelModifier());
-    this.modifiers.add(new NPCLevelModifier());
-    this.modifiers.add(new CollisionsLevelModifier(kinetics, score));
-    this.modifiers.add(new BubbleActionsLevelModifier());
-    this.modifiers.add(kinetics);
-
   }
 
   /**
@@ -140,13 +131,13 @@ public class Game {
   }
 
   /**
-   * Restarting the game.
+   * Register a new LevelModifier that should be triggered on this Game's steps.
+   * 
+   * @param levelModifier
+   *          The LevelModifier to be registered.
    */
-  public void restart() {
-    LevelParser lp = new LevelParser();
-    construct(lp.getLevels());
-
-    Logger.getInstance().log("--------------------PLAYED DIED");
+  public void registerLevelModifier(LevelModifier levelModifier) {
+    modifiers.add(levelModifier);
   }
 
   /**
@@ -170,6 +161,15 @@ public class Game {
    */
   public String getScore() {
     return score.getScoreString();
+  }
+
+  /**
+   * Get the Game's ScoreCounter.
+   * 
+   * @return The Game's ScoreCounter.
+   */
+  public ScoreCounter getScoreCounter() {
+    return score;
   }
 
   /**
@@ -208,5 +208,20 @@ public class Game {
   public int getFullSteps() {
     return (int) Math.floor(steps);
   }
+
+  /**
+   * Restart the Game.
+   */
+  public void restart() {
+    levels = makeLevels();
+    currentLevel = levels.get(0);
+  }
+
+  /**
+   * Make the Levels for this Game.
+   * 
+   * @return A list of Levels.
+   */
+  protected abstract ArrayList<Level> makeLevels();
 
 }

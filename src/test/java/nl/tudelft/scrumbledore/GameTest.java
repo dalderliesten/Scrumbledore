@@ -7,7 +7,6 @@ import static org.junit.Assert.assertTrue;
 
 import java.util.ArrayList;
 
-import org.junit.After;
 import org.junit.Before;
 import org.junit.Test;
 
@@ -36,7 +35,7 @@ public class GameTest {
     list1 = new ArrayList<Level>();
     list1.add(l1);
     list1.add(l2);
-    g1 = new Game(list1);
+    g1 = new MultiPlayerGame(list1);
   }
 
   /**
@@ -85,19 +84,6 @@ public class GameTest {
     g1.addSteps(6.4);
     assertEquals(9.6, g1.getSteps(), Constants.DOUBLE_PRECISION);
     assertEquals(9, g1.getFullSteps());
-  }
-
-  /**
-   * Deleting test properties after testing.
-   * 
-   * @throws Exception
-   */
-  @After
-  public void tearDownAfterClass() {
-    l1 = null;
-    l2 = null;
-    list1 = null;
-    g1 = null;
   }
 
 }

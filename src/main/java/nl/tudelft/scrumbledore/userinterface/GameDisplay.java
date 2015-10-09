@@ -22,6 +22,7 @@ import nl.tudelft.scrumbledore.Bubble;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Fruit;
 import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.GameFactory;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.NPC;
 import nl.tudelft.scrumbledore.NPCAction;
@@ -65,18 +66,45 @@ public final class GameDisplay {
 
   /**
    * Constructor is set to private, as only one instance of the main menu should exist.
+   * 
+   * @param passedStage
+   *          The stage used by the game client.
    */
   private GameDisplay() {
   }
 
   /**
-   * Handles the creation of a game and the associated interface.
+   * Launch a new MultiPlayerGame.
    * 
    * @param passedStage
-   *          The stage used by the game client.
+   *          The stage to draw to.
    */
-  public static void launchGame(Stage passedStage) {
+  public static void launchMultiPlayerGame(Stage passedStage) {
     currentStage = passedStage;
+    GameFactory factory = new GameFactory();
+    currentGame = factory.makeMultiPlayerGame();
+
+    launchGame();
+  }
+
+  /**
+   * Launch a new SinglePlayerGame.
+   * 
+   * @param passedStage
+   *          The stage to draw to.
+   */
+  public static void launchSinglePlayerGame(Stage passedStage) {
+    currentStage = passedStage;
+    GameFactory factory = new GameFactory();
+    currentGame = factory.makeSinglePlayerGame();
+
+    launchGame();
+  }
+
+  /**
+   * Handles the creation of a game and the associated interface.
+   */
+  private static void launchGame() {
     currentLayout = new BorderPane();
 
     prepareGame();
@@ -90,12 +118,12 @@ public final class GameDisplay {
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
-    passedStage.setScene(currentScene);
+    currentStage.setScene(currentScene);
 
     EventListeners listeners = new EventListeners(currentGame, currentStage, currentScene);
     listeners.init();
 
-    passedStage.show();
+    currentStage.show();
   }
 
   /**
@@ -103,7 +131,6 @@ public final class GameDisplay {
    */
   private static void prepareGame() {
     sprites = new SpriteStore();
-    currentGame = new Game();
 
     currentTimer = new StepTimer(Constants.REFRESH_RATE, currentGame);
     currentTimer.start();
