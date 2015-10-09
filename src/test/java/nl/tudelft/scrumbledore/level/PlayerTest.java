@@ -7,12 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.level.Fruit;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.PlayerAction;
-import nl.tudelft.scrumbledore.level.Vector;
-
 /**
  * Test Suite for the Player class.
  * 

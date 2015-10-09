@@ -7,15 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Bubble;
-import nl.tudelft.scrumbledore.level.Fruit;
-import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
-import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.NPC;
-import nl.tudelft.scrumbledore.level.Platform;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Testing the Kinetics class.

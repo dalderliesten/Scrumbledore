@@ -10,12 +10,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import nl.tudelft.scrumbledore.level.Collision;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Platform;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.Vector;
-
 /**
  * Test Suite for the Collision class.
  * 

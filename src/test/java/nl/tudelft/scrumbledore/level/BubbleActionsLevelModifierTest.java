@@ -7,12 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Bubble;
-import nl.tudelft.scrumbledore.level.BubbleAction;
-import nl.tudelft.scrumbledore.level.BubbleActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for the Bubble Actions Level Modifier class.

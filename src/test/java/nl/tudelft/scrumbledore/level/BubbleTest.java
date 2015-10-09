@@ -8,10 +8,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Bubble;
-import nl.tudelft.scrumbledore.level.BubbleAction;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for the Bubble class.
