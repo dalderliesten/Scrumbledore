@@ -155,7 +155,7 @@ public final class GameDisplay {
     highScoreLabel.setId("gameviewscores");
     powerUpLabel = new Label("NONE");
     powerUpLabel.setId("gameviewscores");
-    levelLabel = new Label(new Integer(currentGame.getCurrentLevelNumber()).toString());
+    levelLabel = new Label(Integer.toString(currentGame.getCurrentLevelNumber()));
     levelLabel.setId("gameviewscores");
 
     topLabels.getChildren().addAll(scoreQuery, scoreLabel, powerUpQuery, powerUpLabel, highQuery,
@@ -333,7 +333,7 @@ public final class GameDisplay {
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
-    levelLabel.setText(new Integer(currentGame.getCurrentLevelNumber()).toString());
+    levelLabel.setText(Integer.toString(currentGame.getCurrentLevelNumber()));
   }
 
   /**
