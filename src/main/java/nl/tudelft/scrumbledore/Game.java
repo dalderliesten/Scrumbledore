@@ -15,7 +15,6 @@ public class Game {
   private Level currentLevel;
   private ScoreCounter score;
   private double steps;
-  private int currentLevelNumber;
 
   /**
    * Constructs a new Game from disk.
@@ -23,8 +22,6 @@ public class Game {
   public Game() {
     LevelParser lp = new LevelParser();
     construct(lp.getLevels());
-
-    currentLevelNumber = 1;
   }
 
   /**
@@ -85,8 +82,13 @@ public class Game {
    * 
    * @return The current level number as a string.
    */
-  public String getCurrentLevelNumber() {
-    return Integer.toString(currentLevelNumber);
+  public int getCurrentLevelNumber() {
+    invariant();
+    int index = 0;
+    while (!currentLevel.equals(levels.get(index)) && index < levels.size()) {
+      ++index;
+    }
+    return index + 1;
   }
 
   /**
@@ -130,14 +132,9 @@ public class Game {
     invariant();
     assert remainingLevels() > 0;
 
-    int index = 0;
-    while (!currentLevel.equals(levels.get(index)) && index < levels.size()) {
-      ++index;
-    }
+    int newIndex = getCurrentLevelNumber();
 
-    setCurrentLevel(levels.get(index + 1));
-
-    currentLevelNumber = currentLevelNumber + 1;
+    setCurrentLevel(levels.get(newIndex));
 
     invariant();
   }

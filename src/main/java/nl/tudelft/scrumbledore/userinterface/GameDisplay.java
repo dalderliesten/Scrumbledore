@@ -2,18 +2,6 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.Bubble;
-import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Fruit;
-import nl.tudelft.scrumbledore.Game;
-import nl.tudelft.scrumbledore.Logger;
-import nl.tudelft.scrumbledore.NPC;
-import nl.tudelft.scrumbledore.NPCAction;
-import nl.tudelft.scrumbledore.Platform;
-import nl.tudelft.scrumbledore.Player;
-import nl.tudelft.scrumbledore.PlayerAction;
-import nl.tudelft.scrumbledore.SpriteStore;
-import nl.tudelft.scrumbledore.StepTimer;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +18,18 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import nl.tudelft.scrumbledore.Bubble;
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Fruit;
+import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.NPC;
+import nl.tudelft.scrumbledore.NPCAction;
+import nl.tudelft.scrumbledore.Platform;
+import nl.tudelft.scrumbledore.Player;
+import nl.tudelft.scrumbledore.PlayerAction;
+import nl.tudelft.scrumbledore.SpriteStore;
+import nl.tudelft.scrumbledore.StepTimer;
 
 /**
  * Class responsible for displaying, running, updating, and interacting with the game for one or two
@@ -128,7 +128,7 @@ public final class GameDisplay {
     highScoreLabel.setId("gameviewscores");
     powerUpLabel = new Label("NONE");
     powerUpLabel.setId("gameviewscores");
-    levelLabel = new Label(currentGame.getCurrentLevelNumber());
+    levelLabel = new Label(new Integer(currentGame.getCurrentLevelNumber()).toString());
     levelLabel.setId("gameviewscores");
 
     topLabels.getChildren().addAll(scoreQuery, scoreLabel, powerUpQuery, powerUpLabel, highQuery,
@@ -306,7 +306,7 @@ public final class GameDisplay {
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
-    levelLabel.setText(currentGame.getCurrentLevelNumber());
+    levelLabel.setText(new Integer(currentGame.getCurrentLevelNumber()).toString());
   }
 
   /**
