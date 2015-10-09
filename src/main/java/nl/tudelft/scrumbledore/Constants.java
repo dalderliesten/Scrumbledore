@@ -6,6 +6,7 @@ import java.util.List;
 import java.util.Map;
 
 import javafx.scene.input.KeyCode;
+import nl.tudelft.scrumbledore.level.PlayerAction;
 
 /**
  * Class for the maintainence of strings for display in visual and GUI. Meant to allow easy fixing

@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore;
 
+import nl.tudelft.scrumbledore.game.Game;
+
 /**
  * Class responsible for invoking the step method at a given rate on the Game.
  * 

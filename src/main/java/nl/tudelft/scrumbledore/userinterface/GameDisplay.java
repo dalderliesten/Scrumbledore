@@ -18,19 +18,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import nl.tudelft.scrumbledore.Bubble;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Fruit;
-import nl.tudelft.scrumbledore.Game;
-import nl.tudelft.scrumbledore.GameFactory;
 import nl.tudelft.scrumbledore.Logger;
-import nl.tudelft.scrumbledore.NPC;
-import nl.tudelft.scrumbledore.NPCAction;
-import nl.tudelft.scrumbledore.Platform;
-import nl.tudelft.scrumbledore.Player;
-import nl.tudelft.scrumbledore.PlayerAction;
-import nl.tudelft.scrumbledore.SpriteStore;
 import nl.tudelft.scrumbledore.StepTimer;
+import nl.tudelft.scrumbledore.game.Game;
+import nl.tudelft.scrumbledore.game.GameFactory;
+import nl.tudelft.scrumbledore.level.Bubble;
+import nl.tudelft.scrumbledore.level.Fruit;
+import nl.tudelft.scrumbledore.level.NPC;
+import nl.tudelft.scrumbledore.level.NPCAction;
+import nl.tudelft.scrumbledore.level.Platform;
+import nl.tudelft.scrumbledore.level.Player;
+import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
  * Class responsible for displaying, running, updating, and interacting with the game for one or two
@@ -224,7 +224,7 @@ public final class GameDisplay {
       public void handle(ActionEvent arg0) {
         currentTimer.pause();
         startStopButton.setText(Constants.GAME_STARTBUTTON);
-        Settingsmenu.settingsHandle();
+        SettingsMenu.settingsHandle();
       }
 
     });
@@ -240,7 +240,7 @@ public final class GameDisplay {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        Mainmenu.mainMenuHandle(currentStage);
+        MainMenu.mainMenuHandle(currentStage);
       }
 
     });
