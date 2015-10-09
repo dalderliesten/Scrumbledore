@@ -10,9 +10,6 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
-import nl.tudelft.scrumbledore.sprite.AnimatedSprite;
-import nl.tudelft.scrumbledore.sprite.Sprite;
-
 /**
  * Test Suite for the Animated Sprite class.
  * 

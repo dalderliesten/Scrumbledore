@@ -11,11 +11,6 @@ import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Collision;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Platform;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for the Collision class.
@@ -54,7 +49,7 @@ public class CollisionDirectionTest {
    * @param expectedRight
    *          Expected outcome of the collision from top check.
    */
-  public CollisionDirectionTest(Vector collider, Vector collidee, Vector colliderSpeed, 
+  public CollisionDirectionTest(Vector collider, Vector collidee, Vector colliderSpeed,
       boolean expectedTop, boolean expectedBottom, boolean expectedLeft, boolean expectedRight) {
     this.expectedTop = expectedTop;
     this.expectedBottom = expectedBottom;
@@ -116,34 +111,32 @@ public class CollisionDirectionTest {
   public static Collection<Object[]> data() {
     Collection<Object[]> input = new ArrayList<Object[]>();
     // Same position should not classify as a collision from any direction.
-    input.add(new Object[] {
-        new Vector(0, 0), new Vector(0, 0), new Vector(0, 0), false, false, false, false });
+    input.add(new Object[] { new Vector(0, 0), new Vector(0, 0), new Vector(0, 0), false, false,
+        false, false });
 
     // Touching within collision precision.
     // Touching Top.
-    input.add(new Object[] {
-        new Vector(33, 32), new Vector(32, 64), new Vector(0, 0), true, false, false, false });
-    input.add(new Object[] {
-        new Vector(32, 32 - Constants.COLLISION_PRECISION), new Vector(32, 64), new Vector(0, 0), 
-        false, false, false, false });
+    input.add(new Object[] { new Vector(33, 32), new Vector(32, 64), new Vector(0, 0), true, false,
+        false, false });
+    input.add(new Object[] { new Vector(32, 32 - Constants.COLLISION_PRECISION), new Vector(32, 64),
+        new Vector(0, 0), false, false, false, false });
     // Touching Left.
-    input.add(new Object[] {
-        new Vector(0, 32), new Vector(32, 32), new Vector(0, 0), false, false, true, false });
-    input.add(new Object[] {
-        new Vector(0 - Constants.COLLISION_PRECISION, 32), new Vector(32, 32), new Vector(0, 0), 
-        false, false, false, false });
+    input.add(new Object[] { new Vector(0, 32), new Vector(32, 32), new Vector(0, 0), false, false,
+        true, false });
+    input.add(new Object[] { new Vector(0 - Constants.COLLISION_PRECISION, 32), new Vector(32, 32),
+        new Vector(0, 0), false, false, false, false });
 
     // Anticipation of predicted collision.
     // From Top.
-    input.add(new Object[] {
-        new Vector(32, 25), new Vector(32, 64), new Vector(0, 8), true, false, false, false });
-    input.add(new Object[] {
-        new Vector(32, 20), new Vector(32, 64), new Vector(0, 8), false, false, false, false });
-    input.add(new Object[] {
-        new Vector(0, 31), new Vector(32, 64), new Vector(0, 8), false, false, false, false });
+    input.add(new Object[] { new Vector(32, 25), new Vector(32, 64), new Vector(0, 8), true, false,
+        false, false });
+    input.add(new Object[] { new Vector(32, 20), new Vector(32, 64), new Vector(0, 8), false, false,
+        false, false });
+    input.add(new Object[] { new Vector(0, 31), new Vector(32, 64), new Vector(0, 8), false, false,
+        false, false });
     // From Left.
-    input.add(new Object[] {
-        new Vector(0, 32), new Vector(48, 32), new Vector(20, 0), false, false, true, false });
+    input.add(new Object[] { new Vector(0, 32), new Vector(48, 32), new Vector(20, 0), false, false,
+        true, false });
 
     return input;
   }

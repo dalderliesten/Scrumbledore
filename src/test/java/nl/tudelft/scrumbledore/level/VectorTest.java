@@ -7,9 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Fruit;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for Vector Class.

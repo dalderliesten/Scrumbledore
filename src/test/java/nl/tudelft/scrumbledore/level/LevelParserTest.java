@@ -11,13 +11,6 @@ import java.util.Scanner;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Fruit;
-import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.LevelParser;
-import nl.tudelft.scrumbledore.level.NPC;
-import nl.tudelft.scrumbledore.level.Platform;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test suite for the LevelParser class.
@@ -158,30 +151,29 @@ public class LevelParserTest {
     assertEquals(new Vector(B_ONE, B_ONE), lp.getBlockPosition(0, 0));
     assertEquals(new Vector(B_TWO, B_TWO), lp.getBlockPosition(1, 1));
   }
-  
+
   /**
-   * Test whether the getLevels method returns the desired levels. 
+   * Test whether the getLevels method returns the desired levels.
    */
   @Test
   public void testGetLevels() {
     LevelParser lp = new LevelParser("src/main/resources/test");
     ArrayList<Level> levels = lp.getLevels();
 
+    Platform platform = new Platform(new Vector(0, 0),
+        new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+    Player player = new Player(new Vector(0, 0),
+        new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
 
-    Platform platform = new Platform(new Vector(0, 0), 
-        new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
-    Player player = new Player(new Vector(0, 0), 
-        new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
-    
     // Check whether two test levels are available
     assertEquals(2, levels.size());
-    
+
     // Check whether level 1 contains a platform and level 2 doesn't
     assertEquals(platform, levels.get(0).getPlatforms().get(0));
     assertEquals(new ArrayList<Platform>(), levels.get(1).getPlatforms());
-    
+
     // Check whether level 1 contains a player and level 2 doesn't
-    assertEquals(0, levels.get(0).getPlayers().size());    
+    assertEquals(0, levels.get(0).getPlayers().size());
     assertEquals(player, levels.get(1).getPlayers().get(0));
   }
 }

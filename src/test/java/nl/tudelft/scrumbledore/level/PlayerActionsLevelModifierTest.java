@@ -7,11 +7,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.PlayerAction;
-import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for the Player Actions Level Modifier class.

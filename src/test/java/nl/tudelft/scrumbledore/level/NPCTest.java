@@ -7,12 +7,6 @@ import static org.junit.Assert.assertTrue;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.level.Fruit;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.NPC;
-import nl.tudelft.scrumbledore.level.NPCAction;
-import nl.tudelft.scrumbledore.level.Vector;
-
 /**
  * Test suite for the NPC class.
  * 
@@ -23,7 +17,7 @@ import nl.tudelft.scrumbledore.level.Vector;
 public class NPCTest extends LevelElementTest {
 
   private NPC npc;
-  
+
   /**
    * Set the NPC field to a new NPC instance to use as a test object.
    */
@@ -31,15 +25,15 @@ public class NPCTest extends LevelElementTest {
   public void setUp() {
     npc = new NPC(new Vector(0, 0), new Vector(0, 0));
   }
-  
+
   @Override
   public LevelElement make(Vector position, Vector size) {
     return new NPC(position, size);
   }
 
   /**
-   * When a new NPC element is created, initially it should have gravity 
-   * and have the correct position and size.
+   * When a new NPC element is created, initially it should have gravity and have the correct
+   * position and size.
    */
   @Test
   public void testConstuctor() {
@@ -47,7 +41,7 @@ public class NPCTest extends LevelElementTest {
     assertEquals(new Vector(0, 0), npc.getSize());
     assertTrue(npc.hasGravity());
   }
-  
+
   /**
    * When an NPC action is added to a bubble's action queue, a call to hasAction for that action
    * should return true.
@@ -89,7 +83,7 @@ public class NPCTest extends LevelElementTest {
     npc.removeAction(NPCAction.MoveLeft);
     assertFalse(npc.hasAction(NPCAction.MoveLeft));
   }
-  
+
   /**
    * The stubbed method hashCode should just return zero (line coverage).
    */
@@ -97,7 +91,7 @@ public class NPCTest extends LevelElementTest {
   public void testHashCode() {
     assertEquals(0, npc.hashCode());
   }
-  
+
   /**
    * Two NPC instances with the same position and size should be considered equal.
    */
@@ -126,7 +120,7 @@ public class NPCTest extends LevelElementTest {
     Fruit fruit = new Fruit(npc.getPosition(), npc.getSize());
     assertFalse(npc.equals(fruit));
   }
-  
+
   /**
    * Test the lastMove field getter/setter.
    */

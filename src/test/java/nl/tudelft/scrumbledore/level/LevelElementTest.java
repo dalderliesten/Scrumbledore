@@ -9,8 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for LevelElement class.
@@ -134,62 +132,61 @@ public abstract class LevelElementTest {
     assertEquals(5, l1.distance(l2), Constants.DOUBLE_PRECISION);
   }
 
-  
   /**
    * Test for the inRadiusRangeOf method.
    */
-  @Test 
+  @Test
   public void testInRadiusRangeOfTrue() {
     LevelElement l1 = make(new Vector(0, 0), size);
     LevelElement l2 = make(new Vector(0, 8), size);
-    
+
     assertTrue(l1.inRadiusRangeOf(l2, 8));
   }
-  
+
   /**
    * Test for the inRadiusRangeOf method.
    */
-  @Test 
+  @Test
   public void testInRadiusRangeOfFalse() {
     LevelElement l1 = make(new Vector(0, 0), size);
     LevelElement l2 = make(new Vector(0, 9), size);
-    
+
     assertFalse(l1.inRadiusRangeOf(l2, 8));
   }
-  
+
   /**
    * Test for the inRadiusRangeOf method.
    */
-  @Test 
+  @Test
   public void testInBoxRangeOfTrue() {
     LevelElement l1 = make(new Vector(0, 0), size);
     LevelElement l2 = make(new Vector(0, 8), size);
-    
+
     assertTrue(l1.inBoxRangeOf(l2, 8));
   }
-  
+
   /**
    * Test for the inRadiusRangeOf method.
    */
-  @Test 
+  @Test
   public void testInBoxRangeOfFalse() {
     LevelElement l1 = make(new Vector(0, 0), size);
     LevelElement l2 = make(new Vector(0, 9), size);
-    
+
     assertFalse(l1.inBoxRangeOf(l2, 8));
   }
-  
+
   /**
    * Test the posX and posY methods.
    */
   @Test
   public void testPos() {
     LevelElement l1 = make(new Vector(42, 21), size);
-   
+
     assertEquals(42, l1.posX(), Constants.DOUBLE_PRECISION);
     assertEquals(21, l1.posY(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * Test width() method.
    */
@@ -198,7 +195,7 @@ public abstract class LevelElementTest {
     LevelElement l1 = make(new Vector(42, 21), new Vector(16, 32));
     assertEquals(16, l1.width(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * Test the height() method.
    */
@@ -207,7 +204,7 @@ public abstract class LevelElementTest {
     LevelElement l1 = make(position, new Vector(16, 32));
     assertEquals(32, l1.height(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * Test the vSpeed and hSpeed methods.
    */
@@ -220,7 +217,7 @@ public abstract class LevelElementTest {
     assertEquals(5, l1.hSpeed(), Constants.DOUBLE_PRECISION);
     assertEquals(7, l1.vSpeed(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * Test the hFric and vFric methods.
    */
@@ -233,7 +230,7 @@ public abstract class LevelElementTest {
     assertEquals(5, l1.hFric(), Constants.DOUBLE_PRECISION);
     assertEquals(7, l1.vFric(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
    * Cleaning up test properties after testing.
    */

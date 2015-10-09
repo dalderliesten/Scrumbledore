@@ -2,8 +2,6 @@ package nl.tudelft.scrumbledore.game;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.game.Game;
-import nl.tudelft.scrumbledore.game.SinglePlayerGame;
 import nl.tudelft.scrumbledore.level.Level;
 
 /**

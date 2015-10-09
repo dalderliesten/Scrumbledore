@@ -6,8 +6,6 @@ import static org.junit.Assert.assertTrue;
 
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.sprite.SpriteStore;
-
 /**
  * Test Suite for the Sprite Store class.
  * 
