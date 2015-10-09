@@ -1,6 +1,5 @@
 package nl.tudelft.scrumbledore.userinterface;
 
-import nl.tudelft.scrumbledore.Constants;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
@@ -8,6 +7,7 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import nl.tudelft.scrumbledore.Constants;
 
 /**
  * The Mainmenu class performs all actions related to the main menu, as well as ensuring successful
@@ -88,7 +88,7 @@ public final class Mainmenu {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        GameDisplay.launchGame(gameStage);
+        GameDisplay.launchSinglePlayerGame(gameStage);
       }
 
     });
@@ -104,7 +104,7 @@ public final class Mainmenu {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        GameDisplay.launchGame(gameStage);
+        GameDisplay.launchMultiPlayerGame(gameStage);
       }
 
     });

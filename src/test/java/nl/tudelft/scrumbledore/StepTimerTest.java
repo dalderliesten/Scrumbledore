@@ -1,17 +1,15 @@
 package nl.tudelft.scrumbledore;
 
-import org.junit.Test;
-import static org.mockito.Mockito.mock;
-import static org.mockito.Mockito.verify;
-
-import java.util.ArrayList;
-
-import static org.mockito.Mockito.atLeast;
-import static org.mockito.Mockito.atMost;
-import static org.mockito.Mockito.times;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
-import static org.mockito.Mockito.anyDouble;
+import static org.mockito.Matchers.anyDouble;
+import static org.mockito.Mockito.atLeast;
+import static org.mockito.Mockito.atMost;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
+
+import org.junit.Test;
 
 /**
  * Test Suite for the StepTimer class.
@@ -19,7 +17,7 @@ import static org.mockito.Mockito.anyDouble;
  * @author Jesse Tilro
  *
  */
-@SuppressWarnings({"PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyStaticImports"})
+@SuppressWarnings({ "PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyStaticImports" })
 public class StepTimerTest {
 
   /**
@@ -53,7 +51,7 @@ public class StepTimerTest {
   public void testLoopGameStepCounter() throws InterruptedException {
     int rate = 30;
     int deviation = 2;
-    Game game = new Game();
+    Game game = new MultiPlayerGame();
     // Initially set the wrong rate.
     StepTimer timer = new StepTimer(15, game);
     // Set rate should update all internal parameters correctly.
@@ -113,10 +111,8 @@ public class StepTimerTest {
    */
   @Test
   public void testGameGetterSetter() {
-    Game game = new Game();
-    ArrayList<Level> levels = new ArrayList<Level>();
-    levels.add(new Level());
-    Game otherGame = new Game(levels);
+    Game game = new MultiPlayerGame();
+    Game otherGame = new SinglePlayerGame();
     StepTimer timer = new StepTimer(30, game);
     timer.setGame(otherGame);
 

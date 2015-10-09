@@ -2,18 +2,6 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.Bubble;
-import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Fruit;
-import nl.tudelft.scrumbledore.Game;
-import nl.tudelft.scrumbledore.Logger;
-import nl.tudelft.scrumbledore.NPC;
-import nl.tudelft.scrumbledore.NPCAction;
-import nl.tudelft.scrumbledore.Platform;
-import nl.tudelft.scrumbledore.Player;
-import nl.tudelft.scrumbledore.PlayerAction;
-import nl.tudelft.scrumbledore.SpriteStore;
-import nl.tudelft.scrumbledore.StepTimer;
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -30,6 +18,19 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import nl.tudelft.scrumbledore.Bubble;
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Fruit;
+import nl.tudelft.scrumbledore.Game;
+import nl.tudelft.scrumbledore.GameFactory;
+import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.NPC;
+import nl.tudelft.scrumbledore.NPCAction;
+import nl.tudelft.scrumbledore.Platform;
+import nl.tudelft.scrumbledore.Player;
+import nl.tudelft.scrumbledore.PlayerAction;
+import nl.tudelft.scrumbledore.SpriteStore;
+import nl.tudelft.scrumbledore.StepTimer;
 
 /**
  * Class responsible for displaying, running, updating, and interacting with the game for one or two
@@ -65,18 +66,45 @@ public final class GameDisplay {
 
   /**
    * Constructor is set to private, as only one instance of the main menu should exist.
+   * 
+   * @param passedStage
+   *          The stage used by the game client.
    */
   private GameDisplay() {
   }
 
   /**
-   * Handles the creation of a game and the associated interface.
+   * Launch a new MultiPlayerGame.
    * 
    * @param passedStage
-   *          The stage used by the game client.
+   *          The stage to draw to.
    */
-  public static void launchGame(Stage passedStage) {
+  public static void launchMultiPlayerGame(Stage passedStage) {
     currentStage = passedStage;
+    GameFactory factory = new GameFactory();
+    currentGame = factory.makeMultiPlayerGame();
+
+    launchGame();
+  }
+
+  /**
+   * Launch a new SinglePlayerGame.
+   * 
+   * @param passedStage
+   *          The stage to draw to.
+   */
+  public static void launchSinglePlayerGame(Stage passedStage) {
+    currentStage = passedStage;
+    GameFactory factory = new GameFactory();
+    currentGame = factory.makeSinglePlayerGame();
+
+    launchGame();
+  }
+
+  /**
+   * Handles the creation of a game and the associated interface.
+   */
+  private static void launchGame() {
     currentLayout = new BorderPane();
 
     prepareGame();
@@ -90,12 +118,12 @@ public final class GameDisplay {
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
-    passedStage.setScene(currentScene);
+    currentStage.setScene(currentScene);
 
     EventListeners listeners = new EventListeners(currentGame, currentStage, currentScene);
     listeners.init();
 
-    passedStage.show();
+    currentStage.show();
   }
 
   /**
@@ -103,7 +131,6 @@ public final class GameDisplay {
    */
   private static void prepareGame() {
     sprites = new SpriteStore();
-    currentGame = new Game();
 
     currentTimer = new StepTimer(Constants.REFRESH_RATE, currentGame);
     currentTimer.start();
@@ -128,7 +155,7 @@ public final class GameDisplay {
     highScoreLabel.setId("gameviewscores");
     powerUpLabel = new Label("NONE");
     powerUpLabel.setId("gameviewscores");
-    levelLabel = new Label(currentGame.getCurrentLevelNumber());
+    levelLabel = new Label(new Integer(currentGame.getCurrentLevelNumber()).toString());
     levelLabel.setId("gameviewscores");
 
     topLabels.getChildren().addAll(scoreQuery, scoreLabel, powerUpQuery, powerUpLabel, highQuery,
@@ -306,7 +333,7 @@ public final class GameDisplay {
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
-    levelLabel.setText(currentGame.getCurrentLevelNumber());
+    levelLabel.setText(new Integer(currentGame.getCurrentLevelNumber()).toString());
   }
 
   /**
