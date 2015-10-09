@@ -11,6 +11,7 @@ import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.Game;
+import nl.tudelft.scrumbledore.game.SinglePlayerGame;
 import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.PlayerAction;
 
@@ -19,6 +20,7 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  * 
  * @author David Alderliesten
  * @author Jeroen Meijer
+ * @author Floris Doolaard
  */
 public class EventListeners {
   private Game game;
@@ -64,27 +66,39 @@ public class EventListeners {
    * Adds key press listeners.
    */
   private void keyPressListeners() {
+
     scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
 
       public void handle(KeyEvent keyPressed) {
-        KeyCode keyCode = keyPressed.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        Boolean playersLeft = false;
-        for (int i = 0; i < players.size(); i++) {
-          players.get(i).addAction(Constants.KEY_MAPPING.get(i).get(keyCode));
+        if (players.size() != 0) {
+          KeyCode keyCode = keyPressed.getCode();
+          Boolean playersLeft = false;
 
-          if (players.get(i).isAlive()) {
-            playersLeft = true;
+          if (game instanceof SinglePlayerGame) {
+            players.get(0).addAction(Constants.KEY_MAPPING.get(2).get(keyCode));
+            if (players.get(0).isAlive()) {
+              playersLeft = true;
+            }
+          } else {
+            for (int i = 0; i < players.size(); i++) {
+              players.get(i).addAction(Constants.KEY_MAPPING.get(i).get(keyCode));
+
+              if (players.get(i).isAlive()) {
+                playersLeft = true;
+              }
+            }
           }
-        }
 
-        // Restarting the game if "R" is pressed or when the player is dead.
-        if (keyCode == KeyCode.R || !playersLeft) {
-          game.restart();
-          // renderStatic();
+          // Restarting the game if "R" is pressed or when the player is dead.
+          if (keyCode == KeyCode.R || !playersLeft) {
+            game.restart();
+            // renderStatic();
+          }
         }
       }
     });
+
   }
 
   /**
@@ -96,9 +110,17 @@ public class EventListeners {
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (int i = 0; i < players.size(); i++) {
-          players.get(i)
-              .addAction(PlayerAction.invertAction(Constants.KEY_MAPPING.get(i).get(keyCode)));
+
+        if (players.size() != 0) {
+          if (game instanceof SinglePlayerGame) {
+            players.get(0).addAction(
+                PlayerAction.invertAction(Constants.KEY_MAPPING.get(2).get(keyCode)));
+          } else {
+            for (int i = 0; i < players.size(); i++) {
+              players.get(i).addAction(
+                  PlayerAction.invertAction(Constants.KEY_MAPPING.get(i).get(keyCode)));
+            }
+          }
         }
       }
     });
@@ -122,5 +144,5 @@ public class EventListeners {
       }
     });
   }
-  
+
 }
