@@ -22,7 +22,6 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  */
 public class EventListeners {
   private Game game;
-  private Stage stage;
   private Scene scene;
 
   /**
@@ -35,9 +34,8 @@ public class EventListeners {
    * @param scene
    *          The scene to which the EventListeners are added.
    */
-  public EventListeners(Game game, Stage stage, Scene scene) {
+  public EventListeners(Game game, Scene scene) {
     this.game = game;
-    this.stage = stage;
     this.scene = scene;
   }
 
@@ -46,7 +44,6 @@ public class EventListeners {
    */
   public void init() {
     addKeyEventListeners();
-    addWindowEventListeners();
   }
 
   /**
@@ -92,24 +89,4 @@ public class EventListeners {
       }
     });
   }
-
-  /**
-   * Add WindowEvent listener to exit the application when the window is closed.
-   * 
-   * @param stage
-   *          The Stage used by the rest of the GUI.
-   */
-  private void addWindowEventListeners() {
-    stage.setOnCloseRequest(new EventHandler<WindowEvent>() {
-      public void handle(WindowEvent event) {
-
-        // Logging the termination of the game.
-        Logger.getInstance().log("--------------------GAME TERMINATED");
-
-        // Quitting the game.
-        System.exit(0);
-      }
-    });
-  }
-
 }

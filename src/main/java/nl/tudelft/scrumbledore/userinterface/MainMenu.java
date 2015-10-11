@@ -7,7 +7,9 @@ import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.Logger;
 
 /**
  * The Mainmenu class performs all actions related to the main menu, as well as ensuring successful
@@ -40,6 +42,8 @@ public final class MainMenu {
     generateLogo();
 
     generateButtons();
+    
+    addWindowEventListeners();
 
     currentScene = new Scene(contentBox);
     gameStage.setScene(currentScene);
@@ -140,6 +144,25 @@ public final class MainMenu {
         System.exit(0);
       }
 
+    });
+  }
+  
+  /**
+   * Add WindowEvent listener to exit the application when the window is closed.
+   * 
+   * @param stage
+   *          The Stage used by the rest of the GUI.
+   */
+  private static void addWindowEventListeners() {
+    gameStage.setOnCloseRequest(new EventHandler<WindowEvent>() {
+      public void handle(WindowEvent event) {
+
+        // Logging the termination of the game.
+        Logger.getInstance().log("--------------------GAME TERMINATED");
+
+        // Quitting the game.
+        System.exit(0);
+      }
     });
   }
 

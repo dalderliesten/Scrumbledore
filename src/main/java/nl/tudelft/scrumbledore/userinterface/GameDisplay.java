@@ -18,6 +18,7 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
+import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
@@ -120,7 +121,7 @@ public final class GameDisplay {
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     currentStage.setScene(currentScene);
 
-    EventListeners listeners = new EventListeners(currentGame, currentStage, currentScene);
+    EventListeners listeners = new EventListeners(currentGame, currentScene);
     listeners.init();
 
     currentStage.show();
