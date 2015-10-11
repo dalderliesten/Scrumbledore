@@ -75,7 +75,7 @@ public final class MainMenu {
     Button settingsButton = new Button(Constants.SETTINGS_BUTTON);
     settingsChoice(settingsButton);
 
-    Button exitButton = new Button(Constants.EXIT_BUTTION);
+    Button exitButton = new Button(Constants.EXIT_BUTTON);
     exitButtonChoice(exitButton);
 
     contentBox.getChildren().addAll(singleplayerGameButton, multiplayerGameButton, settingsButton,

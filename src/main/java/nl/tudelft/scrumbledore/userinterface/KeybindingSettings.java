@@ -1,5 +1,11 @@
 package nl.tudelft.scrumbledore.userinterface;
 
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
+import javafx.scene.control.Label;
+import javafx.scene.control.RadioButton;
+import javafx.scene.control.ToggleGroup;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import nl.tudelft.scrumbledore.Constants;
 
@@ -26,7 +32,7 @@ public final class KeybindingSettings {
    * 
    * @return A JavaFX VBox containing all the options and associated actions.
    */
-  public static VBox fetchLoggingOptions() {
+  public static VBox fetchKeybindingOptions() {
     currentBox = new VBox(Constants.SETTINGS_PADDING);
 
     generateOptions();
