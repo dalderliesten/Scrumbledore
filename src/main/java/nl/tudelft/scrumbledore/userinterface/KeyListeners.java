@@ -6,37 +6,35 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
+import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.PlayerAction;
 
 /**
- * Handles all the evenlisteners of the gui.
+ * Handles all the key event listeners of the gui.
  * 
  * @author David Alderliesten
  * @author Jeroen Meijer
  */
-public class EventListeners {
+public class KeyListeners {
   private Game game;
   private Scene scene;
+  private KeybindingContainer keybindings;
 
   /**
    * Prepares the EventListeners.
    * 
    * @param game
-   *          The game to which the EventListeners are added.
-   * @param stage
-   *          The stage to which the EventListeners are added.
+   *          The game to which the KeyEventListeners are added.
    * @param scene
-   *          The scene to which the EventListeners are added.
+   *          The scene to which the KeyEventListeners are added.
    */
-  public EventListeners(Game game, Scene scene) {
+  public KeyListeners(Game game, Scene scene) {
     this.game = game;
     this.scene = scene;
+    this.keybindings = KeybindingContainer.getInstance();
   }
 
   /**
@@ -66,8 +64,8 @@ public class EventListeners {
       public void handle(KeyEvent keyPressed) {
         KeyCode keyCode = keyPressed.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (int i = 0; i < players.size(); i++) {
-          players.get(i).addAction(Constants.KEY_MAPPING.get(i).get(keyCode));
+        for (Player player : players) {
+          player.addAction(keybindings.getKeybindg(player).getAction(keyCode));
         }
       }
     });
@@ -82,9 +80,9 @@ public class EventListeners {
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (int i = 0; i < players.size(); i++) {
-          players.get(i)
-              .addAction(PlayerAction.invertAction(Constants.KEY_MAPPING.get(i).get(keyCode)));
+        for (Player player : players) {
+          player.addAction(
+              PlayerAction.invertAction(keybindings.getKeybindg(player).getAction(keyCode)));
         }
       }
     });
