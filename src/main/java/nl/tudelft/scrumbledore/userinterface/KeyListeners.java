@@ -79,11 +79,10 @@ public class KeyListeners {
 
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
-        
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
         for (Player player : players) {
           player.addAction(
-              PlayerAction.invertAction(player, keybindings.getKeybinding(player).getAction(keyCode)));
+              PlayerAction.invertAction(keybindings.getKeybinding(player).getAction(keyCode)));
         }
       }
     });

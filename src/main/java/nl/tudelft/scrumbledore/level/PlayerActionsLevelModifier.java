@@ -38,8 +38,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           }
         }
 
-        player.removeAction(PlayerAction.MoveStop);
-        player.removeAction(PlayerAction.Shoot);
+        player.clearActions();
       }
     }
   }
