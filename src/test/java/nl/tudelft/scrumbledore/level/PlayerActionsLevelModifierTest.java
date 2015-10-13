@@ -101,14 +101,11 @@ public class PlayerActionsLevelModifierTest {
    */
   @Test
   public void testModifyClear() {
-    player.addAction(PlayerAction.Jump);
+    player.addAction(PlayerAction.Shoot);
     player.addAction(PlayerAction.MoveStop);
-    player.addAction(PlayerAction.MoveLeft);
-    player.addAction(PlayerAction.MoveRight);
     modifier.modify(level, .5);
-    assertFalse(player.hasAction(PlayerAction.Jump));
     assertFalse(player.hasAction(PlayerAction.MoveStop));
-    assertFalse(player.hasAction(PlayerAction.MoveLeft));
-    assertFalse(player.hasAction(PlayerAction.MoveRight));
+    assertFalse(player.hasAction(PlayerAction.Shoot));
+
   }
 }

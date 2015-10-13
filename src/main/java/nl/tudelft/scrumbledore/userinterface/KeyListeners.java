@@ -78,10 +78,13 @@ public class KeyListeners {
 
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
+        
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (Player player : players) {
+        for (Player player : players) { 
           player.addAction(PlayerAction.invertAction(
               keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode)));
+          player.removeAction((keybindings.getKeybinding(
+              player.getPlayerNumber()).getAction(keyCode)));
         }
       }
     });
