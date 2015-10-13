@@ -19,7 +19,7 @@
  .label {
  	-fx-text-fill: #ffffff;
  	-fx-font-size: 15.0px;
- 	-fx-padding: 0.0 0.0 0.0 14.0;
+ 	-fx-padding: 0.0 0.0 15.0 14.0;
  }
  
   .button {

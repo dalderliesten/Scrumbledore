@@ -97,7 +97,7 @@ public final class Constants {
   public static final String GAME_EXITBUTTON = "Exit";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
-  public static final String GAMEWIN_HEADER = "Scrummaster";
+  public static final String GAMEWIN_HEADER = "SCRUMMASTER";
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
   public static final String GAMEWIN_TOMAINMENU = "Return to the main menu";
 
