@@ -3,7 +3,6 @@ package nl.tudelft.scrumbledore.userinterface;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -292,7 +291,8 @@ public final class GameDisplay {
       } else {
         Logger.getInstance().log("Player advanced to the next level.");
         staticContext.setFill(Color.WHITE);
-        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100, (Constants.LEVELY / 2) - 125);
+        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+            (Constants.LEVELY / 2) - 130);
 
 //        new Timer().schedule(new TimerTask() {
 //          @Override
@@ -304,7 +304,7 @@ public final class GameDisplay {
       }
     }
   }
-
+  
   /**
    * Prepares the game view renderer.
    */
