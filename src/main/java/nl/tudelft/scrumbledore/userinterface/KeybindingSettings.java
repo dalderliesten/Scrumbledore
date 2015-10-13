@@ -44,11 +44,11 @@ public final class KeybindingSettings {
   public static VBox fetchKeybindingOptions() {
     currentBox = new VBox(Constants.SETTINGS_PADDING);
     actionBinders = new VBox();
-    
+
     generateOptions();
-    
+
     currentBox.getChildren().add(actionBinders);
-    
+
     return currentBox;
   }
 
@@ -94,7 +94,7 @@ public final class KeybindingSettings {
 
   private static void generateKeybindings() {
     actionBinders.getChildren().clear();
-    
+
     Keybinding binding = KeybindingContainer.getInstance().getKeybinding(selectedPlayer - 1);
 
     Button moveLeft = generateKeybinder(PlayerAction.MoveLeft,
@@ -117,14 +117,24 @@ public final class KeybindingSettings {
    *          Description of the button.
    * @return actionBinder The Button to be rendered
    */
-  private static Button generateKeybinder(PlayerAction action, KeyCode key, String description) {
+  private static Button generateKeybinder(final PlayerAction action, KeyCode key,
+      String description) {
     Button actionBinder = new Button(description + key.toString());
 
     actionBinder.setOnMouseClicked(new EventHandler<MouseEvent>() {
       public void handle(MouseEvent event) {
-        
+        showKeybindingPopup(action);
       }
     });
     return actionBinder;
+  }
+
+  /**
+   * Shows a popup asking the player to press a new key for a given action.
+   * 
+   * @param action The PlayerAction to be rebound.
+   */
+  private static void showKeybindingPopup(PlayerAction action) {
+    
   }
 }

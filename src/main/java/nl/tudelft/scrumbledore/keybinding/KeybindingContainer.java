@@ -56,29 +56,19 @@ public final class KeybindingContainer {
   }
 
   /**
-   * Checks if a key has been bound anywhere in the keybindings.
+   * Updates a Keybinding and if necessary unbinds other Keybinding to enforce KeyCode uniqueness.
    * 
-   * @param key
-   *          The KeyCode to check for.
-   * @return boolean Whether or not a key has been bound.
-   */
-  public boolean isAssigned(KeyCode key) {
-    boolean assigned = false;
-    for (Keybinding binding : keybindingList) {
-      if (binding.isAssigned(key)) {
-        assigned = true;
-      }
-    }
-    return assigned;
-  }
-
-  /**
-   * 
-   * @param playerNumber 
-   * @param action 
-   * @param key 
+   * @param playerNumber The player for which to update the Keybinding.
+   * @param action The action for which the Keycode is updated.
+   * @param key The new KeyCode for the given action.
    */
   public void updateKeyBinding(int playerNumber, PlayerAction action, KeyCode key) {
-
+    for (Keybinding binding : keybindingList) {
+      if (binding.isAssigned(key)) {
+        binding.updateKeyByAction(action, null);
+      }
+    }
+    
+    getKeybinding(playerNumber).updateKeyByAction(action, key);
   }
 }
