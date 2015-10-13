@@ -6,7 +6,12 @@ import java.util.List;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Player;
 
-public class KeybindingContainer {
+/**
+ * A custom container for Keybindings. One Keybinding per player.
+ * 
+ * @author Jeroen Meijer
+ */
+public final class KeybindingContainer {
   private static KeybindingContainer keybindingContainer;
 
   private List<Keybinding> keybindingList;
@@ -16,7 +21,12 @@ public class KeybindingContainer {
     reset();
   }
 
-  public synchronized static KeybindingContainer getInstance() {
+  /**
+   * Gets the KeybindingContainer.
+   * 
+   * @return KeybindingContainer the only instance.
+   */
+  public static synchronized KeybindingContainer getInstance() {
     if (keybindingContainer == null) {
       keybindingContainer = new KeybindingContainer();
     }
@@ -24,13 +34,16 @@ public class KeybindingContainer {
     return keybindingContainer;
   }
 
+  /**
+   * 
+   */
   public void reset() {
     for (int i = 0; i < Constants.NUMBER_OF_PLAYERS; i++) {
       keybindingList.add(new Keybinding(i + 1));
     }
   }
 
-  public Keybinding getKeybindg(Player player) {
+  public Keybinding getKeybinding(Player player) {
     return keybindingList.get(player.getPlayerNumber());
   }
 

@@ -18,7 +18,6 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
-import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
@@ -358,7 +357,9 @@ public final class GameDisplay {
         if (player.getSpeed().getX() == 0 && !isFiring) {
           steps = 0;
         }
-        String path = sprites.getAnimated("player-" + Constants.PLAYER_COLORS[player.getPlayerNumber()] + "-" + spr).getFrame(steps).getPath();
+        String path = sprites
+            .getAnimated("player-" + Constants.PLAYER_COLORS[player.getPlayerNumber()] + "-" + spr)
+            .getFrame(steps).getPath();
         dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
             player.getPosition().getY());
       }

@@ -65,7 +65,7 @@ public class KeyListeners {
         KeyCode keyCode = keyPressed.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
         for (Player player : players) {
-          player.addAction(keybindings.getKeybindg(player).getAction(keyCode));
+          player.addAction(keybindings.getKeybinding(player).getAction(keyCode));
         }
       }
     });
@@ -82,7 +82,7 @@ public class KeyListeners {
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
         for (Player player : players) {
           player.addAction(
-              PlayerAction.invertAction(keybindings.getKeybindg(player).getAction(keyCode)));
+              PlayerAction.invertAction(keybindings.getKeybinding(player).getAction(keyCode)));
         }
       }
     });
