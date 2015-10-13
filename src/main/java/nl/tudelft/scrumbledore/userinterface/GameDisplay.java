@@ -268,7 +268,8 @@ public final class GameDisplay {
    */
   private static void levelStatus() {
     if (currentGame.getCurrentLevel().getNPCs().isEmpty()
-        && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
+        && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()
+        && currentGame.getCurrentLevel().getFruits().isEmpty()) {
       if (currentGame.remainingLevels() == 0) {
         Logger.getInstance().log("Player completed the game successfully.");
 
