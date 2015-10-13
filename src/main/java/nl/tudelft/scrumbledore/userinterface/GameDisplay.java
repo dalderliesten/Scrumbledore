@@ -297,10 +297,11 @@ public final class GameDisplay {
 //        new Timer().schedule(new TimerTask() {
 //          @Override
 //          public void run() {
-//            currentGame.goToNextLevel();
-//            renderStatic();
 //          }
 //        }, Constants.ADVANCING_DELAY);
+        
+      currentGame.goToNextLevel();
+      renderStatic();
       }
     }
   }
