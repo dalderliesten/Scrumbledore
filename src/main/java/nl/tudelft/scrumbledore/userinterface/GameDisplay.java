@@ -296,10 +296,14 @@ public final class GameDisplay {
 
     Label bodyVictory = new Label(Constants.GAMEWIN_DIALOG);
 
+    Label pointsView = new Label(Constants.GAMEWIN_POINTS
+        + currentGame.getScoreCounter().getScore() + Constants.GAMEWIN_HIGHSCORE
+        + currentGame.getScoreCounter().getHighScore() +".");
+
     Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
     mapExitButton(returnButton);
 
-    currentBox.getChildren().addAll(headerVictory, bodyVictory, returnButton);
+    currentBox.getChildren().addAll(headerVictory, bodyVictory, pointsView, returnButton);
     currentScene = new Scene(currentBox);
     currentScene.getStylesheets().add(Constants.CSS_VICTORY);
     currentStage.setScene(currentScene);

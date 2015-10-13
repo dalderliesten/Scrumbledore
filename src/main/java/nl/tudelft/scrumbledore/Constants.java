@@ -99,6 +99,8 @@ public final class Constants {
   // Defining text needed for the display of dialog and handling boxes within the user interface.
   public static final String GAMEWIN_HEADER = "SCRUMMASTER";
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
+  public static final String GAMEWIN_POINTS = "You scored ";
+  public static final String GAMEWIN_HIGHSCORE = " points with a session high score of ";
   public static final String GAMEWIN_TOMAINMENU = "Return to the main menu";
 
   // The standard size of a block.
