@@ -5,12 +5,18 @@ import javafx.beans.value.ObservableValue;
 import javafx.event.EventHandler;
 import javafx.scene.control.Button;
 import javafx.scene.control.RadioButton;
+import javafx.scene.control.Label;
 import javafx.scene.control.Toggle;
 import javafx.scene.control.ToggleGroup;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.stage.Stage;
+import javafx.stage.Modality;
+import javafx.stage.StageStyle;
+import javafx.scene.Scene;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.keybinding.Keybinding;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
@@ -26,7 +32,7 @@ public final class KeybindingSettings {
 
   private static VBox currentBox;
   private static VBox actionBinders;
-  private static int selectedPlayer = 1;
+  private static int selectedPlayer;
 
   /**
    * Constructor is set to private, as only one instance of the settings menu should exist at any
@@ -45,6 +51,8 @@ public final class KeybindingSettings {
     currentBox = new VBox(Constants.SETTINGS_PADDING);
     actionBinders = new VBox();
 
+    selectedPlayer = 0;
+    
     generateOptions();
 
     currentBox.getChildren().add(actionBinders);
@@ -79,10 +87,10 @@ public final class KeybindingSettings {
           Object newButton) {
         int index = 0;
         for (Toggle toggle : playerGroup.getToggles()) {
-          index++;
           if (toggle == newButton) {
             selectedPlayer = index;
           }
+          index++;
         }
         generateKeybindings();
       }
@@ -94,8 +102,8 @@ public final class KeybindingSettings {
 
   private static void generateKeybindings() {
     actionBinders.getChildren().clear();
-
-    Keybinding binding = KeybindingContainer.getInstance().getKeybinding(selectedPlayer - 1);
+    
+    Keybinding binding = KeybindingContainer.getInstance().getKeybinding(selectedPlayer);
 
     Button moveLeft = generateKeybinder(PlayerAction.MoveLeft,
         binding.getKey(PlayerAction.MoveLeft), "Move left: ");
@@ -132,9 +140,28 @@ public final class KeybindingSettings {
   /**
    * Shows a popup asking the player to press a new key for a given action.
    * 
-   * @param action The PlayerAction to be rebound.
+   * @param action
+   *          The PlayerAction to be rebound.
    */
-  private static void showKeybindingPopup(PlayerAction action) {
-    
+  private static void showKeybindingPopup(final PlayerAction action) {
+    final Stage popup = new Stage();
+    Label rebindLabel = new Label("Press a key to rebind...");
+    rebindLabel.setId("popup");
+    Scene scene = new Scene(rebindLabel);
+
+    scene.setUserAgentStylesheet(Constants.CSS_SETTINGS);
+
+    scene.setOnKeyPressed(new EventHandler<KeyEvent>() {
+      public void handle(KeyEvent key) {
+        KeybindingContainer.getInstance().updateKeyBinding(selectedPlayer, action, key.getCode());
+        generateKeybindings();
+        popup.close();
+      }
+    });
+
+    popup.initStyle(StageStyle.UNDECORATED);
+    popup.initModality(Modality.APPLICATION_MODAL);
+    popup.setScene(scene);
+    popup.show();
   }
 }

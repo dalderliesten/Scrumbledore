@@ -40,7 +40,7 @@ public final class KeybindingContainer {
    */
   public void reset() {
     for (int i = 0; i < Constants.NUMBER_OF_PLAYERS; i++) {
-      keybindingList.add(new Keybinding(i + 1));
+      keybindingList.add(new Keybinding(i));
     }
   }
 
@@ -58,17 +58,20 @@ public final class KeybindingContainer {
   /**
    * Updates a Keybinding and if necessary unbinds other Keybinding to enforce KeyCode uniqueness.
    * 
-   * @param playerNumber The player for which to update the Keybinding.
-   * @param action The action for which the Keycode is updated.
-   * @param key The new KeyCode for the given action.
+   * @param playerNumber
+   *          The player for which to update the Keybinding.
+   * @param action
+   *          The action for which the Keycode is updated.
+   * @param key
+   *          The new KeyCode for the given action.
    */
   public void updateKeyBinding(int playerNumber, PlayerAction action, KeyCode key) {
     for (Keybinding binding : keybindingList) {
       if (binding.isAssigned(key)) {
-        binding.updateKeyByAction(action, null);
+        binding.updateKeyByAction(binding.getAction(key), KeyCode.UNDEFINED);
       }
     }
-    
+
     getKeybinding(playerNumber).updateKeyByAction(action, key);
   }
 }
