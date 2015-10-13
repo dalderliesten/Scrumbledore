@@ -19,6 +19,7 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Constants {
+  
   // Empty private constructor for the utility class.
   private Constants() {
   }
@@ -46,6 +47,10 @@ public final class Constants {
   public static final String HISCORELABEL = "High-Score:";
   public static final String POWERUPLABEL = "Power-Ups:";
   public static final String LEVELLABEL = "Level:";
+  
+  // Defining labels and values needed for the advancement GUI pop-ups.
+  public static final String ADVANCINGLABEL = "Advancing to next level in 5 seconds...";
+  public static final int ADVANCING_DELAY = 5000;
 
   // Defining text needed to display the buttons in the bottom of the user interface.
   public static final String STARTBTNLABEL = "Start";
@@ -299,4 +304,5 @@ public final class Constants {
   public static void setLoggingWantEnemy(boolean loggingWantEnemy) {
     Constants.loggingWantEnemy = loggingWantEnemy;
   }
+  
 }
