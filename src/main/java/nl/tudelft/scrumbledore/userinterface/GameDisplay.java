@@ -3,6 +3,9 @@ package nl.tudelft.scrumbledore.userinterface;
 import java.util.ArrayList;
 import java.util.Timer;
 import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -293,19 +296,13 @@ public final class GameDisplay {
         staticContext.setFill(Color.WHITE);
         staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);
-
-//        new Timer().schedule(new TimerTask() {
-//          @Override
-//          public void run() {
-//          }
-//        }, Constants.ADVANCING_DELAY);
         
-      currentGame.goToNextLevel();
-      renderStatic();
+        currentGame.goToNextLevel();
+        GameDisplay.renderStatic();
       }
     }
   }
-  
+
   /**
    * Prepares the game view renderer.
    */
