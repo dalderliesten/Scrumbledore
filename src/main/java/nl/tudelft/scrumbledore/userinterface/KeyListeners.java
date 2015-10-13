@@ -7,7 +7,6 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
-import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.PlayerAction;
@@ -65,7 +64,7 @@ public class KeyListeners {
         KeyCode keyCode = keyPressed.getCode();
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
         for (Player player : players) {
-          player.addAction(keybindings.getKeybinding(player).getAction(keyCode));
+          player.addAction(keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode));
         }
       }
     });
@@ -81,10 +80,11 @@ public class KeyListeners {
         KeyCode keyCode = keyReleased.getCode();
         
         ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (Player player : players) {
-          player.addAction(
-              PlayerAction.invertAction(keybindings.getKeybinding(player).getAction(keyCode)));
-          player.removeAction((keybindings.getKeybinding(player).getAction(keyCode)));
+        for (Player player : players) { 
+          player.addAction(PlayerAction.invertAction(
+              keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode)));
+          player.removeAction((keybindings.getKeybinding(
+              player.getPlayerNumber()).getAction(keyCode)));
         }
       }
     });

@@ -29,15 +29,18 @@ public class Player extends LevelElement {
     super(position, size);
 
     setGravity(true);
-    
+
     id = playerCount++;
     actions = new ArrayList<PlayerAction>();
     lastMove = PlayerAction.MoveRight;
     firing = false;
     alive = true;
   }
-  
-  public static void ResetPlayerCount() {
+
+  /**
+   * Resets the current player count.
+   */
+  public static void resetPlayerCount() {
     playerCount = 0;
   }
 
@@ -79,9 +82,10 @@ public class Player extends LevelElement {
   public void setAlive(Boolean bool) {
     alive = bool;
   }
-  
+
   /**
    * Gets the id of the current player.
+   * 
    * @return Integer that represents the players number in the game.
    */
   public int getPlayerNumber() {
