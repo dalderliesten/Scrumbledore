@@ -100,6 +100,9 @@ public final class KeybindingSettings {
     currentBox.getChildren().addAll(playerBox);
   }
 
+  /**
+   * Generates all the keybinding buttons.
+   */
   private static void generateKeybindings() {
     actionBinders.getChildren().clear();
     
