@@ -1,6 +1,10 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -16,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nl.tudelft.scrumbledore.Constants;
@@ -265,6 +270,7 @@ public final class GameDisplay {
 
   /**
    * Checks the status of the level, and determines if the player should advance to the next level.
+   * Upon restarting, notifies the player of time to pick up fruit.
    */
   private static void levelStatus() {
     if (currentGame.getCurrentLevel().getNPCs().isEmpty()
@@ -287,9 +293,12 @@ public final class GameDisplay {
         animationTimer.stop();
       } else {
         Logger.getInstance().log("Player advanced to the next level.");
-
+        staticContext.setFill(Color.WHITE);
+        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+            (Constants.LEVELY / 2) - 130);
+        
         currentGame.goToNextLevel();
-        renderStatic();
+        GameDisplay.renderStatic();
       }
     }
   }
@@ -315,8 +324,8 @@ public final class GameDisplay {
     staticContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
     for (Platform current : currentGame.getCurrentLevel().getPlatforms()) {
-      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()),
-          current.getPosition().getX(), current.getPosition().getY());
+      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition()
+          .getX(), current.getPosition().getY());
     }
   }
 
@@ -364,8 +373,8 @@ public final class GameDisplay {
           steps = 0;
         }
         String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
-        dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
-            player.getPosition().getY());
+        dynamicContext.drawImage(new Image(path), player.getPosition().getX(), player.getPosition()
+            .getY());
       }
     }
   }
@@ -385,8 +394,8 @@ public final class GameDisplay {
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
       }
-      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
+          .getPosition().getY());
     }
   }
 
@@ -407,8 +416,8 @@ public final class GameDisplay {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      dynamicContext.drawImage(new Image(path), current.getPosition().getX(),
-          current.getPosition().getY());
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
@@ -421,8 +430,8 @@ public final class GameDisplay {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      dynamicContext.drawImage(new Image(path), current.getPosition().getX(),
-          current.getPosition().getY());
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
