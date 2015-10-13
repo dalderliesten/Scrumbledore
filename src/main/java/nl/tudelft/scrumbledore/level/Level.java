@@ -27,7 +27,7 @@ public class Level {
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
     players = new ArrayList<Player>();
-    Player.ResetPlayerCount();
+    Player.resetPlayerCount();
   }
 
   /**
