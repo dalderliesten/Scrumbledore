@@ -409,7 +409,13 @@ public final class GameDisplay {
       double bubbleLifetime = currentBubble.getLifetime();
 
       if (currentBubble.hasNPC()) {
-        path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
+        if (bubbleLifetime < 60 && bubbleLifetime % 15 < 8) {
+          path = sprites.getAnimated("bubble-zenchan-red").getFrame(currentGame.getSteps())
+              .getPath();
+        } else {
+          path = sprites.getAnimated("bubble-zenchan-green").getFrame(currentGame.getSteps())
+            .getPath();
+        }
       } else if (bubbleLifetime > 5 && bubbleLifetime < 40 && bubbleLifetime % 15 < 8) {
         path = sprites.getAnimated("bubble-red").getFrame(currentGame.getSteps()).getPath();
       } else if (bubbleLifetime <= 5) {
