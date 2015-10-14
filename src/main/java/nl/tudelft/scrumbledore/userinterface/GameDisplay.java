@@ -411,10 +411,14 @@ public final class GameDisplay {
         path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
       }
       
-      if (currentBubble.getLifetime() < 40 && currentBubble.getLifetime() % 15 < 8) {
+      double bubbleLifetime = currentBubble.getLifetime();
+      if (bubbleLifetime > 5 && bubbleLifetime < 40 && bubbleLifetime % 15 < 8) {
         path = sprites.getAnimated("bubble-red").getFrame(currentGame.getSteps()).getPath();
       }
-      
+   
+      if (bubbleLifetime <= 5) {
+        path = sprites.getAnimated("bubble-green-burst").getFrame(currentGame.getSteps()).getPath();
+      }
       dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
           .getPosition().getY());
     }
