@@ -1,6 +1,10 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
+import java.util.Timer;
+import java.util.TimerTask;
+import java.util.concurrent.Executors;
+import java.util.concurrent.ScheduledExecutorService;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -16,6 +20,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
+import javafx.scene.paint.Color;
 import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nl.tudelft.scrumbledore.Constants;
@@ -265,6 +270,7 @@ public final class GameDisplay {
 
   /**
    * Checks the status of the level, and determines if the player should advance to the next level.
+   * Upon restarting, notifies the player of time to pick up fruit.
    */
   private static void levelStatus() {
     if (currentGame.getCurrentLevel().getNPCs().isEmpty()
@@ -272,26 +278,44 @@ public final class GameDisplay {
       if (currentGame.remainingLevels() == 0) {
         Logger.getInstance().log("Player completed the game successfully.");
 
-        Stage gameWinStage = new Stage();
-        gameWinStage.initModality(Modality.APPLICATION_MODAL);
-        gameWinStage.initOwner(currentStage);
-
-        VBox gameWinVBox = new VBox(20);
-        Label gameWinLabel = new Label(Constants.GAMEWIN_DIALOG);
-        gameWinVBox.getChildren().add(gameWinLabel);
-
-        Scene gameWinScene = new Scene(gameWinVBox, 300, 200);
-        gameWinStage.setScene(gameWinScene);
-        gameWinStage.show();
-
         animationTimer.stop();
+
+        winDialog();
       } else {
         Logger.getInstance().log("Player advanced to the next level.");
+        staticContext.setFill(Color.WHITE);
+        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+            (Constants.LEVELY / 2) - 130);
 
         currentGame.goToNextLevel();
-        renderStatic();
+        GameDisplay.renderStatic();
       }
     }
+  }
+
+  /**
+   * Displays the player victory dialog and presents the player with a nice message and the option
+   * to go back to the main menu.
+   */
+  private static void winDialog() {
+    VBox currentBox = new VBox(Constants.GAME_PADDING);
+
+    Label headerVictory = new Label(Constants.GAMEWIN_HEADER);
+    headerVictory.setId("winHeader");
+
+    Label bodyVictory = new Label(Constants.GAMEWIN_DIALOG);
+
+    Label pointsView = new Label(Constants.GAMEWIN_POINTS + currentGame.getScoreCounter().getScore()
+        + Constants.GAMEWIN_HIGHSCORE + currentGame.getScoreCounter().getHighScore() + ".");
+
+    Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
+    mapExitButton(returnButton);
+
+    currentBox.getChildren().addAll(headerVictory, bodyVictory, pointsView, returnButton);
+    currentScene = new Scene(currentBox);
+    currentScene.getStylesheets().add(Constants.CSS_VICTORY);
+    currentStage.setScene(currentScene);
+    currentStage.show();
   }
 
   /**

@@ -1,0 +1,37 @@
+ /*
+ * Style for the victory menu.
+ * Scrumbledore, a faithful recreation of Bubble Bobble.
+ * 
+ * @author David Alderliesten.
+ */
+ 
+ .root, .button {
+ 	-fx-background-color: #1d1d1d;
+ }
+ 
+ #winHeader {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-font-weight: bold;
+ 	-fx-font-size: 55.0px;
+ 	-fx-padding: 0.0 0.0 0.0 11.0;
+ }
+ 
+ .label {
+ 	-fx-text-fill: #ffffff;
+ 	-fx-font-size: 15.0px;
+ 	-fx-padding: 0.0 0.0 15.0 14.0;
+ }
+ 
+  .button {
+ 	-fx-text-fill: #cccccc;
+ 	-fx-font-size: 15.0px;
+ 	-fx-border-color: #1d1d1d;
+ 	-fx-border-style: solid;
+ 	-fx-border-width: 0.0 0.0 0.0 5.0;
+ 	-fx-padding: 0.0 0.0 0.0 8.0;
+ }
+ 
+ .button:hover {
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-border-color: #32b8f1;
+ }
