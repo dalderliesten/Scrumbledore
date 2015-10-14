@@ -191,7 +191,7 @@ public final class Constants {
     keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
     keyMapping.put(KeyCode.RIGHT, PlayerAction.MoveRight);
     keyMapping.put(KeyCode.UP, PlayerAction.Jump);
-    keyMapping.put(KeyCode.CONTROL, PlayerAction.Shoot);
+    keyMapping.put(KeyCode.R, PlayerAction.Shoot);
 
     return keyMapping;
   }
@@ -202,7 +202,7 @@ public final class Constants {
     keyMapping.put(KeyCode.A, PlayerAction.MoveLeft);
     keyMapping.put(KeyCode.D, PlayerAction.MoveRight);
     keyMapping.put(KeyCode.W, PlayerAction.Jump);
-    keyMapping.put(KeyCode.Q, PlayerAction.Shoot);
+    keyMapping.put(KeyCode.V, PlayerAction.Shoot);
 
     return keyMapping;
   }
