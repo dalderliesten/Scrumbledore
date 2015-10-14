@@ -405,10 +405,15 @@ public final class GameDisplay {
     }
 
     for (Bubble currentBubble : bubbles) {
-      String path = sprites.getAnimated("bubble").getFrame(currentGame.getSteps()).getPath();
+      String path = sprites.getAnimated("bubble-green").getFrame(currentGame.getSteps()).getPath();
+      double bubbleLifetime = currentBubble.getLifetime();
 
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
+      } else if (bubbleLifetime > 5 && bubbleLifetime < 40 && bubbleLifetime % 15 < 8) {
+        path = sprites.getAnimated("bubble-red").getFrame(currentGame.getSteps()).getPath();
+      } else if (bubbleLifetime <= 5) {
+        path = sprites.getAnimated("bubble-green-burst").getFrame(currentGame.getSteps()).getPath();
       }
       dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
           .getPosition().getY());
