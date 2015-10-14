@@ -19,6 +19,7 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Constants {
+  
   // Empty private constructor for the utility class.
   private Constants() {
   }
@@ -46,6 +47,10 @@ public final class Constants {
   public static final String HISCORELABEL = "High-Score:";
   public static final String POWERUPLABEL = "Power-Ups:";
   public static final String LEVELLABEL = "Level:";
+  
+  // Defining labels and values needed for the advancement GUI pop-ups.
+  public static final String ADVANCINGLABEL = "Advancing to next level in 5 seconds...";
+  public static final int ADVANCING_DELAY = 5000;
 
   // Defining text needed to display the buttons in the bottom of the user interface.
   public static final String STARTBTNLABEL = "Start";
@@ -97,7 +102,11 @@ public final class Constants {
   public static final String GAME_EXITBUTTON = "Exit";
 
   // Defining text needed for the display of dialog and handling boxes within the user interface.
+  public static final String GAMEWIN_HEADER = "SCRUMMASTER";
   public static final String GAMEWIN_DIALOG = "You beat the game, congratulations!";
+  public static final String GAMEWIN_POINTS = "You scored ";
+  public static final String GAMEWIN_HIGHSCORE = " points with a session high score of ";
+  public static final String GAMEWIN_TOMAINMENU = "Return to the main menu";
 
   // The standard size of a block.
   public static final double BLOCKSIZE = 32;
@@ -158,6 +167,7 @@ public final class Constants {
   public static final String CSS_MAINMENU = "css/mainmenustyle.css";
   public static final String CSS_SETTINGS = "css/settingsstyle.css";
   public static final String CSS_GAMEVIEW = "css/gameviewstyle.css";
+  public static final String CSS_VICTORY = "css/victorystyle.css";
 
   // Setting the interval for the animation of the sprites.
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
@@ -299,4 +309,5 @@ public final class Constants {
   public static void setLoggingWantEnemy(boolean loggingWantEnemy) {
     Constants.loggingWantEnemy = loggingWantEnemy;
   }
+  
 }
