@@ -56,8 +56,8 @@ public class GameFactory {
     game.registerLevelModifier(player);
     game.registerLevelModifier(gravity);
     game.registerLevelModifier(npc);
-    game.registerLevelModifier(collisions);
     game.registerLevelModifier(bubbles);
+    game.registerLevelModifier(collisions);
     game.registerLevelModifier(kinetics);
   }
 
