@@ -405,7 +405,7 @@ public final class GameDisplay {
     }
 
     for (Bubble currentBubble : bubbles) {
-      String path = sprites.getAnimated("bubble").getFrame(currentGame.getSteps()).getPath();
+      String path = sprites.getAnimated("bubble-red").getFrame(currentGame.getSteps()).getPath();
 
       if (currentBubble.hasNPC()) {
         path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
