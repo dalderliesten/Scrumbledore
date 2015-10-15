@@ -125,7 +125,7 @@ public final class GameDisplay {
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     currentStage.setScene(currentScene);
 
-    EventListeners listeners = new EventListeners(currentGame, currentStage, currentScene);
+    KeyListeners listeners = new KeyListeners(currentGame, currentScene);
     listeners.init();
 
     currentStage.show();
@@ -286,7 +286,7 @@ public final class GameDisplay {
         staticContext.setFill(Color.WHITE);
         staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);
-        
+
         currentGame.goToNextLevel();
         GameDisplay.renderStatic();
       }
@@ -305,9 +305,8 @@ public final class GameDisplay {
 
     Label bodyVictory = new Label(Constants.GAMEWIN_DIALOG);
 
-    Label pointsView = new Label(Constants.GAMEWIN_POINTS
-        + currentGame.getScoreCounter().getScore() + Constants.GAMEWIN_HIGHSCORE
-        + currentGame.getScoreCounter().getHighScore() +".");
+    Label pointsView = new Label(Constants.GAMEWIN_POINTS + currentGame.getScoreCounter().getScore()
+        + Constants.GAMEWIN_HIGHSCORE + currentGame.getScoreCounter().getHighScore() + ".");
 
     Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
     mapExitButton(returnButton);
@@ -340,8 +339,8 @@ public final class GameDisplay {
     staticContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
     for (Platform current : currentGame.getCurrentLevel().getPlatforms()) {
-      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition()
-          .getX(), current.getPosition().getY());
+      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()),
+          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 
@@ -366,13 +365,7 @@ public final class GameDisplay {
    */
   private static void renderPlayer() {
     ArrayList<Player> players = currentGame.getCurrentLevel().getPlayers();
-    String color = "";
-    String[] colors = { "green", "blue" };
-    int index = 0;
     for (Player player : players) {
-      if (index < colors.length) {
-        color = colors[index++];
-      }
       if (player.isAlive()) {
         double steps = currentGame.getSteps();
         boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
@@ -388,9 +381,11 @@ public final class GameDisplay {
         if (player.getSpeed().getX() == 0 && !isFiring) {
           steps = 0;
         }
-        String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
-        dynamicContext.drawImage(new Image(path), player.getPosition().getX(), player.getPosition()
-            .getY());
+        String path = sprites
+            .getAnimated("player-" + Constants.PLAYER_COLORS[player.getPlayerNumber()] + "-" + spr)
+            .getFrame(steps).getPath();
+        dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
+            player.getPosition().getY());
       }
     }
   }
@@ -421,8 +416,8 @@ public final class GameDisplay {
       } else if (bubbleLifetime <= 5) {
         path = sprites.getAnimated("bubble-green-burst").getFrame(currentGame.getSteps()).getPath();
       }
-      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
-          .getPosition().getY());
+      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(),
+          currentBubble.getPosition().getY());
     }
   }
 
@@ -443,8 +438,8 @@ public final class GameDisplay {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
-          .getY());
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 
@@ -457,8 +452,8 @@ public final class GameDisplay {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
-          .getY());
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(),
+          current.getPosition().getY());
     }
   }
 

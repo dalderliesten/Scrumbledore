@@ -38,7 +38,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           }
         }
 
-        player.clearActions();
+        player.removeAction(PlayerAction.MoveStop);
+        player.removeAction(PlayerAction.Shoot);
       }
     }
   }
@@ -123,6 +124,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     }
     if (player.hasAction(PlayerAction.ShootStop)) {
       player.setFiring(false);
+      player.removeAction(PlayerAction.ShootStop);
     }
   }
 }

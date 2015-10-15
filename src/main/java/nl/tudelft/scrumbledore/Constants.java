@@ -34,13 +34,17 @@ public final class Constants {
 
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
+  
+  // Defining the maximum number of players.
+  public static final int NUMBER_OF_PLAYERS = 2;
+  public static final String[] PLAYER_COLORS = { "green", "blue" };
 
   // Defining text needed for the labels and buttons at the main menu of the GUI.
   public static final String SCRUMBLEDORE_TEXT = "SCRUMBLEDORE";
   public static final String SINGLEPLAYERGAME_BUTTON = "Singleplayer Game";
   public static final String MULTIPLAYERGAME_BUTTON = "Multiplayer Game";
   public static final String SETTINGS_BUTTON = "Settings";
-  public static final String EXIT_BUTTION = "Exit";
+  public static final String EXIT_BUTTON = "Exit";
 
   // Defining labels needed in the top section of the user interface.
   public static final String SCORELABEL = "Score:";
@@ -82,7 +86,13 @@ public final class Constants {
   public static final String SETTINGS_LABEL = "Settings";
   public static final String SETTINGS_YES = "Yes";
   public static final String SETTINGS_NO = "No";
-  public static final String SETTINGSEXIT_BUTTION = "Back";
+  public static final String SETTINGSEXIT_BUTTON = "Back";
+  public static final String SETTINGSLOGGING_BUTTON = "Logging";
+  public static final String SETTINGSKEYBINDING_BUTTON = "Keybinding";
+  
+  // Defining the text needed for the display of the keybinding options.
+  public static final String SETTINGS_PLAYER1 = "Player 1";
+  public static final String SETTINGS_PLAYER2 = "Player 2";
 
   // Defining constants needed for the user interface items.
   public static final int MAINMENU_PADDING = 30;

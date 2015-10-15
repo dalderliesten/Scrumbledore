@@ -51,3 +51,12 @@
  	-fx-text-fill: #32b8f1;
  	-fx-border-color: #32b8f1;
  }
+ 
+ #popup{
+	 -fx-font-size: 32px;
+	 -fx-border-width: 5px;
+	 -fx-border-style: solid;
+	 -fx-border-color: #32b8f1;
+	 -fx-background-color: #1d1d1d;
+	 -fx-padding: 18px 64px;
+ }

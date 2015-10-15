@@ -10,10 +10,12 @@ import java.util.ArrayList;
  * @author David Alderliesten
  */
 public class Player extends LevelElement {
+  private static int playerCount;
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
   private Boolean firing;
   private Boolean alive;
+  private int id;
 
   /**
    * Create a new Player instance.
@@ -28,10 +30,18 @@ public class Player extends LevelElement {
 
     setGravity(true);
 
+    id = playerCount++;
     actions = new ArrayList<PlayerAction>();
     lastMove = PlayerAction.MoveRight;
     firing = false;
     alive = true;
+  }
+
+  /**
+   * Resets the current player count.
+   */
+  public static void resetPlayerCount() {
+    playerCount = 0;
   }
 
   /**
@@ -71,6 +81,15 @@ public class Player extends LevelElement {
    */
   public void setAlive(Boolean bool) {
     alive = bool;
+  }
+
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
+  public int getPlayerNumber() {
+    return id;
   }
 
   /**
