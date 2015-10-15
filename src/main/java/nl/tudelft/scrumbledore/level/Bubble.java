@@ -10,7 +10,7 @@ import nl.tudelft.scrumbledore.Constants;
  * @author Floris Doolaard
  *
  */
-public class Bubble extends Projectile {
+public class Bubble extends LevelElement {
   private ArrayList<BubbleAction> actions;
   private Boolean hasNPC;
 
