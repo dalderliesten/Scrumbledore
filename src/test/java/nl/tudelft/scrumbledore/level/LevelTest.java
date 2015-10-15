@@ -3,8 +3,9 @@ package nl.tudelft.scrumbledore.level;
 import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
-
 import org.junit.Test;
+import nl.tudelft.scrumbledore.Constants;
+
 
 /**
  * Test case for the Level class.
@@ -96,5 +97,24 @@ public class LevelTest {
     assertEquals(bubbles.size(), 2);
     assertEquals(bubbles.get(0).getClass(), Bubble.class);
     assertEquals(bubbles.get(1).getClass(), Bubble.class);
+  }
+  
+  /**
+   * Test whether the end timer is initially set to REFRESH_RATE * 5.
+   */
+  @Test
+  public void testEndTimer() {
+    Level level = new Level();
+    assertEquals(Constants.REFRESH_RATE * 4, level.getEndTimer());
+  }
+  
+  /**
+   * Test whether the end timer can be decremented correctly.
+   */
+  @Test
+  public void testDecrementEndTimer() {
+    Level level = new Level();
+    level.decrementEndTimer();
+    assertEquals(Constants.REFRESH_RATE * 4 - 1, level.getEndTimer());
   }
 }
