@@ -1,12 +1,14 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
+import nl.tudelft.scrumbledore.Constants;
+
 
 /**
  * Class representing a Level in the Game.
  * 
  * @author Jesse Tilro
- *
+ * @author Niels Warnars
  */
 public class Level {
 
@@ -16,6 +18,7 @@ public class Level {
   private ArrayList<Bubble> bubbles;
   private ArrayList<Player> players;
   private ArrayList<Bubble> encapEnemies;
+  private int endTimer;
 
   /**
    * Constructs a new Level instance.
@@ -27,6 +30,7 @@ public class Level {
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
     players = new ArrayList<Player>();
+    endTimer = Constants.REFRESH_RATE * 4;
   }
 
   /**
@@ -103,4 +107,19 @@ public class Level {
     return encapEnemies;
   }
 
+  /**
+   * Returns the number of pausing cycles left at the end of a level.
+   * 
+   * @return The number of pausing cycles left at the end of a level
+   */
+  public int getEndTimer() {
+    return endTimer;
+  }
+
+  /**
+   * Decrements the endTimer by one.
+   */
+  public void decrementEndTimer() {
+    endTimer--;
+  }
 }
