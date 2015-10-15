@@ -1,11 +1,6 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -21,7 +16,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
@@ -275,21 +269,24 @@ public final class GameDisplay {
   private static void levelStatus() {
     if (currentGame.getCurrentLevel().getNPCs().isEmpty()
         && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
-      if (currentGame.remainingLevels() == 0) {
-        Logger.getInstance().log("Player completed the game successfully.");
-
-        animationTimer.stop();
-
-        winDialog();
-      } else {
-        Logger.getInstance().log("Player advanced to the next level.");
-        staticContext.setFill(Color.WHITE);
-        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
-            (Constants.LEVELY / 2) - 130);
-        
-        currentGame.goToNextLevel();
-        GameDisplay.renderStatic();
+      if (currentGame.getCurrentLevel().getEndTimer() <= 0) {
+        if (currentGame.remainingLevels() == 0) {
+          Logger.getInstance().log("Player completed the game successfully.");
+ 
+          animationTimer.stop();
+  
+          winDialog();
+        } else {
+            Logger.getInstance().log("Player advanced to the next level.");
+            staticContext.setFill(Color.WHITE);
+            staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+                (Constants.LEVELY / 2) - 130);
+            
+            currentGame.goToNextLevel();
+            GameDisplay.renderStatic();
+        }
       }
+      currentGame.getCurrentLevel().decrementEndTimer();
     }
   }
 
@@ -307,7 +304,7 @@ public final class GameDisplay {
 
     Label pointsView = new Label(Constants.GAMEWIN_POINTS
         + currentGame.getScoreCounter().getScore() + Constants.GAMEWIN_HIGHSCORE
-        + currentGame.getScoreCounter().getHighScore() +".");
+        + currentGame.getScoreCounter().getHighScore() + ".");
 
     Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
     mapExitButton(returnButton);
