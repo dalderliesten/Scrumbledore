@@ -38,6 +38,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * players.
  * 
  * @author David Alderliesten
+ * @author Niels Warnars
  */
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.TooManyFields", "PMD.CyclomaticComplexity" })
 public final class GameDisplay {
@@ -273,6 +274,9 @@ public final class GameDisplay {
     Level currentLevel = currentGame.getCurrentLevel();
     if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
       if (endStepsSnapShot == 0) {
+        staticContext.setFill(Color.WHITE);
+        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+            (Constants.LEVELY / 2) - 130);
         endStepsSnapShot = currentGame.getSteps();
       }
       
@@ -285,10 +289,6 @@ public final class GameDisplay {
           winDialog();
         } else {
           Logger.getInstance().log("Player advanced to the next level.");
-          staticContext.setFill(Color.WHITE);
-          staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
-              (Constants.LEVELY / 2) - 130);
-  
           currentGame.goToNextLevel();
           GameDisplay.renderStatic();
         }
