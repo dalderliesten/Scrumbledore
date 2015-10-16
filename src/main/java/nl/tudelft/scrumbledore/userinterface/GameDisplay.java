@@ -382,7 +382,7 @@ public final class GameDisplay {
           steps = 0;
         }
         String path = sprites
-            .getAnimated("player-" + Constants.PLAYER_COLORS[player.getPlayerNumber()] + "-" + spr)
+            .getAnimated("player-" + Constants.PLAYER_COLORS.get(player.getPlayerNumber()) + "-" + spr)
             .getFrame(steps).getPath();
         dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
             player.getPosition().getY());
