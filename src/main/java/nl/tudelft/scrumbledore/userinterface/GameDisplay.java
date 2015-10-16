@@ -1,10 +1,6 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
-import java.util.Timer;
-import java.util.TimerTask;
-import java.util.concurrent.Executors;
-import java.util.concurrent.ScheduledExecutorService;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -21,7 +17,6 @@ import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.scene.paint.Color;
-import javafx.stage.Modality;
 import javafx.stage.Stage;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
@@ -30,6 +25,7 @@ import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
 import nl.tudelft.scrumbledore.level.Bubble;
 import nl.tudelft.scrumbledore.level.Fruit;
+import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.NPC;
 import nl.tudelft.scrumbledore.level.NPCAction;
 import nl.tudelft.scrumbledore.level.Platform;
@@ -42,6 +38,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * players.
  * 
  * @author David Alderliesten
+ * @author Niels Warnars
  */
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.TooManyFields", "PMD.CyclomaticComplexity" })
 public final class GameDisplay {
@@ -50,6 +47,7 @@ public final class GameDisplay {
   private static BorderPane currentLayout;
   private static Group renderGroup;
   private static StepTimer currentTimer;
+  private static double endStepsSnapShot;
   private static Game currentGame;
   private static Canvas staticCanvas;
   private static Canvas dynamicCanvas;
@@ -120,7 +118,7 @@ public final class GameDisplay {
 
     renderStatic();
     animationTimer.start();
-
+    
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     currentStage.setScene(currentScene);
@@ -273,22 +271,29 @@ public final class GameDisplay {
    * Upon restarting, notifies the player of time to pick up fruit.
    */
   private static void levelStatus() {
-    if (currentGame.getCurrentLevel().getNPCs().isEmpty()
-        && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
-      if (currentGame.remainingLevels() == 0) {
-        Logger.getInstance().log("Player completed the game successfully.");
-
-        animationTimer.stop();
-
-        winDialog();
-      } else {
-        Logger.getInstance().log("Player advanced to the next level.");
+    Level currentLevel = currentGame.getCurrentLevel();
+    if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
+      if (endStepsSnapShot == 0) {
         staticContext.setFill(Color.WHITE);
         staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);
-
-        currentGame.goToNextLevel();
-        GameDisplay.renderStatic();
+        endStepsSnapShot = currentGame.getSteps();
+      }
+      
+      if (endStepsSnapShot + Constants.REFRESH_RATE * 4 < currentGame.getSteps()) {
+        if (currentGame.remainingLevels() == 0) {
+          Logger.getInstance().log("Player completed the game successfully.");
+  
+          animationTimer.stop();
+  
+          winDialog();
+        } else {
+          Logger.getInstance().log("Player advanced to the next level.");
+          currentGame.goToNextLevel();
+          GameDisplay.renderStatic();
+        }
+        
+        endStepsSnapShot = 0;
       }
     }
   }
