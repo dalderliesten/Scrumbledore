@@ -42,7 +42,7 @@ public class Collision {
   public boolean colliding() {
     // Since colliding can be defined as having at least one vertical and one horizontal edge
     // of the collider inside the boundary box of the collidee.
-    return ((collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight()));
+    return (collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight());
   }
 
   /**
