@@ -43,9 +43,9 @@ public class Platform extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Platform) {
       Platform that = (Platform) other;
-      return (this.getPosition().equals(that.getPosition()) 
+      return this.getPosition().equals(that.getPosition()) 
           && this.getSize().equals(that.getSize())
-          && this.isPassable() == that.isPassable());
+          && this.isPassable() == that.isPassable();
     }
     
     return false;

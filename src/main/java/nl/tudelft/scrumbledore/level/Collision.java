@@ -42,7 +42,7 @@ public class Collision {
   public boolean colliding() {
     // Since colliding can be defined as having at least one vertical and one horizontal edge
     // of the collider inside the boundary box of the collidee.
-    return ((collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight()));
+    return (collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight());
   }
 
   /**
@@ -168,7 +168,7 @@ public class Collision {
   private boolean touchingTop() {
     boolean c1 = collider.getBottom() >= collidee.getTop();
     boolean c2 = collider.getBottom() <= (collidee.getTop() + Constants.COLLISION_PRECISION);
-    return (colliding() && c1 && c2);
+    return colliding() && c1 && c2;
   }
 
   /**
@@ -179,7 +179,7 @@ public class Collision {
   private boolean touchingBottom() {
     boolean c1 = collider.getTop() >= collidee.getBottom() - Constants.COLLISION_PRECISION;
     boolean c2 = collider.getTop() <= collidee.getBottom();
-    return (colliding() && c1 && c2);
+    return colliding() && c1 && c2;
   }
 
   /**
@@ -190,7 +190,7 @@ public class Collision {
   private boolean touchingLeft() {
     boolean c1 = collider.getRight() >= collidee.getLeft();
     boolean c2 = collider.getRight() <= (collidee.getLeft() + Constants.COLLISION_PRECISION);
-    return (colliding() && c1 && c2);
+    return colliding() && c1 && c2;
   }
 
   /**
@@ -201,7 +201,7 @@ public class Collision {
   private boolean touchingRight() {
     boolean c1 = collider.getLeft() >= collidee.getRight() - Constants.COLLISION_PRECISION;
     boolean c2 = collider.getLeft() <= collidee.getRight();
-    return (colliding() && c1 && c2);
+    return colliding() && c1 && c2;
   }
 
   /**
@@ -210,9 +210,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingLeft() {
-    boolean b = (collider.getLeft() >= collidee.getLeft()
-        && collider.getLeft() <= collidee.getRight());
-    return b;
+    return collider.getLeft() >= collidee.getLeft() 
+        && collider.getLeft() <= collidee.getRight();
   }
 
   /**
@@ -221,9 +220,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingRight() {
-    boolean b = (collider.getRight() >= collidee.getLeft()
-        && collider.getRight() <= collidee.getRight());
-    return b;
+    return collider.getRight() >= collidee.getLeft() 
+        && collider.getRight() <= collidee.getRight();
   }
 
   /**
@@ -232,9 +230,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingTop() {
-    boolean b = (collider.getTop() >= collidee.getTop()
-        && collider.getTop() <= collidee.getBottom());
-    return b;
+    return collider.getTop() >= collidee.getTop()
+        && collider.getTop() <= collidee.getBottom();
   }
 
   /**
@@ -243,9 +240,8 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingBottom() {
-    boolean b = (collider.getBottom() >= collidee.getTop()
-        && collider.getBottom() <= collidee.getBottom());
-    return b;
+    return collider.getBottom() >= collidee.getTop()
+        && collider.getBottom() <= collidee.getBottom();
   }
 
 }

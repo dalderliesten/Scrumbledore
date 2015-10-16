@@ -193,7 +193,8 @@ public class Vector implements Cloneable {
   public boolean equals(Object other) {
     if (other instanceof Vector) {
       Vector that = (Vector) other;
-      return (this.getX() == that.getX() && this.getY() == that.getY());
+      return this.getX() == that.getX() 
+          && this.getY() == that.getY();
     }
     return false;
   }

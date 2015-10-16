@@ -43,8 +43,8 @@ public class Fruit extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
       Fruit that = (Fruit) other;
-      return (this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize()));
+      return this.getPosition().equals(that.getPosition())
+          && this.getSize().equals(that.getSize());
     }
 
     return false;

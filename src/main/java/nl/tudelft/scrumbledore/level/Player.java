@@ -153,8 +153,8 @@ public class Player extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Player) {
       Player that = (Player) other;
-      return (this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize()));
+      return this.getPosition().equals(that.getPosition())
+          && this.getSize().equals(that.getSize());
     }
 
     return false;

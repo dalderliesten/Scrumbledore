@@ -1,6 +1,8 @@
 package nl.tudelft.scrumbledore;
 
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -37,8 +39,9 @@ public final class Constants {
   
   // Defining the maximum number of players.
   public static final int NUMBER_OF_PLAYERS = 2;
-  public static final String[] PLAYER_COLORS = { "green", "blue" };
-
+  public static final List<String> PLAYER_COLORS 
+    = Collections.unmodifiableList(Arrays.asList("green", "blue"));
+  
   // Defining text needed for the labels and buttons at the main menu of the GUI.
   public static final String SCRUMBLEDORE_TEXT = "SCRUMBLEDORE";
   public static final String SINGLEPLAYERGAME_BUTTON = "Singleplayer Game";
