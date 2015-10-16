@@ -104,15 +104,18 @@ public class LevelParser {
     do {
       String line = lineScanner.nextLine();
 
-      // A Scanner cannot be used to iterate over
-      // the chars in a line, so a for loop has
-      // to be used.
       for (int idx = 0; idx < line.length(); idx++) {
         char ch = line.charAt(idx);
 
-        // Since blank spaces correspond to no element at the given position.
         if (ch != ' ') {
-          tmpLevel.addElement(getElementFromChar(ch, idx, lineNumber));
+          LevelElement le = getElementFromChar(ch, idx, lineNumber);
+          
+          if (le instanceof Player) {
+            int numPlayers = tmpLevel.getPlayers().size();
+            ((Player) le).setPlayerNumber(numPlayers);
+          }
+          
+          tmpLevel.addElement(le);
         }
       }
 
