@@ -7,6 +7,7 @@ import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
@@ -41,8 +42,10 @@ public final class SettingsMenu {
 
     generateTitle();
 
-    VBox loggingOptions = LoggingSettings.fetchLoggingOptions();
-    currentBox.getChildren().addAll(loggingOptions);
+    generateTabs();
+
+    VBox currentSettings = LoggingSettings.fetchLoggingOptions();
+    currentBox.getChildren().add(currentSettings);
 
     exitButtonHandling();
 
@@ -76,10 +79,50 @@ public final class SettingsMenu {
   }
 
   /**
+   * Generates the settings tabs which the player can choose from.
+   */
+  private static void generateTabs() {
+    HBox hbox = new HBox();
+
+    Button loggingButton = getLoggingButton();
+    Button keybindingButton = getKeybindingButton();
+    
+    hbox.getChildren().addAll(loggingButton, keybindingButton);
+
+    currentBox.getChildren().add(hbox);
+  }
+
+  private static Button getLoggingButton() {
+    final Button button = new Button(Constants.SETTINGSLOGGING_BUTTON);
+    button.getStyleClass().add("tab");
+
+    button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      public void handle(MouseEvent event) {
+        currentBox.getChildren().set(2, LoggingSettings.fetchLoggingOptions());
+      }
+    });
+    
+    return button;
+  }
+
+  private static Button getKeybindingButton() {
+    final Button button = new Button(Constants.SETTINGSKEYBINDING_BUTTON);
+    button.getStyleClass().add("tab");
+
+    button.setOnMouseClicked(new EventHandler<MouseEvent>() {
+      public void handle(MouseEvent event) {
+        currentBox.getChildren().set(2, KeybindingSettings.fetchKeybindingOptions());
+      }
+    });
+
+    return button;
+  }
+
+  /**
    * Handles the creation and the return from the settings menu.
    */
   private static void exitButtonHandling() {
-    Button exitButton = new Button(Constants.SETTINGSEXIT_BUTTION);
+    Button exitButton = new Button(Constants.SETTINGSEXIT_BUTTON);
     mapExitFunction(exitButton);
 
     currentBox.getChildren().add(exitButton);

@@ -42,13 +42,13 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   public void modify(Level level, double delta) {
     detectPlayerBubble(level, delta);
+    detectBubbleEnemy(level, delta);
+    detectBubbleBubble(level, delta);
     detectFruitPlatform(level, delta);
     detectBubblePlatform(level, delta);
     detectPlayerPlatform(level, delta);
     detectPlayerFruit(level, delta);
     detectPlayerEnemy(level, delta);
-    detectBubbleEnemy(level, delta);
-    detectBubbleBubble(level, delta);
     detectNPCPlatform(level, delta);
   }
 

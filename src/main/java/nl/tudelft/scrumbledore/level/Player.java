@@ -14,6 +14,7 @@ public class Player extends LevelElement {
   private PlayerAction lastMove;
   private Boolean firing;
   private Boolean alive;
+  private int id;
 
   /**
    * Create a new Player instance.
@@ -28,6 +29,7 @@ public class Player extends LevelElement {
 
     setGravity(true);
 
+    id = 0;
     actions = new ArrayList<PlayerAction>();
     lastMove = PlayerAction.MoveRight;
     firing = false;
@@ -73,6 +75,25 @@ public class Player extends LevelElement {
     alive = bool;
   }
 
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
+  public int getPlayerNumber() {
+    return id;
+  }
+
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *         Integer that represents the players number in the game.
+   */
+  public void setPlayerNumber(int id) {
+    this.id = id;
+  }
+  
   /**
    * Check whether the given action is queued for the next step.
    * 
@@ -134,8 +155,8 @@ public class Player extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Player) {
       Player that = (Player) other;
-      return (this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize()));
+      return this.getPosition().equals(that.getPosition())
+          && this.getSize().equals(that.getSize());
     }
 
     return false;

@@ -216,8 +216,7 @@ public abstract class LevelElement {
    * @return A boolean.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
-    double dist = distance(other);
-    return (dist <= range);
+    return distance(other) <= range;
   }
 
   /**
@@ -234,7 +233,7 @@ public abstract class LevelElement {
   public boolean inBoxRangeOf(LevelElement other, double range) {
     boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
     boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
-    return (inX && inY);
+    return inX && inY;
   }
 
 }

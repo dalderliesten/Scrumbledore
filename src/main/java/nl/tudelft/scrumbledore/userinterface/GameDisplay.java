@@ -16,7 +16,7 @@ import javafx.scene.image.Image;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
-import javafx.stage.Modality;
+import javafx.scene.paint.Color;
 import javafx.stage.Stage;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
@@ -25,6 +25,7 @@ import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
 import nl.tudelft.scrumbledore.level.Bubble;
 import nl.tudelft.scrumbledore.level.Fruit;
+import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.NPC;
 import nl.tudelft.scrumbledore.level.NPCAction;
 import nl.tudelft.scrumbledore.level.Platform;
@@ -37,6 +38,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * players.
  * 
  * @author David Alderliesten
+ * @author Niels Warnars
  */
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.TooManyFields", "PMD.CyclomaticComplexity" })
 public final class GameDisplay {
@@ -45,6 +47,7 @@ public final class GameDisplay {
   private static BorderPane currentLayout;
   private static Group renderGroup;
   private static StepTimer currentTimer;
+  private static double endStepsSnapShot;
   private static Game currentGame;
   private static Canvas staticCanvas;
   private static Canvas dynamicCanvas;
@@ -115,12 +118,12 @@ public final class GameDisplay {
 
     renderStatic();
     animationTimer.start();
-
+    
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     currentStage.setScene(currentScene);
 
-    EventListeners listeners = new EventListeners(currentGame, currentStage, currentScene);
+    KeyListeners listeners = new KeyListeners(currentGame, currentScene);
     listeners.init();
 
     currentStage.show();
@@ -265,33 +268,59 @@ public final class GameDisplay {
 
   /**
    * Checks the status of the level, and determines if the player should advance to the next level.
+   * Upon restarting, notifies the player of time to pick up fruit.
    */
   private static void levelStatus() {
-    if (currentGame.getCurrentLevel().getNPCs().isEmpty()
-        && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
-      if (currentGame.remainingLevels() == 0) {
-        Logger.getInstance().log("Player completed the game successfully.");
-
-        Stage gameWinStage = new Stage();
-        gameWinStage.initModality(Modality.APPLICATION_MODAL);
-        gameWinStage.initOwner(currentStage);
-
-        VBox gameWinVBox = new VBox(20);
-        Label gameWinLabel = new Label(Constants.GAMEWIN_DIALOG);
-        gameWinVBox.getChildren().add(gameWinLabel);
-
-        Scene gameWinScene = new Scene(gameWinVBox, 300, 200);
-        gameWinStage.setScene(gameWinScene);
-        gameWinStage.show();
-
-        animationTimer.stop();
-      } else {
-        Logger.getInstance().log("Player advanced to the next level.");
-
-        currentGame.goToNextLevel();
-        renderStatic();
+    Level currentLevel = currentGame.getCurrentLevel();
+    if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
+      if (endStepsSnapShot == 0) {
+        staticContext.setFill(Color.WHITE);
+        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+            (Constants.LEVELY / 2) - 130);
+        endStepsSnapShot = currentGame.getSteps();
+      }
+      
+      if (endStepsSnapShot + Constants.REFRESH_RATE * 4 < currentGame.getSteps()) {
+        if (currentGame.remainingLevels() == 0) {
+          Logger.getInstance().log("Player completed the game successfully.");
+  
+          animationTimer.stop();
+  
+          winDialog();
+        } else {
+          Logger.getInstance().log("Player advanced to the next level.");
+          currentGame.goToNextLevel();
+          GameDisplay.renderStatic();
+        }
+        
+        endStepsSnapShot = 0;
       }
     }
+  }
+
+  /**
+   * Displays the player victory dialog and presents the player with a nice message and the option
+   * to go back to the main menu.
+   */
+  private static void winDialog() {
+    VBox currentBox = new VBox(Constants.GAME_PADDING);
+
+    Label headerVictory = new Label(Constants.GAMEWIN_HEADER);
+    headerVictory.setId("winHeader");
+
+    Label bodyVictory = new Label(Constants.GAMEWIN_DIALOG);
+
+    Label pointsView = new Label(Constants.GAMEWIN_POINTS + currentGame.getScoreCounter().getScore()
+        + Constants.GAMEWIN_HIGHSCORE + currentGame.getScoreCounter().getHighScore() + ".");
+
+    Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
+    mapExitButton(returnButton);
+
+    currentBox.getChildren().addAll(headerVictory, bodyVictory, pointsView, returnButton);
+    currentScene = new Scene(currentBox);
+    currentScene.getStylesheets().add(Constants.CSS_VICTORY);
+    currentStage.setScene(currentScene);
+    currentStage.show();
   }
 
   /**
@@ -341,13 +370,7 @@ public final class GameDisplay {
    */
   private static void renderPlayer() {
     ArrayList<Player> players = currentGame.getCurrentLevel().getPlayers();
-    String color = "";
-    String[] colors = { "green", "blue" };
-    int index = 0;
     for (Player player : players) {
-      if (index < colors.length) {
-        color = colors[index++];
-      }
       if (player.isAlive()) {
         double steps = currentGame.getSteps();
         boolean toRight = player.getLastMove() == PlayerAction.MoveRight;
@@ -363,7 +386,9 @@ public final class GameDisplay {
         if (player.getSpeed().getX() == 0 && !isFiring) {
           steps = 0;
         }
-        String path = sprites.getAnimated("player-" + color + "-" + spr).getFrame(steps).getPath();
+        String path = 
+            sprites.getAnimated("player-" + Constants.PLAYER_COLORS.get(player.getPlayerNumber()) 
+              + "-" + spr).getFrame(steps).getPath();
         dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
             player.getPosition().getY());
       }
@@ -380,10 +405,21 @@ public final class GameDisplay {
     }
 
     for (Bubble currentBubble : bubbles) {
-      String path = sprites.getAnimated("bubble").getFrame(currentGame.getSteps()).getPath();
+      String path = sprites.getAnimated("bubble-green").getFrame(currentGame.getSteps()).getPath();
+      double bubbleLifetime = currentBubble.getLifetime();
 
       if (currentBubble.hasNPC()) {
-        path = sprites.getAnimated("bubble-zenchan").getFrame(currentGame.getSteps()).getPath();
+        if (bubbleLifetime < 60 && bubbleLifetime % 15 < 8) {
+          path = sprites.getAnimated("bubble-zenchan-red").getFrame(currentGame.getSteps())
+              .getPath();
+        } else {
+          path = sprites.getAnimated("bubble-zenchan-green").getFrame(currentGame.getSteps())
+            .getPath();
+        }
+      } else if (bubbleLifetime > 5 && bubbleLifetime < 40 && bubbleLifetime % 15 < 8) {
+        path = sprites.getAnimated("bubble-red").getFrame(currentGame.getSteps()).getPath();
+      } else if (bubbleLifetime <= 5) {
+        path = sprites.getAnimated("bubble-green-burst").getFrame(currentGame.getSteps()).getPath();
       }
       dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(),
           currentBubble.getPosition().getY());
