@@ -10,7 +10,6 @@ import java.util.ArrayList;
  * @author David Alderliesten
  */
 public class Player extends LevelElement {
-  private static int playerCount;
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
   private Boolean firing;
@@ -30,18 +29,11 @@ public class Player extends LevelElement {
 
     setGravity(true);
 
-    id = playerCount++;
+    id = 0;
     actions = new ArrayList<PlayerAction>();
     lastMove = PlayerAction.MoveRight;
     firing = false;
     alive = true;
-  }
-
-  /**
-   * Resets the current player count.
-   */
-  public static void resetPlayerCount() {
-    playerCount = 0;
   }
 
   /**
@@ -92,6 +84,16 @@ public class Player extends LevelElement {
     return id;
   }
 
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *         Integer that represents the players number in the game.
+   */
+  public void setPlayerNumber(int id) {
+    this.id = id;
+  }
+  
   /**
    * Check whether the given action is queued for the next step.
    * 
