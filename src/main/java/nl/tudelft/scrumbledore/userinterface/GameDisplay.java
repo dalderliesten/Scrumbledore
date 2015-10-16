@@ -381,9 +381,9 @@ public final class GameDisplay {
         if (player.getSpeed().getX() == 0 && !isFiring) {
           steps = 0;
         }
-        String path = sprites
-            .getAnimated("player-" + Constants.PLAYER_COLORS.get(player.getPlayerNumber()) + "-" + spr)
-            .getFrame(steps).getPath();
+        String path = 
+            sprites.getAnimated("player-" + Constants.PLAYER_COLORS.get(player.getPlayerNumber()) 
+              + "-" + spr).getFrame(steps).getPath();
         dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
             player.getPosition().getY());
       }
