@@ -17,6 +17,7 @@ import nl.tudelft.scrumbledore.Logger;
  * 
  * @author David Alderliesten
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public final class MainMenu {
   private static Stage gameStage;
   private static Scene currentScene;
