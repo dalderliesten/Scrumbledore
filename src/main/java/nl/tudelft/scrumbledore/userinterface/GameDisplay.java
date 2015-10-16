@@ -54,6 +54,7 @@ public final class GameDisplay {
   private static Label highScoreLabel;
   private static Label levelLabel;
   private static Label powerUpLabel;
+  private static int endTimer;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
@@ -114,6 +115,7 @@ public final class GameDisplay {
 
     renderStatic();
     animationTimer.start();
+    endTimer = Constants.REFRESH_RATE * 5;
 
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
@@ -269,7 +271,7 @@ public final class GameDisplay {
   private static void levelStatus() {
     if (currentGame.getCurrentLevel().getNPCs().isEmpty()
         && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
-      if (currentGame.getCurrentLevel().getEndTimer() <= 0) {
+      if (endTimer <= 0) {
         if (currentGame.remainingLevels() == 0) {
           Logger.getInstance().log("Player completed the game successfully.");
  
@@ -286,7 +288,7 @@ public final class GameDisplay {
             GameDisplay.renderStatic();
         }
       }
-      currentGame.getCurrentLevel().decrementEndTimer();
+      endTimer--;
     }
   }
 
