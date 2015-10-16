@@ -25,6 +25,7 @@ import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
 import nl.tudelft.scrumbledore.level.Bubble;
 import nl.tudelft.scrumbledore.level.Fruit;
+import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.NPC;
 import nl.tudelft.scrumbledore.level.NPCAction;
 import nl.tudelft.scrumbledore.level.Platform;
@@ -45,7 +46,7 @@ public final class GameDisplay {
   private static BorderPane currentLayout;
   private static Group renderGroup;
   private static StepTimer currentTimer;
-  private static int endTimer;
+  private static double endStepsSnapShot;
   private static Game currentGame;
   private static Canvas staticCanvas;
   private static Canvas dynamicCanvas;
@@ -116,7 +117,6 @@ public final class GameDisplay {
 
     renderStatic();
     animationTimer.start();
-    endTimer = Constants.REFRESH_RATE * 4;
     
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
@@ -270,9 +270,13 @@ public final class GameDisplay {
    * Upon restarting, notifies the player of time to pick up fruit.
    */
   private static void levelStatus() {
-    if (currentGame.getCurrentLevel().getNPCs().isEmpty()
-        && currentGame.getCurrentLevel().getEnemyBubbles().isEmpty()) {
-      if (endTimer <= 0) {
+    Level currentLevel = currentGame.getCurrentLevel();
+    if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
+      if (endStepsSnapShot == 0) {
+        endStepsSnapShot = currentGame.getSteps();
+      }
+      
+      if (endStepsSnapShot + Constants.REFRESH_RATE * 4 < currentGame.getSteps()) {
         if (currentGame.remainingLevels() == 0) {
           Logger.getInstance().log("Player completed the game successfully.");
   
@@ -288,9 +292,9 @@ public final class GameDisplay {
           currentGame.goToNextLevel();
           GameDisplay.renderStatic();
         }
-        endTimer = Constants.REFRESH_RATE * 4;
+        
+        endStepsSnapShot = 0;
       }
-      endTimer--;
     }
   }
 
