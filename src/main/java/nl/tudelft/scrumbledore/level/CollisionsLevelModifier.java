@@ -246,7 +246,7 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (Bubble bubble : bubbles) {
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(player, bubble, delta);
-          if (collision.collidingFromTop() &&  !(bubble.hasNPC())) {
+          if (collision.collidingFromTop() && !(bubble.hasNPC())) {
             player.getSpeed().setY(-Constants.PLAYER_JUMP);
             kinetics.snapTop(player, bubble);
             break;
@@ -255,8 +255,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.colliding() && bubble.hasNPC()) {
             Fruit newFruit = null;
             try {
-              newFruit = new Fruit(bubble.getPosition().clone(),
-                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              newFruit = new Fruit(bubble.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
+                  Constants.BLOCKSIZE));
             } catch (CloneNotSupportedException e) {
               e.printStackTrace();
             }
