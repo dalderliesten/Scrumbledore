@@ -26,8 +26,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
     for (Player player : players) {
       if (player.isAlive()) {
-        checkHorizontalMovement(player);
         checkStopMovement(player);
+        checkHorizontalMovement(player);
         checkShooting(player, level);
 
         if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
