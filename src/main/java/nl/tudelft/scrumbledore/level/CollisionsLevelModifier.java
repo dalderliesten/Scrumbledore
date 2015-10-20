@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
+import nl.tudelft.scrumbledore.powerup.Powerup;
 
 /**
  * Class responsible for collision detection between given elements.
@@ -41,6 +42,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
+    detectPlayerPowerup(level, delta);
     detectPlayerBubble(level, delta);
     detectBubbleEnemy(level, delta);
     detectBubbleBubble(level, delta);
@@ -50,6 +52,31 @@ public class CollisionsLevelModifier implements LevelModifier {
     detectPlayerFruit(level, delta);
     detectPlayerEnemy(level, delta);
     detectNPCPlatform(level, delta);
+  }
+
+  /**
+   * Detect collisions between player and powerups.
+   * 
+   * @param level , the level.
+   * @param delta , the delta provided by StepTimer.
+   */
+  protected void detectPlayerPowerup(Level level, double delta) {
+    ArrayList<Powerup> powerUps = level.getPowerups();
+    ArrayList<Player> players = level.getPlayers();
+
+    if (powerUps.size() > 0) {
+      for (Player player : players) {
+        for (int i = 0; i < powerUps.size(); i++) {
+          if (powerUps.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+            Collision collision = new Collision(player, powerUps.get(i), delta);
+            if (collision.colliding()) {
+              powerUps.remove(i);
+            }
+          }
+        }
+      }
+    }
+
   }
 
   /**
