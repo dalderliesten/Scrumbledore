@@ -41,7 +41,8 @@ public class BubbleActionsLevelModifierTest {
   }
 
   /**
-   * 
+   * When a Level is modified and one of its Bubbles has a negative lifetime and an NPC
+   * then a new NPC should be spawned.
    */
   @Test
   public void testModifyNegativeLifetime() {
