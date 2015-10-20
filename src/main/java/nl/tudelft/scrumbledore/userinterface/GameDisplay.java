@@ -118,7 +118,7 @@ public final class GameDisplay {
 
     renderStatic();
     animationTimer.start();
-    
+
     currentScene = new Scene(currentLayout);
     currentScene.getStylesheets().add(Constants.CSS_GAMEVIEW);
     currentStage.setScene(currentScene);
@@ -279,20 +279,20 @@ public final class GameDisplay {
             (Constants.LEVELY / 2) - 130);
         endStepsSnapShot = currentGame.getSteps();
       }
-      
+
       if (endStepsSnapShot + Constants.REFRESH_RATE * 4 < currentGame.getSteps()) {
         if (currentGame.remainingLevels() == 0) {
           Logger.getInstance().log("Player completed the game successfully.");
-  
+
           animationTimer.stop();
-  
+
           winDialog();
         } else {
           Logger.getInstance().log("Player advanced to the next level.");
           currentGame.goToNextLevel();
           GameDisplay.renderStatic();
         }
-        
+
         endStepsSnapShot = 0;
       }
     }
@@ -310,8 +310,9 @@ public final class GameDisplay {
 
     Label bodyVictory = new Label(Constants.GAMEWIN_DIALOG);
 
-    Label pointsView = new Label(Constants.GAMEWIN_POINTS + currentGame.getScoreCounter().getScore()
-        + Constants.GAMEWIN_HIGHSCORE + currentGame.getScoreCounter().getHighScore() + ".");
+    Label pointsView = new Label(Constants.GAMEWIN_POINTS
+        + currentGame.getScoreCounter().getScore() + Constants.GAMEWIN_HIGHSCORE
+        + currentGame.getScoreCounter().getHighScore() + ".");
 
     Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
     mapExitButton(returnButton);
@@ -344,8 +345,8 @@ public final class GameDisplay {
     staticContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
     for (Platform current : currentGame.getCurrentLevel().getPlatforms()) {
-      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()),
-          current.getPosition().getX(), current.getPosition().getY());
+      staticContext.drawImage(new Image(sprites.get("wall-1").getPath()), current.getPosition()
+          .getX(), current.getPosition().getY());
     }
   }
 
@@ -386,11 +387,12 @@ public final class GameDisplay {
         if (player.getSpeed().getX() == 0 && !isFiring) {
           steps = 0;
         }
-        String path = 
-            sprites.getAnimated("player-" + Constants.PLAYER_COLORS.get(player.getPlayerNumber()) 
-              + "-" + spr).getFrame(steps).getPath();
-        dynamicContext.drawImage(new Image(path), player.getPosition().getX(),
-            player.getPosition().getY());
+        String path = sprites
+            .getAnimated(
+                "player-" + Constants.PLAYER_COLORS.get(player.getPlayerNumber()) + "-" + spr)
+            .getFrame(steps).getPath();
+        dynamicContext.drawImage(new Image(path), player.getPosition().getX(), player.getPosition()
+            .getY());
       }
     }
   }
@@ -414,15 +416,15 @@ public final class GameDisplay {
               .getPath();
         } else {
           path = sprites.getAnimated("bubble-zenchan-green").getFrame(currentGame.getSteps())
-            .getPath();
+              .getPath();
         }
       } else if (bubbleLifetime > 5 && bubbleLifetime < 40 && bubbleLifetime % 15 < 8) {
         path = sprites.getAnimated("bubble-red").getFrame(currentGame.getSteps()).getPath();
       } else if (bubbleLifetime <= 5) {
         path = sprites.getAnimated("bubble-green-burst").getFrame(currentGame.getSteps()).getPath();
       }
-      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(),
-          currentBubble.getPosition().getY());
+      dynamicContext.drawImage(new Image(path), currentBubble.getPosition().getX(), currentBubble
+          .getPosition().getY());
     }
   }
 
@@ -443,11 +445,14 @@ public final class GameDisplay {
         spr = "zenchan-move-left";
       }
       String path = sprites.getAnimated(spr).getFrame(steps).getPath();
-      dynamicContext.drawImage(new Image(path), current.getPosition().getX(),
-          current.getPosition().getY());
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
+  /**
+   * Renders the fruit objects on the map.
+   */
   private static void renderFruit() {
     ArrayList<Fruit> fruits = new ArrayList<Fruit>();
 
@@ -457,8 +462,8 @@ public final class GameDisplay {
 
     for (Fruit current : fruits) {
       String path = sprites.getAnimated("fruit").getFrame(current.posX()).getPath();
-      dynamicContext.drawImage(new Image(path), current.getPosition().getX(),
-          current.getPosition().getY());
+      dynamicContext.drawImage(new Image(path), current.getPosition().getX(), current.getPosition()
+          .getY());
     }
   }
 
