@@ -8,9 +8,9 @@ import java.io.FileInputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.io.UnsupportedEncodingException;
-import java.text.SimpleDateFormat;
-import java.util.Date;
+import org.junit.Before;
 import org.junit.Test;
+
 
 /**
  * Test suite for the Logger class.
@@ -19,12 +19,21 @@ import org.junit.Test;
  */
 public class LoggerTest {
 
+  private Logger logger;
+
+  /**
+   * Set-up the initial Game Factory.
+   */
+  @Before
+  public void setUp() {
+    logger = Logger.getInstance();
+  }
+  
   /**
    * Test whether only one instance of a Logger can exist.
    */
   @Test
   public final void testGetInstance() {
-    Logger logger = Logger.getInstance();
     Logger logger2 = Logger.getInstance();
     
     assertEquals(logger, logger2);
@@ -34,26 +43,17 @@ public class LoggerTest {
    * Test whether the correct logging directory has been created.
    */
   @Test
-  public final void testLoggingDir() {
-    Logger.getInstance();
-    
+  public final void testLoggingDir() {    
     File loggingDir = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR);
     assertTrue(loggingDir.exists());
   }
-  
   
   /**
    * Test whether the correct logging file has been created.
    */
   @Test
   public final void testLoggingFile() {
-    Logger.getInstance();
-    
-    Date currentDate = new Date();
-    SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
-    
-    String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
-    File loggingFile = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR + desiredFileName);
+    File loggingFile = logger.getLoggingFile();
     
     assertTrue(loggingFile.exists());
   }
@@ -64,12 +64,7 @@ public class LoggerTest {
    */
   @Test
   public final void testLog() {
-    Logger logger = Logger.getInstance();
-    
-    SimpleDateFormat simpleFormat = new SimpleDateFormat("yyyy-MM.dd-hh-mm-ss");
-    String desiredFileName = "Session-" + simpleFormat.format(new Date()) + ".log";
-    File loggingFile = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR + desiredFileName);
-
+    File loggingFile = logger.getLoggingFile();
     logger.log("log_write_test");
         
     try {
