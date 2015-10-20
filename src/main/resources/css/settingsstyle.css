@@ -53,10 +53,57 @@
  }
  
  #popup{
-	 -fx-font-size: 32px;
-	 -fx-border-width: 5px;
+ 	 -fx-background-color: #333333;
+ 	 -fx-font-fill: #32b8f1;
+	 -fx-font-size: 30.0px;
+	 -fx-border-width: 5.0px;
 	 -fx-border-style: solid;
 	 -fx-border-color: #32b8f1;
-	 -fx-background-color: #1d1d1d;
-	 -fx-padding: 18px 64px;
+	 -fx-padding: 0.0px 50.0px 0.0px 50.0px;
  }
+ 
+ #settingschoice {
+ 	-fx-background-color: #32b8f1;
+ 	-fx-text-fill: #1d1d1d;
+ 	-fx-font-weight: bold;
+ 	-fx-font-size: 15.0px;
+ 	-fx-padding: 0.5 0.0 0.5 0.5;
+ 	-fx-border-style: solid;
+	-fx-border-color: #333333;
+ 	-fx-border-width: 1.0 0.0 1.0 0.0;
+ }
+ 
+ #settingschoice .button {
+ 	-fx-background-color: #32b8f1;
+ 	-fx-background-radius: 0.0;
+ 	-fx-text-fill: #333333;
+ 	-fx-font-size: 15.0px;
+ 	-fx-border-width: 0.0 0.0 0.0 0.0;
+ 	-fx-padding: 3.0 2.5 0.0 2.5;
+ 	
+ }
+ 
+ #settingschoice .button:hover,  #settingschoice .button:focused  {
+ 	-fx-background-color: #333333;
+ 	-fx-text-fill: #32b8f1;
+ 	-fx-border-width: 0.0 0.0 5.0 0.0;
+ 	-fx-border-style: solid;
+	-fx-border-color: #333333;
+ }
+ 
+ #playerselect {
+ 	-fx-background-color: #333333;
+ }
+ 
+ #playerselect .radio-button {
+ 	-fx-background-color: #333333;
+ }
+ 
+ #playerselect .radio-button:hover, #playerselect .radio-button:focused {
+ 	-fx-background-color: #32b8f1;
+ 	-fx-text-fill: #333333;
+ }
+ 
+  #playerselect .radio-button .radio, #playerselect .radio-button:focused .dot, #playerselect  .radio-button:active .dot, #playerselect .radio-button:selected .dot {
+  	-fx-background-color: transparent;
+  }

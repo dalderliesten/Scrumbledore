@@ -26,6 +26,7 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  * Class responsible for generating the keybinding options and the arming of all graphical elements
  * for these options.
  * 
+ * @author David Alderliesten
  * @author Jeroen Meijer
  */
 public final class KeybindingSettings {
@@ -39,7 +40,6 @@ public final class KeybindingSettings {
    * given time.
    */
   private KeybindingSettings() {
-
   }
 
   /**
@@ -73,6 +73,7 @@ public final class KeybindingSettings {
    */
   private static void generatePlayerRadio() {
     HBox playerBox = new HBox(Constants.SETTINGS_PADDING);
+    playerBox.setId("playerselect");
     final ToggleGroup playerGroup = new ToggleGroup();
 
     final RadioButton player1 = new RadioButton(Constants.SETTINGS_PLAYER1);
@@ -148,9 +149,11 @@ public final class KeybindingSettings {
    */
   private static void showKeybindingPopup(final PlayerAction action) {
     final Stage popup = new Stage();
-    Label rebindLabel = new Label("Press a key to rebind...");
+    Label rebindLabel = new Label(Constants.SETTINGS_CHOOSEKEYQUERY);
+    VBox currentBox = new VBox(Constants.SETTINGS_CHOOSEKEYPADDING);
     rebindLabel.setId("popup");
-    Scene scene = new Scene(rebindLabel);
+    currentBox.getChildren().add(rebindLabel);
+    Scene scene = new Scene(currentBox);
 
     scene.setUserAgentStylesheet(Constants.CSS_SETTINGS);
 
@@ -167,4 +170,5 @@ public final class KeybindingSettings {
     popup.setScene(scene);
     popup.show();
   }
+  
 }

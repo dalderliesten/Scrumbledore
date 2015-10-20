@@ -5,6 +5,7 @@ import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
+import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
 import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
@@ -42,8 +43,10 @@ public final class MainMenu {
 
     generateLogo();
 
+    generateSplit();
+
     generateButtons();
-    
+
     addWindowEventListeners();
 
     currentScene = new Scene(contentBox);
@@ -61,6 +64,15 @@ public final class MainMenu {
     Label logo = new Label(Constants.SCRUMBLEDORE_TEXT);
 
     contentBox.getChildren().add(logo);
+  }
+
+  /**
+   * Generates the splitting bar between the logo and the main menu.
+   */
+  private static void generateSplit() {
+    HBox splitterBox = new HBox();
+    splitterBox.setId("splitter");
+    contentBox.getChildren().add(splitterBox);
   }
 
   /**
@@ -147,7 +159,7 @@ public final class MainMenu {
 
     });
   }
-  
+
   /**
    * Add WindowEvent listener to exit the application when the window is closed.
    * 
