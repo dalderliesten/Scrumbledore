@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -54,6 +53,7 @@ public final class GameDisplay {
   private static Label highScoreLabel;
   private static Label levelLabel;
   private static Label powerUpLabel;
+  private static String advanceLabel;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
@@ -268,8 +268,9 @@ public final class GameDisplay {
     Level currentLevel = currentGame.getCurrentLevel();
     if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
       if (endStepsSnapShot == 0) {
+        advanceLabel = new String(Constants.ADVANCINGLABEL);
         staticContext.setFill(Color.WHITE);
-        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+        staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);
         endStepsSnapShot = currentGame.getSteps();
       }
@@ -299,18 +300,23 @@ public final class GameDisplay {
   private static void winDialog() {
     VBox currentBox = new VBox(Constants.GAME_PADDING);
 
+    HBox splitterBox = new HBox();
+    splitterBox.setId("splitter");
+
     Label headerVictory = new Label(Constants.GAMEWIN_HEADER);
     headerVictory.setId("winHeader");
 
     Label bodyVictory = new Label(Constants.GAMEWIN_DIALOG);
 
-    Label pointsView = new Label(Constants.GAMEWIN_POINTS + currentGame.getScoreCounter().getScore()
-        + Constants.GAMEWIN_HIGHSCORE + currentGame.getScoreCounter().getHighScore() + ".");
+    Label pointsView = new Label(Constants.GAMEWIN_POINTS
+        + currentGame.getScoreCounter().getScore() + Constants.GAMEWIN_HIGHSCORE
+        + currentGame.getScoreCounter().getHighScore() + ".");
 
     Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
     mapExitButton(returnButton);
 
-    currentBox.getChildren().addAll(headerVictory, bodyVictory, pointsView, returnButton);
+    currentBox.getChildren().addAll(headerVictory, splitterBox, bodyVictory, pointsView,
+        returnButton);
     currentScene = new Scene(currentBox);
     currentScene.getStylesheets().add(Constants.CSS_VICTORY);
     currentStage.setScene(currentScene);
@@ -369,7 +375,6 @@ public final class GameDisplay {
         drawPos.sum(Vector.scale(new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE), .5));
         context.drawImage(new Image(sprite.getPath()), drawPos.getX(), drawPos.getY());
       }
-
     }
   }
 

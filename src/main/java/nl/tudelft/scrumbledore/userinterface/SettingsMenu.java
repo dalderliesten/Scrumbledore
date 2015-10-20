@@ -45,6 +45,7 @@ public final class SettingsMenu {
     generateTabs();
 
     VBox currentSettings = LoggingSettings.fetchLoggingOptions();
+    currentSettings.setId("generalview");
     currentBox.getChildren().add(currentSettings);
 
     exitButtonHandling();
@@ -82,16 +83,22 @@ public final class SettingsMenu {
    * Generates the settings tabs which the player can choose from.
    */
   private static void generateTabs() {
-    HBox hbox = new HBox();
+    HBox hbox = new HBox(Constants.SETTINGS_PADDING);
+    hbox.setId("settingschoice");
 
     Button loggingButton = getLoggingButton();
     Button keybindingButton = getKeybindingButton();
-    
+
     hbox.getChildren().addAll(loggingButton, keybindingButton);
 
     currentBox.getChildren().add(hbox);
   }
 
+  /**
+   * Gets the logging button for the current option.
+   * 
+   * @return The button for the logging function.
+   */
   private static Button getLoggingButton() {
     final Button button = new Button(Constants.SETTINGSLOGGING_BUTTON);
     button.getStyleClass().add("tab");
@@ -101,10 +108,15 @@ public final class SettingsMenu {
         currentBox.getChildren().set(2, LoggingSettings.fetchLoggingOptions());
       }
     });
-    
+
     return button;
   }
 
+  /**
+   * Gets the button needed for the curreny key function.
+   * 
+   * @return The button for the keybinding.
+   */
   private static Button getKeybindingButton() {
     final Button button = new Button(Constants.SETTINGSKEYBINDING_BUTTON);
     button.getStyleClass().add("tab");

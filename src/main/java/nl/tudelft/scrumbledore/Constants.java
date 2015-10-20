@@ -56,7 +56,7 @@ public final class Constants {
   public static final String LEVELLABEL = "Level:";
   
   // Defining labels and values needed for the advancement GUI pop-ups.
-  public static final String ADVANCINGLABEL = "Advancing to next level in 5 seconds...";
+  public static final String ADVANCINGLABEL = "Advancing to next level in a few moments...";
   public static final int ADVANCING_DELAY = 5000;
 
   // Defining text needed to display the buttons in the bottom of the user interface.
@@ -92,6 +92,8 @@ public final class Constants {
   public static final String SETTINGSEXIT_BUTTON = "Back";
   public static final String SETTINGSLOGGING_BUTTON = "Logging";
   public static final String SETTINGSKEYBINDING_BUTTON = "Keybinding";
+  public static final String SETTINGS_CHOOSEKEYQUERY = "Press the desired key...";
+  public static final int SETTINGS_CHOOSEKEYPADDING = 50;
   
   // Defining the text needed for the display of the keybinding options.
   public static final String SETTINGS_PLAYER1 = "Player 1";
