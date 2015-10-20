@@ -300,6 +300,9 @@ public final class GameDisplay {
   private static void winDialog() {
     VBox currentBox = new VBox(Constants.GAME_PADDING);
 
+    HBox splitterBox = new HBox();
+    splitterBox.setId("splitter");
+
     Label headerVictory = new Label(Constants.GAMEWIN_HEADER);
     headerVictory.setId("winHeader");
 
@@ -312,7 +315,8 @@ public final class GameDisplay {
     Button returnButton = new Button(Constants.GAMEWIN_TOMAINMENU);
     mapExitButton(returnButton);
 
-    currentBox.getChildren().addAll(headerVictory, bodyVictory, pointsView, returnButton);
+    currentBox.getChildren().addAll(headerVictory, splitterBox, bodyVictory, pointsView,
+        returnButton);
     currentScene = new Scene(currentBox);
     currentScene.getStylesheets().add(Constants.CSS_VICTORY);
     currentStage.setScene(currentScene);

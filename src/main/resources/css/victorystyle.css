@@ -35,3 +35,8 @@
  	-fx-text-fill: #32b8f1;
  	-fx-border-color: #32b8f1;
  }
+ 
+ #splitter {
+ 	-fx-background-color: #32b8f1;
+ 	-fx-padding: 12.0px;
+ }
