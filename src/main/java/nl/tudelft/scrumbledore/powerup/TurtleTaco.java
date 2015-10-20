@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
