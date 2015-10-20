@@ -11,12 +11,12 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class TurtleTaco extends Powerup{
+public class TurtleTaco extends Powerup {
 
   /**
-   * 
-   * @param position
-   * @param size
+   * Constructs a TurtleTaco object.
+   * @param position , location of the TurtleTaco.
+   * @param size , size of the object.
    */
   public TurtleTaco(Vector position, Vector size) {
     super(position, size);

@@ -11,12 +11,12 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class ChiliChicken extends Powerup{
+public class ChiliChicken extends Powerup {
   
   /**
    * Creates a ChiliChicken instance.
-   * @param position
-   * @param size
+   * @param position , location of the ChiliChicken.
+   * @param size , size of the object.
    */
   public ChiliChicken(Vector position, Vector size) {
     super(position, size);
