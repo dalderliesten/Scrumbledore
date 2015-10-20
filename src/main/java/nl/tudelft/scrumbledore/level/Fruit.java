@@ -1,5 +1,10 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
+
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
+
 /**
  * Class representing a Fruit in a game.
  * 
@@ -33,8 +38,7 @@ public class Fruit extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
       Fruit that = (Fruit) other;
-      return this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize());
+      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
     return false;
@@ -76,6 +80,22 @@ public class Fruit extends LevelElement {
    */
   public void setPickable(Boolean bool) {
     pickable = bool;
+  }
+
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    SpriteStore store = SpriteStore.getInstance();
+    String id = "fruit";
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    result.add(store.getAnimated(id).getFrame(posX()));
+    return result;
   }
 
 }

@@ -1,5 +1,9 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
+
+import nl.tudelft.scrumbledore.sprite.Sprite;
+
 /**
  * Abstract class representing an element that can be placed in a Level.
  * 
@@ -235,5 +239,15 @@ public abstract class LevelElement {
     boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
     return inX && inY;
   }
+
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public abstract ArrayList<Sprite> getSprites(double steps);
 
 }

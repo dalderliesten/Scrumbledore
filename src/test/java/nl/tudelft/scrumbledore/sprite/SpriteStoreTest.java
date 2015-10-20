@@ -27,7 +27,7 @@ public class SpriteStoreTest {
     assertTrue(test.getAll().get(0).getID().equals("test"));
 
     // Additionally test constructor with zero parameters, just for the line coverage.
-    SpriteStore additionalTest = new SpriteStore();
+    SpriteStore additionalTest = SpriteStore.getInstance();
     assertFalse(additionalTest.getAll().isEmpty());
   }
 
