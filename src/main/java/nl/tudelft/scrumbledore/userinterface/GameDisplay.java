@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
@@ -23,15 +24,10 @@ import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
-import nl.tudelft.scrumbledore.level.Bubble;
-import nl.tudelft.scrumbledore.level.Fruit;
 import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.NPC;
-import nl.tudelft.scrumbledore.level.NPCAction;
-import nl.tudelft.scrumbledore.level.Platform;
+import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.PlayerAction;
-import nl.tudelft.scrumbledore.sprite.SpriteStore;
+import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
  * Class responsible for displaying, running, updating, and interacting with the game for one or two
@@ -340,11 +336,8 @@ public final class GameDisplay {
   private static void renderStatic() {
     staticContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
-    for (Platform current : currentGame.getCurrentLevel().getPlatforms()) {
-      dynamicContext.drawImage(
-          new Image(current.getSprites(currentGame.getSteps()).get(0).getPath()),
-          current.getPosition().getX(), current.getPosition().getY());
-    }
+    ArrayList<LevelElement> staticElements = currentGame.getCurrentLevel().getStaticElements();
+    renderLevelElements(staticElements, staticContext);
   }
 
   /**
@@ -353,10 +346,8 @@ public final class GameDisplay {
   private static void renderDynamic() {
     dynamicContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
-    renderPlayer();
-    renderBubbles();
-    renderNPC();
-    renderFruit();
+    ArrayList<LevelElement> dynamicElements = currentGame.getCurrentLevel().getDynamicElements();
+    renderLevelElements(dynamicElements, dynamicContext);
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
@@ -364,64 +355,20 @@ public final class GameDisplay {
   }
 
   /**
-   * Renders the player(s) on the map.
+   * Render a given list of level elements to a given context of the Game Display.
+   * 
+   * @param elements
+   *          The Level Elements to be rendered.
+   * @param context
+   *          The Graphics Context in which the elements should be drawn.
    */
-  private static void renderPlayer() {
-    ArrayList<Player> players = currentGame.getCurrentLevel().getPlayers();
-    for (Player player : players) {
-      if (player.isAlive()) {
-        dynamicContext.drawImage(
-            new Image(player.getSprites(currentGame.getSteps()).get(0).getPath()),
-            player.getPosition().getX(), player.getPosition().getY());
+  private static void renderLevelElements(List<LevelElement> elements, GraphicsContext context) {
+    for (LevelElement element : elements) {
+      for (Sprite sprite : element.getSprites(currentGame.getSteps())) {
+        context.drawImage(new Image(sprite.getPath()), element.getPosition().getX(),
+            element.getPosition().getY());
       }
-    }
-  }
 
-  /**
-   * Renders the bubble projectile(s) on the map.
-   */
-  private static void renderBubbles() {
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-    for (Bubble bubble : currentGame.getCurrentLevel().getBubbles()) {
-      bubbles.add(bubble);
-    }
-
-    for (Bubble currentBubble : bubbles) {
-      dynamicContext.drawImage(
-          new Image(currentBubble.getSprites(currentGame.getSteps()).get(0).getPath()),
-          currentBubble.getPosition().getX(), currentBubble.getPosition().getY());
-    }
-  }
-
-  /**
-   * Renders the non-player characters on the map.
-   */
-  private static void renderNPC() {
-    ArrayList<NPC> npcs = new ArrayList<NPC>();
-    double steps = currentGame.getSteps();
-
-    for (NPC npc : currentGame.getCurrentLevel().getNPCs()) {
-      npcs.add(npc);
-    }
-
-    for (NPC current : npcs) {
-      dynamicContext.drawImage(
-          new Image(current.getSprites(currentGame.getSteps()).get(0).getPath()),
-          current.getPosition().getX(), current.getPosition().getY());
-    }
-  }
-
-  private static void renderFruit() {
-    ArrayList<Fruit> fruits = new ArrayList<Fruit>();
-
-    for (Fruit fruit : currentGame.getCurrentLevel().getFruits()) {
-      fruits.add(fruit);
-    }
-
-    for (Fruit current : fruits) {
-      dynamicContext.drawImage(
-          new Image(current.getSprites(currentGame.getSteps()).get(0).getPath()),
-          current.getPosition().getX(), current.getPosition().getY());
     }
   }
 

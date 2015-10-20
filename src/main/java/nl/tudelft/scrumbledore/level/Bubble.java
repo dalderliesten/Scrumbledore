@@ -121,7 +121,7 @@ public class Bubble extends LevelElement {
    */
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
-    String id = "bubble-green-burst";
+    String id = "bubble-green";
     if (hasNPC()) {
       id = "bubble-zenchan-green";
       if (lifetime < 60 && lifetime % 15 < 8) {
@@ -129,6 +129,8 @@ public class Bubble extends LevelElement {
       }
     } else if (lifetime > 5 && lifetime < 40 && lifetime % 15 < 8) {
       id = "bubble-red";
+    } else if (lifetime <= 5) {
+      id = "bubble-green-burst";
     }
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     result.add(store.getAnimated(id).getFrame(steps));

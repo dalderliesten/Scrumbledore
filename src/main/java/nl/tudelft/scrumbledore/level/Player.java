@@ -183,24 +183,27 @@ public class Player extends LevelElement {
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
-    SpriteStore store = SpriteStore.getInstance();
-    boolean toRight = getLastMove() == PlayerAction.MoveRight;
-    
-    String id = "move-left";
-    if (firing && toRight) {
-      id = "shoot-right";
-    } else if (firing) {
-      id = "shoot-left";
-    } else if (toRight) {
-      id = "move-right";
-    }
-    if (getSpeed().getX() == 0 && !firing) {
-      steps = 0;
-    }
-    
-    id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
     ArrayList<Sprite> result = new ArrayList<Sprite>();
-    result.add(store.getAnimated(id).getFrame(steps));
+    SpriteStore store = SpriteStore.getInstance();
+    if (alive) {
+      boolean toRight = getLastMove() == PlayerAction.MoveRight;
+
+      String id = "move-left";
+      if (firing && toRight) {
+        id = "shoot-right";
+      } else if (firing) {
+        id = "shoot-left";
+      } else if (toRight) {
+        id = "move-right";
+      }
+      if (getSpeed().getX() == 0 && !firing) {
+        steps = 0;
+      }
+
+      id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
+
+      result.add(store.getAnimated(id).getFrame(steps));
+    }
     return result;
   }
 
