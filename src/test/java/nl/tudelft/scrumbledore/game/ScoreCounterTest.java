@@ -1,4 +1,4 @@
-package nl.tudelft.scrumbledore;
+package nl.tudelft.scrumbledore.game;
 
 import static org.junit.Assert.assertEquals;
 
