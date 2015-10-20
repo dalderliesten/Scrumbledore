@@ -48,16 +48,26 @@ public final class Logger {
    * file system.
    */
   private void createLoggingDir() {
+    File appDir = new File(Constants.APPDATA_DIR);
     File loggingDir = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR);
+ 
+    boolean result = true;
     try {
+      if (!appDir.exists()) {
+        result = appDir.mkdir();
+        if (!result) {
+            throw new IOException();
+        }
+      }
+      
       if (!loggingDir.exists()) {
-        boolean result = loggingDir.mkdir();
-
+        result = loggingDir.mkdir();
         if (!result) {
           throw new IOException();
         }
       }
     } catch (IOException e) {
+      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
@@ -79,7 +89,7 @@ public final class Logger {
 
       buffWriter.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
   }
 
@@ -99,8 +109,17 @@ public final class Logger {
 
       buffWriter.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
+  }
+  
+  /**
+   * Returns the logging file.
+   * 
+   * @return The logging file
+   */
+  public File getLoggingFile() {
+    return loggingFile;
   }
 
 }
