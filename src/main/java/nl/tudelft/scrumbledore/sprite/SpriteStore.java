@@ -1,9 +1,14 @@
 package nl.tudelft.scrumbledore.sprite;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * The Sprite Store reads and creates Sprites from the file system and allows to easily select and
@@ -126,7 +131,17 @@ public class SpriteStore {
     int pos = name.lastIndexOf('.');
     String id = name.substring(0, pos);
     String ext = name.substring(pos + 1);
-    return new Sprite(id, ext, dir);
+
+    Vector size = new Vector(0, 0);
+    try {
+      BufferedImage sprite = ImageIO.read(file);
+      size.setX(sprite.getWidth());
+      size.setY(sprite.getHeight());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return new Sprite(id, ext, dir, size);
   }
 
   /**

@@ -27,6 +27,7 @@ import nl.tudelft.scrumbledore.game.GameFactory;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Player;
+import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
@@ -336,8 +337,7 @@ public final class GameDisplay {
   private static void renderStatic() {
     staticContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
-    ArrayList<LevelElement> staticElements = currentGame.getCurrentLevel().getStaticElements();
-    renderLevelElements(staticElements, staticContext);
+    renderLevelElements(currentGame.getCurrentLevel().getStaticElements(), staticContext);
   }
 
   /**
@@ -346,8 +346,7 @@ public final class GameDisplay {
   private static void renderDynamic() {
     dynamicContext.clearRect(0, 0, Constants.GUIX, Constants.GUIY);
 
-    ArrayList<LevelElement> dynamicElements = currentGame.getCurrentLevel().getDynamicElements();
-    renderLevelElements(dynamicElements, dynamicContext);
+    renderLevelElements(currentGame.getCurrentLevel().getDynamicElements(), dynamicContext);
 
     scoreLabel.setText(currentGame.getScore());
     highScoreLabel.setText(currentGame.getHighScore());
@@ -365,8 +364,10 @@ public final class GameDisplay {
   private static void renderLevelElements(List<LevelElement> elements, GraphicsContext context) {
     for (LevelElement element : elements) {
       for (Sprite sprite : element.getSprites(currentGame.getSteps())) {
-        context.drawImage(new Image(sprite.getPath()), element.getPosition().getX(),
-            element.getPosition().getY());
+        Vector drawPos = sprite.getDrawPosition(element.getPosition());
+        // Because all Sprites are drawn at their center they need an offset to be in the grid.
+        drawPos.sum(Vector.scale(new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE), .5));
+        context.drawImage(new Image(sprite.getPath()), drawPos.getX(), drawPos.getY());
       }
 
     }
