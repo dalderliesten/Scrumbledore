@@ -92,9 +92,8 @@ public class Fruit extends LevelElement {
    */
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
-    String id = "fruit";
     ArrayList<Sprite> result = new ArrayList<Sprite>();
-    result.add(store.getAnimated(id).getFrame(posX()));
+    result.add(store.getAnimated("fruit").getFrame(posX()));
     return result;
   }
 
