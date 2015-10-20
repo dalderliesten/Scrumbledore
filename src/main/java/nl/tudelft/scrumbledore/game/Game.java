@@ -220,6 +220,16 @@ public abstract class Game {
     currentLevel = levels.get(0);
   }
 
+  
+  /**
+   * Returns a list of LevelModifiers.
+   * 
+   * @return A list of levelModifiers
+   */
+  public ArrayList<LevelModifier> getModifiers() {
+    return modifiers;
+  }
+
   /**
    * Make the Levels for this Game.
    * 
