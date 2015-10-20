@@ -67,19 +67,23 @@
  	-fx-text-fill: #1d1d1d;
  	-fx-font-weight: bold;
  	-fx-font-size: 15.0px;
- 	-fx-padding: 0.0 0.0 0.5 5.0;
+ 	-fx-padding: 0.0 0.0 0.0 0.5;
  }
  
  #settingschoice .button {
  	-fx-background-color: #32b8f1;
  	-fx-background-radius: 0.0;
  	-fx-text-fill: #333333;
+ 	-fx-font-size: 15.0px;
  	-fx-border-width: 0.0 0.0 0.0 0.0;
- 	-fx-padding: 0.0 0.0 0.0 5.0;
+ 	-fx-padding: 3.0 2.5 0.0 2.5;
  	
  }
  
  #settingschoice .button:hover,  #settingschoice .button:focused  {
  	-fx-background-color: #333333;
  	-fx-text-fill: #32b8f1;
+ 	-fx-border-width: 0.0 0.0 5.0 0.0;
+ 	-fx-border-style: solid;
+	-fx-border-color: #333333;
  }
