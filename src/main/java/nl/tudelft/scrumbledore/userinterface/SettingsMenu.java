@@ -45,6 +45,7 @@ public final class SettingsMenu {
     generateTabs();
 
     VBox currentSettings = LoggingSettings.fetchLoggingOptions();
+    currentSettings.setId("generalview");
     currentBox.getChildren().add(currentSettings);
 
     exitButtonHandling();
@@ -82,7 +83,8 @@ public final class SettingsMenu {
    * Generates the settings tabs which the player can choose from.
    */
   private static void generateTabs() {
-    HBox hbox = new HBox();
+    HBox hbox = new HBox(Constants.SETTINGS_PADDING);
+    hbox.setId("settingschoice");
 
     Button loggingButton = getLoggingButton();
     Button keybindingButton = getKeybindingButton();
