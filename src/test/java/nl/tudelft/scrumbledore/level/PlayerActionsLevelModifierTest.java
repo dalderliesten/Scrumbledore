@@ -106,6 +106,18 @@ public class PlayerActionsLevelModifierTest {
     modifier.modify(level, .5);
     assertFalse(player.hasAction(PlayerAction.MoveStop));
     assertFalse(player.hasAction(PlayerAction.Shoot));
-
+  }
+  
+  /**
+   * When a Level is modified and its Player has the action to stop shooting, then 
+   * the shooting action should be removed and the player should no longer be firing.
+   */
+  @Test
+  public void testModifyStopShooting() {
+    player.setFiring(true);
+    player.addAction(PlayerAction.ShootStop);
+    modifier.modify(level, .5);
+    assertFalse(player.isFiring());
+    assertFalse(player.hasAction(PlayerAction.ShootStop));
   }
 }
