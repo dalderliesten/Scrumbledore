@@ -11,7 +11,7 @@ import org.junit.Test;
  * Test Suite for the Player class.
  * 
  * @author Jesse Tilro
- *
+ * @author Niels Warnars
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class PlayerTest extends LevelElementTest {
@@ -104,6 +104,15 @@ public class PlayerTest extends LevelElementTest {
   }
 
   /**
+   * Test the id field getter/setter.
+   */
+  @Test
+  public void testPlayerNumber() {
+    player.setPlayerNumber(42);
+    assertEquals(42, player.getPlayerNumber());
+  }
+  
+  /**
    * Test the lastMove field getter/setter.
    */
   @Test
@@ -153,4 +162,5 @@ public class PlayerTest extends LevelElementTest {
   public void testHashCode() {
     assertEquals(0, player.hashCode());
   }
+  
 }
