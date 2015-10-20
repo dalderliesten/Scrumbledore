@@ -1,5 +1,6 @@
 package nl.tudelft.scrumbledore.userinterface;
 
+import java.awt.Font;
 import java.util.ArrayList;
 
 import javafx.animation.AnimationTimer;
@@ -58,6 +59,7 @@ public final class GameDisplay {
   private static Label highScoreLabel;
   private static Label levelLabel;
   private static Label powerUpLabel;
+  private static String advanceLabel;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
@@ -274,8 +276,9 @@ public final class GameDisplay {
     Level currentLevel = currentGame.getCurrentLevel();
     if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
       if (endStepsSnapShot == 0) {
+        advanceLabel = new String(Constants.ADVANCINGLABEL);
         staticContext.setFill(Color.WHITE);
-        staticContext.fillText(Constants.ADVANCINGLABEL, (Constants.LEVELX / 2) - 100,
+        staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);
         endStepsSnapShot = currentGame.getSteps();
       }

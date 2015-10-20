@@ -21,12 +21,12 @@
  	-fx-text-fill: #32b8f1;
  	-fx-font-weight: bold;
  	-fx-font-size: 15.0px;
- 	-fx-padding: 0 15 0 15;
+ 	-fx-padding: 0.0 15.0 0.0 15.0;
  }
  
  .button {
  	-fx-background-color: #32b8f1;
- 	-fx-background-radius: 0;
+ 	-fx-background-radius: 0.0;
  }
  
  .button:hover {
