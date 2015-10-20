@@ -150,8 +150,10 @@ public final class KeybindingSettings {
   private static void showKeybindingPopup(final PlayerAction action) {
     final Stage popup = new Stage();
     Label rebindLabel = new Label(Constants.SETTINGS_CHOOSEKEYQUERY);
+    VBox currentBox = new VBox(Constants.SETTINGS_CHOOSEKEYPADDING);
     rebindLabel.setId("popup");
-    Scene scene = new Scene(rebindLabel);
+    currentBox.getChildren().add(rebindLabel);
+    Scene scene = new Scene(currentBox);
 
     scene.setUserAgentStylesheet(Constants.CSS_SETTINGS);
 
