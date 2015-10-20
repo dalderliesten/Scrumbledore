@@ -24,21 +24,11 @@ public class Fruit extends LevelElement {
     pickable = false;
   }
 
-  /**
-   * Dummy HashCode method to satisfy code quality tools.
-   */
   @Override
   public int hashCode() {
     return 0;
   }
 
-  /**
-   * Check whether a given object is equal to this instance.
-   * 
-   * @param other
-   *          Another instance.
-   * @return A Boolean.
-   */
   @Override
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
