@@ -59,6 +59,7 @@
 	 -fx-border-width: 5.0px;
 	 -fx-border-style: solid;
 	 -fx-border-color: #32b8f1;
+	 -fx-padding: 0.0px 50.0px 0.0px 50.0px;
  }
  
  #settingschoice {
