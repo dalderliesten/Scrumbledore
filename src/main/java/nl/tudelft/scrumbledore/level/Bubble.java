@@ -3,6 +3,8 @@ package nl.tudelft.scrumbledore.level;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
  * This class creates a Bubble object that the player can shoot.
@@ -79,28 +81,59 @@ public class Bubble extends LevelElement {
   public double getLifetime() {
     return lifetime;
   }
-  
+
   /**
    * Setting the life time of a bubble.
-   * @param newTime The new life time.
+   * 
+   * @param newTime
+   *          The new life time.
    */
   public void setLifetime(double newTime) {
     lifetime = newTime;
   }
-  
+
   /**
    * Return a boolean wether to see if a bubble has an NPC in it.
+   * 
    * @return Boolean of hasNPC.
    */
   public Boolean hasNPC() {
     return hasNPC;
   }
-  
+
   /**
    * Setting a boolean to hasNPC.
-   * @param bool The boolean that hasNPC has to be.
+   * 
+   * @param bool
+   *          The boolean that hasNPC has to be.
    */
   public void setHasNPC(Boolean bool) {
     hasNPC = bool;
+  }
+
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    SpriteStore store = SpriteStore.getInstance();
+    String id = "bubble-green";
+    if (hasNPC()) {
+      id = "bubble-zenchan-green";
+      if (lifetime < 60 && lifetime % 15 < 8) {
+        id = "bubble-zenchan-red";
+      }
+    } else if (lifetime > 5 && lifetime < 40 && lifetime % 15 < 8) {
+      id = "bubble-red";
+    } else if (lifetime <= 5) {
+      id = "bubble-green-burst";
+    }
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    result.add(store.getAnimated(id).getFrame(steps));
+    return result;
   }
 }

@@ -19,13 +19,31 @@ public class SpriteStore {
   private String dir;
   private String dirSprite;
 
+  private static volatile SpriteStore instance;
+
   /**
    * Construct a new Sprite Store by reading the Sprites from the file system.
    */
-  public SpriteStore() {
+  private SpriteStore() {
     this.dir = Constants.RESOURCES_DIR + Constants.SPRITES_DIR;
     this.dirSprite = Constants.SPRITES_DIR;
     read();
+  }
+
+  /**
+   * Creates a new SpriteStore instance if it has not yet been instantiated.
+   * 
+   * @return The single SpriteStore instance.
+   */
+  public static SpriteStore getInstance() {
+    if (instance == null) {
+      synchronized (SpriteStore.class) {
+        if (instance == null) {
+          instance = new SpriteStore();
+        }
+      }
+    }
+    return instance;
   }
 
   /**
