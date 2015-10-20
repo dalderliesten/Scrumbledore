@@ -17,9 +17,6 @@ public class UserInterface extends Application {
   public UserInterface() {
   }
 
-  /**
-   * Start is the JavaFX method that starts and launches the user interface.
-   */
   @Override
   public void start(Stage gameStage) {
     gameStage.setTitle("Scrumbledore");

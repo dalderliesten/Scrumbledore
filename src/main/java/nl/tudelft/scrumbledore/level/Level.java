@@ -50,6 +50,31 @@ public class Level {
   }
 
   /**
+   * Get all the dynamic elements in the Level (elements that are updated every cycle).
+   * 
+   * @return All Dynamic Level Elements.
+   */
+  public ArrayList<LevelElement> getDynamicElements() {
+    ArrayList<LevelElement> elements = new ArrayList<LevelElement>();
+    elements.addAll(players);
+    elements.addAll(npcs);
+    elements.addAll(fruits);
+    elements.addAll(bubbles);
+    return elements;
+  }
+
+  /**
+   * Get all the static elements in the Level (elements that are not updated every cycle).
+   * 
+   * @return All Static Level Elements.
+   */
+  public ArrayList<LevelElement> getStaticElements() {
+    ArrayList<LevelElement> elements = new ArrayList<LevelElement>();
+    elements.addAll(platforms);
+    return elements;
+  }
+
+  /**
    * Returns an ArrayList of Platform elements.
    * 
    * @return An ArrayList of Platform elements
