@@ -16,6 +16,7 @@ import nl.tudelft.scrumbledore.Constants;
  */
 public class BubbleActionsLevelModifierTest {
 
+  private NPC npc;
   private Bubble bubble;
   private Bubble bubble2;
   private Level level;
@@ -28,15 +29,30 @@ public class BubbleActionsLevelModifierTest {
   @Before
   public void setUp() {
     Player player = new Player(new Vector(0, 0), new Vector(0, 0));
+    npc = new NPC(new Vector(16, 16), new Vector(0, 0));
     bubble = new Bubble(new Vector(0, 0), new Vector(0, 0));
     bubble2 = new Bubble(new Vector(0, 0), new Vector(0, 0));
     level = new Level();
     level.addElement(player);
+    level.addElement(npc);
     level.addElement(bubble);
     level.addElement(bubble2);
     modifier = new BubbleActionsLevelModifier();
   }
 
+  /**
+   * 
+   */
+  @Test
+  public void testModifyNegativeLifetime() {
+    bubble.setLifetime(0);
+    bubble.setHasNPC(true);
+    modifier.modify(level, .5);
+    assertEquals(2, level.getNPCs().size());
+    assertEquals(new Vector(16, 16), level.getNPCs().get(0).getPosition());
+    assertEquals(new Vector(0, 0), level.getNPCs().get(1).getPosition());
+  }
+  
   /**
    * When a Level is modified and its Bubbles have the action to move left or right, their speed
    * vector needs to updated correspondingly.
