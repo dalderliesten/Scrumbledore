@@ -6,6 +6,7 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.powerup.PyroPepper;
 
 /**
  * Class responsible for reading a map from disk and converting it into a Level object.
@@ -154,6 +155,8 @@ public class LevelParser {
       return new NPC(blockPos, size);
     case 'F':
       return new Fruit(blockPos, size);
+    case 'Z':
+      return new PyroPepper(blockPos, size);
     default:
       return null;
     }

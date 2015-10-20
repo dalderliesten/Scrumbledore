@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
  * BlueberryBubble creates a large bubble if the player uses this powerup.
@@ -24,7 +25,10 @@ public class BlueberryBubble extends Powerup {
 
   @Override
   public ArrayList<Sprite> getSprites(double steps) {
-    // TODO Auto-generated method stub
-    return null;
+    SpriteStore store = SpriteStore.getInstance();
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    
+    result.add(store.get("powerup-blueberry-bubble"));
+    return result;
   }
 }

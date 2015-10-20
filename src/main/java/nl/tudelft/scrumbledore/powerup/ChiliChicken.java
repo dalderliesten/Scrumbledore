@@ -4,16 +4,17 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
- * 
+ * ChiliChicken is a power-up that gives a Player object more speed for 5 seconds.
  * @author Floris Doolaard
  *
  */
 public class ChiliChicken extends Powerup{
   
   /**
-   * 
+   * Creates a ChiliChicken instance.
    * @param position
    * @param size
    */
@@ -23,8 +24,11 @@ public class ChiliChicken extends Powerup{
 
   @Override
   public ArrayList<Sprite> getSprites(double steps) {
-    // TODO Auto-generated method stub
-    return null;
+    SpriteStore store = SpriteStore.getInstance();
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    
+    result.add(store.get("powerup-chili-chicken"));
+    return result;
   }
 
 }
