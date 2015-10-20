@@ -55,11 +55,10 @@
  #popup{
  	 -fx-background-color: #333333;
  	 -fx-font-fill: #32b8f1;
-	 -fx-font-size: 32.0px;
+	 -fx-font-size: 30.0px;
 	 -fx-border-width: 5.0px;
 	 -fx-border-style: solid;
 	 -fx-border-color: #32b8f1;
-	 -fx-margin: 25.0px 55.0px;
  }
  
  #settingschoice {

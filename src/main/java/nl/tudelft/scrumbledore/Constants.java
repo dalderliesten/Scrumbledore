@@ -92,6 +92,8 @@ public final class Constants {
   public static final String SETTINGSEXIT_BUTTON = "Back";
   public static final String SETTINGSLOGGING_BUTTON = "Logging";
   public static final String SETTINGSKEYBINDING_BUTTON = "Keybinding";
+  public static final String SETTINGS_CHOOSEKEYQUERY = "Press The desired key...";
+  public static final int SETTINGS_CHOOSEKEYPADDING = 50;
   
   // Defining the text needed for the display of the keybinding options.
   public static final String SETTINGS_PLAYER1 = "Player 1";

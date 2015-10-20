@@ -149,7 +149,7 @@ public final class KeybindingSettings {
    */
   private static void showKeybindingPopup(final PlayerAction action) {
     final Stage popup = new Stage();
-    Label rebindLabel = new Label("Press a key to rebind...");
+    Label rebindLabel = new Label(Constants.SETTINGS_CHOOSEKEYQUERY);
     rebindLabel.setId("popup");
     Scene scene = new Scene(rebindLabel);
 
