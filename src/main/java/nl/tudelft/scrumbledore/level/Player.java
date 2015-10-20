@@ -186,6 +186,8 @@ public class Player extends LevelElement {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     SpriteStore store = SpriteStore.getInstance();
     if (alive) {
+      result.add(store.getAnimated("fire").getFrame(steps));
+
       boolean toRight = getLastMove() == PlayerAction.MoveRight;
 
       String id = "move-left";
