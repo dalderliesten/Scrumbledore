@@ -1,17 +1,15 @@
 package nl.tudelft.scrumbledore.game;
 
-//import static org.junit.Assert.*;
-
 import static org.junit.Assert.assertEquals;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Fruit;
 import nl.tudelft.scrumbledore.level.Level;
+import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.Vector;
 
 /**
@@ -19,8 +17,10 @@ import nl.tudelft.scrumbledore.level.Vector;
  * 
  * @author Floris Doolaard
  * @author Jesse Tilro
+ * @author Niels Warnars
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class GameTest {
   private Game game;
   private ArrayList<Level> levels;
@@ -88,6 +88,43 @@ public abstract class GameTest {
     assertEquals(levels.get(1), game.getCurrentLevel());
   }
 
+  /**
+   * When a score is being set this one should be returned as a string when calling the
+   * Game.getScore method.
+   */
+  @Test
+  public void testGetScore() {
+    ScoreCounter sc = game.getScoreCounter();
+    sc.updateScore(42);
+    assertEquals("42", game.getScore());
+  }
+  
+  /**
+   * When a score is being set and this score is the highest score achieved in the game then
+   * this score should be returned as a string when calling the Game.getHighScore method.
+   */
+  @Test
+  public void testGetHighScore() {
+    ScoreCounter sc = game.getScoreCounter();
+    sc.updateScore(42);
+    sc.resetScore();
+    sc.updateScore(21);
+    assertEquals("42", game.getHighScore());
+  }
+  
+  /**
+   * Whenever a step is taken the Modifier.modify() method should be taken.
+   */
+  @Test
+  @SuppressWarnings("PMD.JUnitTestsShouldIncludeAssert")
+  public void testStep() {
+    NPCLevelModifier modifier = mock(NPCLevelModifier.class);
+    game.registerLevelModifier(modifier);
+    
+    game.step(1.0d);
+    verify(modifier).modify(game.getCurrentLevel(), 1.0d);
+  }
+  
   /**
    * When the Game is restarted, it's current Level should be reset to the first Level again.
    */

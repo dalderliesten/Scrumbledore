@@ -1,10 +1,9 @@
-package nl.tudelft.scrumbledore;
+package nl.tudelft.scrumbledore.game;
 
 import static org.junit.Assert.assertEquals;
 
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.game.ScoreCounter;
 
 /**
  * Test suite for the scoreCounter class.
