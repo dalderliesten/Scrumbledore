@@ -9,7 +9,7 @@ import org.junit.Test;
 import nl.tudelft.scrumbledore.Constants;
 
 /**
- * Test Suite for Gravity class.
+ * Test Suite for Gravity Level Modifier class.
  * 
  * @author Jesse Tilro
  *
