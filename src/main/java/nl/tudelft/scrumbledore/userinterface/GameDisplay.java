@@ -1,8 +1,6 @@
 package nl.tudelft.scrumbledore.userinterface;
 
-import java.awt.Font;
 import java.util.ArrayList;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;

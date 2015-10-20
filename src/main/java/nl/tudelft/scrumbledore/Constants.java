@@ -56,7 +56,7 @@ public final class Constants {
   public static final String LEVELLABEL = "Level:";
   
   // Defining labels and values needed for the advancement GUI pop-ups.
-  public static final String ADVANCINGLABEL = "Advancing to next level in 5 seconds...";
+  public static final String ADVANCINGLABEL = "Advancing to next level in a few moments...";
   public static final int ADVANCING_DELAY = 5000;
 
   // Defining text needed to display the buttons in the bottom of the user interface.
