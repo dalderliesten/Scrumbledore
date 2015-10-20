@@ -104,6 +104,6 @@
  	-fx-text-fill: #333333;
  }
  
-  #playerselect .radio-button .radio, .radio-button:focused .dot,  .radio-button:active .dot, .radio-button:selected .dot {
+  #playerselect .radio-button .radio, #playerselect .radio-button:focused .dot, #playerselect  .radio-button:active .dot, #playerselect .radio-button:selected .dot {
   	-fx-background-color: transparent;
   }
