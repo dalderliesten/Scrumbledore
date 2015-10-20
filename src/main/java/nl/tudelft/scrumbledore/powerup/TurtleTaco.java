@@ -6,18 +6,18 @@ import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
- * 
+ * TurtleTaco is a power-up that gives the player invulnerability for 5 seconds.
  * @author Floris Doolaard
  *
  */
-public class ChiliChicken extends Powerup{
-  
+public class TurtleTaco extends Powerup{
+
   /**
    * 
    * @param position
    * @param size
    */
-  public ChiliChicken(Vector position, Vector size) {
+  public TurtleTaco(Vector position, Vector size) {
     super(position, size);
   }
 
@@ -26,5 +26,5 @@ public class ChiliChicken extends Powerup{
     // TODO Auto-generated method stub
     return null;
   }
-
+  
 }
