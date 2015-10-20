@@ -1,17 +1,15 @@
 package nl.tudelft.scrumbledore.game;
 
-//import static org.junit.Assert.*;
-
 import static org.junit.Assert.assertEquals;
-
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.verify;
 import java.util.ArrayList;
-
 import org.junit.Before;
 import org.junit.Test;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Fruit;
 import nl.tudelft.scrumbledore.level.Level;
+import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.Vector;
 
 /**
@@ -109,6 +107,18 @@ public abstract class GameTest {
     game.addSteps(6.4);
     assertEquals(9.6, game.getSteps(), Constants.DOUBLE_PRECISION);
     assertEquals(9, game.getFullSteps());
+  }
+  
+  /**
+   * 
+   */
+  @Test
+  public void testStep() {
+    NPCLevelModifier modifier = mock(NPCLevelModifier.class);
+    game.registerLevelModifier(modifier);
+    
+    game.step(1.0d);
+    verify(modifier).modify(game.getCurrentLevel(), 1.0d);
   }
 
 }
