@@ -4,7 +4,7 @@ import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * 
- * @author Floris Doolaad
+ * @author Floris Doolaard
  *
  */
 public class BlueberryBubble extends Powerup {
