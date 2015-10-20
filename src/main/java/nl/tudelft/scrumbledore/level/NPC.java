@@ -2,6 +2,9 @@ package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
+
 /**
  * Class representing an NPC in a game.
  * 
@@ -104,6 +107,25 @@ public class NPC extends LevelElement {
     if (action == NPCAction.MoveLeft || action == NPCAction.MoveRight) {
       lastMove = action;
     }
+  }
+  
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    SpriteStore store = SpriteStore.getInstance();
+    String id = "zenchan-move-right";
+    if (getLastMove().equals(NPCAction.MoveLeft)) {
+      id = "zenchan-move-left";
+    }
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    result.add(store.getAnimated(id).getFrame(steps));
+    return result;
   }
 
 }

@@ -1,9 +1,14 @@
 package nl.tudelft.scrumbledore.sprite;
 
+import java.awt.image.BufferedImage;
 import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
 
+import javax.imageio.ImageIO;
+
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * The Sprite Store reads and creates Sprites from the file system and allows to easily select and
@@ -19,13 +24,31 @@ public class SpriteStore {
   private String dir;
   private String dirSprite;
 
+  private static volatile SpriteStore instance;
+
   /**
    * Construct a new Sprite Store by reading the Sprites from the file system.
    */
-  public SpriteStore() {
+  private SpriteStore() {
     this.dir = Constants.RESOURCES_DIR + Constants.SPRITES_DIR;
     this.dirSprite = Constants.SPRITES_DIR;
     read();
+  }
+
+  /**
+   * Creates a new SpriteStore instance if it has not yet been instantiated.
+   * 
+   * @return The single SpriteStore instance.
+   */
+  public static SpriteStore getInstance() {
+    if (instance == null) {
+      synchronized (SpriteStore.class) {
+        if (instance == null) {
+          instance = new SpriteStore();
+        }
+      }
+    }
+    return instance;
   }
 
   /**
@@ -108,7 +131,17 @@ public class SpriteStore {
     int pos = name.lastIndexOf('.');
     String id = name.substring(0, pos);
     String ext = name.substring(pos + 1);
-    return new Sprite(id, ext, dir);
+
+    Vector size = new Vector(0, 0);
+    try {
+      BufferedImage sprite = ImageIO.read(file);
+      size.setX(sprite.getWidth());
+      size.setY(sprite.getHeight());
+    } catch (IOException e) {
+      e.printStackTrace();
+    }
+
+    return new Sprite(id, ext, dir, size);
   }
 
   /**

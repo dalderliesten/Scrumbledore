@@ -2,6 +2,10 @@ package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
+
 /**
  * Class representing a Player in a game.
  * 
@@ -88,12 +92,12 @@ public class Player extends LevelElement {
    * Sets the id of the current player.
    * 
    * @param id
-   *         Integer that represents the players number in the game.
+   *          Integer that represents the players number in the game.
    */
   public void setPlayerNumber(int id) {
     this.id = id;
   }
-  
+
   /**
    * Check whether the given action is queued for the next step.
    * 
@@ -145,8 +149,7 @@ public class Player extends LevelElement {
   public boolean equals(Object other) {
     if (other instanceof Player) {
       Player that = (Player) other;
-      return this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize());
+      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
     return false;
@@ -169,6 +172,39 @@ public class Player extends LevelElement {
    */
   public void setFiring(Boolean isFiring) {
     this.firing = isFiring;
+  }
+
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    SpriteStore store = SpriteStore.getInstance();
+    if (alive) {
+      boolean toRight = getLastMove() == PlayerAction.MoveRight;
+
+      String id = "move-left";
+      if (firing && toRight) {
+        id = "shoot-right";
+      } else if (firing) {
+        id = "shoot-left";
+      } else if (toRight) {
+        id = "move-right";
+      }
+      if (getSpeed().getX() == 0 && !firing) {
+        steps = 0;
+      }
+
+      id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
+
+      result.add(store.getAnimated(id).getFrame(steps));
+    }
+    return result;
   }
 
 }
