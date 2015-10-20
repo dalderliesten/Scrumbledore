@@ -4,7 +4,6 @@ import java.io.File;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Logger;
 
 /**
  * The Sprite Store reads and creates Sprites from the file system and allows to easily select and
@@ -19,7 +18,7 @@ public class SpriteStore {
   private ArrayList<AnimatedSprite> animatedSprites;
   private String dir;
   private String dirSprite;
-  
+
   private static volatile SpriteStore instance;
 
   /**
@@ -30,7 +29,7 @@ public class SpriteStore {
     this.dirSprite = Constants.SPRITES_DIR;
     read();
   }
-  
+
   /**
    * Creates a new SpriteStore instance if it has not yet been instantiated.
    * 
