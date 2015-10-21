@@ -30,7 +30,6 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  * @author Jeroen Meijer
  */
 public final class KeybindingSettings {
-
   private static VBox currentBox;
   private static VBox actionBinders;
   private static int selectedPlayer;

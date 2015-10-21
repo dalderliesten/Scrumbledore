@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 import java.util.List;
+
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -13,6 +14,8 @@ import javafx.scene.canvas.GraphicsContext;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.image.Image;
+import javafx.scene.input.KeyCode;
+import javafx.scene.input.KeyEvent;
 import javafx.scene.layout.BorderPane;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -121,6 +124,8 @@ public final class GameDisplay {
 
     KeyListeners listeners = new KeyListeners(currentGame, currentScene);
     listeners.init();
+
+    removeSpacebarFunctionality();
 
     currentStage.show();
   }
@@ -378,4 +383,17 @@ public final class GameDisplay {
     }
   }
 
+  /**
+   * Removes the ability to use the spacebar to accidentally pause/play/trigger button events in the
+   * game.
+   */
+  private static void removeSpacebarFunctionality() {
+    currentScene.addEventHandler(KeyEvent.KEY_PRESSED, new EventHandler<KeyEvent>() {
+      public void handle(KeyEvent t) {
+        if (t.getCode() == KeyCode.SPACE) {
+          return;
+        }
+      }
+    });
+  }
 }
