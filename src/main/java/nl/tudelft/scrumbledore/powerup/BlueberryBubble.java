@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -12,7 +13,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class BlueberryBubble extends Powerup {
+public class BlueberryBubble extends LevelElement implements Powerup {
 
   /**
    * Creates a BlueberryBubble instance.
@@ -25,10 +26,7 @@ public class BlueberryBubble extends Powerup {
 
   @Override
   public ArrayList<Sprite> getSprites(double steps) {
-    SpriteStore store = SpriteStore.getInstance();
-    ArrayList<Sprite> result = new ArrayList<Sprite>();
-    
-    result.add(store.get("powerup-blueberry-bubble"));
-    return result;
+    // TODO Auto-generated method stub
+    return null;
   }
 }

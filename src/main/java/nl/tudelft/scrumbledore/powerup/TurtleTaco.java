@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
@@ -12,7 +13,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class TurtleTaco extends Powerup {
+public class TurtleTaco extends LevelElement implements Powerup {
 
   /**
    * Constructs a TurtleTaco object.
@@ -25,11 +26,8 @@ public class TurtleTaco extends Powerup {
 
   @Override
   public ArrayList<Sprite> getSprites(double steps) {
-    SpriteStore store = SpriteStore.getInstance();
-    ArrayList<Sprite> result = new ArrayList<Sprite>();
-    
-    result.add(store.get("powerup-turtle-taco"));
-    return result;
+    // TODO Auto-generated method stub
+    return null;
   }
   
 }
