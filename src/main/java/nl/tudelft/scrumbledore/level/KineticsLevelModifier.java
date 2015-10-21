@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.Logger;
 
 /**
  * The Kinetics class handles the position/speed of levelelements.
@@ -21,79 +20,10 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    updateNPC(level, d);
-    updateFruit(level, d);
-    updatePlayer(level, d);
-    updateBubble(level, d);
-  }
-
-  /**
-   * Update the Fruits in a given Level.
-   * 
-   * @param level
-   *          The level whose elements should be updated.
-   * @param d
-   *          The number of steps since last executing this function.
-   */
-  private void updateFruit(Level level, double d) {
-    for (Fruit fruit : level.getFruits()) {
-      addSpeed(fruit, d);
-      warpVertically(fruit);
-      warpHorizontally(fruit);
-    }
-  }
-
-  /**
-   * Update the NPCs in a given Level.
-   * 
-   * @param level
-   *          The level whose elements should be updated.
-   * @param d
-   *          The number of steps since last executing this function.
-   */
-  private void updateNPC(Level level, double d) {
-    for (NPC npc : level.getNPCs()) {
-      addSpeed(npc, d);
-      warpVertically(npc);
-      warpHorizontally(npc);
-    }
-  }
-
-  /**
-   * Update the player in a given Level.
-   * 
-   * @param level
-   *          The level whose elements should be updated.
-   * @param d
-   *          The number of steps since last executing this function.
-   */
-  private void updatePlayer(Level level, double d) {
-    for (Player player : level.getPlayers()) {
-      addSpeed(player, d);
-      warpVertically(player);
-      warpHorizontally(player);
-
-      if (Constants.isLoggingWantMovement()) {
-        Logger.getInstance().log(
-            "Player moved to " + player.getPosition().getX() + ", " + player.getPosition().getY());
-      }
-    }
-  }
-
-  /**
-   * Update the speed/position of the bubble in a given level.
-   * 
-   * @param level
-   *          The level whose Bubble objects should be updated.
-   * @param d
-   *          The number of steps since last executing this function.
-   */
-  private void updateBubble(Level level, double d) {
-    for (Bubble bubble : level.getBubbles()) {
-      addSpeed(bubble, d);
-      applyFriction(bubble, d);
-      warpVertically(bubble);
-      warpHorizontally(bubble);
+    for (LevelElement element : level.getDynamicElements()) {
+      move(element, d);
+      applyFriction(element, d);
+      warp(element);
     }
   }
 
@@ -126,28 +56,28 @@ public class KineticsLevelModifier implements LevelModifier {
   }
 
   /**
-   * Update the position of the LevelElement by adding the speed.
+   * Move a LevelElement by updating its position vector.
    * 
    * @param el
    *          The element whose position has to be updated with its speed.
    * @param d
    *          The number of steps since last executing this function.
    */
-  public void addSpeed(LevelElement el, double d) {
+  public void move(LevelElement el, double d) {
     if (el != null) {
       el.getPosition().sum(Vector.scale(el.getSpeed(), d));
     }
   }
 
   /**
-   * Reverse update the position of the LevelElement by removing the speed.
+   * Reverse update the position of the LevelElement by removing the speed vector.
    * 
    * @param el
    *          The element whose position has to be reverse updated with its speed.
    * @param d
    *          The number of steps since last executing this function.
    */
-  public void removeSpeed(LevelElement el, double d) {
+  public void revertMove(LevelElement el, double d) {
     if (el != null) {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
     }
@@ -171,6 +101,17 @@ public class KineticsLevelModifier implements LevelModifier {
    */
   public void stopHorizontally(LevelElement element) {
     element.getSpeed().setX(0);
+  }
+
+  /**
+   * Warp a LeveElement both in horizontal and vertical direction.
+   * 
+   * @param element
+   *          The LevelElement to be warped.
+   */
+  public void warp(LevelElement element) {
+    warpVertically(element);
+    warpHorizontally(element);
   }
 
   /**

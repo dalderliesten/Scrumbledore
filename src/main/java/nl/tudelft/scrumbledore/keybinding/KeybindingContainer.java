@@ -10,11 +10,11 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
 /**
  * A custom container for Keybindings. One Keybinding per player.
  * 
+ * @author David Alderliesten
  * @author Jeroen Meijer
  */
 public final class KeybindingContainer {
   private static KeybindingContainer keybindingContainer;
-
   private List<Keybinding> keybindingList;
 
   private KeybindingContainer() {
