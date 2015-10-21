@@ -12,7 +12,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-class ChiliChickenPickUp extends PowerupPickUp {
+public class ChiliChickenPickUp extends PowerupPickUp {
 
   /**
    * The consctrutor creates a pickup item in the level.

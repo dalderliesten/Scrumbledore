@@ -6,10 +6,10 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
-import nl.tudelft.scrumbledore.powerup.ChiliChicken;
-import nl.tudelft.scrumbledore.powerup.PyroPepper;
-import nl.tudelft.scrumbledore.powerup.TurtleTaco;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
+import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
+import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
+import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
 
 /**
  * Class responsible for reading a map from disk and converting it into a Level object.
@@ -159,13 +159,13 @@ public class LevelParser {
     case 'F':
       return new Fruit(blockPos, size);
     case 'Z':
-      return new PyroPepper(blockPos, size);
+      return new PyroPepperPickUp(blockPos, size);
     case 'X':
-      return new BlueberryBubble(blockPos, size);
+      return new BlueberryBubblePickUp(blockPos, size);
     case 'C':
-      return new ChiliChicken(blockPos, size);
+      return new ChiliChickenPickUp(blockPos, size);
     case 'V':
-      return new TurtleTaco(blockPos, size);
+      return new TurtleTacoPickUp(blockPos, size);
     default:
       return null;
     }

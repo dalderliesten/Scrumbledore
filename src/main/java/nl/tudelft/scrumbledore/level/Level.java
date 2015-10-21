@@ -2,7 +2,7 @@ package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.powerup.Powerup;
+import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
 
 /**
  * Class representing a Level in the Game.
@@ -18,7 +18,7 @@ public class Level {
   private ArrayList<Bubble> bubbles;
   private ArrayList<Player> players;
   private ArrayList<Bubble> encapEnemies;
-  private ArrayList<Powerup> powerups;
+  private ArrayList<PowerupPickUp> powerups;
 
   /**
    * Constructs a new Level instance.
@@ -30,7 +30,7 @@ public class Level {
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
     players = new ArrayList<Player>();
-    powerups = new ArrayList<Powerup>();
+    powerups = new ArrayList<PowerupPickUp>();
   }
 
   /**
@@ -50,8 +50,8 @@ public class Level {
       players.add((Player) element);
     } else if (element.getClass().equals(Bubble.class)) {
       bubbles.add((Bubble) element);
-    } else if (element instanceof Powerup) {
-      powerups.add((Powerup) element);
+    } else if (element instanceof PowerupPickUp) {
+      powerups.add((PowerupPickUp) element);
     }
   }
 
@@ -140,7 +140,7 @@ public class Level {
    * 
    * @return an ArrayList of Powerup objects.
    */
-  public ArrayList<Powerup> getPowerups() {
+  public ArrayList<PowerupPickUp> getPowerups() {
     return powerups;
   }
 

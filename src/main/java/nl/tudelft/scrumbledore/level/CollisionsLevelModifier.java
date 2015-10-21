@@ -6,6 +6,7 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
 import nl.tudelft.scrumbledore.powerup.Powerup;
+import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
 
 /**
  * Class responsible for collision detection between given elements.
@@ -61,7 +62,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta , the delta provided by StepTimer.
    */
   protected void detectPlayerPowerup(Level level, double delta) {
-    ArrayList<Powerup> powerUps = level.getPowerups();
+    ArrayList<PowerupPickUp> powerUps = level.getPowerups();
     ArrayList<Player> players = level.getPlayers();
 
     if (powerUps.size() > 0) {
