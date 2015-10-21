@@ -3,6 +3,7 @@ package nl.tudelft.scrumbledore.level;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.powerup.Powerup;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
@@ -13,7 +14,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Jesse Tilro
  * @author David Alderliesten
  */
-public class Player extends LevelElement {
+public class Player extends LevelElement implements Powerup {
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
   private Boolean firing;
