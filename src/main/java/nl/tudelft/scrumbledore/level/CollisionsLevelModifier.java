@@ -233,15 +233,8 @@ public class CollisionsLevelModifier implements LevelModifier {
     ArrayList<Player> players = level.getPlayers();
 
     for (Player player : players) {
-
-      ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-
+      ArrayList<Bubble> bubbles = level.getBubbles();
       ArrayList<Fruit> fruits = level.getFruits();
-
-      // To prevent a race condition when many bubbles are shot rapidly
-      for (Bubble bubble : level.getBubbles()) {
-        bubbles.add(bubble);
-      }
 
       for (Bubble bubble : bubbles) {
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
@@ -320,12 +313,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The number of steps passed since this method was last executed.
    */
   protected void detectBubbleBubble(Level level, double delta) {
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-
-    // To prevent a race condition when many bubbles are shot rapidly
-    for (Bubble bubble : level.getBubbles()) {
-      bubbles.add(bubble);
-    }
+    ArrayList<Bubble> bubbles = level.getBubbles();
 
     for (Bubble bubble : bubbles) {
       for (Bubble other : bubbles) {

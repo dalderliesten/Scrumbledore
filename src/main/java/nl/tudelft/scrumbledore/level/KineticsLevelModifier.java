@@ -92,11 +92,7 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   private void updateBubble(Level level, double d) {
-    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-    for (Bubble bubble : level.getBubbles()) {
-      bubbles.add(bubble);
-    }
+    ArrayList<Bubble> bubbles = level.getBubbles();
 
     for (Bubble bubble : bubbles) {
       addSpeed(bubble, d);
