@@ -43,7 +43,6 @@ public class BubbleActionsLevelModifier implements LevelModifier {
           enemyBubbles.remove(bub);
         }
         iter.remove();
-        level.getBubbles().remove(bub);
       } else {
         bub.decreaseLifetime(delta);
 
