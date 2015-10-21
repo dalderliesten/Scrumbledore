@@ -1,7 +1,5 @@
 package nl.tudelft.scrumbledore.level;
 
-import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 
@@ -70,8 +68,7 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   private void updatePlayer(Level level, double d) {
-    ArrayList<Player> players = level.getPlayers();
-    for (Player player : players) {
+    for (Player player : level.getPlayers()) {
       addSpeed(player, d);
       warpVertically(player);
       warpHorizontally(player);
@@ -92,13 +89,7 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   private void updateBubble(Level level, double d) {
-    // Copy bubbles to prevent a race condition when many bubbles are shot rapidly
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
     for (Bubble bubble : level.getBubbles()) {
-      bubbles.add(bubble);
-    }
-
-    for (Bubble bubble : bubbles) {
       addSpeed(bubble, d);
       applyFriction(bubble, d);
       warpVertically(bubble);
