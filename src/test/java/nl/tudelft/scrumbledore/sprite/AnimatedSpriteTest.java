@@ -10,6 +10,8 @@ import org.junit.runner.RunWith;
 import org.junit.runners.Parameterized;
 import org.junit.runners.Parameterized.Parameters;
 
+import nl.tudelft.scrumbledore.Constants;
+
 /**
  * Test Suite for the Animated Sprite class.
  * 
@@ -68,5 +70,32 @@ public class AnimatedSpriteTest {
     input.add(new Object[] { 20, 30, "frame-2" });
     return input;
   }
+  
+  /**
+   * Test the getID() method.
+   */
+  @Test
+  public void testGetID() {
+    AnimatedSprite as = new AnimatedSprite("test", 42d, new ArrayList<Sprite>());
+    assertEquals("test", as.getID());
+  }
+  
+  /**
+   * Test the getInterval() method.
+   */
+  @Test
+  public void testGetInterval() {
+    AnimatedSprite as = new AnimatedSprite("test", 42d, new ArrayList<Sprite>());
+    assertEquals(42, as.getInterval(), Constants.DOUBLE_PRECISION);
+  }
 
+  /**
+   * Test the SetInterval() method.
+   */
+  @Test
+  public void testSetInterval() {
+    AnimatedSprite as = new AnimatedSprite("test", 42d, new ArrayList<Sprite>());
+    as.setInterval(21d);
+    assertEquals(21, as.getInterval(), Constants.DOUBLE_PRECISION);
+  }
 }
