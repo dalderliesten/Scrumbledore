@@ -124,9 +124,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerPlatform(Level level, double delta) {
-    ArrayList<Player> players = level.getPlayers();
-
-    for (Player player : players) {
+    for (Player player : level.getPlayers()) {
       // To accelerate the second iteration over the platforms
       ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
@@ -145,7 +143,6 @@ public class CollisionsLevelModifier implements LevelModifier {
         Collision collision = new Collision(player, platform, delta);
 
         if (!platform.isPassable()) {
-
           if (collision.collidingFromBottom() && player.vSpeed() < 0) {
             kinetics.stopVertically(player);
             kinetics.snapBottom(player, platform);
@@ -174,7 +171,6 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   public void detectNPCPlatform(Level level, double delta) {
-
     for (NPC npc : level.getNPCs()) {
       // To accelerate the second iteration over the platforms
       ArrayList<Platform> candidates = new ArrayList<Platform>();
@@ -257,20 +253,8 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta.
    */
   protected void detectPlayerBubble(Level level, double delta) {
-    ArrayList<Player> players = level.getPlayers();
-
-    for (Player player : players) {
-
-      ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-
-      ArrayList<Fruit> fruits = level.getFruits();
-
-      // To prevent a race condition when many bubbles are shot rapidly
+    for (Player player : level.getPlayers()) {
       for (Bubble bubble : level.getBubbles()) {
-        bubbles.add(bubble);
-      }
-
-      for (Bubble bubble : bubbles) {
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && !(bubble.hasNPC())) {
@@ -287,7 +271,7 @@ public class CollisionsLevelModifier implements LevelModifier {
             } catch (CloneNotSupportedException e) {
               e.printStackTrace();
             }
-            fruits.add(newFruit);
+            level.getFruits().add(newFruit);
             level.getEnemyBubbles().remove(bubble);
             level.getBubbles().remove(bubble);
 
@@ -347,12 +331,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The number of steps passed since this method was last executed.
    */
   protected void detectBubbleBubble(Level level, double delta) {
-    ArrayList<Bubble> bubbles = new ArrayList<Bubble>();
-
-    // To prevent a race condition when many bubbles are shot rapidly
-    for (Bubble bubble : level.getBubbles()) {
-      bubbles.add(bubble);
-    }
+    ArrayList<Bubble> bubbles = level.getBubbles();
 
     for (Bubble bubble : bubbles) {
       for (Bubble other : bubbles) {
@@ -381,9 +360,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerFruit(Level level, double delta) {
-    ArrayList<Player> players = level.getPlayers();
-    for (Player player : players) {
-
+    for (Player player : level.getPlayers()) {
       ArrayList<Fruit> fruits = level.getFruits();
 
       if (fruits.size() > 0) {
@@ -410,9 +387,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerEnemy(Level level, double delta) {
-    ArrayList<Player> players = level.getPlayers();
-    for (Player player : players) {
-
+    for (Player player : level.getPlayers()) {
       ArrayList<NPC> npcs = level.getNPCs();
 
       if (npcs.size() > 0) {
