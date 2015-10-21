@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
+import java.util.Iterator;
 
 import nl.tudelft.scrumbledore.Constants;
 
@@ -24,11 +25,13 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
-    ArrayList<Bubble> bubbles = level.getBubbles();
     ArrayList<NPC> enemies = level.getNPCs();
     ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
 
-    for (Bubble bub : bubbles) {
+    Iterator<Bubble> iter = level.getBubbles().iterator();
+
+    while (iter.hasNext()) {
+      Bubble bub = iter.next();
       if (bub.getLifetime() <= 0) {
         if (bub.hasNPC()) {
           try {
@@ -39,6 +42,7 @@ public class BubbleActionsLevelModifier implements LevelModifier {
           }
           enemyBubbles.remove(bub);
         }
+        iter.remove();
         level.getBubbles().remove(bub);
       } else {
         bub.decreaseLifetime(delta);
