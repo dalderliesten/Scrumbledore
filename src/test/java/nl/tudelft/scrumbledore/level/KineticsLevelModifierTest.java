@@ -94,12 +94,12 @@ public class KineticsLevelModifierTest {
    * the delta into account.
    */
   @Test
-  public void testAddSpeed() {
+  public void testMove() {
     LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
-    kinetics.addSpeed(el, 0.5);
+    kinetics.move(el, 0.5);
     // For branch coverage:
-    kinetics.addSpeed(null, 1);
+    kinetics.move(null, 1);
     assertEquals(new Vector(2, 3), el.getPosition());
   }
 
@@ -108,12 +108,12 @@ public class KineticsLevelModifierTest {
    * taking the delta into account.
    */
   @Test
-  public void testRemoveSpeed() {
+  public void testRevertMove() {
     LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
-    kinetics.removeSpeed(el, 0.5);
+    kinetics.revertMove(el, 0.5);
     // For branch coverage:
-    kinetics.removeSpeed(null, 1);
+    kinetics.revertMove(null, 1);
     assertEquals(new Vector(0, 1), el.getPosition());
   }
 
