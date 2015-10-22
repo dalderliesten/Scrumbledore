@@ -5,7 +5,6 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
-import nl.tudelft.scrumbledore.powerup.Powerup;
 import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
 
 /**
@@ -58,8 +57,10 @@ public class CollisionsLevelModifier implements LevelModifier {
   /**
    * Detect collisions between player and powerups.
    * 
-   * @param level , the level.
-   * @param delta , the delta provided by StepTimer.
+   * @param level
+   *          , the level.
+   * @param delta
+   *          , the delta provided by StepTimer.
    */
   protected void detectPlayerPowerup(Level level, double delta) {
     ArrayList<PowerupPickUp> powerUps = level.getPowerups();
@@ -108,8 +109,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(fruit, platform, delta);
 
           if (collision.collidingFromTop() && fruit.vSpeed() > 0) {
-            kinetics.stopVertically(fruit);
-            kinetics.snapTop(fruit, platform);
+            fruit.stopVertically();
+            fruit.snapTop(platform);
           }
         }
       }
@@ -134,8 +135,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(player, platform, delta);
 
           if (collision.collidingFromTop() && player.vSpeed() > 0) {
-            kinetics.stopVertically(player);
-            kinetics.snapTop(player, platform);
+            player.stopVertically();
+            player.snapTop(platform);
           }
         }
       }
@@ -145,18 +146,18 @@ public class CollisionsLevelModifier implements LevelModifier {
 
         if (!platform.isPassable()) {
           if (collision.collidingFromBottom() && player.vSpeed() < 0) {
-            kinetics.stopVertically(player);
-            kinetics.snapBottom(player, platform);
+            player.stopVertically();
+            player.snapBottom(platform);
           }
 
           if (collision.collidingFromLeft() && player.hSpeed() > 0) {
-            kinetics.stopHorizontally(player);
-            kinetics.snapLeft(player, platform);
+            player.stopHorizontally();
+            player.snapLeft(platform);
           }
 
           if (collision.collidingFromRight() && player.hSpeed() < 0) {
-            kinetics.stopHorizontally(player);
-            kinetics.snapRight(player, platform);
+            player.stopHorizontally();
+            player.snapRight(platform);
           }
         }
       }
@@ -181,8 +182,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(npc, platform, delta);
 
           if (collision.collidingFromTop() && npc.vSpeed() > 0) {
-            kinetics.stopVertically(npc);
-            kinetics.snapTop(npc, platform);
+            npc.stopVertically();
+            npc.snapTop(platform);
           }
         }
       }
@@ -192,14 +193,14 @@ public class CollisionsLevelModifier implements LevelModifier {
 
         if (!platform.isPassable()) {
           if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
-            kinetics.stopHorizontally(npc);
-            kinetics.snapLeft(npc, platform);
+            npc.stopHorizontally();
+            npc.snapLeft(platform);
             npc.addAction(NPCAction.MoveLeft);
           }
 
           if (collision.collidingFromRight() && npc.hSpeed() < 0) {
-            kinetics.stopHorizontally(npc);
-            kinetics.snapRight(npc, platform);
+            npc.stopHorizontally();
+            npc.snapRight(platform);
             npc.addAction(NPCAction.MoveRight);
           }
         }
@@ -225,19 +226,19 @@ public class CollisionsLevelModifier implements LevelModifier {
 
           if (collision.collidingFromBottom()) {
             bubble.getSpeed().setY(Constants.BUBBLE_BOUNCE);
-            kinetics.snapBottom(bubble, platform);
+            bubble.snapBottom(platform);
             break;
           }
 
           if (collision.collidingFromLeft()) {
             bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
-            kinetics.snapLeft(bubble, platform);
+            bubble.snapLeft(platform);
             break;
           }
 
           if (collision.collidingFromRight()) {
             bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-            kinetics.snapRight(bubble, platform);
+            bubble.snapRight(platform);
             break;
           }
         }
@@ -260,15 +261,15 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && !(bubble.hasNPC())) {
             player.getSpeed().setY(-Constants.PLAYER_JUMP);
-            kinetics.snapTop(player, bubble);
+            player.snapTop(bubble);
             break;
           }
 
           if (collision.colliding() && bubble.hasNPC()) {
             Fruit newFruit = null;
             try {
-              newFruit = new Fruit(bubble.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
-                  Constants.BLOCKSIZE));
+              newFruit = new Fruit(bubble.getPosition().clone(),
+                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
             } catch (CloneNotSupportedException e) {
               e.printStackTrace();
             }

@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
+import static org.mockito.Mockito.when;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,6 +17,7 @@ import nl.tudelft.scrumbledore.game.ScoreCounter;
  * Test suite for the CollisionsLevelModifier class.
  * 
  * @author Niels Warnars
+ * @author Jesse Tilro
  */
 @SuppressWarnings({ "PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyMethods",
     "PMD.TooManyStaticImports" })
@@ -33,6 +35,30 @@ public class CollisionsLevelModifierTest {
     sc = mock(ScoreCounter.class);
 
     clm = new CollisionsLevelModifier(klm, sc);
+  }
+
+  /**
+   * Helper method for stubbing a mocked dependency LevelElement class.
+   * 
+   * @param instance
+   *          The reference instance determining which class is to be mocked and how it should be
+   *          stubbed.
+   */
+  private LevelElement mockLevelElement(LevelElement instance) {
+    LevelElement mock = mock(instance.getClass());
+
+    when(mock.getPosition()).thenReturn(instance.getPosition());
+    when(mock.getSpeed()).thenReturn(instance.getSpeed());
+    when(mock.posX()).thenReturn(instance.posX());
+    when(mock.posY()).thenReturn(instance.posY());
+    when(mock.hSpeed()).thenReturn(instance.hSpeed());
+    when(mock.vSpeed()).thenReturn(instance.vSpeed());
+    when(mock.getLeft()).thenReturn(instance.getLeft());
+    when(mock.getRight()).thenReturn(instance.getRight());
+    when(mock.getTop()).thenReturn(instance.getTop());
+    when(mock.getBottom()).thenReturn(instance.getBottom());
+
+    return mock;
   }
 
   /**
@@ -56,13 +82,15 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
     Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
     fruit.getSpeed().setY(4);
+    LevelElement fruitMock = mockLevelElement(fruit);
+
     Level level = new Level();
-    level.addElement(fruit);
+    level.addElement(fruitMock);
     level.addElement(platform);
 
     clm.detectFruitPlatform(level, 1);
-    verify(klm).stopVertically(fruit);
-    verify(klm).snapTop(fruit, platform);
+    verify(fruitMock).stopVertically();
+    verify(fruitMock).snapTop(platform);
   }
 
   /**
@@ -70,17 +98,19 @@ public class CollisionsLevelModifierTest {
    */
   @Test
   public void testDetectNPCPlatformFromTop() {
+    // Fixtures
     Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
     NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
-    npc.getSpeed().setY(4);
+    npc.getSpeed().setY(8);
+    LevelElement npcMock = mockLevelElement(npc);
 
     Level level = new Level();
     level.addElement(platform);
-    level.addElement(npc);
-
+    level.addElement(npcMock);
     clm.detectNPCPlatform(level, 1);
-    verify(klm).stopVertically(npc);
-    verify(klm).snapTop(npc, platform);
+
+    verify(npcMock).stopVertically();
+    verify(npcMock).snapTop(platform);
   }
 
   /**
@@ -91,15 +121,15 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
     NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
     npc.getSpeed().setX(4);
+    LevelElement npcMock = mockLevelElement(npc);
 
     Level level = new Level();
     level.addElement(platform);
-    level.addElement(npc);
+    level.addElement(npcMock);
 
     clm.detectNPCPlatform(level, 1);
-    verify(klm).stopHorizontally(npc);
-    verify(klm).snapLeft(npc, platform);
-    assertTrue(npc.hasAction(NPCAction.MoveLeft));
+    verify(npcMock).stopHorizontally();
+    verify(npcMock).snapLeft(platform);
   }
 
   /**
@@ -110,15 +140,15 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     NPC npc = new NPC(new Vector(32, 0), new Vector(32, 32));
     npc.getSpeed().setX(-4);
+    LevelElement npcMock = mockLevelElement(npc);
 
     Level level = new Level();
     level.addElement(platform);
-    level.addElement(npc);
+    level.addElement(npcMock);
 
     clm.detectNPCPlatform(level, 1);
-    verify(klm).stopHorizontally(npc);
-    verify(klm).snapRight(npc, platform);
-    assertTrue(npc.hasAction(NPCAction.MoveRight));
+    verify(npcMock).stopHorizontally();
+    verify(npcMock).snapRight(platform);
   }
 
   /**
@@ -129,14 +159,15 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
     player.getSpeed().setY(4);
+    LevelElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
-    level.addElement(player);
+    level.addElement(playerMock);
     level.addElement(platform);
 
     clm.detectPlayerPlatform(level, 1);
-    verify(klm).stopVertically(player);
-    verify(klm).snapTop(player, platform);
+    verify(playerMock).stopVertically();
+    verify(playerMock).snapTop(platform);
   }
 
   /**
@@ -145,16 +176,17 @@ public class CollisionsLevelModifierTest {
   @Test
   public void testDetectPlayerPlatformFromBottom() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Player player = new Player(new Vector(0, 33), new Vector(32, 32));
+    Player player = new Player(new Vector(0, 32), new Vector(32, 32));
     player.getSpeed().setY(-4);
+    LevelElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
-    level.addElement(player);
+    level.addElement(playerMock);
     level.addElement(platform);
 
     clm.detectPlayerPlatform(level, 1);
-    verify(klm).stopVertically(player);
-    verify(klm).snapBottom(player, platform);
+    verify(playerMock).stopVertically();
+    verify(playerMock).snapBottom(platform);
   }
 
   /**
@@ -164,15 +196,15 @@ public class CollisionsLevelModifierTest {
   public void testDetectPlayerPlatformFromLeft() {
     Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
-
     player.getSpeed().setX(4);
+    LevelElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
-    level.addElement(player);
+    level.addElement(playerMock);
     level.addElement(platform);
 
     clm.detectPlayerPlatform(level, 1);
-    verify(klm).stopHorizontally(player);
+    verify(playerMock).stopHorizontally();
   }
 
   /**
@@ -182,15 +214,15 @@ public class CollisionsLevelModifierTest {
   public void testDetectPlayerPlatformFromRight() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Player player = new Player(new Vector(32, 0), new Vector(32, 32));
-
     player.getSpeed().setX(-4);
+    LevelElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
-    level.addElement(player);
+    level.addElement(playerMock);
     level.addElement(platform);
 
     clm.detectPlayerPlatform(level, 1);
-    verify(klm).stopHorizontally(player);
+    verify(playerMock).stopHorizontally();
   }
 
   /**
@@ -200,14 +232,15 @@ public class CollisionsLevelModifierTest {
   public void testDetectBubblePlatformFromBottom() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
+    LevelElement bubbleMock = mockLevelElement(bubble);
 
     Level level = new Level();
-    level.addElement(bubble);
+    level.addElement(bubbleMock);
     level.addElement(platform);
 
     clm.detectBubblePlatform(level, 1);
-    verify(klm).snapBottom(bubble, platform);
-    assertEquals(bubble.vSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
+    verify(bubbleMock).snapBottom(platform);
+    assertEquals(Constants.BUBBLE_BOUNCE, bubbleMock.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -217,14 +250,16 @@ public class CollisionsLevelModifierTest {
   public void testDetectBubblePlatformFromLeft() {
     Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
     Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
+    LevelElement bubbleMock = mockLevelElement(bubble);
 
     Level level = new Level();
-    level.addElement(bubble);
+    level.addElement(bubbleMock);
     level.addElement(platform);
 
     clm.detectBubblePlatform(level, 1);
-    verify(klm).snapLeft(bubble, platform);
-    assertEquals(bubble.hSpeed(), -Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
+    verify(bubbleMock).snapLeft(platform);
+    assertEquals(-Constants.BUBBLE_BOUNCE, bubbleMock.getSpeed().getX(),
+        Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -234,14 +269,15 @@ public class CollisionsLevelModifierTest {
   public void testDetectBubblePlatformFromRight() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Bubble bubble = new Bubble(new Vector(32, 0), new Vector(32, 32));
+    LevelElement bubbleMock = mockLevelElement(bubble);
 
     Level level = new Level();
-    level.addElement(bubble);
+    level.addElement(bubbleMock);
     level.addElement(platform);
 
     clm.detectBubblePlatform(level, 1);
-    verify(klm).snapRight(bubble, platform);
-    assertEquals(bubble.hSpeed(), Constants.BUBBLE_BOUNCE, Constants.DOUBLE_PRECISION);
+    verify(bubbleMock).snapRight(platform);
+    assertEquals(Constants.BUBBLE_BOUNCE, bubbleMock.getSpeed().getX(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -252,14 +288,15 @@ public class CollisionsLevelModifierTest {
     Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
     player.getSpeed().setY(4);
+    LevelElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
-    level.addElement(player);
+    level.addElement(playerMock);
     level.addElement(bubble);
 
     clm.detectPlayerBubble(level, 1);
-    verify(klm).snapTop(player, bubble);
-    assertEquals(-Constants.PLAYER_JUMP, player.vSpeed(), Constants.DOUBLE_PRECISION);
+    verify(playerMock).snapTop(bubble);
+    assertEquals(-Constants.PLAYER_JUMP, playerMock.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**

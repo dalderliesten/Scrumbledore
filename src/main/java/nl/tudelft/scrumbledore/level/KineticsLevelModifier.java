@@ -43,12 +43,12 @@ public class KineticsLevelModifier implements LevelModifier {
     if (Math.abs(el.hSpeed()) > el.hFric() * d) {
       signX = (int) Math.signum(el.hSpeed());
     } else {
-      stopHorizontally(el);
+      el.stopHorizontally();
     }
     if (Math.abs(el.vSpeed()) > el.vFric() * d) {
       signY = (int) Math.signum(el.vSpeed());
     } else {
-      stopVertically(el);
+      el.stopVertically();
     }
 
     Vector fricDiff = new Vector(d * signX * el.hFric(), d * signY * el.vFric());
@@ -81,26 +81,6 @@ public class KineticsLevelModifier implements LevelModifier {
     if (el != null) {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
     }
-  }
-
-  /**
-   * Stop a LevelElement's vertical movement.
-   * 
-   * @param element
-   *          The element.
-   */
-  public void stopVertically(LevelElement element) {
-    element.getSpeed().setY(0);
-  }
-
-  /**
-   * Stop a LevelElement's horizontal movement.
-   * 
-   * @param element
-   *          The element.
-   */
-  public void stopHorizontally(LevelElement element) {
-    element.getSpeed().setX(0);
   }
 
   /**
@@ -142,62 +122,6 @@ public class KineticsLevelModifier implements LevelModifier {
     } else if (element.posX() > Constants.LEVELX + offset) {
       element.getPosition().setX(-offset);
     }
-  }
-
-  /**
-   * Snap a LevelElement to the left side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapLeft(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getX() / 2;
-    double newPos = snapTo.getLeft() - offset;
-    snapper.getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the right side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapRight(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getX() / 2;
-    double newPos = snapTo.getRight() + offset;
-    snapper.getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the top side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapTop(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getY() / 2;
-    double newPos = snapTo.getTop() - offset;
-    snapper.getPosition().setY(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the bottom side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapBottom(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getY() / 2;
-    double newPos = snapTo.getBottom() + offset;
-    snapper.getPosition().setY(newPos);
   }
 
 }
