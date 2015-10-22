@@ -50,7 +50,7 @@ public class GameFactory {
     LevelModifier player = new PlayerActionsLevelModifier();
     LevelModifier gravity = new GravityLevelModifier();
     LevelModifier npc = new NPCLevelModifier();
-    LevelModifier collisions = new CollisionsLevelModifier(kinetics, game.getScoreCounter());
+    LevelModifier collisions = new CollisionsLevelModifier(game.getScoreCounter());
     LevelModifier bubbles = new BubbleActionsLevelModifier();
 
     game.registerLevelModifier(player);

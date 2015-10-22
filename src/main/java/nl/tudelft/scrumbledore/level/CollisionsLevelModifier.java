@@ -17,7 +17,6 @@ import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
     "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
 public class CollisionsLevelModifier implements LevelModifier {
 
-  private KineticsLevelModifier kinetics;
   private ScoreCounter score;
 
   /**
@@ -28,8 +27,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param score
    *          The Score Counter to be used.
    */
-  public CollisionsLevelModifier(KineticsLevelModifier kinetics, ScoreCounter score) {
-    this.kinetics = kinetics;
+  public CollisionsLevelModifier(ScoreCounter score) {
     this.score = score;
   }
 
@@ -403,15 +401,6 @@ public class CollisionsLevelModifier implements LevelModifier {
         }
       }
     }
-  }
-
-  /**
-   * Returns a KineticsLevelModifier.
-   * 
-   * @return The kinetics
-   */
-  public KineticsLevelModifier getKinetics() {
-    return kinetics;
   }
 
   /**

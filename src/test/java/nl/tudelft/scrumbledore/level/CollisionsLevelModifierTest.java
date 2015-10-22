@@ -31,10 +31,9 @@ public class CollisionsLevelModifierTest {
    */
   @Before
   public void setUp() {
-    klm = mock(KineticsLevelModifier.class);
     sc = mock(ScoreCounter.class);
 
-    clm = new CollisionsLevelModifier(klm, sc);
+    clm = new CollisionsLevelModifier(sc);
   }
 
   /**
@@ -69,8 +68,7 @@ public class CollisionsLevelModifierTest {
     KineticsLevelModifier klm = new KineticsLevelModifier();
     ScoreCounter sc = new ScoreCounter();
 
-    CollisionsLevelModifier clm = new CollisionsLevelModifier(klm, sc);
-    assertEquals(klm, clm.getKinetics());
+    CollisionsLevelModifier clm = new CollisionsLevelModifier(sc);
     assertEquals(sc, clm.getScore());
   }
 
