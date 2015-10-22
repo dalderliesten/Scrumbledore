@@ -4,7 +4,6 @@ import java.util.Map;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -13,7 +12,7 @@ import org.junit.Test;
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.keybinding.Keybinding;
-import nl.tudelft.scrumbledore.level.PlayerAction;;
+import nl.tudelft.scrumbledore.level.LevelElementAction;;
 
 /**
  * Test suite for the Keybinding class.
@@ -39,7 +38,7 @@ public class KeybindingTest {
   public void testInitialKeybinding() {
     for (int i = 0; i < Constants.NUMBER_OF_PLAYERS; i++) {
       keybinding = new Keybinding(i);
-      Map<KeyCode, PlayerAction> bindings = Constants.KEY_MAPPING.get(i);
+      Map<KeyCode, LevelElementAction> bindings = Constants.KEY_MAPPING.get(i);
       for (KeyCode key : bindings.keySet()) {
         assertEquals(bindings.get(key), keybinding.getAction(key));
       }
@@ -51,7 +50,7 @@ public class KeybindingTest {
    */
   @Test
   public void testGetKey() {
-    assertEquals(KeyCode.UP, keybinding.getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.UP, keybinding.getKey(LevelElementAction.Jump));
   }
 
   /**
@@ -59,7 +58,7 @@ public class KeybindingTest {
    */
   @Test
   public void testGetAction() {
-    assertEquals(PlayerAction.Jump, keybinding.getAction(KeyCode.UP));
+    assertEquals(LevelElementAction.Jump, keybinding.getAction(KeyCode.UP));
   }
 
   /**
@@ -75,11 +74,11 @@ public class KeybindingTest {
    */
   @Test
   public void testUpdateKeyByAction() {
-    assertEquals(PlayerAction.Jump, keybinding.getAction(KeyCode.UP));
+    assertEquals(LevelElementAction.Jump, keybinding.getAction(KeyCode.UP));
 
-    keybinding.updateKeyByAction(PlayerAction.Jump, KeyCode.LEFT);
+    keybinding.updateKeyByAction(LevelElementAction.Jump, KeyCode.LEFT);
 
-    assertEquals(PlayerAction.Jump, keybinding.getAction(KeyCode.LEFT));
+    assertEquals(LevelElementAction.Jump, keybinding.getAction(KeyCode.LEFT));
 
     assertFalse(keybinding.isAssigned(KeyCode.UP));
   }
@@ -89,11 +88,11 @@ public class KeybindingTest {
    */
   @Test
   public void testUpdateActionByKey() {
-    assertEquals(KeyCode.UP, keybinding.getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.UP, keybinding.getKey(LevelElementAction.Jump));
 
-    keybinding.updateActionByKey(KeyCode.UP, PlayerAction.Shoot);
+    keybinding.updateActionByKey(KeyCode.UP, LevelElementAction.Shoot);
 
-    assertEquals(KeyCode.UP, keybinding.getKey(PlayerAction.Shoot));
+    assertEquals(KeyCode.UP, keybinding.getKey(LevelElementAction.Shoot));
   }
 
 }

@@ -9,7 +9,7 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * Test suite for the KeybindingContainer class.
@@ -20,6 +20,9 @@ public class KeybindingContainerTest {
 
   private KeybindingContainer keybindingContainer = KeybindingContainer.getInstance();
 
+  /**
+   * Resets the keybindingcontainer after each test.
+   */
   @After
   public void reset() {
     keybindingContainer.reset();
@@ -33,6 +36,9 @@ public class KeybindingContainerTest {
     assertTrue(KeybindingContainer.getInstance() instanceof KeybindingContainer);
   }
 
+  /**
+   * Tests the getter method.
+   */
   @Test
   public void testGetKeybinding() {
     Keybinding binding = new Keybinding(0);
@@ -46,33 +52,38 @@ public class KeybindingContainerTest {
    */
   @Test
   public void testUpdateKeybinding() {
-    assertEquals(KeyCode.UP, keybindingContainer.getKeybinding(0).getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.UP, keybindingContainer.getKeybinding(0).getKey(LevelElementAction.Jump));
 
-    keybindingContainer.updateKeyBinding(0, PlayerAction.Jump, KeyCode.LEFT);
+    keybindingContainer.updateKeyBinding(0, LevelElementAction.Jump, KeyCode.LEFT);
 
-    assertEquals(KeyCode.LEFT, keybindingContainer.getKeybinding(0).getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.LEFT,
+        keybindingContainer.getKeybinding(0).getKey(LevelElementAction.Jump));
 
     assertFalse(keybindingContainer.getKeybinding(0).isAssigned(KeyCode.UP));
 
     assertEquals(KeyCode.UNDEFINED,
-        keybindingContainer.getKeybinding(0).getKey(PlayerAction.MoveLeft));
+        keybindingContainer.getKeybinding(0).getKey(LevelElementAction.MoveLeft));
   }
-
+  
+  /**
+   * Tests whether the reset functions resets.
+   */
   @Test
   public void testReset() {
-    assertEquals(KeyCode.UP, keybindingContainer.getKeybinding(0).getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.UP, keybindingContainer.getKeybinding(0).getKey(LevelElementAction.Jump));
 
-    keybindingContainer.updateKeyBinding(0, PlayerAction.Jump, KeyCode.LEFT);
+    keybindingContainer.updateKeyBinding(0, LevelElementAction.Jump, KeyCode.LEFT);
 
-    assertEquals(KeyCode.LEFT, keybindingContainer.getKeybinding(0).getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.LEFT,
+        keybindingContainer.getKeybinding(0).getKey(LevelElementAction.Jump));
 
     assertFalse(keybindingContainer.getKeybinding(0).isAssigned(KeyCode.UP));
 
     assertEquals(KeyCode.UNDEFINED,
-        keybindingContainer.getKeybinding(0).getKey(PlayerAction.MoveLeft));
+        keybindingContainer.getKeybinding(0).getKey(LevelElementAction.MoveLeft));
 
     keybindingContainer.reset();
 
-    assertEquals(KeyCode.UP, keybindingContainer.getKeybinding(0).getKey(PlayerAction.Jump));
+    assertEquals(KeyCode.UP, keybindingContainer.getKeybinding(0).getKey(LevelElementAction.Jump));
   }
 }
