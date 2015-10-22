@@ -426,8 +426,8 @@ public class TurtleTaco implements Powerup {
 
   @Override
   public boolean equals(Object other) {
-    if (other instanceof Player) {
-      Player that = (Player) other;
+    if (other instanceof TurtleTaco) {
+      TurtleTaco that = (TurtleTaco) other;
       return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
@@ -484,6 +484,14 @@ public class TurtleTaco implements Powerup {
       result.add(store.getAnimated(id).getFrame(steps));
     }
     return result;
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
   }
 
 }

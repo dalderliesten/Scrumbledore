@@ -80,7 +80,6 @@ public class ChiliChickenPickUp extends PowerupPickUp {
 
   public void setLastMove(LevelElementAction action) {
     // TODO Auto-generated method stub
-    
   }
 
   public Boolean isFiring() {
@@ -91,6 +90,11 @@ public class ChiliChickenPickUp extends PowerupPickUp {
   public void setFiring(Boolean isFiring) {
     // TODO Auto-generated method stub
     
+  }
+
+  public ArrayList<LevelElementAction> getActions() {
+    // TODO Auto-generated method stub
+    return null;
   }
 
 }

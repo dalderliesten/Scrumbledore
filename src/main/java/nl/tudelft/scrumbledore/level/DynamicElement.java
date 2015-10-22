@@ -1,13 +1,26 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
 
+/**
+ * The interface of powerup objects and dynamic elements.
+ * This way dynamic elements an powerups are replacable.
+ * @author Floris Doolaard
+ *
+ */
 public interface DynamicElement extends LevelElement {
+  
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  ArrayList<LevelElementAction> getActions();
 
   /**
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A PlayerAction
+   *          A LevelElementAction
    */
   void addAction(LevelElementAction action);
 
@@ -17,17 +30,17 @@ public interface DynamicElement extends LevelElement {
   void clearActions();
 
   /**
-   * Checking wether the player is alive.
+   * Checking wether the element is alive.
    * 
-   * @return The boolean if the player is alive.
+   * @return The boolean if the element is alive.
    */
   Boolean isAlive();
 
   /**
-   * Setting the life of the player.
+   * Setting the life of the element.
    * 
    * @param bool
-   *          Can be True or False, stated on situation of player.
+   *          Can be True or False, stated on situation of element.
    */
   void setAlive(Boolean bool);
 
@@ -50,7 +63,7 @@ public interface DynamicElement extends LevelElement {
    * Check whether the given action is queued for the next step.
    * 
    * @param action
-   *          A PlayerAction.
+   *          A LevelElementAction.
    * @return Boolean.
    */
   boolean hasAction(LevelElementAction action);
@@ -59,7 +72,7 @@ public interface DynamicElement extends LevelElement {
    * Remove the given action from the actions queue.
    * 
    * @param action
-   *          A PlayerAction.
+   *          A LevelElementAction.
    */
   void removeAction(LevelElementAction action);
 

@@ -4,6 +4,12 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
+/**
+ * An abstract class as a basic class for represententing static level elements.
+ * @author Floris Doolaard
+ *
+ */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicStaticElement implements StaticElement {
 
   private Vector position;

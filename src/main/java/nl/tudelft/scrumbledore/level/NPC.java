@@ -128,34 +128,66 @@ public class NPC extends BasicDynamicElement {
     return result;
   }
 
+  /**
+   * Checking wether the element is alive.
+   * 
+   * @return The boolean if the element is alive.
+   */
   public Boolean isAlive() {
-    // TODO Auto-generated method stub
-    return null;
+    return false;
   }
 
+  /**
+   * Setting the life of the element.
+   * 
+   * @param bool
+   *          Can be True or False, stated on situation of element.
+   */
   public void setAlive(Boolean bool) {
-    // TODO Auto-generated method stub
-    
   }
 
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
   public int getPlayerNumber() {
-    // TODO Auto-generated method stub
     return 0;
   }
 
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *          Integer that represents the players number in the game.
+   */
   public void setPlayerNumber(int id) {
-    // TODO Auto-generated method stub
-    
   }
 
+  /**
+   * Return whether the Player is firing.
+   * 
+   * @return whether the Player is firing
+   */
   public Boolean isFiring() {
-    // TODO Auto-generated method stub
-    return null;
+    return false;
   }
 
+  /**
+   * Set whether the Player is firing.
+   * 
+   * @param isFiring
+   *          whether the Player is firing
+   */
   public void setFiring(Boolean isFiring) {
-    // TODO Auto-generated method stub
-    
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
   }
 
 

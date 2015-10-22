@@ -4,6 +4,11 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
+/**
+ * An abstract class as a basic class for represententing dynamic level elements.
+ * @author Floris Doolaard
+ *
+ */
 public abstract class BasicDynamicElement implements DynamicElement{
 
   private Vector position;

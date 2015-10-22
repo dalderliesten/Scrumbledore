@@ -13,6 +13,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Niels Warnars
  * @author Jesse Tilro
  * @author David Alderliesten
+ * @author Floris Doolaard
  */
 public class Player extends BasicDynamicElement {
   private ArrayList<LevelElementAction> actions;
@@ -97,6 +98,14 @@ public class Player extends BasicDynamicElement {
    */
   public void setPlayerNumber(int id) {
     this.id = id;
+  }
+  
+  /**
+   * Gives the list of actions of the player.
+   * @return a list of actions.
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
   }
 
   /**

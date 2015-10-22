@@ -21,7 +21,7 @@ import javafx.scene.input.KeyCode;
  */
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Constants {
-  
+
   // Empty private constructor for the utility class.
   private Constants() {
   }
@@ -36,12 +36,12 @@ public final class Constants {
 
   // Setting the refresh rates for the calculations.
   public static final int REFRESH_RATE = 30;
-  
+
   // Defining the maximum number of players.
   public static final int NUMBER_OF_PLAYERS = 2;
-  public static final List<String> PLAYER_COLORS 
-    = Collections.unmodifiableList(Arrays.asList("green", "blue"));
-  
+  public static final List<String> PLAYER_COLORS = Collections.unmodifiableList(Arrays.asList(
+      "green", "blue"));
+
   // Defining text needed for the labels and buttons at the main menu of the GUI.
   public static final String SCRUMBLEDORE_TEXT = "SCRUMBLEDORE";
   public static final String SINGLEPLAYERGAME_BUTTON = "Singleplayer Game";
@@ -54,7 +54,7 @@ public final class Constants {
   public static final String HISCORELABEL = "High-Score:";
   public static final String POWERUPLABEL = "Power-Ups:";
   public static final String LEVELLABEL = "Level:";
-  
+
   // Defining labels and values needed for the advancement GUI pop-ups.
   public static final String ADVANCINGLABEL = "Advancing to next level in a few moments...";
   public static final int ADVANCING_DELAY = 5000;
@@ -68,8 +68,7 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = 
-      "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
   public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
@@ -94,7 +93,7 @@ public final class Constants {
   public static final String SETTINGSKEYBINDING_BUTTON = "Keybinding";
   public static final String SETTINGS_CHOOSEKEYQUERY = "Press the desired key...";
   public static final int SETTINGS_CHOOSEKEYPADDING = 50;
-  
+
   // Defining the text needed for the display of the keybinding options.
   public static final String SETTINGS_PLAYER1 = "Player 1";
   public static final String SETTINGS_PLAYER2 = "Player 2";
@@ -109,7 +108,7 @@ public final class Constants {
   public static final String GAME_HISCORELABEL = "High-Score";
   public static final String GAME_POWERUPLABEL = "Power-Ups";
   public static final String GAME_LEVELLABEL = "Level";
-  
+
   // Defining labels needed in the bottom section of the user interface.
   public static final String GAME_STARTBUTTON = "Start";
   public static final String GAME_STOPBUTTON = "Stop";
@@ -192,7 +191,8 @@ public final class Constants {
 
   // Generation of keymapping list to prevent action skipping.
   private static List<Map<KeyCode, LevelElementAction>> createKeyMapping() {
-    List<Map<KeyCode, LevelElementAction>> keyMapping = new ArrayList<Map<KeyCode, LevelElementAction>>();
+    List<Map<KeyCode, LevelElementAction>> keyMapping = new ArrayList<Map<KeyCode, 
+        LevelElementAction>>();
 
     keyMapping.add(createKeyMappingP1());
     keyMapping.add(createKeyMappingP2());
@@ -221,10 +221,10 @@ public final class Constants {
 
     return keyMapping;
   }
-  
-  
+
   /**
    * Returns whether movement should be logged.
+   * 
    * @return whether movement should be logged
    */
   public static boolean isLoggingWantMovement() {
@@ -233,6 +233,7 @@ public final class Constants {
 
   /**
    * Returns whether input should be logged.
+   * 
    * @return whether input should be logged
    */
   public static boolean isLoggingWantInput() {
@@ -241,6 +242,7 @@ public final class Constants {
 
   /**
    * Returns whether the usage of the start/stop button should be logged.
+   * 
    * @return whether the usage of the start/stop button should be logged
    */
   public static boolean isLoggingWantStartStop() {
@@ -249,6 +251,7 @@ public final class Constants {
 
   /**
    * Returns whether shooting actions should be logged.
+   * 
    * @return whether shooting actions should be logged
    */
   public static boolean isLoggingWantShooting() {
@@ -257,6 +260,7 @@ public final class Constants {
 
   /**
    * Returns whether obtained points should be logged.
+   * 
    * @return whether obtained points should be logged.
    */
   public static boolean isLoggingWantPoints() {
@@ -265,6 +269,7 @@ public final class Constants {
 
   /**
    * Returns whether the location of enemies should be logged.
+   * 
    * @return whether the location of enemies should be logged.
    */
   public static boolean isLoggingWantEnemy() {
@@ -273,6 +278,7 @@ public final class Constants {
 
   /**
    * Set whether movement should be logged.
+   * 
    * @param loggingWantMovement
    *          whether movement should be logged
    */
@@ -282,6 +288,7 @@ public final class Constants {
 
   /**
    * Set whether input should be logged.
+   * 
    * @param loggingWantInput
    *          whether input should be logged
    */
@@ -291,7 +298,8 @@ public final class Constants {
 
   /**
    * Set whether the usage of the start/stop button should be logged.
-   * @param loggingWantStartStop 
+   * 
+   * @param loggingWantStartStop
    *          whether the usage of the start/stop button should be logged
    */
   public static void setLoggingWantStartStop(boolean loggingWantStartStop) {
@@ -300,7 +308,8 @@ public final class Constants {
 
   /**
    * Set whether shooting actions should be logged.
-   * @param loggingWantShooting 
+   * 
+   * @param loggingWantShooting
    *          whether shooting actions should be logged
    */
   public static void setLoggingWantShooting(boolean loggingWantShooting) {
@@ -309,7 +318,8 @@ public final class Constants {
 
   /**
    * Set whether obtained points should be logged.
-   * @param loggingWantPoints   
+   * 
+   * @param loggingWantPoints
    *          whether obtained points should be logged
    */
   public static void setLoggingWantPoints(boolean loggingWantPoints) {
@@ -318,11 +328,12 @@ public final class Constants {
 
   /**
    * Set whether the location of enemies should be logged.
+   * 
    * @param loggingWantEnemy
    *          whether the location of enemies should be logged
    */
   public static void setLoggingWantEnemy(boolean loggingWantEnemy) {
     Constants.loggingWantEnemy = loggingWantEnemy;
   }
-  
+
 }

@@ -112,12 +112,12 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           if (Constants.isLoggingWantShooting()) {
             Logger.getInstance().log("Player shot in the left direction.");
           }
-          newBubble.addAction(BubbleAction.MoveLeft);
+          newBubble.addAction(LevelElementAction.MoveLeft);
         } else {
           if (Constants.isLoggingWantShooting()) {
             Logger.getInstance().log("Player shot in the right direction.");
           }
-          newBubble.addAction(BubbleAction.MoveRight);
+          newBubble.addAction(LevelElementAction.MoveRight);
         }
       }
       player.setFiring(true);

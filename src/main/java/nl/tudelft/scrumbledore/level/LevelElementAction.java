@@ -3,7 +3,7 @@ package nl.tudelft.scrumbledore.level;
 /**
  * Enumeration containing types of actions that a LevelElement can perform.
  * 
- * @author Jesse Tilro
+ * @author Jesse Tilro, Floris Doolaard
  *
  */
 public enum LevelElementAction {

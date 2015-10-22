@@ -1,10 +1,10 @@
 package nl.tudelft.scrumbledore.level;
 
-import java.util.ArrayList;
-
-import nl.tudelft.scrumbledore.sprite.Sprite;
-
+/**
+ * The interface for static elements in the game.
+ * @author Floris
+ *
+ */
 public interface StaticElement extends LevelElement {
 
-  
 }

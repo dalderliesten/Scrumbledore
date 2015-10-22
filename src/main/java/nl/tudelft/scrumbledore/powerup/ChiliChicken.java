@@ -29,6 +29,7 @@ public class ChiliChicken implements Powerup {
   private Boolean firing;
   private Boolean alive;
   private int id;
+  private Player player;
 
   /**
    * Create a new LevelElement instance.
@@ -38,18 +39,20 @@ public class ChiliChicken implements Powerup {
    * @param size
    *          Size of the element.
    */
-  public ChiliChicken(Vector position, Vector size) {
-    this.position = position;
-    this.size = size;
+  public ChiliChicken(Player player) {
+    this.position = player.getPosition();
+    this.size = player.getSize();
     this.speed = new Vector(0, 0);
     this.friction = new Vector(0, 0);
     setGravity(true);
 
     id = 0;
     actions = new ArrayList<LevelElementAction>();
-    lastMove = LevelElementAction.MoveRight;
-    firing = false;
-    alive = true;
+    lastMove = player.getLastMove();
+    firing = player.isFiring();
+    alive = player.isAlive();
+    
+    this.player = player;
   }
 
   /**
@@ -426,11 +429,10 @@ public class ChiliChicken implements Powerup {
 
   @Override
   public boolean equals(Object other) {
-    if (other instanceof Player) {
-      Player that = (Player) other;
+    if (other instanceof ChiliChicken) {
+      ChiliChicken that = (ChiliChicken) other;
       return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
-
     return false;
   }
 
@@ -484,5 +486,13 @@ public class ChiliChicken implements Powerup {
       result.add(store.getAnimated(id).getFrame(steps));
     }
     return result;
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
   }
 }
