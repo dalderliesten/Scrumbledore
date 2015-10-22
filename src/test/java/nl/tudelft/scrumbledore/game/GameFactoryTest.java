@@ -38,7 +38,7 @@ public class GameFactoryTest {
    */
   @Test
   public final void testMakeSinglePlayerGame() {
-    Game game = factory.makeSinglePlayerGame();
+    Game game = factory.makeGame(SinglePlayerGame.class);
     ArrayList<LevelModifier> modifiers = game.getModifiers();
 
     assertEquals(7, modifiers.size());
@@ -56,7 +56,7 @@ public class GameFactoryTest {
    */
   @Test
   public final void testMakeMultiPlayerGame() {
-    Game game = factory.makeMultiPlayerGame();
+    Game game = factory.makeGame(MultiPlayerGame.class);
     ArrayList<LevelModifier> modifiers = game.getModifiers();
 
     assertEquals(7, modifiers.size());

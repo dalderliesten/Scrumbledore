@@ -26,6 +26,8 @@ import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
+import nl.tudelft.scrumbledore.game.MultiPlayerGame;
+import nl.tudelft.scrumbledore.game.SinglePlayerGame;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelElement;
@@ -85,7 +87,7 @@ public final class GameDisplay {
   public static void launchMultiPlayerGame(Stage passedStage) {
     currentStage = passedStage;
     GameFactory factory = new GameFactory();
-    currentGame = factory.makeMultiPlayerGame();
+    currentGame = factory.makeGame(MultiPlayerGame.class);
 
     launchGame();
   }
@@ -99,7 +101,7 @@ public final class GameDisplay {
   public static void launchSinglePlayerGame(Stage passedStage) {
     currentStage = passedStage;
     GameFactory factory = new GameFactory();
-    currentGame = factory.makeSinglePlayerGame();
+    currentGame = factory.makeGame(SinglePlayerGame.class);
 
     launchGame();
   }

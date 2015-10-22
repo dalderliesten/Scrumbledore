@@ -24,26 +24,25 @@ public class GameFactory {
   }
 
   /**
-   * Make a new SinglePlayerGame.
+   * Makes a new Single / Multiplayer game.
+   * @param c 
+   *          A given class of game.
    * 
-   * @return The SinglePlayerGame.
+   * @return A SinglePlayer or MultiPlayer game.
    */
-  public Game makeSinglePlayerGame() {
-    Game game = new SinglePlayerGame();
+  public Game makeGame(Class c) {
+    Game game = null;
+    
+    if (c == SinglePlayerGame.class) {
+      game = new SinglePlayerGame();
+    } else if (c == MultiPlayerGame.class) {
+      game = new MultiPlayerGame();
+    }
+    
     makeLevelModifiers(game);
     return game;
   }
 
-  /**
-   * Make a new MultiPlayerGame.
-   * 
-   * @return The MultiPlayerGame.
-   */
-  public Game makeMultiPlayerGame() {
-    Game game = new MultiPlayerGame();
-    makeLevelModifiers(game);
-    return game;
-  }
 
   private void makeLevelModifiers(Game game) {
     game.registerLevelModifier(new PlayerActionsLevelModifier());
