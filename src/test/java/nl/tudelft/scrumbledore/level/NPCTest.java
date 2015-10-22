@@ -48,8 +48,8 @@ public class NPCTest extends LevelElementTest {
    */
   @Test
   public void testHasActionTrue() {
-    npc.addAction(NPCAction.MoveLeft);
-    assertTrue(npc.hasAction(NPCAction.MoveLeft));
+    npc.addAction(LevelElementAction.MoveLeft);
+    assertTrue(npc.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -58,8 +58,8 @@ public class NPCTest extends LevelElementTest {
    */
   @Test
   public void testHasActionFalse() {
-    npc.addAction(NPCAction.MoveLeft);
-    assertFalse(npc.hasAction(NPCAction.MoveRight));
+    npc.addAction(LevelElementAction.MoveLeft);
+    assertFalse(npc.hasAction(LevelElementAction.MoveRight));
   }
 
   /**
@@ -68,9 +68,9 @@ public class NPCTest extends LevelElementTest {
    */
   @Test
   public void testClearActions() {
-    npc.addAction(NPCAction.MoveLeft);
+    npc.addAction(LevelElementAction.MoveLeft);
     npc.clearActions();
-    assertFalse(npc.hasAction(NPCAction.MoveLeft));
+    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -78,10 +78,10 @@ public class NPCTest extends LevelElementTest {
    */
   @Test
   public void testRemoveAction() {
-    npc.addAction(NPCAction.MoveLeft);
-    npc.addAction(NPCAction.MoveLeft);
-    npc.removeAction(NPCAction.MoveLeft);
-    assertFalse(npc.hasAction(NPCAction.MoveLeft));
+    npc.addAction(LevelElementAction.MoveLeft);
+    npc.addAction(LevelElementAction.MoveLeft);
+    npc.removeAction(LevelElementAction.MoveLeft);
+    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -126,11 +126,11 @@ public class NPCTest extends LevelElementTest {
    */
   @Test
   public void testLastMove() {
-    npc.setLastMove(NPCAction.MoveLeft);
-    assertEquals(NPCAction.MoveLeft, npc.getLastMove());
-    npc.setLastMove(NPCAction.MoveRight);
-    assertEquals(NPCAction.MoveRight, npc.getLastMove());
+    npc.setLastMove(LevelElementAction.MoveLeft);
+    assertEquals(LevelElementAction.MoveLeft, npc.getLastMove());
+    npc.setLastMove(LevelElementAction.MoveRight);
+    assertEquals(LevelElementAction.MoveRight, npc.getLastMove());
     // Actions other than MoveLeft and MoveRight should be ignored.
-    assertEquals(NPCAction.MoveRight, npc.getLastMove());
+    assertEquals(LevelElementAction.MoveRight, npc.getLastMove());
   }
 }

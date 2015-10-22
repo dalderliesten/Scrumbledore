@@ -10,9 +10,9 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * 
  * @author Niels Warnars
  */
-public class NPC extends LevelElement {
-  private NPCAction lastMove;
-  private ArrayList<NPCAction> actions;
+public class NPC extends BasicDynamicElement {
+  private LevelElementAction lastMove;
+  private ArrayList<LevelElementAction> actions;
 
   /**
    * Create a new NPC instance.
@@ -27,8 +27,8 @@ public class NPC extends LevelElement {
 
     setGravity(true);
 
-    actions = new ArrayList<NPCAction>();
-    addAction(NPCAction.MoveLeft);
+    actions = new ArrayList<LevelElementAction>();
+    addAction(LevelElementAction.MoveLeft);
   }
 
   /**
@@ -37,7 +37,7 @@ public class NPC extends LevelElement {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(NPCAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -58,7 +58,7 @@ public class NPC extends LevelElement {
    *          An NPCAction.
    * @return Boolean.
    */
-  public boolean hasAction(NPCAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -68,7 +68,7 @@ public class NPC extends LevelElement {
    * @param action
    *          An NPCAction.
    */
-  public void removeAction(NPCAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -93,7 +93,7 @@ public class NPC extends LevelElement {
    * 
    * @return The last move performed.
    */
-  public NPCAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -103,8 +103,8 @@ public class NPC extends LevelElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(NPCAction action) {
-    if (action == NPCAction.MoveLeft || action == NPCAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
@@ -120,12 +120,102 @@ public class NPC extends LevelElement {
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
     String id = "zenchan-move-right";
-    if (getLastMove().equals(NPCAction.MoveLeft)) {
+    if (getLastMove().equals(LevelElementAction.MoveLeft)) {
       id = "zenchan-move-left";
     }
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     result.add(store.getAnimated(id).getFrame(steps));
     return result;
   }
+
+  /**
+   * Checking wether the element is alive.
+   * 
+   * @return The boolean if the element is alive.
+   */
+  public Boolean isAlive() {
+    return false;
+  }
+
+  /**
+   * Setting the life of the element.
+   * 
+   * @param bool
+   *          Can be True or False, stated on situation of element.
+   */
+  public void setAlive(Boolean bool) {
+  }
+
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
+  public int getPlayerNumber() {
+    return 0;
+  }
+
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *          Integer that represents the players number in the game.
+   */
+  public void setPlayerNumber(int id) {
+  }
+
+  /**
+   * Return whether the Player is firing.
+   * 
+   * @return whether the Player is firing
+   */
+  public Boolean isFiring() {
+    return false;
+  }
+
+  /**
+   * Set whether the Player is firing.
+   * 
+   * @param isFiring
+   *          whether the Player is firing
+   */
+  public void setFiring(Boolean isFiring) {
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
+  
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return 0;
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
+  }
+
 
 }

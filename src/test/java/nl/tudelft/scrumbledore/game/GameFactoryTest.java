@@ -14,6 +14,7 @@ import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
 import nl.tudelft.scrumbledore.level.LevelModifier;
 import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.WarpLevelModifier;
 
 /**
  * Test suite for the GameFactory class.
@@ -23,7 +24,7 @@ import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
 public class GameFactoryTest {
 
   private GameFactory factory;
-  
+
   /**
    * Set-up the initial Game Factory.
    */
@@ -37,16 +38,17 @@ public class GameFactoryTest {
    */
   @Test
   public final void testMakeSinglePlayerGame() {
-    Game game = factory.makeSinglePlayerGame(); 
+    Game game = factory.makeSinglePlayerGame();
     ArrayList<LevelModifier> modifiers = game.getModifiers();
-    
-    assertEquals(6, modifiers.size());
+
+    assertEquals(7, modifiers.size());
     assertEquals(1, countLevelModifiers(PlayerActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(GravityLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(NPCLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(BubbleActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(CollisionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(KineticsLevelModifier.class, modifiers));
+    assertEquals(1, countLevelModifiers(WarpLevelModifier.class, modifiers));
   }
 
   /**
@@ -54,16 +56,17 @@ public class GameFactoryTest {
    */
   @Test
   public final void testMakeMultiPlayerGame() {
-    Game game = factory.makeMultiPlayerGame(); 
+    Game game = factory.makeMultiPlayerGame();
     ArrayList<LevelModifier> modifiers = game.getModifiers();
 
-    assertEquals(6, modifiers.size());
+    assertEquals(7, modifiers.size());
     assertEquals(1, countLevelModifiers(PlayerActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(GravityLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(NPCLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(BubbleActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(CollisionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(KineticsLevelModifier.class, modifiers));
+    assertEquals(1, countLevelModifiers(WarpLevelModifier.class, modifiers));
   }
 
   /**
@@ -73,18 +76,17 @@ public class GameFactoryTest {
    *          A class to counted
    * @param modifiers
    *          An ArrayList of LevelModifiers
-   * @return
-   *          The number of instances of an input object counted in the list of modifiers
+   * @return The number of instances of an input object counted in the list of modifiers
    */
   private static int countLevelModifiers(Class c, ArrayList<LevelModifier> modifiers) {
     int count = 0;
-    
+
     for (LevelModifier modifier : modifiers) {
       if (modifier.getClass() == c) {
         count++;
       }
     }
-    
+
     return count;
   }
 }

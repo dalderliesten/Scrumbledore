@@ -16,8 +16,8 @@ public class PlayerActionTest {
    */
   @Test
   public final void testInvertActionMoveRight() {
-    PlayerAction result = PlayerAction.invertAction(PlayerAction.MoveRight);
-    assertEquals(PlayerAction.MoveStop, result);
+    LevelElementAction result = LevelElementAction.invertAction(LevelElementAction.MoveRight);
+    assertEquals(LevelElementAction.MoveStop, result);
   }
 
   /**
@@ -25,8 +25,8 @@ public class PlayerActionTest {
    */
   @Test
   public final void testInvertActionMoveLeft() {
-    PlayerAction result = PlayerAction.invertAction(PlayerAction.MoveLeft);
-    assertEquals(PlayerAction.MoveStop, result);
+    LevelElementAction result = LevelElementAction.invertAction(LevelElementAction.MoveLeft);
+    assertEquals(LevelElementAction.MoveStop, result);
   }
 
   /**
@@ -34,8 +34,8 @@ public class PlayerActionTest {
    */
   @Test
   public final void testInvertActionShoot() {
-    PlayerAction result = PlayerAction.invertAction(PlayerAction.Shoot);
-    assertEquals(PlayerAction.ShootStop, result);
+    LevelElementAction result = LevelElementAction.invertAction(LevelElementAction.Shoot);
+    assertEquals(LevelElementAction.ShootStop, result);
   }
 
   /**
@@ -43,7 +43,7 @@ public class PlayerActionTest {
    */
   @Test
   public final void testInvertActionUnsupported() {
-    PlayerAction result = PlayerAction.invertAction(PlayerAction.Jump);
+    LevelElementAction result = LevelElementAction.invertAction(LevelElementAction.Jump);
     assertEquals(null, result);
   }
 
@@ -52,7 +52,7 @@ public class PlayerActionTest {
    */
   @Test
   public final void testInvertActionNull() {
-    PlayerAction result = PlayerAction.invertAction(null);
+    LevelElementAction result = LevelElementAction.invertAction(null);
     assertEquals(null, result);
   }
 }

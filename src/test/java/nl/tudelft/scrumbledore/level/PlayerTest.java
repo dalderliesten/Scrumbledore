@@ -40,7 +40,7 @@ public class PlayerTest extends LevelElementTest {
     assertTrue(player.hasGravity());
     assertTrue(player.isAlive());
     assertFalse(player.isFiring());
-    assertEquals(PlayerAction.MoveRight, player.getLastMove());
+    assertEquals(LevelElementAction.MoveRight, player.getLastMove());
   }
 
   /**
@@ -49,8 +49,8 @@ public class PlayerTest extends LevelElementTest {
    */
   @Test
   public void testHasActionTrue() {
-    player.addAction(PlayerAction.MoveLeft);
-    assertTrue(player.hasAction(PlayerAction.MoveLeft));
+    player.addAction(LevelElementAction.MoveLeft);
+    assertTrue(player.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -59,8 +59,8 @@ public class PlayerTest extends LevelElementTest {
    */
   @Test
   public void testHasActionFalse() {
-    player.addAction(PlayerAction.MoveLeft);
-    assertFalse(player.hasAction(PlayerAction.MoveRight));
+    player.addAction(LevelElementAction.MoveLeft);
+    assertFalse(player.hasAction(LevelElementAction.MoveRight));
   }
 
   /**
@@ -69,9 +69,9 @@ public class PlayerTest extends LevelElementTest {
    */
   @Test
   public void testClearActions() {
-    player.addAction(PlayerAction.MoveLeft);
+    player.addAction(LevelElementAction.MoveLeft);
     player.clearActions();
-    assertFalse(player.hasAction(PlayerAction.MoveLeft));
+    assertFalse(player.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -79,10 +79,10 @@ public class PlayerTest extends LevelElementTest {
    */
   @Test
   public void testRemoveAction() {
-    player.addAction(PlayerAction.MoveLeft);
-    player.addAction(PlayerAction.MoveLeft);
-    player.removeAction(PlayerAction.MoveLeft);
-    assertFalse(player.hasAction(PlayerAction.MoveLeft));
+    player.addAction(LevelElementAction.MoveLeft);
+    player.addAction(LevelElementAction.MoveLeft);
+    player.removeAction(LevelElementAction.MoveLeft);
+    assertFalse(player.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -111,19 +111,19 @@ public class PlayerTest extends LevelElementTest {
     player.setPlayerNumber(42);
     assertEquals(42, player.getPlayerNumber());
   }
-  
+
   /**
    * Test the lastMove field getter/setter.
    */
   @Test
   public void testLastMove() {
-    player.setLastMove(PlayerAction.MoveLeft);
-    assertEquals(PlayerAction.MoveLeft, player.getLastMove());
-    player.setLastMove(PlayerAction.MoveRight);
-    assertEquals(PlayerAction.MoveRight, player.getLastMove());
+    player.setLastMove(LevelElementAction.MoveLeft);
+    assertEquals(LevelElementAction.MoveLeft, player.getLastMove());
+    player.setLastMove(LevelElementAction.MoveRight);
+    assertEquals(LevelElementAction.MoveRight, player.getLastMove());
     // Actions other than MoveLeft and MoveRight should be ignored.
-    player.setLastMove(PlayerAction.Jump);
-    assertEquals(PlayerAction.MoveRight, player.getLastMove());
+    player.setLastMove(LevelElementAction.Jump);
+    assertEquals(LevelElementAction.MoveRight, player.getLastMove());
   }
 
   /**
@@ -162,5 +162,5 @@ public class PlayerTest extends LevelElementTest {
   public void testHashCode() {
     assertEquals(0, player.hashCode());
   }
-  
+
 }

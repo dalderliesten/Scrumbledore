@@ -1,99 +1,35 @@
-package nl.tudelft.scrumbledore.level;
+package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
- * Class representing a Fruit in a game.
+ * This class represents a pickup item of the BlueberryBubble power-up.
  * 
- * @author Niels Warnars, Floris Doolaard
+ * @author Floris Doolaard
+ *
  */
-public class Fruit extends BasicDynamicElement {
-  private int value;
-  private Boolean pickable;
+public class BlueberryBubblePickUp extends PowerupPickUp {
 
   /**
-   * Create a new Fruit instance.
-   * 
-   * @param position
-   *          Position of the fruit in the level.
-   * @param size
-   *          Size of the fruit.
+   * The consctrutor creates a pickup item in the level.
+   * @param position , location of the object.
+   * @param size , size of the object.
    */
-  public Fruit(Vector position, Vector size) {
+  public BlueberryBubblePickUp(Vector position, Vector size) {
     super(position, size);
-
-    setGravity(true);
-    pickable = false;
   }
 
   @Override
-  public int hashCode() {
-    return 0;
-  }
-
-  @Override
-  public boolean equals(Object other) {
-    if (other instanceof Fruit) {
-      Fruit that = (Fruit) other;
-      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
-    }
-
-    return false;
-  }
-
-  /**
-   * Get the value of a fruit.
-   * 
-   * @return The value of a fruit
-   */
-  public int getValue() {
-    return value;
-  }
-
-  /**
-   * Set the value of a fruit.
-   * 
-   * @param value
-   *          The value of a fruit
-   */
-  public void setValue(int value) {
-    this.value = value;
-  }
-
-  /**
-   * Return whether the fruit instance is pickable or not.
-   * 
-   * @return Boolean pickable.
-   */
-  public Boolean isPickable() {
-    return pickable;
-  }
-
-  /**
-   * Setting whether the fruit instance is pickable.
-   * 
-   * @param bool
-   *          true or false.
-   */
-  public void setPickable(Boolean bool) {
-    pickable = bool;
-  }
-
-  /**
-   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
-   * Element.
-   * 
-   * @param steps
-   *          The absolute exact number of steps since the game was started.
-   * @return Sprites to be drawn.
-   */
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
     ArrayList<Sprite> result = new ArrayList<Sprite>();
-    result.add(store.getAnimated("fruit").getFrame(posX()));
+
+    result.add(store.get("powerup-blueberry-bubble"));
     return result;
   }
 
@@ -111,7 +47,7 @@ public class Fruit extends BasicDynamicElement {
    */
   public void clearActions() {
   }
-  
+
   /**
    * Checking wether the element is alive.
    * 
@@ -183,7 +119,7 @@ public class Fruit extends BasicDynamicElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(LevelElementAction action) {    
+  public void setLastMove(LevelElementAction action) {
   }
 
   /**
@@ -211,7 +147,7 @@ public class Fruit extends BasicDynamicElement {
   public ArrayList<LevelElementAction> getActions() {
     return null;
   }
-
+  
   /**
    * Decrease the lifetime by a given number of steps.
    * 
@@ -238,4 +174,6 @@ public class Fruit extends BasicDynamicElement {
    */
   public void setLifetime(double newTime) {
   }
+
+
 }

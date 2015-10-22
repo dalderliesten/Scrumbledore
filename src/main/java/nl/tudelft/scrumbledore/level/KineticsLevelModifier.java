@@ -1,7 +1,5 @@
 package nl.tudelft.scrumbledore.level;
 
-import nl.tudelft.scrumbledore.Constants;
-
 /**
  * The Kinetics class handles the position/speed of levelelements.
  * 
@@ -23,7 +21,6 @@ public class KineticsLevelModifier implements LevelModifier {
     for (LevelElement element : level.getDynamicElements()) {
       move(element, d);
       applyFriction(element, d);
-      warp(element);
     }
   }
 
@@ -43,12 +40,12 @@ public class KineticsLevelModifier implements LevelModifier {
     if (Math.abs(el.hSpeed()) > el.hFric() * d) {
       signX = (int) Math.signum(el.hSpeed());
     } else {
-      stopHorizontally(el);
+      el.stopHorizontally();
     }
     if (Math.abs(el.vSpeed()) > el.vFric() * d) {
       signY = (int) Math.signum(el.vSpeed());
     } else {
-      stopVertically(el);
+      el.stopVertically();
     }
 
     Vector fricDiff = new Vector(d * signX * el.hFric(), d * signY * el.vFric());
@@ -81,123 +78,6 @@ public class KineticsLevelModifier implements LevelModifier {
     if (el != null) {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
     }
-  }
-
-  /**
-   * Stop a LevelElement's vertical movement.
-   * 
-   * @param element
-   *          The element.
-   */
-  public void stopVertically(LevelElement element) {
-    element.getSpeed().setY(0);
-  }
-
-  /**
-   * Stop a LevelElement's horizontal movement.
-   * 
-   * @param element
-   *          The element.
-   */
-  public void stopHorizontally(LevelElement element) {
-    element.getSpeed().setX(0);
-  }
-
-  /**
-   * Warp a LeveElement both in horizontal and vertical direction.
-   * 
-   * @param element
-   *          The LevelElement to be warped.
-   */
-  public void warp(LevelElement element) {
-    warpVertically(element);
-    warpHorizontally(element);
-  }
-
-  /**
-   * Warp a Level Element through the vertical boundaries of the level.
-   * 
-   * @param element
-   *          The Level Element to be warped.
-   */
-  public void warpVertically(LevelElement element) {
-    double offset = element.height() / 2;
-    if (element.posY() < -offset) {
-      element.getPosition().setY(Constants.LEVELY + offset);
-    } else if (element.posY() > Constants.LEVELY + offset) {
-      element.getPosition().setY(-offset);
-    }
-  }
-
-  /**
-   * Warp a Level Element through the horizontal boundaries of the level.
-   * 
-   * @param element
-   *          The Level Element to be warped.
-   */
-  public void warpHorizontally(LevelElement element) {
-    double offset = -element.width() / 2;
-    if (element.posX() < -offset) {
-      element.getPosition().setX(Constants.LEVELX + offset);
-    } else if (element.posX() > Constants.LEVELX + offset) {
-      element.getPosition().setX(-offset);
-    }
-  }
-
-  /**
-   * Snap a LevelElement to the left side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapLeft(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getX() / 2;
-    double newPos = snapTo.getLeft() - offset;
-    snapper.getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the right side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapRight(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getX() / 2;
-    double newPos = snapTo.getRight() + offset;
-    snapper.getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the top side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapTop(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getY() / 2;
-    double newPos = snapTo.getTop() - offset;
-    snapper.getPosition().setY(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the bottom side of another LevelElement.
-   * 
-   * @param snapper
-   *          The LevelElement to be snapped.
-   * @param snapTo
-   *          The LevelElement to be snapped to.
-   */
-  public void snapBottom(LevelElement snapper, LevelElement snapTo) {
-    double offset = snapper.getSize().getY() / 2;
-    double newPos = snapTo.getBottom() + offset;
-    snapper.getPosition().setY(newPos);
   }
 
 }

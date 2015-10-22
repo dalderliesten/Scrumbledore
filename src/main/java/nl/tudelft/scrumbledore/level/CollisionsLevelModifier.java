@@ -5,6 +5,15 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
+import nl.tudelft.scrumbledore.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
+import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
+import nl.tudelft.scrumbledore.powerup.PyroPepper;
+import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
+import nl.tudelft.scrumbledore.powerup.TurtleTaco;
+import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
 
 /**
  * Class responsible for collision detection between given elements.
@@ -13,10 +22,10 @@ import nl.tudelft.scrumbledore.game.ScoreCounter;
  * @author David Alderliesten
  */
 @SuppressWarnings({ "checkstyle:methodlength", "PMD.ModifiedCyclomaticComplexity",
-    "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
+    "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity",
+    "PMD.TooManyMethods" })
 public class CollisionsLevelModifier implements LevelModifier {
 
-  private KineticsLevelModifier kinetics;
   private ScoreCounter score;
 
   /**
@@ -27,8 +36,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param score
    *          The Score Counter to be used.
    */
-  public CollisionsLevelModifier(KineticsLevelModifier kinetics, ScoreCounter score) {
-    this.kinetics = kinetics;
+  public CollisionsLevelModifier(ScoreCounter score) {
     this.score = score;
   }
 
@@ -41,6 +49,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The steps passed since this method wat last executed.
    */
   public void modify(Level level, double delta) {
+    detectPlayerPowerup(level, delta);
     detectPlayerBubble(level, delta);
     detectBubbleEnemy(level, delta);
     detectBubbleBubble(level, delta);
@@ -50,6 +59,52 @@ public class CollisionsLevelModifier implements LevelModifier {
     detectPlayerFruit(level, delta);
     detectPlayerEnemy(level, delta);
     detectNPCPlatform(level, delta);
+  }
+
+  /**
+   * Detect collisions between player and powerups.
+   * 
+   * @param level
+   *          , the level.
+   * @param delta
+   *          , the delta provided by StepTimer.
+   */
+  protected void detectPlayerPowerup(Level level, double delta) {
+    ArrayList<PowerupPickUp> powerUps = level.getPowerups();
+    ArrayList<DynamicElement> players = level.getPlayers();
+
+    if (powerUps.size() > 0) {
+      for (int j = 0; j < players.size(); j++) {
+        DynamicElement player = players.get(j);
+        for (int i = 0; i < powerUps.size(); i++) {
+          PowerupPickUp currentPow = powerUps.get(i);
+          if (currentPow.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+            Collision collision = new Collision(player, currentPow, delta);
+            if (collision.colliding()) {
+              if (currentPow instanceof ChiliChickenPickUp) {
+                ChiliChicken newChick = new ChiliChicken(player);
+                players.add(j, newChick);
+                players.remove(j + 1);
+              } else if (currentPow instanceof BlueberryBubblePickUp) {
+                BlueberryBubble newBlue = new BlueberryBubble(player);
+                players.add(j, newBlue);
+                players.remove(j + 1);
+              } else if (currentPow instanceof PyroPepperPickUp) {
+                PyroPepper newPyro = new PyroPepper(player);
+                players.add(j, newPyro);
+                players.remove(j + 1);
+              } else if (currentPow instanceof TurtleTacoPickUp) {
+                TurtleTaco newTurtle = new TurtleTaco(player);
+                players.add(j, newTurtle);
+                players.remove(j + 1);
+              }
+              powerUps.remove(i);
+            }
+          }
+        }
+      }
+    }
+
   }
 
   /**
@@ -64,7 +119,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     for (Fruit fruit : level.getFruits()) {
       // To prevent the player from instantaneously picking up fruit.
       boolean pickable = true;
-      for (Player player : level.getPlayers()) {
+      for (DynamicElement player : level.getPlayers()) {
         Collision playerCollision = new Collision(fruit, player, delta);
         if (playerCollision.colliding()) {
           pickable = false;
@@ -80,8 +135,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(fruit, platform, delta);
 
           if (collision.collidingFromTop() && fruit.vSpeed() > 0) {
-            kinetics.stopVertically(fruit);
-            kinetics.snapTop(fruit, platform);
+            fruit.stopVertically();
+            fruit.snapTop(platform);
           }
         }
       }
@@ -97,7 +152,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerPlatform(Level level, double delta) {
-    for (Player player : level.getPlayers()) {
+    for (DynamicElement player : level.getPlayers()) {
       // To accelerate the second iteration over the platforms
       ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
@@ -106,8 +161,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(player, platform, delta);
 
           if (collision.collidingFromTop() && player.vSpeed() > 0) {
-            kinetics.stopVertically(player);
-            kinetics.snapTop(player, platform);
+            player.stopVertically();
+            player.snapTop(platform);
           }
         }
       }
@@ -117,18 +172,18 @@ public class CollisionsLevelModifier implements LevelModifier {
 
         if (!platform.isPassable()) {
           if (collision.collidingFromBottom() && player.vSpeed() < 0) {
-            kinetics.stopVertically(player);
-            kinetics.snapBottom(player, platform);
+            player.stopVertically();
+            player.snapBottom(platform);
           }
 
           if (collision.collidingFromLeft() && player.hSpeed() > 0) {
-            kinetics.stopHorizontally(player);
-            kinetics.snapLeft(player, platform);
+            player.stopHorizontally();
+            player.snapLeft(platform);
           }
 
           if (collision.collidingFromRight() && player.hSpeed() < 0) {
-            kinetics.stopHorizontally(player);
-            kinetics.snapRight(player, platform);
+            player.stopHorizontally();
+            player.snapRight(platform);
           }
         }
       }
@@ -153,8 +208,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           Collision collision = new Collision(npc, platform, delta);
 
           if (collision.collidingFromTop() && npc.vSpeed() > 0) {
-            kinetics.stopVertically(npc);
-            kinetics.snapTop(npc, platform);
+            npc.stopVertically();
+            npc.snapTop(platform);
           }
         }
       }
@@ -164,15 +219,15 @@ public class CollisionsLevelModifier implements LevelModifier {
 
         if (!platform.isPassable()) {
           if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
-            kinetics.stopHorizontally(npc);
-            kinetics.snapLeft(npc, platform);
-            npc.addAction(NPCAction.MoveLeft);
+            npc.stopHorizontally();
+            npc.snapLeft(platform);
+            npc.addAction(LevelElementAction.MoveLeft);
           }
 
           if (collision.collidingFromRight() && npc.hSpeed() < 0) {
-            kinetics.stopHorizontally(npc);
-            kinetics.snapRight(npc, platform);
-            npc.addAction(NPCAction.MoveRight);
+            npc.stopHorizontally();
+            npc.snapRight(platform);
+            npc.addAction(LevelElementAction.MoveRight);
           }
         }
       }
@@ -197,19 +252,19 @@ public class CollisionsLevelModifier implements LevelModifier {
 
           if (collision.collidingFromBottom()) {
             bubble.getSpeed().setY(Constants.BUBBLE_BOUNCE);
-            kinetics.snapBottom(bubble, platform);
+            bubble.snapBottom(platform);
             break;
           }
 
           if (collision.collidingFromLeft()) {
             bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
-            kinetics.snapLeft(bubble, platform);
+            bubble.snapLeft(platform);
             break;
           }
 
           if (collision.collidingFromRight()) {
             bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-            kinetics.snapRight(bubble, platform);
+            bubble.snapRight(platform);
             break;
           }
         }
@@ -226,13 +281,13 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta.
    */
   protected void detectPlayerBubble(Level level, double delta) {
-    for (Player player : level.getPlayers()) {
+    for (DynamicElement player : level.getPlayers()) {
       for (Bubble bubble : level.getBubbles()) {
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && !(bubble.hasNPC())) {
             player.getSpeed().setY(-Constants.PLAYER_JUMP);
-            kinetics.snapTop(player, bubble);
+            player.snapTop(bubble);
             break;
           }
 
@@ -333,7 +388,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerFruit(Level level, double delta) {
-    for (Player player : level.getPlayers()) {
+    for (DynamicElement player : level.getPlayers()) {
       ArrayList<Fruit> fruits = level.getFruits();
 
       if (fruits.size() > 0) {
@@ -360,7 +415,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerEnemy(Level level, double delta) {
-    for (Player player : level.getPlayers()) {
+    for (DynamicElement player : level.getPlayers()) {
       ArrayList<NPC> npcs = level.getNPCs();
 
       if (npcs.size() > 0) {
@@ -374,15 +429,6 @@ public class CollisionsLevelModifier implements LevelModifier {
         }
       }
     }
-  }
-
-  /**
-   * Returns a KineticsLevelModifier.
-   * 
-   * @return The kinetics
-   */
-  public KineticsLevelModifier getKinetics() {
-    return kinetics;
   }
 
   /**

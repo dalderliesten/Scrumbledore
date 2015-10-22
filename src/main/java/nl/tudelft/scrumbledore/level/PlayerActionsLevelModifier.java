@@ -4,6 +4,8 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.powerup.TurtleTaco;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -22,15 +24,16 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    *          The number of steps passed since the last execution of this method.
    */
   public void modify(Level level, double delta) {
-    ArrayList<Player> players = level.getPlayers();
+    ArrayList<DynamicElement> players = level.getPlayers();
 
-    for (Player player : players) {
+    for (int i = 0; i < players.size(); i++) {
+      DynamicElement player = players.get(i);
       if (player.isAlive()) {
         checkStopMovement(player);
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
+        if (player.hasAction(LevelElementAction.Jump) && player.vSpeed() == 0) {
           player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
 
           if (Constants.isLoggingWantInput()) {
@@ -38,8 +41,26 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           }
         }
 
-        player.removeAction(PlayerAction.MoveStop);
-        player.removeAction(PlayerAction.Shoot);
+        player.removeAction(LevelElementAction.MoveStop);
+        player.removeAction(LevelElementAction.Shoot);
+      }
+
+      if (player instanceof ChiliChicken || player instanceof TurtleTaco) {
+        if (player.getLifetime() <= 0) {
+          try {
+            Player newP = new Player(player.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
+                Constants.BLOCKSIZE));
+            for (int j = 0; j < player.getActions().size(); j++) {
+              newP.addAction(player.getActions().get(j));
+            }
+            players.remove(i);
+            players.add(i, newP);
+          } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+          }
+        } else {
+          player.decreaseLifetime(delta);
+        }
       }
     }
   }
@@ -50,16 +71,26 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param player
    *          Player to be checked
    */
-  public void checkHorizontalMovement(Player player) {
-    if (player.hasAction(PlayerAction.MoveLeft)) {
-      player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+  public void checkHorizontalMovement(DynamicElement player) {
+    if (player.hasAction(LevelElementAction.MoveLeft)) {
+      if (player instanceof ChiliChicken) {
+        player.getSpeed().setX(-1 * Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
+      } else {
+        player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+      }
+
       if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move left action.");
       }
     }
 
-    if (player.hasAction(PlayerAction.MoveRight)) {
-      player.getSpeed().setX(Constants.PLAYER_SPEED);
+    if (player.hasAction(LevelElementAction.MoveRight)) {
+      if (player instanceof ChiliChicken) {
+        player.getSpeed().setX(Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
+      } else {
+        player.getSpeed().setX(Constants.PLAYER_SPEED);
+
+      }
 
       if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move right action.");
@@ -73,8 +104,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param player
    *          The player to be checked
    */
-  public void checkStopMovement(Player player) {
-    if (player.hasAction(PlayerAction.MoveStop)) {
+  public void checkStopMovement(DynamicElement player) {
+    if (player.hasAction(LevelElementAction.MoveStop)) {
       player.getSpeed().setX(0);
 
       if (Constants.isLoggingWantInput()) {
@@ -92,9 +123,9 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    *          Level to be get the bubbles from
    */
   @SuppressWarnings("methodlength")
-  public void checkShooting(Player player, Level level) {
+  public void checkShooting(DynamicElement player, Level level) {
     Vector bubblePos = null;
-    
+
     try {
       bubblePos = player.getPosition().clone();
     } catch (CloneNotSupportedException e) {
@@ -102,29 +133,29 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     }
     ArrayList<Bubble> bubbles = level.getBubbles();
 
-    if (player.hasAction(PlayerAction.Shoot) && player.isAlive()) {
+    if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        Bubble newBubble = new Bubble(bubblePos,
-            new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+        Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
+            Constants.BLOCKSIZE));
 
         bubbles.add(newBubble);
-        if (player.getLastMove() == PlayerAction.MoveLeft) {
+        if (player.getLastMove() == LevelElementAction.MoveLeft) {
           if (Constants.isLoggingWantShooting()) {
             Logger.getInstance().log("Player shot in the left direction.");
           }
-          newBubble.addAction(BubbleAction.MoveLeft);
+          newBubble.addAction(LevelElementAction.MoveLeft);
         } else {
           if (Constants.isLoggingWantShooting()) {
             Logger.getInstance().log("Player shot in the right direction.");
           }
-          newBubble.addAction(BubbleAction.MoveRight);
+          newBubble.addAction(LevelElementAction.MoveRight);
         }
       }
       player.setFiring(true);
     }
-    if (player.hasAction(PlayerAction.ShootStop)) {
+    if (player.hasAction(LevelElementAction.ShootStop)) {
       player.setFiring(false);
-      player.removeAction(PlayerAction.ShootStop);
+      player.removeAction(LevelElementAction.ShootStop);
     }
   }
 }

@@ -60,8 +60,8 @@ public class BubbleActionsLevelModifierTest {
    */
   @Test
   public void testModifyMove() {
-    bubble.addAction(BubbleAction.MoveLeft);
-    bubble2.addAction(BubbleAction.MoveRight);
+    bubble.addAction(LevelElementAction.MoveLeft);
+    bubble2.addAction(LevelElementAction.MoveRight);
     modifier.modify(level, .5);
     double expected = -Constants.BUBBLE_SPEED;
     double expected2 = Constants.BUBBLE_SPEED;
@@ -88,7 +88,7 @@ public class BubbleActionsLevelModifierTest {
   @Test
   public void testModifyRemoveNoLifetimeLeft() {
     bubble.decreaseLifetime(bubble.getLifetime());
-    bubble2.addAction(BubbleAction.MoveLeft);
+    bubble2.addAction(LevelElementAction.MoveLeft);
     modifier.modify(level, .5);
     assertFalse(level.getBubbles().contains(bubble));
   }
@@ -99,10 +99,10 @@ public class BubbleActionsLevelModifierTest {
    */
   @Test
   public void testModifyClear() {
-    bubble.addAction(BubbleAction.MoveLeft);
-    bubble2.addAction(BubbleAction.MoveRight);
+    bubble.addAction(LevelElementAction.MoveLeft);
+    bubble2.addAction(LevelElementAction.MoveRight);
     modifier.modify(level, .5);
-    assertFalse(bubble.hasAction(BubbleAction.MoveLeft));
-    assertFalse(bubble2.hasAction(BubbleAction.MoveRight));
+    assertFalse(bubble.hasAction(LevelElementAction.MoveLeft));
+    assertFalse(bubble2.hasAction(LevelElementAction.MoveRight));
   }
 }

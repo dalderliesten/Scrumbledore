@@ -38,7 +38,7 @@ public class PlayerActionsLevelModifierTest {
    */
   @Test
   public void testModifyMoveLeft() {
-    player.addAction(PlayerAction.MoveLeft);
+    player.addAction(LevelElementAction.MoveLeft);
     modifier.modify(level, .5);
     double expectedOut = -Constants.PLAYER_SPEED;
     assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
@@ -50,7 +50,7 @@ public class PlayerActionsLevelModifierTest {
    */
   @Test
   public void testModifyMoveRight() {
-    player.addAction(PlayerAction.MoveRight);
+    player.addAction(LevelElementAction.MoveRight);
     modifier.modify(level, .5);
     double expectedOut = Constants.PLAYER_SPEED;
     assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
@@ -64,7 +64,7 @@ public class PlayerActionsLevelModifierTest {
   public void testModifyMoveStop() {
     player.getSpeed().setX(42);
     player.getSpeed().setY(1);
-    player.addAction(PlayerAction.MoveStop);
+    player.addAction(LevelElementAction.MoveStop);
     modifier.modify(level, .5);
     double expectedOut = 0;
     assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
@@ -76,7 +76,7 @@ public class PlayerActionsLevelModifierTest {
    */
   @Test
   public void testModifyJump() {
-    player.addAction(PlayerAction.Jump);
+    player.addAction(LevelElementAction.Jump);
     modifier.modify(level, .5);
     double expectedOut = -Constants.PLAYER_JUMP;
     assertEquals(expectedOut, player.getSpeed().getY(), Constants.DOUBLE_PRECISION);
@@ -89,7 +89,7 @@ public class PlayerActionsLevelModifierTest {
   @Test
   public void testModifyJumpNotPossible() {
     player.getSpeed().setY(1);
-    player.addAction(PlayerAction.Jump);
+    player.addAction(LevelElementAction.Jump);
     modifier.modify(level, .5);
     double expectedOut = 1;
     assertEquals(expectedOut, player.getSpeed().getY(), Constants.DOUBLE_PRECISION);
@@ -101,11 +101,11 @@ public class PlayerActionsLevelModifierTest {
    */
   @Test
   public void testModifyClear() {
-    player.addAction(PlayerAction.Shoot);
-    player.addAction(PlayerAction.MoveStop);
+    player.addAction(LevelElementAction.Shoot);
+    player.addAction(LevelElementAction.MoveStop);
     modifier.modify(level, .5);
-    assertFalse(player.hasAction(PlayerAction.MoveStop));
-    assertFalse(player.hasAction(PlayerAction.Shoot));
+    assertFalse(player.hasAction(LevelElementAction.MoveStop));
+    assertFalse(player.hasAction(LevelElementAction.Shoot));
   }
   
   /**
@@ -115,9 +115,9 @@ public class PlayerActionsLevelModifierTest {
   @Test
   public void testModifyStopShooting() {
     player.setFiring(true);
-    player.addAction(PlayerAction.ShootStop);
+    player.addAction(LevelElementAction.ShootStop);
     modifier.modify(level, .5);
     assertFalse(player.isFiring());
-    assertFalse(player.hasAction(PlayerAction.ShootStop));
+    assertFalse(player.hasAction(LevelElementAction.ShootStop));
   }
 }
