@@ -33,67 +33,118 @@ public class ChiliChickenPickUp extends PowerupPickUp {
     return result;
   }
 
+  /**
+   * Add an action to be performed in the next step.
+   * 
+   * @param action
+   *          A LevelElementAction
+   */
   public void addAction(LevelElementAction action) {
-    // TODO Auto-generated method stub
-    
   }
 
+  /**
+   * Remove all actions from the queue.
+   */
   public void clearActions() {
-    // TODO Auto-generated method stub
-    
   }
 
+  /**
+   * Checking wether the element is alive.
+   * 
+   * @return The boolean if the element is alive.
+   */
   public Boolean isAlive() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void setAlive(Boolean bool) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public int getPlayerNumber() {
-    // TODO Auto-generated method stub
-    return 0;
-  }
-
-  public void setPlayerNumber(int id) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public boolean hasAction(LevelElementAction action) {
-    // TODO Auto-generated method stub
     return false;
   }
 
+  /**
+   * Setting the life of the element.
+   * 
+   * @param bool
+   *          Can be True or False, stated on situation of element.
+   */
+  public void setAlive(Boolean bool) {
+  }
+
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
+  public int getPlayerNumber() {
+    return 0;
+  }
+
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *          Integer that represents the players number in the game.
+   */
+  public void setPlayerNumber(int id) {
+  }
+
+  /**
+   * Check whether the given action is queued for the next step.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   * @return Boolean.
+   */
+  public boolean hasAction(LevelElementAction action) {
+    return false;
+  }
+
+  /**
+   * Remove the given action from the actions queue.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   */
   public void removeAction(LevelElementAction action) {
-    // TODO Auto-generated method stub
-    
   }
 
+  /**
+   * Get the last horizontal move performed.
+   * 
+   * @return The last move performed.
+   */
   public LevelElementAction getLastMove() {
-    // TODO Auto-generated method stub
     return null;
   }
 
+  /**
+   * Set the last performed horizontal move.
+   * 
+   * @param action
+   *          The last move action performed.
+   */
   public void setLastMove(LevelElementAction action) {
-    // TODO Auto-generated method stub
   }
 
+  /**
+   * Return whether the Player is firing.
+   * 
+   * @return whether the Player is firing
+   */
   public Boolean isFiring() {
-    // TODO Auto-generated method stub
-    return null;
+    return false;
   }
 
+  /**
+   * Set whether the Player is firing.
+   * 
+   * @param isFiring
+   *          whether the Player is firing
+   */
   public void setFiring(Boolean isFiring) {
-    // TODO Auto-generated method stub
-    
   }
 
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
   public ArrayList<LevelElementAction> getActions() {
-    // TODO Auto-generated method stub
     return null;
   }
 
