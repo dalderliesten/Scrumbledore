@@ -15,8 +15,8 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author David Alderliesten
  */
 public class Player extends BasicDynamicElement {
-  private ArrayList<PlayerAction> actions;
-  private PlayerAction lastMove;
+  private ArrayList<LevelElementAction> actions;
+  private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
@@ -35,8 +35,8 @@ public class Player extends BasicDynamicElement {
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<PlayerAction>();
-    lastMove = PlayerAction.MoveRight;
+    actions = new ArrayList<LevelElementAction>();
+    lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
   }
@@ -47,7 +47,7 @@ public class Player extends BasicDynamicElement {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(PlayerAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -106,7 +106,7 @@ public class Player extends BasicDynamicElement {
    *          A PlayerAction.
    * @return Boolean.
    */
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -116,7 +116,7 @@ public class Player extends BasicDynamicElement {
    * @param action
    *          A PlayerAction.
    */
-  public void removeAction(PlayerAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -125,7 +125,7 @@ public class Player extends BasicDynamicElement {
    * 
    * @return The last move performed.
    */
-  public PlayerAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -135,8 +135,8 @@ public class Player extends BasicDynamicElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(PlayerAction action) {
-    if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
@@ -187,7 +187,7 @@ public class Player extends BasicDynamicElement {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     SpriteStore store = SpriteStore.getInstance();
     if (alive) {
-      boolean toRight = getLastMove() == PlayerAction.MoveRight;
+      boolean toRight = getLastMove() == LevelElementAction.MoveRight;
 
       String id = "move-left";
       if (firing && toRight) {

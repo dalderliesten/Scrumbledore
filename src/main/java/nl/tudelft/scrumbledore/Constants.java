@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 import javafx.scene.input.KeyCode;
-import nl.tudelft.scrumbledore.level.PlayerAction;
 
 /**
  * Class for the maintainence of strings for display in visual and GUI. Meant to allow easy fixing
@@ -188,11 +188,11 @@ public final class Constants {
   public static final double ANIMATED_SPRITES_INTERVAL = REFRESH_RATE / 10;
 
   // Keymapping reference location.
-  public static final List<Map<KeyCode, PlayerAction>> KEY_MAPPING = createKeyMapping();
+  public static final List<Map<KeyCode, LevelElementAction>> KEY_MAPPING = createKeyMapping();
 
   // Generation of keymapping list to prevent action skipping.
-  private static List<Map<KeyCode, PlayerAction>> createKeyMapping() {
-    List<Map<KeyCode, PlayerAction>> keyMapping = new ArrayList<Map<KeyCode, PlayerAction>>();
+  private static List<Map<KeyCode, LevelElementAction>> createKeyMapping() {
+    List<Map<KeyCode, LevelElementAction>> keyMapping = new ArrayList<Map<KeyCode, LevelElementAction>>();
 
     keyMapping.add(createKeyMappingP1());
     keyMapping.add(createKeyMappingP2());
@@ -201,23 +201,23 @@ public final class Constants {
   }
 
   // Performing key mapping for player one.
-  private static Map<KeyCode, PlayerAction> createKeyMappingP1() {
-    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
-    keyMapping.put(KeyCode.LEFT, PlayerAction.MoveLeft);
-    keyMapping.put(KeyCode.RIGHT, PlayerAction.MoveRight);
-    keyMapping.put(KeyCode.UP, PlayerAction.Jump);
-    keyMapping.put(KeyCode.CONTROL, PlayerAction.Shoot);
+  private static Map<KeyCode, LevelElementAction> createKeyMappingP1() {
+    Map<KeyCode, LevelElementAction> keyMapping = new HashMap<KeyCode, LevelElementAction>();
+    keyMapping.put(KeyCode.LEFT, LevelElementAction.MoveLeft);
+    keyMapping.put(KeyCode.RIGHT, LevelElementAction.MoveRight);
+    keyMapping.put(KeyCode.UP, LevelElementAction.Jump);
+    keyMapping.put(KeyCode.CONTROL, LevelElementAction.Shoot);
 
     return keyMapping;
   }
 
   // Performing key mapping for player two.
-  private static Map<KeyCode, PlayerAction> createKeyMappingP2() {
-    Map<KeyCode, PlayerAction> keyMapping = new HashMap<KeyCode, PlayerAction>();
-    keyMapping.put(KeyCode.A, PlayerAction.MoveLeft);
-    keyMapping.put(KeyCode.D, PlayerAction.MoveRight);
-    keyMapping.put(KeyCode.W, PlayerAction.Jump);
-    keyMapping.put(KeyCode.Q, PlayerAction.Shoot);
+  private static Map<KeyCode, LevelElementAction> createKeyMappingP2() {
+    Map<KeyCode, LevelElementAction> keyMapping = new HashMap<KeyCode, LevelElementAction>();
+    keyMapping.put(KeyCode.A, LevelElementAction.MoveLeft);
+    keyMapping.put(KeyCode.D, LevelElementAction.MoveRight);
+    keyMapping.put(KeyCode.W, LevelElementAction.Jump);
+    keyMapping.put(KeyCode.Q, LevelElementAction.Shoot);
 
     return keyMapping;
   }

@@ -26,6 +26,7 @@ import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
+import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Player;
@@ -252,9 +253,9 @@ public final class GameDisplay {
    * Checks the status of the player(s) in terms of life.
    */
   private static void playerStatus() {
-    ArrayList<Player> players = currentGame.getCurrentLevel().getPlayers();
+    ArrayList<DynamicElement> players = currentGame.getCurrentLevel().getPlayers();
     Boolean playersLeft = false;
-    for (Player player : players) {
+    for (DynamicElement player : players) {
       if (player.isAlive()) {
         playersLeft = true;
       }

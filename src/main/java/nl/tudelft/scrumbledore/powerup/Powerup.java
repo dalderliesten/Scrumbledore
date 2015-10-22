@@ -3,7 +3,6 @@ package nl.tudelft.scrumbledore.powerup;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.level.DynamicElement;
-import nl.tudelft.scrumbledore.level.PlayerAction;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**

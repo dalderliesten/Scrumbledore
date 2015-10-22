@@ -2,7 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -33,7 +33,7 @@ public class ChiliChickenPickUp extends PowerupPickUp {
     return result;
   }
 
-  public void addAction(PlayerAction action) {
+  public void addAction(LevelElementAction action) {
     // TODO Auto-generated method stub
     
   }
@@ -63,22 +63,22 @@ public class ChiliChickenPickUp extends PowerupPickUp {
     
   }
 
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(LevelElementAction action) {
     // TODO Auto-generated method stub
     return false;
   }
 
-  public void removeAction(PlayerAction action) {
+  public void removeAction(LevelElementAction action) {
     // TODO Auto-generated method stub
     
   }
 
-  public PlayerAction getLastMove() {
+  public LevelElementAction getLastMove() {
     // TODO Auto-generated method stub
     return null;
   }
 
-  public void setLastMove(PlayerAction action) {
+  public void setLastMove(LevelElementAction action) {
     // TODO Auto-generated method stub
     
   }
@@ -92,4 +92,5 @@ public class ChiliChickenPickUp extends PowerupPickUp {
     // TODO Auto-generated method stub
     
   }
+
 }

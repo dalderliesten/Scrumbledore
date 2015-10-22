@@ -54,7 +54,7 @@ public class GravityLevelModifier implements LevelModifier {
     }
 
     // Pull down the player
-    for (Player player : level.getPlayers()) {
+    for (DynamicElement player : level.getPlayers()) {
       pull(player, d);
     }
   }

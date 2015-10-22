@@ -137,58 +137,42 @@ public class Bubble extends BasicDynamicElement {
     return result;
   }
 
-  public void addAction(PlayerAction action) {
-    // TODO Auto-generated method stub
-    
+  public void addAction(LevelElementAction action) {
   }
 
   public Boolean isAlive() {
-    // TODO Auto-generated method stub
     return null;
   }
 
   public void setAlive(Boolean bool) {
-    // TODO Auto-generated method stub
-    
   }
 
   public int getPlayerNumber() {
-    // TODO Auto-generated method stub
     return 0;
   }
 
   public void setPlayerNumber(int id) {
-    // TODO Auto-generated method stub
-    
   }
 
-  public boolean hasAction(PlayerAction action) {
-    // TODO Auto-generated method stub
+  public boolean hasAction(LevelElementAction action) {
     return false;
   }
 
-  public void removeAction(PlayerAction action) {
-    // TODO Auto-generated method stub
-    
+  public void removeAction(LevelElementAction action) {
   }
 
-  public PlayerAction getLastMove() {
-    // TODO Auto-generated method stub
+  public LevelElementAction getLastMove() {
     return null;
   }
 
-  public void setLastMove(PlayerAction action) {
-    // TODO Auto-generated method stub
-    
+  public void setLastMove(LevelElementAction action) {    
   }
 
   public Boolean isFiring() {
-    // TODO Auto-generated method stub
-    return null;
+    return false;
   }
 
   public void setFiring(Boolean isFiring) {
-    // TODO Auto-generated method stub
-    
   }
+
 }

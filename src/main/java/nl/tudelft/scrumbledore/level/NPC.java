@@ -11,8 +11,8 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Niels Warnars
  */
 public class NPC extends BasicDynamicElement {
-  private NPCAction lastMove;
-  private ArrayList<NPCAction> actions;
+  private LevelElementAction lastMove;
+  private ArrayList<LevelElementAction> actions;
 
   /**
    * Create a new NPC instance.
@@ -27,8 +27,8 @@ public class NPC extends BasicDynamicElement {
 
     setGravity(true);
 
-    actions = new ArrayList<NPCAction>();
-    addAction(NPCAction.MoveLeft);
+    actions = new ArrayList<LevelElementAction>();
+    addAction(LevelElementAction.MoveLeft);
   }
 
   /**
@@ -37,7 +37,7 @@ public class NPC extends BasicDynamicElement {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(NPCAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -58,7 +58,7 @@ public class NPC extends BasicDynamicElement {
    *          An NPCAction.
    * @return Boolean.
    */
-  public boolean hasAction(NPCAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -68,7 +68,7 @@ public class NPC extends BasicDynamicElement {
    * @param action
    *          An NPCAction.
    */
-  public void removeAction(NPCAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -93,7 +93,7 @@ public class NPC extends BasicDynamicElement {
    * 
    * @return The last move performed.
    */
-  public NPCAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -103,8 +103,8 @@ public class NPC extends BasicDynamicElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(NPCAction action) {
-    if (action == NPCAction.MoveLeft || action == NPCAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
@@ -120,17 +120,12 @@ public class NPC extends BasicDynamicElement {
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
     String id = "zenchan-move-right";
-    if (getLastMove().equals(NPCAction.MoveLeft)) {
+    if (getLastMove().equals(LevelElementAction.MoveLeft)) {
       id = "zenchan-move-left";
     }
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     result.add(store.getAnimated(id).getFrame(steps));
     return result;
-  }
-
-  public void addAction(PlayerAction action) {
-    // TODO Auto-generated method stub
-    
   }
 
   public Boolean isAlive() {
@@ -153,26 +148,6 @@ public class NPC extends BasicDynamicElement {
     
   }
 
-  public boolean hasAction(PlayerAction action) {
-    // TODO Auto-generated method stub
-    return false;
-  }
-
-  public void removeAction(PlayerAction action) {
-    // TODO Auto-generated method stub
-    
-  }
-
-  public PlayerAction getLastMove() {
-    // TODO Auto-generated method stub
-    return null;
-  }
-
-  public void setLastMove(PlayerAction action) {
-    // TODO Auto-generated method stub
-    
-  }
-
   public Boolean isFiring() {
     // TODO Auto-generated method stub
     return null;
@@ -182,5 +157,6 @@ public class NPC extends BasicDynamicElement {
     // TODO Auto-generated method stub
     
   }
+
 
 }

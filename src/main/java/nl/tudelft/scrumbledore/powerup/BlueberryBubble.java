@@ -4,8 +4,8 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.LevelElement;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.PlayerAction;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -25,8 +25,8 @@ public class BlueberryBubble implements Powerup {
   private Vector speed;
   private Vector friction;
   private boolean gravity;
-  private ArrayList<PlayerAction> actions;
-  private PlayerAction lastMove;
+  private ArrayList<LevelElementAction> actions;
+  private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
@@ -47,8 +47,8 @@ public class BlueberryBubble implements Powerup {
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<PlayerAction>();
-    lastMove = PlayerAction.MoveRight;
+    actions = new ArrayList<LevelElementAction>();
+    lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
   }
@@ -326,7 +326,7 @@ public class BlueberryBubble implements Powerup {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(PlayerAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -385,7 +385,7 @@ public class BlueberryBubble implements Powerup {
    *          A PlayerAction.
    * @return Boolean.
    */
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -395,7 +395,7 @@ public class BlueberryBubble implements Powerup {
    * @param action
    *          A PlayerAction.
    */
-  public void removeAction(PlayerAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -404,7 +404,7 @@ public class BlueberryBubble implements Powerup {
    * 
    * @return The last move performed.
    */
-  public PlayerAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -414,8 +414,8 @@ public class BlueberryBubble implements Powerup {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(PlayerAction action) {
-    if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
@@ -466,7 +466,7 @@ public class BlueberryBubble implements Powerup {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     SpriteStore store = SpriteStore.getInstance();
     if (alive) {
-      boolean toRight = getLastMove() == PlayerAction.MoveRight;
+      boolean toRight = getLastMove() == LevelElementAction.MoveRight;
 
       String id = "move-left";
       if (firing && toRight) {

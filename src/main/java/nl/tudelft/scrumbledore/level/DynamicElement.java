@@ -9,7 +9,7 @@ public interface DynamicElement extends LevelElement {
    * @param action
    *          A PlayerAction
    */
-  void addAction(PlayerAction action);
+  void addAction(LevelElementAction action);
 
   /**
    * Remove all actions from the queue.
@@ -53,7 +53,7 @@ public interface DynamicElement extends LevelElement {
    *          A PlayerAction.
    * @return Boolean.
    */
-  boolean hasAction(PlayerAction action);
+  boolean hasAction(LevelElementAction action);
 
   /**
    * Remove the given action from the actions queue.
@@ -61,14 +61,14 @@ public interface DynamicElement extends LevelElement {
    * @param action
    *          A PlayerAction.
    */
-  void removeAction(PlayerAction action);
+  void removeAction(LevelElementAction action);
 
   /**
    * Get the last horizontal move performed.
    * 
    * @return The last move performed.
    */
-  PlayerAction getLastMove();
+  LevelElementAction getLastMove();
 
   /**
    * Set the last performed horizontal move.
@@ -76,7 +76,7 @@ public interface DynamicElement extends LevelElement {
    * @param action
    *          The last move action performed.
    */
-  void setLastMove(PlayerAction action);
+  void setLastMove(LevelElementAction action);
 
   @Override
   int hashCode();

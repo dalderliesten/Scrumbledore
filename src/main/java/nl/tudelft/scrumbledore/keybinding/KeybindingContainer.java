@@ -5,7 +5,7 @@ import java.util.List;
 
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * A custom container for Keybindings. One Keybinding per player.
@@ -65,7 +65,7 @@ public final class KeybindingContainer {
    * @param key
    *          The new KeyCode for the given action.
    */
-  public void updateKeyBinding(int playerNumber, PlayerAction action, KeyCode key) {
+  public void updateKeyBinding(int playerNumber, LevelElementAction action, KeyCode key) {
     for (Keybinding binding : keybindingList) {
       if (binding.isAssigned(key)) {
         binding.updateKeyByAction(binding.getAction(key), KeyCode.UNDEFINED);
