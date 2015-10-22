@@ -10,7 +10,9 @@ import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
 import nl.tudelft.scrumbledore.powerup.ChiliChicken;
 import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
 import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
+import nl.tudelft.scrumbledore.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
+import nl.tudelft.scrumbledore.powerup.TurtleTaco;
 import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
 
 /**
@@ -88,9 +90,13 @@ public class CollisionsLevelModifier implements LevelModifier {
                 players.add(j, newBlue);
                 players.remove(j + 1);
               } else if (currentPow instanceof PyroPepperPickUp) {
-                
+                PyroPepper newPyro = new PyroPepper(player);
+                players.add(j, newPyro);
+                players.remove(j + 1);
               } else if (currentPow instanceof TurtleTacoPickUp) {
-                
+                TurtleTaco newTurtle = new TurtleTaco(player);
+                players.add(j, newTurtle);
+                players.remove(j + 1);
               }
               powerUps.remove(i);
             }

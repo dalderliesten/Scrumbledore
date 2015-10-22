@@ -3,6 +3,7 @@ package nl.tudelft.scrumbledore.powerup;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
@@ -32,23 +33,20 @@ public class PyroPepper implements Powerup {
   /**
    * Create a new LevelElement instance.
    * 
-   * @param position
-   *          Position of the element in the level.
-   * @param size
-   *          Size of the element.
+   * @param player , the wrapped object.
    */
-  public PyroPepper(Vector position, Vector size) {
-    this.position = position;
-    this.size = size;
-    this.speed = new Vector(0, 0);
+  public PyroPepper(DynamicElement player) {
+    this.position = player.getPosition();
+    this.size = player.getSize();
+    this.speed = player.getSpeed();
     this.friction = new Vector(0, 0);
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<LevelElementAction>();
-    lastMove = LevelElementAction.MoveRight;
-    firing = false;
-    alive = true;
+    actions = player.getActions();
+    lastMove = player.getLastMove();
+    firing = player.isFiring();
+    alive = player.isAlive();
   }
 
   /**
@@ -480,6 +478,7 @@ public class PyroPepper implements Powerup {
 
       id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
 
+      result.add(store.getAnimated("fire-red").getFrame(steps));
       result.add(store.getAnimated(id).getFrame(steps));
     }
     return result;
