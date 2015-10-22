@@ -128,4 +128,59 @@ public class NPC extends BasicDynamicElement {
     return result;
   }
 
+  public void addAction(PlayerAction action) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Boolean isAlive() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void setAlive(Boolean bool) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public int getPlayerNumber() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void setPlayerNumber(int id) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean hasAction(PlayerAction action) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public void removeAction(PlayerAction action) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public PlayerAction getLastMove() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void setLastMove(PlayerAction action) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Boolean isFiring() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void setFiring(Boolean isFiring) {
+    // TODO Auto-generated method stub
+    
+  }
+
 }

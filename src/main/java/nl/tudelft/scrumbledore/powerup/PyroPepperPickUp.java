@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.PlayerAction;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -30,6 +31,66 @@ public class PyroPepperPickUp extends PowerupPickUp {
     
     result.add(store.get("powerup-pyro-pepper"));
     return result;
+  }
+
+  public void addAction(PlayerAction action) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public void clearActions() {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Boolean isAlive() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void setAlive(Boolean bool) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public int getPlayerNumber() {
+    // TODO Auto-generated method stub
+    return 0;
+  }
+
+  public void setPlayerNumber(int id) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public boolean hasAction(PlayerAction action) {
+    // TODO Auto-generated method stub
+    return false;
+  }
+
+  public void removeAction(PlayerAction action) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public PlayerAction getLastMove() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void setLastMove(PlayerAction action) {
+    // TODO Auto-generated method stub
+    
+  }
+
+  public Boolean isFiring() {
+    // TODO Auto-generated method stub
+    return null;
+  }
+
+  public void setFiring(Boolean isFiring) {
+    // TODO Auto-generated method stub
+    
   }
 
 }
