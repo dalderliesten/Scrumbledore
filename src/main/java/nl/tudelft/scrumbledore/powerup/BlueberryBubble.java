@@ -2,11 +2,9 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
-import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -20,37 +18,62 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class BlueberryBubble implements Powerup {
-  
-  private Vector position;
-  private Vector size;
-  private Vector speed;
-  private Vector friction;
-  private boolean gravity;
-  private ArrayList<LevelElementAction> actions;
-  private LevelElementAction lastMove;
-  private Boolean firing;
-  private Boolean alive;
-  private int id;
-  
-  private DynamicElement player;
+
+  private DynamicElement wrapped;
 
   /**
    * Create a new LevelElement instance.
    * 
-   * @param player , the wrapped object.
+   * @param wrapped
+   *          The DynamicElement to be wrapped in this Powerup Decorator.
    */
-  public BlueberryBubble(DynamicElement player) {
-    this.position = player.getPosition();
-    this.size = player.getSize();
-    this.speed = player.getSpeed();
-    this.friction = new Vector(0, 0);
-    setGravity(true);
+  public BlueberryBubble(DynamicElement wrapped) {
+    this.wrapped = wrapped;
+  }
 
-    id = 0;
-    actions = player.getActions();
-    lastMove = player.getLastMove();
-    firing = player.isFiring();
-    alive = player.isAlive();
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    ArrayList<Sprite> sprites = new ArrayList<Sprite>();
+    SpriteStore store = SpriteStore.getInstance();
+    sprites.add(store.getAnimated("fire-blue").getFrame(steps));
+    sprites.addAll(wrapped.getSprites(steps));
+    return sprites;
+  }
+
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+    wrapped.decreaseLifetime(delta);
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return wrapped.getLifetime();
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
+    wrapped.setLifetime(newTime);
   }
 
   /**
@@ -59,7 +82,7 @@ public class BlueberryBubble implements Powerup {
    * @return Position Vector.
    */
   public Vector getPosition() {
-    return position;
+    return wrapped.getPosition();
   }
 
   /**
@@ -68,7 +91,7 @@ public class BlueberryBubble implements Powerup {
    * @return double
    */
   public double posX() {
-    return position.getX();
+    return wrapped.posX();
   }
 
   /**
@@ -77,7 +100,7 @@ public class BlueberryBubble implements Powerup {
    * @return double
    */
   public double posY() {
-    return position.getY();
+    return wrapped.posY();
   }
 
   /**
@@ -86,7 +109,7 @@ public class BlueberryBubble implements Powerup {
    * @return Size Vector.
    */
   public Vector getSize() {
-    return size;
+    return wrapped.getSize();
   }
 
   /**
@@ -95,7 +118,7 @@ public class BlueberryBubble implements Powerup {
    * @return double
    */
   public double width() {
-    return size.getX();
+    return wrapped.width();
   }
 
   /**
@@ -104,7 +127,7 @@ public class BlueberryBubble implements Powerup {
    * @return double
    */
   public double height() {
-    return size.getY();
+    return wrapped.height();
   }
 
   /**
@@ -113,7 +136,7 @@ public class BlueberryBubble implements Powerup {
    * @return Speed Vector.
    */
   public Vector getSpeed() {
-    return speed;
+    return wrapped.getSpeed();
   }
 
   /**
@@ -122,7 +145,7 @@ public class BlueberryBubble implements Powerup {
    * @return double
    */
   public double hSpeed() {
-    return speed.getX();
+    return wrapped.hSpeed();
   }
 
   /**
@@ -131,7 +154,7 @@ public class BlueberryBubble implements Powerup {
    * @return double
    */
   public double vSpeed() {
-    return speed.getY();
+    return wrapped.vSpeed();
   }
 
   /**
@@ -140,7 +163,7 @@ public class BlueberryBubble implements Powerup {
    * @return Friction Vector.
    */
   public Vector getFriction() {
-    return friction;
+    return wrapped.getFriction();
   }
 
   /**
@@ -149,7 +172,7 @@ public class BlueberryBubble implements Powerup {
    * @return Horizontal friction.
    */
   public double hFric() {
-    return friction.getX();
+    return wrapped.hFric();
   }
 
   /**
@@ -158,21 +181,21 @@ public class BlueberryBubble implements Powerup {
    * @return Vertical friction.
    */
   public double vFric() {
-    return friction.getY();
+    return wrapped.vFric();
   }
 
   /**
    * Stop this LevelElement's vertical movement.
    */
   public void stopVertically() {
-    getSpeed().setY(0);
+    wrapped.stopVertically();
   }
 
   /**
    * Stop this LevelElement's horizontal movement.
    */
   public void stopHorizontally() {
-    getSpeed().setX(0);
+    wrapped.stopHorizontally();
   }
 
   /**
@@ -181,7 +204,7 @@ public class BlueberryBubble implements Powerup {
    * @return Boolean
    */
   public boolean hasGravity() {
-    return gravity;
+    return wrapped.hasGravity();
   }
 
   /**
@@ -191,7 +214,7 @@ public class BlueberryBubble implements Powerup {
    *          A boolean
    */
   public void setGravity(boolean gravity) {
-    this.gravity = gravity;
+    wrapped.setGravity(gravity);
   }
 
   /**
@@ -200,7 +223,7 @@ public class BlueberryBubble implements Powerup {
    * @return Y-coordinate of top.
    */
   public double getTop() {
-    return position.getY() - size.getY() / 2;
+    return wrapped.getTop();
   }
 
   /**
@@ -209,7 +232,7 @@ public class BlueberryBubble implements Powerup {
    * @return Y-coordinate of bottom.
    */
   public double getBottom() {
-    return position.getY() + size.getY() / 2;
+    return wrapped.getBottom();
   }
 
   /**
@@ -218,7 +241,7 @@ public class BlueberryBubble implements Powerup {
    * @return X-coordinate of left side.
    */
   public double getLeft() {
-    return position.getX() - size.getX() / 2;
+    return wrapped.getLeft();
   }
 
   /**
@@ -227,7 +250,7 @@ public class BlueberryBubble implements Powerup {
    * @return X-coordinate of right side.
    */
   public double getRight() {
-    return position.getX() + size.getX() / 2;
+    return wrapped.getRight();
   }
 
   /**
@@ -238,7 +261,7 @@ public class BlueberryBubble implements Powerup {
    * @return The distance.
    */
   public double distance(LevelElement other) {
-    return getPosition().distance(other.getPosition());
+    return wrapped.distance(other);
   }
 
   /**
@@ -252,7 +275,7 @@ public class BlueberryBubble implements Powerup {
    * @return A boolean.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
-    return distance(other) <= range;
+    return wrapped.inBoxRangeOf(other, range);
   }
 
   /**
@@ -267,9 +290,7 @@ public class BlueberryBubble implements Powerup {
    * @return A boolean.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
-    boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
-    boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
-    return inX && inY;
+    return wrapped.inBoxRangeOf(other, range);
   }
 
   /**
@@ -279,9 +300,7 @@ public class BlueberryBubble implements Powerup {
    *          The LevelElement to be snapped to.
    */
   public void snapLeft(LevelElement other) {
-    double offset = getSize().getX() / 2;
-    double newPos = other.getLeft() - offset;
-    getPosition().setX(newPos);
+    wrapped.snapLeft(other);
   }
 
   /**
@@ -291,9 +310,7 @@ public class BlueberryBubble implements Powerup {
    *          The LevelElement to be snapped to.
    */
   public void snapRight(LevelElement other) {
-    double offset = getSize().getX() / 2;
-    double newPos = other.getRight() + offset;
-    getPosition().setX(newPos);
+    wrapped.snapRight(other);
   }
 
   /**
@@ -303,9 +320,7 @@ public class BlueberryBubble implements Powerup {
    *          The LevelElement to be snapped to.
    */
   public void snapTop(LevelElement other) {
-    double offset = getSize().getY() / 2;
-    double newPos = other.getTop() - offset;
-    getPosition().setY(newPos);
+    wrapped.snapTop(other);
   }
 
   /**
@@ -315,38 +330,33 @@ public class BlueberryBubble implements Powerup {
    *          The LevelElement to be snapped to.
    */
   public void snapBottom(LevelElement other) {
-    double offset = getSize().getY() / 2;
-    double newPos = other.getBottom() + offset;
-    getPosition().setY(newPos);
+    wrapped.snapBottom(other);
   }
 
   /**
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A PlayerAction
+   *          A LevelElementAction
    */
   public void addAction(LevelElementAction action) {
-    if (!hasAction(action)) {
-      actions.add(action);
-      setLastMove(action);
-    }
+    wrapped.addAction(action);
   }
 
   /**
    * Remove all actions from the queue.
    */
   public void clearActions() {
-    actions.clear();
+    wrapped.clearActions();
   }
 
   /**
-   * Checking wether the player is alive.
+   * Checking whether the player is alive.
    * 
    * @return The boolean if the player is alive.
    */
   public Boolean isAlive() {
-    return alive;
+    return wrapped.isAlive();
   }
 
   /**
@@ -356,7 +366,7 @@ public class BlueberryBubble implements Powerup {
    *          Can be True or False, stated on situation of player.
    */
   public void setAlive(Boolean bool) {
-    alive = bool;
+    wrapped.setAlive(bool);
   }
 
   /**
@@ -365,7 +375,7 @@ public class BlueberryBubble implements Powerup {
    * @return Integer that represents the players number in the game.
    */
   public int getPlayerNumber() {
-    return id;
+    return wrapped.getPlayerNumber();
   }
 
   /**
@@ -375,28 +385,28 @@ public class BlueberryBubble implements Powerup {
    *          Integer that represents the players number in the game.
    */
   public void setPlayerNumber(int id) {
-    this.id = id;
+    wrapped.setPlayerNumber(id);
   }
 
   /**
    * Check whether the given action is queued for the next step.
    * 
    * @param action
-   *          A PlayerAction.
+   *          A LevelElementAction.
    * @return Boolean.
    */
   public boolean hasAction(LevelElementAction action) {
-    return actions.contains(action);
+    return wrapped.hasAction(action);
   }
 
   /**
    * Remove the given action from the actions queue.
    * 
    * @param action
-   *          A PlayerAction.
+   *          A LevelElementAction.
    */
   public void removeAction(LevelElementAction action) {
-    actions.remove(action);
+    wrapped.removeAction(action);
   }
 
   /**
@@ -405,7 +415,7 @@ public class BlueberryBubble implements Powerup {
    * @return The last move performed.
    */
   public LevelElementAction getLastMove() {
-    return lastMove;
+    return wrapped.getLastMove();
   }
 
   /**
@@ -415,24 +425,17 @@ public class BlueberryBubble implements Powerup {
    *          The last move action performed.
    */
   public void setLastMove(LevelElementAction action) {
-    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
-      lastMove = action;
-    }
+    wrapped.setLastMove(action);
   }
 
   @Override
   public int hashCode() {
-    return 0;
+    return wrapped.hashCode();
   }
 
   @Override
   public boolean equals(Object other) {
-    if (other instanceof BlueberryBubble) {
-      BlueberryBubble that = (BlueberryBubble) other;
-      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
-    }
-
-    return false;
+    return wrapped.equals(other);
   }
 
   /**
@@ -441,7 +444,7 @@ public class BlueberryBubble implements Powerup {
    * @return whether the Player is firing
    */
   public Boolean isFiring() {
-    return firing;
+    return wrapped.isFiring();
   }
 
   /**
@@ -451,75 +454,16 @@ public class BlueberryBubble implements Powerup {
    *          whether the Player is firing
    */
   public void setFiring(Boolean isFiring) {
-    this.firing = isFiring;
-  }
-
-  /**
-   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
-   * Element.
-   * 
-   * @param steps
-   *          The absolute exact number of steps since the game was started.
-   * @return Sprites to be drawn.
-   */
-  public ArrayList<Sprite> getSprites(double steps) {
-    ArrayList<Sprite> result = new ArrayList<Sprite>();
-    SpriteStore store = SpriteStore.getInstance();
-    if (alive) {
-      boolean toRight = getLastMove() == LevelElementAction.MoveRight;
-
-      String id = "move-left";
-      if (firing && toRight) {
-        id = "shoot-right";
-      } else if (firing) {
-        id = "shoot-left";
-      } else if (toRight) {
-        id = "move-right";
-      }
-      if (getSpeed().getX() == 0 && !firing) {
-        steps = 0;
-      }
-
-      id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
-
-      result.add(store.getAnimated("fire-blue").getFrame(steps));
-      result.add(store.getAnimated(id).getFrame(steps));
-    }
-    return result;
+    wrapped.setFiring(isFiring);
   }
 
   /**
    * Gives a list of current actions of the player.
+   * 
    * @return a list of actions
    */
   public ArrayList<LevelElementAction> getActions() {
-    return actions;
-  }
-  
-  /**
-   * Decrease the lifetime by a given number of steps.
-   * 
-   * @param delta
-   *          The number of steps.
-   */
-  public void decreaseLifetime(double delta) {
+    return wrapped.getActions();
   }
 
-  /**
-   * Get the remaining lifetime.
-   * 
-   * @return Remaining lifetime.
-   */
-  public double getLifetime() {
-    return 0;
-  }
-
-  /**
-   * Setting the life time of a bubble.
-   * 
-   * @param newTime
-   *          The new life time.
-   */
-  public void setLifetime(double newTime) {
-  }
 }
