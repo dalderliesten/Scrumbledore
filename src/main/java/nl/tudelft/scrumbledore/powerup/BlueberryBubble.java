@@ -17,7 +17,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class BlueberryBubble extends LevelElement implements Powerup {
+public class BlueberryBubble implements Powerup {
 
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;

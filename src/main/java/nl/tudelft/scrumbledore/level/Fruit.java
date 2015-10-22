@@ -10,7 +10,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * 
  * @author Niels Warnars, Floris Doolaard
  */
-public class Fruit extends LevelElement {
+public class Fruit extends BasicDynamicElement {
   private int value;
   private Boolean pickable;
 

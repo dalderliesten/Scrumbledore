@@ -14,7 +14,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Jesse Tilro
  * @author David Alderliesten
  */
-public class Player extends LevelElement implements Powerup {
+public class Player extends BasicDynamicElement {
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
   private Boolean firing;

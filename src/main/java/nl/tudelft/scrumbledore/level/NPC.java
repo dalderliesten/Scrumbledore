@@ -10,7 +10,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * 
  * @author Niels Warnars
  */
-public class NPC extends LevelElement {
+public class NPC extends BasicDynamicElement {
   private NPCAction lastMove;
   private ArrayList<NPCAction> actions;
 

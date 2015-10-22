@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.PlayerAction;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
@@ -11,7 +12,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * @author Floris
  *
  */
-public interface Powerup {
+public interface Powerup extends DynamicElement {
 
   /**
    * Add an action to be performed in the next step.

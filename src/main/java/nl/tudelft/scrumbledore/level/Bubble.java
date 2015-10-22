@@ -12,7 +12,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class Bubble extends LevelElement {
+public class Bubble extends BasicDynamicElement {
   private ArrayList<BubbleAction> actions;
   private Boolean hasNPC;
 
