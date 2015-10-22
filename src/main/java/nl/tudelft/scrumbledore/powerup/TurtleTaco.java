@@ -30,6 +30,7 @@ public class TurtleTaco implements Powerup {
   private Boolean firing;
   private Boolean alive;
   private int id;
+  private double lifetime;
 
   /**
    * Create a new LevelElement instance.
@@ -48,6 +49,7 @@ public class TurtleTaco implements Powerup {
     lastMove = player.getLastMove();
     firing = player.isFiring();
     alive = player.isAlive();
+    lifetime = Constants.TURTLE_LIFETIME;
   }
 
   /**
@@ -500,6 +502,7 @@ public class TurtleTaco implements Powerup {
    *          The number of steps.
    */
   public void decreaseLifetime(double delta) {
+    lifetime -= delta;
   }
 
   /**
@@ -508,7 +511,7 @@ public class TurtleTaco implements Powerup {
    * @return Remaining lifetime.
    */
   public double getLifetime() {
-    return 0;
+    return lifetime;
   }
 
   /**
@@ -518,6 +521,7 @@ public class TurtleTaco implements Powerup {
    *          The new life time.
    */
   public void setLifetime(double newTime) {
+    lifetime = newTime;
   }
 
 }

@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.powerup.TurtleTaco;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -44,7 +45,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         player.removeAction(LevelElementAction.Shoot);
       }
 
-      if (player instanceof ChiliChicken) {
+      if (player instanceof ChiliChicken || player instanceof TurtleTaco) {
         if (player.getLifetime() <= 0) {
           try {
             Player newP = new Player(player.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
