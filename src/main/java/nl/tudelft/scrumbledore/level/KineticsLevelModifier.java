@@ -1,7 +1,5 @@
 package nl.tudelft.scrumbledore.level;
 
-import nl.tudelft.scrumbledore.Constants;
-
 /**
  * The Kinetics class handles the position/speed of levelelements.
  * 
@@ -23,7 +21,6 @@ public class KineticsLevelModifier implements LevelModifier {
     for (LevelElement element : level.getDynamicElements()) {
       move(element, d);
       applyFriction(element, d);
-      warp(element);
     }
   }
 
@@ -80,47 +77,6 @@ public class KineticsLevelModifier implements LevelModifier {
   public void revertMove(LevelElement el, double d) {
     if (el != null) {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
-    }
-  }
-
-  /**
-   * Warp a LeveElement both in horizontal and vertical direction.
-   * 
-   * @param element
-   *          The LevelElement to be warped.
-   */
-  public void warp(LevelElement element) {
-    warpVertically(element);
-    warpHorizontally(element);
-  }
-
-  /**
-   * Warp a Level Element through the vertical boundaries of the level.
-   * 
-   * @param element
-   *          The Level Element to be warped.
-   */
-  public void warpVertically(LevelElement element) {
-    double offset = element.height() / 2;
-    if (element.posY() < -offset) {
-      element.getPosition().setY(Constants.LEVELY + offset);
-    } else if (element.posY() > Constants.LEVELY + offset) {
-      element.getPosition().setY(-offset);
-    }
-  }
-
-  /**
-   * Warp a Level Element through the horizontal boundaries of the level.
-   * 
-   * @param element
-   *          The Level Element to be warped.
-   */
-  public void warpHorizontally(LevelElement element) {
-    double offset = -element.width() / 2;
-    if (element.posX() < -offset) {
-      element.getPosition().setX(Constants.LEVELX + offset);
-    } else if (element.posX() > Constants.LEVELX + offset) {
-      element.getPosition().setX(-offset);
     }
   }
 

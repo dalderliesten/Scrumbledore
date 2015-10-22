@@ -6,8 +6,6 @@ import static org.junit.Assert.assertEquals;
 import org.junit.Before;
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.Constants;
-
 /**
  * Testing the Kinetics class.
  * 
@@ -118,58 +116,6 @@ public class KineticsLevelModifierTest {
   }
 
   /**
-   * When a Level Element has gotten outside the bottom of the level and is subsequently being
-   * warped, it should reappear just outside the top of the level with the same X coordinate.
-   */
-  @Test
-  public void testWarpVerticallyBottomToTop() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setY(Constants.LEVELY + 17);
-    kinetics.warpVertically(el);
-    assertEquals(-16, el.posY(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the top of the level and is subsequently being warped,
-   * it should reappear just outside the bottom of the level with the same X coordinate.
-   */
-  @Test
-  public void testWarpVerticallyTopToBottom() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setY(-17);
-    kinetics.warpVertically(el);
-    assertEquals(Constants.LEVELY + 16, el.posY(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the right side of the level and is subsequently being
-   * warped, it should reappear just outside the left side of the level with the same Y coordinate.
-   */
-  @Test
-  public void testWarpHorizontallyRightToLeft() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setX(Constants.LEVELX);
-    kinetics.warpHorizontally(el);
-    assertEquals(16, el.posX(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the left side of the level and is subsequently being
-   * warped, it should reappear just outside the right side of the level with the same Y coordinate.
-   */
-  @Test
-  public void testWarpHorizontallyLeftToRight() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setX(0);
-    kinetics.warpHorizontally(el);
-    assertEquals(Constants.LEVELX - 16, el.posX(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
    * When a Level is modified, the position of the Player should be updated correctly.
    */
   @Test
@@ -179,23 +125,6 @@ public class KineticsLevelModifierTest {
     Level level = new Level();
     level.addElement(player);
     Vector expectedPosition = new Vector(2, 2);
-
-    kinetics.modify(level, .5);
-
-    assertEquals(expectedPosition, player.getPosition());
-  }
-
-  /**
-   * When a Level is modified and the Player is moving outside the bottom of the Level, the Player
-   * should be warped to the top of the Level.
-   */
-  @Test
-  public void testModifyPlayerWarp() {
-    Player player = new Player(new Vector(0, Constants.LEVELY), new Vector(0, 0));
-    player.getSpeed().sum(new Vector(4, 4));
-    Level level = new Level();
-    level.addElement(player);
-    Vector expectedPosition = new Vector(2, 0);
 
     kinetics.modify(level, .5);
 
