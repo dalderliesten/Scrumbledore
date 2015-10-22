@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.powerup.ChiliChicken;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -52,14 +53,24 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    */
   public void checkHorizontalMovement(DynamicElement player) {
     if (player.hasAction(LevelElementAction.MoveLeft)) {
-      player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+      if (player instanceof ChiliChicken) {
+        player.getSpeed().setX(-1 * Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
+      } else {
+        player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+      }
+
       if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move left action.");
       }
     }
 
     if (player.hasAction(LevelElementAction.MoveRight)) {
-      player.getSpeed().setX(Constants.PLAYER_SPEED);
+      if (player instanceof ChiliChicken) {
+        player.getSpeed().setX(Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
+      } else {
+        player.getSpeed().setX(Constants.PLAYER_SPEED);
+
+      }
 
       if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move right action.");
@@ -94,7 +105,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
   @SuppressWarnings("methodlength")
   public void checkShooting(DynamicElement player, Level level) {
     Vector bubblePos = null;
-    
+
     try {
       bubblePos = player.getPosition().clone();
     } catch (CloneNotSupportedException e) {
@@ -104,8 +115,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        Bubble newBubble = new Bubble(bubblePos,
-            new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+        Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
+            Constants.BLOCKSIZE));
 
         bubbles.add(newBubble);
         if (player.getLastMove() == LevelElementAction.MoveLeft) {

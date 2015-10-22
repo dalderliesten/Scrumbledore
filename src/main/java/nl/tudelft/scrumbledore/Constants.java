@@ -143,6 +143,7 @@ public final class Constants {
 
   // Player horizontal movement speed.
   public static final double PLAYER_SPEED = 8;
+  public static final double PLAYER_CHILI_MULTIPLIER = 1.8;
   // Player jump strength.
   public static final double PLAYER_JUMP = 22;
 

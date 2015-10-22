@@ -5,7 +5,13 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
+import nl.tudelft.scrumbledore.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
 import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
+import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
+import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
 
 /**
  * Class responsible for collision detection between given elements.
@@ -14,7 +20,8 @@ import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
  * @author David Alderliesten
  */
 @SuppressWarnings({ "checkstyle:methodlength", "PMD.ModifiedCyclomaticComplexity",
-    "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
+    "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity",
+    "PMD.TooManyMethods" })
 public class CollisionsLevelModifier implements LevelModifier {
 
   private ScoreCounter score;
@@ -65,11 +72,26 @@ public class CollisionsLevelModifier implements LevelModifier {
     ArrayList<DynamicElement> players = level.getPlayers();
 
     if (powerUps.size() > 0) {
-      for (DynamicElement player : players) {
+      for (int j = 0; j < players.size(); j++) {
+        DynamicElement player = players.get(j);
         for (int i = 0; i < powerUps.size(); i++) {
-          if (powerUps.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
-            Collision collision = new Collision(player, powerUps.get(i), delta);
+          PowerupPickUp currentPow = powerUps.get(i);
+          if (currentPow.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
+            Collision collision = new Collision(player, currentPow, delta);
             if (collision.colliding()) {
+              if (currentPow instanceof ChiliChickenPickUp) {
+                ChiliChicken newChick = new ChiliChicken(player);
+                players.add(j, newChick);
+                players.remove(j + 1);
+              } else if (currentPow instanceof BlueberryBubblePickUp) {
+                BlueberryBubble newBlue = new BlueberryBubble(player);
+                players.add(j, newBlue);
+                players.remove(j + 1);
+              } else if (currentPow instanceof PyroPepperPickUp) {
+                
+              } else if (currentPow instanceof TurtleTacoPickUp) {
+                
+              }
               powerUps.remove(i);
             }
           }
@@ -266,8 +288,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.colliding() && bubble.hasNPC()) {
             Fruit newFruit = null;
             try {
-              newFruit = new Fruit(bubble.getPosition().clone(),
-                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              newFruit = new Fruit(bubble.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
+                  Constants.BLOCKSIZE));
             } catch (CloneNotSupportedException e) {
               e.printStackTrace();
             }
