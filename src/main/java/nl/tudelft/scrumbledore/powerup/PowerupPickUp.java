@@ -1,5 +1,6 @@
 package nl.tudelft.scrumbledore.powerup;
 
+import nl.tudelft.scrumbledore.level.BasicDynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Vector;
 
@@ -9,7 +10,7 @@ import nl.tudelft.scrumbledore.level.Vector;
  * @author Floris Doolaard
  *
  */
-public abstract class PowerupPickUp extends LevelElement {
+public abstract class PowerupPickUp extends BasicDynamicElement {
 
   /**
    * The basic constructor of a PowerupPickable object.

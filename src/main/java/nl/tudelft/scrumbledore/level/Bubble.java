@@ -12,8 +12,8 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class Bubble extends LevelElement {
-  private ArrayList<BubbleAction> actions;
+public class Bubble extends BasicDynamicElement {
+  private ArrayList<LevelElementAction> actions;
   private Boolean hasNPC;
 
   private double lifetime;
@@ -30,7 +30,7 @@ public class Bubble extends LevelElement {
     super(position, size);
     getFriction().setX(Constants.BUBBLE_FRICTION);
     lifetime = Constants.BUBBLE_LIFETIME;
-    actions = new ArrayList<BubbleAction>();
+    actions = new ArrayList<LevelElementAction>();
     hasNPC = false;
   }
 
@@ -40,7 +40,7 @@ public class Bubble extends LevelElement {
    * @param action
    *          The action (MoveLeft or MoveRight) the Bubble has to perform.
    */
-  public void addAction(BubbleAction action) {
+  public void addAction(LevelElementAction action) {
     actions.clear();
     actions.add(action);
   }
@@ -52,7 +52,7 @@ public class Bubble extends LevelElement {
    *          A BubbleAction.
    * @return Boolean.
    */
-  public boolean hasAction(BubbleAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -136,4 +136,94 @@ public class Bubble extends LevelElement {
     result.add(store.getAnimated(id).getFrame(steps));
     return result;
   }
+
+  /**
+   * Checking wether the element is alive.
+   * 
+   * @return The boolean if the element is alive.
+   */
+  public Boolean isAlive() {
+    return false;
+  }
+
+  /**
+   * Setting the life of the element.
+   * 
+   * @param bool
+   *          Can be True or False, stated on situation of element.
+   */
+  public void setAlive(Boolean bool) {
+  }
+
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
+  public int getPlayerNumber() {
+    return 0;
+  }
+
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *          Integer that represents the players number in the game.
+   */
+  public void setPlayerNumber(int id) {
+  }
+
+  /**
+   * Remove the given action from the actions queue.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   */
+  public void removeAction(LevelElementAction action) {
+  }
+
+  /**
+   * Get the last horizontal move performed.
+   * 
+   * @return The last move performed.
+   */
+  public LevelElementAction getLastMove() {
+    return null;
+  }
+
+  /**
+   * Set the last performed horizontal move.
+   * 
+   * @param action
+   *          The last move action performed.
+   */
+  public void setLastMove(LevelElementAction action) {    
+  }
+
+  /**
+   * Return whether the Player is firing.
+   * 
+   * @return whether the Player is firing
+   */
+  public Boolean isFiring() {
+    return false;
+  }
+
+  /**
+   * Set whether the Player is firing.
+   * 
+   * @param isFiring
+   *          whether the Player is firing
+   */
+  public void setFiring(Boolean isFiring) {
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
+
 }

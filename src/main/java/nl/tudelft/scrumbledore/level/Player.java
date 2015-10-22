@@ -3,7 +3,6 @@ package nl.tudelft.scrumbledore.level;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.powerup.Powerup;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
@@ -13,10 +12,11 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Niels Warnars
  * @author Jesse Tilro
  * @author David Alderliesten
+ * @author Floris Doolaard
  */
-public class Player extends LevelElement implements Powerup {
-  private ArrayList<PlayerAction> actions;
-  private PlayerAction lastMove;
+public class Player extends BasicDynamicElement {
+  private ArrayList<LevelElementAction> actions;
+  private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
@@ -35,8 +35,8 @@ public class Player extends LevelElement implements Powerup {
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<PlayerAction>();
-    lastMove = PlayerAction.MoveRight;
+    actions = new ArrayList<LevelElementAction>();
+    lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
   }
@@ -47,7 +47,7 @@ public class Player extends LevelElement implements Powerup {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(PlayerAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -98,6 +98,14 @@ public class Player extends LevelElement implements Powerup {
   public void setPlayerNumber(int id) {
     this.id = id;
   }
+  
+  /**
+   * Gives the list of actions of the player.
+   * @return a list of actions.
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
 
   /**
    * Check whether the given action is queued for the next step.
@@ -106,7 +114,7 @@ public class Player extends LevelElement implements Powerup {
    *          A PlayerAction.
    * @return Boolean.
    */
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -116,7 +124,7 @@ public class Player extends LevelElement implements Powerup {
    * @param action
    *          A PlayerAction.
    */
-  public void removeAction(PlayerAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -125,7 +133,7 @@ public class Player extends LevelElement implements Powerup {
    * 
    * @return The last move performed.
    */
-  public PlayerAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -135,8 +143,8 @@ public class Player extends LevelElement implements Powerup {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(PlayerAction action) {
-    if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
@@ -187,7 +195,7 @@ public class Player extends LevelElement implements Powerup {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     SpriteStore store = SpriteStore.getInstance();
     if (alive) {
-      boolean toRight = getLastMove() == PlayerAction.MoveRight;
+      boolean toRight = getLastMove() == LevelElementAction.MoveRight;
 
       String id = "move-left";
       if (firing && toRight) {
@@ -206,6 +214,33 @@ public class Player extends LevelElement implements Powerup {
       result.add(store.getAnimated(id).getFrame(steps));
     }
     return result;
+  }
+  
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return 0;
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
   }
 
 }

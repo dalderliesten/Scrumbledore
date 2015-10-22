@@ -65,7 +65,6 @@ public class CollisionsLevelModifierTest {
    */
   @Test
   public void testCollisionsLevelModifier() {
-    KineticsLevelModifier klm = new KineticsLevelModifier();
     ScoreCounter sc = new ScoreCounter();
 
     CollisionsLevelModifier clm = new CollisionsLevelModifier(sc);

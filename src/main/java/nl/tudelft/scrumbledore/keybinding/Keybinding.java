@@ -5,7 +5,7 @@ import java.util.Map;
 
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * Represents a Keybinding in the form of a key value pair.
@@ -13,8 +13,8 @@ import nl.tudelft.scrumbledore.level.PlayerAction;
  * @author Jeroen Meijer
  */
 public class Keybinding {
-  private Map<KeyCode, PlayerAction> keyMap;
-  private Map<PlayerAction, KeyCode> actionMap;
+  private Map<KeyCode, LevelElementAction> keyMap;
+  private Map<LevelElementAction, KeyCode> actionMap;
 
   /**
    * Creates a new KeyBinding with the default binding for the given player number.
@@ -23,8 +23,8 @@ public class Keybinding {
    *          The number of a given player.
    */
   public Keybinding(int playerNumber) {
-    keyMap = new HashMap<KeyCode, PlayerAction>();
-    actionMap = new HashMap<PlayerAction, KeyCode>();
+    keyMap = new HashMap<KeyCode, LevelElementAction>();
+    actionMap = new HashMap<LevelElementAction, KeyCode>();
 
     keyMap = Constants.KEY_MAPPING.get(playerNumber);
     for (KeyCode key : keyMap.keySet()) {
@@ -40,7 +40,7 @@ public class Keybinding {
    * @param key
    *          Unchanged.
    */
-  public void updateActionByKey(KeyCode key, PlayerAction action) {
+  public void updateActionByKey(KeyCode key, LevelElementAction action) {
     actionMap.remove(keyMap.get(key));
     actionMap.put(action, key);
     keyMap.replace(key, action);
@@ -54,31 +54,31 @@ public class Keybinding {
    * @param key
    *          Updated.
    */
-  public void updateKeyByAction(PlayerAction action, KeyCode key) {
+  public void updateKeyByAction(LevelElementAction action, KeyCode key) {
     keyMap.remove(actionMap.get(action));
     keyMap.put(key, action);
     actionMap.replace(action, key);
   }
 
   /**
-   * Gets a KeyCode based on an PlayerAction.
+   * Gets a KeyCode based on an LevelElementAction.
    * 
    * @param action
-   *          The PlayerAction to get the KeyCode for.
-   * @return KeyCode The KeyCode associated with a PlayerAction.
+   *          The LevelElementAction to get the KeyCode for.
+   * @return KeyCode The KeyCode associated with a LevelElementAction.
    */
-  public KeyCode getKey(PlayerAction action) {
+  public KeyCode getKey(LevelElementAction action) {
     return actionMap.get(action);
   }
 
   /**
-   * Gets a PlayerAction based on an KeyCode.
+   * Gets a LevelElementAction based on an KeyCode.
    * 
    * @param key
-   *          The KeyCode to get the PlayerAction for.
-   * @return PlayerAction The PlayerACtion associated with a KeyCode.
+   *          The KeyCode to get the LevelElementAction for.
+   * @return LevelElementAction The LevelElementAction associated with a KeyCode.
    */
-  public PlayerAction getAction(KeyCode key) {
+  public LevelElementAction getAction(KeyCode key) {
     return keyMap.get(key);
   }
 

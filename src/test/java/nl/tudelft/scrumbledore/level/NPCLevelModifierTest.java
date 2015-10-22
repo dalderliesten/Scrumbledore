@@ -39,12 +39,12 @@ public class NPCLevelModifierTest {
   @Test
   public void testModifyMoveLeft() {
     npc.clearActions();
-    npc.addAction(NPCAction.MoveLeft);
+    npc.addAction(LevelElementAction.MoveLeft);
     
     modifier.modify(level, 1.0d);
     
     assertEquals(-Constants.NPC_SPEED, npc.getSpeed().getX(), Constants.DOUBLE_PRECISION);
-    assertFalse(npc.hasAction(NPCAction.MoveLeft));
+    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
   }
   
   /**
@@ -54,12 +54,12 @@ public class NPCLevelModifierTest {
   @Test
   public void testModifyMoveRight() {
     npc.clearActions();
-    npc.addAction(NPCAction.MoveRight);
+    npc.addAction(LevelElementAction.MoveRight);
     
     modifier.modify(level, 1.0d);
     
     assertEquals(Constants.NPC_SPEED, npc.getSpeed().getX(), Constants.DOUBLE_PRECISION);
-    assertFalse(npc.hasAction(NPCAction.MoveRight));
+    assertFalse(npc.hasAction(LevelElementAction.MoveRight));
   }
 
 }

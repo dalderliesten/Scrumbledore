@@ -3,9 +3,10 @@ package nl.tudelft.scrumbledore.powerup;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -16,43 +17,312 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class PyroPepper extends LevelElement implements Powerup {
-
-  private ArrayList<PlayerAction> actions;
-  private PlayerAction lastMove;
+@SuppressWarnings("PMD.TooManyMethods")
+public class PyroPepper implements Powerup {
+  private Vector position;
+  private Vector size;
+  private Vector speed;
+  private Vector friction;
+  private boolean gravity;
+  private ArrayList<LevelElementAction> actions;
+  private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
 
-  private Player player;
-
   /**
-   * Creates a ChiliChicken instance.
+   * Create a new LevelElement instance.
    * 
-   * @param position
-   *          , location of the ChiliChicken.
-   * @param size
-   *          , size of the object.
+   * @param player , the wrapped object.
    */
-  public PyroPepper(Vector position, Vector size) {
-    super(position, size);
-
+  public PyroPepper(DynamicElement player) {
+    this.position = player.getPosition();
+    this.size = player.getSize();
+    this.speed = player.getSpeed();
+    this.friction = new Vector(0, 0);
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<PlayerAction>();
-    lastMove = PlayerAction.MoveRight;
-    firing = false;
-    alive = true;
+    actions = player.getActions();
+    lastMove = player.getLastMove();
+    firing = player.isFiring();
+    alive = player.isAlive();
+  }
+
+  /**
+   * Get the position vector of this element.
+   * 
+   * @return Position Vector.
+   */
+  public Vector getPosition() {
+    return position;
+  }
+
+  /**
+   * Get the X coordinate of the element.
+   * 
+   * @return double
+   */
+  public double posX() {
+    return position.getX();
+  }
+
+  /**
+   * Get the Y coordinate of the element.
+   * 
+   * @return double
+   */
+  public double posY() {
+    return position.getY();
+  }
+
+  /**
+   * Get the size vector of this element.
+   * 
+   * @return Size Vector.
+   */
+  public Vector getSize() {
+    return size;
+  }
+
+  /**
+   * Get the width of the element.
+   * 
+   * @return double
+   */
+  public double width() {
+    return size.getX();
+  }
+
+  /**
+   * Get the height of the element.
+   * 
+   * @return double
+   */
+  public double height() {
+    return size.getY();
+  }
+
+  /**
+   * Get the speed vector of this element.
+   * 
+   * @return Speed Vector.
+   */
+  public Vector getSpeed() {
+    return speed;
+  }
+
+  /**
+   * Get the horizontal speed of the element.
+   * 
+   * @return double
+   */
+  public double hSpeed() {
+    return speed.getX();
+  }
+
+  /**
+   * Get the vertical speed of the element.
+   * 
+   * @return double
+   */
+  public double vSpeed() {
+    return speed.getY();
+  }
+
+  /**
+   * Get the friction vector of this element.
+   * 
+   * @return Friction Vector.
+   */
+  public Vector getFriction() {
+    return friction;
+  }
+
+  /**
+   * Get the horizontal friction.
+   * 
+   * @return Horizontal friction.
+   */
+  public double hFric() {
+    return friction.getX();
+  }
+
+  /**
+   * Get the vertical friction.
+   * 
+   * @return Vertical friction.
+   */
+  public double vFric() {
+    return friction.getY();
+  }
+
+  /**
+   * Stop this LevelElement's vertical movement.
+   */
+  public void stopVertically() {
+    getSpeed().setY(0);
+  }
+
+  /**
+   * Stop this LevelElement's horizontal movement.
+   */
+  public void stopHorizontally() {
+    getSpeed().setX(0);
+  }
+
+  /**
+   * Check whether this LevelElement is affected by Gravity.
+   * 
+   * @return Boolean
+   */
+  public boolean hasGravity() {
+    return gravity;
+  }
+
+  /**
+   * Set the property determining whether this LevelElement is affected by gravity.
+   * 
+   * @param gravity
+   *          A boolean
+   */
+  public void setGravity(boolean gravity) {
+    this.gravity = gravity;
+  }
+
+  /**
+   * Get the absolute Y-coordinate of the top of this element, given the position and size.
+   * 
+   * @return Y-coordinate of top.
+   */
+  public double getTop() {
+    return position.getY() - size.getY() / 2;
+  }
+
+  /**
+   * Get the absolute Y-coordinate of the bottom of this element, given the position and size.
+   * 
+   * @return Y-coordinate of bottom.
+   */
+  public double getBottom() {
+    return position.getY() + size.getY() / 2;
+  }
+
+  /**
+   * Get the absolute X-coordinate of the left side of this element, given the position and size.
+   * 
+   * @return X-coordinate of left side.
+   */
+  public double getLeft() {
+    return position.getX() - size.getX() / 2;
+  }
+
+  /**
+   * Get the absolute X-coordinate of the right side of this element, given the position and size.
+   * 
+   * @return X-coordinate of right side.
+   */
+  public double getRight() {
+    return position.getX() + size.getX() / 2;
+  }
+
+  /**
+   * Get the distance to another LevelElement.
+   * 
+   * @param other
+   *          The other element to measure the distance to.
+   * @return The distance.
+   */
+  public double distance(LevelElement other) {
+    return getPosition().distance(other.getPosition());
+  }
+
+  /**
+   * Check whether another element is within range of this element using a circular radius by
+   * computing the distance.
+   * 
+   * @param other
+   *          The other element.
+   * @param range
+   *          The range (of the circle).
+   * @return A boolean.
+   */
+  public boolean inRadiusRangeOf(LevelElement other, double range) {
+    return distance(other) <= range;
+  }
+
+  /**
+   * Check whether another element is within range of this element using a box. The box is a square
+   * axis-aligned bounding box, with dimensions of twice the given range. It has the position of
+   * this element as its center.
+   * 
+   * @param other
+   *          The other element.
+   * @param range
+   *          The range (a half of the dimensions of the square box).
+   * @return A boolean.
+   */
+  public boolean inBoxRangeOf(LevelElement other, double range) {
+    boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
+    boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
+    return inX && inY;
+  }
+
+  /**
+   * Snap a LevelElement to the left side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapLeft(LevelElement other) {
+    double offset = getSize().getX() / 2;
+    double newPos = other.getLeft() - offset;
+    getPosition().setX(newPos);
+  }
+
+  /**
+   * Snap a LevelElement to the right side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapRight(LevelElement other) {
+    double offset = getSize().getX() / 2;
+    double newPos = other.getRight() + offset;
+    getPosition().setX(newPos);
+  }
+
+  /**
+   * Snap a LevelElement to the top side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapTop(LevelElement other) {
+    double offset = getSize().getY() / 2;
+    double newPos = other.getTop() - offset;
+    getPosition().setY(newPos);
+  }
+
+  /**
+   * Snap a LevelElement to the bottom side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapBottom(LevelElement other) {
+    double offset = getSize().getY() / 2;
+    double newPos = other.getBottom() + offset;
+    getPosition().setY(newPos);
   }
 
   /**
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A PlayerAction
+   *          A LevelElementAction
    */
-  public void addAction(PlayerAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -108,10 +378,10 @@ public class PyroPepper extends LevelElement implements Powerup {
    * Check whether the given action is queued for the next step.
    * 
    * @param action
-   *          A PlayerAction.
+   *          A LevelElementAction.
    * @return Boolean.
    */
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -119,9 +389,9 @@ public class PyroPepper extends LevelElement implements Powerup {
    * Remove the given action from the actions queue.
    * 
    * @param action
-   *          A PlayerAction.
+   *          A LevelElementAction.
    */
-  public void removeAction(PlayerAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -130,7 +400,7 @@ public class PyroPepper extends LevelElement implements Powerup {
    * 
    * @return The last move performed.
    */
-  public PlayerAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -140,8 +410,8 @@ public class PyroPepper extends LevelElement implements Powerup {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(PlayerAction action) {
-    if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
@@ -192,7 +462,7 @@ public class PyroPepper extends LevelElement implements Powerup {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     SpriteStore store = SpriteStore.getInstance();
     if (alive) {
-      boolean toRight = getLastMove() == PlayerAction.MoveRight;
+      boolean toRight = getLastMove() == LevelElementAction.MoveRight;
 
       String id = "move-left";
       if (firing && toRight) {
@@ -208,9 +478,45 @@ public class PyroPepper extends LevelElement implements Powerup {
 
       id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
 
+      result.add(store.getAnimated("fire-red").getFrame(steps));
       result.add(store.getAnimated(id).getFrame(steps));
     }
     return result;
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
+  
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return 0;
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
   }
 
 }

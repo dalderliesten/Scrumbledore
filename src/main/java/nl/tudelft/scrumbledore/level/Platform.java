@@ -10,7 +10,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * 
  * @author Niels Warnars
  */
-public class Platform extends LevelElement {
+public class Platform extends BasicStaticElement {
   private boolean isPassable;
   
   /**
