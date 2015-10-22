@@ -25,7 +25,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
   public void modify(Level level, double delta) {
     ArrayList<DynamicElement> players = level.getPlayers();
 
-    for (DynamicElement player : players) {
+    for (int i = 0; i < players.size(); i++) {
+      DynamicElement player = players.get(i);
       if (player.isAlive()) {
         checkStopMovement(player);
         checkHorizontalMovement(player);
@@ -41,6 +42,24 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
         player.removeAction(LevelElementAction.MoveStop);
         player.removeAction(LevelElementAction.Shoot);
+      }
+
+      if (player instanceof ChiliChicken) {
+        if (player.getLifetime() <= 0) {
+          try {
+            Player newP = new Player(player.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
+                Constants.BLOCKSIZE));
+            for (int j = 0; j < player.getActions().size(); j++) {
+              newP.addAction(player.getActions().get(j));
+            }
+            players.remove(i);
+            players.add(i, newP);
+          } catch (CloneNotSupportedException e) {
+            e.printStackTrace();
+          }
+        } else {
+          player.decreaseLifetime(delta);
+        }
       }
     }
   }

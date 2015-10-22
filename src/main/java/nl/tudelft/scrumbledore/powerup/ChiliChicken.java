@@ -30,7 +30,7 @@ public class ChiliChicken implements Powerup {
   private Boolean firing;
   private Boolean alive;
   private int id;
-  private DynamicElement player;
+  private double lifetime;
 
   /**
    * Create a new LevelElement instance.
@@ -41,6 +41,7 @@ public class ChiliChicken implements Powerup {
     this.position = player.getPosition();
     this.size = player.getSize();
     this.speed = player.getSpeed();
+    this.lifetime = Constants.CHILI_LIFETIME;
     
     this.friction = new Vector(0, 0);
     setGravity(true);
@@ -50,8 +51,35 @@ public class ChiliChicken implements Powerup {
     lastMove = player.getLastMove();
     firing = player.isFiring();
     alive = player.isAlive();
-    
-    this.player = player;
+  }
+  
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+    lifetime -= delta;
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return lifetime;
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
+    lifetime = newTime;
   }
 
   /**

@@ -157,6 +157,9 @@ public final class Constants {
   public static final double BUBBLE_BOUNCE = 8;
   // Number of steps a Bubble needs to stay alive.
   public static final double BUBBLE_LIFETIME = REFRESH_RATE * 3;
+  
+  // Number of steps a ChiliChicken needs to stay alive.
+  public static final double CHILI_LIFETIME = REFRESH_RATE * 3;
 
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;

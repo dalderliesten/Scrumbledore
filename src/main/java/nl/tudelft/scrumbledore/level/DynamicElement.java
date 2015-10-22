@@ -11,6 +11,29 @@ import java.util.ArrayList;
 public interface DynamicElement extends LevelElement {
   
   /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  void decreaseLifetime(double delta);
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  double getLifetime();
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  void setLifetime(double newTime);
+  
+  /**
    * Gives a list of current actions of the player.
    * @return a list of actions
    */
