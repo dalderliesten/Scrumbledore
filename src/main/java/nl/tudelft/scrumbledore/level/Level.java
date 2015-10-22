@@ -40,15 +40,15 @@ public class Level {
    *          A LevelElement.
    */
   public void addElement(LevelElement element) {
-    if (element.getClass().equals(Platform.class)) {
+    if (element instanceof Platform) {
       platforms.add((Platform) element);
-    } else if (element.getClass().equals(NPC.class)) {
+    } else if (element instanceof NPC) {
       npcs.add((NPC) element);
-    } else if (element.getClass().equals(Fruit.class)) {
+    } else if (element instanceof Fruit) {
       fruits.add((Fruit) element);
-    } else if (element.getClass().equals(Player.class)) {
+    } else if (element instanceof Player) {
       players.add((Player) element);
-    } else if (element.getClass().equals(Bubble.class)) {
+    } else if (element instanceof Bubble) {
       bubbles.add((Bubble) element);
     } else if (element instanceof PowerupPickUp) {
       powerups.add((PowerupPickUp) element);
@@ -134,7 +134,7 @@ public class Level {
   public ArrayList<Bubble> getEnemyBubbles() {
     return encapEnemies;
   }
-  
+
   /**
    * Returns an ArrayList of Powerup objects.
    * 

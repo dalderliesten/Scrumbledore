@@ -144,6 +144,20 @@ public abstract class LevelElement {
   }
 
   /**
+   * Stop this LevelElement's vertical movement.
+   */
+  public void stopVertically() {
+    getSpeed().setY(0);
+  }
+
+  /**
+   * Stop this LevelElement's horizontal movement.
+   */
+  public void stopHorizontally() {
+    getSpeed().setX(0);
+  }
+
+  /**
    * Check whether this LevelElement is affected by Gravity.
    * 
    * @return Boolean
@@ -216,7 +230,7 @@ public abstract class LevelElement {
    * @param other
    *          The other element.
    * @param range
-   *          The range (of the circal).
+   *          The range (of the circle).
    * @return A boolean.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
@@ -238,6 +252,54 @@ public abstract class LevelElement {
     boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
     boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
     return inX && inY;
+  }
+
+  /**
+   * Snap a LevelElement to the left side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapLeft(LevelElement other) {
+    double offset = getSize().getX() / 2;
+    double newPos = other.getLeft() - offset;
+    getPosition().setX(newPos);
+  }
+
+  /**
+   * Snap a LevelElement to the right side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapRight(LevelElement other) {
+    double offset = getSize().getX() / 2;
+    double newPos = other.getRight() + offset;
+    getPosition().setX(newPos);
+  }
+
+  /**
+   * Snap a LevelElement to the top side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapTop(LevelElement other) {
+    double offset = getSize().getY() / 2;
+    double newPos = other.getTop() - offset;
+    getPosition().setY(newPos);
+  }
+
+  /**
+   * Snap a LevelElement to the bottom side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  public void snapBottom(LevelElement other) {
+    double offset = getSize().getY() / 2;
+    double newPos = other.getBottom() + offset;
+    getPosition().setY(newPos);
   }
 
   /**

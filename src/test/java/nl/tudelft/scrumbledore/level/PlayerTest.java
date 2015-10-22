@@ -111,7 +111,7 @@ public class PlayerTest extends LevelElementTest {
     player.setPlayerNumber(42);
     assertEquals(42, player.getPlayerNumber());
   }
-  
+
   /**
    * Test the lastMove field getter/setter.
    */
@@ -162,5 +162,5 @@ public class PlayerTest extends LevelElementTest {
   public void testHashCode() {
     assertEquals(0, player.hashCode());
   }
-  
+
 }
