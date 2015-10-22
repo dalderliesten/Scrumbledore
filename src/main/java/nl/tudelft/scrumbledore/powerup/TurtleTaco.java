@@ -1,35 +1,40 @@
-package nl.tudelft.scrumbledore.level;
+package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.powerup.Powerup;
+import nl.tudelft.scrumbledore.level.LevelElement;
+import nl.tudelft.scrumbledore.level.Player;
+import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
- * Class representing a Player in a game.
+ * TurtleTaco is a power-up that gives the player invulnerability for 5 seconds.
  * 
- * @author Niels Warnars
- * @author Jesse Tilro
- * @author David Alderliesten
+ * @author Floris Doolaard
+ *
  */
-public class Player extends LevelElement implements Powerup {
+public class TurtleTaco extends LevelElement implements Powerup {
+
   private ArrayList<PlayerAction> actions;
   private PlayerAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
 
+  private Player player;
+
   /**
-   * Create a new Player instance.
+   * Creates a ChiliChicken instance.
    * 
    * @param position
-   *          Position of the player in the level.
+   *          , location of the ChiliChicken.
    * @param size
-   *          Size of the Player.
+   *          , size of the object.
    */
-  public Player(Vector position, Vector size) {
+  public TurtleTaco(Vector position, Vector size) {
     super(position, size);
 
     setGravity(true);
@@ -148,8 +153,8 @@ public class Player extends LevelElement implements Powerup {
 
   @Override
   public boolean equals(Object other) {
-    if (other instanceof Player) {
-      Player that = (Player) other;
+    if (other instanceof TurtleTaco) {
+      TurtleTaco that = (TurtleTaco) other;
       return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
