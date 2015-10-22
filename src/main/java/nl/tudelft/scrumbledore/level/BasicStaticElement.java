@@ -4,7 +4,7 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
-public abstract class BasicStaticElement implements DynamicElement {
+public abstract class BasicStaticElement implements StaticElement {
 
   private Vector position;
   private Vector size;
