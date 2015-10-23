@@ -15,7 +15,7 @@ import nl.tudelft.scrumbledore.level.WarpLevelModifier;
  * @author Jesse Tilro
  *
  */
-public class GameFactory {
+public abstract class GameFactory {
 
   /**
    * Constructs a new GameFactory that utilizes a given LevelParser.
@@ -24,27 +24,29 @@ public class GameFactory {
   }
 
   /**
-   * Makes a new Single / Multiplayer game.
-   * @param c 
-   *          A given class of game.
-   * 
+   * Makes a new Single / MultiPlayer game.
+
    * @return A SinglePlayer or MultiPlayer game.
    */
-  public Game makeGame(Class c) {
-    Game game = null;
-    
-    if (c == SinglePlayerGame.class) {
-      game = new SinglePlayerGame();
-    } else if (c == MultiPlayerGame.class) {
-      game = new MultiPlayerGame();
-    }
-    
+  public Game makeGame() {
+    Game game = createGame();
     makeLevelModifiers(game);
     return game;
   }
 
+  /**
+   * Abstract method implemented by child classes for the creation of a specific type of game.
+   * 
+   * @return A Single Player or MultiPlayer game.
+   */
+  abstract Game createGame();
 
-  private void makeLevelModifiers(Game game) {
+  /**
+   * Registers Level Modifiers to a given game.
+   * 
+   * @param game A given game.
+   */
+  protected void makeLevelModifiers(Game game) {
     game.registerLevelModifier(new PlayerActionsLevelModifier());
     game.registerLevelModifier(new GravityLevelModifier());
     game.registerLevelModifier(new NPCLevelModifier());
