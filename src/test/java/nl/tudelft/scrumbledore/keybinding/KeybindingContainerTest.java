@@ -33,7 +33,7 @@ public class KeybindingContainerTest {
    */
   @Test
   public void testGetInstance() {
-    assertTrue(KeybindingContainer.getInstance() instanceof KeybindingContainer);
+    assertEquals(KeybindingContainer.class, KeybindingContainer.getInstance().getClass());
   }
 
   /**
