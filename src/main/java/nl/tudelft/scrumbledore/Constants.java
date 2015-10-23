@@ -150,7 +150,7 @@ public final class Constants {
 
   // Projectile horizontal movement speed
   public static final double BUBBLE_SPEED = 20;
-  public static final double FIREBALL_SPEED = 20;
+  public static final double FIREBALL_SPEED = 9;
   // Bubble horizontal fiction
   public static final double BUBBLE_FRICTION = 1.5;
   // Bubble horizontal fiction

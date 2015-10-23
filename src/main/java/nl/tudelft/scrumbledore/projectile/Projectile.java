@@ -1,4 +1,7 @@
-package nl.tudelft.scrumbledore.level;
+package nl.tudelft.scrumbledore.projectile;
+
+import nl.tudelft.scrumbledore.level.LevelElement;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * Represents a projectile object.

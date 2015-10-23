@@ -7,7 +7,10 @@ import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
 import nl.tudelft.scrumbledore.powerup.ChiliChicken;
 import nl.tudelft.scrumbledore.powerup.PyroPepper;
-import nl.tudelft.scrumbledore.powerup.TurtleTaco;
+import nl.tudelft.scrumbledore.projectile.BlueBubble;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.Fireball;
+import nl.tudelft.scrumbledore.projectile.Projectile;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -15,6 +18,7 @@ import nl.tudelft.scrumbledore.powerup.TurtleTaco;
  * @author Jesse Tilro
  * @author David Alderliesten
  */
+@SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity" })
 public class PlayerActionsLevelModifier implements LevelModifier {
 
   /**
@@ -56,7 +60,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
             player.decreaseLifetime(delta);
           }
         }
-        
+
         if (player.hasAction(LevelElementAction.ShootStop)) {
           player.setFiring(false);
           player.removeAction(LevelElementAction.ShootStop);
@@ -154,6 +158,12 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
           checkShootingDirection(player, newFireball);
 
+        } else if (player instanceof BlueberryBubble) {
+          BlueBubble newBlueBubble = new BlueBubble(projectPos, new Vector(Constants.BLOCKSIZE,
+              Constants.BLOCKSIZE));
+          projectiles.add(newBlueBubble);
+
+          checkShootingDirection(player, newBlueBubble);
         } else {
           Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
               Constants.BLOCKSIZE));
@@ -165,7 +175,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
       }
       player.setFiring(true);
     }
-    
+
   }
 
   /**

@@ -3,6 +3,8 @@ package nl.tudelft.scrumbledore.level;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.Projectile;
 
 /**
  * Class representing a Level in the Game.

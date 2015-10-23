@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Test Suite for the Bubble Actions Level Modifier class.

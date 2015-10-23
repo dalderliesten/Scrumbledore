@@ -5,8 +5,8 @@ import nl.tudelft.scrumbledore.level.GravityLevelModifier;
 import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
 import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.ProjectileActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.WarpLevelModifier;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Class responsible for creating different types of Games. Conforming to the Factory design

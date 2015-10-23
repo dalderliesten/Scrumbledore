@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
+import nl.tudelft.scrumbledore.projectile.Bubble;
 
 /**
  * Test suite for the CollisionsLevelModifier class.

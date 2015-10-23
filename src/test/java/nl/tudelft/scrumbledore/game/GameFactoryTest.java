@@ -13,8 +13,8 @@ import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
 import nl.tudelft.scrumbledore.level.LevelModifier;
 import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.ProjectileActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.WarpLevelModifier;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Test suite for the GameFactory class.

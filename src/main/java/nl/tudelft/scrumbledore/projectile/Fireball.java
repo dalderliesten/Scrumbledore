@@ -1,8 +1,11 @@
-package nl.tudelft.scrumbledore.level;
+package nl.tudelft.scrumbledore.projectile;
 
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.BasicDynamicElement;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
@@ -23,7 +26,7 @@ public class Fireball extends BasicDynamicElement implements Projectile {
   public Fireball(Vector position, Vector size) {
     super(position, size);
     getFriction().setX(Constants.BUBBLE_FRICTION);
-    lifetime = Constants.BUBBLE_LIFETIME;
+    lifetime = 0;
     actions = new ArrayList<LevelElementAction>();
     hasNPC = false;
   }

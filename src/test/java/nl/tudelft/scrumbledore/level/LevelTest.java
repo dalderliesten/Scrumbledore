@@ -4,6 +4,9 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.Projectile;
+
 import org.junit.Test;
 
 /**
