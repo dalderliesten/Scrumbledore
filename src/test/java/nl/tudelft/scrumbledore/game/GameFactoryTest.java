@@ -4,7 +4,6 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.level.CollisionsLevelModifier;
@@ -23,22 +22,13 @@ import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
  */
 public class GameFactoryTest {
 
-  private GameFactory factory;
-
-  /**
-   * Set-up the initial Game Factory.
-   */
-  @Before
-  public void setUp() {
-    factory = new GameFactory();
-  }
-
   /**
    * Make sure that a SinglePlayerGame instance contains the specified Level Modifiers.
    */
   @Test
   public final void testMakeSinglePlayerGame() {
-    Game game = factory.makeSinglePlayerGame();
+    SinglePlayerGameFactory sFactory = new SinglePlayerGameFactory();
+    Game game = sFactory.makeGame();
     ArrayList<LevelModifier> modifiers = game.getModifiers();
 
     assertEquals(7, modifiers.size());
@@ -56,7 +46,8 @@ public class GameFactoryTest {
    */
   @Test
   public final void testMakeMultiPlayerGame() {
-    Game game = factory.makeMultiPlayerGame();
+    MultiPlayerGameFactory mFactory = new MultiPlayerGameFactory();
+    Game game = mFactory.makeGame();
     ArrayList<LevelModifier> modifiers = game.getModifiers();
 
     assertEquals(7, modifiers.size());

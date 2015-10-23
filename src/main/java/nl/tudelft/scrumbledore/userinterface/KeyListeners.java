@@ -9,7 +9,6 @@ import javafx.scene.input.KeyEvent;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.level.DynamicElement;
-import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**

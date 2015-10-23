@@ -23,7 +23,6 @@ import nl.tudelft.scrumbledore.projectile.Bubble;
 @SuppressWarnings({ "PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyMethods",
     "PMD.TooManyStaticImports" })
 public class CollisionsLevelModifierTest {
-  private KineticsLevelModifier klm;
   private ScoreCounter sc;
   private CollisionsLevelModifier clm;
 

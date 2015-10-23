@@ -29,7 +29,6 @@ import nl.tudelft.scrumbledore.game.GameFactory;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.Player;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
@@ -77,32 +76,20 @@ public final class GameDisplay {
   }
 
   /**
-   * Launch a new MultiPlayerGame.
+   * Creates a new game using a given game factory.
    * 
+   * @param factory
+   *          The game factory used for creating a new game.
    * @param passedStage
    *          The stage to draw to.
    */
-  public static void launchMultiPlayerGame(Stage passedStage) {
+  public static void createGame(GameFactory factory, Stage passedStage) {
     currentStage = passedStage;
-    GameFactory factory = new GameFactory();
-    currentGame = factory.makeMultiPlayerGame();
+    currentGame = factory.makeGame();
 
     launchGame();
   }
 
-  /**
-   * Launch a new SinglePlayerGame.
-   * 
-   * @param passedStage
-   *          The stage to draw to.
-   */
-  public static void launchSinglePlayerGame(Stage passedStage) {
-    currentStage = passedStage;
-    GameFactory factory = new GameFactory();
-    currentGame = factory.makeSinglePlayerGame();
-
-    launchGame();
-  }
 
   /**
    * Handles the creation of a game and the associated interface.
@@ -274,7 +261,7 @@ public final class GameDisplay {
     Level currentLevel = currentGame.getCurrentLevel();
     if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
       if (endStepsSnapShot == 0) {
-        advanceLabel = new String(Constants.ADVANCINGLABEL);
+        advanceLabel = Constants.ADVANCINGLABEL;
         staticContext.setFill(Color.WHITE);
         staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);

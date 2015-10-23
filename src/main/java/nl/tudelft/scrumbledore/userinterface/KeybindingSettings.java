@@ -112,9 +112,10 @@ public final class KeybindingSettings {
         binding.getKey(LevelElementAction.MoveLeft), "Move left: ");
     Button moveRight = generateKeybinder(LevelElementAction.MoveRight,
         binding.getKey(LevelElementAction.MoveRight), "Move right: ");
-    Button jump = generateKeybinder(LevelElementAction.Jump, binding.getKey(LevelElementAction.Jump), "Jump: ");
-    Button shoot = generateKeybinder(LevelElementAction.Shoot, binding.getKey(LevelElementAction.Shoot),
-        "Shoot: ");
+    Button jump = generateKeybinder(LevelElementAction.Jump, 
+        binding.getKey(LevelElementAction.Jump), "Jump: ");
+    Button shoot = generateKeybinder(LevelElementAction.Shoot, 
+        binding.getKey(LevelElementAction.Shoot), "Shoot: ");
     actionBinders.getChildren().addAll(moveLeft, moveRight, jump, shoot);
   }
 

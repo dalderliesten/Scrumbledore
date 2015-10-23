@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.powerup;
 
 import nl.tudelft.scrumbledore.level.BasicDynamicElement;
-import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Vector;
 
 /**

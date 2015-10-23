@@ -26,9 +26,11 @@ public class Keybinding {
     keyMap = new HashMap<KeyCode, LevelElementAction>();
     actionMap = new HashMap<LevelElementAction, KeyCode>();
 
-    keyMap = Constants.KEY_MAPPING.get(playerNumber);
-    for (KeyCode key : keyMap.keySet()) {
-      actionMap.put(keyMap.get(key), key);
+    Map<KeyCode, LevelElementAction> tempMap = Constants.KEY_MAPPING.get(playerNumber);
+
+    for (KeyCode key : tempMap.keySet()) {
+      keyMap.put(key, tempMap.get(key));
+      actionMap.put(tempMap.get(key), key);
     }
   }
 
