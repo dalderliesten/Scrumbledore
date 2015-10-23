@@ -1,11 +1,15 @@
 package nl.tudelft.scrumbledore;
 
+import java.io.BufferedReader;
 import java.io.BufferedWriter;
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.io.InputStreamReader;
 import java.io.OutputStreamWriter;
 import java.text.SimpleDateFormat;
+import java.util.ArrayList;
 import java.util.Date;
 
 /**
@@ -51,16 +55,16 @@ public final class Logger {
   private void createLoggingDir() {
     File appDir = new File(Constants.APPDATA_DIR);
     File loggingDir = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR);
- 
+
     boolean result = true;
     try {
       if (!appDir.exists()) {
         result = appDir.mkdir();
         if (!result) {
-            throw new IOException();
+          throw new IOException();
         }
       }
-      
+
       if (!loggingDir.exists()) {
         result = loggingDir.mkdir();
         if (!result) {
@@ -84,8 +88,8 @@ public final class Logger {
       String desiredFileName = "Session-" + simpleFormat.format(currentDate) + ".log";
       loggingFile = new File(Constants.APPDATA_DIR + Constants.LOGGER_DIR + desiredFileName);
 
-      BufferedWriter buffWriter = new BufferedWriter(
-          new OutputStreamWriter(new FileOutputStream(loggingFile), "UTF-8"));
+      BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+          loggingFile), "UTF-8"));
       buffWriter.write("--------------------SCRUMBLEDORE LOGGING FILE");
 
       buffWriter.close();
@@ -102,8 +106,8 @@ public final class Logger {
    */
   public void log(String toLog) {
     try {
-      BufferedWriter buffWriter = new BufferedWriter(
-          new OutputStreamWriter(new FileOutputStream(loggingFile, true), "UTF-8"));
+      BufferedWriter buffWriter = new BufferedWriter(new OutputStreamWriter(new FileOutputStream(
+          loggingFile, true), "UTF-8"));
 
       buffWriter.newLine();
       buffWriter.write(toLog);
@@ -113,7 +117,7 @@ public final class Logger {
       e.printStackTrace();
     }
   }
-  
+
   /**
    * Returns the logging file.
    * 
@@ -121,6 +125,30 @@ public final class Logger {
    */
   public File getLoggingFile() {
     return loggingFile;
+  }
+
+  /**
+   * Returns all the lines currently in the Logging file.
+   * 
+   * @return ArrayList with current logger contents.
+   */
+  public ArrayList<String> getLines() {
+    ArrayList<String> toReturn = new ArrayList();
+
+    try {
+      BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(
+          loggingFile)));
+
+      String currentElement = null;
+      
+      while ((currentElement = fileReader.readLine()) != null) {
+        toReturn.add(currentElement);
+      }
+    } catch (IOException e) {
+      System.out.println(e);
+    }
+
+    return toReturn;
   }
 
 }
