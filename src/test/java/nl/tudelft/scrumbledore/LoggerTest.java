@@ -1,14 +1,10 @@
 package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
-import java.io.BufferedReader;
 import java.io.File;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.util.ArrayList;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -16,10 +12,10 @@ import org.junit.Test;
 /**
  * Test suite for the Logger class.
  * 
+ * @author David Alderliesten
  * @author Niels Warnars
  */
 public class LoggerTest {
-
   private Logger logger;
 
   /**
@@ -63,28 +59,48 @@ public class LoggerTest {
    * Test whether the desired data is written to disk when the Logger.log() method is being called.
    */
   @Test
+  @SuppressWarnings("PMD.AvoidDuplicateLiterals")
   public final void testLog() {
-    File loggingFile = logger.getLoggingFile();
+    logger.log("log_write_test");
+    
+    ArrayList<String> fetchedLog = logger.getLines();
+
+    assertEquals("--------------------SCRUMBLEDORE LOGGING FILE", fetchedLog.get(0));
+    
+    assertEquals("log_write_test", fetchedLog.get(fetchedLog.size() - 1));
+  }
+
+  /**
+   * Test whether the getLines function works by checking if the returning list is not empty.
+   */
+  @Test
+  public final void testGetLines() {
     logger.log("log_write_test");
 
-    try {
-      BufferedReader reader = new BufferedReader(
-          new InputStreamReader(new FileInputStream(loggingFile), "UTF-8"));
+    ArrayList<String> toTest = logger.getLines();
 
-      assertEquals("--------------------SCRUMBLEDORE LOGGING FILE", reader.readLine());
-      String lastLine = "";
-      String line;
-      while ((line = reader.readLine()) != null) {
-        lastLine = line;
-      }
-      assertEquals("log_write_test", lastLine);
+    assertFalse(toTest.isEmpty());
+  }
 
-      reader.close();
-    } catch (UnsupportedEncodingException e) {
-      e.printStackTrace();
-    } catch (IOException e) {
-      e.printStackTrace();
-    }
+  /**
+   * Test whether the getFirstLine works by querying the method and comparing it to the default
+   * first line.
+   */
+  @Test
+  public final void testGetFirstLine() {
+    String toCompare = logger.getFirstLine();
+    assertEquals(toCompare, "--------------------SCRUMBLEDORE LOGGING FILE");
+  }
+
+  /**
+   * Test whether the getLastLine function works by checking if the last element matches the final
+   * element of the default log.
+   */
+  @Test
+  public final void testGetLastLine() {
+    String toCompare = logger.getLastLine();
+
+    assertEquals(toCompare, "log_write_test");
   }
 
 }
