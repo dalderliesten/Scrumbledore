@@ -158,6 +158,8 @@ public final class Constants {
   // Number of steps a Bubble needs to stay alive.
   public static final double BUBBLE_LIFETIME = REFRESH_RATE * 3;
   
+  // Default lifetime player.
+  public static final double PLAYER_POWERUP_LIFETIME = REFRESH_RATE * 3;
   // Number of steps a ChiliChicken needs to stay alive.
   public static final double CHILI_LIFETIME = REFRESH_RATE * 3;
   // Number of steps a TurtleTaco needs to stay alive.
