@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Test Suite for the Bubble Actions Level Modifier class.
@@ -20,7 +22,7 @@ public class BubbleActionsLevelModifierTest {
   private Bubble bubble;
   private Bubble bubble2;
   private Level level;
-  private BubbleActionsLevelModifier modifier;
+  private ProjectileActionsLevelModifier modifier;
 
   /**
    * Setup a test object, Player Actions Level Modifier, and dependencies: a Player and a Level
@@ -37,7 +39,7 @@ public class BubbleActionsLevelModifierTest {
     level.addElement(npc);
     level.addElement(bubble);
     level.addElement(bubble2);
-    modifier = new BubbleActionsLevelModifier();
+    modifier = new ProjectileActionsLevelModifier();
   }
 
   /**
@@ -90,7 +92,7 @@ public class BubbleActionsLevelModifierTest {
     bubble.decreaseLifetime(bubble.getLifetime());
     bubble2.addAction(LevelElementAction.MoveLeft);
     modifier.modify(level, .5);
-    assertFalse(level.getBubbles().contains(bubble));
+    assertFalse(level.getProjectiles().contains(bubble));
   }
 
   /**

@@ -20,6 +20,8 @@ public class Player extends BasicDynamicElement {
   private Boolean firing;
   private Boolean alive;
   private int id;
+  private double lifetime;
+  
 
   /**
    * Create a new Player instance.
@@ -39,6 +41,7 @@ public class Player extends BasicDynamicElement {
     lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
+    lifetime = Constants.PLAYER_POWERUP_LIFETIME;
   }
 
   /**
@@ -223,7 +226,8 @@ public class Player extends BasicDynamicElement {
    *          The number of steps.
    */
   public void decreaseLifetime(double delta) {
-  }
+    lifetime -= delta;
+}
 
   /**
    * Get the remaining lifetime.
@@ -231,7 +235,7 @@ public class Player extends BasicDynamicElement {
    * @return Remaining lifetime.
    */
   public double getLifetime() {
-    return 0;
+    return lifetime;
   }
 
   /**
@@ -241,6 +245,7 @@ public class Player extends BasicDynamicElement {
    *          The new life time.
    */
   public void setLifetime(double newTime) {
+    lifetime = newTime;
   }
 
 }

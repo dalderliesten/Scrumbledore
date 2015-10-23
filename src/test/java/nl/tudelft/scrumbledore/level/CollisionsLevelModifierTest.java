@@ -12,6 +12,7 @@ import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
+import nl.tudelft.scrumbledore.projectile.Bubble;
 
 /**
  * Test suite for the CollisionsLevelModifier class.
@@ -311,7 +312,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
 
     clm.detectPlayerBubble(level, 1);
-    assertFalse(level.getBubbles().contains(bubble));
+    assertFalse(level.getProjectiles().contains(bubble));
   }
 
   /**

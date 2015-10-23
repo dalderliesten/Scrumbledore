@@ -19,6 +19,7 @@ import java.util.Date;
  * @author David Alderliesten
  * @author Jesse Tilro
  */
+@SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Logger {
   private File loggingFile;
 

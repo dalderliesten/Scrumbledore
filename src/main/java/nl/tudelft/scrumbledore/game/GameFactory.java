@@ -1,12 +1,12 @@
 package nl.tudelft.scrumbledore.game;
 
-import nl.tudelft.scrumbledore.level.BubbleActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.CollisionsLevelModifier;
 import nl.tudelft.scrumbledore.level.GravityLevelModifier;
 import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
 import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.WarpLevelModifier;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Class responsible for creating different types of Games. Conforming to the Factory design
@@ -50,7 +50,7 @@ public abstract class GameFactory {
     game.registerLevelModifier(new PlayerActionsLevelModifier());
     game.registerLevelModifier(new GravityLevelModifier());
     game.registerLevelModifier(new NPCLevelModifier());
-    game.registerLevelModifier(new BubbleActionsLevelModifier());
+    game.registerLevelModifier(new ProjectileActionsLevelModifier());
     game.registerLevelModifier(new CollisionsLevelModifier(game.getScoreCounter()));
     game.registerLevelModifier(new KineticsLevelModifier());
     game.registerLevelModifier(new WarpLevelModifier());

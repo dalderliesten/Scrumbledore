@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
@@ -53,7 +54,7 @@ public class TurtleTaco implements Powerup {
    *          The number of steps.
    */
   public void decreaseLifetime(double delta) {
-    wrapped.decreaseLifetime(delta);
+    wrapped.decreaseLifetime(delta * Constants.TURTLE_LIFETIME_MULTIPLIER);
   }
 
   /**

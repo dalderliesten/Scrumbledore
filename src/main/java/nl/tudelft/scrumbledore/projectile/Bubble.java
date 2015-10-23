@@ -1,8 +1,11 @@
-package nl.tudelft.scrumbledore.level;
+package nl.tudelft.scrumbledore.projectile;
 
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.BasicDynamicElement;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
@@ -12,7 +15,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class Bubble extends BasicDynamicElement {
+public class Bubble extends BasicDynamicElement implements Projectile {
   private ArrayList<LevelElementAction> actions;
   private Boolean hasNPC;
 

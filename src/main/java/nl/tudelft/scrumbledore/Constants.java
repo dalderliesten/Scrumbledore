@@ -68,8 +68,8 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP 
-    = "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game "
+      + "states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
   public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
@@ -148,8 +148,9 @@ public final class Constants {
   // Player jump strength.
   public static final double PLAYER_JUMP = 22;
 
-  // Bubble horizontal movement speed
+  // Projectile horizontal movement speed
   public static final double BUBBLE_SPEED = 20;
+  public static final double FIREBALL_SPEED = 9;
   // Bubble horizontal fiction
   public static final double BUBBLE_FRICTION = 1.5;
   // Bubble horizontal fiction
@@ -158,11 +159,12 @@ public final class Constants {
   public static final double BUBBLE_BOUNCE = 8;
   // Number of steps a Bubble needs to stay alive.
   public static final double BUBBLE_LIFETIME = REFRESH_RATE * 3;
-  
-  // Number of steps a ChiliChicken needs to stay alive.
-  public static final double CHILI_LIFETIME = REFRESH_RATE * 3;
-  // Number of steps a TurtleTaco needs to stay alive.
-  public static final double TURTLE_LIFETIME = REFRESH_RATE * 3;
+
+  // Default lifetime player.
+  public static final double PLAYER_POWERUP_LIFETIME = REFRESH_RATE * 3;
+  // Powerups lifetime multiplier
+  public static final double CHILI_LIFETIME_MULTIPLIER  = 0.4;
+  public static final double TURTLE_LIFETIME_MULTIPLIER  = 0.7;
 
   // NPC horizontal movement speed
   public static final double NPC_SPEED = 4;
@@ -198,8 +200,8 @@ public final class Constants {
 
   // Generation of keymapping list to prevent action skipping.
   private static List<Map<KeyCode, LevelElementAction>> createKeyMapping() {
-    List<Map<KeyCode, LevelElementAction>> keyMapping = new ArrayList<Map<KeyCode, 
-        LevelElementAction>>();
+    List<Map<KeyCode, LevelElementAction>> keyMapping 
+      = new ArrayList<Map<KeyCode, LevelElementAction>>();
 
     keyMapping.add(createKeyMappingP1());
     keyMapping.add(createKeyMappingP2());

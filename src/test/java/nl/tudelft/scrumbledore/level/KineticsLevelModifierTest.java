@@ -2,6 +2,8 @@ package nl.tudelft.scrumbledore.level;
 
 import static org.junit.Assert.assertEquals;
 
+import nl.tudelft.scrumbledore.projectile.Bubble;
+
 //import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
