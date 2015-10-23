@@ -16,10 +16,10 @@ import org.junit.Test;
 /**
  * Test suite for the Logger class.
  * 
+ * @author David Alderliesten
  * @author Niels Warnars
  */
 public class LoggerTest {
-
   private Logger logger;
 
   /**
@@ -68,8 +68,8 @@ public class LoggerTest {
     logger.log("log_write_test");
 
     try {
-      BufferedReader reader = new BufferedReader(
-          new InputStreamReader(new FileInputStream(loggingFile), "UTF-8"));
+      BufferedReader reader = new BufferedReader(new InputStreamReader(new FileInputStream(
+          loggingFile), "UTF-8"));
 
       assertEquals("--------------------SCRUMBLEDORE LOGGING FILE", reader.readLine());
       String lastLine = "";
