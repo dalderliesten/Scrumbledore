@@ -7,8 +7,12 @@ package nl.tudelft.scrumbledore.game;
  */
 public class SinglePlayerGameFactory extends GameFactory {
 
-  
-  @Override
+
+  /**
+   * Creates a new instance of a Single Player Game.
+   * 
+   * @return a new instance of a Single Player Game.
+   */
   Game createGame() {
     return new SinglePlayerGame();
   }

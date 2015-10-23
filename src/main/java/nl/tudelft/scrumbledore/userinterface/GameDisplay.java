@@ -26,8 +26,6 @@ import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
-import nl.tudelft.scrumbledore.game.MultiPlayerGameFactory;
-import nl.tudelft.scrumbledore.game.SinglePlayerGameFactory;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelElement;
@@ -78,32 +76,20 @@ public final class GameDisplay {
   }
 
   /**
-   * Launch a new MultiPlayerGame.
+   * Creates a new game using a given game factory.
    * 
+   * @param factory
+   *          The game factory used for creating a new game.
    * @param passedStage
    *          The stage to draw to.
    */
-  public static void launchMultiPlayerGame(Stage passedStage) {
+  public static void createGame(GameFactory factory, Stage passedStage) {
     currentStage = passedStage;
-    GameFactory factory = new MultiPlayerGameFactory();
     currentGame = factory.makeGame();
 
     launchGame();
   }
 
-  /**
-   * Launch a new SinglePlayerGame.
-   * 
-   * @param passedStage
-   *          The stage to draw to.
-   */
-  public static void launchSinglePlayerGame(Stage passedStage) {
-    currentStage = passedStage;
-    GameFactory factory = new SinglePlayerGameFactory();
-    currentGame = factory.makeGame();
-
-    launchGame();
-  }
 
   /**
    * Handles the creation of a game and the associated interface.

@@ -7,8 +7,11 @@ package nl.tudelft.scrumbledore.game;
  */
 public class MultiPlayerGameFactory extends GameFactory {
 
-  
-  @Override
+  /**
+   * Creates a new instance of a Multi Player Game.
+   * 
+   * @return a new instance of a Multi Player Game.
+   */
   Game createGame() {
     return new MultiPlayerGame();
   }

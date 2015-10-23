@@ -11,6 +11,8 @@ import javafx.stage.Stage;
 import javafx.stage.WindowEvent;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.game.MultiPlayerGameFactory;
+import nl.tudelft.scrumbledore.game.SinglePlayerGameFactory;
 
 /**
  * The Mainmenu class performs all actions related to the main menu, as well as ensuring successful
@@ -105,7 +107,8 @@ public final class MainMenu {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        GameDisplay.launchSinglePlayerGame(gameStage);
+        SinglePlayerGameFactory factory = new SinglePlayerGameFactory();
+        GameDisplay.createGame(factory, gameStage);
       }
 
     });
@@ -121,7 +124,8 @@ public final class MainMenu {
     passedButton.setOnAction(new EventHandler<ActionEvent>() {
 
       public void handle(ActionEvent arg0) {
-        GameDisplay.launchMultiPlayerGame(gameStage);
+        MultiPlayerGameFactory factory = new MultiPlayerGameFactory();
+        GameDisplay.createGame(factory, gameStage);
       }
 
     });
