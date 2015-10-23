@@ -42,9 +42,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
         if (!(player instanceof Player)) {
           if (player.getLifetime() <= 0
-              || ((player instanceof PyroPepper) 
-              && player.hasAction(LevelElementAction.ShootStop))) {
-
+              || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
+              && player.hasAction(LevelElementAction.ShootStop)) {
             try {
               Player newP = new Player(player.getPosition().clone(), new Vector(
                   Constants.BLOCKSIZE, Constants.BLOCKSIZE));

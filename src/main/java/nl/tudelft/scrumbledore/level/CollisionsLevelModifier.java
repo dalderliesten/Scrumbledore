@@ -14,6 +14,7 @@ import nl.tudelft.scrumbledore.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
 import nl.tudelft.scrumbledore.powerup.TurtleTaco;
 import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
+import nl.tudelft.scrumbledore.projectile.BlueBubble;
 import nl.tudelft.scrumbledore.projectile.Fireball;
 import nl.tudelft.scrumbledore.projectile.Projectile;
 
@@ -255,7 +256,7 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (platform.inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(currentProjectile, platform, delta);
 
-          if (currentProjectile instanceof Fireball) {
+          if (currentProjectile instanceof Fireball || currentProjectile instanceof BlueBubble) {
             if (collision.collidingFromLeft() || collision.collidingFromRight()) {
               projectiles.remove(i);
             }

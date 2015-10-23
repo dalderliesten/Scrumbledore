@@ -86,12 +86,12 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
   }
 
   /**
-   * Modifies the stat of a bubble.
+   * Modifies the stat of a fireball.
    * 
    * @param level
-   *          , the level of the bubble.
+   *          , the level of the projectile.
    * @param delta
-   *          , the step in which this bubble is moving.
+   *          , the step in which this projectile is moving.
    */
   public static void modifyFireball(Level level, double delta) {
     ArrayList<Projectile> projectiles = level.getProjectiles();
@@ -110,6 +110,11 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
 
   }
 
+  /**
+   * Modifies the start of a BlueBubble.
+   * @param level , the level of the Bluebubble.
+   * @param delta , the step in which this Bluebubble is moving.
+   */
   public static void modifyBlueBubble(Level level, double delta) {
     ArrayList<Projectile> projectiles = level.getProjectiles();
 
