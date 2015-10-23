@@ -128,31 +128,30 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    */
   @SuppressWarnings("methodlength")
   public void checkShooting(DynamicElement player, Level level) {
-    Vector bubblePos = null;
+    Vector projectPos = null;
 
     try {
-      bubblePos = player.getPosition().clone();
+      projectPos = player.getPosition().clone();
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
-    ArrayList<Projectile> bubbles = level.getProjectiles();
+    ArrayList<Projectile> projectiles = level.getProjectiles();
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        Bubble newBubble = new Bubble(bubblePos, new Vector(Constants.BLOCKSIZE,
-            Constants.BLOCKSIZE));
-
-        bubbles.add(newBubble);
-        if (player.getLastMove() == LevelElementAction.MoveLeft) {
-          if (Constants.isLoggingWantShooting()) {
-            Logger.getInstance().log("Player shot in the left direction.");
-          }
-          newBubble.addAction(LevelElementAction.MoveLeft);
+        if (player instanceof PyroPepper) {
+          Fireball newFireball = new Fireball(projectPos, new Vector(Constants.BLOCKSIZE,
+              Constants.BLOCKSIZE));
+          projectiles.add(newFireball);
+          
+          checkShootingDirection(player, newFireball);
         } else {
-          if (Constants.isLoggingWantShooting()) {
-            Logger.getInstance().log("Player shot in the right direction.");
-          }
-          newBubble.addAction(LevelElementAction.MoveRight);
+          Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
+              Constants.BLOCKSIZE));
+
+          projectiles.add(newBubble);
+          
+          checkShootingDirection(player, newBubble);
         }
       }
       player.setFiring(true);
@@ -160,6 +159,25 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     if (player.hasAction(LevelElementAction.ShootStop)) {
       player.setFiring(false);
       player.removeAction(LevelElementAction.ShootStop);
+    }
+  }
+  
+  /**
+   * Checks whether a projectile should be shot to the left or right side.
+   * @param player , the player that shoots.
+   * @param projectile , the projectile the player is shooting.
+   */
+  public static void checkShootingDirection(DynamicElement player, Projectile projectile) {
+    if (player.getLastMove() == LevelElementAction.MoveLeft) {
+      if (Constants.isLoggingWantShooting()) {
+        Logger.getInstance().log("Player shot in the left direction.");
+      }
+      projectile.addAction(LevelElementAction.MoveLeft);
+    } else {
+      if (Constants.isLoggingWantShooting()) {
+        Logger.getInstance().log("Player shot in the right direction.");
+      }
+      projectile.addAction(LevelElementAction.MoveRight);
     }
   }
 }

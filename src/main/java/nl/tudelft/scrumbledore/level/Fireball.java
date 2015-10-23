@@ -116,7 +116,7 @@ public class Fireball extends BasicDynamicElement implements Projectile {
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
     ArrayList<Sprite> result = new ArrayList<Sprite>();
-    result.add(store.getAnimated("powerup-pyro-pepper").getFrame(steps));
+    result.add(store.get("powerup-pyro-pepper"));
     return result;
   }
 

@@ -245,26 +245,35 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectBubblePlatform(Level level, double delta) {
-    for (Projectile bubble : level.getProjectiles()) {
+    ArrayList<Projectile> projectiles = level.getProjectiles();
+    for (int i = 0; i < projectiles.size(); i++) {
+      Projectile currentProjectile = projectiles.get(i);
       for (Platform platform : level.getPlatforms()) {
-        if (platform.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
-          Collision collision = new Collision(bubble, platform, delta);
+        if (platform.inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)) {
+          Collision collision = new Collision(currentProjectile, platform, delta);
+          
+          if (currentProjectile instanceof Fireball) {
+            if (collision.collidingFromLeft() || collision.collidingFromRight()) {
+              projectiles.remove(i);
+              break;
+            }
+          }
 
           if (collision.collidingFromBottom()) {
-            bubble.getSpeed().setY(Constants.BUBBLE_BOUNCE);
-            bubble.snapBottom(platform);
+            currentProjectile.getSpeed().setY(Constants.BUBBLE_BOUNCE);
+            currentProjectile.snapBottom(platform);
             break;
           }
 
           if (collision.collidingFromLeft()) {
-            bubble.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
-            bubble.snapLeft(platform);
+            currentProjectile.getSpeed().setX(-Constants.BUBBLE_BOUNCE);
+            currentProjectile.snapLeft(platform);
             break;
           }
 
           if (collision.collidingFromRight()) {
-            bubble.getSpeed().setX(Constants.BUBBLE_BOUNCE);
-            bubble.snapRight(platform);
+            currentProjectile.getSpeed().setX(Constants.BUBBLE_BOUNCE);
+            currentProjectile.snapRight(platform);
             break;
           }
         }
