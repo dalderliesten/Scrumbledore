@@ -122,10 +122,12 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
       Projectile current = projectiles.get(i);
       if (current instanceof BlueBubble) {
 
-        if (current.hasAction(LevelElementAction.MoveLeft)) {
-          current.getSpeed().setX(-1 * Constants.FIREBALL_SPEED);
+        if (current.vSpeed() > -Constants.BUBBLE_FLOAT) {
+          current.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION * delta));
+        } else if (current.hasAction(LevelElementAction.MoveLeft)) {
+          current.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);
         } else if (current.hasAction(LevelElementAction.MoveRight)) {
-          current.getSpeed().setX(Constants.FIREBALL_SPEED);
+          current.getSpeed().setX(Constants.BUBBLE_SPEED);
         }
       }
     }

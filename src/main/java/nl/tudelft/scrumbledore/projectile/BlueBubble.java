@@ -22,7 +22,7 @@ public class BlueBubble extends BasicDynamicElement implements Projectile{
   public BlueBubble(Vector position, Vector size) {
     super(position, size);
     getFriction().setX(Constants.BUBBLE_FRICTION);
-    lifetime = 0;
+    lifetime = 3;
     actions = new ArrayList<LevelElementAction>();
     hasNPC = false;
   }

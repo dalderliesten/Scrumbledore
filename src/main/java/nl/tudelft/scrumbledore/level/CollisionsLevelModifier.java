@@ -15,6 +15,7 @@ import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
 import nl.tudelft.scrumbledore.powerup.TurtleTaco;
 import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
 import nl.tudelft.scrumbledore.projectile.BlueBubble;
+import nl.tudelft.scrumbledore.projectile.Bubble;
 import nl.tudelft.scrumbledore.projectile.Fireball;
 import nl.tudelft.scrumbledore.projectile.Projectile;
 
@@ -256,7 +257,7 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (platform.inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(currentProjectile, platform, delta);
 
-          if (currentProjectile instanceof Fireball || currentProjectile instanceof BlueBubble) {
+          if (currentProjectile instanceof Fireball) {
             if (collision.collidingFromLeft() || collision.collidingFromRight()) {
               projectiles.remove(i);
             }
@@ -344,22 +345,47 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (int i = 0; i < enemies.size(); i++) {
 
         for (int j = 0; j < projectiles.size(); j++) {
-          Projectile currentProjectile = projectiles.get(i);
+          Projectile currentP = projectiles.get(j);
           // Temporary fix to prevent race condition.
-          if (!(currentProjectile.hasNPC()) && enemies.size() != i
-              && enemies.get(i).inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)
-              && new Collision(currentProjectile, enemies.get(i), delta).colliding()) {
+          if (!(currentP.hasNPC()) && enemies.size() != i
+              && enemies.get(i).inBoxRangeOf(currentP, Constants.COLLISION_RADIUS)
+              && new Collision(currentP, enemies.get(i), delta).colliding()) {
 
             enemies.remove(i);
-            if (!(currentProjectile instanceof Fireball)) {
-              enemyBubbles.add(currentProjectile);
-              currentProjectile.setHasNPC(true);
-              currentProjectile.setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
+            if (!(currentP instanceof Fireball)) {
+              enemyBubbles.add(currentP);
+              currentP.setHasNPC(true);
+              currentP.setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
             }
 
             if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("An enemy was encapsulated by a bubble.");
             }
+          }
+        }
+      }
+    }
+  }
+
+  /**
+   * Detects collission between a BlueberryBubble and an enemy.
+   * @param level , the level of the projectile.
+   * @param delta , the step time of the projectile.
+   */
+  protected void detectBlueBubbleEnemey(Level level, double delta) {
+    ArrayList<NPC> enemies = level.getNPCs();
+    ArrayList<Projectile> projectiles = level.getProjectiles();
+
+    if (projectiles.size() > 0 && enemies.size() > 0) {
+      for (int i = 0; i < enemies.size(); i++) {
+        for (int j = 0; j < projectiles.size(); j++) {
+          Projectile currentP = projectiles.get(j);
+
+          if (currentP.getLifetime() > 0
+              && enemies.get(i).inBoxRangeOf(currentP, Constants.COLLISION_RADIUS)
+              && new Collision(currentP, enemies.get(i), delta).colliding()) {
+
+            enemies.remove(i);
           }
         }
       }
