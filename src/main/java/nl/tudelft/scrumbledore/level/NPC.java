@@ -218,5 +218,4 @@ public class NPC extends BasicDynamicElement {
   public void setLifetime(double newTime) {
   }
 
-
 }
