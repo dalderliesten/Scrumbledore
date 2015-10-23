@@ -26,7 +26,7 @@ public class NPCLevelModifier implements LevelModifier {
     for (NPC npc : level.getNPCs()) {
 
       if (npc.hasAction(LevelElementAction.Jump)) {
-        npc.getSpeed().setY(-Constants.NPC_SPEED);
+        npc.getSpeed().setY(-Constants.PLAYER_JUMP / 1.1);
       }
 
       if (npc.hasAction(LevelElementAction.MoveLeft)) {
