@@ -153,7 +153,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectPlayerPlatform(Level level, double delta) {
     for (DynamicElement player : level.getPlayers()) {
-      // To accelerate the second iteration over the platforms
+      // To accelerate the second iteration over the platforms.
       ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
@@ -166,7 +166,7 @@ public class CollisionsLevelModifier implements LevelModifier {
           }
         }
       }
-      // Since vertical collision detection has to be done before horizontal
+      // Since vertical collision detection has to be done before horizontal.
       for (Platform platform : candidates) {
         Collision collision = new Collision(player, platform, delta);
 
@@ -200,7 +200,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   public void detectNPCPlatform(Level level, double delta) {
     for (NPC npc : level.getNPCs()) {
-      // To accelerate the second iteration over the platforms
+      // To accelerate the second iteration over the platforms.
       ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(npc, Constants.COLLISION_RADIUS)) {
@@ -211,9 +211,14 @@ public class CollisionsLevelModifier implements LevelModifier {
             npc.stopVertically();
             npc.snapTop(platform);
           }
+
+          if (collision.collidingFromBottom() && npc.vSpeed() < 0) {
+            npc.stopVertically();
+            npc.snapBottom(platform);
+          }
         }
       }
-      // Since vertical collision detection has to be done before horizontal
+      // Since vertical collision detection has to be done before horizontal.
       for (Platform platform : candidates) {
         Collision collision = new Collision(npc, platform, delta);
 
@@ -222,12 +227,20 @@ public class CollisionsLevelModifier implements LevelModifier {
             npc.stopHorizontally();
             npc.snapLeft(platform);
             npc.addAction(LevelElementAction.MoveLeft);
+
+            if (!collision.collidingFromTop() && npc.vSpeed() == 0) {
+              npc.addAction(LevelElementAction.Jump);
+            }
           }
 
           if (collision.collidingFromRight() && npc.hSpeed() < 0) {
             npc.stopHorizontally();
             npc.snapRight(platform);
             npc.addAction(LevelElementAction.MoveRight);
+
+            if (!collision.collidingFromTop() && npc.vSpeed() == 0) {
+              npc.addAction(LevelElementAction.Jump);
+            }
           }
         }
       }

@@ -10,7 +10,6 @@ import nl.tudelft.scrumbledore.Constants;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Collision {
-
   private LevelElement collider;
   private LevelElement collidee;
   private double delta;
