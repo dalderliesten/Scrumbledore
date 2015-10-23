@@ -137,7 +137,7 @@ public final class Logger {
 
     try {
       BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(
-          loggingFile)));
+          loggingFile), "UTF-8"));
 
       String currentElement = null;
 
@@ -163,7 +163,7 @@ public final class Logger {
     
     try {
       BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(
-          loggingFile)));
+          loggingFile), "UTF-8"));
 
       toReturn = fileReader.readLine();
 
@@ -185,7 +185,7 @@ public final class Logger {
 
     try {
       BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(
-          loggingFile)));
+          loggingFile), "UTF-8"));
       
       String currentElement = null;
 
