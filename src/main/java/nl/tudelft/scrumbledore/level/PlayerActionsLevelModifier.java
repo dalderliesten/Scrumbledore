@@ -23,6 +23,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
     ArrayList<DynamicElement> players = level.getPlayers();
 

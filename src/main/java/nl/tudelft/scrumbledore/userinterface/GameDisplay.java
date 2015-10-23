@@ -261,7 +261,7 @@ public final class GameDisplay {
     Level currentLevel = currentGame.getCurrentLevel();
     if (currentLevel.getNPCs().isEmpty() && currentLevel.getEnemyBubbles().isEmpty()) {
       if (endStepsSnapShot == 0) {
-        advanceLabel = new String(Constants.ADVANCINGLABEL);
+        advanceLabel = Constants.ADVANCINGLABEL;
         staticContext.setFill(Color.WHITE);
         staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 100,
             (Constants.LEVELY / 2) - 130);

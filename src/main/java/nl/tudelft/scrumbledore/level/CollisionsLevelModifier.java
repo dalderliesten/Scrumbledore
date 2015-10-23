@@ -31,8 +31,6 @@ public class CollisionsLevelModifier implements LevelModifier {
   /**
    * Constructs a new Collisions Level Modifier using a given Kinetics Level Modifier.
    * 
-   * @param kinetics
-   *          The Kinetics Level Modifier to be used.
    * @param score
    *          The Score Counter to be used.
    */

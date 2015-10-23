@@ -9,7 +9,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * @author Floris Doolaard
  *
  */
-public abstract class BasicDynamicElement implements DynamicElement{
+public abstract class BasicDynamicElement implements DynamicElement {
 
   private Vector position;
   private Vector size;
