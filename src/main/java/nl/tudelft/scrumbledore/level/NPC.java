@@ -8,6 +8,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
 /**
  * Class representing an NPC in a game.
  * 
+ * @author David Alderliesten
  * @author Niels Warnars
  */
 public class NPC extends BasicDynamicElement {
