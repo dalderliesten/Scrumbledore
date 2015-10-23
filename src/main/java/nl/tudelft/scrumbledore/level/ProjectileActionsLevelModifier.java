@@ -39,7 +39,7 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
     ArrayList<NPC> enemies = level.getNPCs();
     ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
 
-    Iterator<Projectile> iter = level.getBubbles().iterator();
+    Iterator<Projectile> iter = level.getProjectiles().iterator();
 
     while (iter.hasNext()) {
       Projectile bub = iter.next();
@@ -72,8 +72,14 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
     }
   }
   
+  /**
+   * Modifies the stat of a bubble.
+   * @param level , the level of the bubble.
+   * @param delta , the step in which this bubble is moving.
+   */
   public static void modifyFireball(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
+    ArrayList<Projectile> projectiles = level.getProjectiles();
+    
   }
 }

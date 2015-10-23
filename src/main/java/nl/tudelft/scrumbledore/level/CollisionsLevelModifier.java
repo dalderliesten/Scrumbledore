@@ -245,7 +245,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectBubblePlatform(Level level, double delta) {
-    for (Projectile bubble : level.getBubbles()) {
+    for (Projectile bubble : level.getProjectiles()) {
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubble, platform, delta);
@@ -282,7 +282,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectPlayerBubble(Level level, double delta) {
     for (DynamicElement player : level.getPlayers()) {
-      for (Projectile bubble : level.getBubbles()) {
+      for (Projectile bubble : level.getProjectiles()) {
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && !(bubble.hasNPC())) {
@@ -301,7 +301,7 @@ public class CollisionsLevelModifier implements LevelModifier {
             }
             level.getFruits().add(newFruit);
             level.getEnemyBubbles().remove(bubble);
-            level.getBubbles().remove(bubble);
+            level.getProjectiles().remove(bubble);
 
             if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("Player executed an encapsulated enemy.");
@@ -324,7 +324,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectBubbleEnemy(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Projectile> bubbles = level.getBubbles();
+    ArrayList<Projectile> bubbles = level.getProjectiles();
     ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
 
     if (bubbles.size() > 0 && enemies.size() > 0) {
@@ -359,7 +359,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The number of steps passed since this method was last executed.
    */
   protected void detectBubbleBubble(Level level, double delta) {
-    ArrayList<Projectile> bubbles = level.getBubbles();
+    ArrayList<Projectile> bubbles = level.getProjectiles();
 
     for (Projectile bubble : bubbles) {
       for (Projectile other : bubbles) {

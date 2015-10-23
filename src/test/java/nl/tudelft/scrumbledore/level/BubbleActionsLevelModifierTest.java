@@ -90,7 +90,7 @@ public class BubbleActionsLevelModifierTest {
     bubble.decreaseLifetime(bubble.getLifetime());
     bubble2.addAction(LevelElementAction.MoveLeft);
     modifier.modify(level, .5);
-    assertFalse(level.getBubbles().contains(bubble));
+    assertFalse(level.getProjectiles().contains(bubble));
   }
 
   /**
