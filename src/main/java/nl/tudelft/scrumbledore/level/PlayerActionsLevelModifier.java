@@ -4,7 +4,9 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
 import nl.tudelft.scrumbledore.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.powerup.TurtleTaco;
 
 /**
@@ -45,7 +47,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         player.removeAction(LevelElementAction.Shoot);
       }
 
-      if (player instanceof ChiliChicken || player instanceof TurtleTaco) {
+      if (player instanceof ChiliChicken || player instanceof TurtleTaco
+          || player instanceof PyroPepper || player instanceof BlueberryBubble) {
         if (player.getLifetime() <= 0) {
           try {
             Player newP = new Player(player.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
