@@ -245,7 +245,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectBubblePlatform(Level level, double delta) {
-    for (Bubble bubble : level.getBubbles()) {
+    for (Projectile bubble : level.getBubbles()) {
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubble, platform, delta);
@@ -282,7 +282,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectPlayerBubble(Level level, double delta) {
     for (DynamicElement player : level.getPlayers()) {
-      for (Bubble bubble : level.getBubbles()) {
+      for (Projectile bubble : level.getBubbles()) {
         if (bubble.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(player, bubble, delta);
           if (collision.collidingFromTop() && !(bubble.hasNPC())) {
@@ -324,8 +324,8 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectBubbleEnemy(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Bubble> bubbles = level.getBubbles();
-    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
+    ArrayList<Projectile> bubbles = level.getBubbles();
+    ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
 
     if (bubbles.size() > 0 && enemies.size() > 0) {
       for (int i = 0; i < enemies.size(); i++) {
@@ -359,10 +359,10 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The number of steps passed since this method was last executed.
    */
   protected void detectBubbleBubble(Level level, double delta) {
-    ArrayList<Bubble> bubbles = level.getBubbles();
+    ArrayList<Projectile> bubbles = level.getBubbles();
 
-    for (Bubble bubble : bubbles) {
-      for (Bubble other : bubbles) {
+    for (Projectile bubble : bubbles) {
+      for (Projectile other : bubbles) {
         if (!other.equals(bubble) && other.inBoxRangeOf(bubble, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(bubble, other, delta);
           if (collision.colliding()) {

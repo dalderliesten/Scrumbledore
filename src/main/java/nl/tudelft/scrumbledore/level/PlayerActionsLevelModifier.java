@@ -25,6 +25,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
+  @SuppressWarnings("PMD.CyclomaticComplexity")
   public void modify(Level level, double delta) {
     ArrayList<DynamicElement> players = level.getPlayers();
 
@@ -134,7 +135,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
-    ArrayList<Bubble> bubbles = level.getBubbles();
+    ArrayList<Projectile> bubbles = level.getBubbles();
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {

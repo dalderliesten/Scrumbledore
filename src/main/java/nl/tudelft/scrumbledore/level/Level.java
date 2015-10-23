@@ -15,9 +15,9 @@ public class Level {
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
-  private ArrayList<Bubble> bubbles;
+  private ArrayList<Projectile> bubbles;
   private ArrayList<DynamicElement> players;
-  private ArrayList<Bubble> encapEnemies;
+  private ArrayList<Projectile> encapEnemies;
   private ArrayList<PowerupPickUp> powerups;
 
   /**
@@ -25,8 +25,8 @@ public class Level {
    */
   public Level() {
     platforms = new ArrayList<Platform>();
-    bubbles = new ArrayList<Bubble>();
-    encapEnemies = new ArrayList<Bubble>();
+    bubbles = new ArrayList<Projectile>();
+    encapEnemies = new ArrayList<Projectile>();
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
     players = new ArrayList<DynamicElement>();
@@ -122,7 +122,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects.
    */
-  public ArrayList<Bubble> getBubbles() {
+  public ArrayList<Projectile> getBubbles() {
     return bubbles;
   }
 
@@ -131,7 +131,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects with enemies in them.
    */
-  public ArrayList<Bubble> getEnemyBubbles() {
+  public ArrayList<Projectile> getEnemyBubbles() {
     return encapEnemies;
   }
 

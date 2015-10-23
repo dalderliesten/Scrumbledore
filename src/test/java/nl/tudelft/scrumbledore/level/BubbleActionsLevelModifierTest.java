@@ -20,7 +20,7 @@ public class BubbleActionsLevelModifierTest {
   private Bubble bubble;
   private Bubble bubble2;
   private Level level;
-  private BubbleActionsLevelModifier modifier;
+  private ProjectileActionsLevelModifier modifier;
 
   /**
    * Setup a test object, Player Actions Level Modifier, and dependencies: a Player and a Level
@@ -37,7 +37,7 @@ public class BubbleActionsLevelModifierTest {
     level.addElement(npc);
     level.addElement(bubble);
     level.addElement(bubble2);
-    modifier = new BubbleActionsLevelModifier();
+    modifier = new ProjectileActionsLevelModifier();
   }
 
   /**

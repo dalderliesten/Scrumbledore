@@ -6,17 +6,17 @@ import java.util.Iterator;
 import nl.tudelft.scrumbledore.Constants;
 
 /**
- * Level Modifier that processes the actions to be performed on the Bubble.
+ * Level Modifier that processes the actions to be performed on the projectile.
  * 
  * @author Floris Doolaard
  *
  */
 @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
     "PMD.StdCyclomaticComplexity" })
-public class BubbleActionsLevelModifier implements LevelModifier {
+public class ProjectileActionsLevelModifier implements LevelModifier {
 
   /**
-   * Processing the actions to be performed on the Bubble.
+   * Processing the actions to be performed on projectiles.
    * 
    * @param level
    *          The current level.
@@ -25,18 +25,29 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
-    ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
+    modifyBubble(level, delta);
 
-    Iterator<Bubble> iter = level.getBubbles().iterator();
+  }
+
+  /**
+   * Modifies the stat of a bubble.
+   * @param level , the level of the bubble.
+   * @param delta , the step in which this bubble is moving.
+   */
+  @SuppressWarnings("checkstyle:methodlength")
+  public static void modifyBubble(Level level, double delta) {
+    ArrayList<NPC> enemies = level.getNPCs();
+    ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
+
+    Iterator<Projectile> iter = level.getBubbles().iterator();
 
     while (iter.hasNext()) {
-      Bubble bub = iter.next();
+      Projectile bub = iter.next();
       if (bub.getLifetime() <= 0) {
         if (bub.hasNPC()) {
           try {
-            enemies.add(new NPC(bub.getPosition().clone(),
-                new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
+            enemies.add(new NPC(bub.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
+                Constants.BLOCKSIZE)));
           } catch (CloneNotSupportedException e) {
             e.printStackTrace();
           }
@@ -59,7 +70,10 @@ public class BubbleActionsLevelModifier implements LevelModifier {
         bub.clearActions();
       }
     }
-
   }
-
+  
+  public static void modifyFireball(Level level, double delta) {
+    ArrayList<NPC> enemies = level.getNPCs();
+    ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
+  }
 }
