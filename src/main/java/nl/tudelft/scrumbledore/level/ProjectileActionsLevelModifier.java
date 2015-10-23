@@ -95,9 +95,9 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
       if (current instanceof Fireball) {
 
         if (current.hasAction(LevelElementAction.MoveLeft)) {
-          current.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);
+          current.getSpeed().setX(-1 * Constants.FIREBALL_SPEED);
         } else if (current.hasAction(LevelElementAction.MoveRight)) {
-          current.getSpeed().setX(Constants.BUBBLE_SPEED);
+          current.getSpeed().setX(Constants.FIREBALL_SPEED);
         }
       }
     }

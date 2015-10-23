@@ -244,6 +244,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * @param delta
    *          The delta provided by the StepTimer.
    */
+  @SuppressWarnings("PMD.CollapsibleIfStatements")
   protected void detectBubblePlatform(Level level, double delta) {
     ArrayList<Projectile> projectiles = level.getProjectiles();
     for (int i = 0; i < projectiles.size(); i++) {
@@ -255,8 +256,8 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (currentProjectile instanceof Fireball) {
             if (collision.collidingFromLeft() || collision.collidingFromRight()) {
               projectiles.remove(i);
-              break;
             }
+            break;
           }
 
           if (collision.collidingFromBottom()) {
@@ -333,23 +334,26 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectBubbleEnemy(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Projectile> bubbles = level.getProjectiles();
+    ArrayList<Projectile> projectiles = level.getProjectiles();
     ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
 
-    if (bubbles.size() > 0 && enemies.size() > 0) {
+    if (projectiles.size() > 0 && enemies.size() > 0) {
       for (int i = 0; i < enemies.size(); i++) {
 
-        for (int j = 0; j < bubbles.size(); j++) {
+        for (int j = 0; j < projectiles.size(); j++) {
+          Projectile currentProjectile = projectiles.get(i);
           // Temporary fix to prevent race condition.
-          if (!(bubbles.get(j).hasNPC()) && enemies.size() != i
-              && enemies.get(i).inBoxRangeOf(bubbles.get(j), Constants.COLLISION_RADIUS)
-              && new Collision(bubbles.get(j), enemies.get(i), delta).colliding()) {
+          if (!(currentProjectile.hasNPC()) && enemies.size() != i
+              && enemies.get(i).inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)
+              && new Collision(currentProjectile, enemies.get(i), delta).colliding()) {
 
             enemies.remove(i);
-            enemyBubbles.add(bubbles.get(j));
-            bubbles.get(j).setHasNPC(true);
-            bubbles.get(j).setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
-
+            if(!(currentProjectile instanceof Fireball)){
+              enemyBubbles.add(currentProjectile);
+              currentProjectile.setHasNPC(true);
+              currentProjectile.setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
+            }
+            
             if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("An enemy was encapsulated by a bubble.");
             }
