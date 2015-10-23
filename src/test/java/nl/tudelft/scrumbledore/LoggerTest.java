@@ -97,8 +97,19 @@ public class LoggerTest {
     logger.log("log_write_test");
 
     ArrayList<String> toTest = logger.getLines();
-    
+
     assertFalse(toTest.isEmpty());
+  }
+
+  /**
+   * Test whetehr the getLastLine function works by checking if the last element matches the final
+   * element of the default log.
+   */
+  @Test
+  public final void testGetLastLine() {
+    String toCompare = logger.getLastLine();
+    
+    assertEquals(toCompare, "log_write_test");
   }
 
 }

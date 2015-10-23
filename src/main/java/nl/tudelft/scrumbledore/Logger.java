@@ -140,10 +140,38 @@ public final class Logger {
           loggingFile)));
 
       String currentElement = null;
-      
+
       while ((currentElement = fileReader.readLine()) != null) {
         toReturn.add(currentElement);
       }
+
+      fileReader.close();
+    } catch (IOException e) {
+      System.out.println(e);
+    }
+
+    return toReturn;
+  }
+
+  /**
+   * Fetches the last line of the current logger and returns it.
+   * 
+   * @return A string with the last line.
+   */
+  public String getLastLine() {
+    String toReturn = null;
+
+    try {
+      BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(
+          loggingFile)));
+      
+      String currentElement = null;
+
+      while ((currentElement = fileReader.readLine()) != null) {
+        toReturn = currentElement;
+      }
+
+      fileReader.close();
     } catch (IOException e) {
       System.out.println(e);
     }
