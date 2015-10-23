@@ -9,6 +9,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * @author Floris Doolaard
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicDynamicElement implements DynamicElement {
 
   private Vector position;
