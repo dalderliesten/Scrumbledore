@@ -102,13 +102,23 @@ public class LoggerTest {
   }
 
   /**
-   * Test whetehr the getLastLine function works by checking if the last element matches the final
+   * Test whether the getFirstLine works by querying the method and comparing it to the default
+   * first line.
+   */
+  @Test
+  public final void testGetFirstLine() {
+    String toCompare = logger.getFirstLine();
+    assertEquals(toCompare, "--------------------SCRUMBLEDORE LOGGING FILE");
+  }
+
+  /**
+   * Test whether the getLastLine function works by checking if the last element matches the final
    * element of the default log.
    */
   @Test
   public final void testGetLastLine() {
     String toCompare = logger.getLastLine();
-    
+
     assertEquals(toCompare, "log_write_test");
   }
 

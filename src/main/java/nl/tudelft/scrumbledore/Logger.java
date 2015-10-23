@@ -152,6 +152,28 @@ public final class Logger {
 
     return toReturn;
   }
+  
+  /**
+   * Fetches the first line of the current logger and returns it.
+   * 
+   * @return A string with the first line.
+   */
+  public String getFirstLine() {
+    String toReturn = null;
+    
+    try {
+      BufferedReader fileReader = new BufferedReader(new InputStreamReader(new FileInputStream(
+          loggingFile)));
+
+      toReturn = fileReader.readLine();
+
+      fileReader.close();
+    } catch (IOException e) {
+      System.out.println(e);
+    }
+    
+    return toReturn;
+  }
 
   /**
    * Fetches the last line of the current logger and returns it.
