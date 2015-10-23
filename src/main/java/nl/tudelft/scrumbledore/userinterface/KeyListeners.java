@@ -8,8 +8,8 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
 import nl.tudelft.scrumbledore.game.Game;
-import nl.tudelft.scrumbledore.level.Player;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.DynamicElement;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * Handles all the key event listeners of the gui.
@@ -62,8 +62,8 @@ public class KeyListeners {
 
       public void handle(KeyEvent keyPressed) {
         KeyCode keyCode = keyPressed.getCode();
-        ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (Player player : players) {
+        ArrayList<DynamicElement> players = game.getCurrentLevel().getPlayers();
+        for (DynamicElement player : players) {
           player.addAction(keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode));
         }
       }
@@ -79,9 +79,9 @@ public class KeyListeners {
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
         
-        ArrayList<Player> players = game.getCurrentLevel().getPlayers();
-        for (Player player : players) { 
-          player.addAction(PlayerAction.invertAction(
+        ArrayList<DynamicElement> players = game.getCurrentLevel().getPlayers();
+        for (DynamicElement player : players) { 
+          player.addAction(LevelElementAction.invertAction(
               keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode)));
           player.removeAction((keybindings.getKeybinding(
               player.getPlayerNumber()).getAction(keyCode)));

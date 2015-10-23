@@ -1,12 +1,12 @@
 package nl.tudelft.scrumbledore.game;
 
-import nl.tudelft.scrumbledore.level.BubbleActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.CollisionsLevelModifier;
 import nl.tudelft.scrumbledore.level.GravityLevelModifier;
 import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
-import nl.tudelft.scrumbledore.level.LevelModifier;
 import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.WarpLevelModifier;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Class responsible for creating different types of Games. Conforming to the Factory design
@@ -15,7 +15,7 @@ import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
  * @author Jesse Tilro
  *
  */
-public class GameFactory {
+public abstract class GameFactory {
 
   /**
    * Constructs a new GameFactory that utilizes a given LevelParser.
@@ -24,41 +24,36 @@ public class GameFactory {
   }
 
   /**
-   * Make a new SinglePlayerGame.
-   * 
-   * @return The SinglePlayerGame.
+   * Makes a new Single / MultiPlayer game.
+
+   * @return A SinglePlayer or MultiPlayer game.
    */
-  public Game makeSinglePlayerGame() {
-    Game game = new SinglePlayerGame();
+  public Game makeGame() {
+    Game game = createGame();
     makeLevelModifiers(game);
     return game;
   }
 
   /**
-   * Make a new MultiPlayerGame.
+   * Abstract method implemented by child classes for the creation of a specific type of game.
    * 
-   * @return The MultiPlayerGame.
+   * @return A Single Player or MultiPlayer game.
    */
-  public Game makeMultiPlayerGame() {
-    Game game = new MultiPlayerGame();
-    makeLevelModifiers(game);
-    return game;
-  }
+  abstract Game createGame();
 
-  private void makeLevelModifiers(Game game) {
-    KineticsLevelModifier kinetics = new KineticsLevelModifier();
-    LevelModifier player = new PlayerActionsLevelModifier();
-    LevelModifier gravity = new GravityLevelModifier();
-    LevelModifier npc = new NPCLevelModifier();
-    LevelModifier collisions = new CollisionsLevelModifier(kinetics, game.getScoreCounter());
-    LevelModifier bubbles = new BubbleActionsLevelModifier();
-
-    game.registerLevelModifier(player);
-    game.registerLevelModifier(gravity);
-    game.registerLevelModifier(npc);
-    game.registerLevelModifier(bubbles);
-    game.registerLevelModifier(collisions);
-    game.registerLevelModifier(kinetics);
+  /**
+   * Registers Level Modifiers to a given game.
+   * 
+   * @param game A given game.
+   */
+  protected void makeLevelModifiers(Game game) {
+    game.registerLevelModifier(new PlayerActionsLevelModifier());
+    game.registerLevelModifier(new GravityLevelModifier());
+    game.registerLevelModifier(new NPCLevelModifier());
+    game.registerLevelModifier(new ProjectileActionsLevelModifier());
+    game.registerLevelModifier(new CollisionsLevelModifier(game.getScoreCounter()));
+    game.registerLevelModifier(new KineticsLevelModifier());
+    game.registerLevelModifier(new WarpLevelModifier());
   }
 
 }

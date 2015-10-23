@@ -1,11 +1,16 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
+
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
+
 /**
  * Class representing a Platform in a game.
  * 
  * @author Niels Warnars
  */
-public class Platform extends LevelElement {
+public class Platform extends BasicStaticElement {
   private boolean isPassable;
   
   /**
@@ -22,23 +27,11 @@ public class Platform extends LevelElement {
     isPassable = false;
   }
 
-
-  /**
-   * Dummy HashCode method to satisfy code quality tools.
-   */
   @Override
   public int hashCode() {
     return 0;
   }
-  
-  
-  /**
-   * Check whether a given object is equal to this instance.
-   * 
-   * @param other
-   *          Another instance.
-   * @return A Boolean.
-   */
+
   @Override
   public boolean equals(Object other) {
     if (other instanceof Platform) {
@@ -72,6 +65,22 @@ public class Platform extends LevelElement {
    */
   public void setPassable(boolean isPassable) {
     this.isPassable = isPassable;
+  }
+  
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    SpriteStore store = SpriteStore.getInstance();
+    String id = "wall-1";
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    result.add(store.get(id));
+    return result;
   }
 
 }

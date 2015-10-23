@@ -1,10 +1,10 @@
 package nl.tudelft.scrumbledore.sprite;
 
 import static org.junit.Assert.assertEquals;
-
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.Vector;
 
 /**
  * Test Suite for the Sprite class.
@@ -44,4 +44,13 @@ public class SpriteTest {
     assertEquals(expectedPath, test.getPath());
   }
 
+  /**
+   * Test the getDrawPosition method which should return the middle coordinates of a sprite.
+   */
+  @Test
+  public void testGetDrawPosition() {
+    Sprite test = new Sprite("file", "ext", "dir/", new Vector(32, 32));
+    Vector res = test.getDrawPosition(new Vector(32, 32));
+    assertEquals(new Vector(16.0d, 16.0d), res);
+  }
 }

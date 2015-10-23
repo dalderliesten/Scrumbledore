@@ -1,11 +1,16 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
+
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
+
 /**
  * Class representing a Fruit in a game.
  * 
  * @author Niels Warnars, Floris Doolaard
  */
-public class Fruit extends LevelElement {
+public class Fruit extends BasicDynamicElement {
   private int value;
   private Boolean pickable;
 
@@ -24,27 +29,16 @@ public class Fruit extends LevelElement {
     pickable = false;
   }
 
-  /**
-   * Dummy HashCode method to satisfy code quality tools.
-   */
   @Override
   public int hashCode() {
     return 0;
   }
 
-  /**
-   * Check whether a given object is equal to this instance.
-   * 
-   * @param other
-   *          Another instance.
-   * @return A Boolean.
-   */
   @Override
   public boolean equals(Object other) {
     if (other instanceof Fruit) {
       Fruit that = (Fruit) other;
-      return this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize());
+      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
     return false;
@@ -88,4 +82,160 @@ public class Fruit extends LevelElement {
     pickable = bool;
   }
 
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    SpriteStore store = SpriteStore.getInstance();
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    result.add(store.getAnimated("fruit").getFrame(posX()));
+    return result;
+  }
+
+  /**
+   * Add an action to be performed in the next step.
+   * 
+   * @param action
+   *          A LevelElementAction
+   */
+  public void addAction(LevelElementAction action) {
+  }
+
+  /**
+   * Remove all actions from the queue.
+   */
+  public void clearActions() {
+  }
+  
+  /**
+   * Checking wether the element is alive.
+   * 
+   * @return The boolean if the element is alive.
+   */
+  public Boolean isAlive() {
+    return false;
+  }
+
+  /**
+   * Setting the life of the element.
+   * 
+   * @param bool
+   *          Can be True or False, stated on situation of element.
+   */
+  public void setAlive(Boolean bool) {
+  }
+
+  /**
+   * Gets the id of the current player.
+   * 
+   * @return Integer that represents the players number in the game.
+   */
+  public int getPlayerNumber() {
+    return 0;
+  }
+
+  /**
+   * Sets the id of the current player.
+   * 
+   * @param id
+   *          Integer that represents the players number in the game.
+   */
+  public void setPlayerNumber(int id) {
+  }
+
+  /**
+   * Check whether the given action is queued for the next step.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   * @return Boolean.
+   */
+  public boolean hasAction(LevelElementAction action) {
+    return false;
+  }
+
+  /**
+   * Remove the given action from the actions queue.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   */
+  public void removeAction(LevelElementAction action) {
+  }
+
+  /**
+   * Get the last horizontal move performed.
+   * 
+   * @return The last move performed.
+   */
+  public LevelElementAction getLastMove() {
+    return null;
+  }
+
+  /**
+   * Set the last performed horizontal move.
+   * 
+   * @param action
+   *          The last move action performed.
+   */
+  public void setLastMove(LevelElementAction action) {    
+  }
+
+  /**
+   * Return whether the Player is firing.
+   * 
+   * @return whether the Player is firing
+   */
+  public Boolean isFiring() {
+    return false;
+  }
+
+  /**
+   * Set whether the Player is firing.
+   * 
+   * @param isFiring
+   *          whether the Player is firing
+   */
+  public void setFiring(Boolean isFiring) {
+  }
+
+  /**
+   * Gives a list of current actions of the player.
+   * @return a list of actions
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return null;
+  }
+
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+  }
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return 0;
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
+  }
 }

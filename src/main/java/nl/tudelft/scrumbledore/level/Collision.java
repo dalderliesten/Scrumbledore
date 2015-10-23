@@ -10,7 +10,6 @@ import nl.tudelft.scrumbledore.Constants;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Collision {
-
   private LevelElement collider;
   private LevelElement collidee;
   private double delta;
@@ -56,9 +55,9 @@ public class Collision {
     if (!touchingLeft() && !touchingRight()) {
       if (collider.getBottom() < collidee.getTop() && collider.getSpeed().getY() > 0) {
         // To anticipate movement in the next step
-        kinetics.addSpeed(collider, delta);
+        kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
-        kinetics.removeSpeed(collider, delta);
+        kinetics.revertMove(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -80,9 +79,9 @@ public class Collision {
     if (!touchingLeft() && !touchingRight()) {
       if (collider.getTop() > collidee.getBottom() && collider.getSpeed().getY() < 0) {
         // To anticipate movement in the next step
-        kinetics.addSpeed(collider, delta);
+        kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
-        kinetics.removeSpeed(collider, delta);
+        kinetics.revertMove(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -104,9 +103,9 @@ public class Collision {
     if (!touchingTop() && !touchingBottom()) {
       if (collider.getRight() < collidee.getLeft() && collider.getSpeed().getX() > 0) {
         // To anticipate movement in the next step
-        kinetics.addSpeed(collider, delta);
+        kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
-        kinetics.removeSpeed(collider, delta);
+        kinetics.revertMove(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -129,9 +128,9 @@ public class Collision {
       // If the collider is about to collide, anticipate.
       if (collider.getLeft() > collidee.getRight() && collider.getSpeed().getX() < 0) {
         // Anticipate movement
-        kinetics.addSpeed(collider, delta);
+        kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
-        kinetics.removeSpeed(collider, delta);
+        kinetics.revertMove(collider, delta);
 
         if (collisionExpected) {
           return true;
@@ -210,8 +209,7 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingLeft() {
-    return collider.getLeft() >= collidee.getLeft() 
-        && collider.getLeft() <= collidee.getRight();
+    return collider.getLeft() >= collidee.getLeft() && collider.getLeft() <= collidee.getRight();
   }
 
   /**
@@ -220,8 +218,7 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingRight() {
-    return collider.getRight() >= collidee.getLeft() 
-        && collider.getRight() <= collidee.getRight();
+    return collider.getRight() >= collidee.getLeft() && collider.getRight() <= collidee.getRight();
   }
 
   /**
@@ -230,8 +227,7 @@ public class Collision {
    * @return Boolean.
    */
   private boolean collidingTop() {
-    return collider.getTop() >= collidee.getTop()
-        && collider.getTop() <= collidee.getBottom();
+    return collider.getTop() >= collidee.getTop() && collider.getTop() <= collidee.getBottom();
   }
 
   /**

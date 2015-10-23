@@ -7,6 +7,8 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
 
 /**
  * Test Suite for the Bubble Actions Level Modifier class.
@@ -16,10 +18,11 @@ import nl.tudelft.scrumbledore.Constants;
  */
 public class BubbleActionsLevelModifierTest {
 
+  private NPC npc;
   private Bubble bubble;
   private Bubble bubble2;
   private Level level;
-  private BubbleActionsLevelModifier modifier;
+  private ProjectileActionsLevelModifier modifier;
 
   /**
    * Setup a test object, Player Actions Level Modifier, and dependencies: a Player and a Level
@@ -28,23 +31,39 @@ public class BubbleActionsLevelModifierTest {
   @Before
   public void setUp() {
     Player player = new Player(new Vector(0, 0), new Vector(0, 0));
+    npc = new NPC(new Vector(16, 16), new Vector(0, 0));
     bubble = new Bubble(new Vector(0, 0), new Vector(0, 0));
     bubble2 = new Bubble(new Vector(0, 0), new Vector(0, 0));
     level = new Level();
     level.addElement(player);
+    level.addElement(npc);
     level.addElement(bubble);
     level.addElement(bubble2);
-    modifier = new BubbleActionsLevelModifier();
+    modifier = new ProjectileActionsLevelModifier();
   }
 
+  /**
+   * When a Level is modified and one of its Bubbles has a negative lifetime and an NPC
+   * then a new NPC should be spawned.
+   */
+  @Test
+  public void testModifyNegativeLifetime() {
+    bubble.setLifetime(0);
+    bubble.setHasNPC(true);
+    modifier.modify(level, .5);
+    assertEquals(2, level.getNPCs().size());
+    assertEquals(new Vector(16, 16), level.getNPCs().get(0).getPosition());
+    assertEquals(new Vector(0, 0), level.getNPCs().get(1).getPosition());
+  }
+  
   /**
    * When a Level is modified and its Bubbles have the action to move left or right, their speed
    * vector needs to updated correspondingly.
    */
   @Test
   public void testModifyMove() {
-    bubble.addAction(BubbleAction.MoveLeft);
-    bubble2.addAction(BubbleAction.MoveRight);
+    bubble.addAction(LevelElementAction.MoveLeft);
+    bubble2.addAction(LevelElementAction.MoveRight);
     modifier.modify(level, .5);
     double expected = -Constants.BUBBLE_SPEED;
     double expected2 = Constants.BUBBLE_SPEED;
@@ -71,9 +90,9 @@ public class BubbleActionsLevelModifierTest {
   @Test
   public void testModifyRemoveNoLifetimeLeft() {
     bubble.decreaseLifetime(bubble.getLifetime());
-    bubble2.addAction(BubbleAction.MoveLeft);
+    bubble2.addAction(LevelElementAction.MoveLeft);
     modifier.modify(level, .5);
-    assertFalse(level.getBubbles().contains(bubble));
+    assertFalse(level.getProjectiles().contains(bubble));
   }
 
   /**
@@ -82,10 +101,10 @@ public class BubbleActionsLevelModifierTest {
    */
   @Test
   public void testModifyClear() {
-    bubble.addAction(BubbleAction.MoveLeft);
-    bubble2.addAction(BubbleAction.MoveRight);
+    bubble.addAction(LevelElementAction.MoveLeft);
+    bubble2.addAction(LevelElementAction.MoveRight);
     modifier.modify(level, .5);
-    assertFalse(bubble.hasAction(BubbleAction.MoveLeft));
-    assertFalse(bubble2.hasAction(BubbleAction.MoveRight));
+    assertFalse(bubble.hasAction(LevelElementAction.MoveLeft));
+    assertFalse(bubble2.hasAction(LevelElementAction.MoveRight));
   }
 }

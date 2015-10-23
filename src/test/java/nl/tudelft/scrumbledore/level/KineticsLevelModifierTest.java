@@ -2,11 +2,11 @@ package nl.tudelft.scrumbledore.level;
 
 import static org.junit.Assert.assertEquals;
 
+import nl.tudelft.scrumbledore.projectile.Bubble;
+
 //import static org.junit.Assert.*;
 import org.junit.Before;
 import org.junit.Test;
-
-import nl.tudelft.scrumbledore.Constants;
 
 /**
  * Testing the Kinetics class.
@@ -94,12 +94,12 @@ public class KineticsLevelModifierTest {
    * the delta into account.
    */
   @Test
-  public void testAddSpeed() {
+  public void testMove() {
     LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
-    kinetics.addSpeed(el, 0.5);
+    kinetics.move(el, 0.5);
     // For branch coverage:
-    kinetics.addSpeed(null, 1);
+    kinetics.move(null, 1);
     assertEquals(new Vector(2, 3), el.getPosition());
   }
 
@@ -108,143 +108,13 @@ public class KineticsLevelModifierTest {
    * taking the delta into account.
    */
   @Test
-  public void testRemoveSpeed() {
+  public void testRevertMove() {
     LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
-    kinetics.removeSpeed(el, 0.5);
+    kinetics.revertMove(el, 0.5);
     // For branch coverage:
-    kinetics.removeSpeed(null, 1);
+    kinetics.revertMove(null, 1);
     assertEquals(new Vector(0, 1), el.getPosition());
-  }
-
-  /**
-   * When stopping a Level Element horizontally, its horizontal speed should be zero.
-   */
-  @Test
-  public void testStopHorizontally() {
-    LevelElement el = new Bubble(new Vector(0, 0), new Vector(0, 0));
-    el.getSpeed().setX(42);
-    kinetics.stopHorizontally(el);
-    assertEquals(0, el.getSpeed().getX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When stopping a Level Element vertically, its vertical speed should be zero.
-   */
-  @Test
-  public void testStopVertically() {
-    LevelElement el = new Bubble(new Vector(0, 0), new Vector(0, 0));
-    el.getSpeed().setY(42);
-    kinetics.stopVertically(el);
-    assertEquals(0, el.getSpeed().getY(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the bottom of the level and is subsequently being
-   * warped, it should reappear just outside the top of the level with the same X coordinate.
-   */
-  @Test
-  public void testWarpVerticallyBottomToTop() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setY(Constants.LEVELY + 17);
-    kinetics.warpVertically(el);
-    assertEquals(-16, el.posY(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the top of the level and is subsequently being warped,
-   * it should reappear just outside the bottom of the level with the same X coordinate.
-   */
-  @Test
-  public void testWarpVerticallyTopToBottom() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setY(-17);
-    kinetics.warpVertically(el);
-    assertEquals(Constants.LEVELY + 16, el.posY(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the right side of the level and is subsequently being
-   * warped, it should reappear just outside the left side of the level with the same Y coordinate.
-   */
-  @Test
-  public void testWarpHorizontallyRightToLeft() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setX(Constants.LEVELX);
-    kinetics.warpHorizontally(el);
-    assertEquals(16, el.posX(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When a Level Element has gotten outside the left side of the level and is subsequently being
-   * warped, it should reappear just outside the right side of the level with the same Y coordinate.
-   */
-  @Test
-  public void testWarpHorizontallyLeftToRight() {
-    LevelElement el = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    el.getPosition().setX(0);
-    kinetics.warpHorizontally(el);
-    assertEquals(Constants.LEVELX - 16, el.posX(), Constants.DOUBLE_PRECISION);
-    assertEquals(0, el.posY(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * The LevelElement should be correctly snapped the left side of another one using the snapLeft
-   * method.
-   */
-  @Test
-  public void testSnapLeft() {
-    LevelElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
-    LevelElement snapTo = new Platform(new Vector(64, 0), new Vector(32, 32));
-
-    kinetics.snapLeft(snapper, snapTo);
-
-    assertEquals(32, snapper.getPosition().getX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * The LevelElement should be correctly snapped the right side of another one using the snapRight
-   * method.
-   */
-  @Test
-  public void testSnapRight() {
-    LevelElement snapper = new Player(new Vector(64, 0), new Vector(32, 32));
-    LevelElement snapTo = new Platform(new Vector(0, 0), new Vector(32, 32));
-
-    kinetics.snapRight(snapper, snapTo);
-
-    assertEquals(32, snapper.getPosition().getX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * The LevelElement should be correctly snapped the top side of another one using the snapTop
-   * method.
-   */
-  @Test
-  public void testSnapTop() {
-    LevelElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
-    LevelElement snapTo = new Platform(new Vector(0, 64), new Vector(32, 32));
-
-    kinetics.snapTop(snapper, snapTo);
-
-    assertEquals(32, snapper.getPosition().getY(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * The LevelElement should be correctly snapped the top side of another one using the snapTop
-   * method.
-   */
-  @Test
-  public void testSnapBottom() {
-    LevelElement snapper = new Player(new Vector(0, 64), new Vector(32, 32));
-    LevelElement snapTo = new Platform(new Vector(0, 0), new Vector(32, 32));
-
-    kinetics.snapBottom(snapper, snapTo);
-
-    assertEquals(32, snapper.getPosition().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**
@@ -257,23 +127,6 @@ public class KineticsLevelModifierTest {
     Level level = new Level();
     level.addElement(player);
     Vector expectedPosition = new Vector(2, 2);
-
-    kinetics.modify(level, .5);
-
-    assertEquals(expectedPosition, player.getPosition());
-  }
-
-  /**
-   * When a Level is modified and the Player is moving outside the bottom of the Level, the Player
-   * should be warped to the top of the Level.
-   */
-  @Test
-  public void testModifyPlayerWarp() {
-    Player player = new Player(new Vector(0, Constants.LEVELY), new Vector(0, 0));
-    player.getSpeed().sum(new Vector(4, 4));
-    Level level = new Level();
-    level.addElement(player);
-    Vector expectedPosition = new Vector(2, 0);
 
     kinetics.modify(level, .5);
 

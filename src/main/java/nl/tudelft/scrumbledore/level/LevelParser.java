@@ -6,12 +6,17 @@ import java.util.ArrayList;
 import java.util.Scanner;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
+import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
+import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
+import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
 
 /**
  * Class responsible for reading a map from disk and converting it into a Level object.
  * 
  * @author Niels Warnars
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class LevelParser {
   private ArrayList<Level> levels;
 
@@ -138,6 +143,7 @@ public class LevelParser {
    *          Vertical position in level map on disk
    * @return An instance of a LevelElement child.
    */
+  @SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
   protected LevelElement getElementFromChar(char ch, int i, int j) {
     Vector blockPos = getBlockPosition(i, j);
     Vector size = new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE);
@@ -154,6 +160,14 @@ public class LevelParser {
       return new NPC(blockPos, size);
     case 'F':
       return new Fruit(blockPos, size);
+    case 'Z':
+      return new PyroPepperPickUp(blockPos, size);
+    case 'X':
+      return new BlueberryBubblePickUp(blockPos, size);
+    case 'C':
+      return new ChiliChickenPickUp(blockPos, size);
+    case 'V':
+      return new TurtleTacoPickUp(blockPos, size);
     default:
       return null;
     }

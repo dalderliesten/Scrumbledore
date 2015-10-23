@@ -8,6 +8,7 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.projectile.Bubble;
 
 /**
  * Test Suite for the Bubble class.
@@ -58,8 +59,8 @@ public class BubbleTest extends LevelElementTest {
    */
   @Test
   public void testHasActionTrue() {
-    test.addAction(BubbleAction.MoveLeft);
-    assertTrue(test.hasAction(BubbleAction.MoveLeft));
+    test.addAction(LevelElementAction.MoveLeft);
+    assertTrue(test.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -68,8 +69,8 @@ public class BubbleTest extends LevelElementTest {
    */
   @Test
   public void testHasActionFalse() {
-    test.addAction(BubbleAction.MoveLeft);
-    assertFalse(test.hasAction(BubbleAction.MoveRight));
+    test.addAction(LevelElementAction.MoveLeft);
+    assertFalse(test.hasAction(LevelElementAction.MoveRight));
   }
 
   /**
@@ -78,8 +79,8 @@ public class BubbleTest extends LevelElementTest {
    */
   @Test
   public void testClearActions() {
-    test.addAction(BubbleAction.MoveLeft);
+    test.addAction(LevelElementAction.MoveLeft);
     test.clearActions();
-    assertFalse(test.hasAction(BubbleAction.MoveLeft));
+    assertFalse(test.hasAction(LevelElementAction.MoveLeft));
   }
 }

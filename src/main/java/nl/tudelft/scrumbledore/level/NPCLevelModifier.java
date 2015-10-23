@@ -5,6 +5,7 @@ import nl.tudelft.scrumbledore.Constants;
 /**
  * Level Modifier that processes the actions to be performed on an NPC.
  * 
+ * @author David Alderliesten
  * @author Jesse Tilro
  * @author Niels Warnars
  *
@@ -24,11 +25,15 @@ public class NPCLevelModifier implements LevelModifier {
 
     for (NPC npc : level.getNPCs()) {
 
-      if (npc.hasAction(NPCAction.MoveLeft)) {
+      if (npc.hasAction(LevelElementAction.Jump)) {
+        npc.getSpeed().setY(-Constants.PLAYER_JUMP / 1.1);
+      }
+
+      if (npc.hasAction(LevelElementAction.MoveLeft)) {
         npc.getSpeed().setX(-Constants.NPC_SPEED);
       }
 
-      if (npc.hasAction(NPCAction.MoveRight)) {
+      if (npc.hasAction(LevelElementAction.MoveRight)) {
         npc.getSpeed().setX(Constants.NPC_SPEED);
       }
 

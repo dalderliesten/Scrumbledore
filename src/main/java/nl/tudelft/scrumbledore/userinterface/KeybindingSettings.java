@@ -20,16 +20,16 @@ import javafx.scene.Scene;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.keybinding.Keybinding;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * Class responsible for generating the keybinding options and the arming of all graphical elements
  * for these options.
  * 
+ * @author David Alderliesten
  * @author Jeroen Meijer
  */
 public final class KeybindingSettings {
-
   private static VBox currentBox;
   private static VBox actionBinders;
   private static int selectedPlayer;
@@ -39,7 +39,6 @@ public final class KeybindingSettings {
    * given time.
    */
   private KeybindingSettings() {
-
   }
 
   /**
@@ -73,6 +72,7 @@ public final class KeybindingSettings {
    */
   private static void generatePlayerRadio() {
     HBox playerBox = new HBox(Constants.SETTINGS_PADDING);
+    playerBox.setId("playerselect");
     final ToggleGroup playerGroup = new ToggleGroup();
 
     final RadioButton player1 = new RadioButton(Constants.SETTINGS_PLAYER1);
@@ -108,27 +108,28 @@ public final class KeybindingSettings {
     
     Keybinding binding = KeybindingContainer.getInstance().getKeybinding(selectedPlayer);
 
-    Button moveLeft = generateKeybinder(PlayerAction.MoveLeft,
-        binding.getKey(PlayerAction.MoveLeft), "Move left: ");
-    Button moveRight = generateKeybinder(PlayerAction.MoveRight,
-        binding.getKey(PlayerAction.MoveRight), "Move right: ");
-    Button jump = generateKeybinder(PlayerAction.Jump, binding.getKey(PlayerAction.Jump), "Jump: ");
-    Button shoot = generateKeybinder(PlayerAction.Shoot, binding.getKey(PlayerAction.Shoot),
-        "Shoot: ");
+    Button moveLeft = generateKeybinder(LevelElementAction.MoveLeft,
+        binding.getKey(LevelElementAction.MoveLeft), "Move left: ");
+    Button moveRight = generateKeybinder(LevelElementAction.MoveRight,
+        binding.getKey(LevelElementAction.MoveRight), "Move right: ");
+    Button jump = generateKeybinder(LevelElementAction.Jump, 
+        binding.getKey(LevelElementAction.Jump), "Jump: ");
+    Button shoot = generateKeybinder(LevelElementAction.Shoot, 
+        binding.getKey(LevelElementAction.Shoot), "Shoot: ");
     actionBinders.getChildren().addAll(moveLeft, moveRight, jump, shoot);
   }
 
   /**
    * 
    * @param action
-   *          The PlayerAction to be remapped.
+   *          The LevelElementAction to be remapped.
    * @param key
    *          The KeyCode to which the action is bound.
    * @param description
    *          Description of the button.
    * @return actionBinder The Button to be rendered
    */
-  private static Button generateKeybinder(final PlayerAction action, KeyCode key,
+  private static Button generateKeybinder(final LevelElementAction action, KeyCode key,
       String description) {
     Button actionBinder = new Button(description + key.toString());
 
@@ -144,13 +145,15 @@ public final class KeybindingSettings {
    * Shows a popup asking the player to press a new key for a given action.
    * 
    * @param action
-   *          The PlayerAction to be rebound.
+   *          The LevelElementAction to be rebound.
    */
-  private static void showKeybindingPopup(final PlayerAction action) {
+  private static void showKeybindingPopup(final LevelElementAction action) {
     final Stage popup = new Stage();
-    Label rebindLabel = new Label("Press a key to rebind...");
+    Label rebindLabel = new Label(Constants.SETTINGS_CHOOSEKEYQUERY);
+    VBox currentBox = new VBox(Constants.SETTINGS_CHOOSEKEYPADDING);
     rebindLabel.setId("popup");
-    Scene scene = new Scene(rebindLabel);
+    currentBox.getChildren().add(rebindLabel);
+    Scene scene = new Scene(currentBox);
 
     scene.setUserAgentStylesheet(Constants.CSS_SETTINGS);
 
@@ -167,4 +170,5 @@ public final class KeybindingSettings {
     popup.setScene(scene);
     popup.show();
   }
+  
 }

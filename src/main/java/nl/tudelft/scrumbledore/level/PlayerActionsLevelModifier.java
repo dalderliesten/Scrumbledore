@@ -4,6 +4,13 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
+import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
+import nl.tudelft.scrumbledore.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.powerup.PyroPepper;
+import nl.tudelft.scrumbledore.projectile.BlueBubble;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.Fireball;
+import nl.tudelft.scrumbledore.projectile.Projectile;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -11,6 +18,8 @@ import nl.tudelft.scrumbledore.Logger;
  * @author Jesse Tilro
  * @author David Alderliesten
  */
+@SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
+    "PMD.CyclomaticComplexity" })
 public class PlayerActionsLevelModifier implements LevelModifier {
 
   /**
@@ -21,16 +30,43 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
+  @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
-    ArrayList<Player> players = level.getPlayers();
+    ArrayList<DynamicElement> players = level.getPlayers();
 
-    for (Player player : players) {
+    for (int i = 0; i < players.size(); i++) {
+      DynamicElement player = players.get(i);
       if (player.isAlive()) {
-        checkHorizontalMovement(player);
         checkStopMovement(player);
+        checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (player.hasAction(PlayerAction.Jump) && player.vSpeed() == 0) {
+        if (!(player instanceof Player)) {
+          if (player.getLifetime() <= 0
+              || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
+              && player.hasAction(LevelElementAction.ShootStop)) {
+            try {
+              Player newP = new Player(player.getPosition().clone(), new Vector(
+                  Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              for (int j = 0; j < player.getActions().size(); j++) {
+                newP.addAction(player.getActions().get(j));
+              }
+              players.remove(i);
+              players.add(i, newP);
+            } catch (CloneNotSupportedException e) {
+              e.printStackTrace();
+            }
+          } else {
+            player.decreaseLifetime(delta);
+          }
+        }
+
+        if (player.hasAction(LevelElementAction.ShootStop)) {
+          player.setFiring(false);
+          player.removeAction(LevelElementAction.ShootStop);
+        }
+
+        if (player.hasAction(LevelElementAction.Jump) && player.vSpeed() == 0) {
           player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
 
           if (Constants.isLoggingWantInput()) {
@@ -38,9 +74,10 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           }
         }
 
-        player.removeAction(PlayerAction.MoveStop);
-        player.removeAction(PlayerAction.Shoot);
+        player.removeAction(LevelElementAction.MoveStop);
+        player.removeAction(LevelElementAction.Shoot);
       }
+
     }
   }
 
@@ -50,16 +87,26 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param player
    *          Player to be checked
    */
-  public void checkHorizontalMovement(Player player) {
-    if (player.hasAction(PlayerAction.MoveLeft)) {
-      player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+  public void checkHorizontalMovement(DynamicElement player) {
+    if (player.hasAction(LevelElementAction.MoveLeft)) {
+      if (player instanceof ChiliChicken) {
+        player.getSpeed().setX(-1 * Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
+      } else {
+        player.getSpeed().setX(-1 * Constants.PLAYER_SPEED);
+      }
+
       if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move left action.");
       }
     }
 
-    if (player.hasAction(PlayerAction.MoveRight)) {
-      player.getSpeed().setX(Constants.PLAYER_SPEED);
+    if (player.hasAction(LevelElementAction.MoveRight)) {
+      if (player instanceof ChiliChicken) {
+        player.getSpeed().setX(Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
+      } else {
+        player.getSpeed().setX(Constants.PLAYER_SPEED);
+
+      }
 
       if (Constants.isLoggingWantInput()) {
         Logger.getInstance().log("Player performed the move right action.");
@@ -73,8 +120,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param player
    *          The player to be checked
    */
-  public void checkStopMovement(Player player) {
-    if (player.hasAction(PlayerAction.MoveStop)) {
+  public void checkStopMovement(DynamicElement player) {
+    if (player.hasAction(LevelElementAction.MoveStop)) {
       player.getSpeed().setX(0);
 
       if (Constants.isLoggingWantInput()) {
@@ -92,39 +139,64 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    *          Level to be get the bubbles from
    */
   @SuppressWarnings("methodlength")
-  public void checkShooting(Player player, Level level) {
-    Vector bubblePos = null;
-    
+  public void checkShooting(DynamicElement player, Level level) {
+    Vector projectPos = null;
+
     try {
-      bubblePos = player.getPosition().clone();
+      projectPos = player.getPosition().clone();
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
-    ArrayList<Bubble> bubbles = level.getBubbles();
+    ArrayList<Projectile> projectiles = level.getProjectiles();
 
-    if (player.hasAction(PlayerAction.Shoot) && player.isAlive()) {
+    if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        Bubble newBubble = new Bubble(bubblePos,
-            new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+        if (player instanceof PyroPepper) {
+          Fireball newFireball = new Fireball(projectPos, new Vector(Constants.BLOCKSIZE,
+              Constants.BLOCKSIZE));
+          projectiles.add(newFireball);
 
-        bubbles.add(newBubble);
-        if (player.getLastMove() == PlayerAction.MoveLeft) {
-          if (Constants.isLoggingWantShooting()) {
-            Logger.getInstance().log("Player shot in the left direction.");
-          }
-          newBubble.addAction(BubbleAction.MoveLeft);
+          checkShootingDirection(player, newFireball);
+
+        } else if (player instanceof BlueberryBubble) {
+          BlueBubble newBlueBubble = new BlueBubble(projectPos, new Vector(Constants.BLOCKSIZE,
+              Constants.BLOCKSIZE));
+          projectiles.add(newBlueBubble);
+
+          checkShootingDirection(player, newBlueBubble);
         } else {
-          if (Constants.isLoggingWantShooting()) {
-            Logger.getInstance().log("Player shot in the right direction.");
-          }
-          newBubble.addAction(BubbleAction.MoveRight);
+          Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
+              Constants.BLOCKSIZE));
+
+          projectiles.add(newBubble);
+
+          checkShootingDirection(player, newBubble);
         }
       }
       player.setFiring(true);
     }
-    if (player.hasAction(PlayerAction.ShootStop)) {
-      player.setFiring(false);
-      player.removeAction(PlayerAction.ShootStop);
+
+  }
+
+  /**
+   * Checks whether a projectile should be shot to the left or right side.
+   * 
+   * @param player
+   *          , the player that shoots.
+   * @param projectile
+   *          , the projectile the player is shooting.
+   */
+  public static void checkShootingDirection(DynamicElement player, Projectile projectile) {
+    if (player.getLastMove() == LevelElementAction.MoveLeft) {
+      if (Constants.isLoggingWantShooting()) {
+        Logger.getInstance().log("Player shot in the left direction.");
+      }
+      projectile.addAction(LevelElementAction.MoveLeft);
+    } else {
+      if (Constants.isLoggingWantShooting()) {
+        Logger.getInstance().log("Player shot in the right direction.");
+      }
+      projectile.addAction(LevelElementAction.MoveRight);
     }
   }
 }

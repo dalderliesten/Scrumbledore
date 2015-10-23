@@ -1,5 +1,9 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
+
+import nl.tudelft.scrumbledore.sprite.Sprite;
+
 /**
  * Abstract class representing an element that can be placed in a Level.
  * 
@@ -7,146 +11,108 @@ package nl.tudelft.scrumbledore.level;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public abstract class LevelElement {
-
-  private Vector position;
-  private Vector size;
-  private Vector speed;
-  private Vector friction;
-  private boolean gravity;
-
-  /**
-   * Create a new LevelElement instance.
-   * 
-   * @param position
-   *          Position of the element in the level.
-   * @param size
-   *          Size of the element.
-   */
-  public LevelElement(Vector position, Vector size) {
-    this.position = position;
-    this.size = size;
-    this.speed = new Vector(0, 0);
-    this.friction = new Vector(0, 0);
-    this.gravity = false;
-  }
+public interface LevelElement {
 
   /**
    * Get the position vector of this element.
    * 
    * @return Position Vector.
    */
-  public Vector getPosition() {
-    return position;
-  }
+  Vector getPosition();
 
   /**
    * Get the X coordinate of the element.
    * 
    * @return double
    */
-  public double posX() {
-    return position.getX();
-  }
+  double posX();
 
   /**
    * Get the Y coordinate of the element.
    * 
    * @return double
    */
-  public double posY() {
-    return position.getY();
-  }
+  double posY();
 
   /**
    * Get the size vector of this element.
    * 
    * @return Size Vector.
    */
-  public Vector getSize() {
-    return size;
-  }
+  Vector getSize();
 
   /**
    * Get the width of the element.
    * 
    * @return double
    */
-  public double width() {
-    return size.getX();
-  }
+  double width();
 
   /**
    * Get the height of the element.
    * 
    * @return double
    */
-  public double height() {
-    return size.getY();
-  }
+  double height();
 
   /**
    * Get the speed vector of this element.
    * 
    * @return Speed Vector.
    */
-  public Vector getSpeed() {
-    return speed;
-  }
+  Vector getSpeed();
 
   /**
    * Get the horizontal speed of the element.
    * 
    * @return double
    */
-  public double hSpeed() {
-    return speed.getX();
-  }
+  double hSpeed();
 
   /**
    * Get the vertical speed of the element.
    * 
    * @return double
    */
-  public double vSpeed() {
-    return speed.getY();
-  }
+  double vSpeed();
 
   /**
    * Get the friction vector of this element.
    * 
    * @return Friction Vector.
    */
-  public Vector getFriction() {
-    return friction;
-  }
+  Vector getFriction();
 
   /**
    * Get the horizontal friction.
    * 
    * @return Horizontal friction.
    */
-  public double hFric() {
-    return friction.getX();
-  }
+  double hFric();
 
   /**
    * Get the vertical friction.
    * 
    * @return Vertical friction.
    */
-  public double vFric() {
-    return friction.getY();
-  }
+  double vFric();
+
+  /**
+   * Stop this LevelElement's vertical movement.
+   */
+  void stopVertically();
+
+  /**
+   * Stop this LevelElement's horizontal movement.
+   */
+  void stopHorizontally();
 
   /**
    * Check whether this LevelElement is affected by Gravity.
    * 
    * @return Boolean
    */
-  public boolean hasGravity() {
-    return gravity;
-  }
+  boolean hasGravity();
 
   /**
    * Set the property determining whether this LevelElement is affected by gravity.
@@ -154,45 +120,35 @@ public abstract class LevelElement {
    * @param gravity
    *          A boolean
    */
-  public void setGravity(boolean gravity) {
-    this.gravity = gravity;
-  }
+  void setGravity(boolean gravity);
 
   /**
    * Get the absolute Y-coordinate of the top of this element, given the position and size.
    * 
    * @return Y-coordinate of top.
    */
-  public double getTop() {
-    return position.getY() - size.getY() / 2;
-  }
+  double getTop();
 
   /**
    * Get the absolute Y-coordinate of the bottom of this element, given the position and size.
    * 
    * @return Y-coordinate of bottom.
    */
-  public double getBottom() {
-    return position.getY() + size.getY() / 2;
-  }
+  double getBottom();
 
   /**
    * Get the absolute X-coordinate of the left side of this element, given the position and size.
    * 
    * @return X-coordinate of left side.
    */
-  public double getLeft() {
-    return position.getX() - size.getX() / 2;
-  }
+  double getLeft();
 
   /**
    * Get the absolute X-coordinate of the right side of this element, given the position and size.
    * 
    * @return X-coordinate of right side.
    */
-  public double getRight() {
-    return position.getX() + size.getX() / 2;
-  }
+  double getRight();
 
   /**
    * Get the distance to another LevelElement.
@@ -201,9 +157,7 @@ public abstract class LevelElement {
    *          The other element to measure the distance to.
    * @return The distance.
    */
-  public double distance(LevelElement other) {
-    return getPosition().distance(other.getPosition());
-  }
+  double distance(LevelElement other);
 
   /**
    * Check whether another element is within range of this element using a circular radius by
@@ -212,12 +166,10 @@ public abstract class LevelElement {
    * @param other
    *          The other element.
    * @param range
-   *          The range (of the circal).
+   *          The range (of the circle).
    * @return A boolean.
    */
-  public boolean inRadiusRangeOf(LevelElement other, double range) {
-    return distance(other) <= range;
-  }
+  boolean inRadiusRangeOf(LevelElement other, double range);
 
   /**
    * Check whether another element is within range of this element using a box. The box is a square
@@ -230,10 +182,48 @@ public abstract class LevelElement {
    *          The range (a half of the dimensions of the square box).
    * @return A boolean.
    */
-  public boolean inBoxRangeOf(LevelElement other, double range) {
-    boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
-    boolean inY = (other.posY() >= posY() - range && other.posY() <= posY() + range);
-    return inX && inY;
-  }
+  boolean inBoxRangeOf(LevelElement other, double range);
+
+  /**
+   * Snap a LevelElement to the left side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapLeft(LevelElement other);
+
+  /**
+   * Snap a LevelElement to the right side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapRight(LevelElement other);
+
+  /**
+   * Snap a LevelElement to the top side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapTop(LevelElement other);
+
+  /**
+   * Snap a LevelElement to the bottom side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapBottom(LevelElement other);
+
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  ArrayList<Sprite> getSprites(double steps);
 
 }

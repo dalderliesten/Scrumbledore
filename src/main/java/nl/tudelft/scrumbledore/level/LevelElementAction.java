@@ -1,12 +1,12 @@
 package nl.tudelft.scrumbledore.level;
 
 /**
- * Enumeration containing types of actions that the player can perform.
+ * Enumeration containing types of actions that a LevelElement can perform.
  * 
- * @author Jesse Tilro
+ * @author Jesse Tilro, Floris Doolaard
  *
  */
-public enum PlayerAction {
+public enum LevelElementAction {
   MoveLeft, MoveRight, MoveStop, Jump, Shoot, ShootStop;
 
   /**
@@ -16,7 +16,7 @@ public enum PlayerAction {
    *          Action to be inverted
    * @return inverted action
    */
-  public static PlayerAction invertAction(PlayerAction action) {
+  public static LevelElementAction invertAction(LevelElementAction action) {
     if (action != null) {
       switch (action) {
       case MoveRight:

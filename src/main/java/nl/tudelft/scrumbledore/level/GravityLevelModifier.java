@@ -1,7 +1,5 @@
 package nl.tudelft.scrumbledore.level;
 
-import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 
 /**
@@ -29,7 +27,7 @@ public class GravityLevelModifier implements LevelModifier {
   }
 
   /**
-   * Construct a new Gravity Level Modifier using the constants for strenght and max.
+   * Construct a new Gravity Level Modifier using the constants for strength and max.
    */
   public GravityLevelModifier() {
     this.strength = Constants.GRAVITY_STRENGTH;
@@ -56,8 +54,7 @@ public class GravityLevelModifier implements LevelModifier {
     }
 
     // Pull down the player
-    ArrayList<Player> players = level.getPlayers();
-    for (Player player : players) {
+    for (DynamicElement player : level.getPlayers()) {
       pull(player, d);
     }
   }
@@ -88,6 +85,26 @@ public class GravityLevelModifier implements LevelModifier {
     } else {
       element.getSpeed().setY(max);
     }
+  }
+
+  /**
+   * Return the strength of the gravity.
+   * 
+   * @return strength
+   *           The strength of the gravity.
+   */
+  public double getStrength() {
+    return strength;
+  }
+
+  /**
+   * Return the maximum strength of the gravity.
+   * 
+   * @return max
+   *           The maximum strength of the gravity.
+   */
+  public double getMax() {
+    return max;
   }
 
 }

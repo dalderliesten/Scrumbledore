@@ -2,6 +2,10 @@ package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
+import nl.tudelft.scrumbledore.projectile.Bubble;
+import nl.tudelft.scrumbledore.projectile.Projectile;
+
 /**
  * Class representing a Level in the Game.
  * 
@@ -13,20 +17,22 @@ public class Level {
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
-  private ArrayList<Bubble> bubbles;
-  private ArrayList<Player> players;
-  private ArrayList<Bubble> encapEnemies;
+  private ArrayList<Projectile> projectiles;
+  private ArrayList<DynamicElement> players;
+  private ArrayList<Projectile> encapEnemies;
+  private ArrayList<PowerupPickUp> powerups;
 
   /**
    * Constructs a new Level instance.
    */
   public Level() {
     platforms = new ArrayList<Platform>();
-    bubbles = new ArrayList<Bubble>();
-    encapEnemies = new ArrayList<Bubble>();
+    projectiles = new ArrayList<Projectile>();
+    encapEnemies = new ArrayList<Projectile>();
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
-    players = new ArrayList<Player>();
+    players = new ArrayList<DynamicElement>();
+    powerups = new ArrayList<PowerupPickUp>();
   }
 
   /**
@@ -36,17 +42,45 @@ public class Level {
    *          A LevelElement.
    */
   public void addElement(LevelElement element) {
-    if (element.getClass().equals(Platform.class)) {
+    if (element instanceof Platform) {
       platforms.add((Platform) element);
-    } else if (element.getClass().equals(NPC.class)) {
+    } else if (element instanceof NPC) {
       npcs.add((NPC) element);
-    } else if (element.getClass().equals(Fruit.class)) {
+    } else if (element instanceof Fruit) {
       fruits.add((Fruit) element);
-    } else if (element.getClass().equals(Player.class)) {
+    } else if (element instanceof Player) {
       players.add((Player) element);
-    } else if (element.getClass().equals(Bubble.class)) {
-      bubbles.add((Bubble) element);
+    } else if (element instanceof Bubble) {
+      projectiles.add((Bubble) element);
+    } else if (element instanceof PowerupPickUp) {
+      powerups.add((PowerupPickUp) element);
     }
+  }
+
+  /**
+   * Get all the dynamic elements in the Level (elements that are updated every cycle).
+   * 
+   * @return All Dynamic Level Elements.
+   */
+  public ArrayList<LevelElement> getDynamicElements() {
+    ArrayList<LevelElement> elements = new ArrayList<LevelElement>();
+    elements.addAll(players);
+    elements.addAll(npcs);
+    elements.addAll(fruits);
+    elements.addAll(projectiles);
+    elements.addAll(powerups);
+    return elements;
+  }
+
+  /**
+   * Get all the static elements in the Level (elements that are not updated every cycle).
+   * 
+   * @return All Static Level Elements.
+   */
+  public ArrayList<LevelElement> getStaticElements() {
+    ArrayList<LevelElement> elements = new ArrayList<LevelElement>();
+    elements.addAll(platforms);
+    return elements;
   }
 
   /**
@@ -81,7 +115,7 @@ public class Level {
    * 
    * @return A player object
    */
-  public ArrayList<Player> getPlayers() {
+  public ArrayList<DynamicElement> getPlayers() {
     return players;
   }
 
@@ -90,8 +124,8 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects.
    */
-  public ArrayList<Bubble> getBubbles() {
-    return bubbles;
+  public ArrayList<Projectile> getProjectiles() {
+    return projectiles;
   }
 
   /**
@@ -99,8 +133,17 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects with enemies in them.
    */
-  public ArrayList<Bubble> getEnemyBubbles() {
+  public ArrayList<Projectile> getEnemyBubbles() {
     return encapEnemies;
+  }
+
+  /**
+   * Returns an ArrayList of Powerup objects.
+   * 
+   * @return an ArrayList of Powerup objects.
+   */
+  public ArrayList<PowerupPickUp> getPowerups() {
+    return powerups;
   }
 
 }

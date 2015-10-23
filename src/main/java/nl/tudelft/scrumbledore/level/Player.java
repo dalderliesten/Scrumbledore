@@ -2,19 +2,26 @@ package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.sprite.Sprite;
+import nl.tudelft.scrumbledore.sprite.SpriteStore;
+
 /**
  * Class representing a Player in a game.
  * 
  * @author Niels Warnars
  * @author Jesse Tilro
  * @author David Alderliesten
+ * @author Floris Doolaard
  */
-public class Player extends LevelElement {
-  private ArrayList<PlayerAction> actions;
-  private PlayerAction lastMove;
+public class Player extends BasicDynamicElement {
+  private ArrayList<LevelElementAction> actions;
+  private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
+  private double lifetime;
+  
 
   /**
    * Create a new Player instance.
@@ -30,10 +37,11 @@ public class Player extends LevelElement {
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<PlayerAction>();
-    lastMove = PlayerAction.MoveRight;
+    actions = new ArrayList<LevelElementAction>();
+    lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
+    lifetime = Constants.PLAYER_POWERUP_LIFETIME;
   }
 
   /**
@@ -42,7 +50,7 @@ public class Player extends LevelElement {
    * @param action
    *          A PlayerAction
    */
-  public void addAction(PlayerAction action) {
+  public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
       actions.add(action);
       setLastMove(action);
@@ -88,12 +96,20 @@ public class Player extends LevelElement {
    * Sets the id of the current player.
    * 
    * @param id
-   *         Integer that represents the players number in the game.
+   *          Integer that represents the players number in the game.
    */
   public void setPlayerNumber(int id) {
     this.id = id;
   }
   
+  /**
+   * Gives the list of actions of the player.
+   * @return a list of actions.
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
+
   /**
    * Check whether the given action is queued for the next step.
    * 
@@ -101,7 +117,7 @@ public class Player extends LevelElement {
    *          A PlayerAction.
    * @return Boolean.
    */
-  public boolean hasAction(PlayerAction action) {
+  public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);
   }
 
@@ -111,7 +127,7 @@ public class Player extends LevelElement {
    * @param action
    *          A PlayerAction.
    */
-  public void removeAction(PlayerAction action) {
+  public void removeAction(LevelElementAction action) {
     actions.remove(action);
   }
 
@@ -120,7 +136,7 @@ public class Player extends LevelElement {
    * 
    * @return The last move performed.
    */
-  public PlayerAction getLastMove() {
+  public LevelElementAction getLastMove() {
     return lastMove;
   }
 
@@ -130,33 +146,22 @@ public class Player extends LevelElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(PlayerAction action) {
-    if (action == PlayerAction.MoveLeft || action == PlayerAction.MoveRight) {
+  public void setLastMove(LevelElementAction action) {
+    if (action == LevelElementAction.MoveLeft || action == LevelElementAction.MoveRight) {
       lastMove = action;
     }
   }
 
-  /**
-   * Dummy HashCode method to satisfy code quality tools.
-   */
   @Override
   public int hashCode() {
     return 0;
   }
 
-  /**
-   * Check whether a given object is equal to this instance.
-   * 
-   * @param other
-   *          Another instance.
-   * @return A boolean.
-   */
   @Override
   public boolean equals(Object other) {
     if (other instanceof Player) {
       Player that = (Player) other;
-      return this.getPosition().equals(that.getPosition())
-          && this.getSize().equals(that.getSize());
+      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
     return false;
@@ -179,6 +184,68 @@ public class Player extends LevelElement {
    */
   public void setFiring(Boolean isFiring) {
     this.firing = isFiring;
+  }
+
+  /**
+   * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
+   * Element.
+   * 
+   * @param steps
+   *          The absolute exact number of steps since the game was started.
+   * @return Sprites to be drawn.
+   */
+  public ArrayList<Sprite> getSprites(double steps) {
+    ArrayList<Sprite> result = new ArrayList<Sprite>();
+    SpriteStore store = SpriteStore.getInstance();
+    if (alive) {
+      boolean toRight = getLastMove() == LevelElementAction.MoveRight;
+
+      String id = "move-left";
+      if (firing && toRight) {
+        id = "shoot-right";
+      } else if (firing) {
+        id = "shoot-left";
+      } else if (toRight) {
+        id = "move-right";
+      }
+      if (getSpeed().getX() == 0 && !firing) {
+        steps = 0;
+      }
+
+      id = "player-" + Constants.PLAYER_COLORS.get(getPlayerNumber()) + "-" + id;
+
+      result.add(store.getAnimated(id).getFrame(steps));
+    }
+    return result;
+  }
+  
+  /**
+   * Decrease the lifetime by a given number of steps.
+   * 
+   * @param delta
+   *          The number of steps.
+   */
+  public void decreaseLifetime(double delta) {
+    lifetime -= delta;
+}
+
+  /**
+   * Get the remaining lifetime.
+   * 
+   * @return Remaining lifetime.
+   */
+  public double getLifetime() {
+    return lifetime;
+  }
+
+  /**
+   * Setting the life time of a bubble.
+   * 
+   * @param newTime
+   *          The new life time.
+   */
+  public void setLifetime(double newTime) {
+    lifetime = newTime;
   }
 
 }

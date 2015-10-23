@@ -5,16 +5,16 @@ import java.util.List;
 
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.PlayerAction;
+import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * A custom container for Keybindings. One Keybinding per player.
  * 
+ * @author David Alderliesten
  * @author Jeroen Meijer
  */
 public final class KeybindingContainer {
   private static KeybindingContainer keybindingContainer;
-
   private List<Keybinding> keybindingList;
 
   private KeybindingContainer() {
@@ -39,6 +39,7 @@ public final class KeybindingContainer {
    * Resets all the Keybindings to the default Keybindings.
    */
   public void reset() {
+    keybindingList.clear();
     for (int i = 0; i < Constants.NUMBER_OF_PLAYERS; i++) {
       keybindingList.add(new Keybinding(i));
     }
@@ -65,7 +66,7 @@ public final class KeybindingContainer {
    * @param key
    *          The new KeyCode for the given action.
    */
-  public void updateKeyBinding(int playerNumber, PlayerAction action, KeyCode key) {
+  public void updateKeyBinding(int playerNumber, LevelElementAction action, KeyCode key) {
     for (Keybinding binding : keybindingList) {
       if (binding.isAssigned(key)) {
         binding.updateKeyByAction(binding.getAction(key), KeyCode.UNDEFINED);
