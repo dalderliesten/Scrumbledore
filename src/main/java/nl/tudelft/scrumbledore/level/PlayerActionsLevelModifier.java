@@ -36,6 +36,32 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
+        if (!(player instanceof Player)) {
+          if (player.getLifetime() <= 0
+              || ((player instanceof PyroPepper) 
+              && player.hasAction(LevelElementAction.ShootStop))) {
+
+            try {
+              Player newP = new Player(player.getPosition().clone(), new Vector(
+                  Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              for (int j = 0; j < player.getActions().size(); j++) {
+                newP.addAction(player.getActions().get(j));
+              }
+              players.remove(i);
+              players.add(i, newP);
+            } catch (CloneNotSupportedException e) {
+              e.printStackTrace();
+            }
+          } else {
+            player.decreaseLifetime(delta);
+          }
+        }
+        
+        if (player.hasAction(LevelElementAction.ShootStop)) {
+          player.setFiring(false);
+          player.removeAction(LevelElementAction.ShootStop);
+        }
+
         if (player.hasAction(LevelElementAction.Jump) && player.vSpeed() == 0) {
           player.getSpeed().setY(-1 * Constants.PLAYER_JUMP);
 
@@ -48,24 +74,6 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         player.removeAction(LevelElementAction.Shoot);
       }
 
-      if (player instanceof ChiliChicken || player instanceof TurtleTaco
-          || player instanceof PyroPepper || player instanceof BlueberryBubble) {
-        if (player.getLifetime() <= 0) {
-          try {
-            Player newP = new Player(player.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
-                Constants.BLOCKSIZE));
-            for (int j = 0; j < player.getActions().size(); j++) {
-              newP.addAction(player.getActions().get(j));
-            }
-            players.remove(i);
-            players.add(i, newP);
-          } catch (CloneNotSupportedException e) {
-            e.printStackTrace();
-          }
-        } else {
-          player.decreaseLifetime(delta);
-        }
-      }
     }
   }
 
@@ -143,29 +151,30 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           Fireball newFireball = new Fireball(projectPos, new Vector(Constants.BLOCKSIZE,
               Constants.BLOCKSIZE));
           projectiles.add(newFireball);
-          
+
           checkShootingDirection(player, newFireball);
+
         } else {
           Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
               Constants.BLOCKSIZE));
 
           projectiles.add(newBubble);
-          
+
           checkShootingDirection(player, newBubble);
         }
       }
       player.setFiring(true);
     }
-    if (player.hasAction(LevelElementAction.ShootStop)) {
-      player.setFiring(false);
-      player.removeAction(LevelElementAction.ShootStop);
-    }
+    
   }
-  
+
   /**
    * Checks whether a projectile should be shot to the left or right side.
-   * @param player , the player that shoots.
-   * @param projectile , the projectile the player is shooting.
+   * 
+   * @param player
+   *          , the player that shoots.
+   * @param projectile
+   *          , the projectile the player is shooting.
    */
   public static void checkShootingDirection(DynamicElement player, Projectile projectile) {
     if (player.getLastMove() == LevelElementAction.MoveLeft) {

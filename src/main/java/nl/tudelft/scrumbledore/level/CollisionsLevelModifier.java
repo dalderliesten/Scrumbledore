@@ -252,7 +252,7 @@ public class CollisionsLevelModifier implements LevelModifier {
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(currentProjectile, platform, delta);
-          
+
           if (currentProjectile instanceof Fireball) {
             if (collision.collidingFromLeft() || collision.collidingFromRight()) {
               projectiles.remove(i);
@@ -348,12 +348,12 @@ public class CollisionsLevelModifier implements LevelModifier {
               && new Collision(currentProjectile, enemies.get(i), delta).colliding()) {
 
             enemies.remove(i);
-            if(!(currentProjectile instanceof Fireball)){
+            if (!(currentProjectile instanceof Fireball)) {
               enemyBubbles.add(currentProjectile);
               currentProjectile.setHasNPC(true);
               currentProjectile.setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
             }
-            
+
             if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("An enemy was encapsulated by a bubble.");
             }
