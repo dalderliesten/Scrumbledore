@@ -39,6 +39,7 @@ public final class KeybindingContainer {
    * Resets all the Keybindings to the default Keybindings.
    */
   public void reset() {
+    keybindingList.clear();
     for (int i = 0; i < Constants.NUMBER_OF_PLAYERS; i++) {
       keybindingList.add(new Keybinding(i));
     }
