@@ -208,6 +208,12 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.collidingFromTop() && npc.vSpeed() > 0) {
             npc.stopVertically();
             npc.snapTop(platform);
+            npc.addAction(LevelElementAction.Jump);
+          }
+          
+          if (collision.collidingFromBottom() && npc.vSpeed() < 0) {
+            npc.stopVertically();
+            npc.snapBottom(platform);
           }
         }
       }
@@ -219,14 +225,12 @@ public class CollisionsLevelModifier implements LevelModifier {
           if (collision.collidingFromLeft() && npc.hSpeed() > 0) {
             npc.stopHorizontally();
             npc.snapLeft(platform);
-            npc.addAction(LevelElementAction.Jump);
             npc.addAction(LevelElementAction.MoveLeft);
           }
 
           if (collision.collidingFromRight() && npc.hSpeed() < 0) {
             npc.stopHorizontally();
             npc.snapRight(platform);
-            npc.addAction(LevelElementAction.Jump);
             npc.addAction(LevelElementAction.MoveRight);
           }
         }
