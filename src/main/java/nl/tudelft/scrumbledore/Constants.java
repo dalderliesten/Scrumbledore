@@ -200,7 +200,8 @@ public final class Constants {
 
   // Generation of keymapping list to prevent action skipping.
   private static List<Map<KeyCode, LevelElementAction>> createKeyMapping() {
-    List<Map<KeyCode, LevelElementAction>> keyMapping = new ArrayList<Map<KeyCode, LevelElementAction>>();
+    List<Map<KeyCode, LevelElementAction>> keyMapping 
+      = new ArrayList<Map<KeyCode, LevelElementAction>>();
 
     keyMapping.add(createKeyMappingP1());
     keyMapping.add(createKeyMappingP2());

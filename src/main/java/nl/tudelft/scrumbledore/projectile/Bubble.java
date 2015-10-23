@@ -15,7 +15,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  *
  */
-public class Bubble extends BasicDynamicElement implements Projectile{
+public class Bubble extends BasicDynamicElement implements Projectile {
   private ArrayList<LevelElementAction> actions;
   private Boolean hasNPC;
 

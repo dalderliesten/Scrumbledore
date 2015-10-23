@@ -9,7 +9,13 @@ import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
-public class BlueBubble extends BasicDynamicElement implements Projectile{
+/**
+ * Class representing a blue bubble.
+ * 
+ * @author Jesse Tilro
+ *
+ */
+public class BlueBubble extends BasicDynamicElement implements Projectile {
   private boolean hasNPC;
   private ArrayList<LevelElementAction> actions;
   private double lifetime;

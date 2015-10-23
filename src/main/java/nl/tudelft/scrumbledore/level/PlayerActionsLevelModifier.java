@@ -18,7 +18,8 @@ import nl.tudelft.scrumbledore.projectile.Projectile;
  * @author Jesse Tilro
  * @author David Alderliesten
  */
-@SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity" })
+@SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
+    "PMD.CyclomaticComplexity" })
 public class PlayerActionsLevelModifier implements LevelModifier {
 
   /**
