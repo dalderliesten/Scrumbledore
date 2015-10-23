@@ -418,7 +418,7 @@ public class CollisionsLevelModifier implements LevelModifier {
     for (DynamicElement player : level.getPlayers()) {
       ArrayList<NPC> npcs = level.getNPCs();
 
-      if (npcs.size() > 0) {
+      if (npcs.size() > 0 && !(player instanceof TurtleTaco)) {
         for (int i = 0; i < npcs.size(); i++) {
           if (npcs.get(i).inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
             Collision collision = new Collision(player, npcs.get(i), delta);
