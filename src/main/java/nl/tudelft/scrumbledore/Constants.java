@@ -68,7 +68,8 @@ public final class Constants {
   // Defining the text needed for the display of options in the settings menu.
   public static final String LOGGING_PLAYER_MOVEMENT = "Do you wish to track player movement?";
   public static final String LOGGING_PLAYER_INPUT = "Do you wish to track player input?";
-  public static final String LOGGING_GAME_STARTSTOP = "Do you wish to track game states, such as pausing and restarting?";
+  public static final String LOGGING_GAME_STARTSTOP 
+    = "Do you wish to track game states, such as pausing and restarting?";
   public static final String LOGGING_SHOOTING = "Do you wish to track shooting?";
   public static final String LOGGING_POINTS = "Do you wish to track points and high-scores?";
   public static final String LOGGING_ENEMY = "Do you wish to track enemy actions and changes?";
