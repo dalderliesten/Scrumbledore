@@ -13,6 +13,7 @@ import java.util.Date;
  * every session and store them.
  * 
  * @author David Alderliesten
+ * @author Jesse Tilro
  */
 public final class Logger {
   private File loggingFile;
