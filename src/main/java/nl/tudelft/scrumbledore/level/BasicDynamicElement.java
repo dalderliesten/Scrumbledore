@@ -6,8 +6,8 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
  * An abstract class as a basic class for represententing dynamic level elements.
+ * 
  * @author Floris Doolaard
- *
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicDynamicElement implements DynamicElement {
