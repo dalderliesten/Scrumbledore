@@ -16,6 +16,7 @@ import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
  * 
  * @author Niels Warnars
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class LevelParser {
   private ArrayList<Level> levels;
 
@@ -142,6 +143,7 @@ public class LevelParser {
    *          Vertical position in level map on disk
    * @return An instance of a LevelElement child.
    */
+  @SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
   protected LevelElement getElementFromChar(char ch, int i, int j) {
     Vector blockPos = getBlockPosition(i, j);
     Vector size = new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE);

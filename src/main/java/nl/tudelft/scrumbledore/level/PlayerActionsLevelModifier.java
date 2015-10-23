@@ -13,6 +13,7 @@ import nl.tudelft.scrumbledore.powerup.TurtleTaco;
  * @author Jesse Tilro
  * @author David Alderliesten
  */
+@SuppressWarnings("PMD.CyclomaticComplexity")
 public class PlayerActionsLevelModifier implements LevelModifier {
 
   /**
