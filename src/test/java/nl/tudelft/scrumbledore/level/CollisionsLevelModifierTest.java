@@ -22,7 +22,6 @@ import nl.tudelft.scrumbledore.game.ScoreCounter;
 @SuppressWarnings({ "PMD.JUnitTestsShouldIncludeAssert", "PMD.TooManyMethods",
     "PMD.TooManyStaticImports" })
 public class CollisionsLevelModifierTest {
-  private KineticsLevelModifier klm;
   private ScoreCounter sc;
   private CollisionsLevelModifier clm;
 
