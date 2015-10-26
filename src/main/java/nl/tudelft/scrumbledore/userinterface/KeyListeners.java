@@ -8,7 +8,6 @@ import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
 import nl.tudelft.scrumbledore.game.Game;
-import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
 import nl.tudelft.scrumbledore.level.PlayerInterface;
 

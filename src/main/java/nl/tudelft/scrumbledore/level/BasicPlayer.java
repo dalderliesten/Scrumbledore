@@ -7,6 +7,14 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 
+/**
+ * An abstract class as a basic class for representing players.
+ * 
+ * @author Niels Warnars
+ * @author Jesse Tilro
+ * @author David Alderliesten
+ * @author Floris Doolaard
+ */
 public abstract class BasicPlayer extends BasicDynamicElement implements PlayerInterface {
 
   private ArrayList<LevelElementAction> actions;
@@ -18,12 +26,12 @@ public abstract class BasicPlayer extends BasicDynamicElement implements PlayerI
   
 
   /**
-   * Create a new Player instance.
+   * Create a new Basic Player instance.
    * 
    * @param position
    *          Position of the player in the level.
    * @param size
-   *          Size of the Player.
+   *          Size of the Basic Player.
    */
   public BasicPlayer(Vector position, Vector size) {
     super(position, size);
@@ -59,7 +67,7 @@ public abstract class BasicPlayer extends BasicDynamicElement implements PlayerI
   }
 
   /**
-   * Checking wether the player is alive.
+   * Checking whether the player is alive.
    * 
    * @return The boolean if the player is alive.
    */

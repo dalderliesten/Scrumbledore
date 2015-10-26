@@ -1,5 +1,12 @@
 package nl.tudelft.scrumbledore.level;
 
+/**
+ * The interface of player and powerup objects.
+ * This way players and powerups are replacable.
+ * 
+ * @author Floris Doolaard
+ * @author Niels Warnars
+ */
 public interface PlayerInterface extends DynamicElement {
 
   /**

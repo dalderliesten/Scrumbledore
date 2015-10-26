@@ -9,7 +9,6 @@ import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.projectile.Bubble;
 
 /**
  * Test Suite for LevelElement class.

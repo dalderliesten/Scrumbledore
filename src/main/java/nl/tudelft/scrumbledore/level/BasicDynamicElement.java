@@ -5,7 +5,7 @@ import java.util.ArrayList;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
- * An abstract class as a basic class for represententing dynamic level elements.
+ * An abstract class as a basic class for representing dynamic level elements.
  * 
  * @author Floris Doolaard
  */

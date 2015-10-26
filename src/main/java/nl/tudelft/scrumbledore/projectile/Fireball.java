@@ -151,24 +151,6 @@ public class Fireball extends BasicDynamicElement implements Projectile {
   }
 
   /**
-   * Return whether the Player is firing.
-   * 
-   * @return whether the Player is firing
-   */
-  public Boolean isFiring() {
-    return false;
-  }
-
-  /**
-   * Set whether the Player is firing.
-   * 
-   * @param isFiring
-   *          whether the Player is firing
-   */
-  public void setFiring(Boolean isFiring) {
-  }
-
-  /**
    * Gives a list of current actions of the player.
    * @return a list of actions
    */

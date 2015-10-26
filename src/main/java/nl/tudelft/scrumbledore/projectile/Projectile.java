@@ -1,9 +1,6 @@
 package nl.tudelft.scrumbledore.projectile;
 
 import nl.tudelft.scrumbledore.level.DynamicElement;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
-
 /**
  * Represents a projectile object.
  * 
@@ -50,25 +47,4 @@ public interface Projectile extends DynamicElement {
    */
   void setLifetime(double newTime);
   
-  /**
-   * Add an action the Bubble has to perform.
-   * 
-   * @param action
-   *          The action (MoveLeft or MoveRight) the Bubble has to perform.
-   */
-  void addAction(LevelElementAction action);
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          A BubbleAction.
-   * @return Boolean.
-   */
-  boolean hasAction(LevelElementAction action);
-  
-  /**
-   * Clear all queued actions for this Bubble.
-   */
-  void clearActions();
 }
