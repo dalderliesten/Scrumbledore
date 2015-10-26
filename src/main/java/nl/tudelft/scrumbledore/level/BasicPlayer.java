@@ -7,7 +7,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 
-public abstract class BasicPlayer extends BasicDynamicElement {
+public abstract class BasicPlayer extends BasicDynamicElement implements PlayerInterface {
 
   private ArrayList<LevelElementAction> actions;
   private LevelElementAction lastMove;

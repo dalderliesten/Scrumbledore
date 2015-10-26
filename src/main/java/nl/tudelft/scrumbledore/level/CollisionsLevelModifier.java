@@ -71,7 +71,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectPlayerPowerup(Level level, double delta) {
     ArrayList<PowerupPickUp> powerUps = level.getPowerups();
-    ArrayList<DynamicElement> players = level.getPlayers();
+    ArrayList<PlayerInterface> players = level.getPlayers();
 
     if (powerUps.size() > 0) {
       for (int j = 0; j < players.size(); j++) {
@@ -82,19 +82,19 @@ public class CollisionsLevelModifier implements LevelModifier {
             Collision collision = new Collision(player, currentPow, delta);
             if (collision.colliding()) {
               if (currentPow instanceof ChiliChickenPickUp) {
-                ChiliChicken newChick = new ChiliChicken(player);
+                ChiliChicken newChick = new ChiliChicken((PlayerInterface) player);
                 players.add(j, newChick);
                 players.remove(j + 1);
               } else if (currentPow instanceof BlueberryBubblePickUp) {
-                BlueberryBubble newBlue = new BlueberryBubble(player);
+                BlueberryBubble newBlue = new BlueberryBubble((PlayerInterface) player);
                 players.add(j, newBlue);
                 players.remove(j + 1);
               } else if (currentPow instanceof PyroPepperPickUp) {
-                PyroPepper newPyro = new PyroPepper(player);
+                PyroPepper newPyro = new PyroPepper((PlayerInterface) player);
                 players.add(j, newPyro);
                 players.remove(j + 1);
               } else if (currentPow instanceof TurtleTacoPickUp) {
-                TurtleTaco newTurtle = new TurtleTaco(player);
+                TurtleTaco newTurtle = new TurtleTaco((PlayerInterface) player);
                 players.add(j, newTurtle);
                 players.remove(j + 1);
               }

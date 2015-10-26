@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore.powerup;
 
 import nl.tudelft.scrumbledore.level.DynamicElement;
+import nl.tudelft.scrumbledore.level.PlayerInterface;
 
 /**
  * This interface tells the player and the powerup objects to have the same functionality.
@@ -8,6 +9,6 @@ import nl.tudelft.scrumbledore.level.DynamicElement;
  * @author Floris
  *
  */
-public interface Powerup extends DynamicElement {
+public interface Powerup extends PlayerInterface {
 
 }

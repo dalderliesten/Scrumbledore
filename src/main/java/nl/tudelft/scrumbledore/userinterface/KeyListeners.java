@@ -10,6 +10,7 @@ import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.PlayerInterface;
 
 /**
  * Handles all the key event listeners of the gui.
@@ -62,8 +63,8 @@ public class KeyListeners {
 
       public void handle(KeyEvent keyPressed) {
         KeyCode keyCode = keyPressed.getCode();
-        ArrayList<DynamicElement> players = game.getCurrentLevel().getPlayers();
-        for (DynamicElement player : players) {
+        ArrayList<PlayerInterface> players = game.getCurrentLevel().getPlayers();
+        for (PlayerInterface player : players) {
           player.addAction(keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode));
         }
       }
@@ -79,8 +80,8 @@ public class KeyListeners {
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
         
-        ArrayList<DynamicElement> players = game.getCurrentLevel().getPlayers();
-        for (DynamicElement player : players) { 
+        ArrayList<PlayerInterface> players = game.getCurrentLevel().getPlayers();
+        for (PlayerInterface player : players) { 
           player.addAction(LevelElementAction.invertAction(
               keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode)));
           player.removeAction((keybindings.getKeybinding(

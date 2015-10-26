@@ -6,6 +6,7 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.PlayerInterface;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -19,7 +20,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
 @SuppressWarnings("PMD.TooManyMethods")
 public class TurtleTaco implements Powerup {
 
-  private DynamicElement wrapped;
+  private PlayerInterface wrapped;
 
   /**
    * Create a new LevelElement instance.
@@ -27,7 +28,7 @@ public class TurtleTaco implements Powerup {
    * @param wrapped
    *          The DynamicElement to be wrapped in this Powerup Decorator.
    */
-  public TurtleTaco(DynamicElement wrapped) {
+  public TurtleTaco(PlayerInterface wrapped) {
     this.wrapped = wrapped;
   }
 
