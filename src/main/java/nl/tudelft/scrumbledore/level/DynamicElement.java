@@ -11,27 +11,14 @@ import java.util.ArrayList;
 public interface DynamicElement extends LevelElement {
   
   /**
-   * Decrease the lifetime by a given number of steps.
-   * 
-   * @param delta
-   *          The number of steps.
+   * Stop this LevelElement's vertical movement.
    */
-  void decreaseLifetime(double delta);
+  void stopVertically();
 
   /**
-   * Get the remaining lifetime.
-   * 
-   * @return Remaining lifetime.
+   * Stop this LevelElement's horizontal movement.
    */
-  double getLifetime();
-
-  /**
-   * Setting the life time of a bubble.
-   * 
-   * @param newTime
-   *          The new life time.
-   */
-  void setLifetime(double newTime);
+  void stopHorizontally();
   
   /**
    * Gives a list of current actions of the player.
@@ -51,21 +38,6 @@ public interface DynamicElement extends LevelElement {
    * Remove all actions from the queue.
    */
   void clearActions();
-
-  /**
-   * Checking wether the element is alive.
-   * 
-   * @return The boolean if the element is alive.
-   */
-  Boolean isAlive();
-
-  /**
-   * Setting the life of the element.
-   * 
-   * @param bool
-   *          Can be True or False, stated on situation of element.
-   */
-  void setAlive(Boolean bool);
 
   /**
    * Check whether the given action is queued for the next step.

@@ -143,20 +143,6 @@ public abstract class BasicStaticElement implements StaticElement {
   }
 
   /**
-   * Stop this LevelElement's vertical movement.
-   */
-  public void stopVertically() {
-    getSpeed().setY(0);
-  }
-
-  /**
-   * Stop this LevelElement's horizontal movement.
-   */
-  public void stopHorizontally() {
-    getSpeed().setX(0);
-  }
-
-  /**
    * Check whether this LevelElement is affected by Gravity.
    * 
    * @return Boolean

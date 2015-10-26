@@ -130,60 +130,6 @@ public class NPC extends BasicDynamicElement {
   }
 
   /**
-   * Checking wether the element is alive.
-   * 
-   * @return The boolean if the element is alive.
-   */
-  public Boolean isAlive() {
-    return false;
-  }
-
-  /**
-   * Setting the life of the element.
-   * 
-   * @param bool
-   *          Can be True or False, stated on situation of element.
-   */
-  public void setAlive(Boolean bool) {
-  }
-
-  /**
-   * Gets the id of the current player.
-   * 
-   * @return Integer that represents the players number in the game.
-   */
-  public int getPlayerNumber() {
-    return 0;
-  }
-
-  /**
-   * Sets the id of the current player.
-   * 
-   * @param id
-   *          Integer that represents the players number in the game.
-   */
-  public void setPlayerNumber(int id) {
-  }
-
-  /**
-   * Return whether the Player is firing.
-   * 
-   * @return whether the Player is firing
-   */
-  public Boolean isFiring() {
-    return false;
-  }
-
-  /**
-   * Set whether the Player is firing.
-   * 
-   * @param isFiring
-   *          whether the Player is firing
-   */
-  public void setFiring(Boolean isFiring) {
-  }
-
-  /**
    * Gives a list of current actions of the player.
    * @return a list of actions
    */
@@ -191,31 +137,4 @@ public class NPC extends BasicDynamicElement {
     return actions;
   }
   
-  /**
-   * Decrease the lifetime by a given number of steps.
-   * 
-   * @param delta
-   *          The number of steps.
-   */
-  public void decreaseLifetime(double delta) {
-  }
-
-  /**
-   * Get the remaining lifetime.
-   * 
-   * @return Remaining lifetime.
-   */
-  public double getLifetime() {
-    return 0;
-  }
-
-  /**
-   * Setting the life time of a bubble.
-   * 
-   * @param newTime
-   *          The new life time.
-   */
-  public void setLifetime(double newTime) {
-  }
-
 }

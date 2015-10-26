@@ -466,7 +466,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerEnemy(Level level, double delta) {
-    for (DynamicElement player : level.getPlayers()) {
+    for (PlayerInterface player : level.getPlayers()) {
       ArrayList<NPC> npcs = level.getNPCs();
 
       if (npcs.size() > 0 && !(player instanceof TurtleTaco)) {
