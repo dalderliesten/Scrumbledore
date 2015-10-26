@@ -126,42 +126,6 @@ public class BlueBubble extends BasicDynamicElement implements Projectile {
   }
 
   /**
-   * Checking wether the element is alive.
-   * 
-   * @return The boolean if the element is alive.
-   */
-  public Boolean isAlive() {
-    return false;
-  }
-
-  /**
-   * Setting the life of the element.
-   * 
-   * @param bool
-   *          Can be True or False, stated on situation of element.
-   */
-  public void setAlive(Boolean bool) {
-  }
-
-  /**
-   * Gets the id of the current player.
-   * 
-   * @return Integer that represents the players number in the game.
-   */
-  public int getPlayerNumber() {
-    return 0;
-  }
-
-  /**
-   * Sets the id of the current player.
-   * 
-   * @param id
-   *          Integer that represents the players number in the game.
-   */
-  public void setPlayerNumber(int id) {
-  }
-
-  /**
    * Remove the given action from the actions queue.
    * 
    * @param action

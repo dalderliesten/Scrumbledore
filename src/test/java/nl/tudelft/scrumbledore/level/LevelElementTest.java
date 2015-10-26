@@ -52,7 +52,6 @@ public abstract class LevelElementTest {
 
     assertEquals(position, testElement.getPosition());
     assertEquals(size, testElement.getSize());
-    assertEquals(new Vector(0, 0), testElement.getSpeed());
   }
 
   /**
@@ -204,54 +203,6 @@ public abstract class LevelElementTest {
   public void testHeight() {
     LevelElement l1 = make(position, new Vector(16, 32));
     assertEquals(32, l1.height(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * Test the vSpeed and hSpeed methods.
-   */
-  @Test
-  public void testSpeed() {
-    LevelElement l1 = make(position, size);
-    l1.getSpeed().setX(5);
-    l1.getSpeed().setY(7);
-
-    assertEquals(5, l1.hSpeed(), Constants.DOUBLE_PRECISION);
-    assertEquals(7, l1.vSpeed(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * Test the hFric and vFric methods.
-   */
-  @Test
-  public void testFric() {
-    LevelElement l1 = make(position, size);
-    l1.getFriction().setX(5);
-    l1.getFriction().setY(7);
-
-    assertEquals(5, l1.hFric(), Constants.DOUBLE_PRECISION);
-    assertEquals(7, l1.vFric(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When stopping a Level Element horizontally, its horizontal speed should be zero.
-   */
-  @Test
-  public void testStopHorizontally() {
-    LevelElement el = new Bubble(new Vector(0, 0), new Vector(0, 0));
-    el.getSpeed().setX(42);
-    el.stopHorizontally();
-    assertEquals(0, el.getSpeed().getX(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * When stopping a Level Element vertically, its vertical speed should be zero.
-   */
-  @Test
-  public void testStopVertically() {
-    LevelElement el = new Bubble(new Vector(0, 0), new Vector(0, 0));
-    el.getSpeed().setY(42);
-    el.stopVertically();
-    assertEquals(0, el.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
 
   /**

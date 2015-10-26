@@ -35,7 +35,7 @@ public class KineticsLevelModifierTest {
    */
   @Test
   public void testApplyFrictionSpeedLargerThanFriction() {
-    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    DynamicElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     // Set speed
     el.getSpeed().sum(new Vector(4, -4));
     // Set friction
@@ -55,7 +55,7 @@ public class KineticsLevelModifierTest {
    */
   @Test
   public void testApplyFrictionSpeedXSmaller() {
-    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    DynamicElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     // Set speed
     el.getSpeed().sum(new Vector(4, -4));
     // Set friction
@@ -75,7 +75,7 @@ public class KineticsLevelModifierTest {
    */
   @Test
   public void testApplyFrictionSpeedYSmaller() {
-    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    DynamicElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     // Set speed
     el.getSpeed().sum(new Vector(4, -4));
     // Set friction
@@ -95,7 +95,7 @@ public class KineticsLevelModifierTest {
    */
   @Test
   public void testMove() {
-    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    DynamicElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
     kinetics.move(el, 0.5);
     // For branch coverage:
@@ -109,7 +109,7 @@ public class KineticsLevelModifierTest {
    */
   @Test
   public void testRevertMove() {
-    LevelElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
+    DynamicElement el = new Bubble(new Vector(1, 2), new Vector(0, 0));
     el.getSpeed().sum(new Vector(2, 2));
     kinetics.revertMove(el, 0.5);
     // For branch coverage:

@@ -37,14 +37,14 @@ public class CollisionsLevelModifierTest {
   }
 
   /**
-   * Helper method for stubbing a mocked dependency LevelElement class.
+   * Helper method for stubbing a mocked dependency DynamicElement class.
    * 
    * @param instance
    *          The reference instance determining which class is to be mocked and how it should be
    *          stubbed.
    */
-  private LevelElement mockLevelElement(LevelElement instance) {
-    LevelElement mock = mock(instance.getClass());
+  private DynamicElement mockLevelElement(DynamicElement instance) {
+    DynamicElement mock = mock(instance.getClass());
 
     when(mock.getPosition()).thenReturn(instance.getPosition());
     when(mock.getSpeed()).thenReturn(instance.getSpeed());
@@ -229,7 +229,7 @@ public class CollisionsLevelModifierTest {
   public void testDetectBubblePlatformFromBottom() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
-    LevelElement bubbleMock = mockLevelElement(bubble);
+    DynamicElement bubbleMock = mockLevelElement(bubble);
 
     Level level = new Level();
     level.addElement(bubbleMock);
@@ -247,7 +247,7 @@ public class CollisionsLevelModifierTest {
   public void testDetectBubblePlatformFromLeft() {
     Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
     Bubble bubble = new Bubble(new Vector(0, 0), new Vector(32, 32));
-    LevelElement bubbleMock = mockLevelElement(bubble);
+    DynamicElement bubbleMock = mockLevelElement(bubble);
 
     Level level = new Level();
     level.addElement(bubbleMock);
@@ -266,7 +266,7 @@ public class CollisionsLevelModifierTest {
   public void testDetectBubblePlatformFromRight() {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Bubble bubble = new Bubble(new Vector(32, 0), new Vector(32, 32));
-    LevelElement bubbleMock = mockLevelElement(bubble);
+    DynamicElement bubbleMock = mockLevelElement(bubble);
 
     Level level = new Level();
     level.addElement(bubbleMock);
@@ -285,7 +285,7 @@ public class CollisionsLevelModifierTest {
     Bubble bubble = new Bubble(new Vector(0, 32), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
     player.getSpeed().setY(4);
-    LevelElement playerMock = mockLevelElement(player);
+    DynamicElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
     level.addElement(playerMock);

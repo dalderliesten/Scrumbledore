@@ -76,5 +76,62 @@ public interface DynamicElement extends LevelElement {
 
   @Override
   boolean equals(Object other);
+  
+  /**
+   * Check whether this LevelElement is affected by Gravity.
+   * 
+   * @return Boolean
+   */
+  boolean hasGravity();
+
+  /**
+   * Set the property determining whether this LevelElement is affected by gravity.
+   * 
+   * @param gravity
+   *          A boolean
+   */
+  void setGravity(boolean gravity);
+  
+  /**
+   * Get the speed vector of this element.
+   * 
+   * @return Speed Vector.
+   */
+  Vector getSpeed();
+
+  /**
+   * Get the horizontal speed of the element.
+   * 
+   * @return double
+   */
+  double hSpeed();
+
+  /**
+   * Get the vertical speed of the element.
+   * 
+   * @return double
+   */
+  double vSpeed();
+
+  /**
+   * Get the friction vector of this element.
+   * 
+   * @return Friction Vector.
+   */
+  Vector getFriction();
+
+  /**
+   * Get the horizontal friction.
+   * 
+   * @return Horizontal friction.
+   */
+  double hFric();
+
+  /**
+   * Get the vertical friction.
+   * 
+   * @return Vertical friction.
+   */
+  double vFric();
 
 }

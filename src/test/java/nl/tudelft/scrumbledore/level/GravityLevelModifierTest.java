@@ -16,8 +16,8 @@ import nl.tudelft.scrumbledore.Constants;
  */
 public class GravityLevelModifierTest {
 
-  private LevelElement test;
-  private LevelElement test2;
+  private DynamicElement test;
+  private DynamicElement test2;
   private double strength;
   private double max;
 
@@ -53,7 +53,7 @@ public class GravityLevelModifierTest {
   @Test
   public void testPullNull() {
     GravityLevelModifier gravity = new GravityLevelModifier(strength, max);
-    LevelElement el = null;
+    DynamicElement el = null;
     gravity.pull(el, 1);
 
     assertNull(el);

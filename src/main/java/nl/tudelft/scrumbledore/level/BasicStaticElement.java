@@ -14,9 +14,6 @@ public abstract class BasicStaticElement implements StaticElement {
 
   private Vector position;
   private Vector size;
-  private Vector speed;
-  private Vector friction;
-  private boolean gravity;
 
   /**
    * Create a new LevelElement instance.
@@ -29,9 +26,6 @@ public abstract class BasicStaticElement implements StaticElement {
   public BasicStaticElement(Vector position, Vector size) {
     this.position = position;
     this.size = size;
-    this.speed = new Vector(0, 0);
-    this.friction = new Vector(0, 0);
-    this.gravity = false;
   }
 
   /**
@@ -86,79 +80,6 @@ public abstract class BasicStaticElement implements StaticElement {
    */
   public double height() {
     return size.getY();
-  }
-
-  /**
-   * Get the speed vector of this element.
-   * 
-   * @return Speed Vector.
-   */
-  public Vector getSpeed() {
-    return speed;
-  }
-
-  /**
-   * Get the horizontal speed of the element.
-   * 
-   * @return double
-   */
-  public double hSpeed() {
-    return speed.getX();
-  }
-
-  /**
-   * Get the vertical speed of the element.
-   * 
-   * @return double
-   */
-  public double vSpeed() {
-    return speed.getY();
-  }
-
-  /**
-   * Get the friction vector of this element.
-   * 
-   * @return Friction Vector.
-   */
-  public Vector getFriction() {
-    return friction;
-  }
-
-  /**
-   * Get the horizontal friction.
-   * 
-   * @return Horizontal friction.
-   */
-  public double hFric() {
-    return friction.getX();
-  }
-
-  /**
-   * Get the vertical friction.
-   * 
-   * @return Vertical friction.
-   */
-  public double vFric() {
-    return friction.getY();
-  }
-
-  /**
-   * Check whether this LevelElement is affected by Gravity.
-   * 
-   * @return Boolean
-   */
-  public boolean hasGravity() {
-    return gravity;
-  }
-
-  /**
-   * Set the property determining whether this LevelElement is affected by gravity.
-   * 
-   * @param gravity
-   *          A boolean
-   */
-  public void setGravity(boolean gravity) {
-    this.gravity = gravity;
   }
 
   /**

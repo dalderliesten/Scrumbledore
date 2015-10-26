@@ -21,8 +21,8 @@ public class CollisionTest {
 
   private boolean expectedOut;
 
-  private LevelElement collider;
-  private LevelElement collidee;
+  private DynamicElement collider;
+  private StaticElement collidee;
 
   private Collision collision;
 

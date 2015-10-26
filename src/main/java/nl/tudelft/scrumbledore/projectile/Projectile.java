@@ -1,5 +1,6 @@
 package nl.tudelft.scrumbledore.projectile;
 
+import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
 
@@ -9,7 +10,7 @@ import nl.tudelft.scrumbledore.level.LevelElementAction;
  * @author Floris Doolaard
  *
  */
-public interface Projectile extends LevelElement {
+public interface Projectile extends DynamicElement {
 
   /**
    * Return a boolean wether to see if a bubble has an NPC in it.

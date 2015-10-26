@@ -87,13 +87,11 @@ public class Platform extends BasicStaticElement {
    * Stop this LevelElement's vertical movement.
    */
   public void stopVertically() {
-    getSpeed().setY(0);
   }
 
   /**
    * Stop this LevelElement's horizontal movement.
    */
   public void stopHorizontally() {
-    getSpeed().setX(0);
   }
 }

@@ -10,7 +10,7 @@ import nl.tudelft.scrumbledore.Constants;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Collision {
-  private LevelElement collider;
+  private DynamicElement collider;
   private LevelElement collidee;
   private double delta;
   private KineticsLevelModifier kinetics;
@@ -25,7 +25,7 @@ public class Collision {
    * @param delta
    *          The number of steps passed since this method was last called.
    */
-  public Collision(LevelElement collider, LevelElement collidee, double delta) {
+  public Collision(DynamicElement collider, LevelElement collidee, double delta) {
     this.collider = collider;
     this.collidee = collidee;
     this.delta = delta;
