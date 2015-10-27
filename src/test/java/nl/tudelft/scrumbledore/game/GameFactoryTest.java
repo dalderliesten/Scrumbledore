@@ -12,7 +12,7 @@ import nl.tudelft.scrumbledore.level.modifier.KineticsLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.LevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.PlayerActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.modifier.ProjectileActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.BubbleActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.WarpLevelModifier;
 
 /**
@@ -35,7 +35,7 @@ public class GameFactoryTest {
     assertEquals(1, countLevelModifiers(PlayerActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(GravityLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(NPCLevelModifier.class, modifiers));
-    assertEquals(1, countLevelModifiers(ProjectileActionsLevelModifier.class, modifiers));
+    assertEquals(1, countLevelModifiers(BubbleActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(CollisionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(KineticsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(WarpLevelModifier.class, modifiers));
@@ -54,7 +54,7 @@ public class GameFactoryTest {
     assertEquals(1, countLevelModifiers(PlayerActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(GravityLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(NPCLevelModifier.class, modifiers));
-    assertEquals(1, countLevelModifiers(ProjectileActionsLevelModifier.class, modifiers));
+    assertEquals(1, countLevelModifiers(BubbleActionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(CollisionsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(KineticsLevelModifier.class, modifiers));
     assertEquals(1, countLevelModifiers(WarpLevelModifier.class, modifiers));

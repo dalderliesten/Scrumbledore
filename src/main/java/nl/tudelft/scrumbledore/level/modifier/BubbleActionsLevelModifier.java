@@ -9,7 +9,6 @@ import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.projectile.Bubble;
-import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 /**
  * Level Modifier that processes the actions to be performed on the projectile.
@@ -19,7 +18,7 @@ import nl.tudelft.scrumbledore.level.projectile.Projectile;
  */
 @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
     "PMD.StdCyclomaticComplexity" })
-public class ProjectileActionsLevelModifier implements LevelModifier {
+public class BubbleActionsLevelModifier implements LevelModifier {
 
   /**
    * Processing the actions to be performed on projectiles.
@@ -45,12 +44,12 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
   @SuppressWarnings("checkstyle:methodlength")
   public static void modifyBubble(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
+    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
 
-    Iterator<Projectile> iter = level.getProjectiles().iterator();
+    Iterator<Bubble> iter = level.getBubbles().iterator();
 
     while (iter.hasNext()) {
-      Projectile bub = iter.next();
+      Bubble bub = iter.next();
       if (bub instanceof Bubble) {
         if (bub.getLifetime() <= 0) {
           if (bub.hasNPC()) {

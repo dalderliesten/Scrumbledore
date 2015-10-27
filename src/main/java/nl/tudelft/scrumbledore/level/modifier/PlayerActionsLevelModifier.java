@@ -13,7 +13,6 @@ import nl.tudelft.scrumbledore.level.powerup.BlueberryBubble;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
 import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.level.projectile.Bubble;
-import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -150,7 +149,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
-    ArrayList<Projectile> projectiles = level.getProjectiles();
+    ArrayList<Bubble> projectiles = level.getBubbles();
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
@@ -173,7 +172,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param projectile
    *          , the projectile the player is shooting.
    */
-  public static void checkShootingDirection(PlayerElement player, Projectile projectile) {
+  public static void checkShootingDirection(PlayerElement player, Bubble projectile) {
     if (player.getLastMove() == LevelElementAction.MoveLeft) {
       if (Constants.isLoggingWantShooting()) {
         Logger.getInstance().log("Player shot in the left direction.");

@@ -10,7 +10,6 @@ import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
 import nl.tudelft.scrumbledore.level.projectile.Bubble;
-import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 /**
  * Class representing a Level in the Game.
@@ -23,9 +22,9 @@ public class Level {
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
-  private ArrayList<Projectile> projectiles;
+  private ArrayList<Bubble> projectiles;
   private ArrayList<PlayerElement> players;
-  private ArrayList<Projectile> encapEnemies;
+  private ArrayList<Bubble> encapEnemies;
   private ArrayList<PowerupPickUp> powerups;
 
   /**
@@ -33,8 +32,8 @@ public class Level {
    */
   public Level() {
     platforms = new ArrayList<Platform>();
-    projectiles = new ArrayList<Projectile>();
-    encapEnemies = new ArrayList<Projectile>();
+    projectiles = new ArrayList<Bubble>();
+    encapEnemies = new ArrayList<Bubble>();
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
     players = new ArrayList<PlayerElement>();
@@ -130,7 +129,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects.
    */
-  public ArrayList<Projectile> getProjectiles() {
+  public ArrayList<Bubble> getBubbles() {
     return projectiles;
   }
 
@@ -139,7 +138,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects with enemies in them.
    */
-  public ArrayList<Projectile> getEnemyBubbles() {
+  public ArrayList<Bubble> getEnemyBubbles() {
     return encapEnemies;
   }
 

@@ -319,7 +319,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
 
     clm.detectPlayerBubble(level, 1);
-    assertFalse(level.getProjectiles().contains(bubble));
+    assertFalse(level.getBubbles().contains(bubble));
   }
 
   /**
