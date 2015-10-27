@@ -162,54 +162,6 @@ public abstract class BasicStaticElement implements StaticElement {
   }
 
   /**
-   * Snap a LevelElement to the left side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapLeft(LevelElement other) {
-    double offset = getSize().getX() / 2;
-    double newPos = other.getLeft() - offset;
-    getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the right side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapRight(LevelElement other) {
-    double offset = getSize().getX() / 2;
-    double newPos = other.getRight() + offset;
-    getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the top side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapTop(LevelElement other) {
-    double offset = getSize().getY() / 2;
-    double newPos = other.getTop() - offset;
-    getPosition().setY(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the bottom side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapBottom(LevelElement other) {
-    double offset = getSize().getY() / 2;
-    double newPos = other.getBottom() + offset;
-    getPosition().setY(newPos);
-  }
-
-  /**
    * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
    * Element.
    * 
