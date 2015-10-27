@@ -157,9 +157,14 @@ public final class Constants {
 
   public static final List<Map<KeyCode, LevelElementAction>> KEY_MAPPING = createKeyMapping();
 
+  /**
+   * Returns a list of maps containing the keybinding/key mapping for players one and two.
+   * 
+   * @return A list containing a map with the keybindings/key mapping for both players.
+   */
   private static List<Map<KeyCode, LevelElementAction>> createKeyMapping() {
-    List<Map<KeyCode, LevelElementAction>> keyMapping = 
-          new ArrayList<Map<KeyCode, LevelElementAction>>();
+    List<Map<KeyCode, LevelElementAction>> keyMapping 
+        = new ArrayList<Map<KeyCode, LevelElementAction>>();
 
     keyMapping.add(createKeyMappingP1());
     keyMapping.add(createKeyMappingP2());
@@ -167,6 +172,11 @@ public final class Constants {
     return keyMapping;
   }
 
+  /**
+   * Returns a map containing the keybinding/key mapping for player one.
+   * 
+   * @return A map containing the keys and their associated actions.
+   */
   private static Map<KeyCode, LevelElementAction> createKeyMappingP1() {
     Map<KeyCode, LevelElementAction> keyMapping = new HashMap<KeyCode, LevelElementAction>();
     keyMapping.put(KeyCode.LEFT, LevelElementAction.MoveLeft);
@@ -178,9 +188,9 @@ public final class Constants {
   }
 
   /**
+   * Returns a map containing the keybinding/key mapping for player two.
    * 
-   * 
-   * @return
+   * @return A map containing the keys and their associated actions.
    */
   private static Map<KeyCode, LevelElementAction> createKeyMappingP2() {
     Map<KeyCode, LevelElementAction> keyMapping = new HashMap<KeyCode, LevelElementAction>();
@@ -195,7 +205,7 @@ public final class Constants {
   /**
    * Returns whether movement should be logged.
    * 
-   * @return whether movement should be logged
+   * @return Whether movement should be logged
    */
   public static boolean isLoggingWantMovement() {
     return loggingWantMovement;
@@ -204,7 +214,7 @@ public final class Constants {
   /**
    * Returns whether input should be logged.
    * 
-   * @return whether input should be logged
+   * @return Whether input should be logged
    */
   public static boolean isLoggingWantInput() {
     return loggingWantInput;
@@ -213,7 +223,7 @@ public final class Constants {
   /**
    * Returns whether the usage of the start/stop button should be logged.
    * 
-   * @return whether the usage of the start/stop button should be logged
+   * @return Whether the usage of the start/stop button should be logged
    */
   public static boolean isLoggingWantStartStop() {
     return loggingWantStartStop;
@@ -222,7 +232,7 @@ public final class Constants {
   /**
    * Returns whether shooting actions should be logged.
    * 
-   * @return whether shooting actions should be logged
+   * @return Whether shooting actions should be logged
    */
   public static boolean isLoggingWantShooting() {
     return loggingWantShooting;
@@ -231,7 +241,7 @@ public final class Constants {
   /**
    * Returns whether obtained points should be logged.
    * 
-   * @return whether obtained points should be logged.
+   * @return Whether obtained points should be logged.
    */
   public static boolean isLoggingWantPoints() {
     return loggingWantPoints;
@@ -240,7 +250,7 @@ public final class Constants {
   /**
    * Returns whether the location of enemies should be logged.
    * 
-   * @return whether the location of enemies should be logged.
+   * @return Whether the location of enemies should be logged.
    */
   public static boolean isLoggingWantEnemy() {
     return loggingWantEnemy;
