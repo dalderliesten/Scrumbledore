@@ -3,8 +3,8 @@ package nl.tudelft.scrumbledore.level;
 /**
  * Enumeration containing types of actions that a LevelElement can perform.
  * 
- * @author Jesse Tilro, Floris Doolaard
- *
+ * @author Jesse Tilro
+ * @author Floris Doolaard
  */
 public enum LevelElementAction {
   MoveLeft, MoveRight, MoveStop, Jump, Shoot, ShootStop;

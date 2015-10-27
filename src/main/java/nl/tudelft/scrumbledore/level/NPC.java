@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
@@ -20,6 +19,7 @@ public class NPC extends BasicDynamicElement {
    * 
    * @param position
    *          Position of the NPC in the level.
+   *          
    * @param size
    *          Size of the NPC.
    */
@@ -36,7 +36,7 @@ public class NPC extends BasicDynamicElement {
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A PlayerAction
+   *          A PlayerAction.
    */
   public void addAction(LevelElementAction action) {
     if (!hasAction(action)) {
@@ -57,6 +57,7 @@ public class NPC extends BasicDynamicElement {
    * 
    * @param action
    *          An NPCAction.
+   *          
    * @return Boolean.
    */
   public boolean hasAction(LevelElementAction action) {
@@ -82,8 +83,7 @@ public class NPC extends BasicDynamicElement {
   public boolean equals(Object other) {
     if (other instanceof NPC) {
       NPC that = (NPC) other;
-      return this.getPosition().equals(that.getPosition()) 
-          && this.getSize().equals(that.getSize());
+      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
     return false;
@@ -109,13 +109,14 @@ public class NPC extends BasicDynamicElement {
       lastMove = action;
     }
   }
-  
+
   /**
    * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
    * Element.
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   *          
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -131,10 +132,11 @@ public class NPC extends BasicDynamicElement {
 
   /**
    * Gives a list of current actions of the player.
+   * 
    * @return a list of actions
    */
   public ArrayList<LevelElementAction> getActions() {
     return actions;
   }
-  
+
 }

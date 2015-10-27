@@ -1,14 +1,14 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
  * Class representing a Fruit in a game.
  * 
- * @author Niels Warnars, Floris Doolaard
+ * @author Niels Warnars
+ * @author Floris Doolaard
  */
 public class Fruit extends BasicDynamicElement {
   private int value;
@@ -19,6 +19,7 @@ public class Fruit extends BasicDynamicElement {
    * 
    * @param position
    *          Position of the fruit in the level.
+   *          
    * @param size
    *          Size of the fruit.
    */
@@ -88,6 +89,7 @@ public class Fruit extends BasicDynamicElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   * 
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -147,15 +149,16 @@ public class Fruit extends BasicDynamicElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(LevelElementAction action) {    
+  public void setLastMove(LevelElementAction action) {
   }
 
   /**
    * Gives a list of current actions of the player.
+   * 
    * @return a list of actions
    */
   public ArrayList<LevelElementAction> getActions() {
     return null;
   }
-  
+
 }

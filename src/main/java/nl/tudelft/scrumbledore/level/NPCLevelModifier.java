@@ -8,7 +8,6 @@ import nl.tudelft.scrumbledore.Constants;
  * @author David Alderliesten
  * @author Jesse Tilro
  * @author Niels Warnars
- *
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public class NPCLevelModifier implements LevelModifier {

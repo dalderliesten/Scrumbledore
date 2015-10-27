@@ -4,7 +4,6 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
 import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
@@ -31,7 +30,7 @@ public class LevelParser {
    * Creates a new LevelParser and loads levels from a user defined path.
    * 
    * @param dir
-   *          A given directory
+   *          A given directory.
    */
   public LevelParser(String dir) {
     levels = loadLevelsFromDisk(dir);
@@ -41,8 +40,9 @@ public class LevelParser {
    * Loads an array of Level objects from disk.
    * 
    * @param dir
-   *          A given directory
-   * @return An array of Level objects
+   *          A given directory.
+   * 
+   * @return An array of Level objects.
    */
   protected ArrayList<Level> loadLevelsFromDisk(String dir) {
     ArrayList<String> levelFiles = listFilesInDir(dir);
@@ -62,8 +62,9 @@ public class LevelParser {
    * Lists all files in a given directory.
    * 
    * @param dir
-   *          A given directory
-   * @return A list of file names
+   *          A given directory.
+   * 
+   * @return A list of file names.
    */
   protected ArrayList<String> listFilesInDir(String dir) {
     ArrayList<String> levelFiles = new ArrayList<String>();
@@ -86,8 +87,9 @@ public class LevelParser {
    * @param inFile
    *          File name of level layout on disk.
    * @throws FileNotFoundException
-   *           Exception thrown in case the file does not exist
-   * @return A level object
+   *           Exception thrown in case the file does not exist.
+   * 
+   * @return A level object.
    */
   protected Level readLevelFromFile(String inFile) throws FileNotFoundException {
     return readLevelFromScanner(new Scanner(new File(inFile), "UTF-8"));
@@ -97,9 +99,11 @@ public class LevelParser {
    * Reads a level object from a given scanner.
    * 
    * @param lineScanner
-   *          A given Scanner object
+   *          A given Scanner object.
+   * 
    * @throws FileNotFoundException
-   *           Exception thrown in case the file does not exist
+   *           Exception thrown in case the file does not exist.
+   * 
    * @return A level object
    */
   protected Level readLevelFromScanner(Scanner lineScanner) throws FileNotFoundException {
@@ -114,12 +118,12 @@ public class LevelParser {
 
         if (ch != ' ') {
           LevelElement le = getElementFromChar(ch, idx, lineNumber);
-          
+
           if (le instanceof Player) {
             int numPlayers = tmpLevel.getPlayers().size();
             ((Player) le).setPlayerNumber(numPlayers);
           }
-          
+
           tmpLevel.addElement(le);
         }
       }
@@ -137,10 +141,13 @@ public class LevelParser {
    * 
    * @param ch
    *          Character representing a LevelElement.
+   * 
    * @param i
-   *          Horizontal position in level map on disk
+   *          Horizontal position in level map on disk.
+   * 
    * @param j
-   *          Vertical position in level map on disk
+   *          Vertical position in level map on disk.
+   * 
    * @return An instance of a LevelElement child.
    */
   @SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
@@ -177,9 +184,11 @@ public class LevelParser {
    * Gets the screen position of a block based on given coordinates in the level map on disk.
    * 
    * @param i
-   *          Horizontal position in level map on disk
+   *          Horizontal position in level map on disk.
+   * 
    * @param j
-   *          Vertical position in level map on disk
+   *          Vertical position in level map on disk.
+   * 
    * @return Screen position of a block
    */
   public Vector getBlockPosition(int i, int j) {

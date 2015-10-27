@@ -28,7 +28,7 @@ public interface PlayerElement extends DynamicElement {
   /**
    * Return whether the Player is firing.
    * 
-   * @return whether the Player is firing
+   * @return whether the Player is firing.
    */
   Boolean isFiring();
 
@@ -36,7 +36,7 @@ public interface PlayerElement extends DynamicElement {
    * Set whether the Player is firing.
    * 
    * @param isFiring
-   *          whether the Player is firing
+   *          whether the Player is firing.
    */
   void setFiring(Boolean isFiring);
   

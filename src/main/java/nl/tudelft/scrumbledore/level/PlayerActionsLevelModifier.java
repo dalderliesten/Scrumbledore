@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.powerup.BlueberryBubble;
@@ -27,6 +26,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level in which the player actions need to be processed.
+   *          
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
@@ -43,7 +43,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
         if (!(player instanceof PlayerElement)) {
           if (player.getLifetime() <= 0
-              || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
+              || ((player instanceof PyroPepper) || player instanceof BlueberryBubble)
               && player.hasAction(LevelElementAction.ShootStop)) {
             try {
               PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
@@ -118,7 +118,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * Checks if the player needs to stop moving.
    * 
    * @param player
-   *          The player to be checked
+   *          The player to be checked.
    */
   public void checkStopMovement(PlayerElement player) {
     if (player.hasAction(LevelElementAction.MoveStop)) {
@@ -134,9 +134,10 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * Checks for shooting actions.
    * 
    * @param player
-   *          The player to be checked
+   *          The player to be checked.
+   *          
    * @param level
-   *          Level to be get the bubbles from
+   *          Level to be get the bubbles from.
    */
   @SuppressWarnings("methodlength")
   public void checkShooting(PlayerElement player, Level level) {
@@ -183,6 +184,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * 
    * @param player
    *          , the player that shoots.
+   *          
    * @param projectile
    *          , the projectile the player is shooting.
    */
@@ -199,4 +201,5 @@ public class PlayerActionsLevelModifier implements LevelModifier {
       projectile.addAction(LevelElementAction.MoveRight);
     }
   }
+  
 }
