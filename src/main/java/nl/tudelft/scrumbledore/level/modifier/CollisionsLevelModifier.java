@@ -8,6 +8,7 @@ import nl.tudelft.scrumbledore.game.ScoreCounter;
 import nl.tudelft.scrumbledore.level.Collision;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.DynamicElement;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
@@ -23,7 +24,6 @@ import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.level.powerup.PyroPepperPickUp;
 import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 import nl.tudelft.scrumbledore.level.powerup.TurtleTacoPickUp;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Class responsible for collision detection between given elements.

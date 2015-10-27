@@ -9,7 +9,6 @@ import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Test Suite for the Bubble class.

@@ -6,13 +6,13 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.powerup.BlueberryBubble;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
 import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.

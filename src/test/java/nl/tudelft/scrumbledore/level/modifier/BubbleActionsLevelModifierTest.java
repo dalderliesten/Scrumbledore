@@ -9,10 +9,10 @@ import org.junit.Test;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Player;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Test Suite for the Bubble Actions Level Modifier class.

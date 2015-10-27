@@ -6,9 +6,9 @@ import java.util.Iterator;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.NPC;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Level Modifier that processes the actions to be performed on the projectile.

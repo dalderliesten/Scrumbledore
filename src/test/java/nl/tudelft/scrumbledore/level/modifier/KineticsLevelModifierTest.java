@@ -4,11 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.DynamicElement;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Player;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 //import static org.junit.Assert.*;
 import org.junit.Before;

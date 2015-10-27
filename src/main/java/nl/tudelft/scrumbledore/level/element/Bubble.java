@@ -1,11 +1,9 @@
-package nl.tudelft.scrumbledore.level.projectile;
+package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
-import nl.tudelft.scrumbledore.level.element.BasicDynamicElement;
-import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 

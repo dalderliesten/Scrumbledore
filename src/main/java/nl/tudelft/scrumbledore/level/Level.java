@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.LevelElement;
 import nl.tudelft.scrumbledore.level.element.NPC;
@@ -9,7 +10,6 @@ import nl.tudelft.scrumbledore.level.element.Platform;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Class representing a Level in the Game.
