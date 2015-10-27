@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.keybinding;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
@@ -75,4 +74,5 @@ public final class KeybindingContainer {
 
     getKeybinding(playerNumber).updateKeyByAction(action, key);
   }
+  
 }

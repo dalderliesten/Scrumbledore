@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.keybinding;
 
 import java.util.HashMap;
 import java.util.Map;
-
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
@@ -94,4 +93,5 @@ public class Keybinding {
   public boolean isAssigned(KeyCode key) {
     return getAction(key) != null;
   }
+
 }
