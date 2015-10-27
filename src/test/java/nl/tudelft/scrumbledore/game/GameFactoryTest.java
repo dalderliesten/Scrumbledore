@@ -6,14 +6,14 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.level.CollisionsLevelModifier;
-import nl.tudelft.scrumbledore.level.GravityLevelModifier;
-import nl.tudelft.scrumbledore.level.KineticsLevelModifier;
-import nl.tudelft.scrumbledore.level.LevelModifier;
-import nl.tudelft.scrumbledore.level.NPCLevelModifier;
-import nl.tudelft.scrumbledore.level.PlayerActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.WarpLevelModifier;
-import nl.tudelft.scrumbledore.projectile.ProjectileActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.CollisionsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.GravityLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.KineticsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.LevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.NPCLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.PlayerActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.ProjectileActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.WarpLevelModifier;
 
 /**
  * Test suite for the GameFactory class.

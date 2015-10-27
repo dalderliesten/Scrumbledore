@@ -7,10 +7,10 @@ import java.util.ArrayList;
 import org.junit.Before;
 import org.junit.Test;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.Fruit;
 import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Fruit;
+import nl.tudelft.scrumbledore.level.modifier.NPCLevelModifier;
 
 /**
  * Testing the Game class.
