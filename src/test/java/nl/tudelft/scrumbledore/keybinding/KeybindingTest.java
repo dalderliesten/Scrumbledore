@@ -1,6 +1,7 @@
 package nl.tudelft.scrumbledore.keybinding;
 
 import java.util.Map;
+import java.util.Map.Entry;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
@@ -38,8 +39,8 @@ public class KeybindingTest {
     for (int i = 0; i < Constants.NUMBER_OF_PLAYERS; i++) {
       keybinding = new Keybinding(i);
       Map<KeyCode, LevelElementAction> bindings = Constants.KEY_MAPPING.get(i);
-      for (KeyCode key : bindings.keySet()) {
-        assertEquals(bindings.get(key), keybinding.getAction(key));
+      for (Entry<KeyCode, LevelElementAction> entry : bindings.entrySet()) {
+        assertEquals(bindings.get(entry.getKey()), keybinding.getAction(entry.getKey()));
       }
     }
   }
