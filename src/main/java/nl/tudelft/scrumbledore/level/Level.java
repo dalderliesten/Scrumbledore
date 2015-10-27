@@ -18,7 +18,7 @@ public class Level {
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
   private ArrayList<Projectile> projectiles;
-  private ArrayList<DynamicElement> players;
+  private ArrayList<PlayerElement> players;
   private ArrayList<Projectile> encapEnemies;
   private ArrayList<PowerupPickUp> powerups;
 
@@ -31,7 +31,7 @@ public class Level {
     encapEnemies = new ArrayList<Projectile>();
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
-    players = new ArrayList<DynamicElement>();
+    players = new ArrayList<PlayerElement>();
     powerups = new ArrayList<PowerupPickUp>();
   }
 
@@ -115,7 +115,7 @@ public class Level {
    * 
    * @return A player object
    */
-  public ArrayList<DynamicElement> getPlayers() {
+  public ArrayList<PlayerElement> getPlayers() {
     return players;
   }
 

@@ -1,5 +1,7 @@
 package nl.tudelft.scrumbledore.level;
 
+import java.util.ArrayList;
+
 /**
  * The Kinetics class handles the position/speed of levelelements.
  * 
@@ -18,7 +20,9 @@ public class KineticsLevelModifier implements LevelModifier {
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    for (LevelElement element : level.getDynamicElements()) {
+    ArrayList<LevelElement> elements = level.getDynamicElements();
+    for (int i = 0; i < elements.size(); i++) {
+      DynamicElement element = (DynamicElement) elements.get(i);
       move(element, d);
       applyFriction(element, d);
     }
@@ -34,7 +38,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * @param d
    *          The number of steps passed since this method was last called.
    */
-  public void applyFriction(LevelElement el, double d) {
+  public void applyFriction(DynamicElement el, double d) {
     int signX = 0;
     int signY = 0;
     if (Math.abs(el.hSpeed()) > el.hFric() * d) {
@@ -60,7 +64,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * @param d
    *          The number of steps since last executing this function.
    */
-  public void move(LevelElement el, double d) {
+  public void move(DynamicElement el, double d) {
     if (el != null) {
       el.getPosition().sum(Vector.scale(el.getSpeed(), d));
     }
@@ -74,7 +78,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * @param d
    *          The number of steps since last executing this function.
    */
-  public void revertMove(LevelElement el, double d) {
+  public void revertMove(DynamicElement el, double d) {
     if (el != null) {
       el.getPosition().difference(Vector.scale(el.getSpeed(), d));
     }

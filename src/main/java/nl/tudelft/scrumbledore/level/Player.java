@@ -6,15 +6,16 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
+
 /**
  * Class representing a Player in a game.
  * 
  * @author Niels Warnars
  * @author Jesse Tilro
- * @author David Alderliesten
  * @author Floris Doolaard
  */
-public class Player extends BasicDynamicElement {
+public class Player extends BasicDynamicElement implements PlayerElement {
+
   private ArrayList<LevelElementAction> actions;
   private LevelElementAction lastMove;
   private Boolean firing;
@@ -24,12 +25,12 @@ public class Player extends BasicDynamicElement {
   
 
   /**
-   * Create a new Player instance.
+   * Create a new Basic Player instance.
    * 
    * @param position
    *          Position of the player in the level.
    * @param size
-   *          Size of the Player.
+   *          Size of the Basic Player.
    */
   public Player(Vector position, Vector size) {
     super(position, size);
@@ -65,7 +66,7 @@ public class Player extends BasicDynamicElement {
   }
 
   /**
-   * Checking wether the player is alive.
+   * Checking whether the player is alive.
    * 
    * @return The boolean if the player is alive.
    */
@@ -247,5 +248,4 @@ public class Player extends BasicDynamicElement {
   public void setLifetime(double newTime) {
     lifetime = newTime;
   }
-
 }

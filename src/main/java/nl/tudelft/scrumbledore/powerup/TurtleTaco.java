@@ -3,9 +3,9 @@ package nl.tudelft.scrumbledore.powerup;
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.PlayerElement;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -17,9 +17,9 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class TurtleTaco implements Powerup {
+public class TurtleTaco implements PlayerElement {
 
-  private DynamicElement wrapped;
+  private PlayerElement wrapped;
 
   /**
    * Create a new LevelElement instance.
@@ -27,7 +27,7 @@ public class TurtleTaco implements Powerup {
    * @param wrapped
    *          The DynamicElement to be wrapped in this Powerup Decorator.
    */
-  public TurtleTaco(DynamicElement wrapped) {
+  public TurtleTaco(PlayerElement wrapped) {
     this.wrapped = wrapped;
   }
 

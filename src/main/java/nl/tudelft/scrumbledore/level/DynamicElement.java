@@ -11,27 +11,14 @@ import java.util.ArrayList;
 public interface DynamicElement extends LevelElement {
   
   /**
-   * Decrease the lifetime by a given number of steps.
-   * 
-   * @param delta
-   *          The number of steps.
+   * Stop this LevelElement's vertical movement.
    */
-  void decreaseLifetime(double delta);
+  void stopVertically();
 
   /**
-   * Get the remaining lifetime.
-   * 
-   * @return Remaining lifetime.
+   * Stop this LevelElement's horizontal movement.
    */
-  double getLifetime();
-
-  /**
-   * Setting the life time of a bubble.
-   * 
-   * @param newTime
-   *          The new life time.
-   */
-  void setLifetime(double newTime);
+  void stopHorizontally();
   
   /**
    * Gives a list of current actions of the player.
@@ -51,36 +38,6 @@ public interface DynamicElement extends LevelElement {
    * Remove all actions from the queue.
    */
   void clearActions();
-
-  /**
-   * Checking wether the element is alive.
-   * 
-   * @return The boolean if the element is alive.
-   */
-  Boolean isAlive();
-
-  /**
-   * Setting the life of the element.
-   * 
-   * @param bool
-   *          Can be True or False, stated on situation of element.
-   */
-  void setAlive(Boolean bool);
-
-  /**
-   * Gets the id of the current player.
-   * 
-   * @return Integer that represents the players number in the game.
-   */
-  int getPlayerNumber();
-
-  /**
-   * Sets the id of the current player.
-   * 
-   * @param id
-   *          Integer that represents the players number in the game.
-   */
-  void setPlayerNumber(int id);
 
   /**
    * Check whether the given action is queued for the next step.
@@ -119,19 +76,62 @@ public interface DynamicElement extends LevelElement {
 
   @Override
   boolean equals(Object other);
+  
+  /**
+   * Check whether this LevelElement is affected by Gravity.
+   * 
+   * @return Boolean
+   */
+  boolean hasGravity();
 
   /**
-   * Return whether the Player is firing.
+   * Set the property determining whether this LevelElement is affected by gravity.
    * 
-   * @return whether the Player is firing
+   * @param gravity
+   *          A boolean
    */
-  Boolean isFiring();
+  void setGravity(boolean gravity);
+  
+  /**
+   * Get the speed vector of this element.
+   * 
+   * @return Speed Vector.
+   */
+  Vector getSpeed();
 
   /**
-   * Set whether the Player is firing.
+   * Get the horizontal speed of the element.
    * 
-   * @param isFiring
-   *          whether the Player is firing
+   * @return double
    */
-  void setFiring(Boolean isFiring);
+  double hSpeed();
+
+  /**
+   * Get the vertical speed of the element.
+   * 
+   * @return double
+   */
+  double vSpeed();
+
+  /**
+   * Get the friction vector of this element.
+   * 
+   * @return Friction Vector.
+   */
+  Vector getFriction();
+
+  /**
+   * Get the horizontal friction.
+   * 
+   * @return Horizontal friction.
+   */
+  double hFric();
+
+  /**
+   * Get the vertical friction.
+   * 
+   * @return Vertical friction.
+   */
+  double vFric();
+
 }

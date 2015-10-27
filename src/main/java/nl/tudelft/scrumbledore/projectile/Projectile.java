@@ -1,15 +1,13 @@
 package nl.tudelft.scrumbledore.projectile;
 
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
-
+import nl.tudelft.scrumbledore.level.DynamicElement;
 /**
  * Represents a projectile object.
  * 
  * @author Floris Doolaard
  *
  */
-public interface Projectile extends LevelElement {
+public interface Projectile extends DynamicElement {
 
   /**
    * Return a boolean wether to see if a bubble has an NPC in it.
@@ -49,25 +47,4 @@ public interface Projectile extends LevelElement {
    */
   void setLifetime(double newTime);
   
-  /**
-   * Add an action the Bubble has to perform.
-   * 
-   * @param action
-   *          The action (MoveLeft or MoveRight) the Bubble has to perform.
-   */
-  void addAction(LevelElementAction action);
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          A BubbleAction.
-   * @return Boolean.
-   */
-  boolean hasAction(LevelElementAction action);
-  
-  /**
-   * Clear all queued actions for this Bubble.
-   */
-  void clearActions();
 }

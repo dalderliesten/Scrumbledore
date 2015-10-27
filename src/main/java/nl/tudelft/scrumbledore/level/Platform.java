@@ -82,5 +82,4 @@ public class Platform extends BasicStaticElement {
     result.add(store.get(id));
     return result;
   }
-
 }

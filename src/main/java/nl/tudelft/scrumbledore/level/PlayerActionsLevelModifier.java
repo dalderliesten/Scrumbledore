@@ -32,21 +32,21 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
-    ArrayList<DynamicElement> players = level.getPlayers();
+    ArrayList<PlayerElement> players = level.getPlayers();
 
     for (int i = 0; i < players.size(); i++) {
-      DynamicElement player = players.get(i);
+      PlayerElement player = players.get(i);
       if (player.isAlive()) {
         checkStopMovement(player);
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (!(player instanceof Player)) {
+        if (!(player instanceof PlayerElement)) {
           if (player.getLifetime() <= 0
               || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
               && player.hasAction(LevelElementAction.ShootStop)) {
             try {
-              Player newP = new Player(player.getPosition().clone(), new Vector(
+              PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
                   Constants.BLOCKSIZE, Constants.BLOCKSIZE));
               for (int j = 0; j < player.getActions().size(); j++) {
                 newP.addAction(player.getActions().get(j));
@@ -87,7 +87,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param player
    *          Player to be checked
    */
-  public void checkHorizontalMovement(DynamicElement player) {
+  public void checkHorizontalMovement(PlayerElement player) {
     if (player.hasAction(LevelElementAction.MoveLeft)) {
       if (player instanceof ChiliChicken) {
         player.getSpeed().setX(-1 * Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER);
@@ -120,7 +120,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param player
    *          The player to be checked
    */
-  public void checkStopMovement(DynamicElement player) {
+  public void checkStopMovement(PlayerElement player) {
     if (player.hasAction(LevelElementAction.MoveStop)) {
       player.getSpeed().setX(0);
 
@@ -139,7 +139,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    *          Level to be get the bubbles from
    */
   @SuppressWarnings("methodlength")
-  public void checkShooting(DynamicElement player, Level level) {
+  public void checkShooting(PlayerElement player, Level level) {
     Vector projectPos = null;
 
     try {
@@ -186,7 +186,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param projectile
    *          , the projectile the player is shooting.
    */
-  public static void checkShootingDirection(DynamicElement player, Projectile projectile) {
+  public static void checkShootingDirection(PlayerElement player, Projectile projectile) {
     if (player.getLastMove() == LevelElementAction.MoveLeft) {
       if (Constants.isLoggingWantShooting()) {
         Logger.getInstance().log("Player shot in the left direction.");

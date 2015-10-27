@@ -64,11 +64,11 @@ public class GravityLevelModifier implements LevelModifier {
    * has not yet reached the maximal vertical speed.
    * 
    * @param element
-   *          A LevelElement
+   *          A DynamicElement
    * @param d
    *          The number of steps since last executing this function.
    */
-  public void pull(LevelElement element, double d) {
+  public void pull(DynamicElement element, double d) {
     if (element == null) {
       return;
     }
