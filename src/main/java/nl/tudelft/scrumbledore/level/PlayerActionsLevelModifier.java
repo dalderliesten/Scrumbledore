@@ -41,12 +41,12 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (!(player instanceof BasicPlayer)) {
+        if (!(player instanceof PlayerElement)) {
           if (player.getLifetime() <= 0
               || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
               && player.hasAction(LevelElementAction.ShootStop)) {
             try {
-              BasicPlayer newP = new Player(player.getPosition().clone(), new Vector(
+              PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
                   Constants.BLOCKSIZE, Constants.BLOCKSIZE));
               for (int j = 0; j < player.getActions().size(); j++) {
                 newP.addAction(player.getActions().get(j));
