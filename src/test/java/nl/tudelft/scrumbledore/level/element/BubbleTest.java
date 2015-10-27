@@ -21,6 +21,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings({"PMD.TooManyMethods", "PMD.AvoidDuplicateLiterals"})
 public class BubbleTest extends LevelElementTest {
 
   private Bubble test;

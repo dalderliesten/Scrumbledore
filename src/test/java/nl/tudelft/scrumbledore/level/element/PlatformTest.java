@@ -18,6 +18,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * 
  * @author Niels Warnars
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class PlatformTest {
 
   /**
