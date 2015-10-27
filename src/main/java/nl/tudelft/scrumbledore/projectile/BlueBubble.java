@@ -10,33 +10,29 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
- * This class creates a Bubble object that the player can shoot.
+ * Class representing a blue bubble.
  * 
- * @author Floris Doolaard
+ * @author Jesse Tilro
  *
  */
-public class Bubble extends BasicDynamicElement implements Projectile {
+public class BlueBubble extends BasicDynamicElement implements Projectile {
+  private boolean hasNPC;
   private ArrayList<LevelElementAction> actions;
-  private Boolean hasNPC;
-
   private double lifetime;
-
+  
   /**
-   * The Bubble constructor creates a new Bubble instance.
-   * 
-   * @param position
-   *          Position of the element in the level.
-   * @param size
-   *          Size of the element.
+   * Constructs a BlueberryBubble object.
+   * @param position , location of object.
+   * @param size , size of object.
    */
-  public Bubble(Vector position, Vector size) {
+  public BlueBubble(Vector position, Vector size) {
     super(position, size);
     getFriction().setX(Constants.BUBBLE_FRICTION);
-    lifetime = Constants.BUBBLE_LIFETIME;
+    lifetime = 3;
     actions = new ArrayList<LevelElementAction>();
     hasNPC = false;
   }
-
+  
   /**
    * Add an action the Bubble has to perform.
    * 
@@ -124,19 +120,8 @@ public class Bubble extends BasicDynamicElement implements Projectile {
    */
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
-    String id = "bubble-green";
-    if (hasNPC()) {
-      id = "bubble-zenchan-green";
-      if (lifetime < 60 && lifetime % 15 < 8) {
-        id = "bubble-zenchan-red";
-      }
-    } else if (lifetime > 5 && lifetime < 40 && lifetime % 15 < 8) {
-      id = "bubble-red";
-    } else if (lifetime <= 5) {
-      id = "bubble-green-burst";
-    }
     ArrayList<Sprite> result = new ArrayList<Sprite>();
-    result.add(store.getAnimated(id).getFrame(steps));
+    result.add(store.get("powerup-blueberry-bubble"));
     return result;
   }
 
@@ -174,5 +159,4 @@ public class Bubble extends BasicDynamicElement implements Projectile {
   public ArrayList<LevelElementAction> getActions() {
     return actions;
   }
-
 }

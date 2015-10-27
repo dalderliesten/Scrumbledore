@@ -31,6 +31,9 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
   @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
     modifyBubble(level, delta);
+    modifyFireball(level, delta);
+    modifyBlueBubble(level, delta);
+
   }
 
   /**
@@ -44,12 +47,12 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
   @SuppressWarnings("checkstyle:methodlength")
   public static void modifyBubble(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
+    ArrayList<Projectile> enemyBubbles = level.getEnemyBubbles();
 
-    Iterator<Bubble> iter = level.getBubbles().iterator();
+    Iterator<Projectile> iter = level.getProjectiles().iterator();
 
     while (iter.hasNext()) {
-      Bubble bub = iter.next();
+      Projectile bub = iter.next();
       if (bub instanceof Bubble) {
         if (bub.getLifetime() <= 0) {
           if (bub.hasNPC()) {
@@ -82,4 +85,51 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
     }
   }
 
+  /**
+   * Modifies the stat of a fireball.
+   * 
+   * @param level
+   *          , the level of the projectile.
+   * @param delta
+   *          , the step in which this projectile is moving.
+   */
+  public static void modifyFireball(Level level, double delta) {
+    ArrayList<Projectile> projectiles = level.getProjectiles();
+
+    for (int i = 0; i < projectiles.size(); i++) {
+      Projectile current = projectiles.get(i);
+      if (current instanceof Fireball) {
+
+        if (current.hasAction(LevelElementAction.MoveLeft)) {
+          current.getSpeed().setX(-1 * Constants.FIREBALL_SPEED);
+        } else if (current.hasAction(LevelElementAction.MoveRight)) {
+          current.getSpeed().setX(Constants.FIREBALL_SPEED);
+        }
+      }
+    }
+
+  }
+
+  /**
+   * Modifies the start of a BlueBubble.
+   * @param level , the level of the Bluebubble.
+   * @param delta , the step in which this Bluebubble is moving.
+   */
+  public static void modifyBlueBubble(Level level, double delta) {
+    ArrayList<Projectile> projectiles = level.getProjectiles();
+
+    for (int i = 0; i < projectiles.size(); i++) {
+      Projectile current = projectiles.get(i);
+      if (current instanceof BlueBubble) {
+
+        if (current.vSpeed() > -Constants.BUBBLE_FLOAT) {
+          current.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION * delta));
+        } else if (current.hasAction(LevelElementAction.MoveLeft)) {
+          current.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);
+        } else if (current.hasAction(LevelElementAction.MoveRight)) {
+          current.getSpeed().setX(Constants.BUBBLE_SPEED);
+        }
+      }
+    }
+  }
 }
