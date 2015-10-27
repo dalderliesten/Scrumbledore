@@ -263,7 +263,7 @@ public final class GameDisplay {
       if (endStepsSnapShot == 0) {
         advanceLabel = Constants.ADVANCINGLABEL;
         staticContext.setFill(Color.WHITE);
-        staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 100,
+        staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 110,
             (Constants.LEVELY / 2) - 130);
         endStepsSnapShot = currentGame.getSteps();
       }
