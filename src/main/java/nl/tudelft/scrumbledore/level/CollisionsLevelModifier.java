@@ -71,7 +71,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    */
   protected void detectPlayerPowerup(Level level, double delta) {
     ArrayList<PowerupPickUp> powerUps = level.getPowerups();
-    ArrayList<PlayerInterface> players = level.getPlayers();
+    ArrayList<PlayerElement> players = level.getPlayers();
 
     if (powerUps.size() > 0) {
       for (int j = 0; j < players.size(); j++) {
@@ -82,19 +82,19 @@ public class CollisionsLevelModifier implements LevelModifier {
             Collision collision = new Collision(player, currentPow, delta);
             if (collision.colliding()) {
               if (currentPow instanceof ChiliChickenPickUp) {
-                ChiliChicken newChick = new ChiliChicken((PlayerInterface) player);
+                ChiliChicken newChick = new ChiliChicken((PlayerElement) player);
                 players.add(j, newChick);
                 players.remove(j + 1);
               } else if (currentPow instanceof BlueberryBubblePickUp) {
-                BlueberryBubble newBlue = new BlueberryBubble((PlayerInterface) player);
+                BlueberryBubble newBlue = new BlueberryBubble((PlayerElement) player);
                 players.add(j, newBlue);
                 players.remove(j + 1);
               } else if (currentPow instanceof PyroPepperPickUp) {
-                PyroPepper newPyro = new PyroPepper((PlayerInterface) player);
+                PyroPepper newPyro = new PyroPepper((PlayerElement) player);
                 players.add(j, newPyro);
                 players.remove(j + 1);
               } else if (currentPow instanceof TurtleTacoPickUp) {
-                TurtleTaco newTurtle = new TurtleTaco((PlayerInterface) player);
+                TurtleTaco newTurtle = new TurtleTaco((PlayerElement) player);
                 players.add(j, newTurtle);
                 players.remove(j + 1);
               }
@@ -466,7 +466,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerEnemy(Level level, double delta) {
-    for (PlayerInterface player : level.getPlayers()) {
+    for (PlayerElement player : level.getPlayers()) {
       ArrayList<NPC> npcs = level.getNPCs();
 
       if (npcs.size() > 0 && !(player instanceof TurtleTaco)) {

@@ -1,6 +1,6 @@
 package nl.tudelft.scrumbledore.powerup;
 
-import nl.tudelft.scrumbledore.level.PlayerInterface;
+import nl.tudelft.scrumbledore.level.PlayerElement;
 
 /**
  * This interface tells the player and the powerup objects to have the same functionality.
@@ -8,6 +8,6 @@ import nl.tudelft.scrumbledore.level.PlayerInterface;
  * @author Floris Doolaard
  *
  */
-public interface Powerup extends PlayerInterface {
+public interface Powerup extends PlayerElement {
 
 }

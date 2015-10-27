@@ -79,7 +79,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
     Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
     fruit.getSpeed().setY(4);
-    LevelElement fruitMock = mockLevelElement(fruit);
+    DynamicElement fruitMock = mockLevelElement(fruit);
 
     Level level = new Level();
     level.addElement(fruitMock);
@@ -99,7 +99,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
     NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
     npc.getSpeed().setY(8);
-    LevelElement npcMock = mockLevelElement(npc);
+    DynamicElement npcMock = mockLevelElement(npc);
 
     Level level = new Level();
     level.addElement(platform);
@@ -118,7 +118,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
     NPC npc = new NPC(new Vector(0, 0), new Vector(32, 32));
     npc.getSpeed().setX(4);
-    LevelElement npcMock = mockLevelElement(npc);
+    DynamicElement npcMock = mockLevelElement(npc);
 
     Level level = new Level();
     level.addElement(platform);
@@ -137,7 +137,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     NPC npc = new NPC(new Vector(32, 0), new Vector(32, 32));
     npc.getSpeed().setX(-4);
-    LevelElement npcMock = mockLevelElement(npc);
+    DynamicElement npcMock = mockLevelElement(npc);
 
     Level level = new Level();
     level.addElement(platform);
@@ -156,7 +156,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 32), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
     player.getSpeed().setY(4);
-    LevelElement playerMock = mockLevelElement(player);
+    DynamicElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
     level.addElement(playerMock);
@@ -175,7 +175,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Player player = new Player(new Vector(0, 32), new Vector(32, 32));
     player.getSpeed().setY(-4);
-    LevelElement playerMock = mockLevelElement(player);
+    DynamicElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
     level.addElement(playerMock);
@@ -194,7 +194,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(32, 0), new Vector(32, 32));
     Player player = new Player(new Vector(0, 0), new Vector(32, 32));
     player.getSpeed().setX(4);
-    LevelElement playerMock = mockLevelElement(player);
+    DynamicElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
     level.addElement(playerMock);
@@ -212,7 +212,7 @@ public class CollisionsLevelModifierTest {
     Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
     Player player = new Player(new Vector(32, 0), new Vector(32, 32));
     player.getSpeed().setX(-4);
-    LevelElement playerMock = mockLevelElement(player);
+    DynamicElement playerMock = mockLevelElement(player);
 
     Level level = new Level();
     level.addElement(playerMock);

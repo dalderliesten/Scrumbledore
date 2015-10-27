@@ -82,16 +82,4 @@ public class Platform extends BasicStaticElement {
     result.add(store.get(id));
     return result;
   }
-
-  /**
-   * Stop this LevelElement's vertical movement.
-   */
-  public void stopVertically() {
-  }
-
-  /**
-   * Stop this LevelElement's horizontal movement.
-   */
-  public void stopHorizontally() {
-  }
 }

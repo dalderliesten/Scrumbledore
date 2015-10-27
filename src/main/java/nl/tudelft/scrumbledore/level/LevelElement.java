@@ -56,16 +56,6 @@ public interface LevelElement {
   double height();
 
   /**
-   * Stop this LevelElement's vertical movement.
-   */
-  void stopVertically();
-
-  /**
-   * Stop this LevelElement's horizontal movement.
-   */
-  void stopHorizontally();
-
-  /**
    * Get the absolute Y-coordinate of the top of this element, given the position and size.
    * 
    * @return Y-coordinate of top.

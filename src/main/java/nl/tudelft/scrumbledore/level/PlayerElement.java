@@ -7,7 +7,7 @@ package nl.tudelft.scrumbledore.level;
  * @author Floris Doolaard
  * @author Niels Warnars
  */
-public interface PlayerInterface extends DynamicElement {
+public interface PlayerElement extends DynamicElement {
 
   /**
    * Gets the id of the current player.
