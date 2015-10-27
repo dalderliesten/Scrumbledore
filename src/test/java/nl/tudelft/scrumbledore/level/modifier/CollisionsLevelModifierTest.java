@@ -14,12 +14,12 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.DynamicElement;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Platform;
 import nl.tudelft.scrumbledore.level.element.Player;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
 
 /**
  * Test suite for the CollisionsLevelModifier class.
@@ -319,7 +319,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
 
     clm.detectPlayerBubble(level, 1);
-    assertFalse(level.getProjectiles().contains(bubble));
+    assertFalse(level.getBubbles().contains(bubble));
   }
 
   /**

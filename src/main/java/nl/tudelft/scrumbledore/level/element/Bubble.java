@@ -1,36 +1,40 @@
-package nl.tudelft.scrumbledore.level.projectile;
+package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
-import nl.tudelft.scrumbledore.level.element.BasicDynamicElement;
-import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
- * Represents a fireball object.
+ * This class creates a Bubble object that the player can shoot.
+ * 
  * @author Floris Doolaard
+ *
  */
-public class Fireball extends BasicDynamicElement implements Projectile {
-  private boolean hasNPC;
+public class Bubble extends BasicDynamicElement {
   private ArrayList<LevelElementAction> actions;
+  private Boolean hasNPC;
+
   private double lifetime;
-  
+
   /**
-   * Constructs a Fireball object.
-   * @param position , location of object.
-   * @param size , size of object.
+   * The Bubble constructor creates a new Bubble instance.
+   * 
+   * @param position
+   *          Position of the element in the level.
+   * @param size
+   *          Size of the element.
    */
-  public Fireball(Vector position, Vector size) {
+  public Bubble(Vector position, Vector size) {
     super(position, size);
     getFriction().setX(Constants.BUBBLE_FRICTION);
-    lifetime = 0;
+    lifetime = Constants.BUBBLE_LIFETIME;
     actions = new ArrayList<LevelElementAction>();
     hasNPC = false;
   }
-  
+
   /**
    * Add an action the Bubble has to perform.
    * 
@@ -118,8 +122,19 @@ public class Fireball extends BasicDynamicElement implements Projectile {
    */
   public ArrayList<Sprite> getSprites(double steps) {
     SpriteStore store = SpriteStore.getInstance();
+    String id = "bubble-green";
+    if (hasNPC()) {
+      id = "bubble-zenchan-green";
+      if (lifetime < 60 && lifetime % 15 < 8) {
+        id = "bubble-zenchan-red";
+      }
+    } else if (lifetime > 5 && lifetime < 40 && lifetime % 15 < 8) {
+      id = "bubble-red";
+    } else if (lifetime <= 5) {
+      id = "bubble-green-burst";
+    }
     ArrayList<Sprite> result = new ArrayList<Sprite>();
-    result.add(store.get("powerup-pyro-pepper"));
+    result.add(store.getAnimated(id).getFrame(steps));
     return result;
   }
 
@@ -157,4 +172,5 @@ public class Fireball extends BasicDynamicElement implements Projectile {
   public ArrayList<LevelElementAction> getActions() {
     return actions;
   }
+
 }

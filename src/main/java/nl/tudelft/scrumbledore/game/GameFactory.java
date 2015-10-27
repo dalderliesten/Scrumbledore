@@ -5,7 +5,7 @@ import nl.tudelft.scrumbledore.level.modifier.GravityLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.KineticsLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.NPCLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.PlayerActionsLevelModifier;
-import nl.tudelft.scrumbledore.level.modifier.ProjectileActionsLevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.BubbleActionsLevelModifier;
 import nl.tudelft.scrumbledore.level.modifier.WarpLevelModifier;
 
 /**
@@ -50,7 +50,7 @@ public abstract class GameFactory {
     game.registerLevelModifier(new PlayerActionsLevelModifier());
     game.registerLevelModifier(new GravityLevelModifier());
     game.registerLevelModifier(new NPCLevelModifier());
-    game.registerLevelModifier(new ProjectileActionsLevelModifier());
+    game.registerLevelModifier(new BubbleActionsLevelModifier());
     game.registerLevelModifier(new CollisionsLevelModifier(game.getScoreCounter()));
     game.registerLevelModifier(new KineticsLevelModifier());
     game.registerLevelModifier(new WarpLevelModifier());

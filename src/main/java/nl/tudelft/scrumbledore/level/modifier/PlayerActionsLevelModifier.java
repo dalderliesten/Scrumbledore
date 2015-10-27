@@ -6,16 +6,11 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
-import nl.tudelft.scrumbledore.level.powerup.BlueberryBubble;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
-import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
-import nl.tudelft.scrumbledore.level.projectile.BlueBubble;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
-import nl.tudelft.scrumbledore.level.projectile.Fireball;
-import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -47,9 +42,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkShooting(player, level);
 
         if (!(player instanceof PlayerElement)) {
-          if (player.getLifetime() <= 0
-              || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
-              && player.hasAction(LevelElementAction.ShootStop)) {
+          if (player.getLifetime() <= 0 && player.hasAction(LevelElementAction.ShootStop)) {
             try {
               PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
                   Constants.BLOCKSIZE, Constants.BLOCKSIZE));
@@ -152,31 +145,15 @@ public class PlayerActionsLevelModifier implements LevelModifier {
     } catch (CloneNotSupportedException e) {
       e.printStackTrace();
     }
-    ArrayList<Projectile> projectiles = level.getProjectiles();
+    ArrayList<Bubble> projectiles = level.getBubbles();
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        if (player instanceof PyroPepper) {
-          Fireball newFireball = new Fireball(projectPos, new Vector(Constants.BLOCKSIZE,
-              Constants.BLOCKSIZE));
-          projectiles.add(newFireball);
+        Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
+            Constants.BLOCKSIZE));
 
-          checkShootingDirection(player, newFireball);
-
-        } else if (player instanceof BlueberryBubble) {
-          BlueBubble newBlueBubble = new BlueBubble(projectPos, new Vector(Constants.BLOCKSIZE,
-              Constants.BLOCKSIZE));
-          projectiles.add(newBlueBubble);
-
-          checkShootingDirection(player, newBlueBubble);
-        } else {
-          Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
-              Constants.BLOCKSIZE));
-
-          projectiles.add(newBubble);
-
-          checkShootingDirection(player, newBubble);
-        }
+        projectiles.add(newBubble);
+        checkShootingDirection(player, newBubble);
       }
       player.setFiring(true);
     }
@@ -191,7 +168,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * @param projectile
    *          , the projectile the player is shooting.
    */
-  public static void checkShootingDirection(PlayerElement player, Projectile projectile) {
+  public static void checkShootingDirection(PlayerElement player, Bubble projectile) {
     if (player.getLastMove() == LevelElementAction.MoveLeft) {
       if (Constants.isLoggingWantShooting()) {
         Logger.getInstance().log("Player shot in the left direction.");

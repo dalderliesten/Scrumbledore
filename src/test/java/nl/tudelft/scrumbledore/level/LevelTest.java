@@ -4,12 +4,11 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
+import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Platform;
 import nl.tudelft.scrumbledore.level.element.Player;
-import nl.tudelft.scrumbledore.level.projectile.Bubble;
-import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 import org.junit.Test;
 
@@ -99,7 +98,7 @@ public class LevelTest {
     level.addElement(b1);
     level.addElement(b2);
 
-    ArrayList<Projectile> bubbles = level.getProjectiles();
+    ArrayList<Bubble> bubbles = level.getBubbles();
     assertEquals(bubbles.size(), 2);
     assertEquals(bubbles.get(0).getClass(), Bubble.class);
     assertEquals(bubbles.get(1).getClass(), Bubble.class);
