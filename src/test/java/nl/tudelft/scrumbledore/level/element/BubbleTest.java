@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -140,7 +141,8 @@ public class BubbleTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("frame-01", sprites.get(0).getID());
-    assertEquals("images\\sprites\\bubble-green/frame-01.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "bubble-green/frame-01.png", sprites.get(0).getPath());
   }
   
   /**
@@ -154,7 +156,8 @@ public class BubbleTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("frame-01", sprites.get(0).getID());
-    assertEquals("images\\sprites\\bubble-red/frame-01.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "bubble-red/frame-01.png", sprites.get(0).getPath());
   }
   
   /**
@@ -168,7 +171,8 @@ public class BubbleTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("frame-01", sprites.get(0).getID());
-    assertEquals("images\\sprites\\bubble-green-burst/frame-01.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "bubble-green-burst/frame-01.png", sprites.get(0).getPath());
   }
   
   /**
@@ -182,7 +186,8 @@ public class BubbleTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("frame-01", sprites.get(0).getID());
-    assertEquals("images\\sprites\\bubble-zenchan-green/frame-01.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "bubble-zenchan-green/frame-01.png", sprites.get(0).getPath());
   }
   
   /**
@@ -197,6 +202,7 @@ public class BubbleTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("frame-01", sprites.get(0).getID());
-    assertEquals("images\\sprites\\bubble-zenchan-red/frame-01.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "bubble-zenchan-red/frame-01.png", sprites.get(0).getPath());
   }
 }

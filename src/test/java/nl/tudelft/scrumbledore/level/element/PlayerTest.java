@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Before;
@@ -194,7 +195,8 @@ public class PlayerTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("frame-01", sprites.get(0).getID());
-    assertEquals("images\\sprites\\player-green-move-right/frame-01.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "player-green-move-right/frame-01.png", sprites.get(0).getPath());
   }
   
   /**
@@ -209,8 +211,8 @@ public class PlayerTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("player-shoot-right", sprites.get(0).getID());
-    assertEquals("images\\sprites\\player-green-shoot-right/player-shoot-right.png", 
-        sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "player-green-shoot-right/player-shoot-right.png", sprites.get(0).getPath());
   }
   
   /**
@@ -225,8 +227,8 @@ public class PlayerTest extends LevelElementTest {
     
     assertEquals(1, sprites.size());
     assertEquals("player-shoot-left", sprites.get(0).getID());
-    assertEquals("images\\sprites\\player-green-shoot-left/player-shoot-left.png", 
-        sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "player-green-shoot-left/player-shoot-left.png", sprites.get(0).getPath());
   }
   
   /**

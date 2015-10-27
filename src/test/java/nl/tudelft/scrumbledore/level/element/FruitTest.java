@@ -5,6 +5,7 @@ import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -106,7 +107,8 @@ public class FruitTest {
     
     assertEquals(1, sprites.size());
     assertEquals("apple", sprites.get(0).getID());
-    assertEquals("images\\sprites\\fruit/apple.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "fruit/apple.png", sprites.get(0).getPath());
   }
   
   /**
