@@ -21,6 +21,9 @@ import javafx.scene.input.KeyCode;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Constants {
 
+  /**
+   * Logger constructor, which should be used only once since this is a Singleton class.
+   */
   private Constants() {
   }
 
