@@ -23,7 +23,6 @@ import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.level.powerup.PyroPepperPickUp;
 import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 import nl.tudelft.scrumbledore.level.powerup.TurtleTacoPickUp;
-import nl.tudelft.scrumbledore.level.projectile.Fireball;
 import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 /**
@@ -275,13 +274,6 @@ public class CollisionsLevelModifier implements LevelModifier {
         if (platform.inBoxRangeOf(currentProjectile, Constants.COLLISION_RADIUS)) {
           Collision collision = new Collision(currentProjectile, platform, delta);
 
-          if (currentProjectile instanceof Fireball) {
-            if (collision.collidingFromLeft() || collision.collidingFromRight()) {
-              projectiles.remove(i);
-            }
-            break;
-          }
-
           if (collision.collidingFromBottom()) {
             currentProjectile.getSpeed().setY(Constants.BUBBLE_BOUNCE);
             currentProjectile.snapBottom(platform);
@@ -370,11 +362,9 @@ public class CollisionsLevelModifier implements LevelModifier {
               && new Collision(currentP, enemies.get(i), delta).colliding()) {
 
             enemies.remove(i);
-            if (!(currentP instanceof Fireball)) {
-              enemyBubbles.add(currentP);
-              currentP.setHasNPC(true);
-              currentP.setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
-            }
+            enemyBubbles.add(currentP);
+            currentP.setHasNPC(true);
+            currentP.setLifetime(1.5 * Constants.BUBBLE_LIFETIME);
 
             if (Constants.isLoggingWantEnemy()) {
               Logger.getInstance().log("An enemy was encapsulated by a bubble.");

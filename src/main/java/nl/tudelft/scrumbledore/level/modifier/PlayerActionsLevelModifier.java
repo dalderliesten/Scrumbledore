@@ -14,7 +14,6 @@ import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
 import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
 import nl.tudelft.scrumbledore.level.projectile.BlueBubble;
 import nl.tudelft.scrumbledore.level.projectile.Bubble;
-import nl.tudelft.scrumbledore.level.projectile.Fireball;
 import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 /**
@@ -156,14 +155,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        if (player instanceof PyroPepper) {
-          Fireball newFireball = new Fireball(projectPos, new Vector(Constants.BLOCKSIZE,
-              Constants.BLOCKSIZE));
-          projectiles.add(newFireball);
-
-          checkShootingDirection(player, newFireball);
-
-        } else if (player instanceof BlueberryBubble) {
+        if (player instanceof BlueberryBubble) {
           BlueBubble newBlueBubble = new BlueBubble(projectPos, new Vector(Constants.BLOCKSIZE,
               Constants.BLOCKSIZE));
           projectiles.add(newBlueBubble);
