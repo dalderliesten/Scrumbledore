@@ -15,13 +15,9 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Platform;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
-import nl.tudelft.scrumbledore.level.powerup.BlueberryBubble;
-import nl.tudelft.scrumbledore.level.powerup.BlueberryBubblePickUp;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChickenPickUp;
 import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
-import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
-import nl.tudelft.scrumbledore.level.powerup.PyroPepperPickUp;
 import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 import nl.tudelft.scrumbledore.level.powerup.TurtleTacoPickUp;
 
@@ -92,14 +88,6 @@ public class CollisionsLevelModifier implements LevelModifier {
               if (currentPow instanceof ChiliChickenPickUp) {
                 ChiliChicken newChick = new ChiliChicken((PlayerElement) player);
                 players.add(j, newChick);
-                players.remove(j + 1);
-              } else if (currentPow instanceof BlueberryBubblePickUp) {
-                BlueberryBubble newBlue = new BlueberryBubble((PlayerElement) player);
-                players.add(j, newBlue);
-                players.remove(j + 1);
-              } else if (currentPow instanceof PyroPepperPickUp) {
-                PyroPepper newPyro = new PyroPepper((PlayerElement) player);
-                players.add(j, newPyro);
                 players.remove(j + 1);
               } else if (currentPow instanceof TurtleTacoPickUp) {
                 TurtleTaco newTurtle = new TurtleTaco((PlayerElement) player);

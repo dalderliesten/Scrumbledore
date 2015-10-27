@@ -10,9 +10,7 @@ import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
-import nl.tudelft.scrumbledore.level.powerup.BlueberryBubble;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
-import nl.tudelft.scrumbledore.level.powerup.PyroPepper;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -44,9 +42,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkShooting(player, level);
 
         if (!(player instanceof PlayerElement)) {
-          if (player.getLifetime() <= 0
-              || ((player instanceof PyroPepper) || player instanceof BlueberryBubble) 
-              && player.hasAction(LevelElementAction.ShootStop)) {
+          if (player.getLifetime() <= 0 && player.hasAction(LevelElementAction.ShootStop)) {
             try {
               PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
                   Constants.BLOCKSIZE, Constants.BLOCKSIZE));
