@@ -8,7 +8,6 @@ import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.NPC;
-import nl.tudelft.scrumbledore.level.projectile.BlueBubble;
 import nl.tudelft.scrumbledore.level.projectile.Bubble;
 import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
@@ -33,8 +32,6 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
   @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
     modifyBubble(level, delta);
-    modifyBlueBubble(level, delta);
-
   }
 
   /**
@@ -86,26 +83,4 @@ public class ProjectileActionsLevelModifier implements LevelModifier {
     }
   }
 
-  /**
-   * Modifies the start of a BlueBubble.
-   * @param level , the level of the Bluebubble.
-   * @param delta , the step in which this Bluebubble is moving.
-   */
-  public static void modifyBlueBubble(Level level, double delta) {
-    ArrayList<Projectile> projectiles = level.getProjectiles();
-
-    for (int i = 0; i < projectiles.size(); i++) {
-      Projectile current = projectiles.get(i);
-      if (current instanceof BlueBubble) {
-
-        if (current.vSpeed() > -Constants.BUBBLE_FLOAT) {
-          current.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION * delta));
-        } else if (current.hasAction(LevelElementAction.MoveLeft)) {
-          current.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);
-        } else if (current.hasAction(LevelElementAction.MoveRight)) {
-          current.getSpeed().setX(Constants.BUBBLE_SPEED);
-        }
-      }
-    }
-  }
 }
