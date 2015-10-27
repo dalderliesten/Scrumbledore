@@ -99,41 +99,6 @@ public class Fruit extends BasicDynamicElement {
   }
 
   /**
-   * Add an action to be performed in the next step.
-   * 
-   * @param action
-   *          A LevelElementAction
-   */
-  public void addAction(LevelElementAction action) {
-  }
-
-  /**
-   * Remove all actions from the queue.
-   */
-  public void clearActions() {
-  }
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          A LevelElementAction.
-   * @return Boolean.
-   */
-  public boolean hasAction(LevelElementAction action) {
-    return false;
-  }
-
-  /**
-   * Remove the given action from the actions queue.
-   * 
-   * @param action
-   *          A LevelElementAction.
-   */
-  public void removeAction(LevelElementAction action) {
-  }
-
-  /**
    * Get the last horizontal move performed.
    * 
    * @return The last move performed.
@@ -149,14 +114,6 @@ public class Fruit extends BasicDynamicElement {
    *          The last move action performed.
    */
   public void setLastMove(LevelElementAction action) {    
-  }
-
-  /**
-   * Gives a list of current actions of the player.
-   * @return a list of actions
-   */
-  public ArrayList<LevelElementAction> getActions() {
-    return null;
   }
   
 }

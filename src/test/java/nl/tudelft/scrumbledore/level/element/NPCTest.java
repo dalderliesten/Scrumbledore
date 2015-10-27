@@ -49,48 +49,6 @@ public class NPCTest extends LevelElementTest {
   }
 
   /**
-   * When an NPC action is added to a bubble's action queue, a call to hasAction for that action
-   * should return true.
-   */
-  @Test
-  public void testHasActionTrue() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    assertTrue(npc.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When an NPC action was not added to a bubble's action queue, a call to hasAction for that
-   * action should return false.
-   */
-  @Test
-  public void testHasActionFalse() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    assertFalse(npc.hasAction(LevelElementAction.MoveRight));
-  }
-
-  /**
-   * When an NPC action queue is cleared, it should not have the actions anymore which were added
-   * before.
-   */
-  @Test
-  public void testClearActions() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    npc.clearActions();
-    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When an NPC has an action removed from its action queue, it should no longer have the action.
-   */
-  @Test
-  public void testRemoveAction() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    npc.addAction(LevelElementAction.MoveLeft);
-    npc.removeAction(LevelElementAction.MoveLeft);
-    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
    * The stubbed method hashCode should just return zero (line coverage).
    */
   @Test
@@ -141,19 +99,6 @@ public class NPCTest extends LevelElementTest {
   }
   
   /**
-   * Test the getActions method.
-   */
-  @Test
-  public void testGetActions() {
-    npc.clearActions();
-    npc.addAction(LevelElementAction.MoveLeft);
-    ArrayList<LevelElementAction> actions = npc.getActions();
-    
-    assertEquals(1, actions.size());
-    assertEquals(LevelElementAction.MoveLeft, actions.get(0));
-  }
-  
-  /**
    * Test the getSprites method to verify whether the correct
    * sprite(s) is/are being returned.
    */
@@ -166,4 +111,5 @@ public class NPCTest extends LevelElementTest {
     assertEquals("images" + File.separator + "sprites" + File.separator
         + "zenchan-move-left/frame-01.png", sprites.get(0).getPath());
   }
+  
 }

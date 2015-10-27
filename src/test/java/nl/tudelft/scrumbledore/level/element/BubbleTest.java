@@ -58,37 +58,6 @@ public class BubbleTest extends LevelElementTest {
     test.decreaseLifetime(delta);
     assertEquals(Constants.BUBBLE_LIFETIME - delta, test.getLifetime(), Constants.DOUBLE_PRECISION);
   }
-
-  /**
-   * When a bubble action is added to a bubble's action queue, a call to hasAction for that action
-   * should return true.
-   */
-  @Test
-  public void testHasActionTrue() {
-    test.addAction(LevelElementAction.MoveLeft);
-    assertTrue(test.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When a bubble action was not added to a bubble's action queue, a call to hasAction for that
-   * action should return false.
-   */
-  @Test
-  public void testHasActionFalse() {
-    test.addAction(LevelElementAction.MoveLeft);
-    assertFalse(test.hasAction(LevelElementAction.MoveRight));
-  }
-
-  /**
-   * When a bubble's action queue is cleared, it should not have the actions anymore which were
-   * added before.
-   */
-  @Test
-  public void testClearActions() {
-    test.addAction(LevelElementAction.MoveLeft);
-    test.clearActions();
-    assertFalse(test.hasAction(LevelElementAction.MoveLeft));
-  }
   
   /**
    * Test the lastMove field getter/setter.
@@ -97,20 +66,6 @@ public class BubbleTest extends LevelElementTest {
   public void testLastMove() {
     test.setLastMove(LevelElementAction.MoveLeft);
     assertNull(test.getLastMove());
-  }
-  
-  /**
-   * Test the getActions method.
-   */
-  @Test
-  public void testGetActions() {
-    test.clearActions();
-    test.removeAction(LevelElementAction.MoveRight);
-    test.addAction(LevelElementAction.MoveLeft);
-    ArrayList<LevelElementAction> actions = test.getActions();
-    
-    assertEquals(1, actions.size());
-    assertEquals(LevelElementAction.MoveLeft, actions.get(0));
   }
   
   /**

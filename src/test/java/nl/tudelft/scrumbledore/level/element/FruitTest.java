@@ -113,18 +113,6 @@ public class FruitTest {
   }
   
   /**
-   * Perform a dummy test to make sure that the action returned by Fruit.hasAction
-   * is always 'false'.
-   */
-  @Test
-  public void testHasAction() {
-    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    fruit.clearActions();
-    fruit.addAction(LevelElementAction.MoveRight);
-    assertFalse(fruit.hasAction(LevelElementAction.MoveRight));
-  }
-  
-  /**
    * Perform a dummy test to make sure that the action returned by Fruit.getLastMove
    * is always 'null'.
    */
@@ -136,15 +124,4 @@ public class FruitTest {
     assertNull(fruit.getLastMove());
   }
   
-  /**
-   * Perform a dummy test to make sure that the action returned by Fruit.getActions
-   * is always 'null'.
-   */
-  @Test
-  public void testGetActions() {
-    Fruit fruit = new Fruit(new Vector(0, 0), new Vector(32, 32));
-    fruit.addAction(LevelElementAction.MoveRight);
-    assertNull(fruit.getActions());
-  }
-
 }
