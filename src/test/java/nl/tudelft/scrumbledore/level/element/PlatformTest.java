@@ -4,6 +4,7 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Test;
@@ -97,6 +98,7 @@ public class PlatformTest {
     
     assertEquals(1, sprites.size());
     assertEquals("wall-1", sprites.get(0).getID());
-    assertEquals("images\\sprites\\wall-1.png", sprites.get(0).getPath());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "wall-1.png", sprites.get(0).getPath());
   }
 }
