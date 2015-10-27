@@ -4,10 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
  * Test suite for the NPC class.
@@ -134,5 +138,32 @@ public class NPCTest extends LevelElementTest {
     assertEquals(LevelElementAction.MoveRight, npc.getLastMove());
     // Actions other than MoveLeft and MoveRight should be ignored.
     assertEquals(LevelElementAction.MoveRight, npc.getLastMove());
+  }
+  
+  /**
+   * Test the getActions method.
+   */
+  @Test
+  public void testGetActions() {
+    npc.clearActions();
+    npc.addAction(LevelElementAction.MoveLeft);
+    ArrayList<LevelElementAction> actions = npc.getActions();
+    
+    assertEquals(1, actions.size());
+    assertEquals(LevelElementAction.MoveLeft, actions.get(0));
+  }
+  
+  /**
+   * Test the getSprites method to verify whether the correct
+   * sprite(s) is/are being returned.
+   */
+  @Test
+  public void testGetSprites() {
+    ArrayList<Sprite> sprites = npc.getSprites(1);
+    
+    assertEquals(1, sprites.size());
+    assertEquals("frame-01", sprites.get(0).getID());
+    assertEquals("images" + File.separator + "sprites" + File.separator
+        + "zenchan-move-left/frame-01.png", sprites.get(0).getPath());
   }
 }

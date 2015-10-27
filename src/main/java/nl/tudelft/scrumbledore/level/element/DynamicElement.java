@@ -136,4 +136,35 @@ public interface DynamicElement extends LevelElement {
    */
   double vFric();
 
+  /**
+   * Snap a LevelElement to the left side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapLeft(LevelElement other);
+
+  /**
+   * Snap a LevelElement to the right side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapRight(LevelElement other);
+
+  /**
+   * Snap a LevelElement to the top side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapTop(LevelElement other);
+
+  /**
+   * Snap a LevelElement to the bottom side of another LevelElement.
+   * 
+   * @param other
+   *          The LevelElement to be snapped to.
+   */
+  void snapBottom(LevelElement other);
 }
