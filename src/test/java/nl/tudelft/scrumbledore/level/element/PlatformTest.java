@@ -4,9 +4,12 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.util.ArrayList;
+
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
  * Test suite for the Platform class.
@@ -82,4 +85,18 @@ public class PlatformTest {
     assertTrue(platform.isPassable());
   }
 
+  /**
+   * Test the getSprites method to verify whether the correct
+   * sprite(s) is/are being returned.
+   */
+  @Test
+  public void testGetSprites() {
+    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
+
+    ArrayList<Sprite> sprites = platform.getSprites(1);
+    
+    assertEquals(1, sprites.size());
+    assertEquals("wall-1", sprites.get(0).getID());
+    assertEquals("images\\sprites\\wall-1.png", sprites.get(0).getPath());
+  }
 }
