@@ -27,9 +27,9 @@ import nl.tudelft.scrumbledore.StepTimer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
 import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.PlayerElement;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**

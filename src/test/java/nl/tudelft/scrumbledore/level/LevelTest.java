@@ -4,8 +4,12 @@ import static org.junit.Assert.assertEquals;
 
 import java.util.ArrayList;
 
-import nl.tudelft.scrumbledore.projectile.Bubble;
-import nl.tudelft.scrumbledore.projectile.Projectile;
+import nl.tudelft.scrumbledore.level.element.Fruit;
+import nl.tudelft.scrumbledore.level.element.NPC;
+import nl.tudelft.scrumbledore.level.element.Platform;
+import nl.tudelft.scrumbledore.level.element.Player;
+import nl.tudelft.scrumbledore.level.projectile.Bubble;
+import nl.tudelft.scrumbledore.level.projectile.Projectile;
 
 import org.junit.Test;
 

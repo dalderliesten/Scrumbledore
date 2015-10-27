@@ -20,7 +20,7 @@ import javafx.scene.Scene;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.keybinding.Keybinding;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 
 /**
  * Class responsible for generating the keybinding options and the arming of all graphical elements

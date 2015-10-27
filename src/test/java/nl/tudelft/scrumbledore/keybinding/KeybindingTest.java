@@ -11,7 +11,7 @@ import org.junit.Test;
 
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.LevelElementAction;;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;;
 
 /**
  * Test suite for the Keybinding class.
