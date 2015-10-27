@@ -17,7 +17,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class BlueberryBubble implements Powerup {
+public class BlueberryBubble implements PlayerElement {
 
   private PlayerElement wrapped;
 

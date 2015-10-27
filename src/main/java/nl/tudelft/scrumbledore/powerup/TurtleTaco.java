@@ -17,7 +17,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class TurtleTaco implements Powerup {
+public class TurtleTaco implements PlayerElement {
 
   private PlayerElement wrapped;
 

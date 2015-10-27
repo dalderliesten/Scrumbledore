@@ -17,7 +17,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class ChiliChicken implements Powerup {
+public class ChiliChicken implements PlayerElement {
 
   private PlayerElement wrapped;
 

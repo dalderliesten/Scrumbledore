@@ -16,7 +16,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  *
  */
 @SuppressWarnings("PMD.TooManyMethods")
-public class PyroPepper implements Powerup {
+public class PyroPepper implements PlayerElement {
 
   private PlayerElement wrapped;
 
