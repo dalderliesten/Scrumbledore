@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
@@ -11,7 +10,6 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicStaticElement implements StaticElement {
-
   private Vector position;
   private Vector size;
 
@@ -217,4 +215,5 @@ public abstract class BasicStaticElement implements StaticElement {
    * @return Sprites to be drawn.
    */
   public abstract ArrayList<Sprite> getSprites(double steps);
+  
 }

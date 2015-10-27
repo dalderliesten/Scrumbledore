@@ -3,13 +3,14 @@ package nl.tudelft.scrumbledore.level;
 import java.util.ArrayList;
 
 /**
- * The interface of powerup objects and dynamic elements.
- * This way dynamic elements an powerups are replacable.
+ * The interface of powerup objects and dynamic elements. This way dynamic elements an powerups are
+ * replacable.
+ * 
  * @author Floris Doolaard
- *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public interface DynamicElement extends LevelElement {
-  
+
   /**
    * Stop this LevelElement's vertical movement.
    */
@@ -19,9 +20,10 @@ public interface DynamicElement extends LevelElement {
    * Stop this LevelElement's horizontal movement.
    */
   void stopHorizontally();
-  
+
   /**
    * Gives a list of current actions of the player.
+   * 
    * @return a list of actions
    */
   ArrayList<LevelElementAction> getActions();
@@ -76,7 +78,7 @@ public interface DynamicElement extends LevelElement {
 
   @Override
   boolean equals(Object other);
-  
+
   /**
    * Check whether this LevelElement is affected by Gravity.
    * 
@@ -91,7 +93,7 @@ public interface DynamicElement extends LevelElement {
    *          A boolean
    */
   void setGravity(boolean gravity);
-  
+
   /**
    * Get the speed vector of this element.
    * 

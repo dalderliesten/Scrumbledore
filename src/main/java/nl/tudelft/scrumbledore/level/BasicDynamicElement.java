@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
@@ -11,7 +10,6 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicDynamicElement implements DynamicElement {
-
   private Vector position;
   private Vector size;
   private Vector speed;
@@ -310,4 +308,5 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * @return Sprites to be drawn.
    */
   public abstract ArrayList<Sprite> getSprites(double steps);
+  
 }
