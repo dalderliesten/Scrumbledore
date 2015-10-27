@@ -4,7 +4,6 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
 import nl.tudelft.scrumbledore.projectile.Bubble;
-import nl.tudelft.scrumbledore.projectile.Projectile;
 
 /**
  * Class representing a Level in the Game.
@@ -17,9 +16,9 @@ public class Level {
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
-  private ArrayList<Projectile> projectiles;
+  private ArrayList<Bubble> bubbles;
   private ArrayList<PlayerElement> players;
-  private ArrayList<Projectile> encapEnemies;
+  private ArrayList<Bubble> encapEnemies;
   private ArrayList<PowerupPickUp> powerups;
 
   /**
@@ -27,8 +26,8 @@ public class Level {
    */
   public Level() {
     platforms = new ArrayList<Platform>();
-    projectiles = new ArrayList<Projectile>();
-    encapEnemies = new ArrayList<Projectile>();
+    bubbles = new ArrayList<Bubble>();
+    encapEnemies = new ArrayList<Bubble>();
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
     players = new ArrayList<PlayerElement>();
@@ -51,7 +50,7 @@ public class Level {
     } else if (element instanceof Player) {
       players.add((Player) element);
     } else if (element instanceof Bubble) {
-      projectiles.add((Bubble) element);
+      bubbles.add((Bubble) element);
     } else if (element instanceof PowerupPickUp) {
       powerups.add((PowerupPickUp) element);
     }
@@ -67,7 +66,7 @@ public class Level {
     elements.addAll(players);
     elements.addAll(npcs);
     elements.addAll(fruits);
-    elements.addAll(projectiles);
+    elements.addAll(bubbles);
     elements.addAll(powerups);
     return elements;
   }
@@ -124,8 +123,8 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects.
    */
-  public ArrayList<Projectile> getProjectiles() {
-    return projectiles;
+  public ArrayList<Bubble> getBubbles() {
+    return bubbles;
   }
 
   /**
@@ -133,7 +132,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects with enemies in them.
    */
-  public ArrayList<Projectile> getEnemyBubbles() {
+  public ArrayList<Bubble> getEnemyBubbles() {
     return encapEnemies;
   }
 
