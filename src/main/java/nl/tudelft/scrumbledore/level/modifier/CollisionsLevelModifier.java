@@ -47,6 +47,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level.
+   * 
    * @param delta
    *          The steps passed since this method wat last executed.
    */
@@ -68,6 +69,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          the level.
+   * 
    * @param delta
    *          the delta provided by StepTimer.
    */
@@ -106,6 +108,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -140,6 +143,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -185,6 +189,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -242,6 +247,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -281,6 +287,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level.
+   * 
    * @param delta
    *          The delta.
    */
@@ -323,6 +330,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The steps passed since this method was last executed.
    */
@@ -358,9 +366,10 @@ public class CollisionsLevelModifier implements LevelModifier {
    * Detects collission between a BlueberryBubble and an enemy.
    * 
    * @param level
-   *          , the level of the projectile.
+   *          the level of the projectile.
+   * 
    * @param delta
-   *          , the step time of the projectile.
+   *          the step time of the projectile.
    */
   protected void detectBlueBubbleEnemey(Level level, double delta) {
     ArrayList<NPC> enemies = level.getNPCs();
@@ -387,6 +396,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level to be modified.
+   * 
    * @param delta
    *          The number of steps passed since this method was last executed.
    */
@@ -416,6 +426,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -443,6 +454,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */

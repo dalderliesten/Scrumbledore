@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.modifier;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.DynamicElement;

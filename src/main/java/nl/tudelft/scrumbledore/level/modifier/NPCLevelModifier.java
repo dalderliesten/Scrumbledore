@@ -20,6 +20,7 @@ public class NPCLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level.
+   * 
    * @param delta
    *          The number of steps passed since this method was last called.
    */
