@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.level.modifier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.mock;
 import static org.mockito.Mockito.verify;
@@ -437,7 +436,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(pickup);
 
     clm.modify(level, 1);
-    assertSame(level.getPowerups().size(), 0);
+    assertEquals(level.getPowerups().size(), 0);
     assertTrue(level.getPlayers().get(0) instanceof ChiliChicken);
   }
 
@@ -454,7 +453,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(pickup);
 
     clm.modify(level, 1);
-    assertSame(level.getPowerups().size(), 0);
+    assertEquals(level.getPowerups().size(), 0);
     assertTrue(level.getPlayers().get(0) instanceof TurtleTaco);
   }
 }

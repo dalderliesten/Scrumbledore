@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.level.modifier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -173,7 +172,7 @@ public class PlayerActionsLevelModifierTest {
   @Test
   public void testPowerUpCountDown() {
     level.getPlayers().set(0, new ChiliChicken(player));
-    assertSame(player.getLifetime(), 90);
+    assertEquals(player.getLifetime(), 90, Constants.DOUBLE_PRECISION);
     modifier.modify(level, 0.5);
     assertTrue(player.getLifetime() < 90);
   }
@@ -211,6 +210,6 @@ public class PlayerActionsLevelModifierTest {
     modifier.modify(level, 0.5);
     player.addAction(LevelElementAction.Shoot);
     modifier.modify(level, 0.5);
-    assertSame(level.getBubbles().size(), 1);
+    assertEquals(level.getBubbles().size(), 1);
   }
 }
