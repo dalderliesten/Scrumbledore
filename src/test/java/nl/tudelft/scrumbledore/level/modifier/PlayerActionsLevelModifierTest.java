@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.level.modifier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
 import org.junit.Test;
@@ -11,6 +12,7 @@ import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
+import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
 
 /**
  * Test Suite for the Player Actions Level Modifier class.
@@ -111,10 +113,10 @@ public class PlayerActionsLevelModifierTest {
     assertFalse(player.hasAction(LevelElementAction.MoveStop));
     assertFalse(player.hasAction(LevelElementAction.Shoot));
   }
-  
+
   /**
-   * When a Level is modified and its Player has the action to stop shooting, then 
-   * the shooting action should be removed and the player should no longer be firing.
+   * When a Level is modified and its Player has the action to stop shooting, then the shooting
+   * action should be removed and the player should no longer be firing.
    */
   @Test
   public void testModifyStopShooting() {
@@ -123,5 +125,39 @@ public class PlayerActionsLevelModifierTest {
     modifier.modify(level, .5);
     assertFalse(player.isFiring());
     assertFalse(player.hasAction(LevelElementAction.ShootStop));
+  }
+
+  /**
+   * When a player is not alive, after the modify the actions list should be cleared.
+   */
+  @Test
+  public void testModifyNotAlive() {
+    player.setAlive(false);
+    player.addAction(LevelElementAction.Jump);
+    modifier.modify(level, .5);
+    assertTrue(player.getActions().isEmpty());
+  }
+
+  /**
+   * When a Level is modified and the player is a powerup, then the lifetime of said powerup should
+   * decrease.
+   */
+  @Test
+  public void testPowerUpCountDown() {
+    level.getPlayers().set(0, new ChiliChicken(player));
+    assertTrue(player.getLifetime() == 90);
+    modifier.modify(level, 0.5);
+    assertTrue(player.getLifetime() < 90);
+  }
+
+  /**
+   * When a Level is modified and the powerup countdown is smaller or equal to zero, the PlayerElement should be a player again.
+   */
+  @Test
+  public void testPowerUpCountDownEnd() {
+    level.getPlayers().set(0, new ChiliChicken(player));
+    modifier.modify(level, 250);
+    modifier.modify(level, 0.5);
+    assertTrue(level.getPlayers().get(0) instanceof Player);
   }
 }
