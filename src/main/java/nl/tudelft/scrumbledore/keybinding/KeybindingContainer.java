@@ -49,6 +49,7 @@ public final class KeybindingContainer {
    * 
    * @param playerNumber
    *          The Player to get the Keybinding for.
+   * 
    * @return Keybinding The Keybinding associated with the given Player.
    */
   public Keybinding getKeybinding(int playerNumber) {
@@ -60,8 +61,10 @@ public final class KeybindingContainer {
    * 
    * @param playerNumber
    *          The player for which to update the Keybinding.
+   * 
    * @param action
    *          The action for which the Keycode is updated.
+   * 
    * @param key
    *          The new KeyCode for the given action.
    */
@@ -74,5 +77,5 @@ public final class KeybindingContainer {
 
     getKeybinding(playerNumber).updateKeyByAction(action, key);
   }
-  
+
 }

@@ -22,8 +22,10 @@ public class Collision {
    * 
    * @param collider
    *          The (moving) LevelElement colliding.
+   *          
    * @param collidee
    *          The (static) LevelElement the collider is colliding with.
+   *          
    * @param delta
    *          The number of steps passed since this method was last called.
    */

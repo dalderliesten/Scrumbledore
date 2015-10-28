@@ -107,7 +107,7 @@ public class LevelParser {
    * @throws FileNotFoundException
    *           Exception thrown in case the file does not exist.
    * 
-   * @return A level object
+   * @return A level object.
    */
   protected Level readLevelFromScanner(Scanner lineScanner) throws FileNotFoundException {
     Level tmpLevel = new Level();
@@ -188,7 +188,7 @@ public class LevelParser {
    * @param j
    *          Vertical position in level map on disk.
    * 
-   * @return Screen position of a block
+   * @return Screen position of a block.
    */
   public Vector getBlockPosition(int i, int j) {
     double x = i * Constants.BLOCKSIZE;
@@ -200,7 +200,7 @@ public class LevelParser {
   /**
    * Returns an ArrayList of Level objects.
    * 
-   * @return An ArrayList of level objects
+   * @return An ArrayList of level objects.
    */
   public ArrayList<Level> getLevels() {
     return levels;
