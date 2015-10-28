@@ -11,6 +11,7 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -41,8 +42,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (!(player instanceof PlayerElement)) {
-          if (player.getLifetime() <= 0 && player.hasAction(LevelElementAction.ShootStop)) {
+        if (player instanceof ChiliChicken || player instanceof TurtleTaco) {
+          if (player.getLifetime() <= 0) {
             try {
               PlayerElement newP = new Player(player.getPosition().clone(),
                   new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
@@ -57,6 +58,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           } else {
             player.decreaseLifetime(delta);
           }
+          System.out.println(player.getLifetime());
         }
 
         if (player.hasAction(LevelElementAction.ShootStop)) {
