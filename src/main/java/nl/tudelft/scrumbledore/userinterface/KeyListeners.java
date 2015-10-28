@@ -6,9 +6,9 @@ import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.game.Game;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
-import nl.tudelft.scrumbledore.level.PlayerElement;
 
 /**
  * Handles all the key event listeners of the gui.

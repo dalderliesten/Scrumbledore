@@ -2,9 +2,10 @@ package nl.tudelft.scrumbledore.keybinding;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Map.Entry;
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 
 /**
  * Represents a Keybinding in the form of a key value pair.
@@ -27,9 +28,9 @@ public class Keybinding {
 
     Map<KeyCode, LevelElementAction> tempMap = Constants.KEY_MAPPING.get(playerNumber);
 
-    for (KeyCode key : tempMap.keySet()) {
-      keyMap.put(key, tempMap.get(key));
-      actionMap.put(tempMap.get(key), key);
+    for (Entry<KeyCode, LevelElementAction> entry : tempMap.entrySet()) {
+      keyMap.put(entry.getKey(), tempMap.get(entry.getKey()));
+      actionMap.put(tempMap.get(entry.getKey()), entry.getKey());
     }
   }
 

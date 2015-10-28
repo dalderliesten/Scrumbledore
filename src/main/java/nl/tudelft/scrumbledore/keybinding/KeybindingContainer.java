@@ -4,7 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 
 /**
  * A custom container for Keybindings. One Keybinding per player.

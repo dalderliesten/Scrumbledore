@@ -11,6 +11,10 @@ import java.util.Scanner;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.element.Fruit;
+import nl.tudelft.scrumbledore.level.element.NPC;
+import nl.tudelft.scrumbledore.level.element.Platform;
+import nl.tudelft.scrumbledore.level.element.Player;
 
 /**
  * Test suite for the LevelParser class.

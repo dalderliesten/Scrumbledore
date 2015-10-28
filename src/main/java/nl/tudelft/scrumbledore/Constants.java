@@ -7,8 +7,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-import nl.tudelft.scrumbledore.level.LevelElementAction;
 import javafx.scene.input.KeyCode;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 
 /**
  * Class for the maintainence of strings for display in visual and GUI. Meant to allow easy fixing

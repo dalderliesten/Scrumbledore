@@ -1,6 +1,9 @@
 package nl.tudelft.scrumbledore.level;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.element.DynamicElement;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.modifier.KineticsLevelModifier;
 
 /**
  * Class representing a collision between two level elements.

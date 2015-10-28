@@ -1,10 +1,10 @@
 package nl.tudelft.scrumbledore.powerup;
 
 import java.util.ArrayList;
-import nl.tudelft.scrumbledore.level.LevelElement;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
-import nl.tudelft.scrumbledore.level.PlayerElement;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
