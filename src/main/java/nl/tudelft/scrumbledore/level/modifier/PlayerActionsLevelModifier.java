@@ -58,7 +58,6 @@ public class PlayerActionsLevelModifier implements LevelModifier {
           } else {
             player.decreaseLifetime(delta);
           }
-          System.out.println(player.getLifetime());
         }
 
         if (player.hasAction(LevelElementAction.ShootStop)) {
