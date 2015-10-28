@@ -2,6 +2,7 @@ package nl.tudelft.scrumbledore.level.modifier;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
+import static org.junit.Assert.assertSame;
 import static org.junit.Assert.assertTrue;
 
 import org.junit.Before;
@@ -172,7 +173,7 @@ public class PlayerActionsLevelModifierTest {
   @Test
   public void testPowerUpCountDown() {
     level.getPlayers().set(0, new ChiliChicken(player));
-    assertTrue(player.getLifetime() == 90);
+    assertSame(player.getLifetime(), 90);
     modifier.modify(level, 0.5);
     assertTrue(player.getLifetime() < 90);
   }
@@ -201,12 +202,15 @@ public class PlayerActionsLevelModifierTest {
     assertTrue(level.getPlayers().get(0) instanceof Player);
   }
 
+  /**
+   * When a Level is modified and the Player has a shoot action, a bubble should be spawned.
+   */
   @Test
   public void testShoot() {
     player.addAction(LevelElementAction.MoveLeft);
     modifier.modify(level, 0.5);
     player.addAction(LevelElementAction.Shoot);
     modifier.modify(level, 0.5);
-    assertTrue(level.getBubbles().size() == 1);
+    assertSame(level.getBubbles().size(), 1);
   }
 }
