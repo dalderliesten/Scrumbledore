@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Vector;
 
 /**
@@ -26,7 +25,7 @@ public interface DynamicElement extends LevelElement {
   /**
    * Gives a list of current actions of the player.
    * 
-   * @return a list of actions
+   * @return a list of actions.
    */
   ArrayList<LevelElementAction> getActions();
 
@@ -34,7 +33,7 @@ public interface DynamicElement extends LevelElement {
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A LevelElementAction
+   *          A LevelElementAction.
    */
   void addAction(LevelElementAction action);
 
@@ -48,7 +47,8 @@ public interface DynamicElement extends LevelElement {
    * 
    * @param action
    *          A LevelElementAction.
-   * @return Boolean.
+   *          
+   * @return True if an action exists.
    */
   boolean hasAction(LevelElementAction action);
 
@@ -84,7 +84,7 @@ public interface DynamicElement extends LevelElement {
   /**
    * Check whether this LevelElement is affected by Gravity.
    * 
-   * @return Boolean
+   * @return true if gravity is active.
    */
   boolean hasGravity();
 
@@ -92,7 +92,7 @@ public interface DynamicElement extends LevelElement {
    * Set the property determining whether this LevelElement is affected by gravity.
    * 
    * @param gravity
-   *          A boolean
+   *          A boolean with the desired gravity value.
    */
   void setGravity(boolean gravity);
 
@@ -106,14 +106,14 @@ public interface DynamicElement extends LevelElement {
   /**
    * Get the horizontal speed of the element.
    * 
-   * @return double
+   * @return double.
    */
   double hSpeed();
 
   /**
    * Get the vertical speed of the element.
    * 
-   * @return double
+   * @return double.
    */
   double vSpeed();
 
