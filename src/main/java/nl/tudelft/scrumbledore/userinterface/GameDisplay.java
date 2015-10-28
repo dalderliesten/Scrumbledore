@@ -30,6 +30,7 @@ import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElement;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
+import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
@@ -90,7 +91,6 @@ public final class GameDisplay {
     launchGame();
   }
 
-
   /**
    * Handles the creation of a game and the associated interface.
    */
@@ -143,7 +143,7 @@ public final class GameDisplay {
     scoreLabel.setId("gameviewscores");
     highScoreLabel = new Label(currentGame.getHighScore());
     highScoreLabel.setId("gameviewscores");
-    powerUpLabel = new Label("NONE");
+    powerUpLabel = new Label(Constants.NOPOWERUP_LABEL);
     powerUpLabel.setId("gameviewscores");
     levelLabel = new Label(Integer.toString(currentGame.getCurrentLevelNumber()));
     levelLabel.setId("gameviewscores");
@@ -251,6 +251,15 @@ public final class GameDisplay {
       currentGame.restart();
       renderStatic();
     }
+
+    checkPowerUpStatus();
+  }
+
+  /**
+   * Checks the status of the power-ups, and updates the labels as needed.
+   */
+  private static void checkPowerUpStatus() {
+    powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
   }
 
   /**

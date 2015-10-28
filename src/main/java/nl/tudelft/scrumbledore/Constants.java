@@ -53,6 +53,7 @@ public final class Constants {
   public static final String SCORELABEL = "Score:";
   public static final String HISCORELABEL = "High-Score:";
   public static final String POWERUPLABEL = "Power-Ups:";
+  public static final String NOPOWERUP_LABEL = "NONE";
   public static final String LEVELLABEL = "Level:";
 
   // Defining labels and values needed for the advancement GUI pop-ups.
