@@ -62,10 +62,10 @@ public class PlayerActionsLevelModifierTest {
     double expectedOut = Constants.PLAYER_SPEED;
     assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
   }
-  
+
   /**
-   * When a Level is modified, the Player is a powerup and its Player has the action to move left, then the player's speed
-   * vector x entry should be set negative.
+   * When a Level is modified, the Player is a powerup and its Player has the action to move left,
+   * then the player's speed vector x entry should be set negative.
    */
   @Test
   public void testModifyMoveLeftChiliChicken() {
@@ -77,8 +77,8 @@ public class PlayerActionsLevelModifierTest {
   }
 
   /**
-   * When a Level is modified, the Player is a powerup and its Player has the action to move right, then the player's speed
-   * vector x entry should be set positive.
+   * When a Level is modified, the Player is a powerup and its Player has the action to move right,
+   * then the player's speed vector x entry should be set positive.
    */
   @Test
   public void testModifyMoveRightChiliChicken() {
@@ -178,7 +178,8 @@ public class PlayerActionsLevelModifierTest {
   }
 
   /**
-   * When a Level is modified and the powerup countdown is smaller or equal to zero, the PlayerElement should be a player again.
+   * When a Level is modified and the powerup countdown is smaller or equal to zero, the
+   * PlayerElement should be a player again.
    */
   @Test
   public void testChiliChickenCountDownEnd() {
@@ -187,9 +188,10 @@ public class PlayerActionsLevelModifierTest {
     modifier.modify(level, 0.5);
     assertTrue(level.getPlayers().get(0) instanceof Player);
   }
-  
+
   /**
-   * When a Level is modified and the powerup countdown is smaller or equal to zero, the PlayerElement should be a player again.
+   * When a Level is modified and the powerup countdown is smaller or equal to zero, the
+   * PlayerElement should be a player again.
    */
   @Test
   public void testTurtleTacoCountDownEnd() {
@@ -198,10 +200,11 @@ public class PlayerActionsLevelModifierTest {
     modifier.modify(level, 0.5);
     assertTrue(level.getPlayers().get(0) instanceof Player);
   }
-  
+
   @Test
   public void testShoot() {
     player.addAction(LevelElementAction.MoveLeft);
+    modifier.modify(level, 0.5);
     player.addAction(LevelElementAction.Shoot);
     modifier.modify(level, 0.5);
     assertTrue(level.getBubbles().size() == 1);
