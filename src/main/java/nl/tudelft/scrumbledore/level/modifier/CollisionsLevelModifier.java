@@ -363,35 +363,6 @@ public class CollisionsLevelModifier implements LevelModifier {
   }
 
   /**
-   * Detects collission between a BlueberryBubble and an enemy.
-   * 
-   * @param level
-   *          the level of the projectile.
-   * 
-   * @param delta
-   *          the step time of the projectile.
-   */
-  protected void detectBlueBubbleEnemey(Level level, double delta) {
-    ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Bubble> projectiles = level.getBubbles();
-
-    if (projectiles.size() > 0 && enemies.size() > 0) {
-      for (int i = 0; i < enemies.size(); i++) {
-        for (int j = 0; j < projectiles.size(); j++) {
-          Bubble currentP = projectiles.get(j);
-
-          if (currentP.getLifetime() > 0
-              && enemies.get(i).inBoxRangeOf(currentP, Constants.COLLISION_RADIUS)
-              && new Collision(currentP, enemies.get(i), delta).colliding()) {
-
-            enemies.remove(i);
-          }
-        }
-      }
-    }
-  }
-
-  /**
    * Detect and handle collisions between Bubbles.
    * 
    * @param level

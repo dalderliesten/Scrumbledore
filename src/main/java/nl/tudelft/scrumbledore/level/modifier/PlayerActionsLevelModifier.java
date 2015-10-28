@@ -10,6 +10,7 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -41,11 +42,11 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (!(player instanceof PlayerElement)) {
-          if (player.getLifetime() <= 0 && player.hasAction(LevelElementAction.ShootStop)) {
+        if (player instanceof ChiliChicken || player instanceof TurtleTaco) {
+          if (player.getLifetime() <= 0) {
             try {
-              PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
-                  Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              PlayerElement newP = new Player(player.getPosition().clone(),
+                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
               for (int j = 0; j < player.getActions().size(); j++) {
                 newP.addAction(player.getActions().get(j));
               }
@@ -74,8 +75,9 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
         player.removeAction(LevelElementAction.MoveStop);
         player.removeAction(LevelElementAction.Shoot);
+      } else {
+        player.clearActions();
       }
-
     }
   }
 
@@ -150,8 +152,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
-            Constants.BLOCKSIZE));
+        Bubble newBubble = new Bubble(projectPos,
+            new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
 
         projectiles.add(newBubble);
         checkShootingDirection(player, newBubble);
