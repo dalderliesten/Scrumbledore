@@ -65,5 +65,20 @@ public class NPCLevelModifierTest {
     assertEquals(Constants.NPC_SPEED, npc.getSpeed().getX(), Constants.DOUBLE_PRECISION);
     assertFalse(npc.hasAction(LevelElementAction.MoveRight));
   }
+  
+  /**
+   * When a modify is performed on an NPC with the Jump its vertical speed should be set to
+   * PLAYER_JUMP / -1.1 and the Jump action should be removed.
+   */
+  @Test
+  public void testModifyJump() {
+    npc.clearActions();
+    npc.addAction(LevelElementAction.Jump);
+    
+    modifier.modify(level, 1.0d);
+    
+    assertEquals(Constants.PLAYER_JUMP / -1.1, npc.getSpeed().getY(), Constants.DOUBLE_PRECISION);
+    assertFalse(npc.hasAction(LevelElementAction.Jump));
+  }
 
 }
