@@ -13,6 +13,7 @@ import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 
 /**
  * Test Suite for the Player Actions Level Modifier class.
@@ -59,6 +60,32 @@ public class PlayerActionsLevelModifierTest {
     player.addAction(LevelElementAction.MoveRight);
     modifier.modify(level, .5);
     double expectedOut = Constants.PLAYER_SPEED;
+    assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * When a Level is modified, the Player is a powerup and its Player has the action to move left, then the player's speed
+   * vector x entry should be set negative.
+   */
+  @Test
+  public void testModifyMoveLeftChiliChicken() {
+    player.addAction(LevelElementAction.MoveLeft);
+    level.getPlayers().set(0, new ChiliChicken(player));
+    modifier.modify(level, .5);
+    double expectedOut = -Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER;
+    assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
+  }
+
+  /**
+   * When a Level is modified, the Player is a powerup and its Player has the action to move right, then the player's speed
+   * vector x entry should be set positive.
+   */
+  @Test
+  public void testModifyMoveRightChiliChicken() {
+    player.addAction(LevelElementAction.MoveRight);
+    level.getPlayers().set(0, new ChiliChicken(player));
+    modifier.modify(level, .5);
+    double expectedOut = Constants.PLAYER_SPEED * Constants.PLAYER_CHILI_MULTIPLIER;
     assertEquals(expectedOut, player.getSpeed().getX(), Constants.DOUBLE_PRECISION);
   }
 
@@ -154,10 +181,29 @@ public class PlayerActionsLevelModifierTest {
    * When a Level is modified and the powerup countdown is smaller or equal to zero, the PlayerElement should be a player again.
    */
   @Test
-  public void testPowerUpCountDownEnd() {
+  public void testChiliChickenCountDownEnd() {
     level.getPlayers().set(0, new ChiliChicken(player));
     modifier.modify(level, 250);
     modifier.modify(level, 0.5);
     assertTrue(level.getPlayers().get(0) instanceof Player);
+  }
+  
+  /**
+   * When a Level is modified and the powerup countdown is smaller or equal to zero, the PlayerElement should be a player again.
+   */
+  @Test
+  public void testTurtleTacoCountDownEnd() {
+    level.getPlayers().set(0, new TurtleTaco(player));
+    modifier.modify(level, 250);
+    modifier.modify(level, 0.5);
+    assertTrue(level.getPlayers().get(0) instanceof Player);
+  }
+  
+  @Test
+  public void testShoot() {
+    player.addAction(LevelElementAction.MoveLeft);
+    player.addAction(LevelElementAction.Shoot);
+    modifier.modify(level, 0.5);
+    assertTrue(level.getBubbles().size() == 1);
   }
 }
