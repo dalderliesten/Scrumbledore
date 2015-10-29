@@ -7,7 +7,6 @@ import nl.tudelft.scrumbledore.level.Level;
  * 
  * @author Jeroen Meijer
  * @author Jesse Tilro
- *
  */
 public interface LevelModifier {
 

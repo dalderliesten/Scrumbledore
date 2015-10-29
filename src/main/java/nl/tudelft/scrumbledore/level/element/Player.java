@@ -1,12 +1,10 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
-
 
 /**
  * Class representing a Player in a game.
@@ -22,13 +20,13 @@ public class Player extends BasicDynamicElement implements PlayerElement {
   private Boolean alive;
   private int id;
   private double lifetime;
-  
 
   /**
    * Create a new Basic Player instance.
    * 
    * @param position
    *          Position of the player in the level.
+   * 
    * @param size
    *          Size of the Basic Player.
    */
@@ -121,7 +119,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
   /**
    * Return whether the Player is firing.
    * 
-   * @return whether the Player is firing
+   * @return whether the Player is firing.
    */
   public Boolean isFiring() {
     return firing;
@@ -131,7 +129,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    * Set whether the Player is firing.
    * 
    * @param isFiring
-   *          whether the Player is firing
+   *          whether the Player is firing.
    */
   public void setFiring(Boolean isFiring) {
     this.firing = isFiring;
@@ -143,6 +141,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   * 
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -169,7 +168,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
     }
     return result;
   }
-  
+
   /**
    * Decrease the lifetime by a given number of steps.
    * 
@@ -178,7 +177,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    */
   public void decreaseLifetime(double delta) {
     lifetime -= delta;
-}
+  }
 
   /**
    * Get the remaining lifetime.
@@ -198,4 +197,5 @@ public class Player extends BasicDynamicElement implements PlayerElement {
   public void setLifetime(double newTime) {
     lifetime = newTime;
   }
+
 }
