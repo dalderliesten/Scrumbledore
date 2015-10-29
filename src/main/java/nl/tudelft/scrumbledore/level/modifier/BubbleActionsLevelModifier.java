@@ -28,22 +28,7 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
-  @SuppressWarnings("checkstyle:methodlength")
   public void modify(Level level, double delta) {
-    modifyBubble(level, delta);
-  }
-
-  /**
-   * Modifies the stat of a bubble.
-   * 
-   * @param level
-   *          , the level of the bubble.
-   * @param delta
-   *          , the step in which this bubble is moving.
-   */
-  @SuppressWarnings("checkstyle:methodlength")
-  public static void modifyBubble(Level level, double delta) {
-
     Iterator<Bubble> iter = level.getBubbles().iterator();
 
     while (iter.hasNext()) {
@@ -79,6 +64,14 @@ public class BubbleActionsLevelModifier implements LevelModifier {
     }
   }
 
+  /**
+   * Checks the movement of the bubble and acts upon that fact.
+   * 
+   * @param bubble
+   *          The bubble to check.
+   * @param delta
+   *          The amount of steps since previous step.
+   */
   public static void checkMovement(Bubble bubble, Double delta) {
     bubble.decreaseLifetime(delta);
 
