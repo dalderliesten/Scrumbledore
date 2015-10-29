@@ -59,52 +59,6 @@ public class PlayerTest extends LevelElementTest {
     player.addAction(LevelElementAction.MoveLeft);
     assertTrue(player.hasAction(LevelElementAction.MoveLeft));
   }
-
-  /**
-   * When a player action was not added to a bubble's action queue, a call to hasAction for that
-   * action should return false.
-   */
-  @Test
-  public void testHasActionFalse() {
-    player.addAction(LevelElementAction.MoveLeft);
-    assertFalse(player.hasAction(LevelElementAction.MoveRight));
-  }
-
-  /**
-   * When a player action queue is cleared, it should not have the actions anymore which were added
-   * before.
-   */
-  @Test
-  public void testClearActions() {
-    player.addAction(LevelElementAction.MoveLeft);
-    player.clearActions();
-    assertFalse(player.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When a player has an action removed from its action queue, it should no longer have the action.
-   */
-  @Test
-  public void testRemoveAction() {
-    player.addAction(LevelElementAction.MoveLeft);
-    player.addAction(LevelElementAction.MoveLeft);
-    player.removeAction(LevelElementAction.MoveLeft);
-    assertFalse(player.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When the Player.getActions is called it should return all the actions 
-   * assigned to a player object.
-   */
-  @Test
-  public void testGetActions() {
-    player.clearActions();
-    player.addAction(LevelElementAction.MoveLeft);
-    player.addAction(LevelElementAction.MoveRight);
-    assertEquals(2, player.getActions().size());
-    assertEquals(LevelElementAction.MoveLeft, player.getActions().get(0));
-    assertEquals(LevelElementAction.MoveRight, player.getActions().get(1));
-  }
   
   /**
    * Test the firing field getter/setter.

@@ -9,7 +9,6 @@ import java.util.ArrayList;
 
 import org.junit.Test;
 
-import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
@@ -104,67 +103,4 @@ public class PlatformTest {
         + "wall-1.png", sprites.get(0).getPath());
   }
 
-  /**
-   * Test the height property of a basic static element.
-   */
-  @Test
-  public void testHeight() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    assertEquals(32, platform.height(), Constants.DOUBLE_PRECISION);
-  }
-
-  /**
-   * Test the width property of a basic static element.
-   */
-  @Test
-  public void testWidth() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    assertEquals(32, platform.width(), Constants.DOUBLE_PRECISION);
-  }
-  
-  /**
-   * Verify whether the distance between two basic static elements can be calculated correctly.
-   */
-  @Test
-  public void testDistance() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Platform platform2 = new Platform(new Vector(42, 0), new Vector(32, 32));
-
-    assertEquals(42d, platform.distance(platform2), Constants.DOUBLE_PRECISION);
-  }
-  
-  /**
-   * Verify whether the in radius calculation of two level elements happens correctly. 
-   * Verification should result in 'false'.
-   */
-  @Test
-  public void testInRadiusRangeOfSmaller() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Platform platform2 = new Platform(new Vector(42, 0), new Vector(32, 32));
-
-    assertFalse(platform.inRadiusRangeOf(platform2, 41d));
-  }
-  /**
-   * Verify whether the in radius calculation of two level elements happens correctly. 
-   * Verification should result in 'true'.
-   */
-  @Test
-  public void testInRadiusRangeOfEqual() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Platform platform2 = new Platform(new Vector(42, 0), new Vector(32, 32));
-
-    assertTrue(platform.inRadiusRangeOf(platform2, 42d));
-  }
-  
-  /**
-   * Verify whether the in radius calculation of two level elements happens correctly. 
-   * Verification should result in 'true'.
-   */
-  @Test
-  public void testInRadiusRangeOfEqualBigger() {
-    Platform platform = new Platform(new Vector(0, 0), new Vector(32, 32));
-    Platform platform2 = new Platform(new Vector(42, 0), new Vector(32, 32));
-
-    assertTrue(platform.inRadiusRangeOf(platform2, 43d));
-  }
 }
