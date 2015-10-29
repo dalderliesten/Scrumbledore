@@ -18,6 +18,7 @@ public class WarpLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level to be modified.
+   *          
    * @param delta
    *          The number of steps passed since the last cycle.
    */

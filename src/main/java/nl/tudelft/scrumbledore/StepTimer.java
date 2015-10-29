@@ -10,7 +10,6 @@ import nl.tudelft.scrumbledore.game.Game;
  * @author David Alderliesten
  */
 public class StepTimer {
-
   private int rate;
   private Game game;
   private boolean running;
@@ -139,6 +138,7 @@ public class StepTimer {
     if (!paused) {
       game.step(d);
     }
+    
     try {
       long timeout = (prevLoopTime - System.nanoTime() + optimalTime) / 1000000;
       if (timeout < 0) {

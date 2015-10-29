@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
@@ -9,7 +8,6 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * Abstract class representing an element that can be placed in a Level.
  * 
  * @author Jesse Tilro
- *
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public interface LevelElement {
@@ -89,6 +87,7 @@ public interface LevelElement {
    * 
    * @param other
    *          The other element to measure the distance to.
+   * 
    * @return The distance.
    */
   double distance(LevelElement other);
@@ -99,8 +98,10 @@ public interface LevelElement {
    * 
    * @param other
    *          The other element.
+   * 
    * @param range
    *          The range (of the circle).
+   * 
    * @return A boolean.
    */
   boolean inRadiusRangeOf(LevelElement other, double range);
@@ -112,8 +113,10 @@ public interface LevelElement {
    * 
    * @param other
    *          The other element.
+   * 
    * @param range
    *          The range (a half of the dimensions of the square box).
+   * 
    * @return A boolean.
    */
   boolean inBoxRangeOf(LevelElement other, double range);
@@ -156,6 +159,7 @@ public interface LevelElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   *          
    * @return Sprites to be drawn.
    */
   ArrayList<Sprite> getSprites(double steps);

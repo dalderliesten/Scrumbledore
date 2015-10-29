@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.game;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelParser;
 

@@ -3,8 +3,8 @@ package nl.tudelft.scrumbledore.level.element;
 /**
  * Enumeration containing types of actions that a LevelElement can perform.
  * 
- * @author Jesse Tilro, Floris Doolaard
- *
+ * @author Jesse Tilro
+ * @author Floris Doolaard
  */
 public enum LevelElementAction {
   MoveLeft, MoveRight, MoveStop, Jump, Shoot, ShootStop;
@@ -13,8 +13,9 @@ public enum LevelElementAction {
    * Returns the inverted action. i.e. MoveRight returns MoveStop.
    * 
    * @param action
-   *          Action to be inverted
-   * @return inverted action
+   *          Action to be inverted.
+   *          
+   * @return inverted action.
    */
   public static LevelElementAction invertAction(LevelElementAction action) {
     if (action != null) {

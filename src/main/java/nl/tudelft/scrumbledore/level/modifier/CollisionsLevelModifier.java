@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.modifier;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.game.ScoreCounter;
@@ -31,7 +30,6 @@ import nl.tudelft.scrumbledore.level.powerup.TurtleTacoPickUp;
     "PMD.NPathComplexity", "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity",
     "PMD.TooManyMethods" })
 public class CollisionsLevelModifier implements LevelModifier {
-
   private ScoreCounter score;
 
   /**
@@ -49,6 +47,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level.
+   * 
    * @param delta
    *          The steps passed since this method wat last executed.
    */
@@ -69,9 +68,10 @@ public class CollisionsLevelModifier implements LevelModifier {
    * Detect collisions between player and powerups.
    * 
    * @param level
-   *          , the level.
+   *          the level.
+   * 
    * @param delta
-   *          , the delta provided by StepTimer.
+   *          the delta provided by StepTimer.
    */
   protected void detectPlayerPowerup(Level level, double delta) {
     ArrayList<PowerupPickUp> powerUps = level.getPowerups();
@@ -108,12 +108,12 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
   protected void detectFruitPlatform(Level level, double delta) {
     for (Fruit fruit : level.getFruits()) {
-      // To prevent the player from instantaneously picking up fruit.
       boolean pickable = true;
       for (DynamicElement player : level.getPlayers()) {
         Collision playerCollision = new Collision(fruit, player, delta);
@@ -121,7 +121,6 @@ public class CollisionsLevelModifier implements LevelModifier {
           pickable = false;
         }
       }
-      // Since becoming pickable can't be undone.
       if (pickable) {
         fruit.setPickable(pickable);
       }
@@ -144,12 +143,12 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
   protected void detectPlayerPlatform(Level level, double delta) {
     for (DynamicElement player : level.getPlayers()) {
-      // To accelerate the second iteration over the platforms.
       ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(player, Constants.COLLISION_RADIUS)) {
@@ -162,7 +161,6 @@ public class CollisionsLevelModifier implements LevelModifier {
           }
         }
       }
-      // Since vertical collision detection has to be done before horizontal.
       for (Platform platform : candidates) {
         Collision collision = new Collision(player, platform, delta);
 
@@ -191,12 +189,12 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
   public void detectNPCPlatform(Level level, double delta) {
     for (NPC npc : level.getNPCs()) {
-      // To accelerate the second iteration over the platforms.
       ArrayList<Platform> candidates = new ArrayList<Platform>();
       for (Platform platform : level.getPlatforms()) {
         if (platform.inBoxRangeOf(npc, Constants.COLLISION_RADIUS)) {
@@ -214,7 +212,6 @@ public class CollisionsLevelModifier implements LevelModifier {
           }
         }
       }
-      // Since vertical collision detection has to be done before horizontal.
       for (Platform platform : candidates) {
         Collision collision = new Collision(npc, platform, delta);
 
@@ -250,6 +247,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -289,6 +287,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level.
+   * 
    * @param delta
    *          The delta.
    */
@@ -331,6 +330,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The steps passed since this method was last executed.
    */
@@ -344,7 +344,6 @@ public class CollisionsLevelModifier implements LevelModifier {
 
         for (int j = 0; j < projectiles.size(); j++) {
           Bubble currentP = projectiles.get(j);
-          // Temporary fix to prevent race condition.
           if (!(currentP.hasNPC()) && enemies.size() != i
               && enemies.get(i).inBoxRangeOf(currentP, Constants.COLLISION_RADIUS)
               && new Collision(currentP, enemies.get(i), delta).colliding()) {
@@ -368,6 +367,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level to be modified.
+   * 
    * @param delta
    *          The number of steps passed since this method was last executed.
    */
@@ -397,6 +397,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -424,6 +425,7 @@ public class CollisionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The Level.
+   * 
    * @param delta
    *          The delta provided by the StepTimer.
    */
@@ -447,7 +449,7 @@ public class CollisionsLevelModifier implements LevelModifier {
   /**
    * Returns a ScoreCounter.
    * 
-   * @return the score
+   * @return the score.
    */
   public ScoreCounter getScore() {
     return score;
