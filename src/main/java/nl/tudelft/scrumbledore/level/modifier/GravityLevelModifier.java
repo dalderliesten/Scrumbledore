@@ -10,10 +10,8 @@ import nl.tudelft.scrumbledore.level.element.NPC;
  * Class simulating Gravity on the LevelElements in the game.
  * 
  * @author Jesse Tilro
- *
  */
 public class GravityLevelModifier implements LevelModifier {
-
   private double strength;
   private double max;
 
@@ -22,6 +20,7 @@ public class GravityLevelModifier implements LevelModifier {
    * 
    * @param strength
    *          The strength.
+   * 
    * @param max
    *          The maximal vertical speed it may accelerate elements to.
    */
@@ -43,21 +42,19 @@ public class GravityLevelModifier implements LevelModifier {
    * 
    * @param level
    *          A Level containing elements to be pulled down.
+   * 
    * @param d
    *          The number of steps since last executing this function.
    */
   public void modify(Level level, double d) {
-    // Pull down NPCs
     for (NPC element : level.getNPCs()) {
       pull(element, d);
     }
 
-    // Pull down Fruits
     for (Fruit element : level.getFruits()) {
       pull(element, d);
     }
 
-    // Pull down the player
     for (DynamicElement player : level.getPlayers()) {
       pull(player, d);
     }
@@ -69,6 +66,7 @@ public class GravityLevelModifier implements LevelModifier {
    * 
    * @param element
    *          A DynamicElement
+   * 
    * @param d
    *          The number of steps since last executing this function.
    */
@@ -94,8 +92,7 @@ public class GravityLevelModifier implements LevelModifier {
   /**
    * Return the strength of the gravity.
    * 
-   * @return strength
-   *           The strength of the gravity.
+   * @return strength The strength of the gravity.
    */
   public double getStrength() {
     return strength;
@@ -104,8 +101,7 @@ public class GravityLevelModifier implements LevelModifier {
   /**
    * Return the maximum strength of the gravity.
    * 
-   * @return max
-   *           The maximum strength of the gravity.
+   * @return max The maximum strength of the gravity.
    */
   public double getMax() {
     return max;

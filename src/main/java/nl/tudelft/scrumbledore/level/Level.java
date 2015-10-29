@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.LevelElement;
@@ -15,10 +14,8 @@ import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
  * Class representing a Level in the Game.
  * 
  * @author Jesse Tilro
- *
  */
 public class Level {
-
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;

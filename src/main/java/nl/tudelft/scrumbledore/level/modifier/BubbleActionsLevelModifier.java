@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.level.modifier;
 
 import java.util.ArrayList;
 import java.util.Iterator;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
@@ -14,7 +13,6 @@ import nl.tudelft.scrumbledore.level.element.NPC;
  * Level Modifier that processes the actions to be performed on the projectile.
  * 
  * @author Floris Doolaard
- *
  */
 @SuppressWarnings({ "PMD.CyclomaticComplexity", "PMD.ModifiedCyclomaticComplexity",
     "PMD.StdCyclomaticComplexity" })
@@ -25,6 +23,7 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The current level.
+   * 
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
@@ -37,9 +36,10 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    * Modifies the stat of a bubble.
    * 
    * @param level
-   *          , the level of the bubble.
+   *          the level of the bubble.
+   * 
    * @param delta
-   *          , the step in which this bubble is moving.
+   *          the step in which this bubble is moving.
    */
   @SuppressWarnings("checkstyle:methodlength")
   public static void modifyBubble(Level level, double delta) {

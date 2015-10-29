@@ -4,9 +4,7 @@ import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.util.ArrayList;
-
 import javax.imageio.ImageIO;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 
@@ -18,12 +16,10 @@ import nl.tudelft.scrumbledore.level.Vector;
  * @author Niels Warnars
  */
 public class SpriteStore {
-
   private ArrayList<Sprite> sprites;
   private ArrayList<AnimatedSprite> animatedSprites;
   private String dir;
   private String dirSprite;
-
   private static volatile SpriteStore instance;
 
   /**
@@ -78,6 +74,7 @@ public class SpriteStore {
    * 
    * @param directory
    *          The directory to search for sprites.
+   * 
    * @return All Sprites.
    */
   private ArrayList<Sprite> readSprites(File directory, String dir) {
@@ -98,6 +95,7 @@ public class SpriteStore {
    * 
    * @param directory
    *          The directory to search for animated sprites.
+   * 
    * @return All Animated Sprites.
    */
   private ArrayList<AnimatedSprite> readAnimatedSprites(File directory, String dir) {
@@ -122,8 +120,10 @@ public class SpriteStore {
    * 
    * @param file
    *          The image file that the Sprite should correspond to.
+   * 
    * @param dir
    *          The path to the image file.
+   * 
    * @return A Sprite.
    */
   private Sprite getSpriteFromFile(File file, String dir) {
@@ -158,6 +158,7 @@ public class SpriteStore {
    * 
    * @param id
    *          The ID.
+   * 
    * @return The Sprite.
    */
   public Sprite get(String id) {
@@ -174,6 +175,7 @@ public class SpriteStore {
    * 
    * @param id
    *          The ID.
+   * 
    * @return The Animated Sprite.
    */
   public AnimatedSprite getAnimated(String id) {

@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.game;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.LevelParser;
 
@@ -9,7 +8,6 @@ import nl.tudelft.scrumbledore.level.LevelParser;
  * A game that can be played by a single player.
  * 
  * @author Jesse Tilro
- *
  */
 public class SinglePlayerGame extends Game {
 

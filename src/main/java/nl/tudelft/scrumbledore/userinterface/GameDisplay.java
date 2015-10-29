@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -80,6 +79,7 @@ public final class GameDisplay {
    * 
    * @param factory
    *          The game factory used for creating a new game.
+   * 
    * @param passedStage
    *          The stage to draw to.
    */
@@ -205,6 +205,7 @@ public final class GameDisplay {
    * 
    * @param passedButton
    *          The button which must recieve the functionality.
+   * 
    * @param startStopbutton
    *          The start/stop button whose label must be updated.
    */
@@ -357,6 +358,7 @@ public final class GameDisplay {
    * 
    * @param elements
    *          The Level Elements to be rendered.
+   * 
    * @param context
    *          The Graphics Context in which the elements should be drawn.
    */
@@ -364,7 +366,6 @@ public final class GameDisplay {
     for (LevelElement element : elements) {
       for (Sprite sprite : element.getSprites(currentGame.getSteps())) {
         Vector drawPos = sprite.getDrawPosition(element.getPosition());
-        // Because all Sprites are drawn at their center they need an offset to be in the grid.
         drawPos.sum(Vector.scale(new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE), .5));
         context.drawImage(new Image(sprite.getPath()), drawPos.getX(), drawPos.getY());
       }
@@ -384,4 +385,5 @@ public final class GameDisplay {
       }
     });
   }
+  
 }

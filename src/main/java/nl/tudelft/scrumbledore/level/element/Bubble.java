@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
@@ -11,7 +10,6 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * This class creates a Bubble object that the player can shoot.
  * 
  * @author Floris Doolaard
- *
  */
 public class Bubble extends BasicDynamicElement {
   private ArrayList<LevelElementAction> actions;
@@ -24,6 +22,7 @@ public class Bubble extends BasicDynamicElement {
    * 
    * @param position
    *          Position of the element in the level.
+   *          
    * @param size
    *          Size of the element.
    */
@@ -51,6 +50,7 @@ public class Bubble extends BasicDynamicElement {
    * 
    * @param action
    *          A BubbleAction.
+   *          
    * @return Boolean.
    */
   public boolean hasAction(LevelElementAction action) {
@@ -118,6 +118,7 @@ public class Bubble extends BasicDynamicElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   *          
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
