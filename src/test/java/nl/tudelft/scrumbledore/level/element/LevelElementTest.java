@@ -211,7 +211,7 @@ public abstract class LevelElementTest {
    */
   @Test
   public void testSnapLeft() {
-    LevelElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
+    DynamicElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(64, 0), new Vector(32, 32));
 
     snapper.snapLeft(snapTo);
@@ -225,7 +225,7 @@ public abstract class LevelElementTest {
    */
   @Test
   public void testSnapRight() {
-    LevelElement snapper = new Player(new Vector(64, 0), new Vector(32, 32));
+    DynamicElement snapper = new Player(new Vector(64, 0), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(0, 0), new Vector(32, 32));
 
     snapper.snapRight(snapTo);
@@ -239,7 +239,7 @@ public abstract class LevelElementTest {
    */
   @Test
   public void testSnapTop() {
-    LevelElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
+    DynamicElement snapper = new Player(new Vector(0, 0), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(0, 64), new Vector(32, 32));
 
     snapper.snapTop(snapTo);
@@ -253,7 +253,7 @@ public abstract class LevelElementTest {
    */
   @Test
   public void testSnapBottom() {
-    LevelElement snapper = new Player(new Vector(0, 64), new Vector(32, 32));
+    DynamicElement snapper = new Player(new Vector(0, 64), new Vector(32, 32));
     LevelElement snapTo = new Platform(new Vector(0, 0), new Vector(32, 32));
 
     snapper.snapBottom(snapTo);

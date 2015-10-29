@@ -4,10 +4,14 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
  * Test suite for the NPC class.
@@ -42,48 +46,6 @@ public class NPCTest extends LevelElementTest {
     assertEquals(new Vector(0, 0), npc.getPosition());
     assertEquals(new Vector(0, 0), npc.getSize());
     assertTrue(npc.hasGravity());
-  }
-
-  /**
-   * When an NPC action is added to a bubble's action queue, a call to hasAction for that action
-   * should return true.
-   */
-  @Test
-  public void testHasActionTrue() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    assertTrue(npc.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When an NPC action was not added to a bubble's action queue, a call to hasAction for that
-   * action should return false.
-   */
-  @Test
-  public void testHasActionFalse() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    assertFalse(npc.hasAction(LevelElementAction.MoveRight));
-  }
-
-  /**
-   * When an NPC action queue is cleared, it should not have the actions anymore which were added
-   * before.
-   */
-  @Test
-  public void testClearActions() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    npc.clearActions();
-    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When an NPC has an action removed from its action queue, it should no longer have the action.
-   */
-  @Test
-  public void testRemoveAction() {
-    npc.addAction(LevelElementAction.MoveLeft);
-    npc.addAction(LevelElementAction.MoveLeft);
-    npc.removeAction(LevelElementAction.MoveLeft);
-    assertFalse(npc.hasAction(LevelElementAction.MoveLeft));
   }
 
   /**
@@ -135,4 +97,19 @@ public class NPCTest extends LevelElementTest {
     // Actions other than MoveLeft and MoveRight should be ignored.
     assertEquals(LevelElementAction.MoveRight, npc.getLastMove());
   }
+  
+  /**
+   * Test the getSprites method to verify whether the correct
+   * sprite(s) is/are being returned.
+   */
+  @Test
+  public void testGetSprites() {
+    ArrayList<Sprite> sprites = npc.getSprites(1);
+    
+    assertEquals(1, sprites.size());
+    assertEquals("frame-01", sprites.get(0).getID());
+    assertEquals("images" + File.separator + "sprites" + File.separator
+        + "zenchan-move-left/frame-01.png", sprites.get(0).getPath());
+  }
+  
 }

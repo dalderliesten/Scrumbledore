@@ -16,6 +16,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   private Vector speed;
   private Vector friction;
   private boolean gravity;
+  private ArrayList<LevelElementAction> actions;
 
   /**
    * Create a new LevelElement instance.
@@ -32,6 +33,8 @@ public abstract class BasicDynamicElement implements DynamicElement {
     this.speed = new Vector(0, 0);
     this.friction = new Vector(0, 0);
     this.gravity = false;
+    this.actions = new ArrayList<LevelElementAction>();
+
   }
 
   /**
@@ -306,6 +309,55 @@ public abstract class BasicDynamicElement implements DynamicElement {
     getPosition().setY(newPos);
   }
 
+  /**
+   * Add an action to be performed in the next step.
+   * 
+   * @param action
+   *          A LevelElementAction
+   */
+  public void addAction(LevelElementAction action) {
+    if (!hasAction(action)) {
+      actions.add(action);
+      setLastMove(action);
+    }
+  }
+
+  /**
+   * Remove all actions from the queue.
+   */
+  public void clearActions() {
+    actions.clear();
+  }
+  
+  /**
+   * Gives the list of actions of the level element.
+   * @return a list of actions.
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
+
+  /**
+   * Check whether the given action is queued for the next step.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   * @return Boolean.
+   */
+  public boolean hasAction(LevelElementAction action) {
+    return actions.contains(action);
+  }
+
+  /**
+   * Remove the given action from the actions queue.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   */
+  public void removeAction(LevelElementAction action) {
+    actions.remove(action);
+  }
+  
   /**
    * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
    * Element.
