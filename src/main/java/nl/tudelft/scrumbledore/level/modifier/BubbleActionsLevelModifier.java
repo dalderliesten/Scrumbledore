@@ -43,43 +43,56 @@ public class BubbleActionsLevelModifier implements LevelModifier {
    */
   @SuppressWarnings("checkstyle:methodlength")
   public static void modifyBubble(Level level, double delta) {
-    ArrayList<NPC> enemies = level.getNPCs();
-    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
 
     Iterator<Bubble> iter = level.getBubbles().iterator();
 
     while (iter.hasNext()) {
       Bubble bub = iter.next();
-      if (bub instanceof Bubble) {
-        if (bub.getLifetime() <= 0) {
-          if (bub.hasNPC()) {
-            try {
-              enemies.add(new NPC(bub.getPosition().clone(), new Vector(Constants.BLOCKSIZE,
-                  Constants.BLOCKSIZE)));
-            } catch (CloneNotSupportedException e) {
-              e.printStackTrace();
-            }
-            enemyBubbles.remove(bub);
-          }
-          iter.remove();
-        } else {
-          bub.decreaseLifetime(delta);
-
-          if (bub.vSpeed() > -Constants.BUBBLE_FLOAT) {
-            bub.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION * delta));
-          }
-          if (bub.hasAction(LevelElementAction.MoveLeft)) {
-            bub.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);
-          }
-          if (bub.hasAction(LevelElementAction.MoveRight)) {
-            bub.getSpeed().setX(Constants.BUBBLE_SPEED);
-          }
-
-          bub.clearActions();
-        }
+      if (bub.getLifetime() <= 0) {
+        checkEnemies(level, bub);
+        iter.remove();
+      } else {
+        checkMovement(bub, delta);
       }
-
     }
+  }
+
+  /**
+   * Checks if the bubble has enemies trapped inside and acts upon that fact.
+   * 
+   * @param level
+   *          The level to check.
+   * @param bubble
+   *          The bubble to check.
+   */
+  public static void checkEnemies(Level level, Bubble bubble) {
+    ArrayList<NPC> enemies = level.getNPCs();
+    ArrayList<Bubble> enemyBubbles = level.getEnemyBubbles();
+    if (bubble.hasNPC()) {
+      try {
+        enemies.add(new NPC(bubble.getPosition().clone(),
+            new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE)));
+      } catch (CloneNotSupportedException e) {
+        e.printStackTrace();
+      }
+      enemyBubbles.remove(bubble);
+    }
+  }
+
+  public static void checkMovement(Bubble bubble, Double delta) {
+    bubble.decreaseLifetime(delta);
+
+    if (bubble.vSpeed() > -Constants.BUBBLE_FLOAT) {
+      bubble.getSpeed().difference(new Vector(0, Constants.BUBBLE_FRICTION * delta));
+    }
+    if (bubble.hasAction(LevelElementAction.MoveLeft)) {
+      bubble.getSpeed().setX(-1 * Constants.BUBBLE_SPEED);
+    }
+    if (bubble.hasAction(LevelElementAction.MoveRight)) {
+      bubble.getSpeed().setX(Constants.BUBBLE_SPEED);
+    }
+
+    bubble.clearActions();
   }
 
 }
