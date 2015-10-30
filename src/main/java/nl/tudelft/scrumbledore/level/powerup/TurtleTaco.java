@@ -39,9 +39,13 @@ public class TurtleTaco implements PlayerElement {
    */
   public ArrayList<Sprite> getSprites(double steps) {
     ArrayList<Sprite> sprites = new ArrayList<Sprite>();
-    SpriteStore store = SpriteStore.getInstance();
-    sprites.add(store.getAnimated("fire-green").getFrame(steps));
-    sprites.addAll(wrapped.getSprites(steps));
+    
+    if (isAlive()) {
+      SpriteStore store = SpriteStore.getInstance();
+      sprites.add(store.getAnimated("fire-green").getFrame(steps));
+      sprites.addAll(wrapped.getSprites(steps));
+    }
+    
     return sprites;
   }
 
