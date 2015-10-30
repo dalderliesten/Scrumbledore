@@ -13,12 +13,13 @@ import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.element.PlayerElementTest;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
+@SuppressWarnings("PMD.TooManyMethods")
 public class ChiliChickenTest extends PlayerElementTest {
 
-  private ChiliChicken ch1;
   private Player player;
   private Vector position;
   private Vector size;
@@ -35,7 +36,8 @@ public class ChiliChickenTest extends PlayerElementTest {
 
   @Override
   public ChiliChicken make(Vector position, Vector size) {
-    return new ChiliChicken(player);
+    PlayerElement tmpPlayer = new Player(position, size);
+    return new ChiliChicken(tmpPlayer);
   }
 
   @Override
