@@ -260,10 +260,9 @@ public final class GameDisplay {
    * Checks the status of the power-ups, and updates the labels as needed.
    */
   private static void checkPowerUpStatus() {
-    for (PlayerElement current : currentGame.getCurrentLevel().getPlayers()) {
-       //TODO
+    for (PowerupPickUp current : currentGame.getCurrentLevel().getPowerups()) {
+      
     }
-
     powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
   }
 
