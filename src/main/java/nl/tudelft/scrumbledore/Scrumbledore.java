@@ -15,10 +15,12 @@ abstract class Scrumbledore {
   /**
    * The main method launches the program.
    * 
-   * @pre Program executed
-   * @post Program terminated
+   * @pre Program executed.
+   * 
+   * @post Program terminated.
+   * 
    * @param args
-   *          Arguments given at program initialization
+   *          Arguments given at program initialization.
    */
   public static void main(String[] args) {
     makeAppDataDir();
