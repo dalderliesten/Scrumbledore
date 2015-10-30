@@ -139,24 +139,6 @@ public class Collision {
   }
 
   /**
-   * Get the collider.
-   * 
-   * @return The collider LevelElement.
-   */
-  public LevelElement getCollider() {
-    return collider;
-  }
-
-  /**
-   * Get the collidee.
-   * 
-   * @return The collidee LevelElement.
-   */
-  public LevelElement getCollidee() {
-    return collidee;
-  }
-
-  /**
    * Check whether the bottom edge of the collider just touches the top edge of the collidee.
    * 
    * @return Boolean if touching the top edge.
