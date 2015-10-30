@@ -4,10 +4,15 @@ import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
 
+import java.io.File;
+import java.util.ArrayList;
+
 import org.junit.Before;
 import org.junit.Test;
 
+import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
  * Test Suite for the Player class.
@@ -54,39 +59,7 @@ public class PlayerTest extends LevelElementTest {
     player.addAction(LevelElementAction.MoveLeft);
     assertTrue(player.hasAction(LevelElementAction.MoveLeft));
   }
-
-  /**
-   * When a player action was not added to a bubble's action queue, a call to hasAction for that
-   * action should return false.
-   */
-  @Test
-  public void testHasActionFalse() {
-    player.addAction(LevelElementAction.MoveLeft);
-    assertFalse(player.hasAction(LevelElementAction.MoveRight));
-  }
-
-  /**
-   * When a player action queue is cleared, it should not have the actions anymore which were added
-   * before.
-   */
-  @Test
-  public void testClearActions() {
-    player.addAction(LevelElementAction.MoveLeft);
-    player.clearActions();
-    assertFalse(player.hasAction(LevelElementAction.MoveLeft));
-  }
-
-  /**
-   * When a player has an action removed from its action queue, it should no longer have the action.
-   */
-  @Test
-  public void testRemoveAction() {
-    player.addAction(LevelElementAction.MoveLeft);
-    player.addAction(LevelElementAction.MoveLeft);
-    player.removeAction(LevelElementAction.MoveLeft);
-    assertFalse(player.hasAction(LevelElementAction.MoveLeft));
-  }
-
+  
   /**
    * Test the firing field getter/setter.
    */
@@ -165,4 +138,69 @@ public class PlayerTest extends LevelElementTest {
     assertEquals(0, player.hashCode());
   }
 
+  
+  /**
+   * Test the getSprites method to verify whether the correct
+   * sprite(s) is/are being returned.
+   */
+  @Test
+  public void testGetSprites() {
+    ArrayList<Sprite> sprites = player.getSprites(1);
+    
+    assertEquals(1, sprites.size());
+    assertEquals("frame-01", sprites.get(0).getID());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "player-green-move-right/frame-01.png", sprites.get(0).getPath());
+  }
+  
+  /**
+   * Test the getSprites method to verify whether the correct
+   * sprite(s) is/are being returned when it is shooting to the right.
+   */
+  @Test
+  public void testGetSpritesShootingRight() {
+    player.setFiring(true);
+    player.setLastMove(LevelElementAction.MoveRight);
+    ArrayList<Sprite> sprites = player.getSprites(1);
+    
+    assertEquals(1, sprites.size());
+    assertEquals("player-shoot-right", sprites.get(0).getID());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "player-green-shoot-right/player-shoot-right.png", sprites.get(0).getPath());
+  }
+  
+  /**
+   * Test the getSprites method to verify whether the correct
+   * sprite(s) is/are being returned when it is shooting to the left.
+   */
+  @Test
+  public void testGetSpritesShootingLeft() {
+    player.setFiring(true);
+    player.setLastMove(LevelElementAction.MoveLeft);
+    ArrayList<Sprite> sprites = player.getSprites(1);
+    
+    assertEquals(1, sprites.size());
+    assertEquals("player-shoot-left", sprites.get(0).getID());
+    assertEquals("images" + File.separator + "sprites" + File.separator 
+        + "player-green-shoot-left/player-shoot-left.png", sprites.get(0).getPath());
+  }
+  
+  /**
+   * Test the getter/setter methods of the lifetime attribute of a Player object.
+   */
+  @Test
+  public void testLifetime() {
+    player.setLifetime(42d);
+    assertEquals(42d, player.getLifetime(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * Test the decreasing of the lifetime of a player by a given number of steps.
+   */
+  @Test
+  public void testDecreaseLifetime() {
+    player.setLifetime(42d);
+    player.decreaseLifetime(1d);
+    assertEquals(41d, player.getLifetime(), Constants.DOUBLE_PRECISION);
+  }
 }

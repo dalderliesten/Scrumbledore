@@ -14,7 +14,7 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * @author Floris Doolaard
  */
 public class Player extends BasicDynamicElement implements PlayerElement {
-  private ArrayList<LevelElementAction> actions;
+
   private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
@@ -36,31 +36,10 @@ public class Player extends BasicDynamicElement implements PlayerElement {
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<LevelElementAction>();
     lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
     lifetime = Constants.PLAYER_POWERUP_LIFETIME;
-  }
-
-  /**
-   * Add an action to be performed in the next step.
-   * 
-   * @param action
-   *          A PlayerAction.
-   */
-  public void addAction(LevelElementAction action) {
-    if (!hasAction(action)) {
-      actions.add(action);
-      setLastMove(action);
-    }
-  }
-
-  /**
-   * Remove all actions from the queue.
-   */
-  public void clearActions() {
-    actions.clear();
   }
 
   /**
@@ -99,36 +78,6 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    */
   public void setPlayerNumber(int id) {
     this.id = id;
-  }
-
-  /**
-   * Gives the list of actions of the player.
-   * 
-   * @return a list of actions.
-   */
-  public ArrayList<LevelElementAction> getActions() {
-    return actions;
-  }
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          A PlayerAction.
-   * @return Boolean.
-   */
-  public boolean hasAction(LevelElementAction action) {
-    return actions.contains(action);
-  }
-
-  /**
-   * Remove the given action from the actions queue.
-   * 
-   * @param action
-   *          A PlayerAction.
-   */
-  public void removeAction(LevelElementAction action) {
-    actions.remove(action);
   }
 
   /**

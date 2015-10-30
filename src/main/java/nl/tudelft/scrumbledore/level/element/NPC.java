@@ -13,7 +13,6 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  */
 public class NPC extends BasicDynamicElement {
   private LevelElementAction lastMove;
-  private ArrayList<LevelElementAction> actions;
 
   /**
    * Create a new NPC instance.
@@ -28,51 +27,7 @@ public class NPC extends BasicDynamicElement {
     super(position, size);
 
     setGravity(true);
-
-    actions = new ArrayList<LevelElementAction>();
     addAction(LevelElementAction.MoveLeft);
-  }
-
-  /**
-   * Add an action to be performed in the next step.
-   * 
-   * @param action
-   *          A PlayerAction.
-   */
-  public void addAction(LevelElementAction action) {
-    if (!hasAction(action)) {
-      actions.add(action);
-      setLastMove(action);
-    }
-  }
-
-  /**
-   * Remove all actions from the queue.
-   */
-  public void clearActions() {
-    actions.clear();
-  }
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          An NPCAction.
-   *          
-   * @return Boolean.
-   */
-  public boolean hasAction(LevelElementAction action) {
-    return actions.contains(action);
-  }
-
-  /**
-   * Remove the given action from the actions queue.
-   * 
-   * @param action
-   *          An NPCAction.
-   */
-  public void removeAction(LevelElementAction action) {
-    actions.remove(action);
   }
 
   @Override
@@ -129,15 +84,6 @@ public class NPC extends BasicDynamicElement {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     result.add(store.getAnimated(id).getFrame(steps));
     return result;
-  }
-
-  /**
-   * Gives a list of current actions of the player.
-   * 
-   * @return a list of actions
-   */
-  public ArrayList<LevelElementAction> getActions() {
-    return actions;
   }
 
 }
