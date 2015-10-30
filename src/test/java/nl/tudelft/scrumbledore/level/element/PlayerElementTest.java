@@ -1,20 +1,16 @@
 package nl.tudelft.scrumbledore.level.element;
 
-import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertFalse;
-import static org.junit.Assert.assertTrue;
-
-import java.io.File;
-import java.util.ArrayList;
-
-import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
-import nl.tudelft.scrumbledore.sprite.Sprite;
 
-import org.junit.Before;
 import org.junit.Test;
 
-public abstract class PlayerElementTest extends LevelElementTest{
+/**
+ * Abstract Player test class.
+ * 
+ * @author Floris Dolaard
+ */
+@SuppressWarnings("PMD.TooManyMethods")
+public abstract class PlayerElementTest extends LevelElementTest {
 
   /**
    * Returns an instance of a LevelElement subclass to be tested.

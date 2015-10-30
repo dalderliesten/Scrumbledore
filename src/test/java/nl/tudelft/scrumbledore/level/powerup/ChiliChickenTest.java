@@ -92,7 +92,7 @@ public class ChiliChickenTest extends PlayerElementTest {
   @Override
   public void testEqualsFalse() {
     Player player2 = new Player(player.getPosition(), player.getSize());
-    assertTrue(wrapped.equals(player2));
+    assertEquals(player2, wrapped);
   }
 
   @Override
