@@ -271,7 +271,7 @@ public final class GameDisplay {
    * Triggers the label change when picking up the Chili speed boost.
    */
   public static void triggerChiliLabel() {
-    chiliTracker = 5000000000L;
+    chiliTracker = 4750000000L;
   }
 
   /**
