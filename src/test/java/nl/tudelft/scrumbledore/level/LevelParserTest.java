@@ -24,7 +24,7 @@ import nl.tudelft.scrumbledore.level.element.Player;
  * 
  * @author Niels Warnars
  */
-@SuppressWarnings("checkstyle:JUnitTestContainsTooManyAsserts")
+@SuppressWarnings({ "checkstyle:JUnitTestContainsTooManyAsserts" , "checkstyle:visibilitymodifier"})
 public class LevelParserTest {
   private static final double B_ONE = 0;
   private static final double B_TWO = B_ONE + Constants.BLOCKSIZE;
