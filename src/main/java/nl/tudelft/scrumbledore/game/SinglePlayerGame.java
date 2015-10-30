@@ -23,7 +23,6 @@ public class SinglePlayerGame extends Game {
    * 
    * @param levels
    *          The levels this Game needs to consist of.
-   * 
    */
   public SinglePlayerGame(ArrayList<Level> levels) {
     super(levels);

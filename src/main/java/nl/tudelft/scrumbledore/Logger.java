@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class for the maintainence and creation of logging files, which track movement and actions in
+ * Class for the maintenance and creation of logging files, which track movement and actions in
  * every session and store them.
  * 
  * @author David Alderliesten

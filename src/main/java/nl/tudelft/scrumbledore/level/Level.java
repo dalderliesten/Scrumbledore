@@ -88,7 +88,7 @@ public class Level {
   /**
    * Returns an ArrayList of Platform elements.
    * 
-   * @return An ArrayList of Platform elements
+   * @return An ArrayList of Platform elements.
    */
   public ArrayList<Platform> getPlatforms() {
     return platforms;
@@ -97,7 +97,7 @@ public class Level {
   /**
    * Returns an ArrayList of Fruit elements.
    * 
-   * @return An ArrayList of Fruit elements
+   * @return An ArrayList of Fruit elements.
    */
   public ArrayList<Fruit> getFruits() {
     return fruits;
@@ -106,16 +106,16 @@ public class Level {
   /**
    * Returns an ArrayList of NPC elements.
    * 
-   * @return An ArrayList of NPC elements
+   * @return An ArrayList of NPC elements.
    */
   public ArrayList<NPC> getNPCs() {
     return npcs;
   }
 
   /**
-   * Returns a Player object.
+   * Returns an ArrayList of Player objects.
    * 
-   * @return A player object
+   * @return An ArrayList of Player objects.
    */
   public ArrayList<PlayerElement> getPlayers() {
     return players;

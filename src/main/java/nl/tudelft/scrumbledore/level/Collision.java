@@ -40,7 +40,7 @@ public class Collision {
   /**
    * Check whether collider and collidee are colliding at all.
    * 
-   * @return A boolean.
+   * @return Whether a collision from two sides has occurred.
    */
   public boolean colliding() {
     return (collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight());
@@ -51,7 +51,7 @@ public class Collision {
    * while it is moving down, or its bottom is making contact with the collidee's top with a given
    * precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the top.
    */
   public boolean collidingFromTop() {
     if (!touchingLeft() && !touchingRight()) {
@@ -74,7 +74,7 @@ public class Collision {
    * step while it is moving up, or its top is making contact with the collidee's bottom with a
    * given precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the bottom.
    */
   public boolean collidingFromBottom() {
     if (!touchingLeft() && !touchingRight()) {
@@ -97,7 +97,7 @@ public class Collision {
    * step while it is moving right, or its right side is making contact with the collidee's left
    * side with a given precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the left.
    */
   public boolean collidingFromLeft() {
     if (!touchingTop() && !touchingBottom()) {
@@ -120,7 +120,7 @@ public class Collision {
    * step while it is moving left, or its left side is making contact with the collidee's right side
    * with a given precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the right.
    */
   public boolean collidingFromRight() {
     if (!touchingTop() && !touchingBottom()) {

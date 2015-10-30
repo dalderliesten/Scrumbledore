@@ -11,7 +11,7 @@ import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 
 /**
- * Class for the maintainence of strings for display in visual and GUI. Meant to allow easy fixing
+ * Class for the maintenance of strings used throughout the game. Meant to allow easy fixing
  * for later.
  * 
  * @author David Alderliesten
@@ -22,7 +22,7 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 public final class Constants {
 
   /**
-   * Logger constructor, which should be used only once since this is a Singleton class.
+   * Private constructor as no instance of a utility class should ever be possible to instantiate.
    */
   private Constants() {
   }
@@ -208,7 +208,7 @@ public final class Constants {
   /**
    * Returns whether movement should be logged.
    * 
-   * @return Whether movement should be logged
+   * @return Whether movement should be logged.
    */
   public static boolean isLoggingWantMovement() {
     return loggingWantMovement;
@@ -217,7 +217,7 @@ public final class Constants {
   /**
    * Returns whether input should be logged.
    * 
-   * @return Whether input should be logged
+   * @return Whether input should be logged.
    */
   public static boolean isLoggingWantInput() {
     return loggingWantInput;
@@ -226,7 +226,7 @@ public final class Constants {
   /**
    * Returns whether the usage of the start/stop button should be logged.
    * 
-   * @return Whether the usage of the start/stop button should be logged
+   * @return Whether the usage of the start/stop button should be logged.
    */
   public static boolean isLoggingWantStartStop() {
     return loggingWantStartStop;
@@ -235,7 +235,7 @@ public final class Constants {
   /**
    * Returns whether shooting actions should be logged.
    * 
-   * @return Whether shooting actions should be logged
+   * @return Whether shooting actions should be logged.
    */
   public static boolean isLoggingWantShooting() {
     return loggingWantShooting;
