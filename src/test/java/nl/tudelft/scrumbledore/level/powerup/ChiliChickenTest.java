@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
@@ -86,15 +87,13 @@ public class ChiliChickenTest extends PlayerElementTest {
   @Override
   public void testEqualsFalse() {
     Player player2 = new Player(player.getPosition(), player.getSize());
-    assertEquals(player, player2);
+    assertTrue(wrapped.equals(player2));
   }
 
   @Override
   public void testEqualsFalseOtherClass() {
     Player player2 = new Player(new Vector(0, 0), player.getSize());
-    Player player3 = new Player(player.getPosition(), new Vector(42, 42));
     assertFalse(player.equals(player2));
-    assertTrue(player.equals(player3));
   }
 
   @Override
@@ -150,4 +149,24 @@ public class ChiliChickenTest extends PlayerElementTest {
     assertEquals(9.6d, player.getLifetime(), Constants.DOUBLE_PRECISION);
   }
   
+  /**
+   * Tests the gravity of the object.
+   */
+  @Test
+  public void testGravity() {
+    assertTrue(player.hasGravity());
+    player.setGravity(false);
+    assertFalse(player.hasGravity());
+  }
+  
+  /**
+   * Tests whether object clears all actions.
+   */
+  @Test
+  public void testClearAction() {
+    player.addAction(LevelElementAction.MoveLeft);
+    assertTrue(player.hasAction(LevelElementAction.MoveLeft));
+    player.clearActions();
+    assertEquals(0, player.getActions().size());
+  }  
 }

@@ -8,6 +8,7 @@ import java.io.File;
 import java.util.ArrayList;
 
 import org.junit.Before;
+import org.junit.Test;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
@@ -17,8 +18,9 @@ import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.element.PlayerElementTest;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
-public class TurtleTacoTest extends PlayerElementTest{
-  private Player player;
+public class TurtleTacoTest extends PlayerElementTest {
+  private TurtleTaco player;
+  private Player wrapped;
   private Vector position;
   private Vector size;
 
@@ -28,8 +30,9 @@ public class TurtleTacoTest extends PlayerElementTest{
   @Before
   public void before() {
     position = new Vector(16, 32);
-    size = new Vector(42, 42);
-    player = new Player(position, size);
+    size = new Vector(42, 42);   
+    wrapped = new Player(position, size);
+    player = new TurtleTaco(wrapped);
   }
 
   @Override
@@ -82,15 +85,13 @@ public class TurtleTacoTest extends PlayerElementTest{
   @Override
   public void testEqualsFalse() {
     Player player2 = new Player(player.getPosition(), player.getSize());
-    assertEquals(player, player2);
+    assertEquals(wrapped, player2);
   }
 
   @Override
   public void testEqualsFalseOtherClass() {
     Player player2 = new Player(new Vector(42, 42), player.getSize());
-    Player player3 = new Player(player.getPosition(), new Vector(42, 42));
     assertFalse(player.equals(player2));
-    assertFalse(player.equals(player3));
   }
 
   @Override
@@ -101,11 +102,12 @@ public class TurtleTacoTest extends PlayerElementTest{
   @Override
   public void testGetSprites() {
     ArrayList<Sprite> sprites = player.getSprites(1);
-    
-    assertEquals(1, sprites.size());
-    assertEquals("frame-01", sprites.get(0).getID());
+
+    assertEquals(2, sprites.size());
+    assertEquals("fire-green-00", sprites.get(0).getID());
+    assertEquals("frame-01", sprites.get(1).getID());
     assertEquals("images" + File.separator + "sprites" + File.separator 
-        + "player-green-move-right/frame-01.png", sprites.get(0).getPath());
+        + "fire-green/fire-green-00.png", sprites.get(0).getPath());
   }
 
   @Override
@@ -114,10 +116,10 @@ public class TurtleTacoTest extends PlayerElementTest{
     player.setLastMove(LevelElementAction.MoveRight);
     ArrayList<Sprite> sprites = player.getSprites(1);
     
-    assertEquals(1, sprites.size());
-    assertEquals("player-shoot-right", sprites.get(0).getID());
+    assertEquals(2, sprites.size());
+    assertEquals("player-shoot-right", sprites.get(1).getID());
     assertEquals("images" + File.separator + "sprites" + File.separator 
-        + "player-green-shoot-right/player-shoot-right.png", sprites.get(0).getPath());
+        + "player-green-shoot-right/player-shoot-right.png", sprites.get(1).getPath());
   }
 
   @Override
@@ -126,10 +128,10 @@ public class TurtleTacoTest extends PlayerElementTest{
     player.setLastMove(LevelElementAction.MoveLeft);
     ArrayList<Sprite> sprites = player.getSprites(1);
     
-    assertEquals(1, sprites.size());
-    assertEquals("player-shoot-left", sprites.get(0).getID());
+    assertEquals(2, sprites.size());
+    assertEquals("player-shoot-left", sprites.get(1).getID());
     assertEquals("images" + File.separator + "sprites" + File.separator 
-        + "player-green-shoot-left/player-shoot-left.png", sprites.get(0).getPath());
+        + "player-green-shoot-left/player-shoot-left.png", sprites.get(1).getPath());
   }
 
   @Override
@@ -140,8 +142,29 @@ public class TurtleTacoTest extends PlayerElementTest{
 
   @Override
   public void testDecreaseLifetime() {
-    player.setLifetime(42d);
+    player.setLifetime(10d);
     player.decreaseLifetime(1d);
-    assertEquals(41d, player.getLifetime(), Constants.DOUBLE_PRECISION);
+    assertEquals(9.3d, player.getLifetime(), Constants.DOUBLE_PRECISION);
+  }
+  
+  /**
+   * Tests the gravity of the object.
+   */
+  @Test
+  public void testGravity() {
+    assertTrue(player.hasGravity());
+    player.setGravity(false);
+    assertFalse(player.hasGravity());
+  }
+  
+  /**
+   * Tests whether object clears all actions.
+   */
+  @Test
+  public void testClearAction() {
+    player.addAction(LevelElementAction.MoveLeft);
+    assertTrue(player.hasAction(LevelElementAction.MoveLeft));
+    player.clearActions();
+    assertEquals(0, player.getActions().size());
   }
 }
