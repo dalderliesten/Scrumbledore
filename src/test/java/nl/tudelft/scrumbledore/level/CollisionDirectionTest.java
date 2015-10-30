@@ -117,8 +117,7 @@ public class CollisionDirectionTest {
     // Same position should not classify as a collision from any direction.
     input.add(new Object[] { new Vector(0, 0), new Vector(0, 0), new Vector(0, 0), false, false,
         false, false });
-
-    // Touching within collision precision.
+    
     // Touching Top.
     input.add(new Object[] { new Vector(33, 32), new Vector(32, 64), new Vector(0, 0), true, false,
         false, false });
@@ -129,18 +128,29 @@ public class CollisionDirectionTest {
         true, false });
     input.add(new Object[] { new Vector(0 - Constants.COLLISION_PRECISION, 32), new Vector(32, 32),
         new Vector(0, 0), false, false, false, false });
+    // Touching Bottom.
+    input.add(new Object[] { new Vector(33, 64), new Vector(32, 32), new Vector(0, 0), false, true,
+        false, false });
+    input.add(new Object[] { new Vector(32, 32 - Constants.COLLISION_PRECISION), new Vector(32, 64),
+        new Vector(0, 0), false, false, false, false });
+    // Touching Right.
+    input.add(new Object[] { new Vector(32, 32), new Vector(0, 32), new Vector(0, 0), false, false,
+        false, true });
+    input.add(new Object[] { new Vector(0 - Constants.COLLISION_PRECISION, 32), new Vector(32, 32),
+        new Vector(0, 0), false, false, false, false });
 
-    // Anticipation of predicted collision.
     // From Top.
     input.add(new Object[] { new Vector(32, 25), new Vector(32, 64), new Vector(0, 8), true, false,
-        false, false });
-    input.add(new Object[] { new Vector(32, 20), new Vector(32, 64), new Vector(0, 8), false, false,
-        false, false });
-    input.add(new Object[] { new Vector(0, 31), new Vector(32, 64), new Vector(0, 8), false, false,
         false, false });
     // From Left.
     input.add(new Object[] { new Vector(0, 32), new Vector(48, 32), new Vector(20, 0), false, false,
         true, false });
+    // From Right.
+    input.add(new Object[] { new Vector(48, 32), new Vector(0, 32), new Vector(-20, 0), false,
+        false, false, true });
+    // From Bottom.
+    input.add(new Object[] { new Vector(32, 48), new Vector(32, 0), new Vector(0, -20), false,
+        true, false, false });
 
     return input;
   }

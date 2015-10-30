@@ -3,12 +3,15 @@ package nl.tudelft.scrumbledore.level;
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertNull;
 import static org.junit.Assert.assertTrue;
+import static org.junit.Assert.fail;
 
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
 
+import org.junit.Rule;
 import org.junit.Test;
+import org.junit.rules.ExpectedException;
 
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.element.Fruit;
@@ -29,6 +32,9 @@ public class LevelParserTest {
 
   private static final Vector SIZE = new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE);
 
+  @Rule
+  public final ExpectedException exception = ExpectedException.none();
+
   /**
    * Test case for the loadLevelsFromDisk method. Two dummy levels are loaded from disk and
    * consequently checked for the presence of expected level elements.
@@ -36,7 +42,7 @@ public class LevelParserTest {
   @Test
   public void testLoadLevelsFromDisk() {
     LevelParser lp = new LevelParser();
-    ArrayList<Level> levels = lp.loadLevelsFromDisk("src/main/resources/test");
+    ArrayList<Level> levels = lp.loadLevelsFromDisk("src/test/resources/levels");
 
     ArrayList<Platform> platformsLevel1 = levels.get(0).getPlatforms();
 
@@ -54,7 +60,7 @@ public class LevelParserTest {
   @Test
   public void testListFilesInDir() {
     LevelParser lp = new LevelParser();
-    ArrayList<String> testFiles = lp.listFilesInDir("src/main/resources/test");
+    ArrayList<String> testFiles = lp.listFilesInDir("src/test/resources/levels");
 
     assertEquals(testFiles.size(), 2);
     assertTrue(testFiles.contains("level01.txt"));
@@ -64,33 +70,33 @@ public class LevelParserTest {
   /**
    * Test case in which the scenario is tested where the file that is being read does not exist and
    * an exception is being thrown.
+   * 
+   * @throws FileNotFoundException
+   *           since we're reading a file.
    */
   @Test
-  public void testFileNotFound() {
+  public void testFileNotFound() throws FileNotFoundException {
     LevelParser lp = new LevelParser();
-    try {
-      lp.readLevelFromFile("dummy.txt");
-    } catch (FileNotFoundException e) {
-      assertEquals(e.getClass(), FileNotFoundException.class);
-    }
+    exception.expect(FileNotFoundException.class);
+    lp.readLevelFromFile("dummy.txt");
+    fail();
   }
 
   /**
    * Test case for readFromScanner method in which a test map is being parsed for validation.
+   * 
+   * @throws FileNotFoundException
+   *           since we're reading a file.
    */
   @Test
-  public void testReadLevelFromScanner() {
+  public void testReadLevelFromScanner() throws FileNotFoundException {
     LevelParser lp = new LevelParser();
     Level level = new Level();
     String testMap = " #_\n" + "PNF\n";
 
     Scanner sc = new Scanner(testMap);
 
-    try {
-      level = lp.readLevelFromScanner(sc);
-    } catch (FileNotFoundException e) {
-      assertEquals(e.getClass(), FileNotFoundException.class);
-    }
+    level = lp.readLevelFromScanner(sc);
 
     ArrayList<NPC> npcs = level.getNPCs();
     ArrayList<Platform> platforms = level.getPlatforms();
@@ -161,7 +167,7 @@ public class LevelParserTest {
    */
   @Test
   public void testGetLevels() {
-    LevelParser lp = new LevelParser("src/main/resources/test");
+    LevelParser lp = new LevelParser("src/test/resources/levels");
     ArrayList<Level> levels = lp.getLevels();
 
     Platform platform = new Platform(new Vector(0, 0),

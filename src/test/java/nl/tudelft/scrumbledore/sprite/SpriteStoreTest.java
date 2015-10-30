@@ -53,4 +53,15 @@ public class SpriteStoreTest {
     assertEquals(null, test.get("non_existant_sprite"));
   }
 
+  /**
+   * When there is no AnimatedSprite in the Sprite Store with the given ID, the get method should
+   * return null.
+   */
+  @Test
+  public void testGetAnimatedNull() {
+    String dir = "src/test/resources/sprites/";
+    SpriteStore test = new SpriteStore(dir);
+    assertEquals(null, test.getAnimated("non_existant_sprite"));
+  }
+
 }
