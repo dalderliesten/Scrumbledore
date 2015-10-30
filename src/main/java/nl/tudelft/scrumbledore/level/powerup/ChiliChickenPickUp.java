@@ -7,14 +7,14 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
 
 /**
- * This class represents a pickup item of the BlueberryBubble power-up.
+ * This class represents a pickup item of the ChiliChicken power-up.
  * 
  * @author Floris Doolaard
  */
 public class ChiliChickenPickUp extends PowerupPickUp {
 
   /**
-   * The consctrutor creates a pickup item in the level.
+   * The constructor creates a pickup item in the level.
    * 
    * @param position
    *          location of the object.
@@ -39,7 +39,7 @@ public class ChiliChickenPickUp extends PowerupPickUp {
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A LevelElementAction.
+   *          A LevelElementAction to be performed.
    */
   public void addAction(LevelElementAction action) {
   }
@@ -54,7 +54,7 @@ public class ChiliChickenPickUp extends PowerupPickUp {
    * Check whether the given action is queued for the next step.
    * 
    * @param action
-   *          A LevelElementAction.
+   *          A LevelElementAction to be checked.
    *          
    * @return Boolean.
    */
@@ -66,7 +66,7 @@ public class ChiliChickenPickUp extends PowerupPickUp {
    * Remove the given action from the actions queue.
    * 
    * @param action
-   *          A LevelElementAction.
+   *          A LevelElementAction to be removed.
    */
   public void removeAction(LevelElementAction action) {
   }
