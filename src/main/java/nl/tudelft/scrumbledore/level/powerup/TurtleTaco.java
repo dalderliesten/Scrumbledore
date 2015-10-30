@@ -8,10 +8,12 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
+import nl.tudelft.scrumbledore.userinterface.GameDisplay;
 
 /**
  * TurtleTaco is a power-up that gives the player invulnerability for 5 seconds.
  * 
+ * @author David Alderliesten
  * @author Floris Doolaard
  */
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.ExcessivePublicCount" })
@@ -26,6 +28,7 @@ public class TurtleTaco implements PlayerElement {
    */
   public TurtleTaco(PlayerElement wrapped) {
     this.wrapped = wrapped;
+    GameDisplay.triggerTacoLabel();
   }
 
   /**

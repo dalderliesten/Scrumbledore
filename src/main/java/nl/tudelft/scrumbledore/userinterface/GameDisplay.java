@@ -57,6 +57,7 @@ public final class GameDisplay {
   private static Label powerUpLabel;
   private static String advanceLabel;
   private static Long chiliTracker;
+  private static Long tacoTracker;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
@@ -67,6 +68,9 @@ public final class GameDisplay {
       if (chiliTracker > 0L) {
         powerUpLabel.setText(Constants.POWERUP_CHILILABEL);
         chiliTracker = chiliTracker - 10500000L;
+      } else if (tacoTracker > 0L) {
+        powerUpLabel.setText(Constants.POWERUP_TACOLABEL);
+        tacoTracker = tacoTracker - 10500000L;
       } else {
         powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
       }
@@ -93,6 +97,7 @@ public final class GameDisplay {
    */
   public static void createGame(GameFactory factory, Stage passedStage) {
     chiliTracker = 0L;
+    tacoTracker = 0L;
     currentStage = passedStage;
     currentGame = factory.makeGame();
 
@@ -267,6 +272,13 @@ public final class GameDisplay {
    */
   public static void triggerChiliLabel() {
     chiliTracker = 5000000000L;
+  }
+
+  /**
+   * Triggers the label change when picking up the Taco invincibility power-up.
+   */
+  public static void triggerTacoLabel() {
+    tacoTracker = 3000000000L;
   }
 
   /**
