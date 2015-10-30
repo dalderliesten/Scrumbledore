@@ -262,6 +262,8 @@ public final class GameDisplay {
       }
     }
     if (!playersLeft) {
+      chiliTracker = 0L;
+      tacoTracker = 0L;
       currentGame.restart();
       renderStatic();
     }
