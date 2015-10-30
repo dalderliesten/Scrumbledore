@@ -146,7 +146,7 @@ public final class Logger {
 
       fileReader.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
 
     return toReturn;
@@ -168,7 +168,7 @@ public final class Logger {
 
       fileReader.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
     
     return toReturn;
@@ -194,7 +194,7 @@ public final class Logger {
 
       fileReader.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
 
     return toReturn;

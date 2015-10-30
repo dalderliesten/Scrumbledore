@@ -2,12 +2,12 @@ package nl.tudelft.scrumbledore;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
-
 import org.junit.Test;
 
 /**
  * Test suite of the Constants class.
  * 
+ * @author David Alderliesten
  * @author Niels Warnars
  */
 public class ConstantsTest {
@@ -19,7 +19,7 @@ public class ConstantsTest {
   public final void testLoggingWantMovement() {
     assertFalse(Constants.isLoggingWantMovement());
     Constants.setLoggingWantMovement(true);
-    assertTrue(Constants.isLoggingWantMovement()); 
+    assertTrue(Constants.isLoggingWantMovement());
   }
 
   /**
