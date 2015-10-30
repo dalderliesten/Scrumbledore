@@ -3,7 +3,6 @@ package nl.tudelft.scrumbledore.keybinding;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Map.Entry;
-
 import javafx.scene.input.KeyCode;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.element.LevelElementAction;
@@ -40,6 +39,7 @@ public class Keybinding {
    * 
    * @param action
    *          Updated.
+   * 
    * @param key
    *          Unchanged.
    */
@@ -54,6 +54,7 @@ public class Keybinding {
    * 
    * @param action
    *          Unchanged.
+   * 
    * @param key
    *          Updated.
    */
@@ -68,6 +69,7 @@ public class Keybinding {
    * 
    * @param action
    *          The LevelElementAction to get the KeyCode for.
+   * 
    * @return KeyCode The KeyCode associated with a LevelElementAction.
    */
   public KeyCode getKey(LevelElementAction action) {
@@ -79,6 +81,7 @@ public class Keybinding {
    * 
    * @param key
    *          The KeyCode to get the LevelElementAction for.
+   * 
    * @return LevelElementAction The LevelElementAction associated with a KeyCode.
    */
   public LevelElementAction getAction(KeyCode key) {
@@ -90,9 +93,11 @@ public class Keybinding {
    * 
    * @param key
    *          The key to check.
+   * 
    * @return boolean Wether or not the key is already bound.
    */
   public boolean isAssigned(KeyCode key) {
     return getAction(key) != null;
   }
+
 }

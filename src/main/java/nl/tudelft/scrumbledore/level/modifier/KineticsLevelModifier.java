@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.modifier;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.DynamicElement;
@@ -21,6 +20,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level whose elements should be updated.
+   * 
    * @param d
    *          The number of steps since last executing this function.
    */
@@ -39,7 +39,8 @@ public class KineticsLevelModifier implements LevelModifier {
    * Otherwise, the friction entry is subtracted from the speed.
    * 
    * @param el
-   *          A LevelElement
+   *          A LevelElement.
+   * 
    * @param d
    *          The number of steps passed since this method was last called.
    */
@@ -66,6 +67,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * 
    * @param el
    *          The element whose position has to be updated with its speed.
+   * 
    * @param d
    *          The number of steps since last executing this function.
    */
@@ -80,6 +82,7 @@ public class KineticsLevelModifier implements LevelModifier {
    * 
    * @param el
    *          The element whose position has to be reverse updated with its speed.
+   * 
    * @param d
    *          The number of steps since last executing this function.
    */

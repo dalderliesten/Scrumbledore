@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
@@ -12,18 +11,19 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicDynamicElement implements DynamicElement {
-
   private Vector position;
   private Vector size;
   private Vector speed;
   private Vector friction;
   private boolean gravity;
+  private ArrayList<LevelElementAction> actions;
 
   /**
    * Create a new LevelElement instance.
    * 
    * @param position
    *          Position of the element in the level.
+   *          
    * @param size
    *          Size of the element.
    */
@@ -33,6 +33,8 @@ public abstract class BasicDynamicElement implements DynamicElement {
     this.speed = new Vector(0, 0);
     this.friction = new Vector(0, 0);
     this.gravity = false;
+    this.actions = new ArrayList<LevelElementAction>();
+
   }
 
   /**
@@ -47,7 +49,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the X coordinate of the element.
    * 
-   * @return double
+   * @return X coordinate of the element.
    */
   public double posX() {
     return position.getX();
@@ -56,7 +58,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the Y coordinate of the element.
    * 
-   * @return double
+   * @return Y coordinate of the element.
    */
   public double posY() {
     return position.getY();
@@ -74,7 +76,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the width of the element.
    * 
-   * @return double
+   * @return Width of the element.
    */
   public double width() {
     return size.getX();
@@ -83,7 +85,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the height of the element.
    * 
-   * @return double
+   * @return Height of the element.
    */
   public double height() {
     return size.getY();
@@ -101,7 +103,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the horizontal speed of the element.
    * 
-   * @return double
+   * @return Horizontal speed of the element.
    */
   public double hSpeed() {
     return speed.getX();
@@ -110,7 +112,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the vertical speed of the element.
    * 
-   * @return double
+   * @return Vertical speed of the element.
    */
   public double vSpeed() {
     return speed.getY();
@@ -160,7 +162,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Check whether this LevelElement is affected by Gravity.
    * 
-   * @return Boolean
+   * @return Whether this LevelElement is affected by Gravity.
    */
   public boolean hasGravity() {
     return gravity;
@@ -170,7 +172,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * Set the property determining whether this LevelElement is affected by gravity.
    * 
    * @param gravity
-   *          A boolean
+   *          Whether this LevelElement is affected by Gravity.
    */
   public void setGravity(boolean gravity) {
     this.gravity = gravity;
@@ -217,7 +219,8 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * 
    * @param other
    *          The other element to measure the distance to.
-   * @return The distance.
+   *          
+   * @return The distance between two LevelElements.
    */
   public double distance(LevelElement other) {
     return getPosition().distance(other.getPosition());
@@ -229,9 +232,11 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * 
    * @param other
    *          The other element.
+   *          
    * @param range
    *          The range (of the circle).
-   * @return A boolean.
+   *          
+   * @return Whether another element is within range of this element.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
     return distance(other) <= range;
@@ -244,9 +249,11 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * 
    * @param other
    *          The other element.
+   *          
    * @param range
    *          The range (a half of the dimensions of the square box).
-   * @return A boolean.
+   *          
+   * @return Whether another element is within range of this element.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
     boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
@@ -303,12 +310,63 @@ public abstract class BasicDynamicElement implements DynamicElement {
   }
 
   /**
+   * Add an action to be performed in the next step.
+   * 
+   * @param action
+   *          A LevelElementAction
+   */
+  public void addAction(LevelElementAction action) {
+    if (!hasAction(action)) {
+      actions.add(action);
+      setLastMove(action);
+    }
+  }
+
+  /**
+   * Remove all actions from the queue.
+   */
+  public void clearActions() {
+    actions.clear();
+  }
+  
+  /**
+   * Gives the list of actions of the level element.
+   * @return a list of actions.
+   */
+  public ArrayList<LevelElementAction> getActions() {
+    return actions;
+  }
+
+  /**
+   * Check whether the given action is queued for the next step.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   * @return Whether the given action is queued.
+   */
+  public boolean hasAction(LevelElementAction action) {
+    return actions.contains(action);
+  }
+
+  /**
+   * Remove the given action from the actions queue.
+   * 
+   * @param action
+   *          A LevelElementAction.
+   */
+  public void removeAction(LevelElementAction action) {
+    actions.remove(action);
+  }
+  
+  /**
    * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
    * Element.
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   *          
    * @return Sprites to be drawn.
    */
   public abstract ArrayList<Sprite> getSprites(double steps);
+  
 }

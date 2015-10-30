@@ -11,7 +11,6 @@ import nl.tudelft.scrumbledore.level.element.NPC;
  * @author David Alderliesten
  * @author Jesse Tilro
  * @author Niels Warnars
- *
  */
 @SuppressWarnings("PMD.CyclomaticComplexity")
 public class NPCLevelModifier implements LevelModifier {
@@ -21,6 +20,7 @@ public class NPCLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level.
+   * 
    * @param delta
    *          The number of steps passed since this method was last called.
    */

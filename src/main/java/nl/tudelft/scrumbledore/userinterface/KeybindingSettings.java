@@ -123,10 +123,13 @@ public final class KeybindingSettings {
    * 
    * @param action
    *          The LevelElementAction to be remapped.
+   *          
    * @param key
    *          The KeyCode to which the action is bound.
+   *          
    * @param description
    *          Description of the button.
+   *          
    * @return actionBinder The Button to be rendered
    */
   private static Button generateKeybinder(final LevelElementAction action, KeyCode key,

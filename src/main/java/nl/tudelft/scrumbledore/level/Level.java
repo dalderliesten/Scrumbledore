@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.LevelElement;
@@ -15,10 +14,8 @@ import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
  * Class representing a Level in the Game.
  * 
  * @author Jesse Tilro
- *
  */
 public class Level {
-
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
@@ -91,7 +88,7 @@ public class Level {
   /**
    * Returns an ArrayList of Platform elements.
    * 
-   * @return An ArrayList of Platform elements
+   * @return An ArrayList of Platform elements.
    */
   public ArrayList<Platform> getPlatforms() {
     return platforms;
@@ -100,7 +97,7 @@ public class Level {
   /**
    * Returns an ArrayList of Fruit elements.
    * 
-   * @return An ArrayList of Fruit elements
+   * @return An ArrayList of Fruit elements.
    */
   public ArrayList<Fruit> getFruits() {
     return fruits;
@@ -109,16 +106,16 @@ public class Level {
   /**
    * Returns an ArrayList of NPC elements.
    * 
-   * @return An ArrayList of NPC elements
+   * @return An ArrayList of NPC elements.
    */
   public ArrayList<NPC> getNPCs() {
     return npcs;
   }
 
   /**
-   * Returns a Player object.
+   * Returns an ArrayList of Player objects.
    * 
-   * @return A player object
+   * @return An ArrayList of Player objects.
    */
   public ArrayList<PlayerElement> getPlayers() {
     return players;

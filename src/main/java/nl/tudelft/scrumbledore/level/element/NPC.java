@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -14,13 +13,13 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  */
 public class NPC extends BasicDynamicElement {
   private LevelElementAction lastMove;
-  private ArrayList<LevelElementAction> actions;
 
   /**
    * Create a new NPC instance.
    * 
    * @param position
    *          Position of the NPC in the level.
+   *          
    * @param size
    *          Size of the NPC.
    */
@@ -28,50 +27,7 @@ public class NPC extends BasicDynamicElement {
     super(position, size);
 
     setGravity(true);
-
-    actions = new ArrayList<LevelElementAction>();
     addAction(LevelElementAction.MoveLeft);
-  }
-
-  /**
-   * Add an action to be performed in the next step.
-   * 
-   * @param action
-   *          A PlayerAction
-   */
-  public void addAction(LevelElementAction action) {
-    if (!hasAction(action)) {
-      actions.add(action);
-      setLastMove(action);
-    }
-  }
-
-  /**
-   * Remove all actions from the queue.
-   */
-  public void clearActions() {
-    actions.clear();
-  }
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          An NPCAction.
-   * @return Boolean.
-   */
-  public boolean hasAction(LevelElementAction action) {
-    return actions.contains(action);
-  }
-
-  /**
-   * Remove the given action from the actions queue.
-   * 
-   * @param action
-   *          An NPCAction.
-   */
-  public void removeAction(LevelElementAction action) {
-    actions.remove(action);
   }
 
   @Override
@@ -83,8 +39,7 @@ public class NPC extends BasicDynamicElement {
   public boolean equals(Object other) {
     if (other instanceof NPC) {
       NPC that = (NPC) other;
-      return this.getPosition().equals(that.getPosition()) 
-          && this.getSize().equals(that.getSize());
+      return this.getPosition().equals(that.getPosition()) && this.getSize().equals(that.getSize());
     }
 
     return false;
@@ -110,13 +65,14 @@ public class NPC extends BasicDynamicElement {
       lastMove = action;
     }
   }
-  
+
   /**
    * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
    * Element.
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   *          
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -130,12 +86,4 @@ public class NPC extends BasicDynamicElement {
     return result;
   }
 
-  /**
-   * Gives a list of current actions of the player.
-   * @return a list of actions
-   */
-  public ArrayList<LevelElementAction> getActions() {
-    return actions;
-  }
-  
 }

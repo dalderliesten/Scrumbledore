@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.powerup;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElement;
@@ -14,11 +13,9 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  * TurtleTaco is a power-up that gives the player invulnerability for 5 seconds.
  * 
  * @author Floris Doolaard
- *
  */
-@SuppressWarnings("PMD.TooManyMethods")
+@SuppressWarnings({ "PMD.TooManyMethods", "PMD.ExcessivePublicCount" })
 public class TurtleTaco implements PlayerElement {
-
   private PlayerElement wrapped;
 
   /**
@@ -37,6 +34,7 @@ public class TurtleTaco implements PlayerElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   * 
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -88,7 +86,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Get the X coordinate of the element.
    * 
-   * @return double
+   * @return double.
    */
   public double posX() {
     return wrapped.posX();
@@ -97,7 +95,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Get the Y coordinate of the element.
    * 
-   * @return double
+   * @return double.
    */
   public double posY() {
     return wrapped.posY();
@@ -115,7 +113,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Get the width of the element.
    * 
-   * @return double
+   * @return double.
    */
   public double width() {
     return wrapped.width();
@@ -124,7 +122,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Get the height of the element.
    * 
-   * @return double
+   * @return double.
    */
   public double height() {
     return wrapped.height();
@@ -142,7 +140,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Get the horizontal speed of the element.
    * 
-   * @return double
+   * @return double.
    */
   public double hSpeed() {
     return wrapped.hSpeed();
@@ -151,7 +149,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Get the vertical speed of the element.
    * 
-   * @return double
+   * @return double.
    */
   public double vSpeed() {
     return wrapped.vSpeed();
@@ -211,7 +209,7 @@ public class TurtleTaco implements PlayerElement {
    * Set the property determining whether this LevelElement is affected by gravity.
    * 
    * @param gravity
-   *          A boolean
+   *          A boolean.
    */
   public void setGravity(boolean gravity) {
     wrapped.setGravity(gravity);
@@ -258,6 +256,7 @@ public class TurtleTaco implements PlayerElement {
    * 
    * @param other
    *          The other element to measure the distance to.
+   * 
    * @return The distance.
    */
   public double distance(LevelElement other) {
@@ -270,8 +269,10 @@ public class TurtleTaco implements PlayerElement {
    * 
    * @param other
    *          The other element.
+   * 
    * @param range
    *          The range (of the circle).
+   * 
    * @return A boolean.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
@@ -285,8 +286,10 @@ public class TurtleTaco implements PlayerElement {
    * 
    * @param other
    *          The other element.
+   * 
    * @param range
    *          The range (a half of the dimensions of the square box).
+   * 
    * @return A boolean.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
@@ -337,7 +340,7 @@ public class TurtleTaco implements PlayerElement {
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A LevelElementAction
+   *          A LevelElementAction.
    */
   public void addAction(LevelElementAction action) {
     wrapped.addAction(action);
@@ -393,6 +396,7 @@ public class TurtleTaco implements PlayerElement {
    * 
    * @param action
    *          A LevelElementAction.
+   * 
    * @return Boolean.
    */
   public boolean hasAction(LevelElementAction action) {
@@ -441,7 +445,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Return whether the Player is firing.
    * 
-   * @return whether the Player is firing
+   * @return whether the Player is firing.
    */
   public Boolean isFiring() {
     return wrapped.isFiring();
@@ -451,7 +455,7 @@ public class TurtleTaco implements PlayerElement {
    * Set whether the Player is firing.
    * 
    * @param isFiring
-   *          whether the Player is firing
+   *          whether the Player is firing.
    */
   public void setFiring(Boolean isFiring) {
     wrapped.setFiring(isFiring);
@@ -460,7 +464,7 @@ public class TurtleTaco implements PlayerElement {
   /**
    * Gives a list of current actions of the player.
    * 
-   * @return a list of actions
+   * @return a list of actions.
    */
   public ArrayList<LevelElementAction> getActions() {
     return wrapped.getActions();
