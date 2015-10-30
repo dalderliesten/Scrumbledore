@@ -5,7 +5,6 @@ package nl.tudelft.scrumbledore.level;
  * position or size.
  * 
  * @author Jesse Tilro
- *
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Vector implements Cloneable {
@@ -17,6 +16,7 @@ public class Vector implements Cloneable {
    * 
    * @param d
    *          The X entry of the vector.
+   *          
    * @param e
    *          The Y entry of the vector.
    */
@@ -41,8 +41,10 @@ public class Vector implements Cloneable {
    * 
    * @param v1
    *          The first vector.
+   *          
    * @param v2
    *          The second vector.
+   *          
    * @return The sum of the first and second vector.
    */
   public static Vector sum(Vector v1, Vector v2) {
@@ -64,8 +66,10 @@ public class Vector implements Cloneable {
    * 
    * @param v1
    *          The first vector.
+   *          
    * @param v2
    *          The second vector.
+   *          
    * @return The difference between the first and second vector.
    */
   public static Vector difference(Vector v1, Vector v2) {
@@ -88,8 +92,10 @@ public class Vector implements Cloneable {
    * 
    * @param vector
    *          The vector to be scaled.
+   *          
    * @param scalar
    *          The scalar.
+   *          
    * @return The scaled vector.
    */
   public static Vector scale(Vector vector, double scalar) {
@@ -101,6 +107,7 @@ public class Vector implements Cloneable {
    * 
    * @param vector
    *          The other vector.
+   *          
    * @return The result of the dotproduct.
    */
   public double dotProduct(Vector vector) {
@@ -121,6 +128,7 @@ public class Vector implements Cloneable {
    * 
    * @param vector
    *          The other vector.
+   *          
    * @return The distance.
    */
   public double distance(Vector vector) {
@@ -136,7 +144,7 @@ public class Vector implements Cloneable {
   /**
    * Get the X entry of the vector.
    * 
-   * @return X entry
+   * @return X entry.
    */
   public double getX() {
     return entryX;
@@ -145,7 +153,7 @@ public class Vector implements Cloneable {
   /**
    * Get the Y entry of the vector.
    * 
-   * @return Y entry
+   * @return Y entry.
    */
   public double getY() {
     return entryY;
@@ -155,7 +163,7 @@ public class Vector implements Cloneable {
    * Set the X entry of the vector.
    * 
    * @param entryX
-   *          X entry
+   *          X entry.
    */
   public void setX(double entryX) {
     this.entryX = entryX;
@@ -165,7 +173,7 @@ public class Vector implements Cloneable {
    * Set the Y entry of the vector.
    * 
    * @param entryY
-   *          Y entry
+   *          Y entry.
    */
   public void setY(double entryY) {
     this.entryY = entryY;

@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
-
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
@@ -27,6 +26,7 @@ public class KeyListeners {
    * 
    * @param game
    *          The game to which the KeyEventListeners are added.
+   * 
    * @param scene
    *          The scene to which the KeyEventListeners are added.
    */
@@ -89,4 +89,5 @@ public class KeyListeners {
       }
     });
   }
+  
 }

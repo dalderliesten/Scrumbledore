@@ -22,7 +22,6 @@ import java.util.Date;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Logger {
   private File loggingFile;
-
   private static volatile Logger instance;
 
   /**
@@ -73,7 +72,6 @@ public final class Logger {
         }
       }
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }

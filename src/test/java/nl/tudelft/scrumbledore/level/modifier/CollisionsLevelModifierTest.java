@@ -20,6 +20,11 @@ import nl.tudelft.scrumbledore.level.element.Fruit;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Platform;
 import nl.tudelft.scrumbledore.level.element.Player;
+import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.level.powerup.ChiliChickenPickUp;
+import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTacoPickUp;
 
 /**
  * Test suite for the CollisionsLevelModifier class.
@@ -92,7 +97,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(fruitMock);
     level.addElement(platform);
 
-    clm.detectFruitPlatform(level, 1);
+    clm.modify(level, 1);
     verify(fruitMock).stopVertically();
     verify(fruitMock).snapTop(platform);
   }
@@ -111,7 +116,7 @@ public class CollisionsLevelModifierTest {
     Level level = new Level();
     level.addElement(platform);
     level.addElement(npcMock);
-    clm.detectNPCPlatform(level, 1);
+    clm.modify(level, 1);
 
     verify(npcMock).stopVertically();
     verify(npcMock).snapTop(platform);
@@ -131,7 +136,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(platform);
     level.addElement(npcMock);
 
-    clm.detectNPCPlatform(level, 1);
+    clm.modify(level, 1);
     verify(npcMock).stopHorizontally();
     verify(npcMock).snapLeft(platform);
   }
@@ -150,7 +155,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(platform);
     level.addElement(npcMock);
 
-    clm.detectNPCPlatform(level, 1);
+    clm.modify(level, 1);
     verify(npcMock).stopHorizontally();
     verify(npcMock).snapRight(platform);
   }
@@ -169,7 +174,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(playerMock);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1);
+    clm.modify(level, 1);
     verify(playerMock).stopVertically();
     verify(playerMock).snapTop(platform);
   }
@@ -188,7 +193,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(playerMock);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1);
+    clm.modify(level, 1);
     verify(playerMock).stopVertically();
     verify(playerMock).snapBottom(platform);
   }
@@ -207,7 +212,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(playerMock);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1);
+    clm.modify(level, 1);
     verify(playerMock).stopHorizontally();
   }
 
@@ -225,7 +230,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(playerMock);
     level.addElement(platform);
 
-    clm.detectPlayerPlatform(level, 1);
+    clm.modify(level, 1);
     verify(playerMock).stopHorizontally();
   }
 
@@ -242,7 +247,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubbleMock);
     level.addElement(platform);
 
-    clm.detectBubblePlatform(level, 1);
+    clm.modify(level, 1);
     verify(bubbleMock).snapBottom(platform);
     assertEquals(Constants.BUBBLE_BOUNCE, bubbleMock.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
@@ -260,7 +265,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubbleMock);
     level.addElement(platform);
 
-    clm.detectBubblePlatform(level, 1);
+    clm.modify(level, 1);
     verify(bubbleMock).snapLeft(platform);
     assertEquals(-Constants.BUBBLE_BOUNCE, bubbleMock.getSpeed().getX(),
         Constants.DOUBLE_PRECISION);
@@ -279,7 +284,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubbleMock);
     level.addElement(platform);
 
-    clm.detectBubblePlatform(level, 1);
+    clm.modify(level, 1);
     verify(bubbleMock).snapRight(platform);
     assertEquals(Constants.BUBBLE_BOUNCE, bubbleMock.getSpeed().getX(), Constants.DOUBLE_PRECISION);
   }
@@ -298,7 +303,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(playerMock);
     level.addElement(bubble);
 
-    clm.detectPlayerBubble(level, 1);
+    clm.modify(level, 1);
     verify(playerMock).snapTop(bubble);
     assertEquals(-Constants.PLAYER_JUMP, playerMock.getSpeed().getY(), Constants.DOUBLE_PRECISION);
   }
@@ -318,7 +323,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(player);
     level.addElement(bubble);
 
-    clm.detectPlayerBubble(level, 1);
+    clm.modify(level, 1);
     assertFalse(level.getBubbles().contains(bubble));
   }
 
@@ -339,7 +344,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
     level.addElement(bubble2);
 
-    clm.detectBubbleBubble(level, 1);
+    clm.modify(level, 1);
     assertEquals(Constants.BUBBLE_BOUNCE, bubble.hSpeed(), Constants.DOUBLE_PRECISION);
     assertEquals(-Constants.BUBBLE_BOUNCE, bubble2.hSpeed(), Constants.DOUBLE_PRECISION);
   }
@@ -361,7 +366,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(bubble);
     level.addElement(bubble2);
 
-    clm.detectBubbleBubble(level, 1);
+    clm.modify(level, 1);
     assertEquals(-Constants.BUBBLE_BOUNCE, bubble.hSpeed(), Constants.DOUBLE_PRECISION);
     assertEquals(Constants.BUBBLE_BOUNCE, bubble2.hSpeed(), Constants.DOUBLE_PRECISION);
   }
@@ -379,7 +384,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(npc);
 
     assertEquals(0, level.getFruits().size());
-    clm.detectBubbleEnemy(level, 1);
+    clm.modify(level, 1);
     assertEquals(0, level.getNPCs().size());
   }
 
@@ -396,7 +401,7 @@ public class CollisionsLevelModifierTest {
     level.addElement(player);
     level.addElement(fruit);
 
-    clm.detectPlayerFruit(level, 1);
+    clm.modify(level, 1);
     assertEquals(0, level.getFruits().size());
     verify(sc).updateScore(100);
   }
@@ -414,8 +419,41 @@ public class CollisionsLevelModifierTest {
     level.addElement(npc);
 
     assertTrue(player.isAlive());
-    clm.detectPlayerEnemy(level, 1);
+    clm.modify(level, 1);
     assertFalse(player.isAlive());
   }
 
+  /**
+   * Test the collision between a layer and a ChiliChicken powerup.
+   */
+  @Test
+  public void testDetectPlayerPowerupChiliChicken() {
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    PowerupPickUp pickup = new ChiliChickenPickUp(new Vector(32, 32), new Vector(32, 32));
+
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(pickup);
+
+    clm.modify(level, 1);
+    assertEquals(level.getPowerups().size(), 0);
+    assertTrue(level.getPlayers().get(0) instanceof ChiliChicken);
+  }
+
+  /**
+   * Test the collision between a layer and a TurtleTaco powerup.
+   */
+  @Test
+  public void testDetectPlayerPowerupTurtleTaco() {
+    Player player = new Player(new Vector(0, 0), new Vector(32, 32));
+    PowerupPickUp pickup = new TurtleTacoPickUp(new Vector(32, 32), new Vector(32, 32));
+
+    Level level = new Level();
+    level.addElement(player);
+    level.addElement(pickup);
+
+    clm.modify(level, 1);
+    assertEquals(level.getPowerups().size(), 0);
+    assertTrue(level.getPlayers().get(0) instanceof TurtleTaco);
+  }
 }

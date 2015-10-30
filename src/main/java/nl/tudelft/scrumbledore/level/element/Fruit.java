@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
@@ -9,7 +8,8 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
 /**
  * Class representing a Fruit in a game.
  * 
- * @author Niels Warnars, Floris Doolaard
+ * @author Niels Warnars
+ * @author Floris Doolaard
  */
 public class Fruit extends BasicDynamicElement {
   private int value;
@@ -20,6 +20,7 @@ public class Fruit extends BasicDynamicElement {
    * 
    * @param position
    *          Position of the fruit in the level.
+   *          
    * @param size
    *          Size of the fruit.
    */
@@ -89,6 +90,7 @@ public class Fruit extends BasicDynamicElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   * 
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -96,41 +98,6 @@ public class Fruit extends BasicDynamicElement {
     ArrayList<Sprite> result = new ArrayList<Sprite>();
     result.add(store.getAnimated("fruit").getFrame(posX()));
     return result;
-  }
-
-  /**
-   * Add an action to be performed in the next step.
-   * 
-   * @param action
-   *          A LevelElementAction
-   */
-  public void addAction(LevelElementAction action) {
-  }
-
-  /**
-   * Remove all actions from the queue.
-   */
-  public void clearActions() {
-  }
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          A LevelElementAction.
-   * @return Boolean.
-   */
-  public boolean hasAction(LevelElementAction action) {
-    return false;
-  }
-
-  /**
-   * Remove the given action from the actions queue.
-   * 
-   * @param action
-   *          A LevelElementAction.
-   */
-  public void removeAction(LevelElementAction action) {
   }
 
   /**
@@ -148,15 +115,7 @@ public class Fruit extends BasicDynamicElement {
    * @param action
    *          The last move action performed.
    */
-  public void setLastMove(LevelElementAction action) {    
+  public void setLastMove(LevelElementAction action) {
   }
 
-  /**
-   * Gives a list of current actions of the player.
-   * @return a list of actions
-   */
-  public ArrayList<LevelElementAction> getActions() {
-    return null;
-  }
-  
 }

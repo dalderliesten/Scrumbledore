@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
@@ -10,9 +9,7 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
  * 
  * @author Floris Doolaard
  */
-@SuppressWarnings("PMD.TooManyMethods")
 public abstract class BasicStaticElement implements StaticElement {
-
   private Vector position;
   private Vector size;
 
@@ -21,6 +18,7 @@ public abstract class BasicStaticElement implements StaticElement {
    * 
    * @param position
    *          Position of the element in the level.
+   *          
    * @param size
    *          Size of the element.
    */
@@ -124,6 +122,7 @@ public abstract class BasicStaticElement implements StaticElement {
    * 
    * @param other
    *          The other element to measure the distance to.
+   *          
    * @return The distance.
    */
   public double distance(LevelElement other) {
@@ -136,8 +135,10 @@ public abstract class BasicStaticElement implements StaticElement {
    * 
    * @param other
    *          The other element.
+   *          
    * @param range
    *          The range (of the circle).
+   *          
    * @return A boolean.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
@@ -151,8 +152,10 @@ public abstract class BasicStaticElement implements StaticElement {
    * 
    * @param other
    *          The other element.
+   *          
    * @param range
    *          The range (a half of the dimensions of the square box).
+   *          
    * @return A boolean.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
@@ -162,60 +165,14 @@ public abstract class BasicStaticElement implements StaticElement {
   }
 
   /**
-   * Snap a LevelElement to the left side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapLeft(LevelElement other) {
-    double offset = getSize().getX() / 2;
-    double newPos = other.getLeft() - offset;
-    getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the right side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapRight(LevelElement other) {
-    double offset = getSize().getX() / 2;
-    double newPos = other.getRight() + offset;
-    getPosition().setX(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the top side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapTop(LevelElement other) {
-    double offset = getSize().getY() / 2;
-    double newPos = other.getTop() - offset;
-    getPosition().setY(newPos);
-  }
-
-  /**
-   * Snap a LevelElement to the bottom side of another LevelElement.
-   * 
-   * @param other
-   *          The LevelElement to be snapped to.
-   */
-  public void snapBottom(LevelElement other) {
-    double offset = getSize().getY() / 2;
-    double newPos = other.getBottom() + offset;
-    getPosition().setY(newPos);
-  }
-
-  /**
    * Retrieve a set of Sprites to be drawn in the current cycle at the position of this Level
    * Element.
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   *          
    * @return Sprites to be drawn.
    */
   public abstract ArrayList<Sprite> getSprites(double steps);
+  
 }

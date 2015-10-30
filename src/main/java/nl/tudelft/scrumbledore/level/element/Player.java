@@ -1,12 +1,10 @@
 package nl.tudelft.scrumbledore.level.element;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
-
 
 /**
  * Class representing a Player in a game.
@@ -17,19 +15,18 @@ import nl.tudelft.scrumbledore.sprite.SpriteStore;
  */
 public class Player extends BasicDynamicElement implements PlayerElement {
 
-  private ArrayList<LevelElementAction> actions;
   private LevelElementAction lastMove;
   private Boolean firing;
   private Boolean alive;
   private int id;
   private double lifetime;
-  
 
   /**
    * Create a new Basic Player instance.
    * 
    * @param position
    *          Position of the player in the level.
+   * 
    * @param size
    *          Size of the Basic Player.
    */
@@ -39,31 +36,10 @@ public class Player extends BasicDynamicElement implements PlayerElement {
     setGravity(true);
 
     id = 0;
-    actions = new ArrayList<LevelElementAction>();
     lastMove = LevelElementAction.MoveRight;
     firing = false;
     alive = true;
     lifetime = Constants.PLAYER_POWERUP_LIFETIME;
-  }
-
-  /**
-   * Add an action to be performed in the next step.
-   * 
-   * @param action
-   *          A PlayerAction
-   */
-  public void addAction(LevelElementAction action) {
-    if (!hasAction(action)) {
-      actions.add(action);
-      setLastMove(action);
-    }
-  }
-
-  /**
-   * Remove all actions from the queue.
-   */
-  public void clearActions() {
-    actions.clear();
   }
 
   /**
@@ -102,35 +78,6 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    */
   public void setPlayerNumber(int id) {
     this.id = id;
-  }
-  
-  /**
-   * Gives the list of actions of the player.
-   * @return a list of actions.
-   */
-  public ArrayList<LevelElementAction> getActions() {
-    return actions;
-  }
-
-  /**
-   * Check whether the given action is queued for the next step.
-   * 
-   * @param action
-   *          A PlayerAction.
-   * @return Boolean.
-   */
-  public boolean hasAction(LevelElementAction action) {
-    return actions.contains(action);
-  }
-
-  /**
-   * Remove the given action from the actions queue.
-   * 
-   * @param action
-   *          A PlayerAction.
-   */
-  public void removeAction(LevelElementAction action) {
-    actions.remove(action);
   }
 
   /**
@@ -172,7 +119,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
   /**
    * Return whether the Player is firing.
    * 
-   * @return whether the Player is firing
+   * @return whether the Player is firing.
    */
   public Boolean isFiring() {
     return firing;
@@ -182,7 +129,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    * Set whether the Player is firing.
    * 
    * @param isFiring
-   *          whether the Player is firing
+   *          whether the Player is firing.
    */
   public void setFiring(Boolean isFiring) {
     this.firing = isFiring;
@@ -194,6 +141,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    * 
    * @param steps
    *          The absolute exact number of steps since the game was started.
+   * 
    * @return Sprites to be drawn.
    */
   public ArrayList<Sprite> getSprites(double steps) {
@@ -220,7 +168,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
     }
     return result;
   }
-  
+
   /**
    * Decrease the lifetime by a given number of steps.
    * 
@@ -229,7 +177,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
    */
   public void decreaseLifetime(double delta) {
     lifetime -= delta;
-}
+  }
 
   /**
    * Get the remaining lifetime.
@@ -249,4 +197,5 @@ public class Player extends BasicDynamicElement implements PlayerElement {
   public void setLifetime(double newTime) {
     lifetime = newTime;
   }
+
 }

@@ -25,7 +25,7 @@ public abstract class GameFactory {
 
   /**
    * Makes a new Single / MultiPlayer game.
-
+   * 
    * @return A SinglePlayer or MultiPlayer game.
    */
   public Game makeGame() {
@@ -44,7 +44,8 @@ public abstract class GameFactory {
   /**
    * Registers Level Modifiers to a given game.
    * 
-   * @param game A given game.
+   * @param game
+   *          A given game.
    */
   protected void makeLevelModifiers(Game game) {
     game.registerLevelModifier(new PlayerActionsLevelModifier());

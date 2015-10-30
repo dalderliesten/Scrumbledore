@@ -10,7 +10,6 @@ import nl.tudelft.scrumbledore.level.Vector;
  * @author Niels Warnars
  */
 public class Sprite {
-
   private String id;
   private String ext;
   private String dir;
@@ -34,6 +33,7 @@ public class Sprite {
    * 
    * @param id
    *          Reference to an image file.
+   *          
    * @param ext
    *          The extension of the image file.
    */
@@ -49,8 +49,10 @@ public class Sprite {
    * 
    * @param id
    *          Reference to an image file.
+   *          
    * @param ext
    *          The extension of the image file.
+   *          
    * @param dir
    *          The directory to look for the file.
    */
@@ -66,10 +68,13 @@ public class Sprite {
    * 
    * @param id
    *          Reference to an image file.
+   *          
    * @param ext
    *          The extension of the image file.
+   *          
    * @param dir
    *          The directory to look for the file.
+   *          
    * @param size
    *          A Vector describing the dimensions of the image.
    */
@@ -104,6 +109,7 @@ public class Sprite {
    * 
    * @param origin
    *          The absolute position for the origin of the sprite.
+   *          
    * @return A Vector describing the drawing position.
    */
   public Vector getDrawPosition(Vector origin) {

@@ -1,7 +1,6 @@
 package nl.tudelft.scrumbledore.level.modifier;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.level.Level;
@@ -11,6 +10,7 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.Player;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.powerup.ChiliChicken;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
 
 /**
  * Level Modifier that processes the actions to be performed on the Player.
@@ -27,6 +27,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * 
    * @param level
    *          The level in which the player actions need to be processed.
+   * 
    * @param delta
    *          The number of steps passed since the last execution of this method.
    */
@@ -41,11 +42,11 @@ public class PlayerActionsLevelModifier implements LevelModifier {
         checkHorizontalMovement(player);
         checkShooting(player, level);
 
-        if (!(player instanceof PlayerElement)) {
-          if (player.getLifetime() <= 0 && player.hasAction(LevelElementAction.ShootStop)) {
+        if (player instanceof ChiliChicken || player instanceof TurtleTaco) {
+          if (player.getLifetime() <= 0) {
             try {
-              PlayerElement newP = new Player(player.getPosition().clone(), new Vector(
-                  Constants.BLOCKSIZE, Constants.BLOCKSIZE));
+              PlayerElement newP = new Player(player.getPosition().clone(),
+                  new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
               for (int j = 0; j < player.getActions().size(); j++) {
                 newP.addAction(player.getActions().get(j));
               }
@@ -74,8 +75,9 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
         player.removeAction(LevelElementAction.MoveStop);
         player.removeAction(LevelElementAction.Shoot);
+      } else {
+        player.clearActions();
       }
-
     }
   }
 
@@ -83,7 +85,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * Check for horizontal movement of the given player.
    * 
    * @param player
-   *          Player to be checked
+   *          Player to be checked.
    */
   public void checkHorizontalMovement(PlayerElement player) {
     if (player.hasAction(LevelElementAction.MoveLeft)) {
@@ -116,7 +118,7 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * Checks if the player needs to stop moving.
    * 
    * @param player
-   *          The player to be checked
+   *          The player to be checked.
    */
   public void checkStopMovement(PlayerElement player) {
     if (player.hasAction(LevelElementAction.MoveStop)) {
@@ -132,9 +134,10 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * Checks for shooting actions.
    * 
    * @param player
-   *          The player to be checked
+   *          The player to be checked.
+   * 
    * @param level
-   *          Level to be get the bubbles from
+   *          Level to be get the bubbles from.
    */
   @SuppressWarnings("methodlength")
   public void checkShooting(PlayerElement player, Level level) {
@@ -149,8 +152,8 @@ public class PlayerActionsLevelModifier implements LevelModifier {
 
     if (player.hasAction(LevelElementAction.Shoot) && player.isAlive()) {
       if (!player.isFiring()) {
-        Bubble newBubble = new Bubble(projectPos, new Vector(Constants.BLOCKSIZE,
-            Constants.BLOCKSIZE));
+        Bubble newBubble = new Bubble(projectPos,
+            new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE));
 
         projectiles.add(newBubble);
         checkShootingDirection(player, newBubble);
@@ -164,9 +167,10 @@ public class PlayerActionsLevelModifier implements LevelModifier {
    * Checks whether a projectile should be shot to the left or right side.
    * 
    * @param player
-   *          , the player that shoots.
+   *          the player that shoots.
+   * 
    * @param projectile
-   *          , the projectile the player is shooting.
+   *          the projectile the player is shooting.
    */
   public static void checkShootingDirection(PlayerElement player, Bubble projectile) {
     if (player.getLastMove() == LevelElementAction.MoveLeft) {
@@ -181,4 +185,5 @@ public class PlayerActionsLevelModifier implements LevelModifier {
       projectile.addAction(LevelElementAction.MoveRight);
     }
   }
+
 }
