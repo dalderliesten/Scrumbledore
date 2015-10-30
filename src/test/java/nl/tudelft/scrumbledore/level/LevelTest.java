@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import nl.tudelft.scrumbledore.level.element.Bubble;
 import nl.tudelft.scrumbledore.level.element.Fruit;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
 import nl.tudelft.scrumbledore.level.element.NPC;
 import nl.tudelft.scrumbledore.level.element.Platform;
 import nl.tudelft.scrumbledore.level.element.Player;
@@ -103,4 +104,22 @@ public class LevelTest {
     assertEquals(bubbles.get(0).getClass(), Bubble.class);
     assertEquals(bubbles.get(1).getClass(), Bubble.class);
   }
+  
+  /**
+   * The getStaticElements should return all static elements (platforms) in the Level.
+   */
+  @Test
+  public void testGetStaticElements() {
+    Level level = new Level();
+    Platform platform = new Platform(basicVt, basicVt);
+    Bubble bubble = new Bubble(basicVt, basicVt);
+
+    level.addElement(platform);
+    level.addElement(bubble);
+
+    ArrayList<LevelElement> staticElements = level.getStaticElements();
+    assertEquals(1, staticElements.size());
+    assertEquals(platform, staticElements.get(0));
+  }
+  
 }
