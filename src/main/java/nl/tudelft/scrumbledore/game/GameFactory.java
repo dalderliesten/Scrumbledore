@@ -18,7 +18,7 @@ import nl.tudelft.scrumbledore.level.modifier.WarpLevelModifier;
 public abstract class GameFactory {
 
   /**
-   * Constructs a new GameFactory that utilizes a given LevelParser.
+   * Constructs a new GameFactory instance.
    */
   public GameFactory() {
   }

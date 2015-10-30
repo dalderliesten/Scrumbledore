@@ -38,7 +38,7 @@ public class TurtleTacoPickUp extends PowerupPickUp {
    * Add an action to be performed in the next step.
    * 
    * @param action
-   *          A LevelElementAction.
+   *          A LevelElementAction to be added.
    */
   public void addAction(LevelElementAction action) {
   }
@@ -53,9 +53,9 @@ public class TurtleTacoPickUp extends PowerupPickUp {
    * Check whether the given action is queued for the next step.
    * 
    * @param action
-   *          A LevelElementAction.
+   *          A LevelElementAction to be checked.
    *          
-   * @return Boolean.
+   * @return Whether the given action is queued.
    */
   public boolean hasAction(LevelElementAction action) {
     return false;
@@ -65,7 +65,7 @@ public class TurtleTacoPickUp extends PowerupPickUp {
    * Remove the given action from the actions queue.
    * 
    * @param action
-   *          A LevelElementAction.
+   *          A LevelElementAction to be removed.
    */
   public void removeAction(LevelElementAction action) {
   }
@@ -91,7 +91,7 @@ public class TurtleTacoPickUp extends PowerupPickUp {
   /**
    * Gives a list of current actions of the player.
    * 
-   * @return a list of actions.
+   * @return A list of actions.
    */
   public ArrayList<LevelElementAction> getActions() {
     return null;

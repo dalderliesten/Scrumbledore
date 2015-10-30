@@ -22,14 +22,14 @@ public interface LevelElement {
   /**
    * Get the X coordinate of the element.
    * 
-   * @return double
+   * @return X coordinate
    */
   double posX();
 
   /**
    * Get the Y coordinate of the element.
    * 
-   * @return double
+   * @return Y coordinate
    */
   double posY();
 
@@ -43,14 +43,14 @@ public interface LevelElement {
   /**
    * Get the width of the element.
    * 
-   * @return double
+   * @return width.
    */
   double width();
 
   /**
    * Get the height of the element.
    * 
-   * @return double
+   * @return height.
    */
   double height();
 
@@ -102,7 +102,7 @@ public interface LevelElement {
    * @param range
    *          The range (of the circle).
    * 
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   boolean inRadiusRangeOf(LevelElement other, double range);
 
@@ -117,7 +117,7 @@ public interface LevelElement {
    * @param range
    *          The range (a half of the dimensions of the square box).
    * 
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   boolean inBoxRangeOf(LevelElement other, double range);
 

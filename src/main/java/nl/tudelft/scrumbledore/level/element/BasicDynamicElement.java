@@ -49,7 +49,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the X coordinate of the element.
    * 
-   * @return double
+   * @return X coordinate of the element.
    */
   public double posX() {
     return position.getX();
@@ -58,7 +58,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the Y coordinate of the element.
    * 
-   * @return double
+   * @return Y coordinate of the element.
    */
   public double posY() {
     return position.getY();
@@ -76,7 +76,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the width of the element.
    * 
-   * @return double
+   * @return Width of the element.
    */
   public double width() {
     return size.getX();
@@ -85,7 +85,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the height of the element.
    * 
-   * @return double
+   * @return Height of the element.
    */
   public double height() {
     return size.getY();
@@ -103,7 +103,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the horizontal speed of the element.
    * 
-   * @return double
+   * @return Horizontal speed of the element.
    */
   public double hSpeed() {
     return speed.getX();
@@ -112,7 +112,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Get the vertical speed of the element.
    * 
-   * @return double
+   * @return Vertical speed of the element.
    */
   public double vSpeed() {
     return speed.getY();
@@ -162,7 +162,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
   /**
    * Check whether this LevelElement is affected by Gravity.
    * 
-   * @return Boolean
+   * @return Whether this LevelElement is affected by Gravity.
    */
   public boolean hasGravity() {
     return gravity;
@@ -172,7 +172,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * Set the property determining whether this LevelElement is affected by gravity.
    * 
    * @param gravity
-   *          A boolean
+   *          Whether this LevelElement is affected by Gravity.
    */
   public void setGravity(boolean gravity) {
     this.gravity = gravity;
@@ -220,7 +220,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * @param other
    *          The other element to measure the distance to.
    *          
-   * @return The distance.
+   * @return The distance between two LevelElements.
    */
   public double distance(LevelElement other) {
     return getPosition().distance(other.getPosition());
@@ -236,7 +236,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * @param range
    *          The range (of the circle).
    *          
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
     return distance(other) <= range;
@@ -253,7 +253,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * @param range
    *          The range (a half of the dimensions of the square box).
    *          
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
     boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);
@@ -342,7 +342,7 @@ public abstract class BasicDynamicElement implements DynamicElement {
    * 
    * @param action
    *          A LevelElementAction.
-   * @return Boolean.
+   * @return Whether the given action is queued.
    */
   public boolean hasAction(LevelElementAction action) {
     return actions.contains(action);

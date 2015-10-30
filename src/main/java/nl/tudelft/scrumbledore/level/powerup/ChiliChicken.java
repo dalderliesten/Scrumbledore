@@ -8,10 +8,12 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
+import nl.tudelft.scrumbledore.userinterface.GameDisplay;
 
 /**
  * ChiliChicken is a power-up that gives a Player object more speed for 5 seconds.
- * 
+ *
+ * @author David Alderliesten
  * @author Floris Doolaard
  */
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.ExcessivePublicCount" })
@@ -19,13 +21,14 @@ public class ChiliChicken implements PlayerElement {
   private PlayerElement wrapped;
 
   /**
-   * Create a new LevelElement instance.
+   * Create a new ChiliChicken instance.
    * 
    * @param wrapped
    *          The DynamicElement to be wrapped in this Powerup Decorator.
    */
   public ChiliChicken(PlayerElement wrapped) {
     this.wrapped = wrapped;
+    GameDisplay.triggerChiliLabel();
   }
 
   /**
@@ -86,7 +89,7 @@ public class ChiliChicken implements PlayerElement {
   /**
    * Get the X coordinate of the element.
    * 
-   * @return double.
+   * @return X coordinate of the element.
    */
   public double posX() {
     return wrapped.posX();
@@ -95,7 +98,7 @@ public class ChiliChicken implements PlayerElement {
   /**
    * Get the Y coordinate of the element.
    * 
-   * @return double.
+   * @return Y coordinate of the element.
    */
   public double posY() {
     return wrapped.posY();
@@ -113,7 +116,7 @@ public class ChiliChicken implements PlayerElement {
   /**
    * Get the width of the element.
    * 
-   * @return double.
+   * @return Width of the element.
    */
   public double width() {
     return wrapped.width();
@@ -122,7 +125,7 @@ public class ChiliChicken implements PlayerElement {
   /**
    * Get the height of the element.
    * 
-   * @return double.
+   * @return Height of the element.
    */
   public double height() {
     return wrapped.height();
@@ -140,7 +143,7 @@ public class ChiliChicken implements PlayerElement {
   /**
    * Get the horizontal speed of the element.
    * 
-   * @return double.
+   * @return Horizontal speed of the element..
    */
   public double hSpeed() {
     return wrapped.hSpeed();
@@ -149,7 +152,7 @@ public class ChiliChicken implements PlayerElement {
   /**
    * Get the vertical speed of the element.
    * 
-   * @return double.
+   * @return Vertical speed of the element..
    */
   public double vSpeed() {
     return wrapped.vSpeed();
@@ -206,10 +209,10 @@ public class ChiliChicken implements PlayerElement {
   }
 
   /**
-   * Set the property determining whether this LevelElement is affected by gravity.
+   * Set the property determining whether this ChiliChicken is affected by gravity.
    * 
    * @param gravity
-   *          A boolean.
+   *          Whether this ChiliChicken is affected by gravity.
    */
   public void setGravity(boolean gravity) {
     wrapped.setGravity(gravity);
@@ -257,7 +260,7 @@ public class ChiliChicken implements PlayerElement {
    * @param other
    *          The other element to measure the distance to.
    * 
-   * @return The distance.
+   * @return The distance between two elements.
    */
   public double distance(LevelElement other) {
     return wrapped.distance(other);
@@ -273,7 +276,7 @@ public class ChiliChicken implements PlayerElement {
    * @param range
    *          The range (of the circle).
    * 
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
     return wrapped.inBoxRangeOf(other, range);
@@ -290,7 +293,7 @@ public class ChiliChicken implements PlayerElement {
    * @param range
    *          The range (a half of the dimensions of the square box).
    * 
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
     return wrapped.inBoxRangeOf(other, range);
@@ -397,7 +400,7 @@ public class ChiliChicken implements PlayerElement {
    * @param action
    *          A LevelElementAction.
    * 
-   * @return Boolean.
+   * @return Whether the given action is queued.
    */
   public boolean hasAction(LevelElementAction action) {
     return wrapped.hasAction(action);
