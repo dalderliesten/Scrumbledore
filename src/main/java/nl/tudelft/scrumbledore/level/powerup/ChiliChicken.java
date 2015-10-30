@@ -8,10 +8,12 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 import nl.tudelft.scrumbledore.sprite.SpriteStore;
+import nl.tudelft.scrumbledore.userinterface.GameDisplay;
 
 /**
  * ChiliChicken is a power-up that gives a Player object more speed for 5 seconds.
- * 
+ *
+ * @author David Alderliesten
  * @author Floris Doolaard
  */
 @SuppressWarnings({ "PMD.TooManyMethods", "PMD.ExcessivePublicCount" })
@@ -26,6 +28,7 @@ public class ChiliChicken implements PlayerElement {
    */
   public ChiliChicken(PlayerElement wrapped) {
     this.wrapped = wrapped;
+    GameDisplay.triggerChiliLabel();
   }
 
   /**

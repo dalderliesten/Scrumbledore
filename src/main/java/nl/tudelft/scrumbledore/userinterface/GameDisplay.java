@@ -56,12 +56,24 @@ public final class GameDisplay {
   private static Label levelLabel;
   private static Label powerUpLabel;
   private static String advanceLabel;
+  private static Long chiliTracker;
+  private static Long tacoTracker;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
       playerStatus();
       levelStatus();
       renderDynamic();
+
+      if (chiliTracker > 0L) {
+        powerUpLabel.setText(Constants.POWERUP_CHILILABEL);
+        chiliTracker = chiliTracker - 10500000L;
+      } else if (tacoTracker > 0L) {
+        powerUpLabel.setText(Constants.POWERUP_TACOLABEL);
+        tacoTracker = tacoTracker - 10500000L;
+      } else {
+        powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
+      }
     }
   };
 
@@ -84,12 +96,13 @@ public final class GameDisplay {
    *          The stage to draw to.
    */
   public static void createGame(GameFactory factory, Stage passedStage) {
+    chiliTracker = 0L;
+    tacoTracker = 0L;
     currentStage = passedStage;
     currentGame = factory.makeGame();
 
     launchGame();
   }
-
 
   /**
    * Handles the creation of a game and the associated interface.
@@ -143,7 +156,7 @@ public final class GameDisplay {
     scoreLabel.setId("gameviewscores");
     highScoreLabel = new Label(currentGame.getHighScore());
     highScoreLabel.setId("gameviewscores");
-    powerUpLabel = new Label("NONE");
+    powerUpLabel = new Label(Constants.NOPOWERUP_LABEL);
     powerUpLabel.setId("gameviewscores");
     levelLabel = new Label(Integer.toString(currentGame.getCurrentLevelNumber()));
     levelLabel.setId("gameviewscores");
@@ -249,9 +262,25 @@ public final class GameDisplay {
       }
     }
     if (!playersLeft) {
+      chiliTracker = 0L;
+      tacoTracker = 0L;
       currentGame.restart();
       renderStatic();
     }
+  }
+
+  /**
+   * Triggers the label change when picking up the Chili speed boost.
+   */
+  public static void triggerChiliLabel() {
+    chiliTracker = 4750000000L;
+  }
+
+  /**
+   * Triggers the label change when picking up the Taco invincibility power-up.
+   */
+  public static void triggerTacoLabel() {
+    tacoTracker = 2750000000L;
   }
 
   /**
@@ -385,5 +414,5 @@ public final class GameDisplay {
       }
     });
   }
-  
+
 }
