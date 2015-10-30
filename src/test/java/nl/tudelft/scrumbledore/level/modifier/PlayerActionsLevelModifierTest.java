@@ -21,6 +21,7 @@ import nl.tudelft.scrumbledore.level.powerup.TurtleTaco;
  * @author Jesse Tilro
  *
  */
+@SuppressWarnings("PMD.TooManyMethods")
 public class PlayerActionsLevelModifierTest {
 
   private Player player;
