@@ -22,7 +22,7 @@ public class Player extends BasicDynamicElement implements PlayerElement {
   private double lifetime;
 
   /**
-   * Create a new Basic Player instance.
+   * Create a new Player instance.
    * 
    * @param position
    *          Position of the player in the level.

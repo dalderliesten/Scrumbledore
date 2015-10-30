@@ -39,7 +39,7 @@ public abstract class BasicStaticElement implements StaticElement {
   /**
    * Get the X coordinate of the element.
    * 
-   * @return double
+   * @return X coordinate.
    */
   public double posX() {
     return position.getX();
@@ -48,7 +48,7 @@ public abstract class BasicStaticElement implements StaticElement {
   /**
    * Get the Y coordinate of the element.
    * 
-   * @return double
+   * @return Y coordinate.
    */
   public double posY() {
     return position.getY();
@@ -66,7 +66,7 @@ public abstract class BasicStaticElement implements StaticElement {
   /**
    * Get the width of the element.
    * 
-   * @return double
+   * @return Width of the element.
    */
   public double width() {
     return size.getX();
@@ -75,7 +75,7 @@ public abstract class BasicStaticElement implements StaticElement {
   /**
    * Get the height of the element.
    * 
-   * @return double
+   * @return Height of the element.
    */
   public double height() {
     return size.getY();
@@ -139,7 +139,7 @@ public abstract class BasicStaticElement implements StaticElement {
    * @param range
    *          The range (of the circle).
    *          
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   public boolean inRadiusRangeOf(LevelElement other, double range) {
     return distance(other) <= range;
@@ -156,7 +156,7 @@ public abstract class BasicStaticElement implements StaticElement {
    * @param range
    *          The range (a half of the dimensions of the square box).
    *          
-   * @return A boolean.
+   * @return Whether another element is within range of this element.
    */
   public boolean inBoxRangeOf(LevelElement other, double range) {
     boolean inX = (other.posX() >= posX() - range && other.posX() <= posX() + range);

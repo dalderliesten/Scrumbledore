@@ -106,14 +106,14 @@ public interface DynamicElement extends LevelElement {
   /**
    * Get the horizontal speed of the element.
    * 
-   * @return double.
+   * @return H speed.
    */
   double hSpeed();
 
   /**
    * Get the vertical speed of the element.
    * 
-   * @return double.
+   * @return V speed.
    */
   double vSpeed();
 
