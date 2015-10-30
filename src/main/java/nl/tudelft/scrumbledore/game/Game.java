@@ -1,9 +1,8 @@
 package nl.tudelft.scrumbledore.game;
 
 import java.util.ArrayList;
-
 import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.LevelModifier;
+import nl.tudelft.scrumbledore.level.modifier.LevelModifier;
 
 /**
  * The class responsible for aggregating all model classes of the Game, and therefore modeling a
@@ -220,7 +219,6 @@ public abstract class Game {
     currentLevel = levels.get(0);
   }
 
-  
   /**
    * Returns a list of LevelModifiers.
    * 
@@ -236,5 +234,4 @@ public abstract class Game {
    * @return A list of Levels.
    */
   protected abstract ArrayList<Level> makeLevels();
-
 }

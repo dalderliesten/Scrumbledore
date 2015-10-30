@@ -14,7 +14,7 @@ public class ScoreCounter {
   private int highScore;
 
   /**
-   * Contructing a a ScoreCounter object.
+   * Constructing a ScoreCounter object.
    */
   public ScoreCounter() {
     this.score = 0;

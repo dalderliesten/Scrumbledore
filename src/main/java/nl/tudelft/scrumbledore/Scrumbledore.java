@@ -5,7 +5,7 @@ import java.io.IOException;
 import nl.tudelft.scrumbledore.userinterface.UserInterface;
 
 /**
- * Launches the game and containes the main method, which will run the GUI, which in turn will run
+ * Launches the game and contains the main method, which will run the GUI, which in turn will run
  * the game.
  * 
  * @author David Alderliesten
@@ -15,10 +15,12 @@ abstract class Scrumbledore {
   /**
    * The main method launches the program.
    * 
-   * @pre Program executed
-   * @post Program terminated
+   * @pre Program executed.
+   * 
+   * @post Program terminated.
+   * 
    * @param args
-   *          Arguments given at program initialization
+   *          Arguments given at program initialization.
    */
   public static void main(String[] args) {
     makeAppDataDir();

@@ -4,12 +4,14 @@ import java.io.File;
 import java.io.FileNotFoundException;
 import java.util.ArrayList;
 import java.util.Scanner;
-
 import nl.tudelft.scrumbledore.Constants;
-import nl.tudelft.scrumbledore.powerup.BlueberryBubblePickUp;
-import nl.tudelft.scrumbledore.powerup.ChiliChickenPickUp;
-import nl.tudelft.scrumbledore.powerup.PyroPepperPickUp;
-import nl.tudelft.scrumbledore.powerup.TurtleTacoPickUp;
+import nl.tudelft.scrumbledore.level.element.Fruit;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.element.NPC;
+import nl.tudelft.scrumbledore.level.element.Platform;
+import nl.tudelft.scrumbledore.level.element.Player;
+import nl.tudelft.scrumbledore.level.powerup.ChiliChickenPickUp;
+import nl.tudelft.scrumbledore.level.powerup.TurtleTacoPickUp;
 
 /**
  * Class responsible for reading a map from disk and converting it into a Level object.
@@ -31,7 +33,7 @@ public class LevelParser {
    * Creates a new LevelParser and loads levels from a user defined path.
    * 
    * @param dir
-   *          A given directory
+   *          A given directory.
    */
   public LevelParser(String dir) {
     levels = loadLevelsFromDisk(dir);
@@ -41,8 +43,9 @@ public class LevelParser {
    * Loads an array of Level objects from disk.
    * 
    * @param dir
-   *          A given directory
-   * @return An array of Level objects
+   *          A given directory.
+   * 
+   * @return An array of Level objects.
    */
   protected ArrayList<Level> loadLevelsFromDisk(String dir) {
     ArrayList<String> levelFiles = listFilesInDir(dir);
@@ -62,8 +65,9 @@ public class LevelParser {
    * Lists all files in a given directory.
    * 
    * @param dir
-   *          A given directory
-   * @return A list of file names
+   *          A given directory.
+   * 
+   * @return A list of file names.
    */
   protected ArrayList<String> listFilesInDir(String dir) {
     ArrayList<String> levelFiles = new ArrayList<String>();
@@ -86,8 +90,9 @@ public class LevelParser {
    * @param inFile
    *          File name of level layout on disk.
    * @throws FileNotFoundException
-   *           Exception thrown in case the file does not exist
-   * @return A level object
+   *           Exception thrown in case the file does not exist.
+   * 
+   * @return A level object.
    */
   protected Level readLevelFromFile(String inFile) throws FileNotFoundException {
     return readLevelFromScanner(new Scanner(new File(inFile), "UTF-8"));
@@ -97,10 +102,12 @@ public class LevelParser {
    * Reads a level object from a given scanner.
    * 
    * @param lineScanner
-   *          A given Scanner object
+   *          A given Scanner object.
+   * 
    * @throws FileNotFoundException
-   *           Exception thrown in case the file does not exist
-   * @return A level object
+   *           Exception thrown in case the file does not exist.
+   * 
+   * @return A level object.
    */
   protected Level readLevelFromScanner(Scanner lineScanner) throws FileNotFoundException {
     Level tmpLevel = new Level();
@@ -114,12 +121,12 @@ public class LevelParser {
 
         if (ch != ' ') {
           LevelElement le = getElementFromChar(ch, idx, lineNumber);
-          
+
           if (le instanceof Player) {
             int numPlayers = tmpLevel.getPlayers().size();
             ((Player) le).setPlayerNumber(numPlayers);
           }
-          
+
           tmpLevel.addElement(le);
         }
       }
@@ -137,10 +144,13 @@ public class LevelParser {
    * 
    * @param ch
    *          Character representing a LevelElement.
+   * 
    * @param i
-   *          Horizontal position in level map on disk
+   *          Horizontal position in level map on disk.
+   * 
    * @param j
-   *          Vertical position in level map on disk
+   *          Vertical position in level map on disk.
+   * 
    * @return An instance of a LevelElement child.
    */
   @SuppressWarnings({ "PMD.StdCyclomaticComplexity", "PMD.CyclomaticComplexity" })
@@ -160,10 +170,6 @@ public class LevelParser {
       return new NPC(blockPos, size);
     case 'F':
       return new Fruit(blockPos, size);
-    case 'Z':
-      return new PyroPepperPickUp(blockPos, size);
-    case 'X':
-      return new BlueberryBubblePickUp(blockPos, size);
     case 'C':
       return new ChiliChickenPickUp(blockPos, size);
     case 'V':
@@ -177,10 +183,12 @@ public class LevelParser {
    * Gets the screen position of a block based on given coordinates in the level map on disk.
    * 
    * @param i
-   *          Horizontal position in level map on disk
+   *          Horizontal position in level map on disk.
+   * 
    * @param j
-   *          Vertical position in level map on disk
-   * @return Screen position of a block
+   *          Vertical position in level map on disk.
+   * 
+   * @return Screen position of a block.
    */
   public Vector getBlockPosition(int i, int j) {
     double x = i * Constants.BLOCKSIZE;
@@ -192,7 +200,7 @@ public class LevelParser {
   /**
    * Returns an ArrayList of Level objects.
    * 
-   * @return An ArrayList of level objects
+   * @return An ArrayList of level objects.
    */
   public ArrayList<Level> getLevels() {
     return levels;

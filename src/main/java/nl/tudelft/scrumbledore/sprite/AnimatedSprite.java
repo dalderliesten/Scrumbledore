@@ -6,10 +6,8 @@ import java.util.ArrayList;
  * Class representing an Animated Sprite. Has multiple sprites as its animation frames.
  * 
  * @author Jesse Tilro
- *
  */
 public class AnimatedSprite {
-
   private String id;
   private ArrayList<Sprite> frames;
   private double interval;
@@ -19,6 +17,7 @@ public class AnimatedSprite {
    * 
    * @param id
    *          The ID to be assigned to this animated sprite.
+   *          
    * @param interval
    *          The number of (partial) steps between each frame.
    */
@@ -33,8 +32,10 @@ public class AnimatedSprite {
    * 
    * @param id
    *          The ID to be assigned to this animated sprite.
+   *          
    * @param interval
    *          The number of (partial) steps between each frame.
+   *          
    * @param frames
    *          The frames the animated sprite should consist of.
    */
@@ -60,6 +61,7 @@ public class AnimatedSprite {
    * 
    * @param steps
    *          The number of steps passed so far.
+   *          
    * @return The current frame in the animation.
    */
   public Sprite getFrame(double steps) {
@@ -72,6 +74,7 @@ public class AnimatedSprite {
    * 
    * @param steps
    *          The number of steps passed so far.
+   *          
    * @return The index of the current frame.
    */
   private int getIndex(double steps) {

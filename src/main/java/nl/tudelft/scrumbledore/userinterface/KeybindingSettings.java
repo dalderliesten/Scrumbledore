@@ -20,7 +20,7 @@ import javafx.scene.Scene;
 import nl.tudelft.scrumbledore.Constants;
 import nl.tudelft.scrumbledore.keybinding.Keybinding;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 
 /**
  * Class responsible for generating the keybinding options and the arming of all graphical elements
@@ -123,10 +123,13 @@ public final class KeybindingSettings {
    * 
    * @param action
    *          The LevelElementAction to be remapped.
+   *          
    * @param key
    *          The KeyCode to which the action is bound.
+   *          
    * @param description
    *          Description of the button.
+   *          
    * @return actionBinder The Button to be rendered
    */
   private static Button generateKeybinder(final LevelElementAction action, KeyCode key,

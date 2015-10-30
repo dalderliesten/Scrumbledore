@@ -1,16 +1,18 @@
 package nl.tudelft.scrumbledore.level;
 
 import nl.tudelft.scrumbledore.Constants;
+import nl.tudelft.scrumbledore.level.element.DynamicElement;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.modifier.KineticsLevelModifier;
 
 /**
  * Class representing a collision between two level elements.
  * 
  * @author Jesse Tilro
- *
  */
 @SuppressWarnings("PMD.TooManyMethods")
 public class Collision {
-  private LevelElement collider;
+  private DynamicElement collider;
   private LevelElement collidee;
   private double delta;
   private KineticsLevelModifier kinetics;
@@ -20,12 +22,14 @@ public class Collision {
    * 
    * @param collider
    *          The (moving) LevelElement colliding.
+   *          
    * @param collidee
    *          The (static) LevelElement the collider is colliding with.
+   *          
    * @param delta
    *          The number of steps passed since this method was last called.
    */
-  public Collision(LevelElement collider, LevelElement collidee, double delta) {
+  public Collision(DynamicElement collider, LevelElement collidee, double delta) {
     this.collider = collider;
     this.collidee = collidee;
     this.delta = delta;
@@ -36,11 +40,9 @@ public class Collision {
   /**
    * Check whether collider and collidee are colliding at all.
    * 
-   * @return A boolean.
+   * @return Whether a collision from two sides has occurred.
    */
   public boolean colliding() {
-    // Since colliding can be defined as having at least one vertical and one horizontal edge
-    // of the collider inside the boundary box of the collidee.
     return (collidingTop() || collidingBottom()) && (collidingLeft() || collidingRight());
   }
 
@@ -49,12 +51,11 @@ public class Collision {
    * while it is moving down, or its bottom is making contact with the collidee's top with a given
    * precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the top.
    */
   public boolean collidingFromTop() {
     if (!touchingLeft() && !touchingRight()) {
       if (collider.getBottom() < collidee.getTop() && collider.getSpeed().getY() > 0) {
-        // To anticipate movement in the next step
         kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
         kinetics.revertMove(collider, delta);
@@ -73,12 +74,11 @@ public class Collision {
    * step while it is moving up, or its top is making contact with the collidee's bottom with a
    * given precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the bottom.
    */
   public boolean collidingFromBottom() {
     if (!touchingLeft() && !touchingRight()) {
       if (collider.getTop() > collidee.getBottom() && collider.getSpeed().getY() < 0) {
-        // To anticipate movement in the next step
         kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingLeft() && !touchingRight());
         kinetics.revertMove(collider, delta);
@@ -97,12 +97,11 @@ public class Collision {
    * step while it is moving right, or its right side is making contact with the collidee's left
    * side with a given precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the left.
    */
   public boolean collidingFromLeft() {
     if (!touchingTop() && !touchingBottom()) {
       if (collider.getRight() < collidee.getLeft() && collider.getSpeed().getX() > 0) {
-        // To anticipate movement in the next step
         kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
         kinetics.revertMove(collider, delta);
@@ -121,13 +120,11 @@ public class Collision {
    * step while it is moving left, or its left side is making contact with the collidee's right side
    * with a given precision.
    * 
-   * @return A boolean.
+   * @return Whether the collider is colliding with the collidee from the right.
    */
   public boolean collidingFromRight() {
     if (!touchingTop() && !touchingBottom()) {
-      // If the collider is about to collide, anticipate.
       if (collider.getLeft() > collidee.getRight() && collider.getSpeed().getX() < 0) {
-        // Anticipate movement
         kinetics.move(collider, delta);
         boolean collisionExpected = (colliding() && !touchingTop() && !touchingBottom());
         kinetics.revertMove(collider, delta);
@@ -142,27 +139,9 @@ public class Collision {
   }
 
   /**
-   * Get the collider.
-   * 
-   * @return The collider LevelElement.
-   */
-  public LevelElement getCollider() {
-    return collider;
-  }
-
-  /**
-   * Get the collidee.
-   * 
-   * @return The collidee LevelElement.
-   */
-  public LevelElement getCollidee() {
-    return collidee;
-  }
-
-  /**
    * Check whether the bottom edge of the collider just touches the top edge of the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if touching the top edge.
    */
   private boolean touchingTop() {
     boolean c1 = collider.getBottom() >= collidee.getTop();
@@ -173,7 +152,7 @@ public class Collision {
   /**
    * Check whether the top edge of the collider just touches the bottom edge of the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if touching the bottom edge.
    */
   private boolean touchingBottom() {
     boolean c1 = collider.getTop() >= collidee.getBottom() - Constants.COLLISION_PRECISION;
@@ -184,7 +163,7 @@ public class Collision {
   /**
    * Check whether the right edge of the collider just touches the left edge of the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if touching the left edge.
    */
   private boolean touchingLeft() {
     boolean c1 = collider.getRight() >= collidee.getLeft();
@@ -195,7 +174,7 @@ public class Collision {
   /**
    * Check whether the left edge of the collider just touches the right edge of the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if touching the right edge.
    */
   private boolean touchingRight() {
     boolean c1 = collider.getLeft() >= collidee.getRight() - Constants.COLLISION_PRECISION;
@@ -206,7 +185,7 @@ public class Collision {
   /**
    * Check whether the left edge of the collider collides with the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if colliding with the left edge.
    */
   private boolean collidingLeft() {
     return collider.getLeft() >= collidee.getLeft() && collider.getLeft() <= collidee.getRight();
@@ -215,7 +194,7 @@ public class Collision {
   /**
    * Check whether the right edge of the collider collides with the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if colliding with the right edge.
    */
   private boolean collidingRight() {
     return collider.getRight() >= collidee.getLeft() && collider.getRight() <= collidee.getRight();
@@ -224,7 +203,7 @@ public class Collision {
   /**
    * Check whether the top edge of the collider collides with the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if colliding with the top edge.
    */
   private boolean collidingTop() {
     return collider.getTop() >= collidee.getTop() && collider.getTop() <= collidee.getBottom();
@@ -233,7 +212,7 @@ public class Collision {
   /**
    * Check whether the bottom edge of the collider collides with the collidee.
    * 
-   * @return Boolean.
+   * @return Boolean if colliding with the bottom edge.
    */
   private boolean collidingBottom() {
     return collider.getBottom() >= collidee.getTop()

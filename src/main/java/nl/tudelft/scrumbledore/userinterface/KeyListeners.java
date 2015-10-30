@@ -1,15 +1,14 @@
 package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
-
 import javafx.event.EventHandler;
 import javafx.scene.Scene;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import nl.tudelft.scrumbledore.keybinding.KeybindingContainer;
+import nl.tudelft.scrumbledore.level.element.LevelElementAction;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.game.Game;
-import nl.tudelft.scrumbledore.level.DynamicElement;
-import nl.tudelft.scrumbledore.level.LevelElementAction;
 
 /**
  * Handles all the key event listeners of the gui.
@@ -27,6 +26,7 @@ public class KeyListeners {
    * 
    * @param game
    *          The game to which the KeyEventListeners are added.
+   * 
    * @param scene
    *          The scene to which the KeyEventListeners are added.
    */
@@ -62,8 +62,8 @@ public class KeyListeners {
 
       public void handle(KeyEvent keyPressed) {
         KeyCode keyCode = keyPressed.getCode();
-        ArrayList<DynamicElement> players = game.getCurrentLevel().getPlayers();
-        for (DynamicElement player : players) {
+        ArrayList<PlayerElement> players = game.getCurrentLevel().getPlayers();
+        for (PlayerElement player : players) {
           player.addAction(keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode));
         }
       }
@@ -79,8 +79,8 @@ public class KeyListeners {
       public void handle(KeyEvent keyReleased) {
         KeyCode keyCode = keyReleased.getCode();
         
-        ArrayList<DynamicElement> players = game.getCurrentLevel().getPlayers();
-        for (DynamicElement player : players) { 
+        ArrayList<PlayerElement> players = game.getCurrentLevel().getPlayers();
+        for (PlayerElement player : players) { 
           player.addAction(LevelElementAction.invertAction(
               keybindings.getKeybinding(player.getPlayerNumber()).getAction(keyCode)));
           player.removeAction((keybindings.getKeybinding(
@@ -89,4 +89,5 @@ public class KeyListeners {
       }
     });
   }
+  
 }

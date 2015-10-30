@@ -1,25 +1,27 @@
 package nl.tudelft.scrumbledore.level;
 
 import java.util.ArrayList;
-
-import nl.tudelft.scrumbledore.powerup.PowerupPickUp;
-import nl.tudelft.scrumbledore.projectile.Bubble;
-import nl.tudelft.scrumbledore.projectile.Projectile;
+import nl.tudelft.scrumbledore.level.element.Bubble;
+import nl.tudelft.scrumbledore.level.element.Fruit;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.element.NPC;
+import nl.tudelft.scrumbledore.level.element.Platform;
+import nl.tudelft.scrumbledore.level.element.Player;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
+import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
 
 /**
  * Class representing a Level in the Game.
  * 
  * @author Jesse Tilro
- *
  */
 public class Level {
-
   private ArrayList<Platform> platforms;
   private ArrayList<Fruit> fruits;
   private ArrayList<NPC> npcs;
-  private ArrayList<Projectile> projectiles;
-  private ArrayList<DynamicElement> players;
-  private ArrayList<Projectile> encapEnemies;
+  private ArrayList<Bubble> projectiles;
+  private ArrayList<PlayerElement> players;
+  private ArrayList<Bubble> encapEnemies;
   private ArrayList<PowerupPickUp> powerups;
 
   /**
@@ -27,11 +29,11 @@ public class Level {
    */
   public Level() {
     platforms = new ArrayList<Platform>();
-    projectiles = new ArrayList<Projectile>();
-    encapEnemies = new ArrayList<Projectile>();
+    projectiles = new ArrayList<Bubble>();
+    encapEnemies = new ArrayList<Bubble>();
     fruits = new ArrayList<Fruit>();
     npcs = new ArrayList<NPC>();
-    players = new ArrayList<DynamicElement>();
+    players = new ArrayList<PlayerElement>();
     powerups = new ArrayList<PowerupPickUp>();
   }
 
@@ -86,7 +88,7 @@ public class Level {
   /**
    * Returns an ArrayList of Platform elements.
    * 
-   * @return An ArrayList of Platform elements
+   * @return An ArrayList of Platform elements.
    */
   public ArrayList<Platform> getPlatforms() {
     return platforms;
@@ -95,7 +97,7 @@ public class Level {
   /**
    * Returns an ArrayList of Fruit elements.
    * 
-   * @return An ArrayList of Fruit elements
+   * @return An ArrayList of Fruit elements.
    */
   public ArrayList<Fruit> getFruits() {
     return fruits;
@@ -104,18 +106,18 @@ public class Level {
   /**
    * Returns an ArrayList of NPC elements.
    * 
-   * @return An ArrayList of NPC elements
+   * @return An ArrayList of NPC elements.
    */
   public ArrayList<NPC> getNPCs() {
     return npcs;
   }
 
   /**
-   * Returns a Player object.
+   * Returns an ArrayList of Player objects.
    * 
-   * @return A player object
+   * @return An ArrayList of Player objects.
    */
-  public ArrayList<DynamicElement> getPlayers() {
+  public ArrayList<PlayerElement> getPlayers() {
     return players;
   }
 
@@ -124,7 +126,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects.
    */
-  public ArrayList<Projectile> getProjectiles() {
+  public ArrayList<Bubble> getBubbles() {
     return projectiles;
   }
 
@@ -133,7 +135,7 @@ public class Level {
    * 
    * @return An ArrayList of Bubble objects with enemies in them.
    */
-  public ArrayList<Projectile> getEnemyBubbles() {
+  public ArrayList<Bubble> getEnemyBubbles() {
     return encapEnemies;
   }
 

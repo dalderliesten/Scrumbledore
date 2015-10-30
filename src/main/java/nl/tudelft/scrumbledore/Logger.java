@@ -13,7 +13,7 @@ import java.util.ArrayList;
 import java.util.Date;
 
 /**
- * Class for the maintainence and creation of logging files, which track movement and actions in
+ * Class for the maintenance and creation of logging files, which track movement and actions in
  * every session and store them.
  * 
  * @author David Alderliesten
@@ -22,7 +22,6 @@ import java.util.Date;
 @SuppressWarnings("PMD.AvoidDuplicateLiterals")
 public final class Logger {
   private File loggingFile;
-
   private static volatile Logger instance;
 
   /**
@@ -73,7 +72,6 @@ public final class Logger {
         }
       }
     } catch (IOException e) {
-      // TODO Auto-generated catch block
       e.printStackTrace();
     }
   }
@@ -148,7 +146,7 @@ public final class Logger {
 
       fileReader.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
 
     return toReturn;
@@ -170,7 +168,7 @@ public final class Logger {
 
       fileReader.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
     
     return toReturn;
@@ -196,7 +194,7 @@ public final class Logger {
 
       fileReader.close();
     } catch (IOException e) {
-      System.out.println(e);
+      e.printStackTrace();
     }
 
     return toReturn;

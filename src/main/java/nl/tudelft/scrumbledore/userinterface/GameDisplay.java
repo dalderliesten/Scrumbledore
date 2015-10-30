@@ -2,7 +2,6 @@ package nl.tudelft.scrumbledore.userinterface;
 
 import java.util.ArrayList;
 import java.util.List;
-
 import javafx.animation.AnimationTimer;
 import javafx.event.ActionEvent;
 import javafx.event.EventHandler;
@@ -26,10 +25,10 @@ import nl.tudelft.scrumbledore.Logger;
 import nl.tudelft.scrumbledore.StepTimer;
 import nl.tudelft.scrumbledore.game.Game;
 import nl.tudelft.scrumbledore.game.GameFactory;
-import nl.tudelft.scrumbledore.level.DynamicElement;
 import nl.tudelft.scrumbledore.level.Level;
-import nl.tudelft.scrumbledore.level.LevelElement;
 import nl.tudelft.scrumbledore.level.Vector;
+import nl.tudelft.scrumbledore.level.element.LevelElement;
+import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
@@ -57,12 +56,24 @@ public final class GameDisplay {
   private static Label levelLabel;
   private static Label powerUpLabel;
   private static String advanceLabel;
+  private static Long chiliTracker;
+  private static Long tacoTracker;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
       playerStatus();
       levelStatus();
       renderDynamic();
+
+      if (chiliTracker > 0L) {
+        powerUpLabel.setText(Constants.POWERUP_CHILILABEL);
+        chiliTracker = chiliTracker - 10500000L;
+      } else if (tacoTracker > 0L) {
+        powerUpLabel.setText(Constants.POWERUP_TACOLABEL);
+        tacoTracker = tacoTracker - 10500000L;
+      } else {
+        powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
+      }
     }
   };
 
@@ -80,16 +91,18 @@ public final class GameDisplay {
    * 
    * @param factory
    *          The game factory used for creating a new game.
+   * 
    * @param passedStage
    *          The stage to draw to.
    */
   public static void createGame(GameFactory factory, Stage passedStage) {
+    chiliTracker = 0L;
+    tacoTracker = 0L;
     currentStage = passedStage;
     currentGame = factory.makeGame();
 
     launchGame();
   }
-
 
   /**
    * Handles the creation of a game and the associated interface.
@@ -143,7 +156,7 @@ public final class GameDisplay {
     scoreLabel.setId("gameviewscores");
     highScoreLabel = new Label(currentGame.getHighScore());
     highScoreLabel.setId("gameviewscores");
-    powerUpLabel = new Label("NONE");
+    powerUpLabel = new Label(Constants.NOPOWERUP_LABEL);
     powerUpLabel.setId("gameviewscores");
     levelLabel = new Label(Integer.toString(currentGame.getCurrentLevelNumber()));
     levelLabel.setId("gameviewscores");
@@ -205,6 +218,7 @@ public final class GameDisplay {
    * 
    * @param passedButton
    *          The button which must recieve the functionality.
+   * 
    * @param startStopbutton
    *          The start/stop button whose label must be updated.
    */
@@ -240,17 +254,33 @@ public final class GameDisplay {
    * Checks the status of the player(s) in terms of life.
    */
   private static void playerStatus() {
-    ArrayList<DynamicElement> players = currentGame.getCurrentLevel().getPlayers();
+    ArrayList<PlayerElement> players = currentGame.getCurrentLevel().getPlayers();
     Boolean playersLeft = false;
-    for (DynamicElement player : players) {
+    for (PlayerElement player : players) {
       if (player.isAlive()) {
         playersLeft = true;
       }
     }
     if (!playersLeft) {
+      chiliTracker = 0L;
+      tacoTracker = 0L;
       currentGame.restart();
       renderStatic();
     }
+  }
+
+  /**
+   * Triggers the label change when picking up the Chili speed boost.
+   */
+  public static void triggerChiliLabel() {
+    chiliTracker = 4750000000L;
+  }
+
+  /**
+   * Triggers the label change when picking up the Taco invincibility power-up.
+   */
+  public static void triggerTacoLabel() {
+    tacoTracker = 2750000000L;
   }
 
   /**
@@ -263,7 +293,7 @@ public final class GameDisplay {
       if (endStepsSnapShot == 0) {
         advanceLabel = Constants.ADVANCINGLABEL;
         staticContext.setFill(Color.WHITE);
-        staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 100,
+        staticContext.fillText(advanceLabel, (Constants.LEVELX / 2) - 110,
             (Constants.LEVELY / 2) - 130);
         endStepsSnapShot = currentGame.getSteps();
       }
@@ -357,6 +387,7 @@ public final class GameDisplay {
    * 
    * @param elements
    *          The Level Elements to be rendered.
+   * 
    * @param context
    *          The Graphics Context in which the elements should be drawn.
    */
@@ -364,7 +395,6 @@ public final class GameDisplay {
     for (LevelElement element : elements) {
       for (Sprite sprite : element.getSprites(currentGame.getSteps())) {
         Vector drawPos = sprite.getDrawPosition(element.getPosition());
-        // Because all Sprites are drawn at their center they need an offset to be in the grid.
         drawPos.sum(Vector.scale(new Vector(Constants.BLOCKSIZE, Constants.BLOCKSIZE), .5));
         context.drawImage(new Image(sprite.getPath()), drawPos.getX(), drawPos.getY());
       }
@@ -384,4 +414,5 @@ public final class GameDisplay {
       }
     });
   }
+
 }
