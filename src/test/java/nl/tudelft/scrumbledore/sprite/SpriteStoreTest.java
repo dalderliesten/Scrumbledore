@@ -14,7 +14,7 @@ import org.junit.Test;
  */
 public class SpriteStoreTest {
 
-  private final String dir = "src/test/resources/sprites/";
+  private static final String DIR = "src/test/resources/sprites/";
   
   /**
    * Test the file system reading functionality that is performed when the SpriteStore is
@@ -23,7 +23,7 @@ public class SpriteStoreTest {
   @Test
   public void testRead() {
     // Actual fixtures, execution and assertion.
-    SpriteStore test = new SpriteStore(dir);
+    SpriteStore test = new SpriteStore(DIR);
     assertEquals(1, test.getAll().size());
     assertTrue(test.getAll().get(0).getID().equals("test"));
 
@@ -38,7 +38,7 @@ public class SpriteStoreTest {
    */
   @Test
   public void testGet() {
-    SpriteStore test = new SpriteStore(dir);
+    SpriteStore test = new SpriteStore(DIR);
     assertEquals("test", test.get("test").getID());
   }
 
@@ -48,7 +48,7 @@ public class SpriteStoreTest {
    */
   @Test
   public void testGetNull() {
-    SpriteStore test = new SpriteStore(dir);
+    SpriteStore test = new SpriteStore(DIR);
     assertEquals(null, test.get("non_existant_sprite"));
   }
 
@@ -58,7 +58,7 @@ public class SpriteStoreTest {
    */
   @Test
   public void testGetAnimatedNull() {
-    SpriteStore test = new SpriteStore(dir);
+    SpriteStore test = new SpriteStore(DIR);
     assertEquals(null, test.getAnimated("non_existant_sprite"));
   }
 
