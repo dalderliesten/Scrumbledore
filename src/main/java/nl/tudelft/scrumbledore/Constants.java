@@ -22,7 +22,7 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 public final class Constants {
 
   /**
-   * Constants constructor, which should be used only once since this is a Singleton class.
+   * Private constructor as no instance of a utility class should ever be possible to instantiate.
    */
   private Constants() {
   }
