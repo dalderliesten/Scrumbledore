@@ -5,7 +5,7 @@ import java.io.IOException;
 import nl.tudelft.scrumbledore.userinterface.UserInterface;
 
 /**
- * Launches the game and containes the main method, which will run the GUI, which in turn will run
+ * Launches the game and contains the main method, which will run the GUI, which in turn will run
  * the game.
  * 
  * @author David Alderliesten
