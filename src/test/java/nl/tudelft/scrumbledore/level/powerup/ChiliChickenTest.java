@@ -20,7 +20,8 @@ import nl.tudelft.scrumbledore.sprite.Sprite;
 @SuppressWarnings("PMD.TooManyMethods")
 public class ChiliChickenTest extends PlayerElementTest {
 
-  private Player player;
+  private Player wrapped;
+  private ChiliChicken player;
   private Vector position;
   private Vector size;
 
@@ -31,7 +32,8 @@ public class ChiliChickenTest extends PlayerElementTest {
   public void before() {
     position = new Vector(16, 32);
     size = new Vector(42, 42);
-    player = new Player(position, size);
+    wrapped = new Player(position, size);
+    player = new ChiliChicken(wrapped);
   }
 
   @Override
@@ -89,10 +91,10 @@ public class ChiliChickenTest extends PlayerElementTest {
 
   @Override
   public void testEqualsFalseOtherClass() {
-    Player player2 = new Player(new Vector(42, 42), player.getSize());
+    Player player2 = new Player(new Vector(0, 0), player.getSize());
     Player player3 = new Player(player.getPosition(), new Vector(42, 42));
     assertFalse(player.equals(player2));
-    assertFalse(player.equals(player3));
+    assertTrue(player.equals(player3));
   }
 
   @Override
@@ -104,10 +106,11 @@ public class ChiliChickenTest extends PlayerElementTest {
   public void testGetSprites() {
     ArrayList<Sprite> sprites = player.getSprites(1);
     
-    assertEquals(1, sprites.size());
-    assertEquals("frame-01", sprites.get(0).getID());
+    assertEquals(2, sprites.size());
+    assertEquals("fire-yellow-00", sprites.get(0).getID());
+    assertEquals("frame-01", sprites.get(1).getID());
     assertEquals("images" + File.separator + "sprites" + File.separator 
-        + "player-green-move-right/frame-01.png", sprites.get(0).getPath());
+        + "fire-yellow/fire-yellow-00.png", sprites.get(0).getPath());
   }
 
   @Override
@@ -116,10 +119,10 @@ public class ChiliChickenTest extends PlayerElementTest {
     player.setLastMove(LevelElementAction.MoveRight);
     ArrayList<Sprite> sprites = player.getSprites(1);
     
-    assertEquals(1, sprites.size());
-    assertEquals("player-shoot-right", sprites.get(0).getID());
+    assertEquals(2, sprites.size());
+    assertEquals("player-shoot-right", sprites.get(1).getID());
     assertEquals("images" + File.separator + "sprites" + File.separator 
-        + "player-green-shoot-right/player-shoot-right.png", sprites.get(0).getPath());
+        + "player-green-shoot-right/player-shoot-right.png", sprites.get(1).getPath());
   }
 
   @Override
@@ -128,10 +131,10 @@ public class ChiliChickenTest extends PlayerElementTest {
     player.setLastMove(LevelElementAction.MoveLeft);
     ArrayList<Sprite> sprites = player.getSprites(1);
     
-    assertEquals(1, sprites.size());
-    assertEquals("player-shoot-left", sprites.get(0).getID());
+    assertEquals(2, sprites.size());
+    assertEquals("player-shoot-left", sprites.get(1).getID());
     assertEquals("images" + File.separator + "sprites" + File.separator 
-        + "player-green-shoot-left/player-shoot-left.png", sprites.get(0).getPath());
+        + "player-green-shoot-left/player-shoot-left.png", sprites.get(1).getPath());
   }
 
   @Override
@@ -142,8 +145,9 @@ public class ChiliChickenTest extends PlayerElementTest {
 
   @Override
   public void testDecreaseLifetime() {
-    player.setLifetime(42d);
+    player.setLifetime(10d);
     player.decreaseLifetime(1d);
-    assertEquals(41d, player.getLifetime(), Constants.DOUBLE_PRECISION);
+    assertEquals(9.6d, player.getLifetime(), Constants.DOUBLE_PRECISION);
   }
+  
 }
