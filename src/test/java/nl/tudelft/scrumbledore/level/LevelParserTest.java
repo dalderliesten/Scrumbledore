@@ -36,7 +36,7 @@ public class LevelParserTest {
   @Test
   public void testLoadLevelsFromDisk() {
     LevelParser lp = new LevelParser();
-    ArrayList<Level> levels = lp.loadLevelsFromDisk("src/main/resources/test");
+    ArrayList<Level> levels = lp.loadLevelsFromDisk("src/test/resources/levels");
 
     ArrayList<Platform> platformsLevel1 = levels.get(0).getPlatforms();
 
@@ -54,7 +54,7 @@ public class LevelParserTest {
   @Test
   public void testListFilesInDir() {
     LevelParser lp = new LevelParser();
-    ArrayList<String> testFiles = lp.listFilesInDir("src/main/resources/test");
+    ArrayList<String> testFiles = lp.listFilesInDir("src/test/resources/levels");
 
     assertEquals(testFiles.size(), 2);
     assertTrue(testFiles.contains("level01.txt"));
@@ -161,7 +161,7 @@ public class LevelParserTest {
    */
   @Test
   public void testGetLevels() {
-    LevelParser lp = new LevelParser("src/main/resources/test");
+    LevelParser lp = new LevelParser("src/test/resources/levels");
     ArrayList<Level> levels = lp.getLevels();
 
     Platform platform = new Platform(new Vector(0, 0),
