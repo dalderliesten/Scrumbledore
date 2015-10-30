@@ -15,7 +15,7 @@ import nl.tudelft.scrumbledore.level.element.LevelElementAction;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
- * Tests the TurtleTacoPickUp class which makes use of the LevelElementTest class.
+ * Tests the TurtleTacoPickUp class which makes use of the PowerupPickUp class.
  * 
  * @author Floris Doolaard
  *

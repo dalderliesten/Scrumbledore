@@ -18,6 +18,11 @@ import nl.tudelft.scrumbledore.level.element.PlayerElement;
 import nl.tudelft.scrumbledore.level.element.PlayerElementTest;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
+/**
+ * Tests the ChiliChicken powerup class.
+ * @author Floris Doolaard
+ *
+ */
 @SuppressWarnings("PMD.TooManyMethods")
 public class ChiliChickenTest extends PlayerElementTest {
 
