@@ -278,7 +278,7 @@ public final class GameDisplay {
    * Triggers the label change when picking up the Taco invincibility power-up.
    */
   public static void triggerTacoLabel() {
-    tacoTracker = 3000000000L;
+    tacoTracker = 2750000000L;
   }
 
   /**
