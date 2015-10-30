@@ -91,7 +91,7 @@ public class LevelParserTest {
   @Test
   public void testReadLevelFromScanner() throws FileNotFoundException {
     LevelParser lp = new LevelParser();
-    Level level = new Level();
+    Level level;
     String testMap = " #_\n" + "PNF\n";
 
     Scanner sc = new Scanner(testMap);
