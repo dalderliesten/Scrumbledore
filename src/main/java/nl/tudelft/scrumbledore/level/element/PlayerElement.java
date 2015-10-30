@@ -41,7 +41,7 @@ public interface PlayerElement extends DynamicElement {
   void setFiring(Boolean isFiring);
   
   /**
-   * Checking wether the element is alive.
+   * Checking whether the element is alive.
    * 
    * @return The boolean if the element is alive.
    */
