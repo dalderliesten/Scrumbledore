@@ -49,6 +49,7 @@ public final class Constants {
   public static final String HISCORELABEL = "High-Score:";
   public static final String POWERUPLABEL = "Power-Ups:";
   public static final String NOPOWERUP_LABEL = "NONE";
+  public static final String POWERUP_CHILILABEL = "CHILI SPEED";
   public static final String LEVELLABEL = "Level:";
 
   public static final String ADVANCINGLABEL = "Advancing to next level in a few moments...";

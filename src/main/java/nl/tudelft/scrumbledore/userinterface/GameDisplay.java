@@ -29,7 +29,6 @@ import nl.tudelft.scrumbledore.level.Level;
 import nl.tudelft.scrumbledore.level.Vector;
 import nl.tudelft.scrumbledore.level.element.LevelElement;
 import nl.tudelft.scrumbledore.level.element.PlayerElement;
-import nl.tudelft.scrumbledore.level.powerup.PowerupPickUp;
 import nl.tudelft.scrumbledore.sprite.Sprite;
 
 /**
@@ -57,12 +56,20 @@ public final class GameDisplay {
   private static Label levelLabel;
   private static Label powerUpLabel;
   private static String advanceLabel;
+  private static Long chiliTracker;
 
   private static AnimationTimer animationTimer = new AnimationTimer() {
     public void handle(long currentNanoTime) {
       playerStatus();
       levelStatus();
       renderDynamic();
+
+      if (chiliTracker > 0L) {
+        powerUpLabel.setText(Constants.POWERUP_CHILILABEL);
+        chiliTracker = chiliTracker - 10500000L;
+      } else {
+        powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
+      }
     }
   };
 
@@ -85,6 +92,7 @@ public final class GameDisplay {
    *          The stage to draw to.
    */
   public static void createGame(GameFactory factory, Stage passedStage) {
+    chiliTracker = 0L;
     currentStage = passedStage;
     currentGame = factory.makeGame();
 
@@ -252,18 +260,13 @@ public final class GameDisplay {
       currentGame.restart();
       renderStatic();
     }
-
-    checkPowerUpStatus();
   }
 
   /**
-   * Checks the status of the power-ups, and updates the labels as needed.
+   * Triggers the label change when picking up the Chili speed boost.
    */
-  private static void checkPowerUpStatus() {
-    for (PowerupPickUp current : currentGame.getCurrentLevel().getPowerups()) {
-      
-    }
-    powerUpLabel.setText(Constants.NOPOWERUP_LABEL);
+  public static void triggerChiliLabel() {
+    chiliTracker = 5000000000L;
   }
 
   /**
